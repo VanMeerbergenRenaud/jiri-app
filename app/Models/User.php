@@ -42,4 +42,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    protected $with = ['jiris', 'jiris.students', 'jiris.evaluators'];
+
+    public function jiris()
+    {
+        return $this->hasMany(Jiri::class);
+    }
+
+    public function contacts()
+    {
+        return $this->hasMany(Contact::class);
+    }
 }
