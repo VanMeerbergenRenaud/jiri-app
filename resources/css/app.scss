@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Variables */
+$blue: #6386E3;
+$border: 1px solid #E6EAF4;
+
 /* Basic styles */
 body {
     margin: 0 auto;
@@ -24,26 +28,32 @@ body {
     }
 
     img {
-        width: 100%;
+        max-width: 100%;
+        width: 3rem;
         height: auto;
         object-fit: cover;
+        border-radius: 50%;
     }
 
     .button--classic {
         border-radius: 0.75rem;
         background-color: #E7EAF6;
-        padding: 0.8125rem 3rem;
+        padding: 0.75rem 1rem;
         font-size: 1rem;
+        font-weight: 500;
         color: #6386E3;
+    }
+
+    .flex-center {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 }
 
 /* Welcome Page */
 .welcome {
     margin: 0 28.75rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 
     p {
         max-width: 400px;
@@ -52,18 +62,14 @@ body {
 
     &__intro {
         margin: 7.5rem 0 5rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
 
         img {
             width: 72px;
             height: 72px;
-            border-radius: 50%;
         }
 
         h2 {
-            margin: 1.125rem 0 0.75rem;
+            margin: 1.25rem 0 0.75rem;
         }
     }
 
@@ -71,11 +77,8 @@ body {
         width: 1000px;
         padding: 3rem;
         background-color: #F0F1F7;
-        border: 1px solid #E6EAF4;
+        border: $border;
         border-radius: 1.5rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
 
         h2 {
             font-size: 2rem;
@@ -85,6 +88,114 @@ body {
         p {
             margin: 2rem 0 3rem;
             color: #3F4353;
+        }
+
+        .button--classic {
+            padding: 0.8125rem 3rem;
+        }
+    }
+}
+
+/* Welcome Start Page */
+.welcome__start {
+    margin-bottom: 2rem;
+    padding: 3rem 11.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__infos {
+        display: flex;
+        align-items: center;
+
+        img {
+            margin-right: 1.25rem;
+            width: 72px;
+            height: 72px;
+        }
+    }
+}
+
+.events {
+    margin: 0 11.25rem;
+
+    .list {
+        font-weight: 500;
+        margin-bottom: 3rem;
+
+        .item {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            padding: 2.625rem 1.75rem;
+            border: $border;
+            border-radius: 1.5rem;
+            background-color: #D9EBED;
+
+            .border:first-child {
+                padding-left: 1rem;
+                font-size: 1.25rem;
+            }
+
+            .border {
+                padding: 0 3rem;
+                border: none;
+                border-right: 1px solid rgba(63, 67, 83, .25);
+            }
+
+            span, time {
+                margin-top: 0.625rem;
+                display: inline-block;
+                font-weight: 400;
+            }
+
+            span + span {
+                margin-left: 2rem;
+            }
+
+            a {
+                padding: 0.5rem;
+                font-weight: 400;
+                background-color: white;
+            }
+
+            .edition {
+                color: $blue;
+                padding: 0.875rem 1.5rem;
+                border-radius: 0.75rem;
+            }
+
+            .see {
+                margin-left: 2.5rem;
+                padding: 0.875rem 3rem;
+                border-radius: 1.5rem;
+            }
+
+            .unavailable {
+                padding: 0.875rem 1rem;
+                background-color: #F7F7FA;
+            }
+        }
+    }
+
+    .empty {
+        padding: 5.5rem 0;
+        border: $border;
+        border-radius: 1.5rem;
+
+        p, a {
+            font-size: 1.125rem;
+            font-weight: 500;
+        }
+
+        p {
+            margin-bottom: 2rem;
+        }
+
+        a {
+            color: $blue;
+            border-bottom: 1px solid $blue;
         }
     }
 }

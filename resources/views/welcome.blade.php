@@ -15,20 +15,20 @@
     </head>
     <body>
         <x-app-layout>
-            <div class="welcome">
-                <div class="welcome__intro">
-                    <img src="https://media.istockphoto.com/id/125141451/fr/photo/grand-dadais-en-donnant-une-fleur.jpg?s=612x612&w=0&k=20&c=6kRaCDLMue4VCUVZAo_ZCKdXy60tuVX-59HzoL1NXyY=" alt="">
+            <div class="flex-center welcome">
+                <div class="flex-center welcome__intro">
+                    <img src="{{ asset('img/dominique.png') }}" alt="Image de l'admin Dominique">
                     <h2>Joyeux anniversaire Dominique !</h2>
                     <p>Commencer votre aventure dès maintenant.</p>
                 </div>
 
-                <div class="welcome__login">
+                <div class="flex-center welcome__login">
                     <h2>Bienvenue sur Jiri App</h2>
                     <p>
                         Il vous faut créer une épreuve afin de commencer
                         correctement à utiliser l’application.
                     </p>
-                    <button class="button--classic">Commencer</button>
+                    <a href="{{ route('events') }}" class="button--classic">Commencer</a>
                 </div>
             </div>
         </x-app-layout>
