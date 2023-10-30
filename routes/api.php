@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Jiri;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,5 +21,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('jiris', function () {
-    return User::whereEmail('dominique.vilain@hepl.be')->firstOrFail();
+    return User::whereEmail('dominique.vilain@hepl.be')
+        ->firstOrFail();
+});
+
+Route::get('jiris/{jiri}', function (Jiri $jiri) {
+    return $jiri->load('students', 'students.implementations.project', 'evaluators');
 });

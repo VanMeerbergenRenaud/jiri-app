@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
             $table->string('role')->nullable();
+            $table->string('token')->nullable();
             $table->timestamps();
         });
     }
