@@ -7,14 +7,12 @@ pour les projets des étudiants. Elle offre un moyen efficace pour les jurés ex
 d'évaluer et de noter le travail des étudiants, tout en facilitant le processus global du jury.
 
 ### Table des matières 📚
-
 1. [Contexte](#contexte)
 2. [Rôles](#rôles)
 3. [Fonctionnalités](#fonctionnalités)
-4. [Détails techniques](#détails-techniques)
-5. [Schéma de la base de données](#schéma-de-lab-base-de-donnée)
-6. [Contribution & contact](#contribuer)
-7. [Licence](#licence)
+4. [Détails techniques](#schéma-de-la-base-de-données)
+5. [Contribution & contact](#contribution--contact)
+6. [Licence](#licence)
 
 ## Contexte 📖
 
