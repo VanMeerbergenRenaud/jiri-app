@@ -1,8 +1,8 @@
 <x-app-layout>
-    <main class="main-event-create">
+    <main class="mainEventsCreate">
         {{-- Component Start --}}
-        <div class="events__infos">
-            <div class="welcome__start__infos">
+        <div class="events__intro">
+            <div class="events__intro__info">
                 <img src="{{ asset('img/dominique.png') }}" alt="Image de l'admin Dominique">
                 <div>
                     <h2>Bonjour Dominique !</h2>
@@ -10,7 +10,7 @@
                 </div>
             </div>
         </div>
-        <div class="event-create">
+        <div class="events__create">
             {{-- Form to create a event --}}
             <form
                 action="{{ route('events.store') }}"

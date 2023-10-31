@@ -7,6 +7,17 @@ $blue: #6386E3;
 $gray-medium: #F0F1F7;
 $border: 1px solid #E6EAF4;
 
+/* Reset */
+.sr-only:not(:focus):not(:active) {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+
 /* Basic styles */
 body {
     margin: 0 auto;
@@ -43,16 +54,6 @@ body {
         height: auto;
         object-fit: cover;
         border-radius: 50%;
-    }
-
-    .sr-only:not(:focus):not(:active) {
-        clip: rect(0 0 0 0);
-        clip-path: inset(50%);
-        height: 1px;
-        overflow: hidden;
-        position: absolute;
-        white-space: nowrap;
-        width: 1px;
     }
 
     input, textarea, select, button {
@@ -163,6 +164,10 @@ body {
             margin-right: 1.25rem;
             width: 3rem;
             height: 3rem;
+        }
+
+        p {
+            margin-top: 0.2rem;
         }
     }
 }
@@ -279,26 +284,76 @@ body {
     }
 }
 
-.main-event-create {
-    padding: 3rem 8rem;
+// For 1440px screen
+@media (min-width: 1440px) {
+    .mainEvents {
+        //padding: 3rem 5rem;
+    }
+
+    .events {
+        padding: 1rem 0;
+
+        .list {
+            .item {
+                display: flex;
+                justify-content: space-between;
+                gap: 0;
+
+                &__name, &__date, &__time, &__members {
+                    margin-left: 1rem;
+                    padding-right: 1.5rem;
+                }
+                &__edition,  &__see, &__unavailable {
+                    align-self: center;
+                    margin-left: 1rem;
+                }
+
+                &__name {
+                    margin-left: 0;
+                    align-self: center;
+                    font-size: 1.15rem;
+                    border-right: 1px solid rgba(63, 67, 83, .25);
+                }
+
+                &__date, &__time, &__members {
+                    border: none;
+                    border-right: 1px solid rgba(63, 67, 83, .25);
+
+                    span, time {
+                        margin-top: 0.625rem;
+                        display: inline-block;
+                        font-weight: 400;
+                    }
+                }
+            }
+        }
+    }
 }
 
-.event-create {
-    margin: 0 11.25rem;
+/* Create an event */
+.mainEventsCreate {
+    padding: 3.5rem 5rem;
+}
+
+.events__intro {
+    margin-bottom: 3rem;
+}
+
+.events__create {
     padding: 0;
     display: flex;
     flex-direction: column;
     align-items: start;
 
     .form {
-        margin-bottom: 4rem;
+        margin-bottom: 1.5rem;
         padding: 2rem 3rem 1.5rem;
         background-color: $gray-medium;
         border-radius: 2rem;
 
         &__infos {
             display: grid;
-            grid-template-columns: repeat(3, 315px);
+            grid-template-columns: repeat(3, 1fr);
             grid-gap: 0 2rem;
             padding-bottom: 2rem;
             border-bottom: $border;
@@ -324,15 +379,13 @@ body {
         }
 
         &__container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0;
+            display: flex;
+            flex-direction: column;
         }
 
         &__component {
-            margin-bottom: 1.5rem;
             padding: 2rem 4rem 1.5rem 0;
-            min-width: 664px;
+            min-width: 600px;
             border-bottom: $border;
 
             h4 {
@@ -375,7 +428,9 @@ body {
 
                         button {
                             position: absolute;
+                            top: 0.5rem;
                             right: 1.5rem;
+                            padding: 0.5rem;
                         }
                     }
                 }
@@ -383,8 +438,7 @@ body {
         }
 
         &__component:last-of-type {
-            padding-left: 4rem;
-            border-left: $border;
+            margin-bottom: 1.5rem;
         }
 
         .form__submit {
@@ -400,6 +454,57 @@ body {
             .button--classic {
                 background-color: #E7EAF6;
                 margin-left: 2rem;
+            }
+        }
+    }
+}
+
+// For 1440px screen
+@media (min-width: 1440px) {
+    .events__create {
+        .form {
+            &__infos {
+                grid-template-columns: repeat(3, 315px);
+            }
+
+            &__container {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0;
+            }
+
+            &__component {
+                margin-bottom: 1.5rem;
+                padding-right: 2rem;
+            }
+
+            &__component:last-of-type {
+                padding-left: 2rem;
+                border-left: $border;
+            }
+        }
+    }
+}
+
+// For 1680px screen
+@media (min-width: 1680px) {
+    .mainEventsCreate {
+        padding: 4rem 8rem;
+    }
+
+    .events__intro {
+        margin-bottom: 4rem;
+    }
+
+    .events__create {
+        .form {
+            &__component {
+                min-width: 664px;
+                padding-right: 4rem;
+            }
+
+            &__component:last-of-type {
+                padding-left: 4rem;
             }
         }
     }
