@@ -50,12 +50,21 @@
                     <div class="form__component">
                         <h4>Ajouter des contacts</h4>
                         <p>Vous pourrez en ajouter encore par la suite sans problème.</p>
-                        <label for="user_id" class="sr-only">Ajout d'un contact</label>
-                        <select name="user_id" id="user_id">
-                            <option value="0">Sélectionner un contact</option>
-                            <option value="1">Renaud Van Meerbergen</option>
-                            <option value="2">Dominique Vilain</option>
-                        </select>
+                        <div x-data="{ open: false }">
+                            <button x-on:click="open = !open" type="button" class="w-72 mt-6 mb-7 bg-white flex justify-between items-center p-4">
+                                Sélectionner un contact
+                                <!-- Arrow down -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </button>
+
+                            <div x-show="open" x-on:click.outside="open = false" class="my-4 w-72 bg-white rounded-xl shadow-md">
+                                @livewire('users-list')
+
+                                <button class="button--classic rounded-none w-full">Ajouter un contact</button>
+                            </div>
+                        </div>
 
                         <div class="form__component__added">
                             <p>Contacts ajoutés</p>

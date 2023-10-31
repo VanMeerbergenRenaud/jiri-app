@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\User;
 use Livewire\Component;
 
 class EventController extends Component
@@ -14,7 +15,8 @@ class EventController extends Component
 
     public function create()
     {
-        return view('livewire.events/create');
+        $users = User::all();
+        return view('livewire.events/create', ['users' => $users]);
     }
 
     public function store()
