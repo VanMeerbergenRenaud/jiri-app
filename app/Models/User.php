@@ -52,25 +52,21 @@ class User extends Authenticatable
 
     public function jiris(): HasMany
     {
-        return $this
-            ->hasMany(Jiri::class);
+        return $this->hasMany(Jiri::class);
     }
 
     public function contacts(): HasMany
     {
-        return $this
-            ->HasMany(Contact::class);
+        return $this->HasMany(Contact::class);
     }
 
     public function projects(): HasMany
     {
-        return $this
-            ->hasMany(Project::class);
+        return $this->hasMany(Project::class);
     }
 
     public function attendances(): hasManyThrough
     {
-        return $this
-            ->hasManyThrough(Attendance::class, Jiri::class);
+        return $this->hasManyThrough(Attendance::class, Jiri::class);
     }
 }

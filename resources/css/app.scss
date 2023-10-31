@@ -4,12 +4,13 @@
 
 /* Variables */
 $blue: #6386E3;
+$gray-medium: #F0F1F7;
 $border: 1px solid #E6EAF4;
 
 /* Basic styles */
 body {
     margin: 0 auto;
-    min-width: 1200px;
+    min-width: 1024px;
     max-width: 2500px;
     font-size: 16px;
     line-height: 1.35;
@@ -17,8 +18,17 @@ body {
     background-color: #F7F7FA;
     scroll-behavior: smooth;
 
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+    main {
+        padding: 0;
+        min-height: 85vh;
+    }
+
     h2 {
-        font-size: 1.5rem;
+        font-size: 1.25rem;
         font-weight: 600;
     }
 
@@ -35,11 +45,30 @@ body {
         border-radius: 50%;
     }
 
+    .sr-only:not(:focus):not(:active) {
+        clip: rect(0 0 0 0);
+        clip-path: inset(50%);
+        height: 1px;
+        overflow: hidden;
+        position: absolute;
+        white-space: nowrap;
+        width: 1px;
+    }
+
+    input, textarea, select, button {
+        border-radius: 0.5rem;
+    }
+
+    a {
+        font-size: 0.875rem;
+        text-decoration: none;
+    }
+
     .button--classic {
         border-radius: 0.75rem;
         background-color: #E7EAF6;
         padding: 0.75rem 1rem;
-        font-size: 1rem;
+        font-size: 0.875rem;
         font-weight: 500;
         color: #6386E3;
     }
@@ -49,133 +78,183 @@ body {
         flex-direction: column;
         align-items: center;
     }
-}
 
-/* Welcome Page */
-.welcome {
-    margin: 0 28.75rem;
-
-    p {
-        max-width: 400px;
-        text-align: center;
-    }
-
-    &__intro {
-        margin: 7.5rem 0 5rem;
-
-        img {
-            width: 72px;
-            height: 72px;
-        }
-
-        h2 {
-            margin: 1.25rem 0 0.75rem;
-        }
-    }
-
-    &__login {
-        width: 1000px;
-        padding: 3rem;
+    footer {
+        padding: 1.75rem;
+        color: #666B7E;
         background-color: #F0F1F7;
-        border: $border;
-        border-radius: 1.5rem;
-
-        h2 {
-            font-size: 2rem;
-            font-weight: 600;
-        }
+        border-radius: 1.5rem 1.5rem 0 0;
 
         p {
-            margin: 2rem 0 3rem;
-            color: #3F4353;
+            text-align: center;
+            font-size: 0.875rem;
+        }
+    }
+}
+
+
+/* Welcome Page */
+.mainWelcome {
+    padding: 0 5rem;
+
+    .welcome {
+        padding: 0 3rem;
+
+        p {
+            max-width: 400px;
+            text-align: center;
         }
 
-        .button--classic {
-            padding: 0.8125rem 3rem;
+        &__intro {
+            margin: 6.5rem 0 5rem;
+
+            img {
+                width: 64px;
+                height: 64px;
+            }
+
+            h2 {
+                margin: 1.25rem 0 0.75rem;
+            }
+        }
+
+        &__login {
+            margin-bottom: 8rem;
+            padding: 3rem;
+            width: 100%;
+            max-width: 1000px;
+            background-color: #F0F1F7;
+            border: $border;
+            border-radius: 1.5rem;
+
+            h2 {
+                font-size: 1.5rem;
+                font-weight: 600;
+            }
+
+            p {
+                margin: 2rem 0 3rem;
+                color: #3F4353;
+            }
+
+            .button--classic {
+                padding: 0.8125rem 3rem;
+            }
         }
     }
 }
 
 /* Welcome Start Page */
-.welcome__start {
+.mainEvents {
+    padding: 3rem 5rem;
+}
+
+.events__intro {
     margin-bottom: 2rem;
-    padding: 3rem 11.25rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    &__infos {
+    &__info {
         display: flex;
         align-items: center;
 
         img {
             margin-right: 1.25rem;
-            width: 72px;
-            height: 72px;
+            width: 3rem;
+            height: 3rem;
         }
     }
 }
 
 .events {
-    margin: 0 11.25rem;
+    padding: 3rem 0;
 
     .list {
         font-weight: 500;
-        margin-bottom: 3rem;
+        margin-bottom: 2.5rem;
 
         .item {
-            margin-top: 2rem;
-            display: flex;
+            margin-top: 1.5rem;
+            /*display: flex;
             justify-content: space-evenly;
-            align-items: center;
-            padding: 2.625rem 1.75rem;
+            align-items: center;*/
+            padding: 2rem 3rem;
             border: $border;
             border-radius: 1.5rem;
             background-color: #D9EBED;
 
-            .border:first-child {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+
+            &__name {
+                grid-column: 1/4;
+                margin-bottom: -0.5rem;
+                font-size: 1.15rem;
+            }
+
+            &__date, &__time, &__members {
+                span, time {
+                    margin-top: 0.75rem;
+                    display: inline-block;
+                    font-weight: 400;
+                }
+            }
+
+            &__members {
+                margin-left: -2rem;
+            }
+
+            a {
+                font-weight: 400;
+                text-align: center;
+                width: fit-content;
+            }
+
+            &__edition {
+                color: $blue;
+                padding: 0.875rem 1.5rem;
+                border-radius: 0.75rem;
+                background-color: white;
+            }
+
+            &__see {
+                padding: 0.875rem 3rem;
+                border-radius: 1.5rem;
+                background-color: white;
+            }
+
+            &__unavailable {
+                cursor: not-allowed;
+                padding: 0.875rem 1rem;
+                border-radius: 1.5rem;
+                background-color: #F7F7FA;
+            }
+
+            /* For 1980px screen */
+            /*
+            &__name {
                 padding-left: 1rem;
                 font-size: 1.25rem;
             }
 
-            .border {
+            &__date, &__time, &__members {
                 padding: 0 3rem;
                 border: none;
                 border-right: 1px solid rgba(63, 67, 83, .25);
-            }
 
-            span, time {
+                span, time {
                 margin-top: 0.625rem;
                 display: inline-block;
                 font-weight: 400;
-            }
+                }
 
-            span + span {
-                margin-left: 2rem;
+                span + span {
+                    margin-left: 2rem;
+                }
             }
-
-            a {
-                padding: 0.5rem;
-                font-weight: 400;
-                background-color: white;
-            }
-
-            .edition {
-                color: $blue;
-                padding: 0.875rem 1.5rem;
-                border-radius: 0.75rem;
-            }
-
-            .see {
-                margin-left: 2.5rem;
-                padding: 0.875rem 3rem;
-                border-radius: 1.5rem;
-            }
-
-            .unavailable {
-                padding: 0.875rem 1rem;
-                background-color: #F7F7FA;
-            }
+            */
         }
     }
 
@@ -185,7 +264,7 @@ body {
         border-radius: 1.5rem;
 
         p, a {
-            font-size: 1.125rem;
+            font-size: 1rem;
             font-weight: 500;
         }
 
@@ -196,6 +275,132 @@ body {
         a {
             color: $blue;
             border-bottom: 1px solid $blue;
+        }
+    }
+}
+
+.main-event-create {
+    padding: 3rem 8rem;
+}
+
+.event-create {
+    margin: 0 11.25rem;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+
+    .form {
+        margin-bottom: 4rem;
+        padding: 2rem 3rem 1.5rem;
+        background-color: $gray-medium;
+        border-radius: 2rem;
+
+        &__infos {
+            display: grid;
+            grid-template-columns: repeat(3, 315px);
+            grid-gap: 0 2rem;
+            padding-bottom: 2rem;
+            border-bottom: $border;
+
+            p {
+                grid-column: span 2;
+            }
+
+            label {
+                display: block;
+                margin-bottom: 1rem;
+            }
+
+            input {
+                padding: 1rem;
+                border-radius: 0.5rem;
+            }
+
+            input:last-of-type {
+                grid-row: 2/3;
+                grid-column: 3/4;
+            }
+        }
+
+        &__container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0;
+        }
+
+        &__component {
+            margin-bottom: 1.5rem;
+            padding: 2rem 4rem 1.5rem 0;
+            min-width: 664px;
+            border-bottom: $border;
+
+            h4 {
+                font-weight: 600;
+                margin-bottom: 0.75rem;
+            }
+
+            select {
+                margin: 1.5rem 0 2rem;
+                padding: 1rem 1.25rem;
+                width: 300px;
+            }
+
+            &__added {
+                p {
+                    margin-bottom: 1rem;
+                }
+
+                ul {
+                    li {
+                        position: relative;
+                        display: grid;
+                        grid-template-columns: 175px 1fr;
+                        align-items: center;
+                        margin-bottom: 0.75rem;
+
+                        .category {
+                            padding: 1rem 1.25rem;
+                            background-color: #E5E9F4;
+                            border-radius: 0.5rem;
+                            z-index: 2;
+                        }
+
+                        .username {
+                            margin-left: -0.5rem;
+                            padding: 1rem 2.5rem;
+                            background-color: white;
+                            border-radius: 0 0.5rem 0.5rem 0;
+                        }
+
+                        button {
+                            position: absolute;
+                            right: 1.5rem;
+                        }
+                    }
+                }
+            }
+        }
+
+        &__component:last-of-type {
+            padding-left: 4rem;
+            border-left: $border;
+        }
+
+        .form__submit {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+
+            button {
+                background-color: white;
+                padding: 1rem 5.5rem;
+            }
+
+            .button--classic {
+                background-color: #E7EAF6;
+                margin-left: 2rem;
+            }
         }
     }
 }

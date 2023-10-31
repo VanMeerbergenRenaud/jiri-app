@@ -29,9 +29,9 @@
             @endif
 
             <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+            {{ $slot }}
+
+            @include('layouts.footer')
         </div>
     </body>
 </html>
