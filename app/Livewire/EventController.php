@@ -9,7 +9,7 @@ class EventController extends Component
     public function index()
     {
         /*$events = Event::all();*/
-        return view('livewire.event-controller');
+        return view('livewire.events-list');
     }
 
     public function create()
