@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Event;
 use App\Models\User;
 use Livewire\Component;
 
@@ -9,7 +10,6 @@ class EventController extends Component
 {
     public function index()
     {
-        /*$events = Event::all();*/
         return view('livewire.events-list');
     }
 
@@ -26,16 +26,17 @@ class EventController extends Component
 
     public function show(Event $event)
     {
-
+        return view('livewire.events/show');
     }
 
     public function edit(Event $event)
     {
-
+        return view('livewire.events/edit');
     }
 
     public function update(Event $event)
     {
-        // Update a single event
+        /*$event->delete();
+        return redirect()->route('events.index')->with('success', 'Événement supprimé avec succès.');*/
     }
 }

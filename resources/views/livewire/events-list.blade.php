@@ -31,8 +31,8 @@
                             <span>24 évalués</span>
                         </p>
                     </div>
-                    <a href="/" class="item__edition">Édition des profils et infos</a>
-                    <a href="/" class="item__see">Voir</a>
+                    <a href="{{ route('events.edit') }}" class="item__edition">Édition des profils et infos</a>
+                    <a href="{{ route('events.show') }}" class="item__see">Voir</a>
                     {{--<a href="#" class="item__unavailable">Non disponible</a>--}}
                 </li>
             </ul>
