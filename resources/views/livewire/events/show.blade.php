@@ -16,7 +16,7 @@
                     <tr>
                         <th class="table-head" scope="col" colspan="6">Tableau récapitulatif des passages</th>
                     </tr>
-                    <tr>
+                    <tr class="first">
                         <th class="category">Étudiants | Jury</th>
                         @for ($i = 1; $i <= 10; $i++)
                             <th class="jiris" scope="col">Jury {{ $i }}</th>
@@ -28,7 +28,7 @@
                     <tr>
                         <th class="students" scope="row" id="etudiant-{{ $i }}">Étudiant {{ $i }}</th>
                         @for ($j = 1; $j <= 10; $j++)
-                            <td x-data="{ checked: false }" x-on:click="checked = !checked" headers="etudiant-{{ $i }} jury-{{ $j}}" class="clickable-cell">
+                            <td x-data="{ checked: false }" x-on:click="checked = !checked" headers="etudiant-{{ $i }} jury-{{ $j}}">
                                 <label>
                                     <input x-model="checked" class="input" type="checkbox">
                                 </label>
