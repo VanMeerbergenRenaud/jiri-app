@@ -1,6 +1,5 @@
 /* Show an event */
 .mainEventShow {
-    margin: 0;
     padding: 2rem;
 
     .events__intro {
@@ -10,10 +9,35 @@
 
     .event__show {
 
+        div.fullscreen {
+            margin: 0 auto;
+            padding: 6rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba($gray-900, 0.75);
+            z-index: 10;
+
+            table {
+                margin: 0 auto;
+                max-width: max-content;
+                max-height: max-content;
+            }
+        }
+
+        button.close {
+            position: absolute;
+            top: 2rem;
+            right: 6.5rem;
+            z-index: 11;
+        }
+
         table {
             display: block;
             max-width: 951px;
-            max-height: 585px;
+            max-height: 525px;
             border-spacing: 0;
             border-radius: 1.5rem;
             border-collapse: separate;
@@ -32,6 +56,10 @@
             td {
                 border-bottom: 1px solid $gray-500;
                 border-right: 1px solid $gray-500;
+            }
+
+            th:last-child, td:last-child {
+                border-right: none;
             }
         }
 
@@ -85,20 +113,36 @@
                 text-align: left;
                 padding: 1.25rem 2rem 1.25rem 1.5rem;
                 min-width: 200px;
+                z-index: 1;
             }
 
-            label {
-                display: grid;
-                align-items: center;
-                justify-content: center;
-                height: 100%;
+            td {
+                position: relative;
 
-                .input {
-                    visibility: hidden;
-                    height: 1px;
+                label {
+                    width: 0;
+                    height: 4rem;
+
+                    .input {
+                        visibility: hidden;
+                        width: 0;
+                        height: 0;
+                    }
+
+                    svg {
+                        position: absolute;
+                        top: 30%;
+                        left: 45%;
+                    }
                 }
             }
 
+
+            tr:last-child {
+                th, td {
+                    border-bottom: none;
+                }
+            }
         }
 
         .jiris, .students {
@@ -106,5 +150,14 @@
             font-weight: 400;
             text-transform: capitalize;
         }
+
+        .button__right {
+            margin-top: 1.25rem;
+            margin-right: 1.25rem;
+            display: flex;
+            justify-content: flex-end;
+        }
     }
 }
+
+
