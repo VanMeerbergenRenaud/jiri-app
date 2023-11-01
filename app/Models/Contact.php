@@ -19,8 +19,7 @@ class Contact extends Model
 
     public function user(): BelongsTo
     {
-        return $this
-            ->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function jiris(): BelongsToMany
@@ -39,7 +38,6 @@ class Contact extends Model
 
     public function implementations(): HasMany
     {
-        return $this
-            ->HasMany(Implementation::class);
+        return $this->HasMany(Implementation::class);
     }
 }

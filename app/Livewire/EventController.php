@@ -35,7 +35,7 @@ class EventController extends Component
         ]);
 
         Event::create($request->all());
-        return redirect()->route('events.index')->with('success', 'Épreuve créée avec succès.');
+        return redirect()->route('events')->with('success', 'Épreuve créée avec succès.');
         */
     }
 
@@ -47,7 +47,7 @@ class EventController extends Component
         ]);
 
         $event->update($request->all());
-        return redirect()->route('events.index')->with('success', 'Épreuve mise à jour avec succès.');
+        return redirect()->route('events')->with('success', 'Épreuve mise à jour avec succès.');
         */
     }
 
@@ -55,7 +55,7 @@ class EventController extends Component
     {
         /*
         $event->delete();
-        return redirect()->route('events.index')->with('success', 'Épreuve supprimée avec succès.');
+        return redirect()->route('events')->with('success', 'Épreuve supprimée avec succès.');
         */
     }
 }

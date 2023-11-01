@@ -7,8 +7,10 @@
         padding: 0 1rem;
     }
 
-    .event__show {
+    @import "../tables";
 
+    /* First Table */
+    .event__show {
         .fullscreen {
             margin: 0 auto;
             padding: 6rem;
@@ -32,35 +34,6 @@
             top: 2rem;
             right: 6.5rem;
             z-index: 11;
-        }
-
-        table {
-            display: block;
-            max-width: 951px;
-            max-height: 525px;
-            border-spacing: 0;
-            border-radius: 1.5rem;
-            border-collapse: separate;
-            border: 1px solid $gray-500;
-            overflow-x: auto;
-
-            th, td {
-                background-color: $gray-bg;
-            }
-
-            th {
-                border-bottom: 1px solid $gray-500;
-                border-right: 1px solid $gray-500;
-            }
-
-            td {
-                border-bottom: 1px solid $gray-500;
-                border-right: 1px solid $gray-500;
-            }
-
-            th:last-child, td:last-child {
-                border-right: none;
-            }
         }
 
         .row-1 {
@@ -88,13 +61,6 @@
                 position: sticky;
                 top: 57px; // 57px = padding + text of .row-1
                 left: 0;
-
-                text-align: left;
-                padding: 1rem 1.5rem;
-                font-size: 0.8rem;
-                font-weight: 500;
-                text-transform: uppercase;
-                min-width: 200px;
             }
 
             .jiris {
@@ -105,7 +71,7 @@
             }
         }
 
-        tbody {
+        .row-3 {
             .students {
                 position: sticky;
                 left: 0;
@@ -136,19 +102,6 @@
                     }
                 }
             }
-
-
-            tr:last-child {
-                th, td {
-                    border-bottom: none;
-                }
-            }
-        }
-
-        .jiris, .students {
-            font-size: 0.85rem;
-            font-weight: 400;
-            text-transform: capitalize;
         }
 
         .button__right {
@@ -158,6 +111,156 @@
             justify-content: flex-end;
         }
     }
+
+    /* Second Table */
+
+    $width: 4.5rem; // width of .moy, .cg, .cga & .cd
+
+    .event__show__results {
+        img {
+            display: inline-block;
+            margin-right: 1rem;
+
+            width: 1.75rem;
+            height: 1.75rem;
+            border-radius: 50%;
+        }
+
+        h3 {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+        }
+
+        table {
+            th:last-child {
+                border-right: 1px solid $gray-500;
+            }
+        }
+
+        .row-1, .row-2 {
+            .category {
+                padding-left: 2.5rem;
+                min-width: 300px;
+            }
+        }
+
+        .row-1 {
+            th {
+                background-color: #EAEBF0;
+            }
+
+            .sticky {
+                position: sticky;
+                left: 0;
+                top: 0;
+                z-index: 3;
+            }
+
+            .sticky-small {
+                position: sticky;
+                left: 0;
+                top: 0;
+                z-index: 2;
+            }
+
+            .jiris {
+                min-width: 225px;
+            }
+
+            .moy, .cg, .cga, .cd {
+                // sticky
+                position: sticky;
+                left: 0;
+                top: 0;
+                z-index: 3;
+
+                padding: 4rem 1.25rem 1rem 1.75rem;
+                vertical-align: bottom;
+                writing-mode: sideways-lr;
+                min-width: 4.5rem;
+            }
+
+            .moy {
+                right: calc($width*3);
+                background-color: #D9EBED;
+            }
+            .cg {
+                right: calc($width*2);
+                background-color: #D9DDED;
+            }
+            .cga {
+                right: calc($width*1);
+                background-color: #E5E6EB;
+            }
+            .cd {
+                right: 0;
+                background-color: #FFDDDD;
+            }
+        }
+
+        .row-2 {
+            th {
+                background-color: $gray-300;
+            }
+
+            .sticky {
+                position: sticky;
+                left: 0;
+                top: 4rem;
+                z-index: 3;
+            }
+
+            .sticky-small {
+                position: sticky;
+                left: 0;
+                top: 4rem;
+                z-index: 2;
+            }
+
+            .project, .category {
+                padding: 4rem 1.25rem 4rem 2.5rem;
+            }
+
+
+            .project {
+                padding: 1rem 1.25rem 1rem 1.75rem;
+                vertical-align: bottom;
+                writing-mode: sideways-lr;
+            }
+        }
+
+        .row-3 {
+            text-align: center;
+
+            .sticky {
+                position: sticky;
+                left: 0;
+                z-index: 2;
+            }
+
+            .moy, .cg, .cga, .cd {
+                // sticky
+                position: sticky;
+                left: 0;
+                z-index: 2;
+            }
+
+            .moy {right: calc($width*3)}
+            .cg {right: calc($width*2)}
+            .cga {right: calc($width*1)}
+            .cd {right: 0}
+
+            /* List of students */
+            .students {
+                text-align: left;
+                padding: 1.25rem 2.5rem;
+            }
+
+            /* List of results */
+            .results {
+                padding: 1.25rem;
+            }
+        }
+    }
 }
-
-

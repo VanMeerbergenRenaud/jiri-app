@@ -12,13 +12,11 @@ class Attendance extends Model
 
     public function jiri(): BelongsTo
     {
-        return $this
-            ->belongsTo(Jiri::class);
+        return $this->belongsTo(Jiri::class);
     }
 
     public function contact(): BelongsTo
     {
-        return $this
-            ->belongsTo(Contact::class);
+        return $this->belongsTo(Contact::class);
     }
 }
