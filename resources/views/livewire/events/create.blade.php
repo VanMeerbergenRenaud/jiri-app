@@ -1,15 +1,12 @@
 <x-app-layout>
     <main class="mainEventsCreate">
-        {{-- Component Start --}}
         <div class="events__intro">
-            <div class="events__intro__info">
-                <img src="{{ asset('img/dominique.png') }}" alt="Image de l'admin Dominique">
-                <div>
-                    <h2>Bonjour Dominique !</h2>
-                    <p>Découvrez la liste des diverses épreuves à venir ou déjà passées.</p>
-                </div>
-            </div>
+            <livewire:welcome-message
+                :title="'Bonjour ' . $user->name"
+                :message="'C’est parti pour une nouvelle expérience !'"
+            />
         </div>
+
         <div class="events__create">
             {{-- Form to create a event --}}
             <form

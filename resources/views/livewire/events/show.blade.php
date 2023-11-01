@@ -1,14 +1,11 @@
 <x-app-layout>
     <main class="mainEventShow">
-        {{-- Component Start --}}
         <div class="events__intro">
-            <div class="events__intro__info">
-                <img src="{{ asset('img/dominique.png') }}" alt="Image de l'admin Dominique">
-                <div>
-                    <h2>Bonjour Dominique !</h2>
-                    <p>Votre épreuve <em>Jury&nbsp;-&nbsp;17 juin 2023</em>&nbsp; vient de commencer.</p>
-                </div>
-            </div>
+            <livewire:welcome-message
+                :title="'Bonjour ' . $user->name"
+                {{--:message="'Votre épreuve ' . $event->name . '  vient de commencer.'"--}}
+                :message="'Votre épreuve ' . 'Jury' . '  vient de commencer.'"
+            />
         </div>
         <div class="event__show" x-data="{ isFullScreen: false }" x-on:click.outside="isFullScreen = false">
             <div x-bind:class="{ 'fullscreen': isFullScreen }">

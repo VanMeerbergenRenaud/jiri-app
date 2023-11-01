@@ -1,42 +1,61 @@
 <?php
-
 namespace App\Livewire;
 
-use App\Models\Event;
 use App\Models\User;
+use App\Models\Event;
 use Livewire\Component;
 
 class EventController extends Component
 {
-    public function index()
+    public function index(Event $event, User $user)
     {
-        return view('livewire.events-list');
+        return view('livewire.events-list', compact('user'));
     }
 
-    public function create()
+    public function create(Event $event, User $user)
     {
-        $users = User::all();
-        return view('livewire.events/create', ['users' => $users]);
+        return view('livewire.events/create', compact('user'));
     }
 
-    public function store()
+    public function show(Event $event, User $user)
     {
-        // Add logic to store a new event
+        return view('livewire.events/show', compact('user'));
     }
 
-    public function show(Event $event)
+    public function edit(Event $event, User $user)
     {
-        return view('livewire.events/show');
+        return view('livewire.events/edit', compact('user'));
     }
 
-    public function edit(Event $event)
+    public function store(Event $event, $request)
     {
-        return view('livewire.events/edit');
+        /*
+        $this->validate([
+            // Event fields
+        ]);
+
+        Event::create($request->all());
+        return redirect()->route('events.index')->with('success', 'Épreuve créée avec succès.');
+        */
     }
 
-    public function update(Event $event)
+    public function update(Event $event, $request)
     {
-        /*$event->delete();
-        return redirect()->route('events.index')->with('success', 'Événement supprimé avec succès.');*/
+        /*
+        $this->validate([
+            // Event fields
+        ]);
+
+        $event->update($request->all());
+        return redirect()->route('events.index')->with('success', 'Épreuve mise à jour avec succès.');
+        */
+    }
+
+    public function destroy(Event $event, $request)
+    {
+        /*
+        $event->delete();
+        return redirect()->route('events.index')->with('success', 'Épreuve supprimée avec succès.');
+        */
     }
 }

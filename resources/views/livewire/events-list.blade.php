@@ -1,13 +1,11 @@
 <x-app-layout>
     <main class="mainEvents">
+
         <div class="events__intro">
-            <div class="events__intro__info">
-                <img src="{{ asset('img/dominique.png') }}" alt="Image de l'admin Dominique">
-                <div>
-                    <h2>Bonjour Dominique !</h2>
-                    <p>Découvrez la liste des diverses épreuves à venir ou déjà passées.</p>
-                </div>
-            </div>
+            <livewire:welcome-message
+                :title="'Bonjour ' . $user->name"
+                :message="'Découvrez la liste des diverses épreuves à venir ou déjà passées.'"
+            />
             <a href="{{ route('events.create') }}" class="button--classic">Créer une nouvelle épreuve</a>
         </div>
         {{-- Events --}}
