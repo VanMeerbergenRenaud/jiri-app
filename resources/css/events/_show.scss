@@ -14,10 +14,10 @@
             display: block;
             max-width: 951px;
             max-height: 585px;
+            border-spacing: 0;
             border-radius: 1.5rem;
             border-collapse: separate;
             border: 1px solid $gray-500;
-            border-spacing: 0;
             overflow-x: auto;
 
             th, td {
@@ -35,64 +35,76 @@
             }
         }
 
-        .first {
-            position: sticky;
-            top: 57px;
-            z-index: 2;
+        .row-1 {
+            th {
+                position: sticky;
+                top: 0;
+                left: 0;
+                z-index: 2;
+
+                padding: 1.25rem;
+                font-size: 0.75rem;
+                font-weight: 500;
+                text-transform: uppercase;
+                border-radius: 1rem 1rem 0 0;
+                background-color: $gray-500;
+            }
         }
 
-        .table-head {
+        .row-2 {
             position: sticky;
-            top: 0;
-            left: 0;
+            top: 57px; // 57px = padding + text of .row-1
             z-index: 2;
 
-            padding: 1.25rem;
-            font-size: 0.75rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            border-radius: 1rem 1rem 0 0;
-            background-color: $gray-500;
+            .category {
+                position: sticky;
+                top: 57px; // 57px = padding + text of .row-1
+                left: 0;
+
+                text-align: left;
+                padding: 1rem 1.5rem;
+                font-size: 0.8rem;
+                font-weight: 500;
+                text-transform: uppercase;
+                min-width: 200px;
+            }
+
+            .jiris {
+                text-align: center;
+                padding: 1rem 2rem;
+                min-width: 150px;
+                z-index: 0;
+            }
         }
 
-        .category {
-            position: sticky;
-            top: 57px;
-            left: 0;
+        tbody {
+            .students {
+                position: sticky;
+                left: 0;
 
-            text-align: left;
-            padding: 1rem 1.5rem;
-            font-size: 0.8rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            min-width: 200px;
+                text-align: left;
+                padding: 1.25rem 2rem 1.25rem 1.5rem;
+                min-width: 200px;
+            }
+
+            label {
+                display: grid;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
+
+                .input {
+                    visibility: hidden;
+                    height: 1px;
+                }
+            }
+
         }
 
         .jiris, .students {
             font-size: 0.85rem;
             font-weight: 400;
             text-transform: capitalize;
-        }
-
-        .jiris {
-            text-align: center;
-            padding: 1rem 2rem;
-            min-width: 150px;
-            z-index: 0;
-        }
-
-        .students {
-            position: sticky;
-            left: 0;
-
-            text-align: left;
-            padding: 1.25rem 2rem 1.25rem 1.5rem;
-            min-width: 200px;
-        }
-
-        .input {
-            width: 100%;
-            display: block;
         }
     }
 }

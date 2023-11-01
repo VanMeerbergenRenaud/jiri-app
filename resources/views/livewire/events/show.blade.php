@@ -13,10 +13,10 @@
         <div class="event__show">
             <table>
                 <thead>
-                    <tr>
-                        <th class="table-head" scope="col" colspan="6">Tableau récapitulatif des passages</th>
+                    <tr class="row-1">
+                        <th scope="col" colspan="6">Tableau récapitulatif des passages</th>
                     </tr>
-                    <tr class="first">
+                    <tr class="row-2">
                         <th class="category">Étudiants | Jury</th>
                         @for ($i = 1; $i <= 10; $i++)
                             <th class="jiris" scope="col">Jury {{ $i }}</th>
@@ -28,9 +28,17 @@
                     <tr>
                         <th class="students" scope="row" id="etudiant-{{ $i }}">Étudiant {{ $i }}</th>
                         @for ($j = 1; $j <= 10; $j++)
-                            <td x-data="{ checked: false }" x-on:click="checked = !checked" headers="etudiant-{{ $i }} jury-{{ $j}}">
+                            <td
+                                x-data="{ checked: localStorage.getItem('checkbox_state_{{$i}}_{{$j}}') === 'true' }"
+                                x-on:click="checked = !checked; localStorage.setItem('checkbox_state_{{$i}}_{{$j}}', checked)"
+                                headers="etudiant-{{ $i }} jury-{{ $j}}"
+                            >
                                 <label>
                                     <input x-model="checked" class="input" type="checkbox">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="23" viewBox="0 0 19 23" x-show="checked">
+                                        <text id="_" data-name="✔️" transform="translate(0 18)" fill="#00ba41" font-size="14" font-family="AppleColorEmoji, Apple Color Emoji"><tspan x="0" y="0">✔️</tspan>
+                                        </text>
+                                    </svg>
                                 </label>
                             </td>
                         @endfor
