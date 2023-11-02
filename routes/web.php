@@ -34,8 +34,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/events', [EventController::class, 'index'])->name('events');
 
     Route::get('/events/create', [EventController::class, 'create'])->name('events.create');
-    Route::get('/events/edit', [EventController::class, 'edit'])->name('events.edit');
-    Route::get('/events/show', [EventController::class, 'show'])->name('events.show');
+    Route::get('/events/{event}', [EventController::class, 'show'])->name('events.show');
+    Route::get('/events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
 
     Route::post('/events', [EventController::class, 'store'])->name('events.store');
     Route::put('/events/{event}', [EventController::class, 'update'])->name('events.update');
@@ -43,15 +43,10 @@ Route::middleware('auth')->group(function () {
 
 //    Route::get('/events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
 //    Route::get('/events/{event}', [EventController::class, 'show'])->name('events.show');
-
-    /* Jiri CRUD */
-    Route::get('/jiri', [JiriController::class, 'index'])->name('jiris.index');
-    Route::get('/jiris/create', [JiriController::class, 'create'])->name('jiris.create');
-    Route::post('/jiris', [JiriController::class, 'store'])->name('jiris.store');
 });
 
 // Page for jiris members
-Route::get('/jiris', [JiriController::class, 'index'])->name('jiris.index');
+Route::get('/events', [EventController::class, 'index'])->name('events');
 
 require __DIR__.'/auth.php';
 require __DIR__.'/pages.php';

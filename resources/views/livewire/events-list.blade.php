@@ -11,7 +11,6 @@
         {{-- Events --}}
         <div class="events">
             @unless(empty($jiris))
-
             <ul class="list">
                 Liste des épreuves en cours
                 @foreach($jiris as $jiri)
@@ -41,18 +40,18 @@
                             <span>24 évalués</span>
                         </p>
                     </div>
-                    <a href="{{ route('events.edit') }}" class="item__edition">Édition des profils et infos</a>
-                    <a href="{{ route('events.show') }}" class="item__see">Voir</a>
+                    <a href="{{ route('events.edit', ['event' => $jiri]) }}" class="item__edition">Édition des profils et infos</a>
+                    <a href="{{ route('events.show', ['event' => $jiri]) }}" class="item__see">Voir</a>
                     {{--<a href="#" class="item__unavailable">Non disponible</a>--}}
                 </li>
                 @endforeach
             </ul>
+                @else
+                <div class="flex-center empty">
+                    <p>Aucune épreuve n’a encore été créé jusqu’à présent.</p>
+                    <a href="{{ route('events.create') }}" class="underline-blue">Créer une première épreuve</a>
+                </div>
             @endunless
-
-            {{--<div class="flex-center empty">
-                <p>Aucune épreuve n’a encore été créé jusqu’à présent.</p>
-                <a href="{{ route('events.create') }}" class="underline-blue">Créer une première épreuve</a>
-            </div>--}}
         </div>
     </main>
 </x-app-layout>
