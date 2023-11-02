@@ -2,12 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\Event;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Jiri>
+ * @extends Factory<Event>
  */
-class JiriFactory extends Factory
+class EventFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +18,7 @@ class JiriFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => 'Jiri ' . $this->faker->word,
+            'name' => 'Event ' . $this->faker->word,
             'starting_at' => $this->faker->dateTimeBetween('-1 year', '+1 year'),
             'duration' => $this->faker->numberBetween(120, 480),
         ];

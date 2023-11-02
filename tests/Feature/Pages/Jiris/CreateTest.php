@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Jiri;
+use App\Models\Event;
 use App\Models\User;
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\get;
@@ -25,14 +25,14 @@ it('creates a jiri', function () {
 
     actingAs($user)
         ->post('jiris', [
-            'name' => 'Jiri 1',
+            'name' => 'Event 1',
             'starting_at' => $startingAt,
             'duration' => 60,
         ])
         ->assertRedirect('/jiris');
 
     $this->assertDatabaseHas('jiris', [
-        'name' => 'Jiri 1',
+        'name' => 'Event 1',
         'starting_at' => $startingAt,
         'duration' => 60,
     ]);

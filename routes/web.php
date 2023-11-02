@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\JiriController;
 use App\Http\Controllers\ProfileController;
-use App\Livewire\EventController;
 use Illuminate\Support\Facades\Route;
 
 /*

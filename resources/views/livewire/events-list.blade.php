@@ -10,23 +10,23 @@
         </div>
         {{-- Events --}}
         <div class="events">
-            @unless(empty($jiris))
+            @unless(empty($events))
             <ul class="list">
                 Liste des épreuves en cours
-                @foreach($jiris as $jiri)
+                @foreach($events as $event)
                 <li class="item">
-                    <h3 class="item__name">{{ $jiri->name }}</h3>
+                    <h3 class="item__name">{{ $event->name }}</h3>
                     <div class="item__date">
                         Date de l’épreuve<br>
-                        <time datetime="{{$jiri->starting_at}}">
-                            {{ \Carbon\Carbon::parse($jiri->starting_at)->format('j F Y \à G\hi')}}
+                        <time datetime="{{$event->starting_at}}">
+                            {{ \Carbon\Carbon::parse($event->starting_at)->format('j F Y \à G\hi')}}
                         </time>
                     </div>
                     <div class="item__time">
                         Durée de l’épreuve<br>
-                        <time datetime="{{$jiri->duration}}">
+                        <time datetime="{{$event->duration}}">
                             @php
-                                $duration = $jiri->duration;
+                                $duration = $event->duration;
                                 $hours = floor($duration / 60);
                                 $minutes = $duration % 60;
                             @endphp
@@ -40,10 +40,14 @@
                             <span>24 évalués</span>
                         </p>
                     </div>
-                    <a href="{{ route('events.edit', ['event' => $jiri]) }}" class="item__edition">Édition des profils et infos</a>
-                    <a href="{{ route('events.show', ['event' => $jiri]) }}" class="item__see">Voir</a>
+                    <a href="{{ route('events.show', ['event' => $event]) }}" class="item__edition">Édition des profils et infos</a>
+                    <a href="{{ route('events.show', ['event' => $event]) }}" class="item__see">Voir</a>
                     {{--<a href="#" class="item__unavailable">Non disponible</a>--}}
+
+                    {{-- Editer l'épreuve --}}
+                    <a href="{{ route('events.edit', ['event' => $event]) }}" class="item__edition" style="background-color: whitesmoke">Editer</a>
                 </li>
+
                 @endforeach
             </ul>
                 @else

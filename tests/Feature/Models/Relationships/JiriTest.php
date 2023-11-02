@@ -1,14 +1,14 @@
 <?php
 
 use App\Models\Contact;
-use App\Models\Jiri;
+use App\Models\Event;
 use App\Models\User;
 use function Pest\Laravel\actingAs;
 
 it('is possible to fetch the students and the evaluators participating to a jiri', function () {
     //Create a user with a jiri
     $user = User::factory()
-        ->has(Jiri::factory())
+        ->has(Event::factory())
         ->create();
 
     // Create three contacts
@@ -19,14 +19,14 @@ it('is possible to fetch the students and the evaluators participating to a jiri
         ]);
 
     // Log the user since the AuthUserScope requires an authenticated user
-    // After that, every access to the Jiri model will be scoped to the user
+    // After that, every access to the Event model will be scoped to the user
     actingAs($user);
 
     // Attach the contacts to the jiri as students
-    Jiri::first()->students()->attach($students, ['role' => 'student']);
+    Event::first()->students()->attach($students, ['role' => 'student']);
 
     // Check that the jiri has three students
-    expect(Jiri::first()->students)->toHaveCount(3);
+    expect(Event::first()->students)->toHaveCount(3);
 
     // Create five other contacts
     $evaluators = Contact::factory()
@@ -36,8 +36,8 @@ it('is possible to fetch the students and the evaluators participating to a jiri
         ]);
 
     //Attach the contacts to the jiri as students
-    Jiri::first()->evaluators()->attach($evaluators, ['role' => 'evaluator', 'token' => str()->random(32)]);
+    Event::first()->evaluators()->attach($evaluators, ['role' => 'evaluator', 'token' => str()->random(32)]);
 
     //Check that the jiri has three students
-    expect(Jiri::first()->evaluators)->toHaveCount(5);
+    expect(Event::first()->evaluators)->toHaveCount(5);
 });

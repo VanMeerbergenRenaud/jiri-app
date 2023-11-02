@@ -22,10 +22,10 @@ class Contact extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function jiris(): BelongsToMany
+    public function events(): BelongsToMany
     {
         return $this
-            ->belongsToMany(Jiri::class, 'attendances', 'contact_id', 'jiri_id')
+            ->belongsToMany(Event::class, 'attendances', 'contact_id', 'event_id')
             ->withPivot(['role', 'token']);
     }
 

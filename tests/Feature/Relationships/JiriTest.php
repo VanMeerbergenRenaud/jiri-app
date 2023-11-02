@@ -1,14 +1,14 @@
 <?php
 
 use App\Models\Contact;
-use App\Models\Jiri;
+use App\Models\Event;
 use App\Models\User;
 
 
 it('is possible to fetch the students and the evaluators participating to a jiri', function () {
     //Create a user with a jiri
     $user = User::factory()
-        ->has(Jiri::factory())
+        ->has(Event::factory())
         ->create();
 
     //Create three contacts

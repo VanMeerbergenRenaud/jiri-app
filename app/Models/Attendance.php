@@ -10,9 +10,9 @@ class Attendance extends Model
 {
     use HasFactory;
 
-    public function jiri(): BelongsTo
+    public function event(): BelongsTo
     {
-        return $this->belongsTo(Jiri::class);
+        return $this->belongsTo(Event::class);
     }
 
     public function contact(): BelongsTo

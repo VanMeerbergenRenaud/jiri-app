@@ -48,9 +48,9 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function jiris(): HasMany
+    public function events(): HasMany
     {
-        return $this->hasMany(Jiri::class);
+        return $this->hasMany(Event::class);
     }
 
     public function contacts(): HasMany
@@ -65,6 +65,6 @@ class User extends Authenticatable
 
     public function attendances(): hasManyThrough
     {
-        return $this->hasManyThrough(Attendance::class, Jiri::class);
+        return $this->hasManyThrough(Attendance::class, Event::class);
     }
 }
