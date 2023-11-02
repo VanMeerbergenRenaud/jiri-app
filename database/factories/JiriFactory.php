@@ -2,11 +2,10 @@
 
 namespace Database\Factories;
 
-use App\Models\Jiri;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<Jiri>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Jiri>
  */
 class JiriFactory extends Factory
 {
@@ -19,6 +18,8 @@ class JiriFactory extends Factory
     {
         return [
             'name' => 'Jiri ' . $this->faker->word,
+            'starting_at' => $this->faker->dateTimeBetween('-1 year', '+1 year'),
+            'duration' => $this->faker->numberBetween(120, 480),
         ];
     }
 }

@@ -19,29 +19,38 @@
             border-radius: 2rem;
 
             &__infos {
+                position: relative;
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
                 grid-gap: 0 2rem;
                 padding-bottom: 2rem;
                 border-bottom: $border;
+                grid-template-areas:
+                    ". . ."
+                    ". . ."
+                    "error1 error2 error3";
 
-                p {
-                    grid-column: span 2;
-                }
+                .error1 {grid-area: error1;}
+                .error2 {grid-area: error2;}
+                .error3 {grid-area: error3;}
 
                 label {
-                    display: block;
                     margin-bottom: 1rem;
                 }
 
                 input {
                     padding: 1rem;
                     border-radius: 0.5rem;
+                    min-width: 250px;
                 }
 
-                input:last-of-type {
-                    grid-row: 2/3;
-                    grid-column: 3/4;
+                input[type="number"] {
+                    min-width: 145px;
+                    max-width: 150px;
+                }
+
+                .error-message {
+                    margin-bottom: 1.25rem;
                 }
             }
 

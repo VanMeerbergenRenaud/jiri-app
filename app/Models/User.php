@@ -48,8 +48,6 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    protected $with = ['jiris', 'contacts', 'projects'];
-
     public function jiris(): HasMany
     {
         return $this->hasMany(Jiri::class);

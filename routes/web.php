@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\JiriController;
 use App\Http\Controllers\ProfileController;
 use App\Livewire\EventController;
 use Illuminate\Support\Facades\Route;
@@ -42,12 +43,15 @@ Route::middleware('auth')->group(function () {
 
 //    Route::get('/events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
 //    Route::get('/events/{event}', [EventController::class, 'show'])->name('events.show');
+
+    /* Jiri CRUD */
+    Route::get('/jiri', [JiriController::class, 'index'])->name('jiris.index');
+    Route::get('/jiris/create', [JiriController::class, 'create'])->name('jiris.create');
+    Route::post('/jiris', [JiriController::class, 'store'])->name('jiris.store');
 });
 
 // Page for jiris members
-Route::get('/jiris', function () {
-    return view('pages/jiris');
-})->name('jiris');
+Route::get('/jiris', [JiriController::class, 'index'])->name('jiris.index');
 
 require __DIR__.'/auth.php';
 require __DIR__.'/pages.php';

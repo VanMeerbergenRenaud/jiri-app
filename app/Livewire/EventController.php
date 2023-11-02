@@ -1,61 +1,56 @@
 <?php
 namespace App\Livewire;
 
+use App\Models\Jiri;
 use App\Models\User;
-use App\Models\Event;
 use Livewire\Component;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Request;
 
 class EventController extends Component
 {
-    public function index(Event $event, User $user)
+    public function index(User $user)
     {
-        return view('livewire.events-list', compact('user'));
+        $jiris = Jiri::orderBy('starting_at','asc')->get();
+        return view('livewire.events-list', compact('jiris', 'user'));
     }
 
-    public function create(Event $event, User $user)
+    public function create(User $user): View
     {
+        info('JiriController@index');
         return view('livewire.events/create', compact('user'));
     }
 
-    public function show(Event $event, User $user)
+    public function show(User $user)
     {
         return view('livewire.events/show', compact('user'));
     }
 
-    public function edit(Event $event, User $user)
+    public function edit(User $user)
     {
         return view('livewire.events/edit', compact('user'));
     }
 
-    public function store(Event $event, $request)
+    public function store(): RedirectResponse
     {
-        /*
-        $this->validate([
-            // Event fields
+        $data = Request::validate([
+            'name' => 'required',
+            'starting_at' => 'required|date',
+            'duration' => 'required|integer',
         ]);
 
-        Event::create($request->all());
-        return redirect()->route('events')->with('success', 'Épreuve créée avec succès.');
-        */
+        auth()->user()?->jiris()->create($data);
+        return redirect('events');
     }
 
-    public function update(Event $event, $request)
+    public function update()
     {
-        /*
-        $this->validate([
-            // Event fields
-        ]);
 
-        $event->update($request->all());
-        return redirect()->route('events')->with('success', 'Épreuve mise à jour avec succès.');
-        */
     }
 
-    public function destroy(Event $event, $request)
+    public function destroy()
     {
-        /*
-        $event->delete();
-        return redirect()->route('events')->with('success', 'Épreuve supprimée avec succès.');
-        */
+
     }
 }

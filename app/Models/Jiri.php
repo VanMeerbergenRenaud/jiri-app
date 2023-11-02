@@ -12,6 +12,12 @@ class Jiri extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'starting_at',
+        'duration',
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -49,7 +55,8 @@ class Jiri extends Model
 
     public function students(): BelongsToMany
     {
-        return $this->belongsToMany(
+        return $this
+            ->belongsToMany(
                 Contact::class,
                 'attendances',
                 'jiri_id',
@@ -61,13 +68,20 @@ class Jiri extends Model
 
     public function evaluators(): BelongsToMany
     {
-        return $this->belongsToMany(
-            Contact::class,
-            'attendances',
-            'jiri_id',
-            'contact_id'
+        return $this
+            ->belongsToMany(
+                Contact::class,
+                'attendances',
+                'jiri_id',
+                'contact_id'
             )
             ->withPivot('role','token')
             ->wherePivot('role', 'evaluator');
+    }
+
+    // Retrieve only the jiris of the authenticated user
+    protected static function booted(): void
+    {
+        static::addGlobalScope(new Scopes\AuthUserScope());
     }
 }

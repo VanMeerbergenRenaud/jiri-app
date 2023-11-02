@@ -14,4 +14,10 @@ class Project extends Model
     {
         return $this->hasMany(Implementation::class);
     }
+
+    // Retrieve only the projects of the authenticated user
+    protected static function booted(): void
+    {
+        static::addGlobalScope(new Scopes\AuthUserScope());
+    }
 }

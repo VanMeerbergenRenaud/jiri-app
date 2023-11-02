@@ -14,33 +14,36 @@
                 method="POST"
                 class="form"
             >
+                @csrf
                 {{-- Label & input for name, date of beginning and end of the event --}}
                 <div class="form__infos">
                     <label for="name">Nom de l'épreuve</label>
-                    <p>
-                        Date et durée de l’épreuve
-                        <label for="date_start" class="sr-only">Date de début</label>
-                        <label for="date_end" class="sr-only">Date de fin</label>
-                    </p>
+                    <label for="starting_at">Date de début</label>
+                    <label for="duration">Durée de l'épreuve</label>
                     <input
                         type="text"
                         name="name"
                         id="name"
                         placeholder="Ex : Design Web"
+                        value="{{ old('name') }}"
                     >
-                    @error('name')<p>{{ $message }}</p>@enderror
                     <input
-                        type="date"
-                        name="date_start"
-                        id="date_start"
+                        type="datetime-local"
+                        name="starting_at"
+                        id="starting_at"
+                        value="{{ old('starting_at') }}"
                     >
-                    @error('date_start')<p>{{ $message }}</p>@enderror
                     <input
-                        type="date"
-                        name="date_end"
-                        id="date_end"
+                        type="number"
+                        name="duration"
+                        id="duration"
+                        min="1"
+                        max="480"
+                        value="{{ old('duration', 1) }}"
                     >
-                    @error('date_end')<p>{{ $message }}</p>@enderror
+                    @error('name')<p class="error-message error1">{{ $message }}</p>@enderror
+                    @error('starting_at')<p class="error-message error2">{{ $message }}</p>@enderror
+                    @error('duration')<p class="error-message error3">{{ $message }}</p>@enderror
                 </div>
                 <div class="form__container">
                     {{-- Label & select to create a user in the database --}}
@@ -138,7 +141,7 @@
                 </div>
                 <div class="form__submit">
                     <button>Annuler</button>
-                    <button class="button--classic">Créer</button>
+                    <button class="button--classic" type="submit">Créer</button>
                 </div>
             </form>
         </div>

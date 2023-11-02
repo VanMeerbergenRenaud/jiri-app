@@ -13,6 +13,8 @@ return new class extends Migration {
         Schema::create('jiris', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->timestamp('starting_at');
+            $table->smallInteger('duration');
             $table->timestamps();
         });
     }

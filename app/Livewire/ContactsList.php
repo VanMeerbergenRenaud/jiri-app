@@ -29,7 +29,7 @@ class ContactsList extends Component
             : new Collection();
     }
 
-    public function save(): void
+    public function save()
     {
         $dominique = User::whereEmail('dominique.vilain@hepl.be')
             ->firstOrFail();

@@ -2,11 +2,11 @@
 
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use function Pest\Laravel\{get,post};
 
 test('login screen can be rendered', function () {
-    $response = $this->get('/login');
-
-    $response->assertStatus(200);
+    get('/login')
+        ->assertOk();
 });
 
 test('users can authenticate using the login screen', function () {
@@ -14,7 +14,7 @@ test('users can authenticate using the login screen', function () {
 
     $response = $this->post('/login', [
         'email' => $user->email,
-        'password' => 'password',
+        'password' => 'password'
     ]);
 
     $this->assertAuthenticated();
@@ -24,7 +24,7 @@ test('users can authenticate using the login screen', function () {
 test('users can not authenticate with invalid password', function () {
     $user = User::factory()->create();
 
-    $this->post('/login', [
+    post('/login', [
         'email' => $user->email,
         'password' => 'wrong-password',
     ]);
