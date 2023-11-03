@@ -3,33 +3,34 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
-use App\Models\User;
+use Auth;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $user = User::find($request->user()->id);
+        $user = Auth::user();
         $events = Event::orderBy('starting_at', 'asc')->get();
         return view('livewire.events-list', compact('events', 'user'));
     }
 
-    public function create(Request $request): View
+    public function create(): View
     {
-        $user = User::find($request->user()->id);
+        $user = Auth::user();
         return view('livewire.events/create', compact('user'));
     }
 
-    public function show(User $user)
+    public function show()
     {
+        $user = Auth::user();
         return view('livewire.events/show', compact('user'));
     }
 
-    public function edit(User $user, $eventId)
+    public function edit($eventId)
     {
+        $user = Auth::user();
         $event = Event::findOrFail($eventId);
         return view('livewire.events/edit', compact('user', 'event'));
     }
@@ -43,7 +44,7 @@ class EventController extends Controller
         return redirect('events');
     }
 
-    public function update(User $user, $eventId): RedirectResponse
+    public function update($eventId): RedirectResponse
     {
         $data = $this->validateEventData();
 
@@ -51,17 +52,21 @@ class EventController extends Controller
 
         $event->update($data);
 
-        return redirect()->route('events', compact('user', 'event'));
+        return redirect()->route('events', compact('event'));
     }
 
-    public function destroy()
+    public function destroy($eventId)
     {
-        // Supprimer l'événement
+        $event = Event::findOrFail($eventId);
+
+        $event->delete();
+
+        return redirect()->route('events');
     }
 
     private function validateEventData()
     {
-        return Request::validate([
+        return request()->validate([
             'name' => 'required',
             'starting_at' => 'required|date',
             'duration' => 'required|integer',

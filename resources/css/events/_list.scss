@@ -39,6 +39,8 @@
             border: $border;
             border-radius: 1.5rem;
             background-color: #D9EBED;
+            //background-color: #E1E8ED;
+            //background-color: #D3E7F2;
 
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -70,29 +72,57 @@
                 width: fit-content;
             }
 
-            &__edition {
-                color: $blue;
-                padding: 0.875rem 1.5rem;
-                border-radius: 0.75rem;
-                background-color: white;
-            }
+            .link {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                gap: 0 1rem;
+                grid-column: span 3;
 
-            &__see {
-                padding: 0.875rem 3rem;
-                border-radius: 1.5rem;
-                background-color: white;
-            }
+                &__edition {
+                    margin-left: 1rem;
+                    padding: 0.875rem 1.5rem;
+                    color: $blue;
+                    background-color: white;
+                    border-radius: 0.75rem;
+                }
 
-            &__unavailable {
-                cursor: not-allowed;
-                padding: 0.875rem 1rem;
-                border-radius: 1.5rem;
-                background-color: #F7F7FA;
+                &__see {
+                    padding: 0.875rem 3rem;
+                    border-radius: 1.5rem;
+                    background-color: white;
+                }
+
+                &__unavailable {
+                    cursor: not-allowed;
+                    padding: 0.875rem 1rem;
+                    min-width: 150px;
+                    border-radius: 1.5rem;
+                    background-color: #F7F7FA;
+                }
+
+                &__edit, &__delete {
+                    padding: 0.5rem;
+                    align-self: center;
+                }
             }
         }
     }
 
+    .list:nth-of-type(2) {
+        .item {
+            background-color: #E1E8ED;
+        }
+    }
+
+    .list:last-of-type {
+        .item {
+            background-color: #D3E7F2;
+        }
+    }
+
     .empty {
+        margin-top: 1rem;
         padding: 5.5rem 0;
         border: $border;
         border-radius: 1.5rem;
@@ -109,6 +139,52 @@
         a {
             color: $blue;
             border-bottom: 1px solid $blue;
+        }
+    }
+
+    .modal {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 10;
+
+        &__dialog {
+            background: $gray-700;
+            border-radius: 1rem;
+            padding: 1.25rem 2rem;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        &__title {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        &__buttons {
+            display: flex;
+            justify-content: space-between;
+
+            button {
+                padding: 0.5rem 1rem;
+                font-weight: 500;
+                color: white;
+            }
+
+            .cancel-button {
+                background: $blue-dark;
+            }
+
+            .confirm-button {
+                background: $blue;
+            }
         }
     }
 }
