@@ -3,7 +3,7 @@
         <div class="events__intro">
             <livewire:welcome-message
                 :title="'Bonjour ' . $user->name"
-                :message="'Découvrez la liste des diverses épreuves à venir ou déjà passées.'"
+                :message="'Découvrez la liste des diverses épreuves créées.'"
             />
             <a href="{{ route('events.create') }}" class="ml-8 button--classic">Créer une nouvelle épreuve</a>
         </div>
@@ -22,11 +22,11 @@
                     $upcomingEvents = $events->where('starting_at', '>', now()->addHour());
                 @endphp
 
-                <!-- Liste des épreuves passées -->
+                    <!-- Liste des épreuves passées -->
                 @if (!$passedEvents->isEmpty())
                     <ul class="list">Liste des épreuves passées
                         @foreach($passedEvents as $event)
-                            @include('components.event-details', ['event' => $event])
+                            @include('components.event.event-details', ['event' => $event])
                         @endforeach
                     </ul>
                 @endif
@@ -35,7 +35,7 @@
                 @if (!$ongoingEvents->isEmpty())
                     <ul class="list list2">Liste des épreuves en cours
                         @foreach($ongoingEvents as $event)
-                            @include('components.event-details', ['event' => $event])
+                            @include('components.event.event-details', ['event' => $event])
                         @endforeach
                     </ul>
                 @endif
@@ -44,7 +44,7 @@
                 @if (!$upcomingEvents->isEmpty())
                     <ul class="list list3">Liste des épreuves à venir
                         @foreach($upcomingEvents as $event)
-                            @include('components.event-details', ['event' => $event])
+                            @include('components.event.event-details', ['event' => $event])
                         @endforeach
                     </ul>
                 @endif

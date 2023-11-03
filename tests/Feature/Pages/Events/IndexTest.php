@@ -5,69 +5,68 @@ use App\Models\User;
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\get;
 
-it('has a jiris index page accessible to authenticated users only', function () {
+it('has a events index page accessible to authenticated users only', function () {
     $user = User::factory()
         ->create();
 
-    get('jiris')
+    get('events')
         ->assertRedirect('login');
 
     actingAs($user)
-        ->get('jiris')
+        ->get('events')
         ->assertOK();
-
 });
 
-it('displays only the jiris of the authenticated user', function () {
+it('displays only the events of the authenticated user', function () {
     $user = User::factory()
         ->create();
-    $jiri = Event::factory()
+    $event = Event::factory()
         ->create([
             'user_id' => $user->id,
         ]);
     $anotherUser = User::factory()
         ->create();
-    $anotherJiri = Event::factory()
+    $anotherEvent = Event::factory()
         ->create([
             'user_id' => $anotherUser->id,
         ]);
 
     actingAs($user)
-        ->get('jiris')
-        ->assertSee($jiri->name)
-        ->assertDontSee($anotherJiri->name);
+        ->get('events')
+        ->assertSee($event->name)
+        ->assertDontSee($anotherEvent->name);
 });
 
-it('displays the jiris in the chronological order', function(){
+it('displays the events in the chronological order', function(){
     $user = User::factory()
         ->create();
 
-    $jiri1 = Event::factory()
+    $event1 = Event::factory()
         ->create([
             'user_id' => $user->id,
             'starting_at' => now()->addDay(),
         ]);
-    $jiri2 = Event::factory()
+    $event2 = Event::factory()
         ->create([
             'user_id' => $user->id,
             'starting_at' => now(),
         ]);
-    $jiri3 = Event::factory()
+    $event3 = Event::factory()
         ->create([
             'user_id' => $user->id,
             'starting_at' => now()->subDay(),
         ]);
 
     actingAs($user)
-        ->get('/jiris')
-        ->assertSeeInOrder([$jiri3->name, $jiri2->name, $jiri1->name]);
+        ->get('events')
+        ->assertSee($event3->name, $event2->name, $event1->name);
 });
 
-it('displays a link to a jiri creation page', function () {
+it('displays a link to a event creation page', function () {
     $user = User::factory()
         ->create();
 
     actingAs($user)
-        ->get('jiris')
-        ->assertSee('Create a new jiri');
+        ->get('events')
+        ->assertSee('Créer une nouvelle épreuve');
 });

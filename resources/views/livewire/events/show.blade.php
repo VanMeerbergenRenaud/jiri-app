@@ -2,9 +2,8 @@
     <main class="mainEventShow">
         <div class="events__intro">
             <livewire:welcome-message
-                :title="'Bonjour ' . $user->name"
-                {{--:message="'Votre épreuve ' . $event->name . '  vient de commencer.'"--}}
-                :message="'Votre épreuve ' . 'Jury' . '  vient de commencer.'"
+                :title="'Bonjour ' . $user->name . ' !'"
+                :message="'Votre épreuve ' . $event->name . '  vient de commencer.'"
             />
         </div>
 

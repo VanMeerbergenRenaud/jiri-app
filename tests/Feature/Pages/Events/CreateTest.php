@@ -5,33 +5,33 @@ use App\Models\User;
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\get;
 
-it('displays a form to create a jiri', function () {
+it('displays a form to create a event', function () {
     $user = User::factory()
         ->create();
 
     actingAs($user)
-        ->get('jiris/create')
-        ->assertSee('Create a new jiri')
+        ->get('events/create')
+        ->assertSee('C’est parti pour une nouvelle expérience')
         ->assertSee('form')
-        ->assertSee('Name')
-        ->assertSee('Starting date and time')
-        ->assertSee('Duration in minutes');
+        ->assertSee('Nom')
+        ->assertSee('Date')
+        ->assertSee('Durée');
 });
 
-it('creates a jiri', function () {
+it('creates a event', function () {
     $user = User::factory()
         ->create();
     $startingAt = now();
 
     actingAs($user)
-        ->post('jiris', [
+        ->post('events', [
             'name' => 'Event 1',
             'starting_at' => $startingAt,
             'duration' => 60,
         ])
-        ->assertRedirect('/jiris');
+        ->assertRedirect('/events');
 
-    $this->assertDatabaseHas('jiris', [
+    $this->assertDatabaseHas('events', [
         'name' => 'Event 1',
         'starting_at' => $startingAt,
         'duration' => 60,

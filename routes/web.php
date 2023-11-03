@@ -26,6 +26,8 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
     ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    /* Home page */
+
     /* Welcome page */
     Route::get('/welcome', [WelcomeController::class, 'index'])->name('welcome');
 
@@ -41,7 +43,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
     Route::post('/events', [EventController::class, 'store'])->name('events.store');
     Route::put('/events/{event}', [EventController::class, 'update'])->name('events.update');
-
     Route::delete('/events/{event}', [EventController::class, 'destroy'])->name('events.destroy');
 });
 

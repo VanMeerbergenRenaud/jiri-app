@@ -2,7 +2,7 @@
     <main class="mainEventsCreate">
         <div class="events__intro">
             <livewire:welcome-message
-                :title="'Bonjour ' . $user->name"
+                :title="'Bonjour ' . $user->name . ' !'"
                 :message="'C’est parti pour une nouvelle expérience !'"
             />
         </div>

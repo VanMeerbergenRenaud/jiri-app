@@ -5,8 +5,8 @@ use App\Models\Event;
 use App\Models\User;
 use function Pest\Laravel\actingAs;
 
-it('is possible to fetch the students and the evaluators participating to a jiri', function () {
-    //Create a user with a jiri
+it('is possible to fetch the students and the evaluators participating to a event', function () {
+    //Create a user with a event
     $user = User::factory()
         ->has(Event::factory())
         ->create();
@@ -22,7 +22,7 @@ it('is possible to fetch the students and the evaluators participating to a jiri
     // After that, every access to the Event model will be scoped to the user
     actingAs($user);
 
-    // Attach the contacts to the jiri as students
+    // Attach the contacts to the event as students
     Event::first()->students()->attach($students, ['role' => 'student']);
 
     // Check that the jiri has three students

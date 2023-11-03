@@ -6,13 +6,13 @@ use App\Models\Scopes\AuthUserScope;
 use App\Models\User;
 use function Pest\Laravel\actingAs;
 
-it('scopes the jiris to the authenticated user', function () {
+it('scopes the events to the authenticated user', function () {
     // Make a user with 4 jiris
     $user = User::factory()
         ->has(Event::factory(4))
         ->create();
 
-    // Make another user with 4 jiris
+    // Make another user with 4 events
     User::factory()
         ->has(Event::factory(4))
         ->create();

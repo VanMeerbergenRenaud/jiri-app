@@ -8,7 +8,7 @@ use function Pest\Laravel\actingAs;
 
 it('is possible to fetch all the attendances to a Event belonging to the authenticated user', function () {
     $user = User::factory()
-        ->hasJiris(2)
+        ->hasEvents(2)
         ->create();
 
     $contacts = Contact::factory()->count(10)->create([
@@ -26,11 +26,11 @@ it('is possible to fetch all the attendances to a Event belonging to the authent
 
 it('is not possible for a user to fetch the jiris of another user', function () {
     $user = User::factory()
-        ->hasJiris(4)
+        ->hasEvents(4)
         ->create();
 
     $anotherUser = User::factory()
-        ->hasJiris(4)
+        ->hasEvents(4)
         ->create();
 
     // Testing the existence of the relationship
@@ -39,5 +39,5 @@ it('is not possible for a user to fetch the jiris of another user', function () 
 
     actingAs($user);
     expect(Event::all())->toHaveCount(4)
-        ->and($anotherUser->jiris)->toHaveCount(0);
+        ->and($anotherUser->events)->toHaveCount(0);
 });
