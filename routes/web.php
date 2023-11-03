@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\JiriController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,14 +19,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+    return view('start-page');
+})->name('start-page');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    /* Welcome page */
+    Route::get('/welcome', [WelcomeController::class, 'index'])->name('welcome');
+
     /* Profile CRUD */
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -32,21 +37,14 @@ Route::middleware('auth')->group(function () {
 
     /* Events CRUD */
     Route::get('/events', [EventController::class, 'index'])->name('events');
-
     Route::get('/events/create', [EventController::class, 'create'])->name('events.create');
     Route::get('/events/{event}', [EventController::class, 'show'])->name('events.show');
     Route::get('/events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
-
     Route::post('/events', [EventController::class, 'store'])->name('events.store');
     Route::put('/events/{event}', [EventController::class, 'update'])->name('events.update');
+
     Route::delete('/events/{event}', [EventController::class, 'destroy'])->name('events.destroy');
-
-//    Route::get('/events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
-//    Route::get('/events/{event}', [EventController::class, 'show'])->name('events.show');
 });
-
-// Page for jiris members
-Route::get('/events', [EventController::class, 'index'])->name('events');
 
 require __DIR__.'/auth.php';
 require __DIR__.'/pages.php';

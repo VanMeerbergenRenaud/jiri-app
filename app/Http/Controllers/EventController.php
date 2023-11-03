@@ -6,18 +6,20 @@ use App\Models\Event;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Request;
+use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
-    public function index(User $user)
+    public function index(Request $request)
     {
+        $user = User::find($request->user()->id);
         $events = Event::orderBy('starting_at', 'asc')->get();
         return view('livewire.events-list', compact('events', 'user'));
     }
 
-    public function create(User $user): View
+    public function create(Request $request): View
     {
+        $user = User::find($request->user()->id);
         return view('livewire.events/create', compact('user'));
     }
 
@@ -46,6 +48,7 @@ class EventController extends Controller
         $data = $this->validateEventData();
 
         $event = Event::findOrFail($eventId);
+
         $event->update($data);
 
         return redirect()->route('events', compact('user', 'event'));

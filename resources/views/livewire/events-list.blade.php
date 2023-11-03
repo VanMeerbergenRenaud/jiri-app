@@ -1,6 +1,5 @@
 <x-app-layout>
     <main class="mainEvents">
-
         <div class="events__intro">
             <livewire:welcome-message
                 :title="'Bonjour ' . $user->name"
