@@ -4,7 +4,6 @@ use App\Models\Contact;
 use App\Models\Event;
 use App\Models\User;
 
-
 it('is possible to fetch the students and the evaluators participating to a event', function () {
     //Create a user with a event
     $user = User::factory()

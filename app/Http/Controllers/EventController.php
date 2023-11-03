@@ -12,8 +12,20 @@ class EventController extends Controller
     public function index()
     {
         $user = Auth::user();
+
         $events = Event::orderBy('starting_at', 'asc')->get();
-        return view('livewire.events-list', compact('events', 'user'));
+
+        $passedEvents = $events->filter(function ($event) {
+            return $event->isPastEvent();
+        });
+        $ongoingEvents = $events->filter(function ($event) {
+            return $event->isOngoingEvent();
+        });
+        $upcomingEvents = $events->filter(function ($event) {
+            return $event->isUpcomingEvent();
+        });
+
+        return view('livewire.events-list', compact('events', 'user', 'passedEvents', 'ongoingEvents', 'upcomingEvents'));
     }
 
     public function create(): View

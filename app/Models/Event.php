@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Carbon\Carbon;
 
 class Event extends Model
 {
@@ -84,4 +85,29 @@ class Event extends Model
     {
         static::addGlobalScope(new Scopes\AuthUserScope());
     }
+
+
+    public function isPastEvent(): bool
+    {
+        $eventStart = Carbon::parse($this->starting_at);
+        $eventEnd = $eventStart->copy()->addHours($this->duration);
+
+        return $eventEnd->isPast();
+    }
+
+    public function isOngoingEvent(): bool
+    {
+        $eventStart = Carbon::parse($this->starting_at);
+        $eventEnd = $eventStart->copy()->addHours($this->duration);
+
+        return $eventStart->isPast() && $eventEnd->isFuture();
+    }
+
+    public function isUpcomingEvent(): bool
+    {
+        $eventStart = Carbon::parse($this->starting_at);
+
+        return $eventStart->isFuture();
+    }
+
 }

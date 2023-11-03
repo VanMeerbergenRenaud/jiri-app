@@ -16,17 +16,13 @@
                     <a href="{{ route('events.create') }}" class="underline-blue">Créer une première épreuve</a>
                 </div>
             @else
-                @php
-                    $passedEvents = $events->where('starting_at', '<', now());
-                    $ongoingEvents = $events->where('starting_at', '>', now())->where('starting_at', '<', now()->addHour());
-                    $upcomingEvents = $events->where('starting_at', '>', now()->addHour());
-                @endphp
-
-                    <!-- Liste des épreuves passées -->
+                <!-- Liste des épreuves passées -->
                 @if (!$passedEvents->isEmpty())
                     <ul class="list">Liste des épreuves passées
                         @foreach($passedEvents as $event)
-                            @include('components.event.event-details', ['event' => $event])
+                            @if($event->isPastEvent())
+                                @include('components.event.event-details', ['event' => $event])
+                            @endif
                         @endforeach
                     </ul>
                 @endif
@@ -35,7 +31,9 @@
                 @if (!$ongoingEvents->isEmpty())
                     <ul class="list list2">Liste des épreuves en cours
                         @foreach($ongoingEvents as $event)
-                            @include('components.event.event-details', ['event' => $event])
+                            @if($event->isOngoingEvent())
+                                @include('components.event.event-details', ['event' => $event])
+                            @endif
                         @endforeach
                     </ul>
                 @endif
@@ -44,7 +42,9 @@
                 @if (!$upcomingEvents->isEmpty())
                     <ul class="list list3">Liste des épreuves à venir
                         @foreach($upcomingEvents as $event)
-                            @include('components.event.event-details', ['event' => $event])
+                            @if($event->isUpcomingEvent())
+                                @include('components.event.event-details', ['event' => $event])
+                            @endif
                         @endforeach
                     </ul>
                 @endif
