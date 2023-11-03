@@ -25,24 +25,18 @@
         </p>
     </div>
     {{-- Liens : Édition, Voir, Non disponible, Éditer, Supprimer --}}
-    <div class="link">
-        <a href="{{ route('events.show', ['event' => $event]) }}" class="link__edition">
-            Édition des profils et infos
-        </a>
+    <div class="link" x-data="{ showModal: false }">
+        <a href="{{ route('events.show', ['event' => $event]) }}" class="link__edition">Édition des profils et infos</a>
 
         @if(now() >= $event->starting_at)
             <a href="{{ route('events.show', ['event' => $event]) }}" class="link__see">Voir</a>
         @else
-            <a href="" class="link__unavailable">Non disponible</a>
+            <button class="link__unavailable">Non disponible</button>
         @endif
 
-        <a href="{{ route('events.edit', ['event' => $event]) }}" class="link__edit">
-            @include('components.svg.edit')
-        </a>
+        <a href="{{ route('events.edit', ['event' => $event]) }}" class="link__edit">@include('components.svg.edit')</a>
 
-        <button @click="showModal = true" class="link__delete">
-            @include('components.svg.trash')
-        </button>
+        <button @click="showModal = !showModal" class="link__delete">@include('components.svg.trash')</button>
 
         {{-- Modal to trash an event --}}
         <div x-show="showModal" class="modal">
@@ -58,7 +52,7 @@
                           method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="confirm-button">
+                        <button type="submit" class="confirm-button" @click="showModal = false">
                             Confirmer la suppression
                         </button>
                     </form>

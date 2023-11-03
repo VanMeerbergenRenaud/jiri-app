@@ -24,6 +24,7 @@
                         type="text"
                         name="name"
                         id="name"
+                        min="1"
                         placeholder="Ex : Design Web"
                         value="{{ old('name') }}"
                     >
@@ -31,7 +32,9 @@
                         type="datetime-local"
                         name="starting_at"
                         id="starting_at"
-                        value="{{ old('starting_at') }}"
+                        min="2023-01-01T00:00"
+                        max="3000-01-01T00:00"
+                        value="{{ old('starting_at') ?? date('Y-m-d\TH:i', strtotime('+1 hour')) }}"
                     >
                     <input
                         type="number"

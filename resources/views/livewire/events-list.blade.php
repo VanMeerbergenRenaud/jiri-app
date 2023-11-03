@@ -7,8 +7,8 @@
             />
             <a href="{{ route('events.create') }}" class="ml-8 button--classic">Créer une nouvelle épreuve</a>
         </div>
-        {{-- Events --}}
-        <div class="events" x-data="{ showModal: false }">
+        {{-- Liste des épreuves --}}
+        <div class="events">
             @if (count($events) === 0)
                 Liste des épreuves
                 <div class="flex-center empty">
@@ -16,27 +16,39 @@
                     <a href="{{ route('events.create') }}" class="underline-blue">Créer une première épreuve</a>
                 </div>
             @else
+                @php
+                    $passedEvents = $events->where('starting_at', '<', now());
+                    $ongoingEvents = $events->where('starting_at', '>', now())->where('starting_at', '<', now()->addHour());
+                    $upcomingEvents = $events->where('starting_at', '>', now()->addHour());
+                @endphp
+
                 <!-- Liste des épreuves passées -->
-                <ul class="list">Liste des épreuves passées
-                    @foreach($events->where('starting_at', '<', now()) as $event)
-                        @include('components.event-details', ['event' => $event])
-                    @endforeach
-                </ul>
+                @if (!$passedEvents->isEmpty())
+                    <ul class="list">Liste des épreuves passées
+                        @foreach($passedEvents as $event)
+                            @include('components.event-details', ['event' => $event])
+                        @endforeach
+                    </ul>
+                @endif
 
                 <!-- Liste des épreuves en cours -->
-                <ul class="list">Liste des épreuves en cours
-                    @foreach($events->where('starting_at', '>', now())->where('starting_at', '<', now()->addHour()) as $event)
-                        @include('components.event-details', ['event' => $event])
-                    @endforeach
-                </ul>
+                @if (!$ongoingEvents->isEmpty())
+                    <ul class="list list2">Liste des épreuves en cours
+                        @foreach($ongoingEvents as $event)
+                            @include('components.event-details', ['event' => $event])
+                        @endforeach
+                    </ul>
+                @endif
 
                 <!-- Liste des épreuves à venir -->
-                <ul class="list">Liste des épreuves à venir
-                    @foreach($events->where('starting_at', '>', now()->addHour()) as $event)
-                        @include('components.event-details', ['event' => $event])
-                    @endforeach
+                @if (!$upcomingEvents->isEmpty())
+                    <ul class="list list3">Liste des épreuves à venir
+                        @foreach($upcomingEvents as $event)
+                            @include('components.event-details', ['event' => $event])
+                        @endforeach
+                    </ul>
                 @endif
-            </ul>
+            @endif
         </div>
     </main>
 </x-app-layout>

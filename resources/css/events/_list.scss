@@ -109,13 +109,14 @@
         }
     }
 
-    .list:nth-of-type(2) {
+    /* nth-of-type ne convient pas ici */
+    .list2 {
         .item {
             background-color: #E1E8ED;
         }
     }
 
-    .list:last-of-type {
+    .list3 {
         .item {
             background-color: #D3E7F2;
         }
@@ -151,7 +152,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background: rgba(0, 0, 0, 0.4);
+        background: rgba(0, 0, 0, 0.825);
         z-index: 10;
 
         &__dialog {
