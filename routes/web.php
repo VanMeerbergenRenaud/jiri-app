@@ -17,17 +17,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/* Home start page */
 Route::get('/', function () {
     return view('start-page');
 })->name('start-page');
 
+/* Home auth page */
 Route::get('/', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    /* Home page */
-
     /* Welcome page */
     Route::get('/welcome', [WelcomeController::class, 'index'])->name('welcome');
 

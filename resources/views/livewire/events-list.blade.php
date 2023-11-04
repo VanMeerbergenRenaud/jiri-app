@@ -16,38 +16,16 @@
                     <a href="{{ route('events.create') }}" class="underline-blue">Créer une première épreuve</a>
                 </div>
             @else
-                <!-- Liste des épreuves passées -->
-                @if (!$passedEvents->isEmpty())
-                    <ul class="list">Liste des épreuves passées
-                        @foreach($passedEvents as $event)
-                            @if($event->isPastEvent())
+                @foreach ($eventGroups as $status => $eventsGroup)
+                    @if (!$eventsGroup->isEmpty())
+                        <ul class="list @if($status === 'en cours') list2 @elseif($status === 'à venir') list3 @endif">
+                            Liste des épreuves {{ $status }}
+                            @foreach($eventsGroup as $event)
                                 @include('components.event.event-details', ['event' => $event])
-                            @endif
-                        @endforeach
-                    </ul>
-                @endif
-
-                <!-- Liste des épreuves en cours -->
-                @if (!$ongoingEvents->isEmpty())
-                    <ul class="list list2">Liste des épreuves en cours
-                        @foreach($ongoingEvents as $event)
-                            @if($event->isOngoingEvent())
-                                @include('components.event.event-details', ['event' => $event])
-                            @endif
-                        @endforeach
-                    </ul>
-                @endif
-
-                <!-- Liste des épreuves à venir -->
-                @if (!$upcomingEvents->isEmpty())
-                    <ul class="list list3">Liste des épreuves à venir
-                        @foreach($upcomingEvents as $event)
-                            @if($event->isUpcomingEvent())
-                                @include('components.event.event-details', ['event' => $event])
-                            @endif
-                        @endforeach
-                    </ul>
-                @endif
+                            @endforeach
+                        </ul>
+                    @endif
+                @endforeach
             @endif
         </div>
     </main>
