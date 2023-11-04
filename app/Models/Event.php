@@ -86,11 +86,11 @@ class Event extends Model
         static::addGlobalScope(new Scopes\AuthUserScope());
     }
 
-    // Select only the events that are not past
+    // Select the events and their status
     public function eventStatus(): string
     {
-        $eventStart = Carbon::parse($this->starting_at);
-        $eventEnd = $eventStart->copy()->addMinutes($this->duration);
+        $eventStart = Carbon::parse($this->starting_at); // Parse the starting_at date to not have a string
+        $eventEnd = $eventStart->copy()->addMinutes($this->duration); // Add the duration to the starting_at date
 
         if ($eventEnd->isPast()) {
             return 'passées';

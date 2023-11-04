@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 /* Home start page */
-Route::get('/', function () {
+Route::get('/start', function () {
     return view('start-page');
 })->name('start-page');
 
