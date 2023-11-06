@@ -143,8 +143,8 @@
                     </div>
                 </div>
                 <div class="form__submit">
-                    <button>Annuler</button>
-                    <button class="button--classic" type="submit">Créer</button>
+                    <a href="{{ route('events') }}" class="button">Annuler</a>
+                    <button class="button button--classic" type="submit">Créer</button>
                 </div>
             </form>
         </div>

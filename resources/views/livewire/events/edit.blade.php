@@ -142,8 +142,8 @@
                     </div>
                 </div>
                 <div class="form__submit">
-                    <button x-on:click="window.location.href = document.referrer">Annuler</button>
-                    <button class="button--classic" type="submit">Sauvegarder</button>
+                    <a href="{{ route('events') }}" class="button">Annuler</a>
+                    <button class="button button--classic" type="submit">Sauvegarder</button>
                 </div>
             </form>
         </div>

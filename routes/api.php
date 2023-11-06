@@ -20,10 +20,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('jiris', function () {
+Route::get('events', function () {
     return User::whereEmail('dominique.vilain@hepl.be')->firstOrFail();
 });
 
-Route::get('jiris/{jiri}', function (Event $jiri) {
-    return $jiri->load('students', 'students.implementations.project', 'evaluators');
+Route::get('events/{event}', function (Event $event) {
+    return $event->load('students', 'students.implementations.project', 'evaluators');
 });
