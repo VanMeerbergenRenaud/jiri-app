@@ -142,7 +142,7 @@
                     </div>
                 </div>
                 <div class="form__submit">
-                    <a href="{{ route('events') }}" class="button">Annuler</a>
+                    <a href="{{ route('events.index') }}" class="button">Annuler</a>
                     <button class="button button--classic" type="submit">Sauvegarder</button>
                 </div>
             </form>

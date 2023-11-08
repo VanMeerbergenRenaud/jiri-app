@@ -29,7 +29,7 @@
                             Il vous faut créer une épreuve afin de commencer
                             correctement à utiliser l’application.
                         </p>
-                        <a href="{{ route('events') }}" class="button--classic">Commencer</a>
+                        <a href="{{ route('events.index') }}" class="button--classic">Commencer</a>
                     </div>
                 </div>
             </main>

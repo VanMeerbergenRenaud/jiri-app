@@ -55,15 +55,13 @@
                         <p>Vous pourrez en ajouter encore par la suite sans problème.</p>
 
                         {{-- Dropdown --}}
-                        <div class="custom__dropdown">
-                            <div x-data="{ open: false }">
-                                <button x-on:click="open = !open" type="button" class="button">
+                        <div class="custom__dropdown" x-data="{ open: false }">
+                            <div>
+                                <button @click="open = !open" type="button" class="button">
                                     Sélectionner un contact
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                    </svg>
+                                    @include('components.svg.arrow-down')
                                 </button>
-                                <div x-show="open" x-on:click.outside="open = false" class="panel">
+                                <div x-show="open" @click.outside="open = false" class="panel">
                                     @livewire('users-list')
                                     <button class="add-button">Ajouter un contact</button>
                                 </div>
@@ -71,32 +69,18 @@
                         </div>
 
                         <div class="form__component__added">
+                            @livewire('contacts-list')
                             <p>Contacts ajoutés</p>
                             <ul>
-                                <li>
-                                    <span class="category">Étudiant</span>
-                                    <span class="username">Renaud Van Meerbergen</span>
-                                    <button>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="18.2" height="20" viewBox="0 0 18.2 20">
-                                            <g transform="translate(1 1)">
-                                                <path d="M4.5,9H20.7" transform="translate(-4.5 -2.25)" fill="none" stroke="#656b7e" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-                                                <path d="M17.7,6.6V19.2A1.656,1.656,0,0,1,16.243,21H8.957A1.656,1.656,0,0,1,7.5,19.2V6.6m2.186,0V4.8A1.656,1.656,0,0,1,11.143,3h2.914a1.656,1.656,0,0,1,1.457,1.8V6.6" transform="translate(-4.5 -3)" fill="none" stroke="#656b7e" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-                                            </g>
-                                        </svg>
-                                    </button>
-                                </li>
-                                <li>
-                                    <span class="category">Membre du jury</span>
-                                    <span class="username">Daniel Schreurs</span>
-                                    <button>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="18.2" height="20" viewBox="0 0 18.2 20">
-                                            <g id="Icon_feather-trash" data-name="Icon feather-trash" transform="translate(1 1)">
-                                                <path id="Tracé_68" data-name="Tracé 68" d="M4.5,9H20.7" transform="translate(-4.5 -2.25)" fill="none" stroke="#656b7e" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-                                                <path id="Tracé_69" data-name="Tracé 69" d="M17.7,6.6V19.2A1.656,1.656,0,0,1,16.243,21H8.957A1.656,1.656,0,0,1,7.5,19.2V6.6m2.186,0V4.8A1.656,1.656,0,0,1,11.143,3h2.914a1.656,1.656,0,0,1,1.457,1.8V6.6" transform="translate(-4.5 -3)" fill="none" stroke="#656b7e" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-                                            </g>
-                                        </svg>
-                                    </button>
-                                </li>
+                                @foreach($users as $contact)
+                                    <li>
+                                        <span class="category">{{ $contact->category }}</span>
+                                        <span class="username">{{ $contact->name }}</span>
+                                        <button>
+                                            @include('components.svg.trash2')
+                                        </button>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
@@ -143,7 +127,7 @@
                     </div>
                 </div>
                 <div class="form__submit">
-                    <a href="{{ route('events') }}" class="button">Annuler</a>
+                    <a href="{{ route('events.index') }}" class="button">Annuler</a>
                     <button class="button button--classic" type="submit">Créer</button>
                 </div>
             </form>

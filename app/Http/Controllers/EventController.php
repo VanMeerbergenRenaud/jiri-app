@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Event;
+use App\Models\User;
 use Auth;
+use App\Models\Event;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 
@@ -15,15 +16,19 @@ class EventController extends Controller
 
         $events = Event::orderBy('starting_at', 'asc')->get();
 
-        $eventGroups = $events->groupBy(fn($event) => $event->eventStatus());
+        $upcomingEvents = $events->filter(fn($event) => $event->isUpcoming());
+        $pastEvents = $events->filter(fn($event) => $event->isPast());
+        $currentEvents = $events->filter(fn($event) => $event->isCurrent());
 
-        return view('livewire.events-list', compact('user', 'events', 'eventGroups'));
+        return view('livewire.events-list', compact('user', 'events', 'upcomingEvents', 'pastEvents', 'currentEvents'));
     }
 
     public function create(): View
     {
         $user = Auth::user();
-        return view('livewire.events/create', compact('user'));
+        $users = User::all();
+
+        return view('livewire.events/create', compact('user', 'users'));
     }
 
     public function show($eventId)
@@ -57,7 +62,7 @@ class EventController extends Controller
 
         $event->update($data);
 
-        return redirect()->route('events', compact('event'));
+        return redirect()->route('events.index', compact('event'));
     }
 
     public function destroy($eventId)
@@ -66,7 +71,7 @@ class EventController extends Controller
 
         $event->delete();
 
-        return redirect()->route('events');
+        return redirect('events');
     }
 
     private function validateEventData()

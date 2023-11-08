@@ -16,16 +16,32 @@
                     <a href="{{ route('events.create') }}" class="underline-blue">Créer une première épreuve</a>
                 </div>
             @else
-                @foreach ($eventGroups as $status => $eventsGroup)
-                    @if (!$eventsGroup->isEmpty())
-                        <ul class="list @if($status === 'en cours') list2 @elseif($status === 'à venir') list3 @endif">
-                            Liste des épreuves {{ $status }}
-                            @foreach($eventsGroup as $event)
-                                @include('components.event.event-details', ['event' => $event])
-                            @endforeach
-                        </ul>
-                    @endif
-                @endforeach
+                @if (!$pastEvents->isEmpty())
+                    <ul class="list list1">
+                        Liste des épreuves passées
+                        @foreach($pastEvents as $event)
+                            @include('components.event.event-details', ['event' => $event])
+                        @endforeach
+                    </ul>
+                @endif
+
+                @if (!$currentEvents->isEmpty())
+                    <ul class="list list2">
+                        Liste des épreuves en cours
+                        @foreach($currentEvents as $event)
+                            @include('components.event.event-details', ['event' => $event])
+                        @endforeach
+                    </ul>
+                @endif
+
+                @if (!$upcomingEvents->isEmpty())
+                    <ul class="list list3">
+                        Liste des épreuves à venir
+                        @foreach($upcomingEvents as $event)
+                            @include('components.event.event-details', ['event' => $event])
+                        @endforeach
+                    </ul>
+                @endif
             @endif
         </div>
     </main>

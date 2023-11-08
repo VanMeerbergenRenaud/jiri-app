@@ -1,12 +1,11 @@
 <div class="contact-list" x-data="{
-    createmode: false,
-    contactname: '',
-    }">
-    <div class="container mx-auto p-4">
-        <div class="py-4 text-center">
-            <label for="contactname" class="text-2xl font-semibold">Mes Contacts</label>
-            <input type="text" id="contactname" wire:model.live="contactname" class="w-full mt-4 p-2 border rounded border-gray-300 focus:outline-none focus:border-blue-500">
-        </div>
+    createmode: true,
+    contactname: ''
+    }"
+>
+    <div class="p-4">
+        <label for="contactname">Mes Contacts</label>
+        <input type="text" id="contactname" wire:model.live="contactname" class="w-full mt-4 p-2 border rounded border-gray-300 focus:outline-none focus:border-blue-500">
         @unless($this->contacts->isEmpty())
             <ol class="mb-8">
                 @foreach($this->contacts as $contact)
@@ -18,22 +17,30 @@
                 @endforeach
             </ol>
         @else
-            <p class="text-center text-gray-500 mb-10">Aucun contact disponible.</p>
+            <p class="my-4">Aucun contact disponible.</p>
         @endunless
-        <button x-on:click="createmode = true; contactname=$wire.get('contactname')">Create</button>
+        {{--<button
+                @click="createmode = true;
+                contactname=$wire.get('contactname')"
+                class="underline-blue"
+        >
+            Create
+        </button>--}}
     </div>
 
-    <template x-if="createmode" class="flex justify-center items-center">
-        <form wire:submit="save" class="p-6 mx-auto rounded shadow-md w-full sm:w-80">
+    <template x-if="createmode">
+        <form wire:submit="save" class="p-6 mb-6">
             <div class="mb-4">
-                <label for="newcontactname" class="block text-lg font-semibold">Nouveau nom de contact</label>
-                <input type="text" id="newcontactname" x-model="contactname" wire:model="newcontactname" class="w-full p-2 border rounded border-gray-300 focus:outline-none focus:border-blue-500">
+                <label for="newcontactname">Nouveau nom de contact</label>
+                <input type="text" id="newcontactname" x-model="contactname" wire:model="newcontactname">
+                @error('newcontactname') <span class="text-red-500">{{ $message }}</span> @enderror
             </div>
             <div class="mb-4">
-                <label for="newcontactemail" class="block text-lg font-semibold">Nouveau email de contact</label>
-                <input type="email" id="newcontactemail" wire:model="newcontactemail" class="w-full p-2 border rounded border-gray-300 focus:outline-none focus:border-blue-500">
+                <label for="newcontactemail">Nouveau email de contact</label>
+                <input type="email" id="newcontactemail" wire:model="newcontactemail">
+                @error('newcontactemail') <span class="text-red-500">{{ $message }}</span> @enderror
             </div>
-            <button type="submit" x-on:click="$wire.set('newcontactname', contactname)" class="w-full bg-blue-500 text-white font-semibold py-2 rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Enregistrer</button>
+            <button type="button" @click="$wire.set('newcontactname', contactname)" class="w-full bg-blue-500 text-white font-semibold py-2 rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Enregistrer</button>
         </form>
     </template>
 </div>

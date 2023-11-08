@@ -31,9 +31,9 @@ class ContactsList extends Component
 
     public function save()
     {
-        $dominique = User::whereEmail('dominique.vilain@hepl.be')
+        $renaud = User::whereEmail('renaud.vmb@gmail.com')
             ->firstOrFail();
-        $dominique->contacts()->create([
+        $renaud->contacts()->create([
             'name' => $this->newcontactname,
             'email' => $this->newcontactemail,
         ]);

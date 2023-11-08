@@ -86,18 +86,40 @@ class Event extends Model
         static::addGlobalScope(new Scopes\AuthUserScope());
     }
 
-    // Select the events and their status
-    public function eventStatus(): string
+    // Select the events and if it is past, current or upcoming
+    public function isPast(): bool
     {
         $eventStart = Carbon::parse($this->starting_at); // Parse the starting_at date to not have a string
         $eventEnd = $eventStart->copy()->addMinutes($this->duration); // Add the duration to the starting_at date
 
         if ($eventEnd->isPast()) {
-            return 'passées';
-        } elseif ($eventStart->isFuture()) {
-            return 'à venir';
+            return true;
         } else {
-            return 'en cours';
+            return false;
+        }
+    }
+
+    public function isUpComing(): bool
+    {
+        $eventStart = Carbon::parse($this->starting_at); // Parse the starting_at date to not have a string
+        $eventEnd = $eventStart->copy()->addMinutes($this->duration); // Add the duration to the starting_at date
+
+        if ($eventStart->isFuture()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function isCurrent(): bool
+    {
+        $eventStart = Carbon::parse($this->starting_at); // Parse the starting_at date to not have a string
+        $eventEnd = $eventStart->copy()->addMinutes($this->duration); // Add the duration to the starting_at date
+
+        if ($eventStart->isPast() && $eventEnd->isFuture()) {
+            return true;
+        } else {
+            return false;
         }
     }
 }

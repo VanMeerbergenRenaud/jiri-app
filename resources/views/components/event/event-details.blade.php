@@ -39,25 +39,27 @@
         <button @click="showModal = !showModal" class="link__delete">@include('components.svg.trash')</button>
 
         {{-- Modal to trash an event --}}
-        <div x-show="showModal" class="modal">
-            <div class="modal__dialog" @click.away="showModal = false">
-                <p class="modal__title">
-                    Êtes-vous sûr de vouloir supprimer l'événement&nbsp;?
-                </p>
-                <div class="modal__buttons">
-                    <button class="cancel-button" @click="showModal = false">
-                        Annuler
-                    </button>
-                    <form action="{{ route('events.destroy', ['event' => $event]) }}"
-                          method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="confirm-button" @click="showModal = false">
-                            Confirmer la suppression
+        <template x-if="showModal">
+            <div class="modal" @click="showModal = false">
+                <div class="modal__dialog" @click.stop="showModal = true">
+                    <p class="modal__title">
+                        Êtes-vous sûr de vouloir supprimer l'événement&nbsp;?
+                    </p>
+                    <div class="modal__buttons">
+                        <button class="cancel-button" @click="showModal = false">
+                            Annuler
                         </button>
-                    </form>
+                        <form action="{{ route('events.destroy', ['event' => $event]) }}"
+                              method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="confirm-button" @click.stop="showModal = true">
+                                Confirmer la suppression
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
+        </template>
     </div>
 </li>
