@@ -41,6 +41,10 @@ Route::middleware('auth')->group(function () {
     /* Events CRUD */
     Route::resource('events', EventController::class);
 
+    // Specific event edition / update
+    Route::get('/events/{event}/edition', [EventController::class, 'editEdition'])->name('events.editEdition');
+    Route::patch('/events/{event}/edition', [EventController::class, 'updateEdition'])->name('events.updateEdition');
+
     /* Contacts CRUD */
     Route::get('/contacts', [ContactsController::class, 'index'])->name('contacts.index');
 

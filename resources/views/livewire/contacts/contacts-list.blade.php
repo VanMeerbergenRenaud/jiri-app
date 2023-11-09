@@ -5,15 +5,15 @@
     }"
  >
     {{-- Search input --}}
-    <label for="contactname">
-        <input
-            type="text"
-            id="contactname"
-            wire:model.live="contactname"
-            class="filter__contacts__input"
-            placeholder="Chercher un contact"
-        >
-    </label>
+     <label for="contactname">
+         <input
+             type="text"
+             id="contactname"
+             wire:model.live="contactname"
+             class="filter__contacts__input"
+             placeholder="Chercher un contact"
+         >
+     </label>
     {{-- List of contacts --}}
     @unless($this->contacts->isEmpty())
         <ol class="filter__contacts__list">

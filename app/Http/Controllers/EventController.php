@@ -84,4 +84,25 @@ class EventController extends Controller
             'duration' => 'required|integer',
         ]);
     }
+
+    // Specific event edition / update
+    public function editEdition($eventId)
+    {
+        $user = Auth::user();
+
+        $event = Event::findOrFail($eventId);
+
+        return view('livewire.events/editEdition', compact('user', 'event'));
+    }
+
+    public function updateEdition($eventId): RedirectResponse
+    {
+        $data = $this->validateEventData();
+
+        $event = Event::findOrFail($eventId);
+
+        $event->update($data);
+
+        return redirect()->route('events.index', compact('event'));
+    }
 }
