@@ -25,6 +25,8 @@ class ContactsList extends Component
     #[Rule('required', 'email', 'unique:users,email')]
     public $newcontactemail;
 
+    public $saved = false; // To show the confirmation message
+
     #[Computed]
     public function contacts()
     {
@@ -36,6 +38,13 @@ class ContactsList extends Component
 
     public function save()
     {
+        $this->validate([
+            /*'newcontacttype' => 'required|min:3|max:255',*/
+            'newcontactname' => 'required|min:3|max:255',
+            'newcontactlastname' => 'required|min:3|max:255',
+            'newcontactemail' => 'required|email|unique:users,email',
+        ]);
+
         $renaud = User::whereEmail('renaud.vmb@gmail.com')
             ->firstOrFail();
         $renaud->contacts()->create([
@@ -44,6 +53,8 @@ class ContactsList extends Component
             'lastname' => $this->newcontactlastname,
             'email' => $this->newcontactemail,
         ]);
+
+        $this->saved = true;
     }
 
     public function render()

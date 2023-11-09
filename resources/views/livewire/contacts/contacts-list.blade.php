@@ -32,7 +32,7 @@
 
     {{-- Form to create a new contact --}}
     <template x-if="createmode">
-        <form wire:submit="save" class="contact__new__form">
+        <form wire:submit.prevent="save" class="contact__new__form">
             <p>Ajouter un contact</p>
             <div class="contact__new__form__container">
                 {{-- Type de contact --}}
@@ -44,6 +44,9 @@
                         <option value="2">Jury</option>
                         <option value="3">Neutre</option>
                     </select>
+                    @error('newcontacttype')
+                        <div class="error-message">{{ $message }}</div>
+                    @enderror
                 </label>
                 {{-- Nom du contact --}}
                 <div class="position-right">
@@ -55,6 +58,9 @@
                         x-model="contactname"
                         placeholder="Ex : Vilain"
                     >
+                    @error('newcontactname')
+                        <div class="error-message">{{ $message }}</div>
+                    @enderror
                 </div>
                 {{-- Prénom du contact --}}
                 <div class="position-right">
@@ -65,6 +71,9 @@
                         wire:model="newcontactlastname"
                         placeholder="Ex : Dominique"
                     >
+                    @error('newcontactlastname')
+                        <div class="error-message">{{ $message }}</div>
+                    @enderror
                 </div>
                 {{-- Adresse mail du contact --}}
                 <div class="position-right">
@@ -75,6 +84,9 @@
                         wire:model="newcontactemail"
                         placeholder="Ex : dominique.vilain@hepl.be"
                     >
+                    @error('newcontactemail')
+                        <div class="error-message">{{ $message }}</div>
+                    @enderror
                 </div>
                 {{-- Button to cancel the new contact --}}
                 <button type="button"
@@ -89,6 +101,19 @@
                         @click="$wire.set('newcontactname', contactname)">
                     Enregistrer
                 </button>
+                {{-- Validation message --}}
+                <div x-data="{ showSuccessMessage: false }" class="success-message">
+                    @if ($saved && !$errors->any())
+                        <p id="success-message"
+                           x-show.transition.duration.500ms="showSuccessMessage"
+                           x-init="
+                               showSuccessMessage = true;
+                               setTimeout(() => { showSuccessMessage = false }, 5000);
+                           ">
+                            Le contact a été enregistré avec succès !
+                        </p>
+                    @endif
+                </div>
             </div>
         </form>
     </template>
