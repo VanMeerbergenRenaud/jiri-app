@@ -51,11 +51,11 @@
 
                 {{--
                 Etapes :
-                1. Afficher un input de type search qui permet de chercher tous les contacts dans la base de donées en fonction de chaque utilisateur
-                2. Afficher un bouton d'ajout d'un contact pour créer un nouveau contact
-                3. Afficher à coté de chaque utilisateur un bouton pour ajouter ce contact depuis notre input de type search qui affiche tous nos contacts
-                4. Afficher dans un div.container les contacts ajoutés depuis notre input de type search
-                5. Afficher un bouton pour supprimer un contact depuis notre div.container
+                1. DONE -> Afficher un input de type search qui permet de chercher tous les contacts dans la base de donées en fonction de chaque utilisateur
+                2. DONE -> Afficher un bouton d'ajout d'un contact pour créer un nouveau contact
+                3. DONE -> Afficher à coté de chaque utilisateur un bouton pour ajouter ce contact depuis notre input de type search qui affiche tous nos contacts
+                4. TODO -> Afficher dans un div.container les contacts ajoutés depuis notre input de type search
+                5. TODO -> Afficher un bouton pour supprimer un contact depuis notre div.container
                 --}}
 
                 <div class="form__container">
@@ -77,10 +77,11 @@
                             </div>
                         </div>
 
+                        {{-- Added contacts --}}
                         <div class="form__component__added">
                             <p>Contacts ajoutés</p>
                             <ul>
-                                @foreach($users as $contact)
+                                @foreach($contacts as $contact)
                                     <li>
                                         <span class="category">{{ $contact->category }}</span>
                                         <span class="username">{{ $contact->name }}</span>
@@ -92,44 +93,38 @@
                             </ul>
                         </div>
                     </div>
+
                     {{-- Label & select to create a project in the database --}}
                     <div class="form__component">
                         <h4>Ajouter des projets</h4>
                         <p>Vous pourrez en ajouter encore par la suite sans problème.</p>
-                        <label for="project_id" class="sr-only">Ajout d'un projet</label>
-                        <select name="project_id" id="project_id">
-                            <option value="0">Sélectionner un projet</option>
-                            <option value="1">Projet 1</option>
-                            <option value="2">Projet 2</option>
-                        </select>
 
+                        {{-- Dropdown --}}
+                        <div class="custom__dropdown" x-data="{ open: false }">
+                            <div>
+                                <button @click="open = !open" type="button" class="button">
+                                    Sélectionner un projet
+                                    @include('components.svg.arrow-down')
+                                </button>
+                                <div x-show="open" class="panel">
+                                    @livewire('projects-list')
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- Added projects --}}
                         <div class="form__component__added">
                             <p>Projets ajoutés</p>
                             <ul>
-                                <li>
-                                    <span class="category">Portfolio</span>
-                                    <span class="username">Design | Intégration | Wordpress</span>
-                                    <button>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="18.2" height="20" viewBox="0 0 18.2 20">
-                                            <g transform="translate(1 1)">
-                                                <path d="M4.5,9H20.7" transform="translate(-4.5 -2.25)" fill="none" stroke="#656b7e" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-                                                <path d="M17.7,6.6V19.2A1.656,1.656,0,0,1,16.243,21H8.957A1.656,1.656,0,0,1,7.5,19.2V6.6m2.186,0V4.8A1.656,1.656,0,0,1,11.143,3h2.914a1.656,1.656,0,0,1,1.457,1.8V6.6" transform="translate(-4.5 -3)" fill="none" stroke="#656b7e" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-                                            </g>
-                                        </svg>
-                                    </button>
-                                </li>
-                                <li>
-                                    <span class="category">Site client</span>
-                                    <span class="username">Design | Intégration</span>
-                                    <button>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="18.2" height="20" viewBox="0 0 18.2 20">
-                                            <g id="Icon_feather-trash" data-name="Icon feather-trash" transform="translate(1 1)">
-                                                <path id="Tracé_68" data-name="Tracé 68" d="M4.5,9H20.7" transform="translate(-4.5 -2.25)" fill="none" stroke="#656b7e" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-                                                <path id="Tracé_69" data-name="Tracé 69" d="M17.7,6.6V19.2A1.656,1.656,0,0,1,16.243,21H8.957A1.656,1.656,0,0,1,7.5,19.2V6.6m2.186,0V4.8A1.656,1.656,0,0,1,11.143,3h2.914a1.656,1.656,0,0,1,1.457,1.8V6.6" transform="translate(-4.5 -3)" fill="none" stroke="#656b7e" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-                                            </g>
-                                        </svg>
-                                    </button>
-                                </li>
+                                @foreach($projects as $project)
+                                    <li>
+                                        <span class="category">{{ $project->category }}</span>
+                                        <span class="username">{{ $project->name }}</span>
+                                        <button>
+                                            @include('components.svg.trash2')
+                                        </button>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>

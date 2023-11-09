@@ -14,7 +14,13 @@ class ContactsList extends Component
     public $contactname = '';
 
     #[Rule('required', 'min:3', 'max:255')]
+    public $newcontacttype;
+
+    #[Rule('required', 'min:3', 'max:255')]
     public $newcontactname;
+
+    #[Rule('required', 'min:3', 'max:255')]
+    public $newcontactlastname;
 
     #[Rule('required', 'email', 'unique:users,email')]
     public $newcontactemail;
@@ -24,8 +30,7 @@ class ContactsList extends Component
     {
         return $this->contactname
             ? Contact::where('name', 'like', '%' . $this->contactname . '%')
-                ->orderBy('name', 'asc')
-                ->get()
+                ->orderBy('name', 'asc')->get()
             : new Collection();
     }
 
@@ -34,7 +39,9 @@ class ContactsList extends Component
         $renaud = User::whereEmail('renaud.vmb@gmail.com')
             ->firstOrFail();
         $renaud->contacts()->create([
+            'type' => $this->newcontacttype,
             'name' => $this->newcontactname,
+            'lastname' => $this->newcontactlastname,
             'email' => $this->newcontactemail,
         ]);
     }

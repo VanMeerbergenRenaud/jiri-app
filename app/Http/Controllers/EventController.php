@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
 use App\Models\User;
 use Auth;
 use App\Models\Event;
@@ -26,9 +27,10 @@ class EventController extends Controller
     public function create(): View
     {
         $user = Auth::user();
-        $users = User::all();
+        $contacts = User::all();
+        $projects = Project::all();
 
-        return view('livewire.events/create', compact('user', 'users'));
+        return view('livewire.events/create', compact('user', 'contacts', 'projects'));
     }
 
     public function show($eventId)
