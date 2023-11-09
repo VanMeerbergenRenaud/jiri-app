@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProjectsController;
+use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,6 +40,12 @@ Route::middleware('auth')->group(function () {
 
     /* Events CRUD */
     Route::resource('events', EventController::class);
+
+    /* Contacts CRUD */
+    Route::get('/contacts', [ContactsController::class, 'index'])->name('contacts.index');
+
+    /* Projects CRUD */
+    Route::get('/projects', [ProjectsController::class, 'index'])->name('projects.index');
 });
 
 require __DIR__.'/auth.php';

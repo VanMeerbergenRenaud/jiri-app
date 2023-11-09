@@ -38,4 +38,9 @@ class ContactsList extends Component
             'email' => $this->newcontactemail,
         ]);
     }
+
+    public function render()
+    {
+        return view('livewire.contacts.contacts-list');
+    }
 }

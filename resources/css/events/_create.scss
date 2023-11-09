@@ -73,12 +73,6 @@
                     margin-bottom: 0.75rem;
                 }
 
-                select {
-                    margin: 1.5rem 0 2rem;
-                    padding: 1rem 1.25rem;
-                    width: 300px;
-                }
-
                 &__added {
                     p {
                         margin-bottom: 1rem;
@@ -137,6 +131,113 @@
                     margin-left: 2rem;
                 }
             }
+
+            /* Filter contact */
+            .filter__contacts {
+                min-width: fit-content;
+                background-color: white;
+                border-radius: 1rem;
+                border: $border;
+
+                &__input {
+                    padding: 0.875rem;
+                    width: 100%;
+                    border-bottom: $border;
+                    border-radius: 1rem 1rem 0 0;
+                }
+
+                &__list {
+                    padding: 0;
+                    max-height: 290px;
+                    overflow-y: scroll;
+
+                    &__item {
+                        padding: 1rem;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        border-bottom: $border;
+
+                        span {
+
+                        }
+
+                        button {
+                            padding-left: 1rem;
+                            color: $blue;
+                            text-decoration: underline;
+                        }
+                    }
+                }
+
+                .no-contact {
+                    padding: 1rem 0.75rem;
+                }
+            }
+
+            .contact__new__form {
+                padding: 1.5rem;
+                background-color: $gray-500;
+                border-radius: 0 0 1rem 1rem;
+
+                p {
+                    font-weight: 600;
+                    text-decoration: underline;
+                    margin-bottom: 1.25rem;
+                }
+
+                &__container {
+                    display: grid;
+                    grid-template-columns: 250px 1fr;
+                    gap: 0 1.5rem;
+
+                    &__label {
+                        display: flex;
+                        flex-direction: column;
+
+                        select {
+                            margin: 0.875rem 0 0;
+                            padding: 0.875rem;
+                            background-color: white;
+                        }
+                    }
+
+                    input {
+                        margin-top: 0.875rem;
+                        margin-bottom: 1.25rem;
+                        padding: 0.875rem 0.75rem;
+                        background-color: white;
+                        min-width: 200px;
+                    }
+
+                    .position-right {
+                        display: flex;
+                        flex-direction: column;
+                        grid-column: 2/3;
+                    }
+
+                    button {
+                        margin-top: 0.5rem;
+                        padding: 0.75rem 1.5rem;
+                        border-radius: 0.5rem;
+                        background-color: transparent;
+                        text-decoration: underline;
+                    }
+
+                    button + button {
+                        &:hover {
+                            background-color: white;
+                        }
+
+                        text-decoration: none;
+                        background-color: $gray-bg;
+                    }
+                }
+            }
+
+            .add-button {
+                padding: 1rem;
+            }
         }
     }
 }
@@ -144,7 +245,6 @@
 // For 1440px screen
 @media (min-width: 1440px) {
     .mainEventsCreate{
-
         .events__create {
             .form {
                 &__infos {
@@ -214,9 +314,8 @@
     }
 
     .panel {
-        margin-top: -1rem;
         margin-bottom: 2rem;
-        width: 18rem;
+        width: 100%;
         background-color: white;
         border-radius: 1rem;
 

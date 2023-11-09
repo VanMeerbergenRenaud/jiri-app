@@ -48,6 +48,16 @@
                     @error('starting_at')<p class="error-message error2">{{ $message }}</p>@enderror
                     @error('duration')<p class="error-message error3">{{ $message }}</p>@enderror
                 </div>
+
+                {{--
+                Etapes :
+                1. Afficher un input de type search qui permet de chercher tous les contacts dans la base de donées en fonction de chaque utilisateur
+                2. Afficher un bouton d'ajout d'un contact pour créer un nouveau contact
+                3. Afficher à coté de chaque utilisateur un bouton pour ajouter ce contact depuis notre input de type search qui affiche tous nos contacts
+                4. Afficher dans un div.container les contacts ajoutés depuis notre input de type search
+                5. Afficher un bouton pour supprimer un contact depuis notre div.container
+                --}}
+
                 <div class="form__container">
                     {{-- Label & select to create a user in the database --}}
                     <div class="form__component">
@@ -61,15 +71,13 @@
                                     Sélectionner un contact
                                     @include('components.svg.arrow-down')
                                 </button>
-                                <div x-show="open" @click.outside="open = false" class="panel">
-                                    @livewire('users-list')
-                                    <button class="add-button">Ajouter un contact</button>
+                                <div x-show="open" class="panel">
+                                    @livewire('contacts-list')
                                 </div>
                             </div>
                         </div>
 
                         <div class="form__component__added">
-                            @livewire('contacts-list')
                             <p>Contacts ajoutés</p>
                             <ul>
                                 @foreach($users as $contact)

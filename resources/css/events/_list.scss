@@ -1,9 +1,9 @@
 /* List of events */
-.mainEvents {
+.mainEvents, .mainContacts, .mainProjects {
     padding: 3rem 5rem;
 }
 
-.events__intro {
+.events__intro, .contacts__intro, .projects__intro {
     margin-bottom: 1rem;
     display: flex;
     justify-content: space-between;
