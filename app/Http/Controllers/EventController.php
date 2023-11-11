@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Models\Project;
 use App\Models\User;
-use Auth;
 use App\Models\Event;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+
 
 class EventController extends Controller
 {
@@ -31,7 +32,9 @@ class EventController extends Controller
         $contacts = $user->contacts()->get();
         $projects = $user->projects()->get();
 
-        return view('livewire/events/create', compact('user', 'contacts', 'projects'));
+        $event = new Event();
+
+        return view('livewire/events/create', compact('user', 'contacts', 'projects', 'event'));
     }
 
     public function show($eventId)

@@ -7,10 +7,8 @@ use App\Models\Contact;
 use App\Models\Event;
 use App\Models\Project;
 use App\Models\User;
-use App\Models\Attendance;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
-use function Laravel\Prompts\password;
 
 class DatabaseSeeder extends Seeder
 {
@@ -29,8 +27,8 @@ class DatabaseSeeder extends Seeder
                 'password' => bcrypt('password'),
             ]);
         $renaud = User::factory()
-            ->has(Event::factory()->count(2))
-            ->has(Project::factory()->count(4))
+            ->has(Event::factory()->count(7))
+            ->has(Project::factory()->count(5))
             ->has(Contact::factory()->count(20))
             ->create([
                 'name' => 'Renaud Vmb',
@@ -41,7 +39,7 @@ class DatabaseSeeder extends Seeder
         $users = collect([$dominique, $renaud]);
 
         foreach ($users as $user) {
-            foreach ($user->events as $event) { 
+            foreach ($user->events as $event) {
                 // Pour chaque événement : on sélectionne un nombre aléatoire d'objets Contact associés à l'utilisateur.
                 $selectedContacts = $user->contacts->random(random_int(2, 10));
 

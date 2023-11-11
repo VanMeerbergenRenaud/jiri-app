@@ -12,11 +12,11 @@
 @unless($contacts->isEmpty())
     <ol class="filter__contacts__list">
         @foreach($contacts as $contact)
-            <li wire:key="{{ $contact->id }}" class="filter__contacts__list__item">
+            <li class="filter__contacts__list__item">
                 <span>{{ $contact->name }}</span>
                 <span>{{ $contact->lastname }}</span>
                 <span>{{ $contact->email }}</span>
-                <button id="user{{$contact->id}}">Ajouter</button>
+                <button type="button" id="user{{$contact->id}}">Ajouter</button>
             </li>
         @endforeach
     </ol>

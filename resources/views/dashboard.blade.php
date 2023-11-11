@@ -10,7 +10,13 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     {{ __("You're logged in!") }}
-                    {{ $user->name }}
+                    {{-- Display all the infos of a user --}}
+                    <div class="flex flex-col mt-4">
+                        <p class="font-bold">{{ $user->name }}</p>
+                        <p class="text-gray-600">{{ $user->email }}</p>
+                        <p class="text-gray-600">id : {{ $user->id }}</p>
+                        <p class="text-gray-600">created_at : {{ $user->created_at }}</p>
+                    </div>
                 </div>
             </div>
         </div>
