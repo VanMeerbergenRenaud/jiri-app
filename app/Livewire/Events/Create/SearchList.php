@@ -9,6 +9,8 @@ use Livewire\Component;
 
 class SearchList extends Component
 {
+    // contact
+    public $contacts;
     public $username = '';
 
     #[Computed]

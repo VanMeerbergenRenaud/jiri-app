@@ -13,9 +13,8 @@ class ContactFactory extends Factory
     public function definition(): array
     {
         return [
-            // type of contact : $this->faker->word(),
             'name' => $this->faker->name(),
-            // last_name : $this->faker->lastName(),
+            'lastname' => $this->faker->lastName(),
             'email' => $this->faker->unique()->safeEmail(),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),

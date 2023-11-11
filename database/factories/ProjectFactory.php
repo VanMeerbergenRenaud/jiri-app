@@ -14,8 +14,8 @@ class ProjectFactory extends Factory
     {
         return [
             'name' => $this->faker->words(2,true),
-            // 'category' => $this->faker->word(),
             'description' => $this->faker->text(),
+            'category' => $this->faker->word(),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ];

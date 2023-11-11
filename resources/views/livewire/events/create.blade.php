@@ -98,15 +98,19 @@
                                     @include("livewire.events.create.search-list")
                                     @include("livewire.events.create.form")
 
-                                    {{--<livewire:events.create.search-list $contacts :contacts /> --}}
-                                    {{--<livewire:events.create.form $contacts :contacts />--}}
+                                    {{--<livewire:events.create.search-list :contacts="$contacts" /> --}}
+                                    {{--<livewire:events.create.form :contacts="$contacts" />--}}
+
+                                    {{--@livewire('events.create.search-list', ['contacts' => $contacts])--}}
+                                    {{--@livewire('events.create.form')--}}
                                 </div>
                             </div>
                         </div>
 
                         {{-- Added contacts --}}
                         @include("livewire.events.create.added-list")
-                        {{--<livewire:events.create.added-list $contacts :contacts />--}}
+                        {{--<livewire:events.create.added-list :contacts="$contacts" />--}}
+                        {{--@livewire('events.create.added-list', ['contacts' => $contacts])--}}
                     </div>
 
                     {{-- Label & select to create a project in the database --}}
