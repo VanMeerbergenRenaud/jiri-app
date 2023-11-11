@@ -1,3 +1,19 @@
-<div>
-    {{-- Do your work, then step back. --}}
+{{-- AddedList of contacts --}}
+<div class="form__component__added">
+    <p>Contacts ajoutés</p>
+    @if(count($contacts) > 0)
+        <ul>
+            @foreach($contacts as $contact)
+                <li wire:key="{{ $contact->id }}">
+                    <span class="category">{{ $contact->category }}</span>
+                    <span class="username">{{ $contact->name }}</span>
+                    <button>
+                        @include('components.svg.trash2')
+                    </button>
+                </li>
+            @endforeach
+        </ul>
+    @else
+        <p class="no-contact">Aucun contact ajouté pour le moment.</p>
+    @endif
 </div>

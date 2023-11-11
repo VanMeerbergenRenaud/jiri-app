@@ -54,7 +54,7 @@
                 1. DONE -> Afficher un input de type search qui permet de chercher tous les contacts dans la base de donées en fonction de chaque utilisateur
                 2. DONE -> Afficher un bouton d'ajout d'un contact pour créer un nouveau contact
                 3. DONE -> Afficher à coté de chaque utilisateur un bouton pour ajouter ce contact depuis notre input de type search qui affiche tous nos contacts
-                4. TODO -> Afficher dans un div.container les contacts ajoutés depuis notre input de type search
+                4. DONE -> Afficher dans un div.container les contacts ajoutés depuis notre input de type search
                 5. TODO -> Afficher un bouton pour supprimer un contact depuis notre div.container
                 --}}
 
@@ -73,37 +73,40 @@
                                         document.getElementById('username').focus();
                                     }, 0);
                                 }
-                            });">
-                            <div>
-                                <button @click="open = true" type="button" class="open-button">
-                                    Sélectionner un contact
-                                    @include('components.svg.arrow-down')
+                            });"
+                        >
+                            {{-- Open button --}}
+                            <button @click="open = true" type="button" class="open-button">
+                                Sélectionner un contact
+                                @include('components.svg.arrow-down')
+                            </button>
+
+                            {{-- Panel --}}
+                            <div x-show="open" class="panel">
+
+                                {{-- Close button --}}
+                                <button @click="open = false" type="button" class="close-button">
+                                    @include('components.svg.cross')
                                 </button>
-                                <div x-show="open" class="panel">
-                                    <button type="button" @click="open = false" class="close-button">
-                                        @include('components.svg.cross')
-                                    </button>
-                                    @livewire('contacts-list')
-                                    {{--<livewire:events.create.search-list $contacts = :contacts />--}}
+
+                                {{-- SearchList & Form --}}
+                                <div class="filter__contacts"
+                                     x-data="{
+                                     createmode: false,
+                                     username: ''}">
+
+                                    @include("livewire.events.create.search-list")
+                                    @include("livewire.events.create.form")
+
+                                    {{--<livewire:events.create.search-list $contacts :contacts /> --}}
+                                    {{--<livewire:events.create.form $contacts :contacts />--}}
                                 </div>
                             </div>
                         </div>
 
                         {{-- Added contacts --}}
-                        <div class="form__component__added">
-                            <p>Contacts ajoutés</p>
-                            <ul>
-                                @foreach($contacts as $contact)
-                                    <li>
-                                        <span class="category">{{ $contact->category }}</span>
-                                        <span class="username">{{ $contact->name }}</span>
-                                        <button>
-                                            @include('components.svg.trash2')
-                                        </button>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
+                        @include("livewire.events.create.added-list")
+                        {{--<livewire:events.create.added-list $contacts :contacts />--}}
                     </div>
 
                     {{-- Label & select to create a project in the database --}}
@@ -111,7 +114,7 @@
                         <h4>Ajouter des projets</h4>
                         <p>Vous pourrez en ajouter encore par la suite sans problème.</p>
 
-                        {{-- Dropdown --}}
+                        {{-- Dropdown,... --}}
                     </div>
                 </div>
                 <div class="form__submit">

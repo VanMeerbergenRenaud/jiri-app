@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
         $renaud = User::factory()
             ->has(Event::factory()->count(2))
             ->has(Project::factory()->count(4))
-            ->has(Contact::factory()->count(0))
+            ->has(Contact::factory()->count(4))
             ->create([
                 'name' => 'Renaud Vmb',
                 'email' => 'renaud.vmb@gmail.com',

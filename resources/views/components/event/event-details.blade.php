@@ -8,7 +8,7 @@
     </div>
     <div class="item__time">
         Durée de l’épreuve<br>
-        <time datetime="{{$event->duration}}">
+        <time datetime="{{ $event->duration }}">
             @php
                 $duration = $event->duration;
                 $hours = floor($duration / 60);
