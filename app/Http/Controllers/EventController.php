@@ -27,8 +27,9 @@ class EventController extends Controller
     public function create(): View
     {
         $user = Auth::user();
-        $contacts = User::all();
-        $projects = Project::all();
+
+        $contacts = $user->contacts()->get();
+        $projects = $user->projects()->get();
 
         return view('livewire.events/create', compact('user', 'contacts', 'projects'));
     }

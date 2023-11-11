@@ -13,7 +13,8 @@ class ProjectFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->words(3,true),
+            'name' => $this->faker->words(2,true),
+            // 'category' => $this->faker->word(),
             'description' => $this->faker->text(),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),

@@ -51,11 +51,11 @@
                 }
 
                 .firstname, .lastname {
-                    min-width: 150px;
+                    min-width: 175px;
                 }
 
                 .photo {
-                    min-width: 125px;
+                    min-width: 150px;
                 }
 
                 th:nth-last-child(1), th:nth-last-of-type(2) {
@@ -146,12 +146,12 @@
                     display: flex;
 
                     button {
+                        margin: -1px;
+                        padding: 1.25rem;
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        padding: 1.25rem;
-                        width: 100%;
-                        scale: 1.05;
+                        width: 105%;
                         color: $blue;
                         background-color: $gray-500;
                         border-radius: 0 0 0.5rem 0.5rem;

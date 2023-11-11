@@ -108,6 +108,13 @@
                             }
                         }
                     }
+
+                    .no-contact {
+                        margin: 0.5rem 0;
+                        padding: 1rem 1.25rem;
+                        border-radius: 0.5rem;
+                        background-color: $gray-500;
+                    }
                 }
             }
 
@@ -136,7 +143,7 @@
             .filter__contacts {
                 min-width: fit-content;
                 background-color: white;
-                border-radius: 1rem;
+                border-radius: 1rem 1rem 0 0;
                 border: $border;
 
                 &__input {
@@ -156,7 +163,6 @@
                         display: flex;
                         align-items: center;
                         justify-content: space-between;
-                        border-bottom: $border;
 
                         span {
 
@@ -322,7 +328,9 @@
 
 /* Dropdown styles */
 .custom__dropdown {
-    .button {
+    position: relative;
+
+    .open-button {
         margin: 1.5rem 0 1.75rem;
         padding: 1rem;
         width: 18rem;
@@ -339,10 +347,20 @@
     }
 
     .panel {
+        position: relative;
         margin-bottom: 2rem;
         width: 100%;
         background-color: white;
         border-radius: 1rem;
+
+        .close-button {
+            position: absolute;
+            top: -4.5rem;
+            right: 1rem;
+            background-color: $gray-500;
+            border-radius: 2rem;
+            padding: 0.85rem 0.95rem 0.85rem 0.95rem;
+        }
 
         .add-button {
             @extend .button--classic;

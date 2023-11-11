@@ -10,7 +10,22 @@
         </div>
         {{-- Liste des projets --}}
         <div class="projects__list">
-
+            {{--
+            <h2>Liste des projets de l'épreuve {{ $event->name }}</h2>
+            <ul>
+                @foreach($event->projects as $project)
+                    <li>{{ $project->title }}</li>
+                @endforeach
+            </ul>
+            --}}
+            {{--
+            <h2>Liste des projets d'un étudiant</h2>
+            <ul>
+                @foreach($student->projects as $project)
+                    <li>{{ $project->title }}</li>
+                @endforeach
+            </ul>
+            --}}
         </div>
     </main>
 </x-app-layout>

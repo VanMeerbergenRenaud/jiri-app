@@ -64,6 +64,10 @@ body {
         color: red;
     }
 
+    .rotate-180 {
+        transform: rotate(180deg);
+    }
+
     footer {
         padding: 1.75rem;
         color: #666B7E;
