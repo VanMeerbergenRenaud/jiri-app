@@ -108,13 +108,13 @@
                             }
                         }
                     }
+                }
 
-                    .no-contact {
-                        margin: 0.5rem 0;
-                        padding: 1rem 1.25rem;
-                        border-radius: 0.5rem;
-                        background-color: $gray-500;
-                    }
+                .no-contact {
+                    margin: 0.5rem 0;
+                    padding: 1rem 1.25rem;
+                    border-radius: 0.5rem;
+                    background-color: $gray-500;
                 }
             }
 
@@ -143,7 +143,7 @@
             .filter__contacts {
                 min-width: fit-content;
                 background-color: white;
-                border-radius: 1rem 1rem 0 0;
+                border-radius: 1rem;
                 border: $border;
 
                 &__input {
@@ -177,7 +177,11 @@
                 }
 
                 .no-contact {
+                    margin: 0;
                     padding: 1rem 0.75rem;
+                    background-color: white;
+                    border-radius: 0;
+                    border: none;
                 }
             }
 
@@ -347,7 +351,6 @@
     }
 
     .panel {
-        position: relative;
         margin-bottom: 2rem;
         width: 100%;
         background-color: white;
@@ -355,7 +358,7 @@
 
         .close-button {
             position: absolute;
-            top: -4.5rem;
+            top: 0.5rem;
             right: 1rem;
             background-color: $gray-500;
             border-radius: 2rem;
@@ -368,7 +371,6 @@
             border-radius: 0 0 0.75rem 0.75rem;
         }
     }
-
 }
 
 /* User List styles */

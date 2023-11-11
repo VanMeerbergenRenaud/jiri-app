@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
                 'password' => bcrypt('password'),
             ]);
         $renaud = User::factory()
-            ->has(Event::factory()->count(6))
+            ->has(Event::factory()->count(2))
             ->has(Project::factory()->count(4))
             ->has(Contact::factory()->count(0))
             ->create([

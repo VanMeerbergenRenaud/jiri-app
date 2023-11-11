@@ -9,6 +9,6 @@ class ProjectsController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return view('livewire.projects', compact('user'));
+        return view('livewire.pages/projects', compact('user'));
     }
 }

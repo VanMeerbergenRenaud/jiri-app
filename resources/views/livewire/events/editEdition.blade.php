@@ -51,34 +51,88 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- List to display every row of students registered --}}
-                        @foreach($students as $index => $student)
-                            <tr>
-                                <td>{{ $student->lastname }}</td>
-                                <td>{{ $student->firstname }}</td>
-                                <td><img src="{{ $student->photo }}" alt="Photo de {{ $student->name }}"></td>
-                                <td>{{ $student->projects }}</td>
-                                <td>{{ $student->categories }}</td>
-                                <td><button>Modifier</button></td>
-                                <td><button>Supprimer</button></td>
-                            </tr>
-                        @endforeach
-
-                        {{-- Row to create a new student --}}
-                        
-
+                        {{-- Row to create a student --}}
+                        <tr class="students__table__row2">
+                            {{-- Name {{ $student->name }} --}}
+                            <td>
+                               <div>
+                                   <label for="name">
+                                       <input type="text" name="name" id="name" placeholder="Nom">
+                                   </label>
+                               </div>
+                            </td>
+                            {{-- Firstname {{ $student->firstname }} --}}
+                            <td>
+                                <div>
+                                    <label for="firstname">
+                                        <input type="text" name="firstname" id="firstname" placeholder="Prénom">
+                                    </label>
+                                </div>
+                            </td>
+                            {{-- Photo --}}
+                            <td>
+                                <div>
+                                    <label for="photo" x-data="{ files: null }" class="file">
+                                        <input type="file" name="photo" id="photo" x-on:change="files = Object.values($event.target.files)">
+                                        @include('components.svg.upload-file')
+                                        <span x-text="files ? files.map(file => file.name).join(', ') : 'JPEG, JPG, PNG only'"></span>
+                                    </label>
+                                </div>
+                            </td>
+                            {{-- Projects --}}
+                            <td>
+                                <div class="projects">
+                                    <label for="project">
+                                        <input type="checkbox" name="project" id="project">
+                                        Portfolio
+                                    </label>
+                                    <label for="project2">
+                                        <input type="checkbox" name="project2" id="project2">
+                                        Site client
+                                    </label>
+                                </div>
+                            </td>
+                            {{-- Categories --}}
+                            <td>
+                                <div class="categories">
+                                    <label for="category">
+                                        <input type="checkbox" name="category" id="category">
+                                        Design
+                                    </label>
+                                    <label for="category2">
+                                        <input type="checkbox" name="category2" id="category2">
+                                        Intégration
+                                    </label>
+                                </div>
+                            </td>
+                            {{-- Edit button --}}
+                            <td>
+                                <div class="editButton">
+                                    <button type="submit">Sauvegarder</button>
+                                    {{--<button>Modifier</button>
+                                    <button>Valider</button>--}}
+                                </div>
+                            </td>
+                            {{-- Delete --}}
+                            <td>
+                                <div class="deleteButton">
+                                    <button>
+                                        @include('components.svg.trash2')
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
                         {{-- Row to add a button that allow to add a new student --}}
                         <tr class="students__table__row3">
                             <td colspan="7">
                                 <div class="addButton">
                                     {{-- Add a row to create a student --}}
-                                    <button type="button" wire:click="addStudentRow">
+                                    <button>
                                         Ajouter un étudiant
                                         @include('components.svg.add')
                                     </button>
                                 </div>
                             </td>
-                        </tr>
                     </tbody>
                 </table>
             </form>

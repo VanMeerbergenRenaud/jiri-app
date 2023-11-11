@@ -21,7 +21,7 @@ class EventController extends Controller
         $pastEvents = $events->filter(fn($event) => $event->isPast());
         $currentEvents = $events->filter(fn($event) => $event->isCurrent());
 
-        return view('livewire.events-list', compact('user', 'events', 'upcomingEvents', 'pastEvents', 'currentEvents'));
+        return view('livewire.pages.events', compact('user', 'events', 'upcomingEvents', 'pastEvents', 'currentEvents'));
     }
 
     public function create(): View
@@ -31,21 +31,21 @@ class EventController extends Controller
         $contacts = $user->contacts()->get();
         $projects = $user->projects()->get();
 
-        return view('livewire.events/create', compact('user', 'contacts', 'projects'));
+        return view('livewire/events/create', compact('user', 'contacts', 'projects'));
     }
 
     public function show($eventId)
     {
         $user = Auth::user();
         $event = Event::findOrFail($eventId);
-        return view('livewire.events/show', compact('user', 'event'));
+        return view('livewire/events/show', compact('user', 'event'));
     }
 
     public function edit($eventId)
     {
         $user = Auth::user();
         $event = Event::findOrFail($eventId);
-        return view('livewire.events/edit', compact('user', 'event'));
+        return view('livewire/events/edit', compact('user', 'event'));
     }
 
     public function store(): RedirectResponse
@@ -93,7 +93,7 @@ class EventController extends Controller
 
         $event = Event::findOrFail($eventId);
 
-        return view('livewire.events/editEdition', compact('user', 'event'));
+        return view('livewire/events/editEdition', compact('user', 'event'));
     }
 
     public function updateEdition($eventId): RedirectResponse

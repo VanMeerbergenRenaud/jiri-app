@@ -9,6 +9,6 @@ class ContactsController
     public function index()
     {
         $user = Auth::user();
-        return view('livewire.contacts', compact('user'));
+        return view('livewire.pages/contacts', compact('user'));
     }
 }

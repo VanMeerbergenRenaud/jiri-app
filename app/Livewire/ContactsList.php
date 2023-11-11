@@ -1,14 +1,17 @@
 <?php
 
-namespace App\Livewire\Events\Create\Contact;
+namespace App\Livewire;
 
+use App\Models\Contact;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 
-class Container extends Component
+class ContactsList extends Component
 {
-    public $contacts;
+    public $username = '';
 
     #[Rule('required', 'min:3', 'max:255')]
     public $newcontacttype;
@@ -22,12 +25,18 @@ class Container extends Component
     #[Rule('required', 'email', 'unique:users,email')]
     public $newcontactemail;
 
-    public function mount(): void
+    public $saved = false; // To show the confirmation message
+
+    #[Computed]
+    public function contacts()
     {
-        $this->contacts = collect();
+        return $this->username
+            ? Contact::where('name', 'like', '%' . $this->username . '%')
+                ->orderBy('name', 'asc')->get()
+            : new Collection();
     }
 
-    public function save(): void
+    public function save()
     {
         $this->validate([
             /*'newcontacttype' => 'required|min:3|max:255',*/
@@ -36,18 +45,20 @@ class Container extends Component
             'newcontactemail' => 'required|email|unique:users,email',
         ]);
 
-        $renaud = User::whereEmail('renaud.vmb@gmail.com')->firstOrFail();
-
+        $renaud = User::whereEmail('renaud.vmb@gmail.com')
+            ->firstOrFail();
         $renaud->contacts()->create([
             'type' => $this->newcontacttype,
             'name' => $this->newcontactname,
             'lastname' => $this->newcontactlastname,
             'email' => $this->newcontactemail,
         ]);
+
+        $this->saved = true;
     }
 
     public function render()
     {
-        return view('livewire.events.create.contact.container');
+        return view('livewire.contacts.contacts-list');
     }
 }
