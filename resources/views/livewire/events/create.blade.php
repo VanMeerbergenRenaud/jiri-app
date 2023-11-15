@@ -27,6 +27,7 @@
                         min="1"
                         placeholder="Ex : Design Web"
                         value="{{ old('name') }}"
+                        dusk="name"
                     >
                     <input
                         type="datetime-local"
@@ -35,6 +36,7 @@
                         min="2023-01-01T00:00"
                         max="3000-01-01T00:00"
                         value="{{ old('starting_at') ?? date('Y-m-d\TH:i', strtotime('+1 hour')) }}"
+                        dusk="starting_at"
                     >
                     <input
                         type="number"
@@ -43,6 +45,7 @@
                         min="1"
                         max="480"
                         value="{{ old('duration', 1) }}"
+                        dusk="duration"
                     >
                     @error('name')<p class="error-message error1">{{ $message }}</p>@enderror
                     @error('starting_at')<p class="error-message error2">{{ $message }}</p>@enderror
@@ -92,8 +95,7 @@
                                 {{-- SearchList & Form --}}
                                 <div class="filter__contacts"
                                      x-data="{
-                                     createmode: false,
-                                     username: ''}
+                                     createmode: false}
                                      ">
 
                                     <livewire:events.create.search-list />

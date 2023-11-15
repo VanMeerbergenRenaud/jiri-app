@@ -24,10 +24,10 @@ class Form extends Component
     {
         $this->validate();
 
-        $renaud = User::whereEmail('renaud.vmb@gmail.com')
-            ->firstOrFail();
+        $renaud = User::whereEmail('renaud.vmb@gmail.com')->firstOrFail();
+
         $renaud->contacts()->create([
-            'type' => $this->newcontacttype,
+            'role' => $this->newcontacttype,
             'name' => $this->newcontactname,
             'lastname' => $this->newcontactlastname,
             'email' => $this->newcontactemail,

@@ -2,27 +2,15 @@
 
 namespace App\Livewire\Events\Create;
 
-use App\Models\Contact;
-use App\Models\Event;
 use Livewire\Component;
 
 class AddedList extends Component
 {
-    public $addContact = [];
+    public $addedContacts = [];
 
-    public function addContact($contactId, $eventId)
+    public function updateAddedList($contactId)
     {
-        $event = Event::findOrFail($eventId);
-        $contact = Contact::findOrFail($contactId);
-
-        if ($event->contacts->contains($contact)) {
-        $event->contacts()->attach($contact->id);
-
-        $this->addContact[] = $contact;
-
-        // TODO : dispatch method to update the list of contacts
-
-        }
+        $this->addedContacts[] = $contactId;
     }
 
     public function render()

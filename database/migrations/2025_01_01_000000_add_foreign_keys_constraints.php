@@ -38,6 +38,25 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        //
+        Schema::table('events', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+        });
+        Schema::table('contacts', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+        });
+        Schema::table('attendances', function (Blueprint $table) {
+            $table->dropForeign(['contact_id']);
+        });
+        Schema::table('attendances', function (Blueprint $table) {
+            $table->dropForeign(['event_id']);
+        });
+        Schema::table('projects', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+        });
+        Schema::table('implementations', function (Blueprint $table) {
+            $table->dropForeign(['project_id']);
+            $table->dropForeign(['contact_id']);
+            $table->dropForeign(['event_id']);
+        });
     }
 };
