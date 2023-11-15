@@ -40,11 +40,11 @@ class DatabaseSeeder extends Seeder
 
         foreach ($users as $user) {
             foreach ($user->events as $event) {
-                // Pour chaque événement : on sélectionne un nombre aléatoire d'objets Contact associés à l'utilisateur.
-                $selectedContacts = $user->contacts->random(random_int(2, 10));
+                $selectedContacts = $user->contacts->random(random_int(5, 10));
 
                 foreach ($selectedContacts as $contact) {
-                    $role = random_int(0, 1) ? 'students' : 'evaluators'; // On détermine un rôle (soit 'students', soit 'evaluators')
+                    $role = random_int(0, 1) ? 'students' : 'evaluators'; // Determine the role for each contact individually
+
                     $event->$role()->attach([
                         $contact->id => [
                             'role' => str($role)->beforeLast('s'), // Le rôle est stocké dans la table pivot sans le 's' final
@@ -62,6 +62,7 @@ class DatabaseSeeder extends Seeder
                             ]
                         );
                     }
+
                     if ($role === 'evaluators') {
                         // on génère un token d'accès pour l'évaluateur et on le stocke dans la table pivot.
                         $contact->events()->updateExistingPivot(

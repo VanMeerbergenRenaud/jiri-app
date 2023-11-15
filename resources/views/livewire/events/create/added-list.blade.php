@@ -1,12 +1,12 @@
 {{-- AddedList of contacts --}}
 <div class="form__component__added">
     <p>Contacts ajoutés</p>
-    @if(count($event->contacts) > 0)
+    @if(count($addContact) > 0)
         <ul>
-            @foreach($event->contacts as $contact)
+            @foreach($addContact as $contact)
                 <li wire:key="{{ $contact->id }}">
-                    <span class="category">{{ $contact->category }}</span>
-                    <span class="username">{{ $contact->name }}</span>
+                    <span class="category">{{ $contact->category ?? 'Neutre' }}</span>
+                    <span class="username">{{ $contact->name ?? 'Pas de nom' }}</span>
                     <button>
                         @include('components.svg.trash2')
                     </button>

@@ -13,3 +13,4 @@ class WelcomeController
         return view('welcome', compact('user'));
     }
 }
+

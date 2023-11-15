@@ -93,24 +93,27 @@
                                 <div class="filter__contacts"
                                      x-data="{
                                      createmode: false,
-                                     username: ''}">
+                                     username: ''}
+                                     ">
 
-                                    @include("livewire.events.create.search-list")
-                                    @include("livewire.events.create.form")
+                                    <livewire:events.create.search-list />
+                                    <livewire:events.create.form />
 
-                                    {{--<livewire:events.create.search-list :contacts="$contacts" /> --}}
-                                    {{--<livewire:events.create.form :contacts="$contacts" />--}}
 
-                                    {{--@livewire('events.create.search-list', ['contacts' => $contacts])--}}
-                                    {{--@livewire('events.create.form')--}}
+                                    {{-- Button to create a new contact --}}
+                                    <button type="button"
+                                            class="add-button"
+                                            x-show="!createmode"
+                                            @click="createmode = true">
+                                        Ajouter un contact
+                                    </button>
+
                                 </div>
                             </div>
                         </div>
 
                         {{-- Added contacts --}}
-                        @include("livewire.events.create.added-list")
-                        {{--<livewire:events.create.added-list :contacts="$contacts" />--}}
-                        {{--@livewire('events.create.added-list', ['contacts' => $contacts])--}}
+                        <livewire:events.create.added-list />
                     </div>
 
                     {{-- Label & select to create a project in the database --}}

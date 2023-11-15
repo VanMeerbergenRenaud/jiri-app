@@ -8,7 +8,7 @@ use Livewire\Component;
 
 class Form extends Component
 {
-    #[Rule('required', 'min:3', 'max:255')]
+    #[Rule('required')]
     public $newcontacttype;
 
     #[Rule('required', 'min:3', 'max:255')]
@@ -22,12 +22,7 @@ class Form extends Component
 
     public function save(): void
     {
-        $this->validate([
-            /*'newcontacttype' => 'required|min:3|max:255',*/
-            'newcontactname' => 'required|min:3|max:255',
-            'newcontactlastname' => 'required|min:3|max:255',
-            'newcontactemail' => 'required|email|unique:users,email',
-        ]);
+        $this->validate();
 
         $renaud = User::whereEmail('renaud.vmb@gmail.com')
             ->firstOrFail();
