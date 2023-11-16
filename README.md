@@ -61,10 +61,11 @@ Jiri est développé en utilisant les technologies modernes du développement we
 
 L'application utilise les tables suivantes pour stocker les données :
 
-- `jiries` : Liste les événements de jury.
+- `events` : Liste les événements de jury.
 - `users` : Contient les données des utilisateurs, y compris les professeurs et les jurés.
 - `students` : Stocke les informations sur les étudiants.
-- `people` : Utilisé pour les relations polymorphes entre les utilisateurs et les étudiants.
+- `evaluators` : Stocke les informations sur les évaluateurs.
+- `attendances` : Utilisé pour les relations polymorphes entre les utilisateurs et les étudiants.
 - `projects` : Liste tous les projets à évaluer.
 - `implementations` : Enregistre les réalisations de projets des étudiants.
 - `scores` : Stocke les scores et les commentaires des jurés.
