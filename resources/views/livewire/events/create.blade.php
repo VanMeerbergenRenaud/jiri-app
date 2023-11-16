@@ -57,7 +57,7 @@
                 1. DONE -> Afficher un input de type search qui permet de chercher tous les contacts dans la base de donées en fonction de chaque utilisateur
                 2. DONE -> Afficher un bouton d'ajout d'un contact pour créer un nouveau contact
                 3. DONE -> Afficher à coté de chaque utilisateur un bouton pour ajouter ce contact depuis notre input de type search qui affiche tous nos contacts
-                4. DONE -> Afficher dans un div.container les contacts ajoutés depuis notre input de type search
+                4. TODO -> Afficher dans un div.container les contacts ajoutés depuis notre input de type search
                 5. TODO -> Afficher un bouton pour supprimer un contact depuis notre div.container
                 --}}
 

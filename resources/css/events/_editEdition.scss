@@ -165,3 +165,46 @@
         }
     }
 }
+
+// For 1050px screen
+@media (min-width: 1050px) {
+    .mainEventEdit {
+        max-width: 1600px;
+
+        .students {
+            &__table {
+                width: 100%;
+                max-width: 1600px;
+
+                &__row1 {
+                    .lastname, .firstname {
+                        min-width: 200px;
+                    }
+
+                    th, td {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// For 1440px screen
+@media (min-width: 1600px) {
+    .mainEventEdit {
+        .students {
+            &__table {
+                &__row1 {
+                    .lastname, .firstname {
+                        min-width: 250px;
+                    }
+
+                    th, td {
+                        min-width: 200px;
+                    }
+                }
+            }
+        }
+    }
+}

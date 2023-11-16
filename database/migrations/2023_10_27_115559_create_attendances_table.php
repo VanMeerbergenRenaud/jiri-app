@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
-            $table->string('role')->nullable();
+            $table->enum('role', ['student', 'evaluator']);
             $table->string('token')->nullable();
             $table->timestamps();
         });

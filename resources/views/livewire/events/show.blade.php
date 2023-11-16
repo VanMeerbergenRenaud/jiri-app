@@ -13,7 +13,7 @@
                 <table>
                     <thead>
                     <tr class="row-1">
-                        <th scope="col" x-bind:colspan="isFullScreen ? '11' : '6'">Tableau récapitulatif des passages</th>
+                        <th scope="col" colspan="100%">Tableau récapitulatif des passages</th>
                     </tr>
                     <tr class="row-2">
                         <th class="category">Étudiants | Jury</th>

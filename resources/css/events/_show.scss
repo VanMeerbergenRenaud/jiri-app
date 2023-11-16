@@ -263,3 +263,46 @@
         }
     }
 }
+
+// media for 1050px screen
+@media (min-width: 1050px) {
+    .mainEventShow {
+        max-width: 1800px;
+        margin: 0 auto;
+
+        .event__show, .event__show__results {
+            table {
+                max-width: max-content;
+                max-height: max-content;
+            }
+        }
+    }
+}
+
+@media (min-width: 1200px) {
+    .mainEventShow {
+        .event__show {
+            table {
+               .row-1 {
+                   th {
+                       column-span: all;
+                   }
+               }
+            }
+        }
+    }
+}
+
+@media (min-width: 1600px) {
+    .mainEventShow {
+        .event__show, .event__show__results {
+            margin-bottom: 4rem;
+
+            .button__right {
+                .button--classic {
+                    display: none;
+                }
+            }
+        }
+    }
+}

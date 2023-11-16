@@ -2,10 +2,10 @@
 
 namespace App\Livewire\Events\Create;
 
+use App\Models\Contact;
 use App\Models\Event;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Attributes\Computed;
-use App\Models\Contact;
 use Livewire\Component;
 
 class SearchList extends Component
@@ -22,15 +22,14 @@ class SearchList extends Component
 
     public function addContact($contactId, $eventId)
     {
-        $event = Event::findOrFail($eventId);
-        $contact = Contact::findOrFail($contactId);
+        $event = Event::find($eventId);
+        $contact = Contact::find($contactId);
 
         $event->contacts()->attach($contact->id);
 
         $this->addedContact[] = $contact;
 
-        // TODO : dispatch method to update the list of contacts
-         $this->dispatch('updateAddedList', $contact->id);
+        $this->dispatch('updateAddedList', $contact->id);
     }
 
     public function render()

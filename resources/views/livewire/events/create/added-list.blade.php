@@ -7,7 +7,7 @@
                 <li wire:key="{{ $contact->id }}">
                     <span class="category">{{ $contact->category ?? 'Neutre' }}</span>
                     <span class="username">{{ $contact->name ?? 'Pas de nom' }}</span>
-                    <button>
+                    <button wire:click="removeContact({{ $contact->id }})">
                         @include('components.svg.trash2')
                     </button>
                 </li>

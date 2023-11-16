@@ -21,7 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('events', function () {
-    return User::whereEmail('dominique.vilain@hepl.be')->firstOrFail();
+    return User::whereEmail('renaud.vmb@gmail.com')->firstOrFail();
 });
 
 Route::get('events/{event}', function (Event $event) {

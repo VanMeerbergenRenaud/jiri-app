@@ -13,6 +13,11 @@ class AddedList extends Component
         $this->addedContacts[] = $contactId;
     }
 
+    public function removeContact($contactId)
+    {
+        $this->addedContacts = array_diff($this->addedContacts, [$contactId]);
+    }
+
     public function render()
     {
         return view('livewire.events.create.added-list');

@@ -21,6 +21,9 @@ return new class extends Migration {
      */
     public function down(): void
     {
-       Schema::dropIfExists('contacts');
+        Schema::table('contacts', function (Blueprint $table) {
+            $table->dropUnique(['email', 'user_id']);
+            $table->dropColumn('role');
+        });
     }
 };

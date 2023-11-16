@@ -13,7 +13,9 @@
             <div class="col-span-1">
                 <div x-data="{ search: '' }">
                     <h3 class="text-2xl font-bold mt-8 mb-4">Liste des étudiants</h3>
-                    <input type="text" x-model="search" placeholder="Rechercher un étudiant..." class="w-full mb-6 p-2 border border-gray-400 rounded-lg">
+                    <label>
+                        <input type="text" x-model="search" placeholder="Rechercher un étudiant..." class="w-full mb-6 p-2 border border-gray-400 rounded-lg">
+                    </label>
                     <ul>
                         @if(count($students) > 0)
                             @foreach($students as $student)
@@ -35,7 +37,9 @@
             <div class="col-span-1">
                 <div x-data="{ search: '' }">
                     <h3 class="text-2xl font-bold mt-8 mb-4">Liste des évaluateurs</h3>
-                    <input type="text" x-model="search" placeholder="Rechercher un évaluateur..." class="w-full mb-4 p-2 border border-gray-400 rounded-lg">
+                    <label>
+                        <input type="text" x-model="search" placeholder="Rechercher un évaluateur..." class="w-full mb-4 p-2 border border-gray-400 rounded-lg">
+                    </label>
                     <ul>
                         @if(count($evaluators) > 0)
                             @foreach($evaluators as $evaluator)

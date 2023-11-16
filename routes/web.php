@@ -1,11 +1,12 @@
 <?php
 
+use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectsController;
-use App\Http\Controllers\ContactsController;
-use App\Http\Controllers\EventController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,7 +26,7 @@ Route::get('/start', function () {
 })->name('start-page');
 
 /* Home auth page */
-Route::get('/', [DashboardController::class, 'index'])
+Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
@@ -50,6 +51,9 @@ Route::middleware('auth')->group(function () {
 
     /* Projects CRUD */
     Route::get('/projects', [ProjectsController::class, 'index'])->name('projects.index');
+
+    /*  Student Profil */
+    Route::get('/student', [StudentController::class, 'index'])->name('student.index');
 });
 
 require __DIR__.'/auth.php';

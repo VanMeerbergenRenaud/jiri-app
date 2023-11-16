@@ -27,6 +27,9 @@
                     <x-breeze.nav-link :href="route('projects.index')" :active="request()->routeIs('projects.index')">
                         {{ __('Projets') }}
                     </x-breeze.nav-link>
+                    <x-breeze.nav-link :href="route('student.index')" :active="request()->routeIs('student.index')">
+                        {{ __('Student Profil') }}
+                    </x-breeze.nav-link>
                 </div>
             </div>
 

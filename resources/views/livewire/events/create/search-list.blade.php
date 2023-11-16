@@ -10,7 +10,6 @@
         >
     </label>
     {{-- List of contacts --}}
-
     @unless($this->searchList->isEmpty())
         <ol class="filter__contacts__list">
             @foreach($this->searchList as $contact)
@@ -18,8 +17,7 @@
                     <span>{{ $contact->name }}</span>
                     <span>{{ $contact->lastname }}</span>
                     <span>{{ $contact->email }}</span>
-                    <button type="button" wire:click="addContact({{ $contact->id }},5)">Ajouter
-                    </button>
+                    <button type="button" wire:click="addContact({{ $contact->id }}, 5">Ajouter</button>
                 </li>
             @endforeach
         </ol>

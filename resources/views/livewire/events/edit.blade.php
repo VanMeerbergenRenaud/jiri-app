@@ -14,9 +14,9 @@
                 method="POST"
                 class="form"
             >
-
             @csrf
             @method('PUT')
+
                 {{-- Label & input for name, date of beginning and end of the event --}}
                 <div class="form__infos">
                     <label for="name">Nom de l'épreuve</label>

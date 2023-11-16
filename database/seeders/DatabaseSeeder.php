@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
 
         foreach ($users as $user) {
             foreach ($user->events as $event) {
-                $selectedContacts = $user->contacts->random(random_int(5, 10));
+                $selectedContacts = $user->contacts->random(random_int(2, 10));
 
                 foreach ($selectedContacts as $contact) {
                     $role = random_int(0, 1) ? 'students' : 'evaluators'; // Determine the role for each contact individually
