@@ -49,7 +49,81 @@
                 </form>
             </div>
             <div class="mainProfil__content__infos">
-
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>
+                                <div style="display: inline-block">
+                                    <img src="" alt="">
+                                    <span>Renaud Van Meerbergen</span>
+                                </div>
+                            </th>
+                            <th>
+                                <button>Editer les informations</button>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            @for ($i = 1; $i <= 3; $i++)
+                                <th>
+                                    Projet {{ $i }}
+                                </th>
+                            @endfor
+                        </tr>
+                        <tr>
+                            @for ($i = 1; $i <= 3; $i++)
+                                <td>
+                                    <h4>Projet présenté</h4>
+                                    <p>Oui</p>
+                                </td>
+                            @endfor
+                        </tr>
+                        <tr>
+                            @for ($i = 1; $i <= 3; $i++)
+                                <td>
+                                    <h4>Réalisation(s)</h4>
+                                    <ul>
+                                        @for ($j = 1; $j <= 3; $j++)
+                                            <li>
+                                                Design UI
+                                            </li>
+                                        @endfor
+                                    </ul>
+                                </td>
+                            @endfor
+                        </tr>
+                        <tr>
+                            @for ($i = 1; $i <= 3; $i++)
+                                <td>
+                                    <h4>Maquette de design</h4>
+                                    <a href="#">https://adobe.xd/cv-renaud.vmb</a>
+                                </td>
+                            @endfor
+                        </tr>
+                        <tr>
+                            @for ($i = 1; $i <= 3; $i++)
+                                <td>
+                                    <h4>Url du site</h4>
+                                    <a href="#">https://renaud-vmb.com</a>
+                                </td>
+                            @endfor
+                        </tr>
+                        <tr>
+                            @for ($i = 1; $i <= 3; $i++)
+                                <td>
+                                    <h4>Repository Github</h4>
+                                    <a href="#">https://github.com/VanMeerbergenRenaud/Portfolio</a>
+                                </td>
+                            @endfor
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="mainProfil__action">
+                    <h4>Action</h4>
+                    <button>Changer le statut du profil</button>
+                </div>
             </div>
         </div>
     </main>
