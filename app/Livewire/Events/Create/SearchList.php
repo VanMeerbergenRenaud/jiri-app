@@ -11,7 +11,6 @@ use Livewire\Component;
 class SearchList extends Component
 {
     public $username = '';
-    public $addedContact = [];
 
     #[Computed]
     public function searchList() {
@@ -20,17 +19,15 @@ class SearchList extends Component
             : new Collection();
     }
 
-    public function addContact($contactId, $eventId)
+    public function addContact(Contact $contact)
     {
-        $event = Event::find($eventId);
-        $contact = Contact::find($contactId);
+        $event = Event::find(5);
 
         $event->contacts()->attach($contact->id);
 
-        $this->addedContact[] = $contact;
-
-        $this->dispatch('updateAddedList', $contact->id);
+        $this->dispatch('eventContacts');
     }
+
 
     public function render()
     {

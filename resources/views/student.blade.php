@@ -6,10 +6,10 @@
             <p>Découvrez toutes les informations du profil ci-dessous.</p>
         </div>
         <div class="mainProfil__nav">
-            <button type="button" class="button--gray">
+            <a href="/" class="button--gray">
                 @include('components.svg.arrow-left')
                 Retour
-            </button>
+            </a>
             <button type="button" class="button--gray">
                 Choisir un autre étudiant
                 @include('components.svg.arrow-down')
@@ -59,7 +59,7 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th>
+                            <th class="user-infos">
                                 <div style="display: inline-block">
                                     <img src="" alt="">
                                     <span>Renaud Van Meerbergen</span>

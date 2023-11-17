@@ -101,7 +101,6 @@
                                     <livewire:events.create.search-list />
                                     <livewire:events.create.form />
 
-
                                     {{-- Button to create a new contact --}}
                                     <button type="button"
                                             class="add-button"
@@ -115,7 +114,7 @@
                         </div>
 
                         {{-- Added contacts --}}
-                        <livewire:events.create.added-list />
+                        <livewire:events.create.added-list :$eventId />
                     </div>
 
                     {{-- Label & select to create a project in the database --}}

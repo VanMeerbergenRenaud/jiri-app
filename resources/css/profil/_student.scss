@@ -50,7 +50,12 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                font-weight: 500;
                 background-color: $gray-300;
+
+                a {
+                    color: $blue;
+                }
             }
 
             &__form {
@@ -129,8 +134,15 @@
             table {
 
                 thead {
+
                     th {
                         border-right: none;
+                        padding: 1rem;
+                        background-color: $gray-300;
+                    }
+
+                    th.user-infos {
+
                     }
 
                 }
