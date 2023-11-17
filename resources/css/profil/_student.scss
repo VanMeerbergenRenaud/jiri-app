@@ -1,16 +1,179 @@
 /* Profil of a student */
 .mainProfil {
+    padding: 2rem 3rem;
+
     @import "../_tables.scss";
 
     &__intro {
-
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        p {
+           margin-top: 0.5rem;
+        }
     }
 
     &__nav {
+        margin: 1.5rem 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
 
+        .button--gray {
+            svg {
+                margin-right: 0.5rem;
+            }
+        }
+
+        .button--gray:last-child {
+            padding-left: 1.5rem;
+
+            svg {
+                margin-right: 0;
+                margin-left: 1rem;
+            }
+        }
     }
 
     &__content {
 
+        &__profil {
+            margin-bottom: 2.5rem;
+            background-color: $gray-bg;
+            border: $border;
+            border-radius: 1rem;
+            overflow: hidden;
+
+            &__header {
+                padding: 1.25rem 2rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background-color: $gray-300;
+            }
+
+            &__form {
+                padding: 2rem 2rem 2.5rem;
+                display: flex;
+                flex-direction: column;
+                font-size: 1rem;
+
+                &__photo {
+                    margin: 0.5rem 0 2rem;
+
+                    div {
+                        position: relative;
+                        width: max-content;
+                        margin-bottom: 0.65rem;
+
+                        img {
+                            width: 120px;
+                            height: 120px;
+                            border-radius: 1rem;
+                        }
+
+                        button {
+                            position: absolute;
+                            bottom: -0.5rem;
+                            right: -0.5rem;
+                            padding: 0.5rem;
+                            background-color: white;
+                            border-radius: 2rem;
+
+                           svg {
+                               width: 0.85rem;
+                           }
+                        }
+                    }
+
+                    span {
+                        display: block;
+                        font-size: 0.85rem;
+                    }
+                }
+
+                &__container {
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    gap: 1rem 1.5rem;
+
+                    label {
+                        margin-bottom: 0;
+                        font-weight: 500;
+                        grid-row: 1/2;
+                    }
+
+                    input {
+                        padding: 0.5rem 0.75rem 0.5rem;
+                        grid-row: 2/3;
+                    }
+
+                    label[for="site"], label[for="github"] {
+                        grid-row: 4/5;
+                    }
+
+                    input[name="site"], input[name="github"] {
+                        grid-row: 5/6;
+                    }
+
+                    input[name="github"] {
+                        grid-column: 2/4;
+                    }
+                }
+            }
+        }
+
+        &__infos {
+
+            table {
+
+                thead {
+                    th {
+                        border-right: none;
+                    }
+
+                }
+
+                tbody {
+
+                }
+            }
+        }
+    }
+
+    &__action {
+
+    }
+}
+
+// For 1440px screens @media
+@media (min-width: 1440px) {
+    .mainProfil {
+        padding: 2rem 5rem;
+
+        &__content {
+            display: grid;
+            grid-template-columns: 1fr 2.5fr;
+            gap: 0 2rem;
+
+            &__profil {
+
+                &__form {
+
+                    &__container {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: start;
+                        gap: 0;
+
+                        input {
+                            margin: 0.75rem 0 2rem;
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

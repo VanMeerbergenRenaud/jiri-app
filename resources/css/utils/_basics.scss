@@ -55,6 +55,16 @@ body {
         color: $blue;
     }
 
+    .button--gray {
+        padding: 0.85rem 1.25rem;
+        display: flex;
+        border-radius: 2rem;
+        background-color: $gray-300;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: $blue-dark;
+    }
+
     .flex-center {
         display: flex;
         flex-direction: column;

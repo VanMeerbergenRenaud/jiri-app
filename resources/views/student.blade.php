@@ -6,46 +6,52 @@
             <p>Découvrez toutes les informations du profil ci-dessous.</p>
         </div>
         <div class="mainProfil__nav">
-            <button type="button" class="button--classic">
+            <button type="button" class="button--gray">
                 @include('components.svg.arrow-left')
                 Retour
             </button>
-            <button type="button" class="button--classic">
+            <button type="button" class="button--gray">
                 Choisir un autre étudiant
                 @include('components.svg.arrow-down')
             </button>
         </div>
         <div class="mainProfil__content">
             <div class="mainProfil__content__profil">
-                <div>
+                <div class="mainProfil__content__profil__header">
                     <h4>Profil</h4>
                     <a href="#">Editer le profil</a>
                 </div>
                 {{-- Form to edit a profil --}}
-                <form action="" method="post">
+                <form action="" method="post" class="mainProfil__content__profil__form">
                     @csrf
                     @method('PUT')
 
                     <label for="Photo">Photo</label>
-                    <div class="mainProfil__content__infos__photo">
-                        <img src="{{ asset('img/dominique.png') }}" alt="Photo de l'étudiant">
-                        <button type="button">Modifier</button>
+                    <div class="mainProfil__content__profil__form__photo">
+                        <div>
+                            <img src="{{ asset('img/dominique.png') }}" alt="Photo de l'étudiant">
+                            <button type="button">
+                                @include('components.svg.edit')
+                            </button>
+                        </div>
                         <span>
                             Accepte les fichiers<br>
                             de type .png et .jpg
                         </span>
                     </div>
                     {{-- Nom, prénom, adresse mail, site de référence et compte Github --}}
-                    <label for="name">Nom</label>
-                    <input type="text" name="name" id="name" value="">
-                    <label for="Prénom">Prénom</label>
-                    <input type="text" name="Prénom" id="Prénom" value="">
-                    <label for="mail">Adresse mail</label>
-                    <input type="email" name="mail" id="mail" value="">
-                    <label for="site">Site de référence</label>
-                    <input type="text" name="site" id="site" value="">
-                    <label for="compteGit">Compte Github</label>
-                    <input type="text" name="compteGit" id="compteGit" value="">
+                    <div class="mainProfil__content__profil__form__container">
+                        <label for="lastname">Nom</label>
+                        <input type="text" name="lastname" id="lastname" value="{{--{{ $student->firstname }}--}}">
+                        <label for="firstname">Prénom</label>
+                        <input type="text" name="firstname" id="firstname" value="{{--{{ $student->lastname }}--}}">
+                        <label for="mail">Adresse mail</label>
+                        <input type="email" name="mail" id="mail" value="{{--{{ $student->mail }}--}}">
+                        <label for="site">Site de référence</label>
+                        <input type="text" name="site" id="site" value="{{--{{ $student->site }}--}}">
+                        <label for="github">Compte Github</label>
+                        <input type="text" name="github" id="github" value="{{--{{ $student->github }}--}}">
+                    </div>
                 </form>
             </div>
             <div class="mainProfil__content__infos">
@@ -113,7 +119,7 @@
                         <tr>
                             @for ($i = 1; $i <= 3; $i++)
                                 <td>
-                                    <h4>Repository Github</h4>
+                                    <h4>Repository GitHub</h4>
                                     <a href="#">https://github.com/VanMeerbergenRenaud/Portfolio</a>
                                 </td>
                             @endfor
