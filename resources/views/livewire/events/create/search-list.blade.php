@@ -17,7 +17,11 @@
                     <span>{{ $contact->name }}</span>
                     <span>{{ $contact->lastname }}</span>
                     <span>{{ $contact->email }}</span>
-                    <button type="button" wire:click="addContact({{ $contact->id }})">Ajouter</button>
+                    <button
+                        type="button"
+                        wire:click="addContact({{ $contact->id }})">
+                        Ajouter
+                    </button>
                     {{-- TODO : Ajouter une boite modal qui permet de sélectionner le role du contact lorsque l'on clic sur le bouton Ajouter --}}
                 </li>
             @endforeach

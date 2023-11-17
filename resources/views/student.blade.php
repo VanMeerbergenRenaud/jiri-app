@@ -58,38 +58,38 @@
                 <table>
                     <thead>
                         <tr>
-                            <th></th>
-                            <th class="user-infos">
-                                <div style="display: inline-block">
-                                    <img src="" alt="">
+                            <th class="user-infos" colspan="100%">
+                                <div>
+                                    <img src="{{ asset('img/dominique.png') }}" alt="">
                                     <span>Renaud Van Meerbergen</span>
                                 </div>
-                            </th>
-                            <th>
-                                <button>Editer les informations</button>
+                                <a href="#">Editer les informations</a>
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            @for ($i = 1; $i <= 3; $i++)
+                    @php
+                        $testCol = 7;
+                    @endphp
+                        <tr class="project-list">
+                            @for ($i = 1; $i <= $testCol; $i++)
                                 <th>
                                     Projet {{ $i }}
                                 </th>
                             @endfor
                         </tr>
-                        <tr>
-                            @for ($i = 1; $i <= 3; $i++)
+                        <tr class="project-info">
+                            @for ($i = 1; $i <= $testCol; $i++)
                                 <td>
-                                    <h4>Projet présenté</h4>
+                                    <h4 class="title">Projet présenté</h4>
                                     <p>Oui</p>
                                 </td>
                             @endfor
                         </tr>
-                        <tr>
-                            @for ($i = 1; $i <= 3; $i++)
+                        <tr class="project-info">
+                            @for ($i = 1; $i <= $testCol; $i++)
                                 <td>
-                                    <h4>Réalisation(s)</h4>
+                                    <h4 class="title">Réalisation(s)</h4>
                                     <ul>
                                         @for ($j = 1; $j <= 3; $j++)
                                             <li>
@@ -100,35 +100,35 @@
                                 </td>
                             @endfor
                         </tr>
-                        <tr>
-                            @for ($i = 1; $i <= 3; $i++)
+                        <tr class="project-info">
+                            @for ($i = 1; $i <= $testCol; $i++)
                                 <td>
-                                    <h4>Maquette de design</h4>
-                                    <a href="#">https://adobe.xd/cv-renaud.vmb</a>
+                                    <h4 class="title">Maquette de design</h4>
+                                    <a href="#" class="link">https://adobe.xd/cv-renaud.vmb</a>
                                 </td>
                             @endfor
                         </tr>
-                        <tr>
-                            @for ($i = 1; $i <= 3; $i++)
+                        <tr class="project-info">
+                            @for ($i = 1; $i <= $testCol; $i++)
                                 <td>
-                                    <h4>Url du site</h4>
-                                    <a href="#">https://renaud-vmb.com</a>
+                                    <h4 class="title">Url du site</h4>
+                                    <a href="#" class="link">https://renaud-vmb.com</a>
                                 </td>
                             @endfor
                         </tr>
-                        <tr>
-                            @for ($i = 1; $i <= 3; $i++)
+                        <tr class="project-info">
+                            @for ($i = 1; $i <= $testCol; $i++)
                                 <td>
-                                    <h4>Repository GitHub</h4>
-                                    <a href="#">https://github.com/VanMeerbergenRenaud/Portfolio</a>
+                                    <h4 class="title">Repository GitHub</h4>
+                                    <a href="#" class="link">https://github.com/VanMeerbergenRenaud/Portfolio</a>
                                 </td>
                             @endfor
                         </tr>
                     </tbody>
                 </table>
                 <div class="mainProfil__action">
-                    <h4>Action</h4>
-                    <button>Changer le statut du profil</button>
+                    <h4 class="title">Action</h4>
+                    <button type="button" class="button--gray">Changer le statut du profil</button>
                 </div>
             </div>
         </div>

@@ -12,15 +12,15 @@
             <div x-bind:class="{ 'fullscreen': isFullScreen }">
                 <table>
                     <thead>
-                    <tr class="row-1">
-                        <th scope="col" colspan="100%">Tableau récapitulatif des passages</th>
-                    </tr>
-                    <tr class="row-2">
-                        <th class="category">Étudiants | Jury</th>
-                        @for ($i = 1; $i <= 10; $i++)
-                            <th class="jiris" scope="col">Jury {{ $i }}</th>
-                        @endfor
-                    </tr>
+                        <tr class="row-1">
+                            <th scope="row" colspan="100%">Tableau récapitulatif des passages</th>
+                        </tr>
+                        <tr class="row-2">
+                            <th class="category">Étudiants | Jury</th>
+                            @for ($i = 1; $i <= 10; $i++)
+                                <th class="jiris" scope="col">Jury {{ $i }}</th>
+                            @endfor
+                        </tr>
                     </thead>
                     <tbody>
                     @for ($i = 1; $i <= 10; $i++)

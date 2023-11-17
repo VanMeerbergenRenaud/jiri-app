@@ -10,6 +10,8 @@ use Livewire\Component;
 
 class SearchList extends Component
 {
+    public int $eventId = 5;
+
     public $username = '';
 
     #[Computed]
@@ -21,11 +23,11 @@ class SearchList extends Component
 
     public function addContact(Contact $contact)
     {
-        $event = Event::find(5);
+        $event = Event::find($this->eventId);
 
         $event->contacts()->attach($contact->id);
 
-        $this->dispatch('eventContacts');
+        $this->dispatch('fetchEventContacts');
     }
 
 

@@ -93,10 +93,7 @@
                                 </button>
 
                                 {{-- SearchList & Form --}}
-                                <div class="filter__contacts"
-                                     x-data="{
-                                     createmode: false}
-                                     ">
+                                <div class="filter__contacts" x-data="{createmode: false}">
 
                                     <livewire:events.create.search-list />
                                     <livewire:events.create.form />
@@ -114,7 +111,7 @@
                         </div>
 
                         {{-- Added contacts --}}
-                        <livewire:events.create.added-list :$eventId />
+                        <livewire:events.create.added-list />
                     </div>
 
                     {{-- Label & select to create a project in the database --}}

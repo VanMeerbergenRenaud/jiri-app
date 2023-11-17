@@ -10,14 +10,15 @@ use Livewire\Component;
 class AddedList extends Component
 {
     public int $eventId = 5;
+
     public Collection $contactsList;
 
     public function mount() {
         $this->contactsList = new Collection();
     }
 
-    #[On('eventContacts')]
-    public function eventContacts()
+    #[On('fetchEventContacts')]
+    public function fetchEventContacts()
     {
         $event = Event::find($this->eventId);
 
@@ -30,7 +31,7 @@ class AddedList extends Component
 
         $event->contacts()->detach($contactId);
 
-        $this->dispatch('eventContacts');
+        $this->dispatch('fetchEventContacts');
     }
 
     public function render()
