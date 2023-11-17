@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Events;
+namespace App\Livewire\Contacts;
 
 use Livewire\Component;
 
@@ -8,6 +8,6 @@ class Create extends Component
 {
     public function render()
     {
-        return view('livewire.events.create');
+        return view('livewire.contacts.create');
     }
 }

@@ -25,6 +25,10 @@ Route::get('/start', function () {
     return view('start-page');
 })->name('start-page');
 
+Route::get('/', function () {
+    return view('start-page');
+})->name('dashboard');
+
 /* Home auth page */
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
@@ -47,13 +51,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/events/{event}/edition', [EventController::class, 'updateEdition'])->name('events.updateEdition');
 
     /* Contacts CRUD */
-    Route::get('/contacts', [ContactsController::class, 'index'])->name('contacts.index');
+    Route::resource('contacts', ContactsController::class);
 
     /* Projects CRUD */
-    Route::get('/projects', [ProjectsController::class, 'index'])->name('projects.index');
+    Route::resource('projects', ProjectsController::class);
 
     /*  Student Profil */
-    Route::get('/student', [StudentController::class, 'index'])->name('student.index');
+    Route::resource('student', StudentController::class);
 });
 
 require __DIR__.'/auth.php';

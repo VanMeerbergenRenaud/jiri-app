@@ -20,7 +20,7 @@
             @if (Route::has('login'))
                 <div class="p-12 text-right z-10 flex flex-col justify-center align-items-center">
                     @auth
-                        <a href="{{ url('/') }}"
+                        <a href="{{ url('/dashboard') }}"
                            class="font-semibold underline text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
                             Vous êtes déjà connecté, retourner au dashboard !
                         </a>

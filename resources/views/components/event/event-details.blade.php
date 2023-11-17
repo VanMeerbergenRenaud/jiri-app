@@ -26,7 +26,8 @@
     </div>
     {{-- Liens : Édition, Voir, Non disponible, Éditer, Supprimer --}}
     <div class="link" x-data="{ showModal: false }">
-        <a href="{{ route('events.editEdition', ['event' => $event]) }}" class="link__edition">Édition des profils et infos</a>
+        <a href="{{ route('events.editEdition', ['event' => $event]) }}" class="link__edition">Édition des profils et
+            infos</a>
 
         @if(now() >= $event->starting_at)
             <a href="{{ route('events.show', ['event' => $event]) }}" class="link__see">Voir</a>
@@ -36,30 +37,15 @@
 
         <a href="{{ route('events.edit', ['event' => $event]) }}" class="link__edit">@include('components.svg.edit')</a>
 
-        <button @click="showModal = !showModal" class="link__delete">@include('components.svg.trash')</button>
+        <button @click="showModal = !showModal" class="link__delete">
+            @include('components.svg.trash')
+        </button>
 
         {{-- Modal to trash an event --}}
-        <template x-if="showModal">
-            <div class="modal" @click="showModal = false">
-                <div class="modal__dialog" @click.stop="showModal = true">
-                    <p class="modal__title">
-                        Êtes-vous sûr de vouloir supprimer l'événement&nbsp;?
-                    </p>
-                    <div class="modal__buttons">
-                        <button class="cancel-button" @click="showModal = false">
-                            Annuler
-                        </button>
-                        <form action="{{ route('events.destroy', ['event' => $event]) }}"
-                              method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="confirm-button" @click.stop="showModal = true">
-                                Confirmer la suppression
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </template>
+        @include('components.modal', [
+            'title' => 'Êtes-vous sûr de vouloir supprimer l‘évènement ?',
+            'action' => route('events.destroy', ['event' => $event]),
+            'method' => 'DELETE',
+        ])
     </div>
 </li>

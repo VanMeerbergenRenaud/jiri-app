@@ -142,52 +142,6 @@
             border-bottom: 1px solid $blue;
         }
     }
-
-    .modal {
-        position: fixed;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: rgba(0, 0, 0, 0.825);
-        z-index: 10;
-
-        &__dialog {
-            background: $gray-700;
-            border-radius: 1rem;
-            padding: 1.25rem 2rem;
-            max-width: 400px;
-            text-align: center;
-        }
-
-        &__title {
-            font-size: 1.25rem;
-            font-weight: 500;
-            margin-bottom: 1.5rem;
-        }
-
-        &__buttons {
-            display: flex;
-            justify-content: space-between;
-
-            button {
-                padding: 0.5rem 1rem;
-                font-weight: 500;
-                color: white;
-            }
-
-            .cancel-button {
-                background: $blue-dark;
-            }
-
-            .confirm-button {
-                background: $blue;
-            }
-        }
-    }
 }
 
 
