@@ -10,6 +10,12 @@ class Project extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'category',
+        'description',
+    ];
+
     public function implementations(): HasMany
     {
         return $this->hasMany(Implementation::class);

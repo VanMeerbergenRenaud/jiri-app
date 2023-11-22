@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Contact;
 use Auth;
+use App\Models\Contact;
 use Illuminate\Http\RedirectResponse;
-use function Laravel\Prompts\alert;
 
 class ContactsController
 {
@@ -30,7 +29,7 @@ class ContactsController
     {
         $contact = new Contact();
 
-        return view('livewire/contacts/create', ['user' => $this->user, 'contact' => $contact]);
+        return view('livewire/contacts/create', compact('contact'));
     }
 
     public function show($contactId)
@@ -58,13 +57,16 @@ class ContactsController
 
     public function update($contactId): RedirectResponse
     {
-        $data = $this->validateContactData();
+        $data = request()->validate([
+            'name' => 'required',
+            'firstname' => 'required',
+        ]);
 
         $contact = Contact::findOrFail($contactId);
 
         $contact->update($data);
 
-        return redirect()->route('contacts.index', compact('contact'));
+        return redirect('contacts');
     }
 
     public function destroy($contactId)
@@ -73,7 +75,7 @@ class ContactsController
 
         $contact->delete();
 
-        return redirect()->route('contacts.index', compact('contact'));
+        return redirect('contacts');
     }
 
     private function validateContactData()

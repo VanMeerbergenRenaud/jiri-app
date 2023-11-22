@@ -27,9 +27,9 @@ class DatabaseSeeder extends Seeder
                 'password' => bcrypt('password'),
             ]);
         $renaud = User::factory()
-            ->has(Event::factory()->count(7))
-            ->has(Project::factory()->count(5))
-            ->has(Contact::factory()->count(20))
+            ->has(Event::factory()->count(12))
+            ->has(Project::factory()->count(10))
+            ->has(Contact::factory()->count(24))
             ->create([
                 'name' => 'Renaud Vmb',
                 'email' => 'renaud.vmb@gmail.com',

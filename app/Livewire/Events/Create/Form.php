@@ -17,7 +17,7 @@ class Form extends Component
     public $newcontactname;
 
     #[Rule('required', 'min:3', 'max:255')]
-    public $newcontactlastname;
+    public $newcontactfirstname;
 
     #[Rule('required', 'email', 'unique:users,email')]
     public $newcontactemail;
@@ -31,7 +31,7 @@ class Form extends Component
         $renaud->contacts()->create([
             'role' => $this->newcontacttype,
             'name' => $this->newcontactname,
-            'lastname' => $this->newcontactlastname,
+            'firstname' => $this->newcontactfirstname,
             'email' => $this->newcontactemail,
         ]);
 

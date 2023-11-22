@@ -19,8 +19,7 @@
                     <ul>
                         @if(count($students) > 0)
                             @foreach($students as $student)
-                                <template
-                                    x-if="search === '' || '{{ $student->name }}'.toLowerCase().includes(search.toLowerCase())">
+                                <template x-if="search === '' || '{{ $student->name }}'.toLowerCase().includes(search.toLowerCase())">
                                     <li class="bg-white relative shadow-md rounded-lg p-6 mb-6"
                                         x-data="{ showModal: false }">
                                         <div class="flex items-center justify-between mb-4">

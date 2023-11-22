@@ -32,14 +32,14 @@
                 </div>
                 {{-- Prénom du contact --}}
                 <div class="position-right">
-                    <label for="newcontactlastname">Prénom du contact</label>
+                    <label for="newcontactfirstname">Prénom du contact</label>
                     <input
                         type="text"
-                        id="newcontactlastname"
-                        wire:model="newcontactlastname"
+                        id="newcontactfirstname"
+                        wire:model="newcontactfirstname"
                         placeholder="Ex : Dominique"
                     >
-                    @error('newcontactlastname')
+                    @error('newcontactfirstname')
                     <div class="error-message">{{ $message }}</div>
                     @enderror
                 </div>
