@@ -108,9 +108,14 @@ body {
             margin-bottom: 1.5rem;
         }
 
+        select {
+            width: 90%;
+            margin-bottom: 2.5rem;
+        }
+
         &__buttons {
             display: flex;
-            justify-content: space-between;
+            justify-content: space-around;
 
             button {
                 padding: 0.5rem 1rem;

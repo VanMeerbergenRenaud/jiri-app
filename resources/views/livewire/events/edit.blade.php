@@ -85,7 +85,7 @@
                                      username: ''}
                                      ">
 
-                                    <livewire:events.create.search-list />
+                                    <livewire:events.create.search-list :eventId="$event->id" />
                                     <livewire:events.create.form />
 
 
@@ -102,7 +102,7 @@
                         </div>
 
                         {{-- Added contacts --}}
-                        <livewire:events.create.added-list />
+                        <livewire:events.create.added-list :eventId="$event->id" />
                     </div>
 
                     {{-- Label & select to create a project in the database --}}

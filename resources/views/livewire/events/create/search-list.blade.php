@@ -15,10 +15,13 @@
             <ol class="filter__contacts__list">
                 @foreach($this->searchList as $contact)
                     <li class="filter__contacts__list__item" wire:key="{{$contact->id}}">
-                        <span>{{ $contact->name }}</span>
-                        <span>{{ $contact->lastname }}</span>
+                        <span class="capitalize">{{ $contact->name }}</span>
+                        <span class="capitalize">{{ $contact->lastname }}</span>
                         <span>{{ $contact->email }}</span>
-                        <button type="button" @click.stop="showSelectType = true; selectedContactId = {{ $contact->id }}">
+                        <button type="button"
+                                @click.stop="showSelectType = true;
+                                selectedContactId = {{ $contact->id }};
+                                selectedEventId = {{ $eventId }}">
                             Ajouter
                         </button>
                     </li>
@@ -52,8 +55,7 @@
                         <button class="confirm-button"
                                 @click.stop="showSelectType = false"
                                 type="button"
-                                wire:click="addContact(selectedContactId)"
-                        >
+                                wire:click="addContact(selectedContactId, selectedEventId)">
                             Confirmer le choix
                         </button>
                     </div>
