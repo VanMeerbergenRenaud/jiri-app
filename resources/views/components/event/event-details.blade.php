@@ -3,7 +3,7 @@
     <div class="item__date">
         Date de l’épreuve<br>
         <time datetime="{{$event->starting_at}}">
-            {{ \Carbon\Carbon::parse($event->starting_at)->format('j F Y \à G\hi')}}
+            {{ \Carbon\Carbon::parse($event->starting_at)->format('j M Y \à G\hi')}}
         </time>
     </div>
     <div class="item__time">
@@ -14,20 +14,23 @@
                 $hours = floor($duration / 60);
                 $minutes = $duration % 60;
             @endphp
-            {{$hours}}h{{$minutes}}min
+            @if($hours > 0)
+                {{$hours}}h{{$minutes}}min
+            @else
+                {{$minutes}}min
+            @endif
         </time>
     </div>
     <div class="item__members">
         Participants<br>
         <p>
-            <span>12 évaluateurs</span> &nbsp;|&nbsp;
-            <span>24 évalués</span>
+            <span>{{ $event->contacts->count() }} enregistré(s)</span>
         </p>
     </div>
     {{-- Liens : Édition, Voir, Non disponible, Éditer, Supprimer --}}
     <div class="link" x-data="{ showModal: false }">
         <a href="{{ route('events.editEdition', ['event' => $event]) }}" class="link__edition">
-            Édition des profils et infos
+            Édition des informations
         </a>
 
         @if(now() >= $event->starting_at)
