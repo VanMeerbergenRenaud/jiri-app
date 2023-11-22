@@ -9,9 +9,9 @@
                     Type
                     <select id="newcontacttype" wire:model="newcontacttype">
                         <option value="0">Sélectionner le type</option>
-                        <option value="students">Étudiants</option>
-                        <option value="evaluators">Évaluateurs</option>
-                        <option value="none">Neutre</option>
+                        <option value="student">Étudiants</option>
+                        <option value="evaluator">Évaluateurs</option>
+                        <option value="neutre">Neutre</option>
                     </select>
                     @error('newcontacttype')
                     <div class="error-message">{{ $message }}</div>

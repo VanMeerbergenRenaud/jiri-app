@@ -26,13 +26,14 @@
     </div>
     {{-- Liens : Édition, Voir, Non disponible, Éditer, Supprimer --}}
     <div class="link" x-data="{ showModal: false }">
-        <a href="{{ route('events.editEdition', ['event' => $event]) }}" class="link__edition">Édition des profils et
-            infos</a>
+        <a href="{{ route('events.editEdition', ['event' => $event]) }}" class="link__edition">
+            Édition des profils et infos
+        </a>
 
         @if(now() >= $event->starting_at)
             <a href="{{ route('events.show', ['event' => $event]) }}" class="link__see">Voir</a>
         @else
-            <button class="link__unavailable">Non disponible</button>
+            <button type="button" class="link__unavailable">Non disponible</button>
         @endif
 
         <a href="{{ route('events.edit', ['event' => $event]) }}" class="link__edit">@include('components.svg.edit')</a>
@@ -42,10 +43,26 @@
         </button>
 
         {{-- Modal to trash an event --}}
-        @include('components.modal', [
-            'title' => 'Êtes-vous sûr de vouloir supprimer l‘évènement ?',
-            'action' => route('events.destroy', ['event' => $event]),
-            'method' => 'DELETE',
-        ])
+        <template x-if="showModal">
+            <div class="modal" @click="showModal = false">
+                <div class="modal__dialog" @click.stop="showModal = true">
+                    <p class="modal__title">
+                        Êtes-vous sûr de vouloir supprimer cette épreuve ?
+                    </p>
+                    <div class="modal__buttons">
+                        <button class="cancel-button" @click="showModal = false">
+                            Annuler
+                        </button>
+                        <form method="POST" action="{{ route('events.destroy', ['event' => $event]) }}">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="confirm-button" @click.stop="showModal = true">
+                                Confirmer la suppression
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </template>
     </div>
 </li>

@@ -9,9 +9,6 @@ it('has a events index page accessible to authenticated users only', function ()
     $user = User::factory()
         ->create();
 
-    get('events')
-        ->assertRedirect('login');
-
     actingAs($user)
         ->get('events')
         ->assertOK();

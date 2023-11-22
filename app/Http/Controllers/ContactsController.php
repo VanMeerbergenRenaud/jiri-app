@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use Auth;
-use Request;
+use Illuminate\Http\RedirectResponse;
+use function Laravel\Prompts\alert;
 
 class ContactsController
 {
@@ -27,39 +28,60 @@ class ContactsController
 
     public function create()
     {
-        return view('livewire/contacts/create', ['user' => $this->user]);
+        $contact = new Contact();
+
+        return view('livewire/contacts/create', ['user' => $this->user, 'contact' => $contact]);
     }
 
     public function show($contactId)
     {
         $contact = Contact::findOrFail($contactId);
-        return view('livewire/contacts/show', ['user' => $this->user, 'contact' => $contact]);
+
+        return view('livewire/contacts/show', compact('contact'));
     }
 
     public function edit($contactId)
     {
         $contact = Contact::findOrFail($contactId);
-        return view('livewire/contacts/edit', ['user' => $this->user, 'contact' => $contact]);
+
+        return view('livewire/contacts/edit', compact('contact'));
     }
 
-    public function update($contactId)
+    public function store(): RedirectResponse
     {
+        $data = $this->validateContactData();
+
+        auth()->user()?->contacts()->create($data);
+
+        return redirect('contacts');
+    }
+
+    public function update($contactId): RedirectResponse
+    {
+        $data = $this->validateContactData();
+
         $contact = Contact::findOrFail($contactId);
-        $contact->update(Request::only('name', 'email'));
-        return redirect()->route('contacts.index', ['contact' => $contact, 'user' => $this->user]);
-    }
 
-    public function store()
-    {
-        $contact = $this->user->contacts()->create();
-        $contact->update(Request::only('name', 'email'));
-        return redirect()->route('contacts.index', ['contact' => $contact, 'user' => $this->user]);
+        $contact->update($data);
+
+        return redirect()->route('contacts.index', compact('contact'));
     }
 
     public function destroy($contactId)
     {
         $contact = Contact::findOrFail($contactId);
+
         $contact->delete();
-        return redirect()->route('contacts.index', ['contact' => $contact, 'user' => $this->user]);
+
+        return redirect()->route('contacts.index', compact('contact'));
+    }
+
+    private function validateContactData()
+    {
+        return request()->validate([
+            'name' => 'required',
+            'firstname' => 'required',
+            'email' => 'required|email|unique:contacts,email',
+        ]);
     }
 }

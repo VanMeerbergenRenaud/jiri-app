@@ -10,7 +10,7 @@ use Livewire\Component;
 
 class SearchList extends Component
 {
-    public int $eventId;
+    public $eventId;
 
     public $username = '';
 

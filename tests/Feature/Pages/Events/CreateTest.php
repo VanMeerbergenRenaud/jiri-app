@@ -1,9 +1,7 @@
 <?php
 
-use App\Models\Event;
 use App\Models\User;
 use function Pest\Laravel\actingAs;
-use function Pest\Laravel\get;
 
 it('displays a form to create a event', function () {
     $user = User::factory()

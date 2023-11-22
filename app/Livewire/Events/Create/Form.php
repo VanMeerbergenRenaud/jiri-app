@@ -8,6 +8,8 @@ use Livewire\Component;
 
 class Form extends Component
 {
+    public int $eventId;
+
     #[Rule('required')]
     public $newcontacttype;
 
@@ -32,6 +34,8 @@ class Form extends Component
             'lastname' => $this->newcontactlastname,
             'email' => $this->newcontactemail,
         ]);
+
+        $this->reset();
     }
 
     public function render()

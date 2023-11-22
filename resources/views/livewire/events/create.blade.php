@@ -52,15 +52,6 @@
                     @error('duration')<p class="error-message error3">{{ $message }}</p>@enderror
                 </div>
 
-                {{--
-                Etapes :
-                1. DONE -> Afficher un input de type search qui permet de chercher tous les contacts dans la base de donées en fonction de chaque utilisateur
-                2. DONE -> Afficher un bouton d'ajout d'un contact pour créer un nouveau contact
-                3. DONE -> Afficher à coté de chaque utilisateur un bouton pour ajouter ce contact depuis notre input de type search qui affiche tous nos contacts
-                4. TODO -> Afficher dans un div.container les contacts ajoutés depuis notre input de type search
-                5. TODO -> Afficher un bouton pour supprimer un contact depuis notre div.container
-                --}}
-
                 <div class="form__container">
                     {{-- Label & select to create a user in the database --}}
                     <div class="form__component">
@@ -95,7 +86,7 @@
                                 {{-- SearchList & Form --}}
                                 <div class="filter__contacts" x-data="{createmode: false}">
 
-                                    <livewire:events.create.search-list />
+                                    <livewire:events.create.search-list :eventId="$event->id" />
                                     <livewire:events.create.form />
 
                                     {{-- Button to create a new contact --}}
@@ -111,7 +102,7 @@
                         </div>
 
                         {{-- Added contacts --}}
-                        <livewire:events.create.added-list />
+                        <livewire:events.create.added-list :eventId="$event->id" />
                     </div>
 
                     {{-- Label & select to create a project in the database --}}

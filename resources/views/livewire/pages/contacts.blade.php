@@ -6,7 +6,7 @@
                 :title="'Bonjour ' . $user->name"
                 :message="'Découvrez la liste de tous vos contacts.'"
             />
-            <a href="#" class="ml-8 button--classic">Créer un nouveau contact</a>
+            <a href="{{ route('contacts.create') }}" class="ml-8 button--classic">Créer un nouveau contact</a>
         </div>
         {{-- Liste des contacts --}}
         <div class="grid grid-cols-2 gap-8">
@@ -14,8 +14,7 @@
                 <div x-data="{ search: '' }">
                     <h3 class="text-2xl font-bold mt-8 mb-4">Liste des étudiants</h3>
                     <label>
-                        <input type="text" x-model="search" placeholder="Rechercher un étudiant..."
-                               class="w-full mb-6 p-2 border border-gray-400 rounded-lg">
+                        <input type="text" x-model="search" placeholder="Rechercher un étudiant..." class="w-full mb-6 p-2 border border-gray-400 rounded-lg">
                     </label>
                     <ul>
                         @if(count($students) > 0)
@@ -26,8 +25,10 @@
                                         x-data="{ showModal: false }">
                                         <div class="flex items-center justify-between mb-4">
                                             <div>
-                                                <a href="{{ route('contacts.show', $student->id) }}"
-                                                   class="font-bold text-blue-500 hover:underline">{{ $student->name }}</a>
+                                                <a href="{{ route('contacts.show', $student->id) }}" class="font-bold text-blue-500 hover:underline">
+                                                    {{ $student->name }}
+                                                </a>
+                                                <span class="ml-8 text-gray-600">{{ $student->firstname }}</span>
                                                 <div class="text-gray-600">{{ $student->email }}</div>
                                             </div>
                                             {{-- Edit button --}}
@@ -42,12 +43,28 @@
                                             @include('components.svg.trash')
                                         </button>
 
-                                        {{-- Modal to trash an event --}}
-                                        @include('components.modal', [
-                                            'title' => 'Êtes-vous sûr de vouloir supprimer l‘étudiant ?',
-                                            'action' => route('contacts.destroy', $student->id),
-                                            'method' => 'DELETE',
-                                        ])
+                                        {{-- Modal to trash a contact --}}
+                                        <template x-if="showModal">
+                                            <div class="modal" @click="showModal = false">
+                                                <div class="modal__dialog" @click.stop="showModal = true">
+                                                    <p class="modal__title">
+                                                        Êtes-vous sûr de vouloir supprimer l'étudiant ?
+                                                    </p>
+                                                    <div class="modal__buttons">
+                                                        <button class="cancel-button" @click="showModal = false">
+                                                            Annuler
+                                                        </button>
+                                                        <form method="POST" action="{{ route('contacts.destroy', $student->id) }}">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="confirm-button" @click.stop="showModal = true">
+                                                                Confirmer la suppression
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </template>
                                     </li>
                                 </template>
                             @endforeach

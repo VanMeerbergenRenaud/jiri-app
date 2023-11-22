@@ -19,4 +19,6 @@ class ProjectsController extends Controller
 
         return view('livewire.pages/projects', compact('user', 'events', 'projects'));
     }
+
+
 }

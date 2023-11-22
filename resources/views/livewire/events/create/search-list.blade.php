@@ -43,9 +43,9 @@
                         <label for="role"></label>
                         <select name="role" id="role" class="mb-6 p-3 bg-white">
                             <option value="O">Choisissez un type</option>
-                            <option value="1">Étudiant</option>
-                            <option value="2">Évaluateur</option>
-                            <option value="3">Client</option>
+                            <option value="student">Étudiant</option>
+                            <option value="evaluator">Évaluateur</option>
+                            <option value="neutre">Neutre</option>
                         </select>
                     </div>
                     <div class="modal__buttons">

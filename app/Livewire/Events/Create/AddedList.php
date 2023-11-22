@@ -9,15 +9,13 @@ use Livewire\Component;
 
 class AddedList extends Component
 {
-    public int $eventId;
+    public $eventId;
 
     public Collection $contactsList;
 
     public function mount() {
-
         $event = Event::find($this->eventId);
-
-        $this->contactsList = $event->contacts;
+        $this->contactsList = $event ? $event->contacts : new Collection();
     }
 
     #[On('fetchEventContacts')]

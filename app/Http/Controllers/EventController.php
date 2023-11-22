@@ -37,14 +37,18 @@ class EventController extends Controller
     public function show($eventId)
     {
         $user = Auth::user();
+
         $event = Event::findOrFail($eventId);
+
         return view('livewire/events/show', compact('user', 'event'));
     }
 
     public function edit($eventId)
     {
         $user = Auth::user();
+
         $event = Event::findOrFail($eventId);
+
         $contacts = $user->contacts()->get();
 
         return view('livewire/events/edit', compact('user', 'event', 'contacts'));
