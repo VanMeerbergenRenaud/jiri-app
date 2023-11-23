@@ -22,15 +22,11 @@ use Illuminate\Support\Facades\Route;
 
 /* Home start page */
 Route::get('/start', function () {
-    return view('start-page');
-})->name('start-page');
-
-Route::get('/', function () {
-    return view('start-page');
-})->name('dashboard');
+    return view('start');
+})->name('start');
 
 /* Home auth page */
-Route::get('/dashboard', [DashboardController::class, 'index'])
+Route::get('/', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 

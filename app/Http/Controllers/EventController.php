@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
 use Auth;
 use App\Models\Event;
 use Illuminate\Contracts\View\View;
@@ -99,7 +100,9 @@ class EventController extends Controller
 
         $event = Event::findOrFail($eventId);
 
-        return view('livewire/events/edit-edition', compact('user', 'event'));
+        $students = Contact::where('role', 'student')->get(); // Attention : prendre les contacts de l‘event, pas tout ceux de l'utilisateur
+
+        return view('livewire/events/edit-edition', compact('user', 'event', 'students'));
     }
 
     public function updateEdition($eventId): RedirectResponse

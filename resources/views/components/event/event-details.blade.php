@@ -24,7 +24,11 @@
     <div class="item__members">
         Participants<br>
         <p>
-            <span>{{ $event->contacts->count() }} enregistré(s)</span>
+            @if($event->contacts->count() > 0)
+                <span>{{ $event->contacts->count() }} enregistrés</span>
+            @else
+                <span>0 enregistré</span>
+            @endif
         </p>
     </div>
     {{-- Liens : Édition, Voir, Non disponible, Éditer, Supprimer --}}

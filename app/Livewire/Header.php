@@ -4,7 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 
-class WelcomeMessage extends Component
+class Header extends Component
 {
     public $title;
     public $message;

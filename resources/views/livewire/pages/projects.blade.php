@@ -2,7 +2,7 @@
 <x-app-layout>
     <main class="mainProjects">
         <div class="projects__intro">
-            <livewire:welcome-message
+            <livewire:header
                     :title="'Bonjour ' . $user->name"
                     :message="'Découvrez la liste de tous vos projets.'"
             />

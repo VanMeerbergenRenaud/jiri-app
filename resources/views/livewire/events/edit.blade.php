@@ -1,7 +1,7 @@
 <x-app-layout>
     <main class="mainEventsCreate">
         <div class="events__intro">
-            <livewire:welcome-message
+            <livewire:header
                 :title="'Bonjour ' . $user->name . ' !'"
                 :message="'Votre épreuve ' . $event->name . ' est en cours d’acheminement.'"
             />

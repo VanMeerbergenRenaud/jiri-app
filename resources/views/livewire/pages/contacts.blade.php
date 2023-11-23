@@ -2,7 +2,7 @@
 <x-app-layout>
     <main class="mainContacts">
         <div class="contacts__intro">
-            <livewire:welcome-message
+            <livewire:header
                 :title="'Bonjour ' . $user->name"
                 :message="'Découvrez la liste de tous vos contacts.'"
             />
