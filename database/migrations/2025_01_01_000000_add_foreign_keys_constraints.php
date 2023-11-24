@@ -30,7 +30,6 @@ return new class extends Migration {
             $table->foreignId('contact_id')->constrained();
             $table->foreignId('event_id')->constrained();
         });
-
     }
 
     /**

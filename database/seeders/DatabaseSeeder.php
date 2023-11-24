@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Contact;
 use App\Models\Event;
 use App\Models\Project;
@@ -26,9 +25,14 @@ class DatabaseSeeder extends Seeder
                 'email' => 'dominique.vilain@hepl.be',
                 'password' => bcrypt('password'),
             ]);
+
         $renaud = User::factory()
             ->has(Event::factory()->count(12))
-            ->has(Project::factory()->count(10))
+            ->has(Project::factory()
+                ->count(12)
+                // add tasks to the project
+
+            )
             ->has(Contact::factory()->count(24))
             ->create([
                 'name' => 'Renaud Vmb',

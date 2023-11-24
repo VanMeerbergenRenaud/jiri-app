@@ -11,7 +11,7 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->string('category'); // category: design, intégration, WordPress, ...
+            $table->json('tasks');
             $table->timestamps();
         });
     }

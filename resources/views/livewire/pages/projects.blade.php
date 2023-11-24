@@ -35,7 +35,11 @@
                         <tr>
                             <td class="border px-4 py-2">{{ $project->id }}</td>
                             <td class="border px-4 py-2">{{ ucfirst($project->name) }}</td>
-                            <td class="border px-4 py-2">{{ ucfirst($project->category) }}</td>
+                            <td class="border px-4 py-2">
+                                @foreach(json_decode($project->tasks) as $task)
+                                    {{ ucfirst($task) }}
+                                @endforeach
+                            </td>
                             <td class="border px-4 py-2">{{ $project->description }}</td>
                             <td class="border px-4 py-2">
                                 <a href="{{ route('projects.edit', $project->id) }}">

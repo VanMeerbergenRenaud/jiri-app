@@ -11,6 +11,7 @@ return new class extends Migration {
             $table->id();
             $table->timestamps();
             $table->json('urls')->nullable();
+            // NB : Liste de toutes les tâches, mais un étudiant ne les a pas spécialement toutes réalisées
             $table->json('tasks')->nullable();
             $table->json('scores')->nullable();
         });
