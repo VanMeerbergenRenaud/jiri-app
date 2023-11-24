@@ -13,9 +13,19 @@ class AddedList extends Component
 
     public Collection $contactsList;
 
+    public $tasks;
+
     public function mount() {
         $event = Event::find($this->eventId);
         $this->contactsList = $event ? $event->contacts : new Collection();
+        $this->tasks = $this->getUniqueTasks();
+    }
+
+    public function getUniqueTasks()
+    {
+        return $this->contactsList->flatMap(function ($contact) {
+            return json_decode($contact->tasks);
+        })->unique();
     }
 
     #[On('fetchEventContacts')]

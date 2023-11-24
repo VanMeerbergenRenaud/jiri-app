@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Contact;
+use App\Models\Duty;
 use App\Models\Event;
 use App\Models\Project;
 use App\Models\User;
@@ -28,11 +29,7 @@ class DatabaseSeeder extends Seeder
 
         $renaud = User::factory()
             ->has(Event::factory()->count(12))
-            ->has(Project::factory()
-                ->count(12)
-                // add tasks to the project
-
-            )
+            ->has(Project::factory()->count(12))
             ->has(Contact::factory()->count(24))
             ->create([
                 'name' => 'Renaud Vmb',

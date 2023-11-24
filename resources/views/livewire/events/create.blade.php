@@ -129,8 +129,8 @@
                                 {{-- SearchList & Form --}}
                                 <div class="filter__contacts" x-data="{createmode: false}">
 
-                                    <livewire:events.create.search-list :eventId="$event->id" />
-                                    <livewire:events.create.form_project />
+                                    <livewire:events.create.search-list-project :eventId="$event->id" />
+                                    <livewire:events.create.form-project />
 
                                     {{-- Button to create a new contact --}}
                                     <button type="button"
@@ -139,13 +139,12 @@
                                             @click="createmode = true">
                                         Ajouter un projet
                                     </button>
-
                                 </div>
                             </div>
                         </div>
 
                         {{-- Added projects --}}
-                        <livewire:events.create.added-list :eventId="$event->id" />
+                        <livewire:events.create.added-list-project :eventId="$event->id" />
                     </div>
                 </div>
                 <div class="form__submit">

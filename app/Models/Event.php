@@ -80,7 +80,7 @@ class Event extends Model
             ->wherePivot('role', 'evaluator');
     }
 
-    // Retrieve only the jiris of the authenticated user
+    // Retrieve only the events of the authenticated user
     protected static function booted(): void
     {
         static::addGlobalScope(new Scopes\AuthUserScope());

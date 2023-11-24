@@ -262,6 +262,32 @@
                             background-color: white;
                         }
                     }
+
+                    .project-tasks {
+                        label {
+                            display: block;
+                        }
+                        select {
+                            margin-top: 0.875rem;
+                            margin-bottom: 1.25rem;
+                            padding: 0.875rem;
+                            background-color: white;
+                        }
+                    }
+
+                    .project-task {
+                        grid-column: 1/3;
+
+                        label {
+                            display: block;
+                        }
+
+                        button {
+                            padding: 0.75rem 1.5rem;
+                            color: $blue;
+                            text-decoration: underline;
+                        }
+                    }
                 }
             }
 

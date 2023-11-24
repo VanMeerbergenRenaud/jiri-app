@@ -19,14 +19,29 @@
                 </div>
                 {{-- Tasks --}}
                 <div class="project-tasks">
-                    <label for="newprojecttasks">Listes des taches</label>
+                    <label for="newprojecttasks">Listes des tâches</label>
                     <select id="newprojecttasks" wire:model="newprojecttasks">
                         <option value="0">Sélectionner une tâche</option>
-                        @foreach($uniqueTasks as $task)
-                            <option wire:key="{{$task}}" value="{{ $task }}">{{ ucfirst($task) }}</option>
-                        @endforeach
+                        <option value="1"> une tâche</option>
+                        {{--@foreach($tasks as $id => $task)
+                            <option wire:key="{{$id}}" value="{{ $id }}">{{ ucfirst($task) }}</option>
+                        @endforeach--}}
                     </select>
                     @error('newprojecttasks')
+                    <div class="error-message">{{ $message }}</div>
+                    @enderror
+                </div>
+                {{-- Ajouter une tâche --}}
+                <div class="project-task">
+                    <label for="newprojecttask">Ajouter une tâche</label>
+                    <input
+                        type="text"
+                        id="newprojecttask"
+                        wire:model="newprojecttask"
+                        placeholder="Ex : CV"
+                    >
+                    <button type="button">Ajouter</button>
+                    @error('newprojecttask')
                     <div class="error-message">{{ $message }}</div>
                     @enderror
                 </div>

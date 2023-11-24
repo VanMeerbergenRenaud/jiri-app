@@ -110,7 +110,41 @@
                         <h4>Ajouter des projets</h4>
                         <p>Vous pourrez en ajouter encore par la suite sans problème.</p>
 
-                        {{-- Dropdown,... --}}
+                        {{-- Dropdown --}}
+                        <div class="custom__dropdown" x-data="{ open: false }">
+                            {{-- Open button --}}
+                            <button @click="open = true" type="button" class="open-button">
+                                Sélectionner un projet
+                                @include('components.svg.arrow-down')
+                            </button>
+
+                            {{-- Panel --}}
+                            <div x-show="open" class="panel">
+
+                                {{-- Close button --}}
+                                <button @click="open = false" type="button" class="close-button">
+                                    @include('components.svg.cross')
+                                </button>
+
+                                {{-- SearchList & Form --}}
+                                <div class="filter__contacts" x-data="{createmode: false}">
+
+                                    <livewire:events.create.search-list-project :eventId="$event->id" />
+                                    <livewire:events.create.form-project />
+
+                                    {{-- Button to create a new contact --}}
+                                    <button type="button"
+                                            class="add-button"
+                                            x-show="!createmode"
+                                            @click="createmode = true">
+                                        Ajouter un projet
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- Added projects --}}
+                        <livewire:events.create.added-list-project :eventId="$event->id" />
                     </div>
                 </div>
                 <div class="form__submit">

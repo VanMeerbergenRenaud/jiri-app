@@ -10,7 +10,7 @@ class Implementation extends Model
 {
     use HasFactory;
 
-    public function author(): BelongsTo
+    public function contact(): BelongsTo
     {
         return $this->belongsTo(Contact::class);
     }
