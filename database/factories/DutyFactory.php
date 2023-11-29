@@ -18,8 +18,7 @@ class DutyFactory extends Factory
     public function definition(): array
     {
         return [
-            'event_id' => $this->faker->numberBetween(1, 10),
-            'project_id' => $this->faker->numberBetween(1, 10),
+            'duty_id' => Duty::factory(),
         ];
     }
 }

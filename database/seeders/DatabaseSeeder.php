@@ -56,20 +56,12 @@ class DatabaseSeeder extends Seeder
                         $contact->projects()->attach(
                             $user->projects->random(3),
                             [
-                                'event_id' => $event->id,
+                                'duty_id' => $event->id,
                                 'urls' => json_encode([
                                     'github' => 'https://github.com',
                                     'trello' => 'https://trello.com'], JSON_THROW_ON_ERROR),
                             ]
                         );
-                    }
-
-                    if ($role === 'evaluators') {
-                        // on génère un token d'accès pour l'évaluateur et on le stocke dans la table pivot.
-                        $contact->events()->updateExistingPivot(
-                            $event->id, [
-                            'token' => Str::random(32),
-                        ]);
                     }
                 }
             }

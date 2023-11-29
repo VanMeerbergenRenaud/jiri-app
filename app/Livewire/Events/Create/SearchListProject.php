@@ -10,22 +10,9 @@ use Livewire\Component;
 
 class SearchListProject extends Component
 {
-    public $tasks;
-
     public $eventId;
-
     public $projectname = '';
-
-    public function mount() {
-        $this->tasks = $this->getUniqueTasks();
-    }
-
-    public function getUniqueTasks()
-    {
-        return Project::all()->flatMap(function ($project) {
-            return json_decode($project->tasks);
-        })->unique();
-    }
+    public $tasks = [];
 
     #[Computed]
     public function searchList() {
@@ -48,6 +35,16 @@ class SearchListProject extends Component
 
     public function render()
     {
-        return view('livewire.events.create.search-list-project');
+        $this->tasks = $this->getTasks();
+        return view('livewire.events.create.search-list-project', ['tasks' => $this->tasks]);
+    }
+
+    // Define the getTasks method
+    public function getTasks()
+    {
+        // Return only the task link to the specific project
+        return $this->searchList->flatMap(function ($project) {
+            return json_decode($project->tasks);
+        })->unique();
     }
 }

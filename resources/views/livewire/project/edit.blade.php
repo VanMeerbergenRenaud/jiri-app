@@ -17,7 +17,7 @@
 
         <div>
             <label for="category">Category</label>
-            <input type="text" id="category" name="category" value="{{ $project->category }}" required>
+            <input type="text" id="category" name="category" value="{{ $project->tasks }}" required>
             @error('category')
             <p>{{ $message }}</p>
             @enderror
