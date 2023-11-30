@@ -67,4 +67,9 @@ class User extends Authenticatable
     {
         return $this->hasManyThrough(Attendance::class, Event::class);
     }
+
+    public function duties()
+    {
+        return $this->hasMany(Duty::class);
+    }
 }

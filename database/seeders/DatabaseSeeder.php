@@ -8,7 +8,6 @@ use App\Models\Event;
 use App\Models\Project;
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -31,6 +30,7 @@ class DatabaseSeeder extends Seeder
             ->has(Event::factory()->count(12))
             ->has(Project::factory()->count(12))
             ->has(Contact::factory()->count(24))
+            //->has(Duty::factory()->count(15))
             ->create([
                 'name' => 'Renaud Vmb',
                 'email' => 'renaud.vmb@gmail.com',

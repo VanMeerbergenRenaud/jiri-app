@@ -19,6 +19,7 @@
             <div class="mainProfil__content__profil">
                 <div class="mainProfil__content__profil__header">
                     <h4>Profil</h4>
+
                     <a href="#">Editer le profil</a>
                 </div>
                 {{-- Form to edit a profil --}}
@@ -55,7 +56,77 @@
                 </form>
             </div>
             <div class="mainProfil__content__infos">
-                <table>
+                <table class="bilan">
+                    <thead>
+                    <tr>
+                        <th class="bilan__head" colspan="100%">
+                            <h3>Bilan de l’étudiant</h3>
+                            <a href="#">Editer les informations</a>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @php
+                        $testCol = 7;
+                    @endphp
+                    <tr class="bilan__row">
+                        <th class="bilan__row__title">Projets</th>
+                        @for ($i = 1; $i <= $testCol; $i++)
+                            <th>
+                                Projet {{ $i }}
+                            </th>
+                        @endfor
+                        <th class="global">Cote globale</th>
+                        <th class="final">Cote délibée</th>
+                    </tr>
+                    <tr class="bilan__row">
+                        <th class="bilan__row__title">Moyenne des cotes</th>
+                        @for ($i = 1; $i <= $testCol; $i++)
+                            <td>
+                                <span class="note">4</span>
+                                <span>/ 20</span>
+                            </td>
+                        @endfor
+                        {{-- TODO : <td> is the AVG of the result --}}
+                        <td class="global">
+                            <span class="note">4.35</span>
+                            <span>/ 20</span>
+                        </td>
+                        {{-- TODO : cote délibée --}}
+                        <td rowspan="3" class="b-b b-r final">
+                            <span class="note">14.4</span>
+                            <span>/ 20</span>
+                        </td>
+                    </tr>
+                    <tr class="bilan__row">
+                        <th rowspan="2" class="bilan__row__title b-b">Coéfficient de la cote globale</th>
+                        @for ($i = 1; $i <= $testCol; $i++)
+                            <td>
+                                <span class="note">0.2</span>
+                            </td>
+                        @endfor
+                        {{-- TODO : cote globale * les coéficients--}}
+                        <td class="global">
+                            <span class="note">4.25</span>
+                        </td>
+                    </tr>
+                    <tr class="bilan__row">
+                        @for ($i = 1; $i <= $testCol; $i++)
+                            <td class="b-b">
+                                <span class="note">0.35</span>
+                            </td>
+                        @endfor
+                            {{-- TODO : cote globale2 * les coéficients--}}
+                            <td class="b-b global">
+                                <span class="note">4.75</span>
+                                <span>/ 20</span>
+                            </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                {{-- Basic table --}}
+                <table class="infosTable">
                     <thead>
                         <tr>
                             <th class="user-infos" colspan="100%">

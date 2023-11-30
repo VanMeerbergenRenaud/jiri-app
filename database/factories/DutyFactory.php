@@ -18,7 +18,8 @@ class DutyFactory extends Factory
     public function definition(): array
     {
         return [
-            'duty_id' => Duty::factory(),
+            'text' => $this->faker->word,
+            'description' => $this->faker->sentence,
         ];
     }
 }

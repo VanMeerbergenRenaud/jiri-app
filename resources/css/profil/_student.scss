@@ -138,6 +138,10 @@
                 max-width: 900px;
                 overflow-x: scroll;
 
+                th, td {
+                    text-transform: initial;
+                }
+
                 thead {
                     display: table;
                     width: 100%;
@@ -169,7 +173,7 @@
                             position: absolute;
                             top: 0;
                             right: 0;
-                            padding: 1.25rem 1.5rem;
+                            padding: 1.15rem 1.5rem;
                             font-size: 0.85rem;
                             font-weight: 500;
                             color: $blue;
@@ -237,6 +241,88 @@
                                 }
                             }
                         }
+                    }
+                }
+            }
+
+            .bilan {
+                margin: 0 0 2rem 0;
+
+                &__head {
+                    position: relative;
+                    padding: 0 1.5rem;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    font-weight: 500;
+                    border-right: none;
+                    background-color: #F0F1F7;
+
+                    a {
+                        margin-right: -1rem;
+                        padding: 1rem;
+                        font-size: 0.85rem;
+                        font-weight: 500;
+                        color: #6386E3;
+                    }
+                }
+
+                tbody {
+                    tr:nth-child(2n) {
+                        th, td {
+                            background-color: $gray-bg;
+                        }
+                    }
+
+                    th, td {
+                        padding: 1.15rem 1.5rem;
+                    }
+
+                    td {
+                        text-align: center;
+                    }
+
+                    td:last-child {
+                        border-right: 1px solid $gray-500;
+                    }
+
+                    td.b-r {
+                        border-right: none;
+                    }
+                }
+
+                &__row {
+
+                    &:first-of-type {
+                        th {
+                            padding: 1.15rem 2rem;
+                            min-width: 125px;
+                        }
+
+                        .global, .final {
+                            padding: 1.15rem 1.5rem;
+                            min-width: 150px;
+                            background-color: $gray-300;
+                        }
+                    }
+
+                    .global {
+                        position: sticky;
+                        right: 150px;
+                        border-left: 1px solid $gray-500;
+                    }
+
+                    .final {
+                        position: sticky;
+                        right: 0;
+                    }
+
+                    &__title {
+                        position: sticky;
+                        left: 0;
+                        text-align: left;
+                        min-width: 250px;
+                        width: 100%;
                     }
                 }
             }
