@@ -2,8 +2,8 @@
 
 use App\Models\Contact;
 use App\Models\Event;
-use App\Models\Scopes\AuthUserScope;
 use App\Models\User;
+
 use function Pest\Laravel\actingAs;
 
 it('is possible to fetch all the attendances to a Event belonging to the authenticated user', function () {

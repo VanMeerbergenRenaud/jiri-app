@@ -8,6 +8,7 @@ use App\Models\Event;
 use App\Models\Project;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -41,27 +42,31 @@ class DatabaseSeeder extends Seeder
 
         foreach ($users as $user) {
             foreach ($user->events as $event) {
-                $selectedContacts = $user->contacts->random(random_int(2, 10));
-
+                $selectedContacts = $user->contacts->random(random_int(3, 10));
                 foreach ($selectedContacts as $contact) {
-                    $role = random_int(0, 1) ? 'students' : 'evaluators'; // Determine the role for each contact individually
-
+                    $role = random_int(0, 1) ? 'students' : 'evaluators';
                     $event->$role()->attach([
                         $contact->id => [
-                            'role' => str($role)->beforeLast('s'), // Le rôle est stocké dans la table pivot sans le 's' final
-                        ]
+                            'role' => str($role)->beforeLast('s'),
+                        ],
                     ]);
 
                     if ($role === 'students') {
                         $contact->projects()->attach(
-                            $user->projects->random(3),
+                            $user->projects->random(2),
                             [
-                                'duty_id' => $event->id,
+                                'event_id' => $event->id,
                                 'urls' => json_encode([
                                     'github' => 'https://github.com',
                                     'trello' => 'https://trello.com'], JSON_THROW_ON_ERROR),
                             ]
                         );
+                    }
+                    if ($role === 'evaluators') {
+                        //create access token for evaluator
+                        $contact->events()->updateExistingPivot($event->id, [
+                            'token' => Str::random(32),
+                        ]);
                     }
                 }
             }

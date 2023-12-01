@@ -13,7 +13,8 @@ class AddedListProject extends Component
 
     public Collection $projectsList;
 
-    public function mount() {
+    public function mount()
+    {
         $event = Duty::find($this->eventId);
         $this->projectsList = $event ? $event->projects : new Collection();
     }

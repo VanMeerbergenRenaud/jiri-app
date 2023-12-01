@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -12,7 +13,6 @@ return new class extends Migration {
     {
         Schema::table('contacts', function (Blueprint $table) {
             $table->unique(['email', 'user_id']);
-            $table->enum('role', ['student', 'evaluator']);
         });
     }
 
@@ -21,9 +21,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('contacts', function (Blueprint $table) {
-            $table->dropUnique(['email', 'user_id']);
-            $table->dropColumn('role');
-        });
+        //
     }
 };

@@ -3,6 +3,7 @@
 use App\Models\Contact;
 use App\Models\Event;
 use App\Models\User;
+
 use function Pest\Laravel\actingAs;
 
 it('is possible to fetch the students and the evaluators participating to a event', function () {

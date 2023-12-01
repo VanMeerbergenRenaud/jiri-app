@@ -3,11 +3,11 @@
     <p>Contacts ajoutés</p>
     @if(count($contactsList) > 0)
         <ul>
-            @foreach($contactsList as $contact)
-                <li wire:key="{{ $contact->id }}">
-                    <span class="category capitalize">{{ $contact->role ?? 'Neutre' }}</span>
-                    <span class="username capitalize">{{ $contact->name ?? 'Pas de nom' }}</span>
-                    <button type="button" wire:click="removeContact({{ $contact->id }})">
+            @foreach($contactsList as $attendance)
+                <li wire:key="{{ $attendance->id }}">
+                    <span class="category capitalize">{{ $attendance->role ?? 'Neutre' }}</span>
+                    <span class="username capitalize">{{ $attendance->contact->name }}</span>
+                    <button type="button" wire:click="removeContact({{ $attendance->id }})">
                         @include('components.svg.trash2')
                     </button>
                 </li>

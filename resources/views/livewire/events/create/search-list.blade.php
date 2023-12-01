@@ -9,7 +9,7 @@
             placeholder="Chercher un contact à ajouter"
         >
     </label>
-    <div x-data="{showSelectType: false, selectedContactId: null}">
+    <div x-data="{showSelectType: false, selectedContactId: null, selectedRole: null}">
         {{-- List of contacts --}}
         @unless($this->searchList->isEmpty())
             <ol class="filter__contacts__list">
@@ -36,16 +36,15 @@
             <div class="modal" @click="showSelectType = false">
                 <div class="modal__dialog" @click.stop="showSelectType = true">
                     <p class="modal__title">
-                        Quel type de contact souhaitez-vous ajouter ?
+                        Quel type de contact souhaitez-vous ajouter ? <br>
                     </p>
                     {{-- Select to choose the type --}}
                     <div class="modal__select">
                         <label for="role"></label>
-                        <select name="role" id="role" class="mb-6 p-3 bg-white">
+                        <select name="role" id="role" class="mb-6 p-3 bg-white" x-model="selectedRole">
                             <option value="O">Choisissez un type</option>
                             <option value="student">Étudiant</option>
                             <option value="evaluator">Évaluateur</option>
-                            <option value="neutre">Neutre</option>
                         </select>
                     </div>
                     <div class="modal__buttons">
@@ -55,7 +54,7 @@
                         <button class="confirm-button"
                                 @click.stop="showSelectType = false"
                                 type="button"
-                                wire:click="addContact(selectedContactId, selectedEventId)">
+                                wire:click="addContact(selectedContactId, selectedRole)">
                             Confirmer le choix
                         </button>
                     </div>

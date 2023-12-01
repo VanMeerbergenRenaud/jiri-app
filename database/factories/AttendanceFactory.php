@@ -18,8 +18,7 @@ class AttendanceFactory extends Factory
     public function definition(): array
     {
         return [
-            'role' => $this->faker->randomElement(['student', 'evaluator']),
-            'token' => $this->faker->uuid,
+            //
         ];
     }
 }

@@ -10,6 +10,7 @@ use Livewire\Component;
 class FormProject extends Component
 {
     public $tasks;
+
     public $projects;
 
     public int $eventId;

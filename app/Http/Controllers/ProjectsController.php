@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
 use App\Models\Project;
+use Auth;
 use Illuminate\Http\RedirectResponse;
 
 class ProjectsController extends Controller
@@ -24,12 +24,14 @@ class ProjectsController extends Controller
     public function create()
     {
         $project = new Project();
+
         return view('livewire/project/create', compact('project'));
     }
 
     public function show($projectId)
     {
         $project = Project::findOrFail($projectId);
+
         return view('livewire/project/show', compact('project'));
     }
 
@@ -40,7 +42,7 @@ class ProjectsController extends Controller
         return view('livewire/project/edit', compact('project'));
     }
 
-    public function store() : RedirectResponse
+    public function store(): RedirectResponse
     {
         $data = $this->validateProjectData();
 

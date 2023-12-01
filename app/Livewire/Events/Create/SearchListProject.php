@@ -2,8 +2,8 @@
 
 namespace App\Livewire\Events\Create;
 
-use App\Models\Project;
 use App\Models\Event;
+use App\Models\Project;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
@@ -11,13 +11,16 @@ use Livewire\Component;
 class SearchListProject extends Component
 {
     public $eventId;
+
     public $projectname = '';
+
     public $tasks = [];
 
     #[Computed]
-    public function searchList() {
+    public function searchList()
+    {
         return $this->projectname
-            ? Project::where('name', 'like', '%' . $this->projectname . '%')->orderBy('name', 'asc')->get()
+            ? Project::where('name', 'like', '%'.$this->projectname.'%')->orderBy('name', 'asc')->get()
             : new Collection();
     }
 
@@ -25,8 +28,8 @@ class SearchListProject extends Component
     {
         $event = Event::find($this->eventId);
 
-        if (!$event->projects()->where('project_id', $project->id)->exists()) {
-//            dd($event->projects());
+        if (! $event->projects()->where('project_id', $project->id)->exists()) {
+            //            dd($event->projects());
             $event->projects()->attach($project->id);
         }
 
@@ -36,6 +39,7 @@ class SearchListProject extends Component
     public function render()
     {
         $this->tasks = $this->getTasks();
+
         return view('livewire.events.create.search-list-project', ['tasks' => $this->tasks]);
     }
 

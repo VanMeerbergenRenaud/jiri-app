@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Carbon\Carbon;
 
 class Event extends Model
 {
@@ -76,7 +76,7 @@ class Event extends Model
                 'event_id',
                 'contact_id'
             )
-            ->withPivot('role','token')
+            ->withPivot('role', 'token')
             ->wherePivot('role', 'evaluator');
     }
 

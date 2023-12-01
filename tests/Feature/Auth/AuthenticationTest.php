@@ -2,7 +2,9 @@
 
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
-use function Pest\Laravel\{get,post};
+
+use function Pest\Laravel\get;
+use function Pest\Laravel\post;
 
 test('login screen can be rendered', function () {
     get('/login')
@@ -14,7 +16,7 @@ test('users can authenticate using the login screen', function () {
 
     $response = $this->post('/login', [
         'email' => $user->email,
-        'password' => 'password'
+        'password' => 'password',
     ]);
 
     $this->assertAuthenticated();

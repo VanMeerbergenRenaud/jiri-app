@@ -96,7 +96,6 @@
                                             @click="createmode = true">
                                         Ajouter un contact
                                     </button>
-
                                 </div>
                             </div>
                         </div>

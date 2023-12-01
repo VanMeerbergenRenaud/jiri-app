@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+
 use function Pest\Laravel\actingAs;
 
 it('displays a form to create a event', function () {

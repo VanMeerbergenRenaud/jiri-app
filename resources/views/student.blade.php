@@ -56,22 +56,21 @@
                         </div>
                     </form>
                 </div>
-                <div class="globalComment">
+                <form class="globalComment">
                     <div class="sectionHeader">
                         <h4>Commentaire global</h4>
-
                         <a href="#">Editer le profil</a>
                     </div>
-                    <form>
-                        <label>
-                            <textarea
+                    <div>
+                        <label for="globalComment">
+                            <textarea id="globalComment"
                                 x-data="{ resize: () => { $el.style.height = '0.5rem'; $el.style.height = $el.scrollHeight + 'px' } }"
                                 x-init="resize()"
                                 @input="resize()"
                             >{!! $globalComment ?? 'Pas encore de commentaires ajoutés...' !!}</textarea>
                         </label>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
             <div class="mainProfil__content__col2">
                 <table class="bilan">

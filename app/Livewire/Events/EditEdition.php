@@ -8,6 +8,7 @@ use Livewire\Component;
 class EditEdition extends Component
 {
     public $students;
+
     public $evaluators;
 
     public function mount()

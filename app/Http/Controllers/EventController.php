@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contact;
-use Auth;
 use App\Models\Event;
+use Auth;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 
@@ -16,9 +16,9 @@ class EventController extends Controller
 
         $events = Event::orderBy('starting_at', 'asc')->get();
 
-        $upcomingEvents = $events->filter(fn($event) => $event->isUpcoming());
-        $pastEvents = $events->filter(fn($event) => $event->isPast());
-        $currentEvents = $events->filter(fn($event) => $event->isCurrent());
+        $upcomingEvents = $events->filter(fn ($event) => $event->isUpcoming());
+        $pastEvents = $events->filter(fn ($event) => $event->isPast());
+        $currentEvents = $events->filter(fn ($event) => $event->isCurrent());
 
         return view('livewire.pages.events', compact('user', 'events', 'upcomingEvents', 'pastEvents', 'currentEvents'));
     }
@@ -100,7 +100,7 @@ class EventController extends Controller
 
         $event = Event::findOrFail($eventId);
 
-        $students = Contact::where('role', 'student')->get(); // Attention : prendre les contacts de l‘event, pas tout ceux de l'utilisateur
+        $students = Contact::all(); // TODO : Attention : prendre les contacts de l‘event, pas tout ceux de l'utilisateur
 
         return view('livewire/events/edit-edition', compact('user', 'event', 'students'));
     }

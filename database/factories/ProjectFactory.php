@@ -13,13 +13,13 @@ class ProjectFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->words(2,true),
+            'name' => $this->faker->words(2, true),
             'description' => $this->faker->text(),
             'tasks' => json_encode($this->faker->randomElements(
                 [
-                    "Design",
-                    "Integration",
-                    "Wordpress",
+                    'Design',
+                    'Integration',
+                    'Wordpress',
                 ], $this->faker->numberBetween(1, 3)
             )),
             'created_at' => Carbon::now(),

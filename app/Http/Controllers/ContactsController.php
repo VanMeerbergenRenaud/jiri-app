@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
 use App\Models\Contact;
+use Auth;
 use Illuminate\Http\RedirectResponse;
 
 class ContactsController
@@ -17,7 +17,7 @@ class ContactsController
 
     public function index()
     {
-        $contacts = $this->user->contacts()->whereIn('role', ['student', 'evaluator'])->get();
+        $contacts = $this->user->contacts()->get();
 
         $students = $contacts->where('role', 'student');
         $evaluators = $contacts->where('role', 'evaluator');

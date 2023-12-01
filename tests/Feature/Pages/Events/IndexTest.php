@@ -2,8 +2,8 @@
 
 use App\Models\Event;
 use App\Models\User;
+
 use function Pest\Laravel\actingAs;
-use function Pest\Laravel\get;
 
 it('has a events index page accessible to authenticated users only', function () {
     $user = User::factory()
@@ -34,7 +34,7 @@ it('displays only the events of the authenticated user', function () {
         ->assertDontSee($anotherEvent->name);
 });
 
-it('displays the events in the chronological order', function(){
+it('displays the events in the chronological order', function () {
     $user = User::factory()
         ->create();
 

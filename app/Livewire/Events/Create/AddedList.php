@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Events\Create;
 
+use App\Models\Attendance;
 use App\Models\Event;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Attributes\On;
@@ -13,19 +14,10 @@ class AddedList extends Component
 
     public Collection $contactsList;
 
-    public $tasks;
-
-    public function mount() {
-        $event = Event::find($this->eventId);
-        $this->contactsList = $event ? $event->contacts : new Collection();
-        $this->tasks = $this->getUniqueTasks();
-    }
-
-    public function getUniqueTasks()
+    public function mount()
     {
-        return $this->contactsList->flatMap(function ($contact) {
-            return json_decode($contact->tasks);
-        })->unique();
+        $event = Event::find($this->eventId);
+        $this->contactsList = $event->attendances;
     }
 
     #[On('fetchEventContacts')]
@@ -36,13 +28,18 @@ class AddedList extends Component
         $this->contactsList = $event->contacts;
     }
 
-    public function removeContact($contactId)
+    public function removeContact($attendanceId)
     {
         $event = Event::find($this->eventId);
 
-        $event->contacts()->detach($contactId);
+        $attendance = Attendance::find($attendanceId);
 
-        $this->dispatch('fetchEventContacts');
+        if ($attendance) {
+            $event->contacts()->detach($attendance->contact_id);
+            $this->dispatch('fetchEventContacts');
+        } else {
+            dd('hello');
+        }
     }
 
     public function render()
