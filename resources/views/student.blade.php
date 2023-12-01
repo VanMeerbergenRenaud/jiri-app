@@ -16,46 +16,60 @@
             </button>
         </div>
         <div class="mainProfil__content">
-            <div class="mainProfil__content__profil">
-                <div class="mainProfil__content__profil__header">
-                    <h4>Profil</h4>
+            <div class="mainProfil__content__col1">
+                <div class="mainProfil__content__profil">
+                    <div class="sectionHeader">
+                        <h4>Profil</h4>
 
-                    <a href="#">Editer le profil</a>
-                </div>
-                {{-- Form to edit a profil --}}
-                <form action="" method="post" class="mainProfil__content__profil__form">
-                    @csrf
-                    @method('PUT')
+                        <a href="#">Editer le profil</a>
+                    </div>
+                    {{-- Form to edit a profil --}}
+                    <form action="" method="post" class="mainProfil__content__profil__form">
+                        @csrf
+                        @method('PUT')
 
-                    <label for="Photo">Photo</label>
-                    <div class="mainProfil__content__profil__form__photo">
-                        <div>
-                            <img src="{{ asset('img/dominique.png') }}" alt="Photo de l'étudiant">
-                            <button type="button">
-                                @include('components.svg.edit')
-                            </button>
-                        </div>
-                        <span>
+                        <label for="Photo">Photo</label>
+                        <div class="mainProfil__content__profil__form__photo">
+                            <div>
+                                <img src="{{ asset('img/dominique.png') }}" alt="Photo de l'étudiant">
+                                <button type="button">
+                                    @include('components.svg.edit')
+                                </button>
+                            </div>
+                            <span>
                             Accepte les fichiers<br>
                             de type .png et .jpg
                         </span>
+                        </div>
+                        {{-- Nom, prénom, adresse mail, site de référence et compte Github --}}
+                        <div class="mainProfil__content__profil__form__container">
+                            <label for="lastname">Nom</label>
+                            <input type="text" name="lastname" id="lastname" value="{{--{{ $student->firstname }}--}}">
+                            <label for="firstname">Prénom</label>
+                            <input type="text" name="firstname" id="firstname" value="{{--{{ $student->lastname }}--}}">
+                            <label for="mail">Adresse mail</label>
+                            <input type="email" name="mail" id="mail" value="{{--{{ $student->mail }}--}}">
+                            <label for="site">Site de référence</label>
+                            <input type="text" name="site" id="site" value="{{--{{ $student->site }}--}}">
+                            <label for="github">Compte Github</label>
+                            <input type="text" name="github" id="github" value="{{--{{ $student->github }}--}}">
+                        </div>
+                    </form>
+                </div>
+                <div class="globalComment">
+                    <div class="sectionHeader">
+                        <h4>Commentaire global</h4>
+
+                        <a href="#">Editer le profil</a>
                     </div>
-                    {{-- Nom, prénom, adresse mail, site de référence et compte Github --}}
-                    <div class="mainProfil__content__profil__form__container">
-                        <label for="lastname">Nom</label>
-                        <input type="text" name="lastname" id="lastname" value="{{--{{ $student->firstname }}--}}">
-                        <label for="firstname">Prénom</label>
-                        <input type="text" name="firstname" id="firstname" value="{{--{{ $student->lastname }}--}}">
-                        <label for="mail">Adresse mail</label>
-                        <input type="email" name="mail" id="mail" value="{{--{{ $student->mail }}--}}">
-                        <label for="site">Site de référence</label>
-                        <input type="text" name="site" id="site" value="{{--{{ $student->site }}--}}">
-                        <label for="github">Compte Github</label>
-                        <input type="text" name="github" id="github" value="{{--{{ $student->github }}--}}">
-                    </div>
-                </form>
+                    <form>
+                        <p>
+                            La cote finale calculée automatiquement n’est pas forcément la cote finale qui se trouvera dans le bulletin de l’étudiant. En effet, si après le calcul par l’application, les membres du jury s’accordent oralement pour dire que celui-ci a créé une cote artificiellement élevée ou basse par rapport à l’estimation. La cote finale calculée automatiquement n’est pas forcément la cote finale qui se trouvera dans le bulletin de l’étudiant. En effet, si après le calcul par l’application, En effet, si après le calcul par l’application,
+                        </p>
+                    </form>
+                </div>
             </div>
-            <div class="mainProfil__content__infos">
+            <div class="mainProfil__content__col2">
                 <table class="bilan">
                     <thead>
                     <tr>
@@ -124,6 +138,40 @@
                     </tr>
                     </tbody>
                 </table>
+
+                {{-- Comments of jiries --}}
+                <div class="jiriesComment">
+                    <h4>Commentaires des membres du jury</h4>
+                    {{-- List of comments --}}
+                    <ul class="jiriesComment__list">
+                        @for ($i = 1; $i <= 3; $i++)
+                            <li x-data="{ open: false, isSelected: false }" class="jiriesComment__list__item">
+                                <div class="jiriesComment__list__item__infos" :class="{ 'isSelected': isSelected }" @click="open = !open; isSelected = !isSelected">
+                                    <div class="jiriesComment__list__item__infos__evaluator">
+                                        <img src="{{ asset('img/dominique.png') }}" alt="">
+                                        <span>Toon van den boss</span>
+                                    </div>
+                                    <span>@include('components.svg.arrow-down')</span>
+                                </div>
+
+                                {{-- All the ratings & comments for all the projects of a student --}}
+                                <ul x-show="open" x-transition.opacity class="jiriesComment__list__item__commentList">
+                                    @for ($j = 1; $j <= 4; $j++)
+                                        <li class="jiriesComment__list__item__commentList__item">
+                                            <div>
+                                                <h5>Nom du projet</h5>
+                                                <span>11.5 / 20</span>
+                                            </div>
+                                            <p>
+                                                La cote finale calculée automatiquement n’est pas forcément la cote finale qui se trouvera dans le bulletin de ok. La cote finale calculée automatiquement...
+                                            </p>
+                                        </li>
+                                    @endfor
+                                </ul>
+                            </li>
+                        @endfor
+                    </ul>
+                </div>
 
                 {{-- Basic table --}}
                 <table class="infosTable">

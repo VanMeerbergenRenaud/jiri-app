@@ -38,28 +38,28 @@
 
     &__content {
 
+        .sectionHeader {
+            padding: 1.15rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.925rem;
+            font-weight: 500;
+            background-color: $gray-300;
+            border-bottom: $border;
+
+            a {
+                font-size: 0.85rem;
+                color: $blue;
+            }
+        }
+
         &__profil {
             margin-bottom: 2.5rem;
             background-color: $gray-bg;
             border: $border;
             border-radius: 1rem;
             overflow: hidden;
-
-            &__header {
-                padding: 1.15rem 2rem;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                font-size: 0.925rem;
-                font-weight: 500;
-                background-color: $gray-300;
-                border-bottom: $border;
-
-                a {
-                    font-size: 0.85rem;
-                    color: $blue;
-                }
-            }
 
             &__form {
                 padding: 2rem 2rem 2.5rem;
@@ -132,7 +132,17 @@
             }
         }
 
-        &__infos {
+        .globalComment {
+            border-radius: 1rem;
+            overflow: hidden;
+            border: $border;
+
+            p {
+                padding: 1.35rem 1.5rem;
+            }
+        }
+
+        &__col2 {
             table {
                 max-height: max-content;
                 max-width: 900px;
@@ -240,6 +250,92 @@
 
                                 }
                             }
+                        }
+                    }
+                }
+            }
+
+            .jiriesComment {
+                margin-bottom: 2rem;
+                border-radius: 1rem;
+                overflow: hidden;
+                border: $border;
+                max-width: 900px;
+
+                h4 {
+                    padding: 1.25rem 1.75rem;
+                    font-size: 0.85rem;
+                    font-weight: 500;
+                    background-color: $gray-300;
+                    border-bottom: $border;
+                }
+
+                .isSelected {
+                    background-color: $gray-300;
+                }
+
+                &__list {
+                    &__item {
+                        border-bottom: $border;
+
+                        &__infos {
+                            padding: 1rem 2rem;
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            cursor: pointer;
+
+                            &__evaluator {
+                                display: flex;
+                                align-items: center;
+                                gap: 0 1rem;
+
+                                img {
+                                    width: 2rem;
+                                    height: 2rem;
+                                }
+
+                                span {
+                                    font-size: 0.925rem;
+                                    text-transform: capitalize;
+                                }
+                            }
+                        }
+
+                        &__commentList {
+                            display: flex;
+                            flex-direction: row;
+                            border-top: $border;
+                            overflow-x: scroll;
+
+                            &__item {
+                                min-width: 250px;
+
+                                div {
+                                    padding: 1.25rem;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: space-between;
+                                    border-bottom: $border;
+                                    font-size: 0.925rem;
+
+                                    h5 {
+                                        font-weight: 500;
+                                    }
+                                }
+
+                                p {
+                                    padding: 1.25rem 1.75rem 1.5rem 1.25rem;
+                                }
+                            }
+
+                            li + li {
+                                border-left: $border;
+                            }
+                        }
+
+                        &:last-of-type {
+                            border-bottom: none;
                         }
                     }
                 }
