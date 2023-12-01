@@ -44,15 +44,15 @@
                         {{-- Nom, prénom, adresse mail, site de référence et compte Github --}}
                         <div class="mainProfil__content__profil__form__container">
                             <label for="lastname">Nom</label>
-                            <input type="text" name="lastname" id="lastname" value="{{--{{ $student->firstname }}--}}">
+                            <input type="text" name="lastname" id="lastname" value="{{ $student->lastname ?? 'Non renseigné' }}">
                             <label for="firstname">Prénom</label>
-                            <input type="text" name="firstname" id="firstname" value="{{--{{ $student->lastname }}--}}">
+                            <input type="text" name="firstname" id="firstname" value="{{ $student->firstname ?? 'Non renseigné' }}">
                             <label for="mail">Adresse mail</label>
-                            <input type="email" name="mail" id="mail" value="{{--{{ $student->mail }}--}}">
+                            <input type="email" name="mail" id="mail" value="{{ $student->mail ?? 'Non renseigné' }}">
                             <label for="site">Site de référence</label>
-                            <input type="text" name="site" id="site" value="{{--{{ $student->site }}--}}">
+                            <input type="text" name="site" id="site" value="{{ $student->site ?? 'Non renseigné' }}">
                             <label for="github">Compte Github</label>
-                            <input type="text" name="github" id="github" value="{{--{{ $student->github }}--}}">
+                            <input type="text" name="github" id="github" value="{{ $student->github ?? 'Non renseigné' }}">
                         </div>
                     </form>
                 </div>
@@ -63,9 +63,13 @@
                         <a href="#">Editer le profil</a>
                     </div>
                     <form>
-                        <p>
-                            La cote finale calculée automatiquement n’est pas forcément la cote finale qui se trouvera dans le bulletin de l’étudiant. En effet, si après le calcul par l’application, les membres du jury s’accordent oralement pour dire que celui-ci a créé une cote artificiellement élevée ou basse par rapport à l’estimation. La cote finale calculée automatiquement n’est pas forcément la cote finale qui se trouvera dans le bulletin de l’étudiant. En effet, si après le calcul par l’application, En effet, si après le calcul par l’application,
-                        </p>
+                        <label>
+                            <textarea
+                                x-data="{ resize: () => { $el.style.height = '0.5rem'; $el.style.height = $el.scrollHeight + 'px' } }"
+                                x-init="resize()"
+                                @input="resize()"
+                            >{!! $globalComment ?? 'Pas encore de commentaires ajoutés...' !!}</textarea>
+                        </label>
                     </form>
                 </div>
             </div>
