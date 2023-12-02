@@ -19,13 +19,6 @@
         <!-- Page Navigation -->
         @include('layouts.navigation')
 
-        <!-- Page Heading -->
-        @if (isset($header))
-            <header>
-                {{ $header }}
-            </header>
-        @endif
-
         <!-- Page Content -->
         {{ $slot }}
 

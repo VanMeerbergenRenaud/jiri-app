@@ -22,7 +22,7 @@ class ContactsController
         $students = $contacts->where('role', 'student');
         $evaluators = $contacts->where('role', 'evaluator');
 
-        return view('livewire.pages/contacts', ['user' => $this->user, 'contacts' => $contacts, 'students' => $students, 'evaluators' => $evaluators]);
+        return view('livewire/pages/contacts', ['user' => $this->user, 'contacts' => $contacts, 'students' => $students, 'evaluators' => $evaluators]);
     }
 
     public function create()
