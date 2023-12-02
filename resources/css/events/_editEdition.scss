@@ -141,7 +141,18 @@
                 }
             }
 
+            .emptyRow {
+                td {
+                    padding: 1rem;
+                    text-transform: initial;
+                }
+            }
+
             &__row3 {
+                position: sticky;
+                bottom: 0;
+                left: 0;
+
                 .addButton {
                     display: flex;
 

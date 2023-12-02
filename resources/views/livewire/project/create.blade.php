@@ -8,10 +8,10 @@
         @error('name')
         <p>{{ $message }}</p>
         @enderror
-        <label for="category">Category:</label><br>
-        <input type="text" id="category" name="category" value="{{ old('category') }}"><br>
+        <label for="tasks">Tasks:</label><br>
+        <input type="text" id="tasks" name="tasks" value="{{ json_encode(["$project->tasks"]) }}"><br>
         {{-- Error if not correct --}}
-        @error('category')
+        @error('task')
         <p>{{ $message }}</p>
         @enderror
         <label for="description">Description:</label><br>

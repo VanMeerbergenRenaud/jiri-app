@@ -42,7 +42,7 @@
                     <div class="modal__select">
                         <label for="role"></label>
                         <select name="role" id="role" class="mb-6 p-3 bg-white" x-model="selectedRole">
-                            <option value="O">Choisissez un type</option>
+                            <option value="" disabled selected>Choisissez un type</option>
                             <option value="student">Étudiant</option>
                             <option value="evaluator">Évaluateur</option>
                         </select>

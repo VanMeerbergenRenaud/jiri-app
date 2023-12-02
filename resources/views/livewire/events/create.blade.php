@@ -101,7 +101,7 @@
                         </div>
 
                         {{-- Added contacts --}}
-                        <livewire:events.create.added-list :eventId="$event->id" />
+{{--                        <livewire:events.create.added-list :eventId="$event->id" />--}}
                     </div>
 
                     {{-- Label & select to create a project in the database --}}
@@ -143,7 +143,7 @@
                         </div>
 
                         {{-- Added projects --}}
-                        <livewire:events.create.added-list-project :eventId="$event->id" />
+{{--                        <livewire:events.create.added-list-project :eventId="$event->id" />--}}
                     </div>
                 </div>
                 <div class="form__submit">

@@ -17,9 +17,14 @@ class EditEdition extends Component
         $this->evaluators = Contact::where('role', 'evaluators')->get();
     }
 
+    public function addStudent()
+    {
+        $this->students[] = new Contact();
+    }
+
     public function save(Contact $student)
     {
-        // update the information of the student to the contacts table
+        $student->save();
     }
 
     public function render()

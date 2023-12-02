@@ -75,8 +75,8 @@ class ProjectsController extends Controller
     {
         return request()->validate([
             'name' => 'required',
-            'category' => 'required',
             'description' => 'required',
+            'tasks' => 'required',
         ]);
     }
 }

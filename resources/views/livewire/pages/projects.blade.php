@@ -15,7 +15,7 @@
             <tr class="border px-4 py-2">
                 <th class="px-4 py-2 border">#</th>
                 <th class="px-4 py-2">Nom</th>
-                <th class="px-4 py-2 border">Category</th>
+                <th class="px-4 py-2 border">Tâches</th>
                 <th class="px-4 py-2">Description</th>
                 <th class="px-4 py-2 border">Edit</th>
                 <th class="px-4 py-2">Delete</th>

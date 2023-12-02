@@ -38,7 +38,7 @@ class AddedList extends Component
             $event->contacts()->detach($attendance->contact_id);
             $this->dispatch('fetchEventContacts');
         } else {
-            dd('hello');
+            dd('error with the deletion of the attendance');
         }
     }
 

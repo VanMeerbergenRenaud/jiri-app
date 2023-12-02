@@ -100,7 +100,7 @@ class EventController extends Controller
 
         $event = Event::findOrFail($eventId);
 
-        $students = Contact::all(); // TODO : Attention : prendre les contacts de l‘event, pas tout ceux de l'utilisateur
+        $students = $event->contacts()->get();
 
         return view('livewire/events/edit-edition', compact('user', 'event', 'students'));
     }

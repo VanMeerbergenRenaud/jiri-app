@@ -21,8 +21,8 @@
                 <div class="project-tasks">
                     <label for="newprojecttasks">Listes des tâches</label>
                     <select id="newprojecttasks" wire:model="newprojecttasks">
-                        <option value="0">Sélectionner une tâche</option>
-                        <option value="1"> une tâche</option>
+                        <option value="0" disabled selected>Sélectionner une tâche</option>
+                        <option value="1">Une tâche</option>
                         {{--@foreach($tasks as $id => $task)
                             <option wire:key="{{$id}}" value="{{ $id }}">{{ ucfirst($task) }}</option>
                         @endforeach--}}

@@ -16,9 +16,18 @@
         </div>
 
         <div>
-            <label for="category">Category</label>
-            <input type="text" id="category" name="category" value="{{ $project->tasks }}" required>
-            @error('category')
+            {{-- List the tasks that exist in the database --}}
+            <label for="tasks">Tasks:</label><br>
+            <input type="text" id="tasks" name="tasks" value="{{ $project->tasks }}"><br>
+
+            {{-- TODO: Add a task to the project --}}
+            {{--<form>
+                <label for="taskAdd">Task</label>
+                <input type="text" id="taskAdd" name="taskAdd">
+                <button type="button">Add the task</button>
+            </form>--}}
+            {{-- Error if not correct --}}
+            @error('task')
             <p>{{ $message }}</p>
             @enderror
         </div>
