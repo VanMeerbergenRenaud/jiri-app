@@ -6,6 +6,9 @@ Jiri est une application web conçue pour simplifier et améliorer le processus 
 pour les projets des étudiants. Elle offre un moyen efficace pour les jurés externes et les professeurs
 d'évaluer et de noter le travail des étudiants, tout en facilitant le processus global du jury.
 
+## Maquette XD 🎨
+[Voir la maquette de design du projet Jiri](https://xd.adobe.com/view/dd388c92-53ab-407b-9e69-4056ba7d9f75-886b/)
+
 ### Table des matières 📚
 1. [Contexte](#contexte)
 2. [Rôles](#rôles)
