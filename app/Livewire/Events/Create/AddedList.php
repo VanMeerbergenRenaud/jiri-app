@@ -12,34 +12,25 @@ class AddedList extends Component
 {
     public $eventId;
 
-    public Collection $contactsList;
+    public Collection $attendanceList;
 
     public function mount()
     {
-        $event = Event::find($this->eventId);
-        $this->contactsList = $event->attendances;
+        $this->fetchEventContacts();
     }
 
     #[On('fetchEventContacts')]
     public function fetchEventContacts()
     {
         $event = Event::find($this->eventId);
-
-        $this->contactsList = $event->contacts;
+        $this->attendanceList = $event->attendances;
     }
 
-    public function removeContact($attendanceId)
+    public function removeContact(Attendance $attendance)
     {
-        $event = Event::find($this->eventId);
+        $attendance->delete();
 
-        $attendance = Attendance::find($attendanceId);
-
-        if ($attendance) {
-            $event->contacts()->detach($attendance->contact_id);
-            $this->dispatch('fetchEventContacts');
-        } else {
-            dd('error with the deletion of the attendance');
-        }
+        $this->dispatch('fetchEventContacts');
     }
 
     public function render()

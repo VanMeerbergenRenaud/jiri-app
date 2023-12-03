@@ -24,9 +24,11 @@ class Event extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function implementations(): HasMany
+    public function events(): BelongsToMany
     {
-        return $this->hasMany(Implementation::class);
+        return $this
+            ->belongsToMany(Event::class, 'attendances', 'contact_id', 'event_id')
+            ->withPivot(['role', 'token']);
     }
 
     public function projects(): BelongsToMany
@@ -42,6 +44,11 @@ class Event extends Model
     public function attendances(): HasMany
     {
         return $this->hasMany(Attendance::class);
+    }
+
+    public function implementations(): HasMany
+    {
+        return $this->hasMany(Implementation::class);
     }
 
     public function contacts(): BelongsToMany

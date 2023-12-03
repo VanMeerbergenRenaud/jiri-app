@@ -1,9 +1,9 @@
 {{-- AddedList of contacts --}}
 <div class="form__component__added">
     <p>Contacts ajoutés</p>
-    @if(count($contactsList) > 0)
+    @if(count($attendanceList) > 0)
         <ul>
-            @foreach($contactsList as $attendance)
+            @foreach($attendanceList as $attendance)
                 <li wire:key="{{ $attendance->id }}">
                     <span class="category capitalize">{{ $attendance->role ?? 'Neutre' }}</span>
                     <span class="username capitalize">{{ $attendance->contact->name }}</span>

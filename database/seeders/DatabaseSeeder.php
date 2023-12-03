@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Attendance;
 use App\Models\Contact;
-use App\Models\Duty;
 use App\Models\Event;
 use App\Models\Project;
 use App\Models\User;
@@ -31,7 +31,6 @@ class DatabaseSeeder extends Seeder
             ->has(Event::factory()->count(12))
             ->has(Project::factory()->count(12))
             ->has(Contact::factory()->count(24))
-            //->has(Duty::factory()->count(15))
             ->create([
                 'name' => 'Renaud Vmb',
                 'email' => 'renaud.vmb@gmail.com',
@@ -63,7 +62,6 @@ class DatabaseSeeder extends Seeder
                         );
                     }
                     if ($role === 'evaluators') {
-                        //create access token for evaluator
                         $contact->events()->updateExistingPivot($event->id, [
                             'token' => Str::random(32),
                         ]);

@@ -30,6 +30,11 @@ class Contact extends Model
             ->withPivot(['role', 'token']);
     }
 
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class);
+    }
+
     public function projects(): BelongsToMany
     {
         return $this
