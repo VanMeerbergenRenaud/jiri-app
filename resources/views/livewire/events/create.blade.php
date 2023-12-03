@@ -147,7 +147,7 @@
                     </div>
                 </div>
                 <div class="form__submit">
-                    <a href="{{ route('events.index') }}" class="button">Annuler</a>
+                    <a href="{{ route('events.index') }}" wire:navigate class="button">Annuler</a>
                     <button class="button button--classic" type="submit">Créer</button>
                 </div>
             </form>

@@ -134,6 +134,7 @@
         }
 
         .globalComment {
+            margin-bottom: 2.5rem;
             border-radius: 1rem;
             overflow: hidden;
             border: $border;
@@ -456,6 +457,10 @@
             gap: 0 2rem;
 
             &__profil {
+                .globalComment {
+                    margin-bottom: 0;
+                }
+
                 &__form {
                     &__container {
                         display: flex;

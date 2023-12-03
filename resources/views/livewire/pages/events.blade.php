@@ -5,7 +5,7 @@
                 :title="'Bonjour ' . $user->name"
                 :message="'Découvrez la liste des diverses épreuves créées.'"
             />
-            <a href="{{ route('events.create') }}" class="ml-8 button--classic">Créer une nouvelle épreuve</a>
+            <a href="{{ route('events.create') }}" wire:navigate class="ml-8 button--classic">Créer une nouvelle épreuve</a>
         </div>
         {{-- Liste des épreuves --}}
         <div class="events">
@@ -13,7 +13,7 @@
                 Liste des épreuves
                 <div class="flex-center empty">
                     <p>Aucune épreuve n’a encore été créée jusqu’à présent.</p>
-                    <a href="{{ route('events.create') }}" class="underline-blue">Créer une première épreuve</a>
+                    <a href="{{ route('events.create') }}" wire:navigate class="underline-blue">Créer une première épreuve</a>
                 </div>
             @else
                 @if (!$pastEvents->isEmpty())

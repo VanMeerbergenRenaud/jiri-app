@@ -3,31 +3,23 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
-                <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-breeze.application-logo class="block h-9 w-auto fill-current text-gray-800" />
-                    </a>
-                </div>
-
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-breeze.nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                    {{-- Logo --}}
+                    <x-breeze.nav-link :href="route('dashboard')" wire:navigate :active="request()->routeIs('dashboard')" class="flex gap-2 items-center mr-2">
+                        <x-breeze.application-logo class="block h-9 w-auto fill-current" />
+                        <span class="font-semibold text-gray-700">Jiri.app</span>
                     </x-breeze.nav-link>
-                    <x-breeze.nav-link :href="route('welcome')" :active="request()->routeIs('welcome')">
-                        {{ __('Welcome') }}
+                    <x-breeze.nav-link :href="route('events.index')" wire:navigate :active="request()->routeIs('events.index')">
+                        {{ __('Épreuves') }}
                     </x-breeze.nav-link>
-                    <x-breeze.nav-link :href="route('events.index')" :active="request()->routeIs('events.index')">
-                        {{ __('Events') }}
-                    </x-breeze.nav-link>
-                    <x-breeze.nav-link :href="route('contacts.index')" :active="request()->routeIs('contacts.index')">
+                    <x-breeze.nav-link :href="route('contacts.index')" wire:navigate :active="request()->routeIs('contacts.index')">
                         {{ __('Contacts') }}
                     </x-breeze.nav-link>
-                    <x-breeze.nav-link :href="route('projects.index')" :active="request()->routeIs('projects.index')">
+                    <x-breeze.nav-link :href="route('projects.index')" wire:navigate :active="request()->routeIs('projects.index')">
                         {{ __('Projets') }}
                     </x-breeze.nav-link>
-                    <x-breeze.nav-link :href="route('student.index')" :active="request()->routeIs('student.index')">
+                    <x-breeze.nav-link :href="route('student.index')" wire:navigate :active="request()->routeIs('student.index')">
                         {{ __('Student Profil') }}
                     </x-breeze.nav-link>
                 </div>
@@ -51,7 +43,7 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-breeze.dropdown-link :href="route('profile.edit')">
+                        <x-breeze.dropdown-link :href="route('profile.edit')" wire:navigate>
                             {{ __('Profile') }}
                         </x-breeze.dropdown-link>
 
@@ -84,11 +76,11 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-breeze.responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+            <x-breeze.responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
                 {{ __('Dashboard') }}
             </x-breeze.responsive-nav-link>
-            <x-breeze.responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('welcome')">
-                {{ __('Welcome') }}
+            <x-breeze.responsive-nav-link :href="route('profile.edit')" :active="request()->routeIs('profile.edit')" wire:navigate>
+                {{ __('Profil') }}
             </x-breeze.responsive-nav-link>
         </div>
 
@@ -102,7 +94,7 @@
             @endif
 
             <div class="mt-3 space-y-1">
-                <x-breeze.responsive-nav-link :href="route('profile.edit')">
+                <x-breeze.responsive-nav-link :href="route('profile.edit')" wire:navigate>
                     {{ __('Profile') }}
                 </x-breeze.responsive-nav-link>
 

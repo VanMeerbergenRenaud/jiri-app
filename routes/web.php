@@ -26,13 +26,13 @@ Route::get('/start', function () {
 })->name('start');
 
 /* Home auth page */
-Route::get('/', [DashboardController::class, 'index'])
+Route::get('/', [WelcomeController::class, 'index'])
     ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+    ->name('welcome');
 
 Route::middleware('auth')->group(function () {
-    /* Welcome page */
-    Route::get('/welcome', [WelcomeController::class, 'index'])->name('welcome');
+    /* Dashboard page */
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     /* Profile CRUD */
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -13,7 +13,6 @@
         @vite(['resources/css/app.scss'])
     </head>
     <body>
-        <x-app-layout>
             <main class="mainWelcome">
                 <div class="flex-center welcome">
                     <div class="flex-center welcome__intro">
@@ -32,6 +31,5 @@
                     </div>
                 </div>
             </main>
-        </x-app-layout>
     </body>
 </html>

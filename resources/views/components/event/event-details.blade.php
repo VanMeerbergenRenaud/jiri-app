@@ -33,17 +33,17 @@
     </div>
     {{-- Liens : Édition, Voir, Non disponible, Éditer, Supprimer --}}
     <div class="link" x-data="{ showModal: false }">
-        <a href="{{ route('events.editEdition', ['event' => $event]) }}" class="link__edition">
+        <a href="{{ route('events.editEdition', ['event' => $event]) }}" wire:navigate class="link__edition">
             Édition des informations
         </a>
 
         @if(now() >= $event->starting_at)
-            <a href="{{ route('events.show', ['event' => $event]) }}" class="link__see">Voir</a>
+            <a href="{{ route('events.show', ['event' => $event]) }}" wire:navigate class="link__see">Voir</a>
         @else
             <button type="button" class="link__unavailable">Non disponible</button>
         @endif
 
-        <a href="{{ route('events.edit', ['event' => $event]) }}" class="link__edit">@include('components.svg.edit')</a>
+        <a href="{{ route('events.edit', ['event' => $event]) }}" wire:navigate class="link__edit">@include('components.svg.edit')</a>
 
         <button @click="showModal = !showModal" class="link__delete">
             @include('components.svg.trash')
