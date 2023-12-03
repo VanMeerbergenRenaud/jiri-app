@@ -1,13 +1,13 @@
 {{-- AddedList of contacts --}}
 <div class="form__component__added">
     <p>Projets ajoutés</p>
-    @if(count($projectsList) > 0)
+    @if(count($dutiesList) > 0)
         <ul>
-            @foreach($projectsList as $project)
-                <li wire:key="{{ $project->id }}">
-                    <span class="username capitalize">{{ $project->name ?? 'Pas de nom' }}</span>
-                    <span class="username capitalize">{{ $project->tasks ?? 'Pas de catégorie' }}</span>
-                    <button type="button" wire:click="removeContact({{ $project->id }})">
+            @foreach($dutiesList as $duty)
+                <li wire:key="{{ $duty->id }}">
+                    <span class="category capitalize">{{ $duty->name ?? 'Pas de nom' }}</span>
+                    <span class="username capitalize">{{ $duty->tasks ?? 'Pas de tâches' }}</span>
+                    <button type="button" wire:click="removeContact({{ $duty->id }})">
                         @include('components.svg.trash2')
                     </button>
                 </li>

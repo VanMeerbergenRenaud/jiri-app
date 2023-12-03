@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Duty;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Carbon;
 
 /**
  * @extends Factory<Duty>
@@ -18,8 +19,12 @@ class DutyFactory extends Factory
     public function definition(): array
     {
         return [
-            'text' => $this->faker->word,
-            'description' => $this->faker->sentence,
+            'event_id' => $this->faker->numberBetween(1, 20),
+            'project_id' => $this->faker->numberBetween(1, 10),
+            'name' => $this->faker->word(),
+            'tasks' => $this->faker->words(3, true),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
         ];
     }
 }

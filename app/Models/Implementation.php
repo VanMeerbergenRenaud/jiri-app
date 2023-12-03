@@ -10,14 +10,14 @@ class Implementation extends Model
 {
     use HasFactory;
 
-    public function contact(): BelongsTo
-    {
-        return $this->belongsTo(Contact::class);
-    }
-
     public function event(): BelongsTo
     {
         return $this->belongsTo(Event::class);
+    }
+
+    public function contact(): BelongsTo
+    {
+        return $this->belongsTo(Contact::class);
     }
 
     public function project(): BelongsTo

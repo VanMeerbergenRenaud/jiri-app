@@ -10,7 +10,11 @@ class Attendance extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['contact_id', 'event_id', 'role'];
+    protected $fillable = [
+        'role',
+        'contact_id',
+        'event_id'
+    ];
 
     public function event(): BelongsTo
     {

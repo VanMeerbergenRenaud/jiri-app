@@ -35,6 +35,9 @@
                 .typeSearch {
                     padding: 0.75rem 3.5rem 0.75rem;
                     border-radius: 2rem;
+                    background-color: transparent;
+                    border: $border;
+                    font-size: 0.9rem;
                 }
             }
         }
@@ -55,7 +58,7 @@
                 }
 
                 .photo {
-                    min-width: 150px;
+                    min-width: 175px;
                 }
 
                 th:nth-last-child(1), th:nth-last-of-type(2) {

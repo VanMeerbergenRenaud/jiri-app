@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Events\Create;
 
+use App\Models\Duty;
 use App\Models\Event;
 use App\Models\Project;
 use Illuminate\Database\Eloquent\Collection;
@@ -24,16 +25,30 @@ class SearchListProject extends Component
             : new Collection();
     }
 
-    public function addProject(Project $project)
+    public function addDuty($projectId)
     {
         $event = Event::find($this->eventId);
+        $project = Project::find($projectId);
 
-        if (! $event->projects()->where('project_id', $project->id)->exists()) {
-            //            dd($event->projects());
-            $event->projects()->attach($project->id);
+        if (!$event->duties()->where('project_id', $project->id)->exists()) {
+            $duty = new Duty();
+            $duty->name = $project->name;
+            $duty->tasks = $project->tasks;
+            $duty->event_id = $event->id;
+            $duty->project_id = $project->id;
+            $duty->user_id = auth()->user()->id;
+            $duty->save();
         }
 
         $this->dispatch('fetchEventProjects');
+    }
+
+    public function getTasks()
+    {
+        // Return only the task link to the specific project
+        return $this->searchList->flatMap(function ($project) {
+            return json_decode($project->tasks);
+        })->unique();
     }
 
     public function render()
@@ -41,14 +56,5 @@ class SearchListProject extends Component
         $this->tasks = $this->getTasks();
 
         return view('livewire.events.create.search-list-project', ['tasks' => $this->tasks]);
-    }
-
-    // Define the getTasks method
-    public function getTasks()
-    {
-        // Return only the task link to the specific project
-        return $this->searchList->flatMap(function ($project) {
-            return json_decode($project->tasks);
-        })->unique();
     }
 }

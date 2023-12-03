@@ -19,7 +19,7 @@
                         @foreach($tasks as $id => $task)
                             <span wire:key="{{$id}}">{{ ucfirst($task) }}</span>
                         @endforeach
-                        <button type="button" wire:click="addProject({{ $project->id }}, {{ $eventId }})">
+                        <button type="button" wire:click="addDuty({{ $project->id }})">
                             Ajouter
                         </button>
                     </li>

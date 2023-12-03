@@ -19,7 +19,8 @@ class AttendanceFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => $this->faker->uuid,
+            'event_id' => $this->faker->numberBetween(1, 20),
+            'contact_id' => $this->faker->numberBetween(1, 10),
             'role' => $this->faker->word,
             'token' => $this->faker->word,
             'created_at' => Carbon::now(),

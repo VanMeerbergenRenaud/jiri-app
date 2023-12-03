@@ -2,7 +2,9 @@
 
 namespace App\Livewire\Events\Create;
 
+use App\Models\Attendance;
 use App\Models\Duty;
+use App\Models\Event;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -11,27 +13,23 @@ class AddedListProject extends Component
 {
     public $eventId;
 
-    public Collection $projectsList;
+    public Collection $dutiesList;
 
     public function mount()
     {
-        $event = Duty::find($this->eventId);
-        $this->projectsList = $event ? $event->projects : new Collection();
+        $this->fetchEventProjects();
     }
 
     #[On('fetchEventProjects')]
     public function fetchEventProjects()
     {
-        $event = Duty::find($this->eventId);
-
-        $this->projectsList = $event->projects;
+        $event = Event::find($this->eventId);
+        $this->dutiesList = $event->duties;
     }
 
-    public function removeProject($projectId)
+    public function removeContact(Duty $duty)
     {
-        $event = Duty::find($this->eventId);
-
-        $event->projects()->detach($projectId);
+        $duty->delete();
 
         $this->dispatch('fetchEventProjects');
     }

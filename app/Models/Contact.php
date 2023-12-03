@@ -30,16 +30,16 @@ class Contact extends Model
             ->withPivot(['role', 'token']);
     }
 
-    public function attendances()
-    {
-        return $this->hasMany(Attendance::class);
-    }
-
     public function projects(): BelongsToMany
     {
         return $this
             ->belongsToMany(Project::class, 'implementations', 'contact_id', 'project_id')
             ->withPivot(['urls', 'scores', 'tasks']);
+    }
+
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class);
     }
 
     public function implementations(): HasMany
