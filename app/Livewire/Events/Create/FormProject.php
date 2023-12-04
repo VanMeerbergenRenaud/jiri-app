@@ -18,8 +18,7 @@ class FormProject extends Component
     #[Rule('required')]
     public $newprojectname;
 
-    #[Rule('required')]
-    public $newprojecttasks;
+    public $newprojecttasks = [];
 
     public $newprojecttask;
 
@@ -45,7 +44,7 @@ class FormProject extends Component
         $user->projects()->create([
             'name' => $this->newprojectname,
             'description' => 'Some description',
-            'tasks' => json_encode($this->newprojecttasks),
+            'tasks' => json_encode([$this->newprojecttasks]),
             'task' => $this->newprojecttask,
         ]);
 

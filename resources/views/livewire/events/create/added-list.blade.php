@@ -6,7 +6,7 @@
             @foreach($attendanceList as $attendance)
                 <li wire:key="{{ $attendance->id }}">
                     <span class="category capitalize">{{ $attendance->role ?? 'Neutre' }}</span>
-                    <span class="username capitalize">{{ $attendance->contact->name }}</span>
+                    <span class="username capitalize">{{ $attendance->contact->name ?? 'NTM' }}</span>
                     <button type="button" wire:click="removeContact({{ $attendance->id }})">
                         @include('components.svg.trash2')
                     </button>

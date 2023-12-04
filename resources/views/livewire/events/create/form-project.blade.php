@@ -25,13 +25,13 @@
                             @foreach($tasks as $id => $task)
                                 <li wire:key="{{$id}}">
                                     <label for="newprojecttasks-{{ $id }}">
-                                        <input type="checkbox" name="{{ $task }}" id="newprojecttasks-{{ $id }}" wire:model="newprojecttasks-{{ $id }}">
+                                        <input type="checkbox" name="newprojecttasks[]" value="{{ $task }}" id="newprojecttasks-{{ $id }}" wire:model="newprojecttasks.{{ $id }}">
                                         {{ ucfirst($task) }}
                                     </label>
                                 </li>
                             @endforeach
                         @else
-                            <p>Aucune tâche n'est associée à ce projet.</p>
+                            <p class="mt-6">Aucune tâche n'est associée à ce projet.</p>
                         @endif
                     </ul>
                     @error('newprojecttasks')

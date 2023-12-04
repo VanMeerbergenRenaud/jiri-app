@@ -32,7 +32,6 @@ class DatabaseSeeder extends Seeder
             ->has(Event::factory()->count(20))
             ->has(Project::factory()->count(8))
             ->has(Contact::factory()->count(32))
-            ->has(Attendance::factory()->count(20))
             ->has(Duty::factory()->count(40))
             ->create([
                 'name' => 'Renaud Vmb',
@@ -42,11 +41,19 @@ class DatabaseSeeder extends Seeder
 
         $users = collect([$dominique, $renaud]);
 
+        /*Attendance::factory()
+            ->count(1)
+            ->create([
+                'event_id' => 3,
+                'contact_id' => 1,
+            ]);*/
+
         foreach ($users as $user) {
             foreach ($user->events as $event) {
-                $selectedContacts = $user->contacts->random(random_int(3, 10));
+                $selectedContacts = $user->contacts;
                 foreach ($selectedContacts as $contact) {
                     $role = random_int(0, 1) ? 'students' : 'evaluators';
+
                     $event->$role()->attach([
                         $contact->id => [
                             'role' => str($role)->beforeLast('s'),
@@ -64,6 +71,7 @@ class DatabaseSeeder extends Seeder
                             ]
                         );
                     }
+
                     if ($role === 'evaluators') {
                         //create access token for evaluator
                         $contact->events()->updateExistingPivot($event->id, [
