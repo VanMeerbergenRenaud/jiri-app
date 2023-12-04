@@ -15,10 +15,19 @@
             <ol class="filter__contacts__list">
                 @foreach($this->searchList as $project)
                     <li class="filter__contacts__list__item" wire:key="{{$project->id}}">
-                        <span class="capitalize">{{ ucfirst($project->name) }}</span>
-                        @foreach($tasks as $id => $task)
-                            <span wire:key="{{$id}}">{{ ucfirst($task) }}</span>
-                        @endforeach
+                        <span class="capitalize projectName">{{ ucfirst($project->name) }}</span>
+                        <div class="projectTasks">
+                            @php
+                                $tasks = json_decode($project->tasks, true);
+                            @endphp
+                            @if(is_array($tasks))
+                                @foreach($tasks as $id => $task)
+                                    <span wire:key="{{$id}}">{{ ucfirst($task) }}</span>
+                                @endforeach
+                            @else
+                                <span>Aucune tâche n'est associée à ce projet.</span>
+                            @endif
+                        </div>
                         <button type="button" wire:click="addDuty({{ $project->id }})">
                             Ajouter
                         </button>

@@ -164,8 +164,15 @@
                         align-items: center;
                         justify-content: space-between;
 
-                        span {
+                        .projectName {
+                            min-width: 200px;
+                        }
 
+                        .projectTasks {
+                            width: 100%;
+                            display: flex;
+                            align-items: center;
+                            gap: 0 1rem;
                         }
 
                         button {
@@ -264,14 +271,24 @@
                     }
 
                     .project-tasks {
-                        label {
-                            display: block;
-                        }
-                        select {
-                            margin-top: 0.875rem;
-                            margin-bottom: 1.25rem;
-                            padding: 0.875rem;
-                            background-color: white;
+                        ul {
+                            display: flex;
+                            align-items: center;
+                            gap: 0 1rem;
+
+                            li{
+                                margin-top: 1.5rem;
+                                display: flex;
+                                align-items: center;
+                                gap: 0 0.5rem;
+
+                                label {
+                                    input {
+                                        margin: 0;
+                                        min-width: auto;
+                                    }
+                                }
+                            }
                         }
                     }
 

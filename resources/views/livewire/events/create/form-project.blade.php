@@ -20,13 +20,20 @@
                 {{-- Tasks --}}
                 <div class="project-tasks">
                     <label for="newprojecttasks">Listes des tâches</label>
-                    <select id="newprojecttasks" wire:model="newprojecttasks">
-                        <option>Sélectionner une tâche</option>
-                        <option value="1">Une tâche</option>
-                        {{--@foreach($tasks as $id => $task)
-                            <option wire:key="{{$id}}" value="{{ $id }}">{{ ucfirst($task) }}</option>
-                        @endforeach--}}
-                    </select>
+                    <ul id="newprojecttasks" wire:model="newprojecttasks">
+                        @if(!empty($tasks))
+                            @foreach($tasks as $id => $task)
+                                <li wire:key="{{$id}}">
+                                    <label for="newprojecttasks-{{ $id }}">
+                                        <input type="checkbox" name="{{ $task }}" id="newprojecttasks-{{ $id }}" wire:model="newprojecttasks-{{ $id }}">
+                                        {{ ucfirst($task) }}
+                                    </label>
+                                </li>
+                            @endforeach
+                        @else
+                            <p>Aucune tâche n'est associée à ce projet.</p>
+                        @endif
+                    </ul>
                     @error('newprojecttasks')
                     <div class="error-message">{{ $message }}</div>
                     @enderror

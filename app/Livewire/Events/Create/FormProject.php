@@ -40,12 +40,12 @@ class FormProject extends Component
     {
         $this->validate();
 
-        $renaud = User::whereEmail('renaud.vmb@gmail.com')->firstOrFail();
+        $user = auth()->user();
 
-        $renaud->projects()->create([
+        $user->projects()->create([
             'name' => $this->newprojectname,
-            'description' => 'coucou',
-            'tasks' => $this->newprojecttasks,
+            'description' => 'Some description',
+            'tasks' => json_encode($this->newprojecttasks),
             'task' => $this->newprojecttask,
         ]);
 

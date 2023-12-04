@@ -16,7 +16,7 @@
                 @foreach($this->searchList as $contact)
                     <li class="filter__contacts__list__item" wire:key="{{$contact->id}}">
                         <span class="capitalize">{{ $contact->name }}</span>
-                        <span class="capitalize">{{ $contact->lastname }}</span>
+                        <span class="capitalize">{{ $contact->firstname }}</span>
                         <span>{{ $contact->email }}</span>
                         <button type="button"
                                 @click.stop="showSelectType = true;

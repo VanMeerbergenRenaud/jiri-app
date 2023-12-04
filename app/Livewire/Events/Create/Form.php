@@ -26,9 +26,9 @@ class Form extends Component
     {
         $this->validate();
 
-        $renaud = User::whereEmail('renaud.vmb@gmail.com')->firstOrFail();
+        $user = auth()->user();
 
-        $renaud->contacts()->create([
+        $user->contacts()->create([
             'role' => $this->newcontacttype,
             'name' => $this->newcontactname,
             'firstname' => $this->newcontactfirstname,

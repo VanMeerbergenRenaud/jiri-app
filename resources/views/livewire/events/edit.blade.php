@@ -111,7 +111,16 @@
                         <p>Vous pourrez en ajouter encore par la suite sans problème.</p>
 
                         {{-- Dropdown --}}
-                        <div class="custom__dropdown" x-data="{ open: false }">
+                        <div class="custom__dropdown"
+                             x-data="{ open: false }"
+                             x-init="$watch('open', value => {
+                                if (value) {
+                                    setTimeout(() => {
+                                        document.getElementById('projectname').focus();
+                                    }, 0);
+                                }
+                            });"
+                        >
                             {{-- Open button --}}
                             <button @click="open = true" type="button" class="open-button">
                                 Sélectionner un projet
