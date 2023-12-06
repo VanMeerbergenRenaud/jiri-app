@@ -10,9 +10,11 @@ return new class extends Migration
     {
         Schema::create('implementations', function (Blueprint $table) {
             $table->id();
-            $table->json('urls')->nullable();
-            $table->json('tasks')->nullable(); // NB : Liste de toutes les tâches, mais un étudiant ne les a pas spécialement toutes réalisées.
-            $table->json('scores')->nullable();
+            // un projet à des tâches qui ont chacune une url
+            $table->string('url'); // url du projet
+            $table->integer('score'); // pondération du projet
+            // foreign key tasks
+            // $table->foreignId('task_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

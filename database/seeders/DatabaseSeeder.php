@@ -6,10 +6,13 @@ use App\Models\Attendance;
 use App\Models\Contact;
 use App\Models\Duty;
 use App\Models\Event;
+use App\Models\Implementation;
 use App\Models\Project;
+use App\Models\Task;
 use App\Models\User;
+use Database\Factories\ImplementationFactory;
+use DB;
 use Illuminate\Database\Seeder;
-use Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,9 +22,6 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $dominique = User::factory()
-            ->has(Event::factory()->count(2))
-            ->has(Project::factory()->count(4))
-            ->has(Contact::factory()->count(20))
             ->create([
                 'name' => 'Dominique Vilain',
                 'email' => 'dominique.vilain@hepl.be',
@@ -29,10 +29,6 @@ class DatabaseSeeder extends Seeder
             ]);
 
         $renaud = User::factory()
-            ->has(Event::factory()->count(20))
-            ->has(Project::factory()->count(8))
-            ->has(Contact::factory()->count(32))
-            ->has(Duty::factory()->count(40))
             ->create([
                 'name' => 'Renaud Vmb',
                 'email' => 'renaud.vmb@gmail.com',
@@ -41,43 +37,47 @@ class DatabaseSeeder extends Seeder
 
         $users = collect([$dominique, $renaud]);
 
-        /*Attendance::factory()
-            ->count(1)
-            ->create([
-                'event_id' => 3,
-                'contact_id' => 1,
-            ]);*/
-
         foreach ($users as $user) {
-            foreach ($user->events as $event) {
-                $selectedContacts = $user->contacts;
-                foreach ($selectedContacts as $contact) {
-                    $role = random_int(0, 1) ? 'students' : 'evaluators';
+            Event::factory()->count(20)->create([
+                'user_id' => $user->id,
+            ]);
 
-                    $event->$role()->attach([
-                        $contact->id => [
-                            'role' => str($role)->beforeLast('s'),
-                        ]
+            Contact::factory()->count(25)->create([
+                'user_id' => $user->id,
+            ]);
+
+            Project::factory()->count(12)->create([
+                'user_id' => $user->id,
+            ]);
+
+            $events = $user->events;
+
+            // Attendances for each event
+            foreach ($events as $event) {
+                foreach ($user->contacts as $contact) {
+                    Attendance::factory()->count(10)->create([
+                        'event_id' => $event->id,
+                        'contact_id' => $contact->id,
+                    ]);
+                }
+            }
+
+            // Duties for each event
+            foreach ($events as $event) {
+                foreach ($user->projects as $project) {
+                    Duty::factory()->count(10)->create([
+                        'event_id' => $event->id,
+                        'project_id' => $project->id,
                     ]);
 
-                    if ($role === 'students') {
-                        $contact->projects()->attach(
-                            $user->projects->random(2),
-                            [
-                                'event_id' => $event->id,
-                                'urls' => json_encode([
-                                    'github' => 'https://github.com',
-                                    'trello' => 'https://trello.com'], JSON_THROW_ON_ERROR),
-                            ]
-                        );
-                    }
+                    Implementation::factory()->count(10)->create([
+                        'duty_id' => $event->duty->id,
+                        'project_id' => $project->id,
+                    ]);
 
-                    if ($role === 'evaluators') {
-                        //create access token for evaluator
-                        $contact->events()->updateExistingPivot($event->id, [
-                            'token' => Str::random(32),
-                        ]);
-                    }
+                    Task::factory()->count(3)->create([
+                        'project_id' => $project->id,
+                    ]);
                 }
             }
         }

@@ -4,19 +4,16 @@
         @csrf
         <label for="name">Name:</label><br>
         <input type="text" id="name" name="name" value="{{ old('name') }}"><br>
-        {{-- Error if not correct --}}
         @error('name')
         <p>{{ $message }}</p>
         @enderror
         <label for="tasks">Tasks:</label><br>
-        <input type="text" id="tasks" name="tasks" value="{{ json_encode(["$project->tasks"]) }}"><br>
-        {{-- Error if not correct --}}
-        @error('task')
+        <input type="text" id="tasks" name="tasks" value="{{ old('tasks') }}"><br>
+        @error('tasks')
         <p>{{ $message }}</p>
         @enderror
         <label for="description">Description:</label><br>
-        <textarea type="text" id="description" name="description" value="{{ old('description') }}" required></textarea><br>
-        {{-- Error if not correct, and project already existing --}}
+        <textarea type="text" id="description" name="description" value="{{ old('description') }}"></textarea><br>
         @error('description')
         <p>{{ $message }}</p>
         @enderror

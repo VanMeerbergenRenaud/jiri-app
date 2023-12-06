@@ -33,28 +33,18 @@ class SearchListProject extends Component
         if (!$event->duties()->where('project_id', $project->id)->exists()) {
             $duty = new Duty();
             $duty->name = $project->name;
-            $duty->tasks = $project->tasks;
+            // Todo : add tasks from the tasks Table
+
             $duty->event_id = $event->id;
             $duty->project_id = $project->id;
-            $duty->user_id = auth()->user()->id;
             $duty->save();
         }
 
         $this->dispatch('fetchEventProjects');
     }
 
-    public function getTasks()
-    {
-        // Return only the task link to the specific project
-        return $this->searchList->flatMap(function ($project) {
-            return json_decode($project->tasks);
-        })->unique();
-    }
-
     public function render()
     {
-        $this->tasks = $this->getTasks();
-
         return view('livewire.events.create.search-list-project', ['tasks' => $this->tasks]);
     }
 }

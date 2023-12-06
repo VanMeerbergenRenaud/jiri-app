@@ -36,9 +36,15 @@
                             <td class="border px-4 py-2">{{ $project->id }}</td>
                             <td class="border px-4 py-2">{{ ucfirst($project->name) }}</td>
                             <td class="border px-4 py-2">
-                                @foreach(json_decode($project->tasks) as $task)
-                                    {{ ucfirst($task) }}
-                                @endforeach
+                                @if(!empty($project->tasks))
+                                    <ul>
+                                        @foreach($project->tasks as $task)
+                                            <li>{{ ucfirst($task->name) }}</li>
+                                        @endforeach
+                                    </ul>
+                                @else
+                                    <span>Aucune tâche n'est associée à ce projet.</span>
+                                @endif
                             </td>
                             <td class="border px-4 py-2">{{ $project->description }}</td>
                             <td class="border px-4 py-2">
@@ -68,22 +74,19 @@
 
         {{-- Display all the projects --}}
         <div class="projects__list">
-            Display all the projects for a event
+            Display all the events and there relative projects
             @foreach($events->sortBy('starting_at') as $event)
                 <h2 class="text-2xl font-bold mb-4">
                     {{ $event->name }}
-                    {{-- Display the event's Date --}}
                     <span class="text-gray-600 text-sm ml-2">({{ $event->starting_at }})</span>
-                    {{-- Display the event's Duration --}}
                     <span class="text-gray-600 text-sm ml-2">({{ $event->duration }} min)</span>
                 </h2>
                 <ul class="list-disc pl-8">
-                    @foreach($projects->sortBy('name') as $project)
+                    @foreach($event->duties->sortBy('name') as $duty)
                         <li class="mb-4 border-b border-gray-200 pb-4">
                             Projet {{ $loop->iteration }}
-                            <h3 class="text-lg font-bold leading-tight mb-2"><strong>Nom:</strong> {{ $project->name }}</h3>
-                            <p class="text-gray-600 leading-tight mb-2"><strong>Description:</strong> {{ $project->description }}</p>
-                            <p class="text-gray-600 leading-tight mb-2"><strong>Category:</strong> {{ $project->category }}</p>
+                            <h3 class="text-lg font-bold leading-tight mb-2"><strong>Nom:</strong> {{ $duty->name }}</h3>
+                            <p class="text-gray-600 leading-tight mb-2"><strong>Tâches:</strong> {{ $duty->tasks }}</p>
                         </li>
                     @endforeach
                 </ul>

@@ -17,13 +17,12 @@
                     <li class="filter__contacts__list__item" wire:key="{{$project->id}}">
                         <span class="capitalize projectName">{{ ucfirst($project->name) }}</span>
                         <div class="projectTasks">
-                            @php
-                                $tasks = json_decode($project->tasks, true);
-                            @endphp
-                            @if(is_array($tasks))
-                                @foreach($tasks as $id => $task)
-                                    <span wire:key="{{$id}}">{{ ucfirst($task) }}</span>
-                                @endforeach
+                            @if(!empty($project->tasks))
+                                <ul>
+                                    @foreach($project->tasks as $task)
+                                        <li>{{ ucfirst($task) }}</li>
+                                    @endforeach
+                                </ul>
                             @else
                                 <span>Aucune tâche n'est associée à ce projet.</span>
                             @endif

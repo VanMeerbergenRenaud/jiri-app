@@ -25,14 +25,8 @@ class FormProject extends Component
     public function mount()
     {
         $this->projects = Project::all();
-        $this->tasks = $this->getUniqueTasks();
-    }
-
-    public function getUniqueTasks()
-    {
-        return $this->projects->flatMap(function ($project) {
-            return json_decode($project->tasks);
-        })->unique();
+        // Tasks from the tasks Table
+        $this->tasks = User::find(auth()->id())->tasks;
     }
 
     public function save(): void
@@ -44,7 +38,7 @@ class FormProject extends Component
         $user->projects()->create([
             'name' => $this->newprojectname,
             'description' => 'Some description',
-            'tasks' => json_encode([$this->newprojecttasks]),
+            'tasks' => $this->newprojecttasks,
             'task' => $this->newprojecttask,
         ]);
 

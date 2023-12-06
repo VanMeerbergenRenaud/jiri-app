@@ -27,7 +27,7 @@
                 <button type="button">Add the task</button>
             </form>--}}
             {{-- Error if not correct --}}
-            @error('task')
+            @error('tasks')
             <p>{{ $message }}</p>
             @enderror
         </div>

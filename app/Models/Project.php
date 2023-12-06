@@ -19,6 +19,11 @@ class Project extends Model
         'tasks' => 'array',
     ];
 
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
+
     // Retrieve only the projects of the authenticated user
     protected static function booted(): void
     {
