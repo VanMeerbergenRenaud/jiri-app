@@ -59,9 +59,9 @@ class EventController extends Controller
     {
         $data = $this->validateEventData();
 
-        auth()->user()?->events()->create($data);
+        $event = auth()->user()?->events()->create($data);
 
-        return redirect('events');
+        return redirect()->route('events.edit', ['event' => $event]);
     }
 
     public function update($eventId): RedirectResponse
@@ -78,6 +78,10 @@ class EventController extends Controller
     public function destroy($eventId)
     {
         $event = Event::findOrFail($eventId);
+
+        // Delete related contacts and projects
+        $event->contacts()->detach();
+        /*$event->projects()->detach();*/
 
         $event->delete();
 
