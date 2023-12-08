@@ -86,7 +86,15 @@
                         <li class="mb-4 border-b border-gray-200 pb-4">
                             Projet {{ $loop->iteration }}
                             <h3 class="text-lg font-bold leading-tight mb-2"><strong>Nom:</strong> {{ $duty->name }}</h3>
-                            <p class="text-gray-600 leading-tight mb-2"><strong>Tâches:</strong> {{ $duty->tasks }}</p>
+                            @if(!empty($duty->project->tasks))
+                                <ul>
+                                    @foreach($duty->project->tasks as $task)
+                                        <li>{{ ucfirst($task->name) }}</li>
+                                    @endforeach
+                                </ul>
+                            @else
+                                <p class="text-gray-600 leading-tight mb-2">Aucune tâche n'est associée à ce projet.</p>
+                            @endif
                             <span class="text-gray-600 leading-tight mb-2"><strong>Projet_id =</strong> {{ $duty->project_id }}</span>
                         </li>
                     @endforeach

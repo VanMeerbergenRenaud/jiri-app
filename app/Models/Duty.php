@@ -21,7 +21,7 @@ class Duty extends Model
         return $this->belongsTo(Event::class);
     }
 
-    public function projects(): BelongsTo
+    public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class);
     }
