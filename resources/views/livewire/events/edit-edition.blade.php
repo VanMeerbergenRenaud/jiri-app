@@ -8,6 +8,7 @@
         </div>
 
         {{-- First Table for students --}}
+        {{--PUSH--}}
         <livewire:events.edit-edition-student :students="$students" />
 
         {{-- Second Table for evaluators --}}
