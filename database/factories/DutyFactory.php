@@ -11,11 +11,8 @@ use Illuminate\Support\Carbon;
  */
 class DutyFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $model = Duty::class;
+
     public function definition(): array
     {
         return [

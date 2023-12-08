@@ -72,7 +72,7 @@ class DatabaseSeeder extends Seeder
 
                     Implementation::factory()->count(10)->create([
                         'duty_id' => $event->duty->id,
-                        'project_id' => $project->id,
+                        'contact_id' => $user->contact->id,
                     ]);
 
                     Task::factory()->count(3)->create([

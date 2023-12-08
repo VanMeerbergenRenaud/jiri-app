@@ -11,11 +11,8 @@ use Illuminate\Support\Carbon;
  */
 class AttendanceFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $model = Attendance::class;
+
     public function definition(): array
     {
         return [
