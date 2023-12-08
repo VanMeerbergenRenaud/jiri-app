@@ -1,6 +1,6 @@
 <div>
     <h2>
-        Modifier le projet : {{ $project->name }}
+        Modifier le projet : {{ $project ? $project->name : 'Projet non trouvé' }}
     </h2>
 
     <form method="POST" action="{{ route('projects.update', $project->id) }}">
@@ -27,7 +27,7 @@
     </form>
 
     <h3>Formulaire d'ajout d'une tâche</h3>
-    <form wire:submit.prevent="addTask({{ $project->id }})">
+    <form wire:submit.prevent="addTask()">
         @csrf
         <label for="newtask">Nome de la tâche :</label><br>
         <input type="text" id="newtask" wire:model="newtask" value="{{ old('newtask') }}">
@@ -40,7 +40,11 @@
     <h4>Liste des tâches associées à ce projet :</h4>
     <ul>
         @foreach($project->tasks as $task)
-            <li>{{ ucfirst($task->name) }}</li>
+            <li>
+                {{ ucfirst($task->name) }}
+                <button wire:click="deleteTask({{ $task->id }})"
+                >Supprimer</button>
+            </li>
         @endforeach
     </ul>
     {{-- If nothing --}}

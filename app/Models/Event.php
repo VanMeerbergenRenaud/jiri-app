@@ -92,12 +92,6 @@ class Event extends Model
             ->wherePivot('role', 'evaluator');
     }
 
-    // Retrieve only the events of the authenticated user
-    protected static function booted(): void
-    {
-        static::addGlobalScope(new Scopes\AuthUserScope());
-    }
-
     // Select the events and if it is past, current or upcoming
     public function isPast(): bool
     {

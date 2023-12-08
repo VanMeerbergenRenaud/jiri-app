@@ -5,11 +5,11 @@ namespace App\Livewire\Project\Edit;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 
-class Test extends Component
+class Form extends Component
 {
     public $project;
 
-    #[Rule('required', 'min:3', 'max:255')]
+    #[Rule('required', 'min:3', 'newtask')]
     public $newtask;
 
     public function mount($project)
@@ -17,24 +17,26 @@ class Test extends Component
         $this->project = $project;
     }
 
-    public function addTask($projectId)
+    public function addTask()
     {
         $this->validate();
 
-        $project = auth()->user()->projects()->find($projectId);
-
-        // dd($project->tasks()->get());
-
-        $project->tasks()->create([
+        $this->project->tasks()->create([
             'name' => $this->newtask,
-            'project_id' => $project->id,
+            'project_id' => $this->project->id,
         ]);
 
         $this->reset();
     }
 
+    public function deleteTask($taskId)
+    {
+        $task = $this->project->tasks()->find($taskId);
+        $task->delete();
+    }
+
     public function render()
     {
-        return view('livewire.project.edit.test');
+        return view('livewire.project.edit.form');
     }
 }

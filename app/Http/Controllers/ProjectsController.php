@@ -46,9 +46,9 @@ class ProjectsController extends Controller
     {
         $data = $this->validateProjectData();
 
-        auth()->user()?->projects()->create($data);
+        $project = auth()->user()?->projects()->create($data);
 
-        return redirect('projects');
+        return redirect()->route('projects.edit', ['project' => $project]);
     }
 
     public function update($projectId)

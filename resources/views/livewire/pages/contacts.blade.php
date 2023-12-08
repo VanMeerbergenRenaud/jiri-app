@@ -13,8 +13,7 @@
             <div x-data="{ search: '' }">
                 <h3 class="text-2xl font-bold mt-8 mb-4">Liste des contacts</h3>
                 <label>
-                    <input type="text" x-model="search" placeholder="Rechercher un contact..."
-                           class="w-full mb-4 p-2 border border-gray-400 rounded-lg">
+                    <input type="text" x-model="search" placeholder="Rechercher un contact..." class="w-full mb-4 p-2 border border-gray-400 rounded-lg">
                 </label>
                 <ul>
                     @if(count($contacts) > 0)

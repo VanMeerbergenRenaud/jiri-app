@@ -6,7 +6,15 @@
             @foreach($dutiesList as $duty)
                 <li wire:key="{{ $duty->id }}">
                     <span class="category capitalize">{{ $duty->name ?? 'Pas de nom' }}</span>
-                    <span class="username capitalize">{{ $duty->tasks ?? 'Pas de tâches' }}</span>
+                    <span class="username capitalize">
+                        @if($duty->project->tasks->count())
+                            @foreach($duty->project->tasks as $task)
+                                <span>{{ ucfirst($task->name) }}</span>
+                            @endforeach
+                        @else
+                            <span class="normal-case">Aucune tâche n'est associée à ce projet.</span>
+                        @endif
+                    </span>
                     <button type="button" wire:click="removeContact({{ $duty->id }})">
                         @include('components.svg.trash2')
                     </button>

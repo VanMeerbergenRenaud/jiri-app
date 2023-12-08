@@ -15,7 +15,7 @@ class FormProject extends Component
 
     public int $eventId;
 
-    #[Rule('required')]
+    #[Rule('required', 'min:2', 'project_name')]
     public $newprojectname;
 
     public $newprojecttasks = [];

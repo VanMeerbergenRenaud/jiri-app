@@ -10,16 +10,16 @@ class Form extends Component
 {
     public int $eventId;
 
-    #[Rule('required')]
+    #[Rule('required', 'min:3', 'type')]
     public $newcontacttype;
 
-    #[Rule('required', 'min:3', 'max:255')]
+    #[Rule('required', 'min:3', 'name')]
     public $newcontactname;
 
-    #[Rule('required', 'min:3', 'max:255')]
+    #[Rule('required', 'min:3', 'firstname')]
     public $newcontactfirstname;
 
-    #[Rule('required', 'email', 'unique:users,email')]
+    #[Rule('required', 'email', 'email')]
     public $newcontactemail;
 
     public function save(): void
