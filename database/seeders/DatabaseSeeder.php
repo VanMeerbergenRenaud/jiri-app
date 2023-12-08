@@ -10,8 +10,6 @@ use App\Models\Implementation;
 use App\Models\Project;
 use App\Models\Task;
 use App\Models\User;
-use Database\Factories\ImplementationFactory;
-use DB;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -37,6 +35,7 @@ class DatabaseSeeder extends Seeder
 
         $users = collect([$dominique, $renaud]);
 
+
         foreach ($users as $user) {
             Event::factory()->count(20)->create([
                 'user_id' => $user->id,
@@ -54,8 +53,10 @@ class DatabaseSeeder extends Seeder
 
             // Attendances for each event
             foreach ($events as $event) {
-                foreach ($user->contacts as $contact) {
-                    Attendance::factory()->count(10)->create([
+                $contacts = $user->contacts->random(3);
+
+                foreach ($contacts as $contact) {
+                    Attendance::factory()->count(2)->create([
                         'event_id' => $event->id,
                         'contact_id' => $contact->id,
                     ]);
@@ -64,18 +65,15 @@ class DatabaseSeeder extends Seeder
 
             // Duties for each event
             foreach ($events as $event) {
-                foreach ($user->projects as $project) {
-                    Duty::factory()->count(10)->create([
+                $projects = $user->projects->random(3);
+
+                foreach ($projects as $project) {
+                    Duty::factory()->count(2)->create([
                         'event_id' => $event->id,
                         'project_id' => $project->id,
                     ]);
 
-                    Implementation::factory()->count(10)->create([
-                        'duty_id' => $event->duty->id,
-                        'contact_id' => $user->contact->id,
-                    ]);
-
-                    Task::factory()->count(3)->create([
+                    Task::factory()->count(1)->create([
                         'project_id' => $project->id,
                     ]);
                 }
