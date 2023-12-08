@@ -12,12 +12,10 @@ class Project extends Model
     protected $fillable = [
         'name',
         'description',
-        'tasks',
     ];
 
-    protected $casts = [
-        'tasks' => 'array',
-    ];
+    // A project have a list of tasks
+    protected $with = ['tasks'];
 
     public function tasks()
     {

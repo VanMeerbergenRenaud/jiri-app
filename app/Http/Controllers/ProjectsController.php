@@ -66,6 +66,9 @@ class ProjectsController extends Controller
     {
         $project = Project::findOrFail($projectId);
 
+        // Delete the tasks associated with the project
+        $project->tasks()->delete();
+
         $project->delete();
 
         return redirect('projects');

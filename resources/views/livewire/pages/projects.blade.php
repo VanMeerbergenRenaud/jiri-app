@@ -77,7 +77,7 @@
             Display all the events and there relative projects
             @foreach($events->sortBy('starting_at') as $event)
                 <h2 class="text-2xl font-bold mb-4">
-                    {{ $event->name }}
+                    {{ $event->id }} - {{ $event->name }}
                     <span class="text-gray-600 text-sm ml-2">({{ $event->starting_at }})</span>
                     <span class="text-gray-600 text-sm ml-2">({{ $event->duration }} min)</span>
                 </h2>
@@ -87,6 +87,7 @@
                             Projet {{ $loop->iteration }}
                             <h3 class="text-lg font-bold leading-tight mb-2"><strong>Nom:</strong> {{ $duty->name }}</h3>
                             <p class="text-gray-600 leading-tight mb-2"><strong>Tâches:</strong> {{ $duty->tasks }}</p>
+                            <span class="text-gray-600 leading-tight mb-2"><strong>Projet_id =</strong> {{ $duty->project_id }}</span>
                         </li>
                     @endforeach
                 </ul>
