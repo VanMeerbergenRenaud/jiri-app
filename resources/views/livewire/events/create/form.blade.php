@@ -8,7 +8,7 @@
                 <label for="newcontacttype" class="contact__new__form__container__label">
                     Type
                     <select id="newcontacttype" wire:model="newcontacttype">
-                        <option value="" disabled selected>Sélectionner le type</option>
+                        <option value="" selected>Sélectionner le type</option>
                         <option value="student">Étudiants</option>
                         <option value="evaluator">Évaluateurs</option>
                         <option value="neutre">Neutre</option>

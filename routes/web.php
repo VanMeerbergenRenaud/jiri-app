@@ -56,5 +56,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('student', StudentController::class);
 });
 
+/*
+ route pour le evaluator_id -> evaluator/token/event_id
+*/
+
 require __DIR__.'/auth.php';
 require __DIR__.'/pages.php';

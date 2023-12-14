@@ -9,7 +9,7 @@
                     <span class="username capitalize">
                         @if($duty->project->tasks->count())
                             @foreach($duty->project->tasks as $task)
-                                <span>{{ ucfirst($task->name) }}</span>
+                                <span class="taskName">{{ ucfirst($task->name) }}</span>
                             @endforeach
                         @else
                             <span class="normal-case">Aucune tâche n'est associée à ce projet.</span>

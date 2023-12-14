@@ -34,9 +34,4 @@ class Implementation extends Model
     {
         return json_decode($value);
     }
-
-    public function getTasksAttribute($value)
-    {
-        return json_decode($value);
-    }
 }

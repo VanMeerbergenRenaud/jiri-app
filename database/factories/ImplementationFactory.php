@@ -16,7 +16,7 @@ class ImplementationFactory extends Factory
     public function definition(): array
     {
         return [
-            'urls' => $this->faker->url(),
+            'url' => $this->faker->url(),
             'score' => $this->faker->numberBetween(0, 20),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),

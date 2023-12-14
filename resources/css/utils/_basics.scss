@@ -1,7 +1,6 @@
 /* Basic styles */
 body {
     margin: 0 auto;
-    min-width: 650px;
     max-width: 2500px;
     font-size: 16px;
     line-height: 1.35;
@@ -75,6 +74,7 @@ body {
         margin-top: 0.5rem;
         display: inline-block;
         font-size: 0.75rem;
+        text-transform: initial;
         color: red;
     }
 
@@ -143,5 +143,11 @@ body {
             text-align: center;
             font-size: 0.875rem;
         }
+    }
+}
+
+@media (min-width: 650px) {
+    body {
+        min-width: 650px;
     }
 }

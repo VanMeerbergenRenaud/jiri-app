@@ -2,44 +2,48 @@
 
 namespace App\Livewire\Events\Create;
 
-use App\Models\Project;
-use App\Models\User;
+use App\Models\Task;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 
 class FormProject extends Component
 {
+    public $user;
     public $tasks;
 
     public $projects;
 
     public int $eventId;
 
-    #[Rule('required', 'min:2', 'project_name')]
+    #[Rule('required', 'min:2', 'name')]
     public $newprojectname;
+
+    #[Rule('required', 'min:1', 'newtask')]
+    public $newprojecttask;
 
     public $newprojecttasks = [];
 
-    public $newprojecttask;
-
     public function mount()
     {
-        $this->projects = Project::all();
-        // Tasks from the tasks Table
-        $this->tasks = User::find(auth()->id())->tasks;
+        $this->user = auth()->user();
+
+        $this->projects = $this->user->projects()->get();
+
+        $this->tasks = Task::all();
     }
 
     public function save(): void
     {
         $this->validate();
 
-        $user = auth()->user();
-
-        $user->projects()->create([
+        $project = $this->user->projects()->create([
             'name' => $this->newprojectname,
             'description' => 'Some description',
-            'tasks' => $this->newprojecttasks,
-            'task' => $this->newprojecttask,
+        ]);
+
+        $project->tasks()->create([
+            'name' => $this->newprojecttask,
+            'project_id' => $project->id,
         ]);
 
         $this->reset();

@@ -17,27 +17,7 @@
                     <div class="error-message">{{ $message }}</div>
                     @enderror
                 </div>
-                {{-- Tasks --}}
-                <div class="project-tasks">
-                    <label for="newprojecttasks">Listes des tâches</label>
-                    <ul id="newprojecttasks" wire:model="newprojecttasks">
-                        @if(!empty($tasks))
-                            @foreach($tasks as $id => $task)
-                                <li wire:key="{{$id}}">
-                                    <label for="newprojecttasks-{{ $id }}">
-                                        <input type="checkbox" name="newprojecttasks[]" value="{{ $task }}" id="newprojecttasks-{{ $id }}" wire:model="newprojecttasks.{{ $id }}">
-                                        {{ ucfirst($task) }}
-                                    </label>
-                                </li>
-                            @endforeach
-                        @else
-                            <p class="mt-6">Aucune tâche n'est associée à ce projet.</p>
-                        @endif
-                    </ul>
-                    @error('newprojecttasks')
-                    <div class="error-message">{{ $message }}</div>
-                    @enderror
-                </div>
+
                 {{-- Ajouter une tâche --}}
                 <div class="project-task">
                     <label for="newprojecttask">Ajouter une tâche</label>
@@ -47,11 +27,25 @@
                         wire:model="newprojecttask"
                         placeholder="Ex : CV"
                     >
-                    <button type="button">Ajouter</button>
                     @error('newprojecttask')
                     <div class="error-message">{{ $message }}</div>
                     @enderror
                 </div>
+
+                {{-- Tasks --}}
+                {{--<div class="project-tasks">
+                    <label for="newprojecttasks">Listes des tâches</label>
+                    <select id="newprojecttasks" wire:model="newprojecttasks" multiple>
+                        <option value="0" selected>Sélectionner une ou plusieurs tâche(s)</option>
+                        @foreach($tasks as $task)
+                            <option value="{{ $task->name }}">{{ ucfirst($task->name) }}</option>
+                        @endforeach
+                    </select>
+                    @error('newprojecttasks')
+                    <div class="error-message">{{ $message }}</div>
+                    @enderror
+                </div>--}}
+
                 {{-- Button to cancel the new contact --}}
                 <button type="button" class="cancel" @click="createmode = false">
                     Annuler

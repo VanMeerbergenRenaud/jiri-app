@@ -36,7 +36,7 @@
                 <th scope="col" class="email">Email</th>
                 <th scope="col" class="photo">Photo</th>
                 <th scope="col" class="projects">Projets</th>
-                <th scope="col" class="editColumn">Modification</th>
+                <th scope="col" class="editColumn">Modifier</th>
                 <th scope="col" class="deleteColumn">Supprimer</th>
             </tr>
             </thead>
@@ -47,21 +47,36 @@
                         <td>
                             <div>
                                 <label for="name">
-                                    <input type="text" name="name" id="name" placeholder="Nom" wire:model="students.{{ $index }}.name" value="{{ $student->name ?? '' }}">
+                                    @if($editStudentId && $student->id == $editStudentId)
+                                        <input type="text" name="name" id="name" placeholder="Nom" wire:model.defer="name">
+                                        @error('name') <span class="error-message w-full underline text-center mb-2">{{ $message }}</span> @enderror
+                                    @else
+                                        <input type="text" name="name" id="name" placeholder="Nom" value="{{ $student->name ?? '' }}" disabled>
+                                    @endif
                                 </label>
                             </div>
                         </td>
                         <td>
                             <div>
                                 <label for="firstname">
-                                    <input type="text" name="firstname" id="firstname" placeholder="Prénom" wire:model="students.{{ $index }}.firstname" value="{{ $student->firstname ?? '' }}">
+                                    @if($editStudentId && $student->id == $editStudentId)
+                                        <input type="text" name="firstname" id="firstname" placeholder="Prénom" wire:model.defer="firstname">
+                                        @error('firstname') <span class="error-message w-full underline text-center mb-2">{{ $message }}</span> @enderror
+                                    @else
+                                        <input type="text" name="firstname" id="firstname" placeholder="Prénom" value="{{ $student->firstname ?? '' }}" disabled>
+                                    @endif
                                 </label>
                             </div>
                         </td>
                         <td>
                             <div>
                                 <label for="email">
-                                    <input type="text" name="email" id="email" placeholder="Email" wire:model="students.{{ $index }}.email" value="{{ $student->email ?? '' }}">
+                                    @if($editStudentId && $student->id == $editStudentId)
+                                        <input type="text" name="email" id="email" placeholder="Email" wire:model.defer="email">
+                                        @error('email') <span class="error-message w-full underline text-center mb-2">{{ $message }}</span> @enderror
+                                    @else
+                                        <input type="text" name="email" id="email" placeholder="Email" value="{{ $student->email ?? '' }}" disabled>
+                                    @endif
                                 </label>
                             </div>
                         </td>
@@ -89,18 +104,23 @@
                         {{-- Edit button --}}
                         <td class="editColumn">
                             <div class="editButton">
-                                <button>Sauvegarder</button>
-                                {{--<button>Modifier</button>
-                                <button>Valider</button>--}}
-                                <button type="button" wire:click="addStudentToEvent">
-                                    @include('components.svg.add')
-                                </button>
+                                @if($editStudentId && $student->id == $editStudentId)
+                                    <button type="button" wire:click.prevent="saveStudent({{$student->id ?? ''}})"
+                                            class="ml-4">
+                                        Sauvegarder
+                                    </button>
+                                @else
+                                    <button type="button" wire:click.prevent="editStudent({{$student->id ?? ''}})"
+                                            class="ml-4">
+                                        Editer
+                                    </button>
+                                @endif
                             </div>
                         </td>
                         {{-- Delete --}}
                         <td class="deleteColumn">
                             <div class="deleteButton">
-                                <button type="button">
+                                <button type="button" wire:click.prevent="removeStudent({{$student->id ?? ''}})">
                                     @include('components.svg.trash2')
                                 </button>
                             </div>
@@ -128,6 +148,10 @@
             </tr>
             </tbody>
         </table>
+
+        <div class="flex justify-end">
+            <button type="submit" class="button--classic mt-4">Enregistrer tout</button>
+        </div>
     </form>
 
     @if (session()->has('message'))
@@ -135,9 +159,4 @@
             {{ session('message') }}
         </div>
     @endif
-
-    {{-- Add error validation --}}
-    @error('students.*.name') <span class="error">{{ $message }}</span> @enderror
-    @error('students.*.firstname') <span class="error">{{ $message }}</span> @enderror
-    @error('students.*.email') <span class="error">{{ $message }}</span> @enderror
 </div>

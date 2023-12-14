@@ -3,25 +3,28 @@
 namespace App\Livewire\Events;
 
 use App\Models\Attendance;
+use App\Models\Contact;
 use App\Models\Duty;
-use App\Models\Project;
-use Livewire\Component;
 use Illuminate\Support\Facades\DB;
+use Livewire\Component;
 
 class EditEditionStudent extends Component
 {
     public $students;
+    public $editStudentId = null;
 
-    // name, firstname, email validation rules
-    public $rules = [
-        'students.*.name' => 'required|string|min:2|max:255',
-        'students.*.firstname' => 'required|string|min:2|max:255',
-        'students.*.email' => 'nullable|email',
+    protected $rules = [
+        'name' => 'required|min:3|max:255',
+        'firstname' => 'required|min:3|max:255',
+        'email' => 'required|email',
     ];
 
-    public $projects;
+    public $name;
+    public $firstname;
+    public $email;
 
     public $event_id;
+    public $projects;
 
     public function mount()
     {
@@ -38,64 +41,82 @@ class EditEditionStudent extends Component
         $this->projects = Duty::where('event_id', $this->event_id)->get();
     }
 
-    // Save the students of the event
-    public function save()
-    {
-        // save the form globally
-        $this->validate();
-
-        session()->flash('message', 'Student saved successfully.');
-
-        // Save the student in the database
-        foreach ($this->students as $student) {
-            DB::table('contacts')
-                ->where('id', $student->id)
-                ->update([
-                    'name' => $student->name,
-                    'firstname' => $student->firstname,
-                    'email' => $student->email,
-                ]);
-        }
-    }
-
-
-    // Add a student to the event
-    public function addStudentToEvent()
-    {
-        $this->validate();
-
-        Attendance::updateOrCreate([
-            'event_id' => $this->event_id,
-            'contact_id' => DB::table('contacts')->insertGetId([
-                'name' => $this->students->last()['name'],
-                'firstname' => $this->students->last()['firstname'],
-                'email' => $this->students->last()['email'], // l'email peut être null pour un student
-                'created_at' => now(),
-                'updated_at' => now(),
-                'user_id' => auth()->id(),
-            ]),
-            'role' => 'student',
-        ]);
-    }
-
+    // Duplicate a empty student row with a new id
     public function addStudentRow()
     {
-        $this->students->push([
+        $contact = auth()->user()->contacts()->make([
+            'id' => Contact::all()->last()->id + 1,
             'name' => '',
             'firstname' => '',
-            'email' => '',
+            'email' => null,
         ]);
+
+        $this->students->push($contact);
+
+        session()->flash('message', 'Nouvel étudiant ajouté !.');
     }
 
-    // Remove the students that are not in the form
-    public function removeStudents()
+    // Save a student from the event
+    public function saveStudent($studentId)
     {
-        $students_id = $this->students->pluck('id')->toArray();
+        $this->validate();
 
-        Attendance::where('event_id', $this->event_id)
+        $this->editStudentId = $studentId;
+
+        $student = Contact::find($studentId);
+
+        // Update the student
+        $student->update([
+            'name' => $this->name,
+            'firstname' => $this->firstname,
+            'email' => $this->email,
+        ]);
+
+        session()->flash('message', 'Etudiant sauvegardé !.');
+    }
+
+    // Edit a student from the event
+    public function editStudent($studentId)
+    {
+        $this->editStudentId = $studentId;
+
+        $this->name = $this->students->where('id', $studentId)->first()->name;
+        $this->firstname = $this->students->where('id', $studentId)->first()->firstname;
+        $this->email = $this->students->where('id', $studentId)->first()->email;
+
+        session()->flash('message', 'Etudiant en cours d\'édition !.');
+    }
+
+    // Remove the student from the event
+    public function removeStudent($studentId)
+    {
+        $student = Contact::find($studentId);
+
+        Attendance::where('contact_id', $student->id)
+            ->where('event_id', $this->event_id)
             ->where('role', 'student')
-            ->whereNotIn('contact_id', $students_id)
             ->delete();
+
+        session()->flash('message', 'Etudiant supprimé !.');
+    }
+
+    // Save the form
+    public function save()
+    {
+        $this->validate();
+
+        foreach ($this->students as $student) {
+            $student = Contact::find($student->id);
+
+            // Update the student
+            $student->update([
+                'name' => $student->name,
+                'firstname' => $student->firstname,
+                'email' => $student->email,
+            ]);
+        }
+
+        session()->flash('message', 'Étudiants sauvegardés !.');
     }
 
     public function render()

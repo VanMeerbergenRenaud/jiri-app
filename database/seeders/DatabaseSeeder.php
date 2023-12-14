@@ -78,6 +78,22 @@ class DatabaseSeeder extends Seeder
                     ]);
                 }
             }
+
+            // Implementations for each event (duty & contact id)
+            foreach ($events as $event) {
+                $duties = $event->duties;
+
+                foreach ($duties as $duty) {
+                    $contacts = $event->contacts->random(2);
+
+                    foreach ($contacts as $contact) {
+                        Implementation::factory()->count(2)->create([
+                            'duty_id' => $duty->id,
+                            'contact_id' => $contact->id,
+                        ]);
+                    }
+                }
+            }
         }
     }
 }

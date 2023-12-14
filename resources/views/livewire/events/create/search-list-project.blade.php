@@ -17,14 +17,16 @@
                     <li class="filter__contacts__list__item" wire:key="{{$project->id}}">
                         <span class="capitalize projectName">{{ ucfirst($project->name) }}</span>
                         <div class="projectTasks">
-                            @if(!empty($project->tasks))
-                                <ul>
+                            @if($project->tasks->count())
+                                <span>
                                     @foreach($project->tasks as $task)
-                                        <li>{{ ucfirst($task) }}</li>
+                                        <span class="taskName">{{ ucfirst($task->name) }}</span>
                                     @endforeach
-                                </ul>
+                                </span>
                             @else
-                                <span>Aucune tâche n'est associée à ce projet.</span>
+                                <span class="underline">
+                                    Aucune tâche associée à ce projet.
+                                </span>
                             @endif
                         </div>
                         <button type="button" wire:click="addDuty({{ $project->id }})">
