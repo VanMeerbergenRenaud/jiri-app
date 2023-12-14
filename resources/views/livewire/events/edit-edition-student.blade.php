@@ -78,13 +78,10 @@
                             <div>
                                 <label for="email">
                                     @if($editStudentId && $student->id == $editStudentId)
-                                        <input type="text" name="email" id="email" placeholder="Email"
-                                               wire:model.defer="email">
-                                        @error('email') <span
-                                            class="error-message w-full underline text-center mb-2">{{ $message }}</span> @enderror
+                                        <input type="text" name="email" id="email" placeholder="Email" wire:model.defer="email">
+                                        @error('email') <span class="error-message w-full underline text-center mb-2">{{ $message }}</span> @enderror
                                     @else
-                                        <input type="text" name="email" id="email" placeholder="Email"
-                                               value="{{ $student->email ?? '' }}" disabled>
+                                        <input type="text" name="email" id="email" placeholder="Email" value="{{ $student->email ?? '' }}" disabled>
                                     @endif
                                 </label>
                             </div>
@@ -92,12 +89,17 @@
                         {{-- Photo --}}
                         <td>
                             <div>
-                                <label for="photo" x-data="{ files: null }" class="file">
-                                    <input type="file" name="photo" id="photo"
-                                           x-on:change="files = Object.values($event.target.files)">
-                                    @include('components.svg.upload-file')
-                                    <span
-                                        x-text="files ? files.map(file => file.name).join(', ') : 'JPEG, JPG, PNG only'"></span>
+                                <label for="photo" class="file">
+                                    @if($editStudentId && $student->id == $editStudentId)
+                                        <input type="file" name="photo" id="photo" wire:model.defer="photo">
+                                        @error('photo') <span class="error-message w-full underline text-center mb-2">{{ $message }}</span> @enderror
+                                        @include('components.svg.upload-file')
+                                        <span x-text="'JPEG, JPG, PNG only'"></span>
+                                    @else
+                                        <input type="file" name="photo" id="photo" disabled>
+                                        @include('components.svg.upload-file')
+                                        <span x-text="'JPEG, JPG, PNG only'"></span>
+                                    @endif
                                 </label>
                             </div>
                         </td>
