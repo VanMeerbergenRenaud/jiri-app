@@ -45,6 +45,13 @@
         &__table {
             text-align: left;
 
+            thead {
+                position: sticky;
+                top: 0;
+                left: 0;
+                z-index: 3;
+            }
+
             &__row1 {
 
                 th {
@@ -61,6 +68,23 @@
                     min-width: 175px;
                 }
 
+                th.projects {
+                    border-right: none;
+                }
+
+                th.editColumn {
+                    position: sticky;
+                    top: 0;
+                    right: 8.3125rem;
+                    border-left: $border;
+                }
+
+                th.deleteColumn {
+                    position: sticky;
+                    top: 0;
+                    right: 0;
+                }
+
                 th:nth-last-child(1), th:nth-last-of-type(2) {
                     padding: 1.25rem 2rem;
                     text-align: center;
@@ -68,6 +92,22 @@
             }
 
             &__row2 {
+                .td__projects {
+                    border-right: none;
+                }
+
+                td.editColumn {
+                    position: sticky;
+                    top: 3.75rem;
+                    right: 8.3125rem;
+                    border-left: $border;
+                }
+
+                td.deleteColumn {
+                    position: sticky;
+                    top: 3.75rem;
+                    right: 0;
+                }
 
                 div {
                     position: relative;
@@ -91,8 +131,9 @@
 
                         input[type="file"] {
                             position: absolute;
-                            top: 0;
+                            top: -0.75rem;
                             left: 0;
+                            padding: 0;
                             opacity: 0;
                             height: 4rem;
                             cursor: pointer;
@@ -141,6 +182,12 @@
                     align-items: center;
                     justify-content: center;
                     padding: 1rem;
+                }
+
+                &:last-of-type {
+                    td {
+                        border-bottom: none;
+                    }
                 }
             }
 

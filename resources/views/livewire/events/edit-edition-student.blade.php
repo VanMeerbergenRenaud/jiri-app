@@ -102,13 +102,17 @@
                             </div>
                         </td>
                         {{-- Projects --}}
-                        <td>
+                        <td class="td__projects">
                             <div class="projects">
                                 @foreach($projects as $project)
                                     <label for="project{{$index}}-{{ $project->id }}">
-                                        <input type="checkbox" name="project{{ $project->name }}"
-                                               id="project{{$index}}-{{ $project->id }}">
-                                        {{ $project->name }}
+                                        @if($editStudentId && $student->id == $editStudentId)
+                                            <input type="checkbox" name="project{{ $project->name }}" id="project{{$index}}-{{ $project->id }}" checked>
+                                            {{ $project->name }}
+                                        @else
+                                            <input type="checkbox" name="project{{ $project->name }}" id="project{{$index}}-{{ $project->id }}" checked disabled>
+                                            {{ $project->name }}
+                                        @endif
                                     </label>
                                 @endforeach
                             </div>

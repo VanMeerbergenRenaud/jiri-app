@@ -59,10 +59,9 @@ class EditEditionStudent extends Component
         ]);
 
         $student->save();
-        
+
         session()->flash('message', 'Etudiant créé !.');
     }
-
 
     // Save a student from the event
     public function saveStudent($studentId)
