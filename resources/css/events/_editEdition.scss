@@ -178,6 +178,75 @@
             }
         }
     }
+
+    .editEditionModal {
+        padding: 1rem;
+
+        h2 {
+            margin-bottom: 1.5rem;
+        }
+
+        &__fields {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 0;
+            text-align: left;
+
+            label[for="name"], label[for="firstname"], label[for="email"], label[for="photo"] {
+                margin: 1rem 0 0.5rem;
+                display: block;
+                width: 100%;
+                font-weight: 500;
+            }
+
+            input[type="text"] {
+                width: 100%;
+                padding: 1rem 1.25rem;
+                border: $border;
+                border-radius: 0.5rem;
+                font-size: 0.9rem;
+            }
+
+            .projects {
+                margin-top: 1rem;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 1rem;
+
+                &__title {
+                    display: block;
+                    width: 100%;
+                    font-weight: 500;
+                }
+            }
+
+        }
+
+        &__buttons {
+            margin-top: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+
+            button {
+                width: 100%;
+                padding: 0.75rem 1rem;
+                font-weight: 500;
+                color: white;
+            }
+
+            .cancel {
+                background: $blue-dark;
+            }
+
+            .confirm {
+                background: $blue;
+            }
+        }
+    }
 }
 
 // For 1050px screen
@@ -201,6 +270,26 @@
 
                     th, td {
                         width: 100%;
+                    }
+                }
+            }
+        }
+    }
+
+    .modal {
+        .modal__dialog {
+            min-width: 800px;
+
+            .editEditionModal {
+                padding: 2rem;
+
+                &__fields {
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 1rem 2.5rem;
+
+                    .projects {
+                        grid-column: 1/3;
                     }
                 }
             }

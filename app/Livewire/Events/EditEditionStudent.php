@@ -41,20 +41,28 @@ class EditEditionStudent extends Component
         $this->projects = Duty::where('event_id', $this->event_id)->get();
     }
 
-    // Duplicate a empty student row with a new id
-    public function addStudentRow()
+    // Create a student and add it to the event
+    public function createStudent()
     {
-        $contact = auth()->user()->contacts()->make([
-            'id' => Contact::all()->last()->id + 1,
-            'name' => '',
-            'firstname' => '',
-            'email' => null,
+        $this->validate();
+
+        $student = auth()->user()->contacts()->create([
+            'name' => $this->name,
+            'firstname' => $this->firstname,
+            'email' => $this->email,
         ]);
 
-        $this->students->push($contact);
+        Attendance::create([
+            'contact_id' => $student->id,
+            'event_id' => $this->event_id,
+            'role' => 'student',
+        ]);
 
-        session()->flash('message', 'Nouvel étudiant ajouté !.');
+        $student->save();
+        
+        session()->flash('message', 'Etudiant créé !.');
     }
+
 
     // Save a student from the event
     public function saveStudent($studentId)
@@ -80,9 +88,11 @@ class EditEditionStudent extends Component
     {
         $this->editStudentId = $studentId;
 
-        $this->name = $this->students->where('id', $studentId)->first()->name;
-        $this->firstname = $this->students->where('id', $studentId)->first()->firstname;
-        $this->email = $this->students->where('id', $studentId)->first()->email;
+        $Student = $this->students->where('id', $studentId)->first();
+
+        $this->name = $Student->name;
+        $this->firstname = $Student->firstname;
+        $this->email = $Student->email;
 
         session()->flash('message', 'Etudiant en cours d\'édition !.');
     }

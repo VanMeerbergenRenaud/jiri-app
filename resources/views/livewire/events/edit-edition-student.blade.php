@@ -24,7 +24,7 @@
         </ul>--}}
     </div>
 
-    <form wire:submit.prevent="save">
+    <form wire:submit.prevent="save" x-data="{showModal: false}">
         @csrf
         @method('PUT')
         <table class="students__table">
@@ -48,10 +48,13 @@
                             <div>
                                 <label for="name">
                                     @if($editStudentId && $student->id == $editStudentId)
-                                        <input type="text" name="name" id="name" placeholder="Nom" wire:model.defer="name">
-                                        @error('name') <span class="error-message w-full underline text-center mb-2">{{ $message }}</span> @enderror
+                                        <input type="text" name="name" id="name" placeholder="Nom"
+                                               wire:model.defer="name">
+                                        @error('name') <span
+                                            class="error-message w-full underline text-center mb-2">{{ $message }}</span> @enderror
                                     @else
-                                        <input type="text" name="name" id="name" placeholder="Nom" value="{{ $student->name ?? '' }}" disabled>
+                                        <input type="text" name="name" id="name" placeholder="Nom"
+                                               value="{{ $student->name ?? '' }}" disabled>
                                     @endif
                                 </label>
                             </div>
@@ -60,10 +63,13 @@
                             <div>
                                 <label for="firstname">
                                     @if($editStudentId && $student->id == $editStudentId)
-                                        <input type="text" name="firstname" id="firstname" placeholder="Prénom" wire:model.defer="firstname">
-                                        @error('firstname') <span class="error-message w-full underline text-center mb-2">{{ $message }}</span> @enderror
+                                        <input type="text" name="firstname" id="firstname" placeholder="Prénom"
+                                               wire:model.defer="firstname">
+                                        @error('firstname') <span
+                                            class="error-message w-full underline text-center mb-2">{{ $message }}</span> @enderror
                                     @else
-                                        <input type="text" name="firstname" id="firstname" placeholder="Prénom" value="{{ $student->firstname ?? '' }}" disabled>
+                                        <input type="text" name="firstname" id="firstname" placeholder="Prénom"
+                                               value="{{ $student->firstname ?? '' }}" disabled>
                                     @endif
                                 </label>
                             </div>
@@ -72,10 +78,13 @@
                             <div>
                                 <label for="email">
                                     @if($editStudentId && $student->id == $editStudentId)
-                                        <input type="text" name="email" id="email" placeholder="Email" wire:model.defer="email">
-                                        @error('email') <span class="error-message w-full underline text-center mb-2">{{ $message }}</span> @enderror
+                                        <input type="text" name="email" id="email" placeholder="Email"
+                                               wire:model.defer="email">
+                                        @error('email') <span
+                                            class="error-message w-full underline text-center mb-2">{{ $message }}</span> @enderror
                                     @else
-                                        <input type="text" name="email" id="email" placeholder="Email" value="{{ $student->email ?? '' }}" disabled>
+                                        <input type="text" name="email" id="email" placeholder="Email"
+                                               value="{{ $student->email ?? '' }}" disabled>
                                     @endif
                                 </label>
                             </div>
@@ -84,9 +93,11 @@
                         <td>
                             <div>
                                 <label for="photo" x-data="{ files: null }" class="file">
-                                    <input type="file" name="photo" id="photo" x-on:change="files = Object.values($event.target.files)">
+                                    <input type="file" name="photo" id="photo"
+                                           x-on:change="files = Object.values($event.target.files)">
                                     @include('components.svg.upload-file')
-                                    <span x-text="files ? files.map(file => file.name).join(', ') : 'JPEG, JPG, PNG only'"></span>
+                                    <span
+                                        x-text="files ? files.map(file => file.name).join(', ') : 'JPEG, JPG, PNG only'"></span>
                                 </label>
                             </div>
                         </td>
@@ -95,7 +106,8 @@
                             <div class="projects">
                                 @foreach($projects as $project)
                                     <label for="project{{$index}}-{{ $project->id }}">
-                                        <input type="checkbox" name="project{{ $project->name }}" id="project{{$index}}-{{ $project->id }}">
+                                        <input type="checkbox" name="project{{ $project->name }}"
+                                               id="project{{$index}}-{{ $project->id }}">
                                         {{ $project->name }}
                                     </label>
                                 @endforeach
@@ -134,23 +146,67 @@
                     </td>
                 </tr>
             @endif
-
-            {{-- Row to add a button that allow to add a new student --}}
-            <tr class="students__table__row3">
-                <td colspan="100%">
-                    <div class="addButton">
-                        <button type="button" wire:click="addStudentRow">
-                            Ajouter un étudiant
-                            @include('components.svg.add')
-                        </button>
-                    </div>
-                </td>
-            </tr>
             </tbody>
         </table>
 
+        <template x-if="showModal">
+            <div class="modal">
+                <div class="modal__dialog">
+                    <form class="editEditionModal" wire:submit="createStudent">
+                        @csrf
+                        <h2>Ajouter un étudiant</h2>
+                        <div class="editEditionModal__fields">
+                            <div>
+                                <label for="name">Nom</label>
+                                <input type="text" name="name" id="name" placeholder="Nom" wire:model.defer="name">
+                                @error('name') <span class="error-message my-1">{{ $message }}</span> @enderror
+                            </div>
+
+                            <div>
+                                <label for="firstname">Prénom</label>
+                                <input type="text" name="firstname" id="firstname" placeholder="Prénom" wire:model.defer="firstname">
+                                @error('firstname') <span class="error-message my-1">{{ $message }}</span> @enderror
+                            </div>
+
+                            <div>
+                                <label for="email">Email</label>
+                                <input type="text" name="email" id="email" placeholder="Email" wire:model.defer="email">
+                                @error('email') <span class="error-message my-1">{{ $message }}</span> @enderror
+                            </div>
+
+                            <div>
+                                <label for="photo">Photo</label>
+                                <input type="file" name="photo" id="photo" wire:model.defer="photo">
+                                @error('photo') <span class="error-message my-1">{{ $message }}</span> @enderror
+                            </div>
+
+                            <div class="projects">
+                                <h3 class="projects__title">Projets</h3>
+                                @foreach($projects as $project)
+                                    <label for="project{{$index}}-{{ $project->id }}">
+                                        <input type="checkbox" name="project{{ $project->name }} "
+                                               id="project{{$index}}-{{ $project->id }}"
+                                               checked
+                                        >
+                                        {{ $project->name }}
+                                    </label>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="editEditionModal__buttons">
+                            <button type="button" class="cancel" @click="showModal = false">Annuler</button>
+                            <button class="confirm">Ajouter</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </template>
+
         <div class="flex justify-end">
-            <button type="submit" class="button--classic mt-4">Enregistrer tout</button>
+            <button type="button" class="button--classic mt-4 inline-flex items-center gap-2" @click="showModal = true">
+                Ajouter un étudiant
+                @include('components.svg.add')
+            </button>
         </div>
     </form>
 
