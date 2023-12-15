@@ -20,6 +20,10 @@
                         @foreach($contacts as $contact)
                             <template x-if="search === '' || '{{ $contact->name }}'.toLowerCase().includes(search.toLowerCase())">
                                 <li class="bg-gray-100 rounded-lg p-6 mb-4 flex gap-3 items-center relative">
+                                    {{-- Image --}}
+                                    <div class="w-16 h-16 rounded-full overflow-hidden">
+                                        <img src="{{ $contact->profile_image }}" alt="{{ $contact->name }}" class="w-full h-full object-cover">
+                                    </div>
                                     <div class="font-bold">{{ $contact->name }}</div>
                                     <div class="font-bold">{{ $contact->firstname }}</div>
                                     <div class="text-gray-600">{{ $contact->email }}</div>

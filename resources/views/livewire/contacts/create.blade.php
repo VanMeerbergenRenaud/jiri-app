@@ -21,7 +21,11 @@
             @error('email')
             <p>{{ $message }}</p>
             @enderror
-            <button type="submit">Submit</button>
+
+            {{-- Image upload component --}}
+            <livewire:image-upload />
+
+            <button type="submit" class="block mt-18">Submit</button>
         </form>
     </div>
 </x-app-layout>

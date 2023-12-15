@@ -33,6 +33,23 @@
                 @enderror
             </div>
 
+            <div>
+                <label for="profile_image">Profile image</label>
+                <input type="file" id="profile_image" name="profile_image" value="{{ $contact->profile_image }}">
+                @error('profile_image')
+                <p>{{ $message }}</p>
+                @enderror
+            </div>
+
+            {{-- Preview of the image --}}
+            <div>
+                <img src="{{ $contact->profile_image }}" alt="Profile image" class="w-20 h-20 object-cover">
+                {{-- If no image --}}
+                @if ($contact->profile_image == null)
+                <p class="bold">No image</p>
+                @endif
+            </div>
+
             <button type="submit">Update Profile</button>
         </form>
     </div>

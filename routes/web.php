@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\WelcomeController;
+use App\Livewire\ImageUpload;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -54,6 +55,9 @@ Route::middleware('auth')->group(function () {
 
     /*  Student Profil */
     Route::resource('student', StudentController::class);
+
+    // Image upload for contacts
+    Route::get('/images', ImageUpload::class)->name('images.upload');
 });
 
 /*

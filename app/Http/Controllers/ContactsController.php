@@ -83,7 +83,8 @@ class ContactsController
         return request()->validate([
             'name' => 'required',
             'firstname' => 'required',
-            'email' => 'required|email|unique:contacts,email',
+            'email' => 'email|unique:contacts,email|nullable',
+            'profile_image' => 'image|nullable',
         ]);
     }
 }
