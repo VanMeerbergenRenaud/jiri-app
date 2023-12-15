@@ -15,7 +15,6 @@ class EditEditionStudent extends Component
 {
     use WithFileUploads;
 
-    public $contact;
     public $search = '';
 
     public $event_id;
@@ -43,17 +42,6 @@ class EditEditionStudent extends Component
         $this->projects = Duty::where('event_id', $this->event_id)->get();
     }
 
-    #[Computed]
-    public function searchList()
-    {
-        return $this->contact
-            ? Contact::where('name', 'like', '%'.$this->contact.'%')
-                ->orWhere('firstname', 'like', '%'.$this->contact.'%')
-                ->orWhere('email', 'like', '%'.$this->contact.'%')
-                ->orderBy('name', 'asc')->get()
-            : new Collection();
-    }
-
     // Fetch the students of the event
     #[Computed]
     public function students()
@@ -64,7 +52,8 @@ class EditEditionStudent extends Component
             ->where('attendances.role', 'student')
             ->where(function($query) {
                 $query->where('contacts.name', 'like', '%' . $this->search . '%')
-                    ->orWhere('contacts.firstname', 'like', '%' . $this->search . '%');
+                    ->orWhere('contacts.firstname', 'like', '%' . $this->search . '%')
+                    ->orWhere('contacts.email', 'like', '%' . $this->search . '%');
             })
             ->select('contacts.id', 'contacts.name', 'contacts.firstname', 'contacts.email')
             ->get();
