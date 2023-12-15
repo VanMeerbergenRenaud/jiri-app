@@ -1,7 +1,7 @@
 <div class="students">
     <div class="students__header flex justify-between">
         <h3>Ajouter des évalués</h3>
-        {{-- Input to search the students in filter the next table --}}
+        {{-- Input to search the students of the down table --}}
         <label for="search">
             @include('components.svg.search')
             <input
@@ -9,24 +9,14 @@
                 name="search"
                 id="search"
                 placeholder="Rechercher un étudiant..."
-                wire:model="search"
+                wire:model.live="search"
                 class="typeSearch"
             >
         </label>
-        {{-- Result list of the students from the search field --}}
-        {{--<ul>
-            @foreach($students as $student)
-                <li>
-                    <img src="" alt="Photo de {{ $student->name }}">
-                    {{ $student->name }}
-                </li>
-            @endforeach
-        </ul>--}}
     </div>
 
-    <form wire:submit.prevent="save" x-data="{showModal: false}">
+    <form x-data="{showModal: false}">
         @csrf
-        @method('PUT')
         <table class="students__table">
             {{-- 7 colonnes : Nom, prénom, photo, projets, catégories, modification, supprimer --}}
             <thead>
@@ -41,13 +31,13 @@
             </tr>
             </thead>
             <tbody>
-            @if(count($students) > 0)
-                @foreach($students as $index => $student)
+            @if($this->students->count() > 0)
+                @foreach($this->students as $index => $student)
                     <tr class="students__table__row2">
                         <td>
                             <div>
                                 <label for="name">
-                                    @if($editStudentId && $student->id == $editStudentId)
+                                    @if($editStudentId && $student->id === $editStudentId)
                                         <input type="text" name="name" id="name" placeholder="Nom"
                                                wire:model.defer="name">
                                         @error('name') <span
@@ -62,7 +52,7 @@
                         <td>
                             <div>
                                 <label for="firstname">
-                                    @if($editStudentId && $student->id == $editStudentId)
+                                    @if($editStudentId && $student->id === $editStudentId)
                                         <input type="text" name="firstname" id="firstname" placeholder="Prénom"
                                                wire:model.defer="firstname">
                                         @error('firstname') <span
@@ -77,7 +67,7 @@
                         <td>
                             <div>
                                 <label for="email">
-                                    @if($editStudentId && $student->id == $editStudentId)
+                                    @if($editStudentId && $student->id === $editStudentId)
                                         <input type="text" name="email" id="email" placeholder="Email" wire:model.defer="email">
                                         @error('email') <span class="error-message w-full underline text-center mb-2">{{ $message }}</span> @enderror
                                     @else
@@ -90,11 +80,11 @@
                         <td>
                             <div>
                                 <label for="photo" class="file">
-                                    @if($editStudentId && $student->id == $editStudentId)
+                                    @if($editStudentId && $student->id === $editStudentId)
                                         <input type="file" name="photo" id="photo" wire:model.defer="photo">
                                         @error('photo') <span class="error-message w-full underline text-center mb-2">{{ $message }}</span> @enderror
                                         @include('components.svg.upload-file')
-                                        <span x-text="'JPEG, JPG, PNG only'"></span>
+                                        <span>JPEG, JPG, PNG only</span>
                                     @else
                                         <input type="file" name="photo" id="photo" disabled>
                                         @include('components.svg.upload-file')
@@ -106,24 +96,30 @@
                         {{-- Projects --}}
                         <td class="td__projects">
                             <div class="projects">
-                                @foreach($projects as $project)
-                                    <label for="project{{$index}}-{{ $project->id }}">
-                                        @if($editStudentId && $student->id == $editStudentId)
-                                            <input type="checkbox" name="project{{ $project->name }}" id="project{{$index}}-{{ $project->id }}" checked>
-                                            {{ $project->name }}
-                                        @else
-                                            <input type="checkbox" name="project{{ $project->name }}" id="project{{$index}}-{{ $project->id }}" checked disabled>
-                                            {{ $project->name }}
-                                        @endif
-                                    </label>
-                                @endforeach
+                                @if($projects->count() > 0)
+                                    @foreach($projects as $project)
+                                        <label for="project{{$index}}-{{ $project->id }}">
+                                            @if($editStudentId && $student->id === $editStudentId)
+                                                <input type="checkbox" name="project{{ $project->name }}"
+                                                       id="project{{$index}}-{{ $project->id }}" checked>
+                                                {{ $project->name }}
+                                            @else
+                                                <input type="checkbox" name="project{{ $project->name }}"
+                                                       id="project{{$index}}-{{ $project->id }}" checked disabled>
+                                                {{ $project->name }}
+                                            @endif
+                                        </label>
+                                    @endforeach
+                                @else
+                                    <p>Aucun projet n'a encore été ajouté.</p>
+                                @endif
                             </div>
                         </td>
                         {{-- Edit button --}}
                         <td class="editColumn">
                             <div class="editButton">
-                                @if($editStudentId && $student->id == $editStudentId)
-                                    <button type="button" wire:click.prevent="saveStudent({{$student->id ?? ''}})"
+                                @if($editStudentId && $student->id === $editStudentId)
+                                    <button type="button" wire:click="saveStudent({{$student->id ?? ''}})"
                                             class="ml-4">
                                         Sauvegarder
                                     </button>
@@ -189,11 +185,9 @@
                             <div class="projects">
                                 <h3 class="projects__title">Projets</h3>
                                 @foreach($projects as $project)
-                                    <label for="project{{$index}}-{{ $project->id }}">
-                                        <input type="checkbox" name="project{{ $project->name }} "
-                                               id="project{{$index}}-{{ $project->id }}"
-                                               checked
-                                        >
+                                    <label for="project{{ $project->name }}">
+                                        <input type="checkbox" name="project{{ $project->name }}"
+                                               id="project{{ $project->name }}" checked>
                                         {{ $project->name }}
                                     </label>
                                 @endforeach

@@ -87,7 +87,7 @@ class DatabaseSeeder extends Seeder
                     $contacts = $event->contacts->random(2);
 
                     foreach ($contacts as $contact) {
-                        Implementation::factory()->count(2)->create([
+                        Implementation::factory()->count(1)->create([
                             'duty_id' => $duty->id,
                             'contact_id' => $contact->id,
                         ]);

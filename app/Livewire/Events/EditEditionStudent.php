@@ -5,40 +5,69 @@ namespace App\Livewire\Events;
 use App\Models\Attendance;
 use App\Models\Contact;
 use App\Models\Duty;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
+use Livewire\Attributes\Computed;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class EditEditionStudent extends Component
 {
-    public $students;
-    public $editStudentId = null;
+    use WithFileUploads;
 
-    protected $rules = [
-        'name' => 'required|min:3|max:255',
-        'firstname' => 'required|min:3|max:255',
-        'email' => 'required|email',
-    ];
+    public $contact;
+    public $search = '';
+
+    public $event_id;
+    public $projects;
+    public $editStudentId; // Student id that is being edited
 
     public $name;
     public $firstname;
     public $email;
+    // public $photo;
 
-    public $event_id;
-    public $projects;
+    protected $rules = [
+        'name' => 'required|min:3|max:255',
+        'firstname' => 'required|min:3|max:255',
+        'email' => 'nullable|email',
+        // 'photo' => 'image|max:1024|jpg,jpeg,png',
+    ];
 
     public function mount()
     {
+        // Get the event id from the url
         $this->event_id = request()->route('event');
-
-        $this->students = DB::table('contacts')
-            ->join('attendances', 'contacts.id', '=', 'attendances.contact_id')
-            ->where('attendances.event_id', $this->event_id)
-            ->where('attendances.role', 'student')
-            ->select('contacts.id', 'contacts.name', 'contacts.firstname', 'contacts.email')
-            ->get();
 
         // Projects of the specific event
         $this->projects = Duty::where('event_id', $this->event_id)->get();
+    }
+
+    #[Computed]
+    public function searchList()
+    {
+        return $this->contact
+            ? Contact::where('name', 'like', '%'.$this->contact.'%')
+                ->orWhere('firstname', 'like', '%'.$this->contact.'%')
+                ->orWhere('email', 'like', '%'.$this->contact.'%')
+                ->orderBy('name', 'asc')->get()
+            : new Collection();
+    }
+
+    // Fetch the students of the event
+    #[Computed]
+    public function students()
+    {
+        return DB::table('contacts')
+            ->join('attendances', 'contacts.id', '=', 'attendances.contact_id')
+            ->where('attendances.event_id', $this->event_id)
+            ->where('attendances.role', 'student')
+            ->where(function($query) {
+                $query->where('contacts.name', 'like', '%' . $this->search . '%')
+                    ->orWhere('contacts.firstname', 'like', '%' . $this->search . '%');
+            })
+            ->select('contacts.id', 'contacts.name', 'contacts.firstname', 'contacts.email')
+            ->get();
     }
 
     // Create a student and add it to the event
@@ -58,12 +87,14 @@ class EditEditionStudent extends Component
             'role' => 'student',
         ]);
 
-        $student->save();
+        $this->name = '';
+        $this->firstname = '';
+        $this->email = null;
 
         session()->flash('message', 'Etudiant créé !.');
     }
 
-    // Save a student from the event
+    // Save a student in the event
     public function saveStudent($studentId)
     {
         $this->validate();
@@ -79,21 +110,23 @@ class EditEditionStudent extends Component
             'email' => $this->email,
         ]);
 
+        $this->editStudentId = null;
+
         session()->flash('message', 'Etudiant sauvegardé !.');
     }
 
-    // Edit a student from the event
+    // Edit a student in the event
     public function editStudent($studentId)
     {
         $this->editStudentId = $studentId;
 
-        $Student = $this->students->where('id', $studentId)->first();
+        $studentIdFind = $this->students()->where('id', $studentId)->first();
 
-        $this->name = $Student->name;
-        $this->firstname = $Student->firstname;
-        $this->email = $Student->email;
+        $this->name = $studentIdFind->name;
+        $this->firstname = $studentIdFind->firstname;
+        $this->email = $studentIdFind->email;
 
-        session()->flash('message', 'Etudiant en cours d\'édition !.');
+        session()->flash('message', 'Etudiant en cours d‘édition !.');
     }
 
     // Remove the student from the event
@@ -107,29 +140,7 @@ class EditEditionStudent extends Component
             ->delete();
 
         session()->flash('message', 'Etudiant supprimé !.');
-    }
 
-    // Save the form
-    public function save()
-    {
-        $this->validate();
-
-        foreach ($this->students as $student) {
-            $student = Contact::find($student->id);
-
-            // Update the student
-            $student->update([
-                'name' => $student->name,
-                'firstname' => $student->firstname,
-                'email' => $student->email,
-            ]);
-        }
-
-        session()->flash('message', 'Étudiants sauvegardés !.');
-    }
-
-    public function render()
-    {
-        return view('livewire.events.edit-edition-student');
+        $this->students();
     }
 }
