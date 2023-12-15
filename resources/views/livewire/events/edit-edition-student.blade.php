@@ -33,55 +33,34 @@
             <tbody>
             @if($this->students->count() > 0)
                 @foreach($this->students as $index => $student)
-                    <tr class="students__table__row2">
-                        <td>
-                            <div>
-                                <label for="name">
-                                    @if($editStudentId && $student->id === $editStudentId)
-                                        <input type="text" name="name" id="name" placeholder="Nom"
-                                               wire:model.defer="name">
-                                        @error('name') <span
-                                            class="error-message w-full underline text-center mb-2">{{ $message }}</span> @enderror
-                                    @else
-                                        <input type="text" name="name" id="name" placeholder="Nom"
-                                               value="{{ $student->name ?? '' }}" disabled>
-                                    @endif
-                                </label>
-                            </div>
-                        </td>
-                        <td>
-                            <div>
-                                <label for="firstname">
-                                    @if($editStudentId && $student->id === $editStudentId)
-                                        <input type="text" name="firstname" id="firstname" placeholder="Prénom"
-                                               wire:model.defer="firstname">
-                                        @error('firstname') <span
-                                            class="error-message w-full underline text-center mb-2">{{ $message }}</span> @enderror
-                                    @else
-                                        <input type="text" name="firstname" id="firstname" placeholder="Prénom"
-                                               value="{{ $student->firstname ?? '' }}" disabled>
-                                    @endif
-                                </label>
-                            </div>
-                        </td>
-                        <td>
-                            <div>
-                                <label for="email">
-                                    @if($editStudentId && $student->id === $editStudentId)
-                                        <input type="text" name="email" id="email" placeholder="Email" wire:model.defer="email">
-                                        @error('email') <span class="error-message w-full underline text-center mb-2">{{ $message }}</span> @enderror
-                                    @else
-                                        <input type="text" name="email" id="email" placeholder="Email" value="{{ $student->email ?? '' }}" disabled>
-                                    @endif
-                                </label>
-                            </div>
-                        </td>
+                    <tr class="students__table__row2" wire:keydown.enter="saveStudent({{$student->id ?? ''}})">
+                        @php
+                            $fields = [
+                                'name' => 'Nom',
+                                'firstname' => 'Prénom',
+                                'email' => 'Email'
+                            ];
+                        @endphp
+
+                        @foreach($fields as $fieldName => $placeholder)
+                            <td wire:key="student-{{ $student->id }}">
+                                @include('components.form.edit-edition-field', [
+                                    'editId' => $editStudentId,
+                                    'modelId' => $student->id,
+                                    'modelName' => $fieldName,
+                                    'fieldId' => 'student-' . $student->id,
+                                    'fieldName' => $fieldName,
+                                    'placeholder' => $placeholder,
+                                    'fieldValue' => $student->{$fieldName} ?? ''
+                                ])
+                            </td>
+                        @endforeach
                         {{-- Photo --}}
                         <td>
                             <div>
                                 <label for="photo" class="file">
                                     @if($editStudentId && $student->id === $editStudentId)
-                                        <input type="file" name="photo" id="photo" wire:model.defer="photo">
+                                        <input type="file" name="photo" id="photo" wire:model="photo">
                                         @error('photo') <span class="error-message w-full underline text-center mb-2">{{ $message }}</span> @enderror
                                         @include('components.svg.upload-file')
                                         <span>JPEG, JPG, PNG only</span>
@@ -100,12 +79,10 @@
                                     @foreach($projects as $project)
                                         <label for="project{{$index}}-{{ $project->id }}">
                                             @if($editStudentId && $student->id === $editStudentId)
-                                                <input type="checkbox" name="project{{ $project->name }}"
-                                                       id="project{{$index}}-{{ $project->id }}" checked>
+                                                <input type="checkbox" name="project{{ $project->name }}" id="project{{$index}}-{{ $project->id }}" checked>
                                                 {{ $project->name }}
                                             @else
-                                                <input type="checkbox" name="project{{ $project->name }}"
-                                                       id="project{{$index}}-{{ $project->id }}" checked disabled>
+                                                <input type="checkbox" name="project{{ $project->name }}" id="project{{$index}}-{{ $project->id }}" checked disabled>
                                                 {{ $project->name }}
                                             @endif
                                         </label>
@@ -124,8 +101,7 @@
                                         Sauvegarder
                                     </button>
                                 @else
-                                    <button type="button" wire:click.prevent="editStudent({{$student->id ?? ''}})"
-                                            class="ml-4">
+                                    <button type="button" wire:click.prevent="editStudent({{$student->id ?? ''}})" class="ml-4">
                                         Editer
                                     </button>
                                 @endif
@@ -144,7 +120,7 @@
             @else
                 <tr class="emptyRow">
                     <td colspan="100%">
-                        Aucun étudiant n'a encore été ajouté.
+                        Aucun étudiant n'a encore été ajouté à cette épreuve.
                     </td>
                 </tr>
             @endif
@@ -160,25 +136,25 @@
                         <div class="editEditionModal__fields">
                             <div>
                                 <label for="name">Nom</label>
-                                <input type="text" name="name" id="name" placeholder="Nom" wire:model.defer="name">
+                                <input type="text" name="name" id="name" placeholder="Nom" wire:model="name">
                                 @error('name') <span class="error-message my-1">{{ $message }}</span> @enderror
                             </div>
 
                             <div>
                                 <label for="firstname">Prénom</label>
-                                <input type="text" name="firstname" id="firstname" placeholder="Prénom" wire:model.defer="firstname">
+                                <input type="text" name="firstname" id="firstname" placeholder="Prénom" wire:model="firstname">
                                 @error('firstname') <span class="error-message my-1">{{ $message }}</span> @enderror
                             </div>
 
                             <div>
                                 <label for="email">Email</label>
-                                <input type="text" name="email" id="email" placeholder="Email" wire:model.defer="email">
+                                <input type="text" name="email" id="email" placeholder="Email" wire:model="email">
                                 @error('email') <span class="error-message my-1">{{ $message }}</span> @enderror
                             </div>
 
                             <div>
                                 <label for="photo">Photo</label>
-                                <input type="file" name="photo" id="photo" wire:model.defer="photo">
+                                <input type="file" name="photo" id="photo" wire:model="photo">
                                 @error('photo') <span class="error-message my-1">{{ $message }}</span> @enderror
                             </div>
 
@@ -186,8 +162,7 @@
                                 <h3 class="projects__title">Projets</h3>
                                 @foreach($projects as $project)
                                     <label for="project{{ $project->name }}">
-                                        <input type="checkbox" name="project{{ $project->name }}"
-                                               id="project{{ $project->name }}" checked>
+                                        <input type="checkbox" name="project{{ $project->name }}" id="project{{ $project->name }}" checked>
                                         {{ $project->name }}
                                     </label>
                                 @endforeach

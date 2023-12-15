@@ -342,23 +342,23 @@
                     }
                 }
             }
-        }
-    }
 
-    .modal {
-        .modal__dialog {
-            min-width: 800px;
+            .modal {
+                .modal__dialog {
+                    min-width: 800px;
 
-            .editEditionModal {
-                padding: 2rem;
+                    .editEditionModal {
+                        padding: 2rem;
 
-                &__fields {
-                    display: grid;
-                    grid-template-columns: repeat(2, 1fr);
-                    gap: 1rem 2.5rem;
+                        &__fields {
+                            display: grid;
+                            grid-template-columns: repeat(2, 1fr);
+                            gap: 1rem 2.5rem;
 
-                    .projects {
-                        grid-column: 1/3;
+                            .projects {
+                                grid-column: 1/3;
+                            }
+                        }
                     }
                 }
             }
