@@ -13,7 +13,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('firstname');
             $table->string('email')->nullable();
-            $table->string('profile_image')->nullable();
+            $table->string('avatar')->nullable();
             $table->timestamps();
         });
     }

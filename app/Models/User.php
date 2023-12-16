@@ -46,6 +46,13 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    // Using Gravatar for user profile image
+    public function avatarUrl()
+    {
+        $hash = md5(strtolower(trim($this->email)));
+        return "https://www.gravatar.com/avatar/$hash";
+    }
+
     public function events(): HasMany
     {
         return $this->hasMany(Event::class);

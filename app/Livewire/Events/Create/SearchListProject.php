@@ -30,7 +30,7 @@ class SearchListProject extends Component
         $event = Event::find($this->eventId);
         $project = Project::find($projectId);
 
-        if (!$event->duties()->where('project_id', $project->id)->exists()) {
+        if (! $event->duties()->where('project_id', $project->id)->exists()) {
             $duty = new Duty();
             $duty->name = $project->name;
             // Todo : add tasks from the tasks Table

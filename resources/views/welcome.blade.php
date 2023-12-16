@@ -16,8 +16,8 @@
             <main class="mainWelcome">
                 <div class="flex-center welcome">
                     <div class="flex-center welcome__intro">
-                        <img src="{{ asset('img/dominique.png') }}" alt="Image de l'admin Dominique">
-                        <h2>Joyeux anniversaire {{ $user->name }} !</h2>
+                        <img src="{{ auth()->user()->avatarUrl() ?? asset('img/dominique.png') }}" alt="Photo de profil">
+                        <h2>Enchanté {{ $user->name }} !</h2>
                         <p>Commencer votre aventure dès maintenant.</p>
                     </div>
 

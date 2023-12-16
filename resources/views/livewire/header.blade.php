@@ -1,5 +1,5 @@
 <div class="events__intro__info">
-    <img src="{{ asset('img/dominique.png') }}" alt="Image de l'admin Dominique">
+    <img src="{{ auth()->user()->avatarUrl() ?? asset('img/dominique.png') }}" alt="Photo de profil">
     <div>
         <h2>{{ $title }}</h2>
         <p>{{ $message }}</p>

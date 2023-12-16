@@ -12,6 +12,9 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
         <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 
+        {{-- Filepond --}}
+        <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+
         <!-- Scripts -->
         @vite(['resources/css/app.scss', 'resources/js/app.js'])
     </head>
@@ -24,5 +27,9 @@
 
         <!-- Page Footer -->
         @include('layouts.footer')
+
+        @livewireScripts
+        {{-- Filepond --}}
+        <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
     </body>
 </html>

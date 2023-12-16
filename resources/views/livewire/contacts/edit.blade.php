@@ -26,8 +26,7 @@
 
             <div>
                 <label for="email">Email</label>
-                {{-- Can't edit the value --}}
-                <input type="text" id="email" name="email" value="{{ $contact->email }}" readonly>
+                <input type="text" id="email" name="email" value="{{ $contact->email }}">
                 @error('email')
                 <p>{{ $message }}</p>
                 @enderror

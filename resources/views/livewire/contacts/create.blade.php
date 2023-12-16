@@ -23,7 +23,26 @@
             @enderror
 
             {{-- Image upload component --}}
-            <livewire:image-upload />
+            <label for="avatar">Avatar</label>
+            <input type="file" id="avatar" name="avatar" wire:model="avatar" value="{{ old('avatar') }}">
+            @error('avatar')
+            <p>{{ $message }}</p>
+            @enderror
+
+            @php
+                $newAvatar = $avatar ?? null;
+            @endphp
+
+            {{-- Preview of the image --}}
+            @if($newAvatar)
+                <img src="{{ $newAvatar->temporaryUrl() }}" alt="Profile image" class="w-20 h-20 object-cover">
+            @else
+                <img src="{{ auth()->user()->avatarUrl() }}" alt="Profile image" class="w-20 h-20 object-cover">
+            @endif
+
+            {{--<livewire:image-upload />--}}
+
+            <x-form.input.filepond wire:model="avatar" />
 
             <button type="submit" class="block mt-18">Submit</button>
         </form>

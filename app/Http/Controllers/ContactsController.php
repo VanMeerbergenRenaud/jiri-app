@@ -60,6 +60,8 @@ class ContactsController
         $data = request()->validate([
             'name' => 'required',
             'firstname' => 'required',
+            'email' => 'email|unique:contacts,email,' . $contactId . '|nullable',
+            'avatar' => 'image|nullable',
         ]);
 
         $contact = Contact::findOrFail($contactId);
@@ -84,7 +86,7 @@ class ContactsController
             'name' => 'required',
             'firstname' => 'required',
             'email' => 'email|unique:contacts,email|nullable',
-            'profile_image' => 'image|nullable',
+            'avatar' => 'nullable',
         ]);
     }
 }

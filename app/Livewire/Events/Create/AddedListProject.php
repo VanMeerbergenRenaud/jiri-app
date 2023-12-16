@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Events\Create;
 
-use App\Models\Attendance;
 use App\Models\Duty;
 use App\Models\Event;
 use Illuminate\Database\Eloquent\Collection;

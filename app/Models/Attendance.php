@@ -13,7 +13,7 @@ class Attendance extends Model
     protected $fillable = [
         'role',
         'contact_id',
-        'event_id'
+        'event_id',
     ];
 
     public function event(): BelongsTo

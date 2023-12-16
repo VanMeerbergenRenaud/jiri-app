@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Events\Create;
 
-use App\Models\User;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 

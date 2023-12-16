@@ -2,7 +2,6 @@
 
 namespace App\Livewire;
 
-use Faker\Provider\Image;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;

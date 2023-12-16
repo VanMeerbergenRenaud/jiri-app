@@ -5,7 +5,6 @@ namespace App\Livewire\Events;
 use App\Models\Attendance;
 use App\Models\Contact;
 use App\Models\Duty;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
@@ -18,11 +17,15 @@ class EditEditionStudent extends Component
     public $search = '';
 
     public $event_id;
+
     public $projects;
+
     public $editStudentId; // Student id that is being edited
 
     public $name;
+
     public $firstname;
+
     public $email;
     // public $photo;
 
@@ -50,10 +53,10 @@ class EditEditionStudent extends Component
             ->join('attendances', 'contacts.id', '=', 'attendances.contact_id')
             ->where('attendances.event_id', $this->event_id)
             ->where('attendances.role', 'student')
-            ->where(function($query) {
-                $query->where('contacts.name', 'like', '%' . $this->search . '%')
-                    ->orWhere('contacts.firstname', 'like', '%' . $this->search . '%')
-                    ->orWhere('contacts.email', 'like', '%' . $this->search . '%');
+            ->where(function ($query) {
+                $query->where('contacts.name', 'like', '%'.$this->search.'%')
+                    ->orWhere('contacts.firstname', 'like', '%'.$this->search.'%')
+                    ->orWhere('contacts.email', 'like', '%'.$this->search.'%');
             })
             ->select('contacts.id', 'contacts.name', 'contacts.firstname', 'contacts.email')
             ->get();

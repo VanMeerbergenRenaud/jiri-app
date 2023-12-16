@@ -30,7 +30,7 @@ class SearchList extends Component
         $event = Event::find($this->eventId);
         $contact = Contact::find($contactId);
 
-        if (!$event->contacts()->where('contact_id', $contact->id)->exists()) {
+        if (! $event->contacts()->where('contact_id', $contact->id)->exists()) {
             Attendance::create([
                 'contact_id' => $contactId,
                 'event_id' => $event->id,

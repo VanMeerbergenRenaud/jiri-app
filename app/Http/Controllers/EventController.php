@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Contact;
 use App\Models\Event;
 use Auth;
 use Illuminate\Contracts\View\View;

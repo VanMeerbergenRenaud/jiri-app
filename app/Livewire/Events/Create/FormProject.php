@@ -9,6 +9,7 @@ use Livewire\Component;
 class FormProject extends Component
 {
     public $user;
+
     public $tasks;
 
     public $projects;
