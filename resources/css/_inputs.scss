@@ -1,0 +1,53 @@
+/* Inputs */
+
+label.search {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: $border;
+    border-radius: 2rem;
+    background-color: $gray-bg;
+
+    input {
+        width: 100%;
+        padding: 0.75rem 3.5rem 0.75rem;
+        font-size: 1rem;
+        outline: none;
+        border-radius: 2rem;
+        background-color: $gray-bg;
+    }
+
+    svg {
+        position: absolute;
+        left: 1.5rem;
+    }
+
+    &:focus-within {
+        border: $border-focus;
+    }
+}
+
+label.select {
+
+}
+
+.import {
+    padding: 0.5rem 1.5rem;
+    display: flex;
+    align-items: center;
+    border-radius: 0.5rem;
+    color: #666B7E;
+    background-color: white;
+
+    svg {
+        margin-right: 0.5rem;
+        fill: #666B7E;
+    }
+
+    span {
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        min-width: 200px;
+    }
+}

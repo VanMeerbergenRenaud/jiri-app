@@ -521,12 +521,4 @@
             }
         }
     }
-
-    .mainEvents *, .mainEventsCreate * {
-        display: flex;
-        flex-direction: column;
-        justify-content: start;
-        align-items: start;
-        margin: 0.5rem 0;
-    }
 }

@@ -7,6 +7,7 @@ $blue-save: #6C8DE4; // save button
 
 /*------- gray variants -------*/
 $gray-bg: #F7F7FA; // background
+$gray-100: rgb(241 245 249);; // input
 $gray-300: #F0F1F7; // footer
 $gray-500: #E5E9F4;
 $gray-700: #E7EAF6;
@@ -14,6 +15,12 @@ $gray-900: #F0F1F7;
 
 /*----------- text -----------*/
 $text: #3F4353;
+$red: rgb(239 68 68);
+$text-slate-500: rgb(100 116 139);
 
 /*---------- borders ----------*/
 $border: 1px solid #E6EAF4;
+$border-focus: 1px solid #DDD;
+
+/*---------- shadows ----------*/
+$shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075)

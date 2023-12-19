@@ -11,27 +11,4 @@ class StudentController extends Controller
     {
         return view('student');
     }
-
-    /*public function show($id)
-    {
-        $student = Contact::findOrFail($id);
-
-        return view('student', ['student' => $student]);
-    }
-
-    public function edit($id)
-    {
-        $student = Contact::findOrFail($id);
-
-        return view('student', ['student' => $student]);
-    }
-
-    public function update(Request $request, $id)
-    {
-        $student = Contact::findOrFail($id);
-
-        $student->update($request->all());
-
-        return redirect()->route('student.show', ['student' => $student]);
-    }*/
 }

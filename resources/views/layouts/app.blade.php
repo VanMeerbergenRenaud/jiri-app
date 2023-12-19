@@ -7,16 +7,15 @@
 
         <title>{{ $title ?? 'Jiri app' }}</title>
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-
-        {{-- Filepond --}}
+        {{-- Filepond : File upload --}}
         <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
 
         <!-- Scripts -->
         @vite(['resources/css/app.scss', 'resources/js/app.js'])
+
+        @livewireStyles
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script defer src="https://unpkg.com/@alpinejs/ui@3.13.2-beta.0/dist/cdn.min.js"></script>
     </head>
     <body>
         <!-- Page Navigation -->

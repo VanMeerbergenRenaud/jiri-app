@@ -19,7 +19,7 @@ class EventController extends Controller
         $pastEvents = $events->filter(fn ($event) => $event->isPast());
         $currentEvents = $events->filter(fn ($event) => $event->isCurrent());
 
-        return view('livewire.pages.events', compact('user', 'events', 'upcomingEvents', 'pastEvents', 'currentEvents'));
+        return view('pages/events', compact('user', 'events', 'upcomingEvents', 'pastEvents', 'currentEvents'));
     }
 
     public function create(): View
