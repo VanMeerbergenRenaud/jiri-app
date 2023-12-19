@@ -1,0 +1,33 @@
+/* Menu */
+.menu {
+    display: flex;
+    align-items: center;
+
+    &__items {
+        padding: 0;
+        width: 12rem;
+        outline: none;
+        border: $border;
+        border-radius: 0.5rem;
+        background-color: white;
+        overflow: hidden;
+        z-index: 9;
+
+        .link, .button {
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            width: 100%;
+            color: #4a5568;
+            font-size: 0.875rem;
+            border-radius: 0;
+            cursor: pointer;
+
+            &:hover {
+                background-color: $gray-300;
+                color: black;
+            }
+        }
+    }
+}
