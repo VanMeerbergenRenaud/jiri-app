@@ -1,6 +1,5 @@
 <x-app-layout>
     <p>Hello {{ $contact->name }}</p>
-
     <div>
         <p>
             Name: {{ $contact->name }}
