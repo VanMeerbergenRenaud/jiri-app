@@ -7,13 +7,9 @@
 
         <title>{{ $title ?? 'Jiri app' }}</title>
 
-        {{-- Filepond : File upload --}}
-        <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
-
         <!-- Scripts -->
         @vite(['resources/css/app.scss', 'resources/js/app.js'])
 
-        @livewireStyles
         <script src="https://cdn.tailwindcss.com"></script>
         <script defer src="https://unpkg.com/@alpinejs/ui@3.13.2-beta.0/dist/cdn.min.js"></script>
     </head>
@@ -28,7 +24,6 @@
         @include('layouts.footer')
 
         @livewireScripts
-        {{-- Filepond --}}
-        <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+
     </body>
 </html>

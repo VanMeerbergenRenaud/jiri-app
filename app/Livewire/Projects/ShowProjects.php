@@ -7,6 +7,8 @@ use Livewire\Component;
 
 class ShowProjects extends Component
 {
+    public $search = '';
+
     public $projects;
     public $tasks = [];
 
@@ -14,6 +16,11 @@ class ShowProjects extends Component
     {
         $this->projects = auth()->user()->projects()->get();
         $this->tasks = auth()->user()->projects()->with('tasks')->get();
+    }
+
+    public function updatedSearch()
+    {
+        $this->projects = auth()->user()->projects()->where('name', 'like', '%' . $this->search . '%')->get();
     }
 
     public function delete($projectId)

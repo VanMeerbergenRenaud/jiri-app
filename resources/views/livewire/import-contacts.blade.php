@@ -29,7 +29,7 @@
                         <h2 class="title">Configurez l'ajout de vos données</h2>
 
                         <p class="p-2">
-                            Veuillez sélectionner la colonne correspondante pour chaque champ.
+                            Veuillez sélectionner la colonne correspondante à celle de votre fichier importé.
                         </p>
 
                         <label for="name">
