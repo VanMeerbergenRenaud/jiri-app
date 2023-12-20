@@ -10,15 +10,11 @@ class ProjectsController extends Controller
 {
     public function index()
     {
-        $user = Auth::user();
+        $user = auth()->user();
 
-        // Get all the events
-        $events = $user->events;
+        $projects = $user->projects();
 
-        // Get all the projects
-        $projects = $user->projects;
-
-        return view('pages/projects', compact('user', 'events', 'projects'));
+        return view('pages/projects', compact('user', 'projects'));
     }
 
     public function show($projectId)

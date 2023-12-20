@@ -33,7 +33,6 @@ class ShowContacts extends Component
     {
         $contact = Contact::findOrFail($contactId);
 
-        // Delete the contact even if it's associated to an event or a project, be careful
         $contact->events()->detach();
         $contact->projects()->detach();
         $contact->delete();

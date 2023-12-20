@@ -10,14 +10,11 @@ class ContactsController
 {
     public function index()
     {
-        $user = Auth::user();
+        $user = auth()->user();
 
         $contacts = $user->contacts()->get();
 
-        $students = $contacts->where('role', 'student');
-        $evaluators = $contacts->where('role', 'evaluator');
-
-        return view('pages/contacts', ['contacts' => $contacts, 'students' => $students, 'evaluators' => $evaluators, 'user' => $user]);
+        return view('pages/contacts', compact('user', 'contacts'));
     }
 
     public function show($contactId)

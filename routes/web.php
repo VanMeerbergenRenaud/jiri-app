@@ -47,6 +47,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/events/{event}/edition', [EventController::class, 'editEdition'])->name('events.editEdition');
     Route::patch('/events/{event}/edition', [EventController::class, 'updateEdition'])->name('events.updateEdition');
 
+    // Route d'un contact lié à une épreuve
+    Route::get('/events/{event}/contacts/{contact}', [EventController::class, 'showContact'])->name('events.showContact');
+
     /* Contacts CRUD */
     Route::resource('contacts', ContactsController::class);
 

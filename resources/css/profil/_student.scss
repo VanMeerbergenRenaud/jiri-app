@@ -1,6 +1,6 @@
 /* Profil of a student */
 .mainProfil {
-    padding: 2rem 3rem;
+    padding: 2rem;
 
     @import "../_tables.scss";
 
@@ -19,11 +19,16 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
 
         select {
-            padding: 0.75rem 4rem 0.75rem 1.5rem;
-            background-color: $gray-300;
+            padding: 0.75rem 3rem 0.75rem 1.5rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            width: 100%;
             border-radius: 2rem;
+            background-color: $gray-300;
         }
     }
 
@@ -34,13 +39,15 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
             font-size: 0.925rem;
             font-weight: 500;
             background-color: $gray-300;
             border-bottom: $border;
 
-            a {
-                font-size: 0.85rem;
+            button {
+                font-size: 0.9rem;
                 color: $blue;
             }
         }
@@ -53,7 +60,7 @@
             overflow: hidden;
 
             &__form {
-                padding: 2rem 2rem 0;
+                padding: 2rem 2rem 1rem;
                 display: flex;
                 flex-direction: column;
                 font-size: 0.925rem;
@@ -92,33 +99,21 @@
                     }
                 }
 
-                &__container {
-                    display: grid;
-                    grid-template-columns: repeat(3, 1fr);
-                    gap: 1rem 1.5rem;
+                &__infos {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.5rem 1rem;
 
-                    label {
-                        margin-bottom: -0.5rem;
+                    .title {
+                        font-size: 0.975rem;
                         font-weight: 500;
-                        grid-row: 1/2;
                     }
 
-                    input {
-                        padding: 0.5rem 0;
-                        grid-row: 2/3;
-                        background-color: transparent;
-                    }
-
-                    label[for="site"], label[for="github"] {
-                        grid-row: 4/5;
-                    }
-
-                    input[name="site"], input[name="github"] {
-                        grid-row: 5/6;
-                    }
-
-                    input[name="github"] {
-                        grid-column: 2/4;
+                    .text {
+                        margin-bottom: 1rem;
+                        padding: 0 0.25rem;
+                        font-size: 0.925rem;
+                        color: $text-slate-500;
                     }
                 }
             }
@@ -133,6 +128,7 @@
             textarea {
                 resize: none;
                 outline: none;
+                border: none;
                 padding: 1.35rem 1.5rem;
                 width: 100%;
                 background-color: $gray-bg;

@@ -11,95 +11,26 @@ class EventController extends Controller
 {
     public function index()
     {
-        $user = Auth::user();
+        $user = auth()->user();
 
-        $events = Event::orderBy('starting_at', 'asc')->get();
+        $events = $user->events()->get();
 
-        $upcomingEvents = $events->filter(fn ($event) => $event->isUpcoming());
-        $pastEvents = $events->filter(fn ($event) => $event->isPast());
-        $currentEvents = $events->filter(fn ($event) => $event->isCurrent());
-
-        return view('pages/events', compact('user', 'events', 'upcomingEvents', 'pastEvents', 'currentEvents'));
-    }
-
-    public function create(): View
-    {
-        $user = Auth::user();
-
-        $contacts = $user->contacts()->get();
-        $projects = $user->projects()->get();
-
-        $event = new Event();
-
-        return view('livewire/events/create', compact('user', 'contacts', 'projects', 'event'));
+        return view('pages/events', compact('user', 'events'));
     }
 
     public function show($eventId)
     {
-        $user = Auth::user();
+        $user = auth()->user();
 
         $event = Event::findOrFail($eventId);
 
         return view('livewire/events/show', compact('user', 'event'));
     }
 
-    public function edit($eventId)
-    {
-        $user = Auth::user();
-
-        $event = Event::findOrFail($eventId);
-
-        $contacts = $user->contacts()->get();
-
-        return view('livewire/events/edit', compact('user', 'event', 'contacts'));
-    }
-
-    public function store(): RedirectResponse
-    {
-        $data = $this->validateEventData();
-
-        $event = auth()->user()?->events()->create($data);
-
-        return redirect()->route('events.edit', ['event' => $event]);
-    }
-
-    public function update($eventId): RedirectResponse
-    {
-        $data = $this->validateEventData();
-
-        $event = Event::findOrFail($eventId);
-
-        $event->update($data);
-
-        return redirect()->route('events.index', compact('event'));
-    }
-
-    public function destroy($eventId)
-    {
-        $event = Event::findOrFail($eventId);
-
-        // Delete related contacts and projects
-        $event->contacts()->detach();
-        /*$event->projects()->detach();*/
-
-        $event->delete();
-
-        return redirect('events');
-    }
-
-    private function validateEventData()
-    {
-        return request()->validate([
-            'name' => 'required',
-            'starting_at' => 'required|date',
-            'duration' => 'required|integer',
-        ]);
-    }
-
     // Specific event edition / update
     public function editEdition($eventId)
     {
-        $user = Auth::user();
+        $user = auth()->user();
 
         $event = Event::findOrFail($eventId);
 
@@ -117,5 +48,17 @@ class EventController extends Controller
         $event->update($data);
 
         return redirect()->route('events.editEdition', compact('event'));
+    }
+
+    // Route d'un contact lié à une épreuve
+    public function showContact($eventId, $contactId)
+    {
+        $user = auth()->user();
+
+        $event = Event::findOrFail($eventId);
+
+        $contact = $event->contacts()->findOrFail($contactId);
+
+        return view('livewire/events/show-contact', compact('user', 'event', 'contact'));
     }
 }

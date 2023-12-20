@@ -62,6 +62,10 @@ body {
         font-size: 0.875rem;
         font-weight: 500;
         color: $blue-dark;
+
+        svg {
+            margin-right: 0.5rem;
+        }
     }
 
     .flex-center {

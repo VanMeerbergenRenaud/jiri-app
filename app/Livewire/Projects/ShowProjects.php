@@ -10,6 +10,7 @@ class ShowProjects extends Component
     public $search = '';
 
     public $projects;
+
     public $tasks = [];
 
     public function mount()
@@ -33,7 +34,6 @@ class ShowProjects extends Component
             $duty->delete();
         }
 
-        // Delete the project even if it's associated to an event and or tasks
         $project->events()->detach();
         $project->tasks()->delete();
         $project->delete();

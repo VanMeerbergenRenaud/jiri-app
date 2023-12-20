@@ -3,9 +3,9 @@
         <div class="mainProfil__content__col1">
             <div class="mainProfil__content__profil">
                 <div class="sectionHeader">
-                    <h4>Profil</h4>
+                    Profil
 
-                    <a href="#">Editer le profil</a>
+                    <button type="button" wire:click="editProfil">Editer le profil</button>
                 </div>
                 {{-- Form to edit a profil --}}
                 <form action="" method="post" class="mainProfil__content__profil__form">
@@ -15,7 +15,7 @@
                     <label for="Photo">Photo</label>
                     <div class="mainProfil__content__profil__form__photo">
                         <div>
-                            <img src="{{ asset('img/dominique.png') }}" alt="Photo de l'étudiant">
+                            <img src="{{ $contact->avatar ?? asset('img/dominique.png') }}" alt="Photo de l'étudiant">
                             <button type="button">
                                 @include('components.svg.edit')
                             </button>
@@ -26,24 +26,28 @@
                         </span>
                     </div>
                     {{-- Nom, prénom, adresse mail, site de référence et compte Github --}}
-                    <div class="mainProfil__content__profil__form__container">
-                        <label for="lastname">Nom</label>
-                        <input type="text" name="lastname" id="lastname" value="{{ $student->lastname ?? 'Non renseigné' }}">
-                        <label for="firstname">Prénom</label>
-                        <input type="text" name="firstname" id="firstname" value="{{ $student->firstname ?? 'Non renseigné' }}">
-                        <label for="mail">Adresse mail</label>
-                        <input type="email" name="mail" id="mail" value="{{ $student->mail ?? 'Non renseigné' }}">
-                        <label for="site">Site de référence</label>
-                        <input type="text" name="site" id="site" value="{{ $student->site ?? 'Non renseigné' }}">
-                        <label for="github">Compte Github</label>
-                        <input type="text" name="github" id="github" value="{{ $student->github ?? 'Non renseigné' }}">
+                    <div class="mainProfil__content__profil__form__infos">
+                        <h3 class="title">Nom</h3>
+                        <p class="text">{{ $contact->name }}</p>
+
+                        <h3 class="title">Prénom</h3>
+                        <p class="text">{{ $contact->firstname }}</p>
+
+                        <h3 class="title">Adresse mail</h3>
+                        <p class="text">{{ $contact->email ?? 'Non renseigné' }}</p>
+
+                        <h3 class="title">Site de référence</h3>
+                        <p class="text">{{ $contact->site ?? 'Non renseigné' }}</p>
+
+                        <h3 class="title">Compte GitHub</h3>
+                        <p class="text">{{ $contact->github ?? 'Non renseigné' }}</p>
                     </div>
                 </form>
             </div>
             <form class="globalComment">
                 <div class="sectionHeader">
                     <h4>Commentaire global</h4>
-                    <a href="#">Editer le profil</a>
+                    <button type="button" wire:click="editComment">Editer</button>
                 </div>
                 <div>
                     <label for="globalComment">
@@ -150,7 +154,7 @@
                                             <span>11.5 / 20</span>
                                         </div>
                                         <p>
-                                            La cote finale calculée automatiquement n’est pas forcément la cote finale qui se trouvera dans le bulletin de ok. La cote finale calculée automatiquement...
+                                            La cote finale calculée automatiquement n’est pas forcément la cote finale qui se trouvera dans le bulletin ok. La cote finale calculée automatiquement...
                                         </p>
                                     </li>
                                 @endfor
@@ -234,7 +238,7 @@
             </table>
             <div class="mainProfil__action">
                 <h4 class="title">Action</h4>
-                <button type="button" class="button--gray">Changer le statut du profil</button>
+                <button type="button" wire:click="editContactRole" class="button--gray">Changer le statut du profil</button>
             </div>
         </div>
     </div>

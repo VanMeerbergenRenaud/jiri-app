@@ -444,13 +444,6 @@
     .item:last-of-type {
         margin-bottom: 0.5rem;
     }
-
-    .link {
-        color: $blue;
-        &:hover {
-            text-decoration: underline;
-        }
-    }
 }
 
 @media (max-width: 650px) {
@@ -502,21 +495,6 @@
 
                 &__members, p {
                     margin: 0;
-                }
-
-                .link {
-                    display: flex;
-                    align-items: start;
-                    flex-wrap: wrap;
-                    flex-direction: row;
-
-                    a {
-                        margin: 0.5rem;
-                    }
-
-                    &__edit, &__delete {
-                        align-items: start;
-                    }
                 }
             }
         }

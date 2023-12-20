@@ -28,9 +28,15 @@
                         Liste des tâches
                         <select wire:model="form.tasks" class="p-2">
                             <option value="" selected>Choisissez une ou plusieurs tâches</option>
-                            @foreach($project->tasks as $task)
-                                <option wire:key="{{ $task->id }}" value="{{ $task->name }}">{{ $task->name }}</option>
-                            @endforeach
+                            @if($project->tasks)
+                                @forelse($project->tasks as $task)
+                                    <option wire:key="{{ $task->id }}" value="{{ $task->name }}">{{ $task->name }}</option>
+                                @empty
+                                    <option value="">Aucune tâches disponibles</option>
+                                @endforelse
+                            @else
+                                <option value="">Aucun projet sélectionné</option>
+                            @endif
                         </select>
                     </label>
 
