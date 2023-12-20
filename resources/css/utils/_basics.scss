@@ -1,7 +1,7 @@
 /* Basic styles */
-body {
+html body {
     margin: 0 auto;
-    max-width: 2500px;
+    max-width: 2200px;
     font-size: 16px;
     line-height: 1.35;
     color: $text;
@@ -10,8 +10,17 @@ body {
     main {
         margin: 0 auto;
         padding: 0;
-        min-height: 85vh;
         width: 100%;
+        max-width: 1650px;
+        min-height: 85vh;
+        overflow-x: hidden;
+    }
+
+    nav {
+        margin: 0 auto;
+        padding: 0 3rem;
+        width: 100%;
+        max-width: 1650px;
     }
 
     h2 {

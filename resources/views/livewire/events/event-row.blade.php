@@ -4,36 +4,35 @@
         <div class="item__date">
             Date de l’épreuve<br>
             <time datetime="{{$event->starting_at}}">
-                {{ \Carbon\Carbon::parse($event->starting_at)->format('j M Y \à G\hi')}}
+                <span>{{ \Carbon\Carbon::parse($event->starting_at)->format('Y-m-d') }}</span>
             </time>
         </div>
         <div class="item__time">
             Durée de l’épreuve<br>
             <time datetime="{{ $event->duration }}">
                 @php
-                    $duration = $event->duration;
-                    $hours = floor($duration / 60);
-                    $minutes = $duration % 60;
+                    $hours = ltrim(\Carbon\Carbon::parse($event->duration)->format('H'), '0');
+                    $minutes = ltrim(\Carbon\Carbon::parse($event->duration)->format('i'), '0');
                 @endphp
+
                 @if($hours > 0)
-                    {{$hours}}h{{$minutes}}min
-                @else
-                    {{$minutes}}min
+                    <span>{{ $hours }}&nbsp;h</span>
                 @endif
+                    <span>{{ $minutes }}&nbsp;min</span>
             </time>
         </div>
         <div class="item__members">
             Participants<br>
             <p>
-                @if($event->contacts->count() > 0)
+                @isset($event->contacts)
                     <span>{{ $event->contacts->count() }} enregistrés</span>
                 @else
                     <span>0 enregistré</span>
-                @endif
+                @endisset
             </p>
         </div>
         {{-- Liens : Édition, Voir, Non disponible, Éditer, Supprimer --}}
-        <div class="flex items-center gap-4">
+        <div class="event__actions">
             <a href="{{ route('events.editEdition', ['event' => $event]) }}" wire:navigate class="link__edition">
                 Configurer l'épreuve
             </a>
@@ -91,7 +90,6 @@
                                         <input
                                             wire:model="form.starting_at"
                                             type="datetime-local"
-                                            placeholder="Ex : 2021-01-01T00:00"
                                         />
                                         @error('form.starting_at')
                                         <div class="error">{{ $message }}</div>@enderror
@@ -99,7 +97,10 @@
 
                                     <label>
                                         Durée
-                                        <input wire:model="form.duration"/>
+                                        <input
+                                            wire:model="form.duration"
+                                            type="number"
+                                        />
                                         @error('form.duration')
                                         <div class="error">{{ $message }}</div>@enderror
                                     </label>

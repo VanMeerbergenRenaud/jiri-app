@@ -21,6 +21,6 @@ class ContactsController
     {
         $contact = Contact::findOrFail($contactId);
 
-        return view('livewire/contacts/show', compact('contact'));
+        return view('pages/contacts/show', compact('contact'));
     }
 }

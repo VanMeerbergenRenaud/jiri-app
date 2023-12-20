@@ -43,8 +43,8 @@
         @endif
         @if($events->count() === 0)
             Liste des épreuves
-            <div class="flex-center empty">
-                <p>Aucune épreuve n’a encore été créée jusqu’à présent.</p>
+            <div class="empty">
+                <p class="px-2">Aucune épreuve n’a encore été créée jusqu’à présent.</p>
                 <livewire:events.add-event-dialog @added="$refresh" />
             </div>
         @endif

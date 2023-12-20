@@ -11,7 +11,10 @@
 
                     <label>
                         Nom
-                        <input autofocus wire:model="form.name">
+                        <input
+                            wire:model="form.name"
+                            autofocus
+                        >
                         @error('form.name')
                         <div class="error">{{ $message }}</div>@enderror
                     </label>
@@ -21,7 +24,6 @@
                         <input
                             wire:model="form.starting_at"
                             type="datetime-local"
-                            placeholder="Ex : 2021-01-01T00:00"
                         />
                         @error('form.starting_at')
                         <div class="error">{{ $message }}</div>@enderror
@@ -29,7 +31,10 @@
 
                     <label>
                         Durée
-                        <input wire:model="form.duration"/>
+                        <input
+                            wire:model="form.duration"
+                            type="number"
+                        />
                         @error('form.duration')
                         <div class="error">{{ $message }}</div>@enderror
                     </label>

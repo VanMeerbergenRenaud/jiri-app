@@ -6,6 +6,7 @@ body input, body textarea, body select {
     border: $border;
     border-radius: 0.5rem;
     background-color: white;
+    max-width: 1600px;
 }
 
 select {

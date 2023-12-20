@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Forms;
 
+use Carbon\Carbon;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
@@ -22,8 +23,8 @@ class EventForm extends Form
     {
         $this->event = $event;
         $this->name = $event->name;
-        $this->starting_at = $event->starting_at;
-        $this->duration = $event->duration;
+        $this->starting_at = Carbon::parse($event->starting_at)->format('Y-m-d\TH:i');
+        $this->duration = Carbon::parse($event->duration)->format('H:i');
     }
 
     public function save()

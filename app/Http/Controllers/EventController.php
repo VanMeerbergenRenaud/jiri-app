@@ -24,7 +24,7 @@ class EventController extends Controller
 
         $event = Event::findOrFail($eventId);
 
-        return view('livewire/events/show', compact('user', 'event'));
+        return view('pages/events/show', compact('user', 'event'));
     }
 
     // Specific event edition / update
@@ -36,7 +36,7 @@ class EventController extends Controller
 
         $students = $event->contacts()->get();
 
-        return view('livewire/events/edit-edition', compact('user', 'event', 'students'));
+        return view('pages/events/edit-edition', compact('user', 'event', 'students'));
     }
 
     public function updateEdition($eventId): RedirectResponse
@@ -59,6 +59,6 @@ class EventController extends Controller
 
         $contact = $event->contacts()->findOrFail($contactId);
 
-        return view('livewire/events/show-contact', compact('user', 'event', 'contact'));
+        return view('pages/events/show-contact', compact('user', 'event', 'contact'));
     }
 }

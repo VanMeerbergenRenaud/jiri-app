@@ -7,7 +7,7 @@
         </div>
 
         <div class="mainProfil__nav">
-            <a href="/" class="button--gray">
+            <a href="{{ url()->previous() }}" class="button--gray">
                 @include('components.svg.arrow-left')
                 Retour
             </a>

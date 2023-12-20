@@ -55,9 +55,9 @@
             }
 
             &__date, &__time, &__members {
-                span, time {
-                    margin-top: 0.75rem;
-                    display: inline-block;
+                span {
+                    margin-top: 0.5rem;
+                    display: inline;
                     font-weight: 400;
                 }
             }
@@ -202,8 +202,7 @@
                         border: none;
 
                         span, time {
-                            margin-top: 0.625rem;
-                            display: block;
+                            display: inline-block;
                             font-weight: 400;
                         }
                     }

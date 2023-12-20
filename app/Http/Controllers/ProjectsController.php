@@ -21,6 +21,6 @@ class ProjectsController extends Controller
     {
         $project = Project::findOrFail($projectId);
 
-        return view('livewire/projects/show', compact('project'));
+        return view('pages/projects/show', compact('project'));
     }
 }

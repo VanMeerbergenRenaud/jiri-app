@@ -15,19 +15,19 @@
         </thead>
 
         <tbody wire:loading.class="opacity-50" class="projects">
-        @forelse ($projects as $project)
-            <livewire:projects.project-row
-                :key="$project->id"
-                :$project
-                @deleted="delete({{ $project->id }})"
-            />
-        @empty
-            <tr>
-                <td colspan="100%" class="py-2" style="min-width: 300px">
-                    Aucun project trouvé.
-                </td>
-            </tr>
-        @endforelse
+            @forelse ($projects as $project)
+                <livewire:projects.project-row
+                    :key="$project->id"
+                    :$project
+                    @deleted="delete({{ $project->id }})"
+                />
+            @empty
+                <tr>
+                    <td colspan="100%" class="py-2 min-w-80">
+                        Aucun project trouvé.
+                    </td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
 
