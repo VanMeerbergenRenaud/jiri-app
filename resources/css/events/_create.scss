@@ -144,7 +144,7 @@
 
             /* Filter contact */
             .filter__contacts {
-                min-width: fit-content;
+                width: 100%;
                 background-color: white;
                 border-radius: 1rem;
                 border: $border;
@@ -401,7 +401,7 @@
         fill: #718096;
     }
 
-    .panel {
+    .open-panel {
         margin-bottom: 2rem;
         width: 100%;
         background-color: white;

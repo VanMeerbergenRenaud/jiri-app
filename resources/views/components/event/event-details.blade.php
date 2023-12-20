@@ -34,7 +34,7 @@
     {{-- Liens : Édition, Voir, Non disponible, Éditer, Supprimer --}}
     <div class="link" x-data="{ showModal: false }">
         <a href="{{ route('events.editEdition', ['event' => $event]) }}" wire:navigate class="link__edition">
-            Édition des informations
+            Configurer l'épreuve
         </a>
 
         @if(now() >= $event->starting_at)

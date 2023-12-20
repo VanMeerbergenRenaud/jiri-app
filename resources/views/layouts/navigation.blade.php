@@ -20,9 +20,6 @@
                     <x-breeze.nav-link :href="route('projects.index')" wire:navigate :active="request()->routeIs('projects.index')">
                         {{ __('Projets') }}
                     </x-breeze.nav-link>
-                    <x-breeze.nav-link :href="route('student.index')" wire:navigate :active="request()->routeIs('student.index')">
-                        {{ __('Student Profil') }}
-                    </x-breeze.nav-link>
                     <x-breeze.nav-link :href="route('images.upload')" wire:navigate :active="request()->routeIs('images.upload')">
                         {{ __('Images') }}
                     </x-breeze.nav-link>
@@ -82,6 +79,15 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-breeze.responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
                 {{ __('Dashboard') }}
+            </x-breeze.responsive-nav-link>
+            <x-breeze.responsive-nav-link :href="route('events.index')" :active="request()->routeIs('events.index')" wire:navigate>
+                {{ __('Épreuves') }}
+            </x-breeze.responsive-nav-link>
+            <x-breeze.responsive-nav-link :href="route('contacts.index')" :active="request()->routeIs('contacts.index')" wire:navigate>
+                {{ __('Contacts') }}
+            </x-breeze.responsive-nav-link>
+            <x-breeze.responsive-nav-link :href="route('projects.index')" :active="request()->routeIs('projects.index')" wire:navigate>
+                {{ __('Projets') }}
             </x-breeze.responsive-nav-link>
         </div>
 

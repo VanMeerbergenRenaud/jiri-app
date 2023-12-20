@@ -20,19 +20,10 @@
         justify-content: space-between;
         align-items: center;
 
-        .button--gray {
-            svg {
-                margin-right: 0.5rem;
-            }
-        }
-
-        .button--gray:last-child {
-            padding-left: 1.5rem;
-
-            svg {
-                margin-right: 0;
-                margin-left: 1rem;
-            }
+        select {
+            padding: 0.75rem 4rem 0.75rem 1.5rem;
+            background-color: $gray-300;
+            border-radius: 2rem;
         }
     }
 

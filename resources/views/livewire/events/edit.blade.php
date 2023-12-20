@@ -75,7 +75,7 @@
                             </button>
 
                             {{-- Panel --}}
-                            <div x-show="open" class="panel">
+                            <div x-show="open" class="open-panel">
 
                                 {{-- Close button --}}
                                 <button @click="open = false" type="button" class="close-button">
@@ -132,7 +132,7 @@
                             </button>
 
                             {{-- Panel --}}
-                            <div x-show="open" class="panel">
+                            <div x-show="open" class="open-panel">
 
                                 {{-- Close button --}}
                                 <button @click="open = false" type="button" class="close-button">

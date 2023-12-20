@@ -53,9 +53,6 @@ Route::middleware('auth')->group(function () {
     /* Projects CRUD */
     Route::resource('projects', ProjectsController::class);
 
-    /*  Student Profil */
-    Route::resource('student', StudentController::class);
-
     // Image upload for contacts
     Route::get('/images', ImageUpload::class)->name('images.upload');
 
