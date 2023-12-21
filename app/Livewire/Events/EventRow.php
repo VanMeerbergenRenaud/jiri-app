@@ -3,6 +3,7 @@
 namespace App\Livewire\Events;
 
 use App\Livewire\Forms\EventForm;
+use Carbon\Carbon;
 use Livewire\Component;
 
 class EventRow extends Component
@@ -16,6 +17,12 @@ class EventRow extends Component
     public function mount()
     {
         $this->form->setEvent($this->event);
+    }
+
+    public function formatDate($date)
+    {
+        Carbon::setLocale('fr');
+        return Carbon::parse($date)->translatedFormat('d D M Y');
     }
 
     public function save()

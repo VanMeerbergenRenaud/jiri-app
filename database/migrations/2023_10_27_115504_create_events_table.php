@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->timestamp('starting_at');
-            $table->smallInteger('duration');
+            $table->string('duration');
             $table->timestamps();
         });
     }

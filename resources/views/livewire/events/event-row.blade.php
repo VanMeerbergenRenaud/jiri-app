@@ -4,21 +4,13 @@
         <div class="item__date">
             Date de l’épreuve<br>
             <time datetime="{{$event->starting_at}}">
-                <span>{{ \Carbon\Carbon::parse($event->starting_at)->format('Y-m-d') }}</span>
+                <span>{{ $this->formatDate($event->starting_at) }}</span>
             </time>
         </div>
         <div class="item__time">
             Durée de l’épreuve<br>
             <time datetime="{{ $event->duration }}">
-                @php
-                    $hours = ltrim(\Carbon\Carbon::parse($event->duration)->format('H'), '0');
-                    $minutes = ltrim(\Carbon\Carbon::parse($event->duration)->format('i'), '0');
-                @endphp
-
-                @if($hours > 0)
-                    <span>{{ $hours }}&nbsp;h</span>
-                @endif
-                    <span>{{ $minutes }}&nbsp;min</span>
+                <span>{{ $event->duration }}</span>
             </time>
         </div>
         <div class="item__members">
@@ -99,7 +91,7 @@
                                         Durée
                                         <input
                                             wire:model="form.duration"
-                                            type="number"
+                                            type="time"
                                         />
                                         @error('form.duration')
                                         <div class="error">{{ $message }}</div>@enderror

@@ -3,25 +3,32 @@
 namespace App\Livewire\Projects;
 
 use App\Models\Project;
+use Livewire\Attributes\Computed;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class ShowProjects extends Component
 {
+    use WithPagination;
+
     public $search = '';
 
-    public $projects;
+    public $saved = false;
 
     public $tasks = [];
 
     public function mount()
     {
-        $this->projects = auth()->user()->projects()->get();
         $this->tasks = auth()->user()->projects()->with('tasks')->get();
     }
 
-    public function updatedSearch()
+    #[Computed]
+    public function projectFilter()
     {
-        $this->projects = auth()->user()->projects()->where('name', 'like', '%' . $this->search . '%')->get();
+        return auth()->user()->projects()
+            ->search('name', $this->search)
+            ->orderBy('name', 'asc')
+            ->paginate(8);
     }
 
     public function delete($projectId)
@@ -38,17 +45,14 @@ class ShowProjects extends Component
         $project->tasks()->delete();
         $project->delete();
 
-        session()->flash('success');
-
         sleep(1);
 
-        $this->projects = auth()->user()->projects()->get();
+        $this->saved = true;
     }
 
     public function render()
     {
         return view('livewire.projects.show-projects', [
-            'projects' => $this->projects,
             'tasks' => $this->tasks,
         ]);
     }

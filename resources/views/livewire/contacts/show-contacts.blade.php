@@ -25,7 +25,7 @@
         </thead>
 
         <tbody wire:loading.class.delay="opacity-50">
-            @forelse ($contacts as $contact)
+            @forelse ($this->contactFilter as $contact)
                 <livewire:contacts.contact-row
                     :key="$contact->id"
                     :$contact
@@ -43,7 +43,7 @@
     </table>
 
     <div class="pagination-links">
-        {{ $contacts->links() }}
+        {{ $this->contactFilter->links() }}
     </div>
 
     <div>

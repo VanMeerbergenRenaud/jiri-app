@@ -33,7 +33,7 @@
                         Durée
                         <input
                             wire:model="form.duration"
-                            type="number"
+                            type="time"
                         />
                         @error('form.duration')
                         <div class="error">{{ $message }}</div>@enderror

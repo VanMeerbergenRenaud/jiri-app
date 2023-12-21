@@ -3,6 +3,7 @@
 namespace App\Livewire\Events;
 
 use App\Models\Event;
+use Livewire\Attributes\Computed;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -12,21 +13,42 @@ class ShowEvents extends Component
 
     public $events;
 
-    public $pastEvents;
-    public $currentEvents;
-    public $futureEvents;
-
     public $search = '';
+
     public $saved = false;
 
-    public function mount()
+    #[Computed]
+    public function pastEvents()
     {
-        $this->updateEvents();
+        return auth()->user()->events()
+            ->where('name', 'like', '%' . $this->search . '%')
+            ->where('starting_at', '<', now())
+            ->orderBy('starting_at', 'asc')
+            ->paginate(4, pageName: 'past-page');
     }
 
-    public function updatedSearch()
+    #[Computed]
+    public function currentEvents()
     {
-        $this->updateEvents();
+        return auth()->user()->events()
+            ->where('name', 'like', '%' . $this->search . '%')
+            ->where(
+                function ($query) {
+                    $query->where('starting_at', '<', now())
+                        ->where('starting_at', '>', now()->subHours(24));
+                })
+            ->orderBy('starting_at', 'asc')
+            ->paginate(4, pageName: 'current-page');
+    }
+
+    #[Computed]
+    public function futureEvents()
+    {
+        return auth()->user()->events()
+            ->where('name', 'like', '%' . $this->search . '%')
+            ->where('starting_at', '>', now())
+            ->orderBy('starting_at', 'asc')
+            ->paginate(4, pageName: 'future-page');
     }
 
     public function delete($eventId)
@@ -44,26 +66,12 @@ class ShowEvents extends Component
         sleep(1);
 
         $this->saved = true;
-
-        $this->updateEvents();
     }
 
     public function render()
     {
         return view('livewire.events.show-events', [
-            'events' => $this->events,
             'saved' => $this->saved,
         ]);
-    }
-
-    private function updateEvents()
-    {
-        $this->events = auth()->user()->events()
-            ->where('name', 'like', '%' . $this->search . '%')
-            ->get();
-
-        $this->futureEvents = $this->events->filter(fn ($event) => $event->isUpcoming());
-        $this->pastEvents = $this->events->filter(fn ($event) => $event->isPast());
-        $this->currentEvents = $this->events->filter(fn ($event) => $event->isCurrent());
     }
 }

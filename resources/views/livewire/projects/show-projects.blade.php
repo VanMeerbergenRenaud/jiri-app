@@ -15,7 +15,7 @@
         </thead>
 
         <tbody wire:loading.class="opacity-50" class="projects">
-            @forelse ($projects as $project)
+            @forelse ($this->projectFilter as $project)
                 <livewire:projects.project-row
                     :key="$project->id"
                     :$project
@@ -31,8 +31,12 @@
         </tbody>
     </table>
 
+    <div class="pagination-links">
+        {{ $this->projectFilter->links() }}
+    </div>
+
     <div>
-        @if(session()->has('success'))
+        @if($saved)
             <x-notifications
                 icon="delete"
                 title="Projet supprimé avec succès !"

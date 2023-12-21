@@ -24,7 +24,7 @@ class EventForm extends Form
         $this->event = $event;
         $this->name = $event->name;
         $this->starting_at = Carbon::parse($event->starting_at)->format('Y-m-d\TH:i');
-        $this->duration = Carbon::parse($event->duration)->format('H:i');
+        $this->duration = $event->duration;
     }
 
     public function save()

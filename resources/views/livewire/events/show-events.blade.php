@@ -5,54 +5,60 @@
     </label>
 
     <div wire:loading.class.delay="opacity-50" class="mt-8">
-        @if($pastEvents->isNotEmpty())
-            <ul class="list list1">
-                Liste des épreuves passées
-                @foreach($pastEvents as $event)
-                    <livewire:events.event-row
-                        :key="$event->id"
-                        :$event
-                        @deleted="delete({{ $event->id }})"
-                    />
-                @endforeach
-            </ul>
-        @endif
-        @if($currentEvents->isNotEmpty())
-            <ul class="list list2">
-                Liste des épreuves en cours
-                @foreach($currentEvents as $event)
-                    <livewire:events.event-row
-                        :key="$event->id"
-                        :$event
-                        @deleted="delete({{ $event->id }})"
-                    />
-                @endforeach
-            </ul>
-        @endif
-        @if($futureEvents->isNotEmpty())
-            <ul class="list list3">
-                Liste des épreuves à venir
-                @foreach($futureEvents as $event)
-                    <livewire:events.event-row
-                        :key="$event->id"
-                        :$event
-                        @deleted="delete({{ $event->id }})"
-                    />
-                @endforeach
-            </ul>
-        @endif
-        @if($events->count() === 0)
+        @unless($this->pastEvents && $this->currentEvents && $this->futureEvents)
             Liste des épreuves
             <div class="empty">
                 <p class="px-2">Aucune épreuve n’a encore été créée jusqu’à présent.</p>
                 <livewire:events.add-event-dialog @added="$refresh" />
             </div>
-        @endif
+        @else
+            @if($this->pastEvents->isNotEmpty())
+                <ul class="list list1">
+                    Liste des épreuves passées
+                    @foreach($this->pastEvents as $event)
+                        <livewire:events.event-row
+                            :key="$event->id"
+                            :$event
+                            @deleted="delete({{ $event->id }})"
+                        />
+                    @endforeach
+                </ul>
+                <div class="pagination-links">
+                    {{ $this->pastEvents->links() }}
+                </div>
+            @endif
+            @if($this->currentEvents->isNotEmpty())
+                <ul class="list list2">
+                    Liste des épreuves en cours
+                    @foreach($this->currentEvents as $event)
+                        <livewire:events.event-row
+                            :key="$event->id"
+                            :$event
+                            @deleted="delete({{ $event->id }})"
+                        />
+                    @endforeach
+                </ul>
+                <div class="pagination-links">
+                    {{ $this->currentEvents->links() }}
+                </div>
+            @endif
+            @if($this->futureEvents->isNotEmpty())
+                <ul class="list list3">
+                    Liste des épreuves à venir
+                    @foreach($this->futureEvents as $event)
+                        <livewire:events.event-row
+                            :key="$event->id"
+                            :$event
+                            @deleted="delete({{ $event->id }})"
+                        />
+                    @endforeach
+                </ul>
+                <div class="pagination-links">
+                    {{ $this->futureEvents->links() }}
+                </div>
+            @endif
+        @endunless
     </div>
-
-    {{--<div class="pagination-links">
-        {{ $events->links() }}
-    </div>--}}
 
     <div>
         @if($saved)

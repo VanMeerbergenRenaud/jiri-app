@@ -3,6 +3,7 @@
 namespace App\Livewire\Contacts;
 
 use App\Models\Contact;
+use Livewire\Attributes\Computed;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -18,6 +19,15 @@ class ShowContacts extends Component
     // protected $queryString = ['sortField', 'sortDirection', 'perPage'];
 
     public $saved = false;
+
+    #[Computed]
+    public function contactFilter()
+    {
+        return auth()->user()->contacts()
+            ->search('name', $this->search)
+            ->orderBy($this->sortField, $this->sortDirection)
+            ->paginate(8);
+    }
 
     public function sortBy($field)
     {
@@ -45,10 +55,6 @@ class ShowContacts extends Component
     public function render()
     {
         return view('livewire.contacts.show-contacts', [
-            'contacts' => auth()->user()->contacts()
-                ->search('name', $this->search)
-                ->orderBy($this->sortField, $this->sortDirection)
-                ->paginate(8),
             'saved' => $this->saved,
             'sortField' => $this->sortField,
         ]);
