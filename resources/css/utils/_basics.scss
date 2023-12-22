@@ -18,7 +18,7 @@ html body {
 
     nav {
         margin: 0 auto;
-        padding: 0 3rem;
+        padding: 0 2rem;
         width: 100%;
         max-width: 1650px;
     }
@@ -158,6 +158,10 @@ html body {
                 font-size: 0.95rem;
             }
         }
+    }
+
+    .pagination-links {
+        margin: 1rem 0 3rem;
     }
 
     footer {

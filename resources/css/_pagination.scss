@@ -1,0 +1,141 @@
+/* Pagination */
+.pagination {
+    nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .small-device {
+            display: flex;
+            justify-content: space-between;
+            flex: 1;
+
+            .previous, .next {
+                position: relative;
+                display: inline-flex;
+                align-items: center;
+                padding: 0.65rem 1rem;
+                font-size: 0.875rem;
+                font-weight: 500;
+                line-height: 1.25rem;
+                background-color: white;
+                border: $border;
+                outline: none;
+                border-radius: 0.5rem;
+                cursor: default;
+                user-select: none;
+
+                &:hover {
+                    color: $text-slate-500;
+                    background-color: white;
+                    transition-duration: 0.15s;
+                }
+
+                &:focus, &:active {
+                    color: $text;
+                    outline: none;
+                }
+            }
+        }
+
+        @media (min-width: 640px) {
+            .small-device {
+                display: none;
+            }
+        }
+
+        .large-device {
+            display: none;
+        }
+
+        @media (min-width: 640px) {
+            .large-device {
+                display: flex;
+                flex: 1;
+                align-items: center;
+                justify-content: space-between;
+
+                .left {
+                    margin-left: -1rem;
+
+                    p {
+                        font-size: 0.875rem;
+                        font-weight: 500;
+                        line-height: 1.25rem;
+
+                        span {
+                            font-weight: 600;
+                        }
+                    }
+                }
+
+                .right {
+                    position: relative;
+                    margin-right: -1.5rem;
+                    padding: 0.3rem 0.5rem;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    border: $border;
+                    background-color: $gray-bg;
+                    border-radius: 0.875rem;
+                    z-index: 0;
+
+                    .previous-arrow, .next-arrow {
+                        position: relative;
+                        padding: 0.5rem;
+                        display: inline-flex;
+                        align-items: center;
+                        font-size: 0.875rem;
+                        font-weight: 500;
+                        border-radius: 0.5rem;
+
+                        &:hover {
+                            color: $text-slate-500;
+                            transition-duration: 0.15s;
+                        }
+                    }
+
+                    .current-page, .dots {
+                        position: relative;
+                        border-radius: 0.35rem;
+                        display: inline-flex;
+                        align-items: center;
+                        padding: 0.5rem 0.875rem;
+                        border: 1px solid transparent;
+                        font-size: 0.875rem;
+                        font-weight: 500;
+                        cursor: pointer;
+                        line-height: 1.25rem;
+                        user-select: none;
+
+                        &:hover {
+                            padding: 0.35rem 0.875rem 0.575em;
+                            color: $text-slate-500;
+                            text-decoration: $text-slate-500 underline;
+                            transition-duration: 0.15s;
+                        }
+
+                        &:focus, &:active {
+                            outline: none;
+                        }
+                    }
+
+                    .dots {
+                        cursor: not-allowed;
+                    }
+
+                    span.current-page {
+                        background-color: $gray-300;
+                        cursor: default;
+                    }
+
+                    span.previous-arrow, span.next-arrow {
+                        opacity: .5;
+                        cursor: not-allowed;
+                    }
+                }
+            }
+        }
+    }
+}
