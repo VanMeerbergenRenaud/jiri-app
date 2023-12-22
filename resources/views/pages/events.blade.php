@@ -5,7 +5,7 @@
                 :title="'Bonjour ' . $user->name"
                 :message="'Voici ci-dessous la liste de tous vos contacts.'"
             />
-            <livewire:events.add-event-dialog @added="$refresh" />
+            <livewire:events.add-event-dialog />
         </div>
 
         {{-- Liste des épreuves --}}

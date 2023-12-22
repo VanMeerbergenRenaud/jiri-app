@@ -5,7 +5,7 @@
                 :title="'Bonjour ' . $user->name"
                 :message="'Voici ci-dessous la liste de tous vos contacts.'"
             />
-            <livewire:contacts.add-contact-dialog @added="$refresh" />
+            <livewire:contacts.add-contact-dialog />
         </div>
 
         <livewire:contacts.show-contacts />

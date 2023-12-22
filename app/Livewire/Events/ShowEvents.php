@@ -32,11 +32,10 @@ class ShowEvents extends Component
     {
         return auth()->user()->events()
             ->where('name', 'like', '%' . $this->search . '%')
-            ->where(
-                function ($query) {
-                    $query->where('starting_at', '<', now())
-                        ->where('starting_at', '>', now()->subHours(24));
-                })
+            ->whereBetween('starting_at', [
+                now(),
+                now()->addHours(8)
+            ])
             ->orderBy('starting_at', 'asc')
             ->paginate(4, pageName: 'current-page');
     }

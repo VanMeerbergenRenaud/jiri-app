@@ -5,7 +5,7 @@
                 :title="'Bonjour ' . $user->name"
                 :message="'Voici ci-dessous la liste de tous vos projets.'"
             />
-            <livewire:projects.add-project-dialog @added="$refresh" />
+            <livewire:projects.add-project-dialog />
         </div>
 
         <livewire:projects.show-projects />

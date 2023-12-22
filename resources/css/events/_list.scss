@@ -124,6 +124,27 @@
         }
     }
 
+    .empty-event {
+        padding: 1rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        border: $border;
+        border-radius: 1rem;
+
+        p, a {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        a {
+            color: $blue;
+            border-bottom: 1px solid $blue;
+        }
+    }
+
     .empty {
         margin-top: 1rem;
         padding: 5.5rem 0;

@@ -1,15 +1,3 @@
-@php
-if (! isset($scrollTo)) {
-    $scrollTo = 'body';
-}
-
-$scrollIntoViewJsSnippet = ($scrollTo !== false)
-    ? <<<JS
-       (\$el.closest('{$scrollTo}') || document.querySelector('{$scrollTo}')).scrollIntoView()
-    JS
-    : '';
-@endphp
-
 <div class="pagination">
     @if ($paginator->hasPages())
         <nav role="navigation" aria-label="Pagination Navigation">
@@ -27,7 +15,6 @@ $scrollIntoViewJsSnippet = ($scrollTo !== false)
                         <button type="button"
                                 class="previous"
                                 wire:click="previousPage('{{ $paginator->getPageName() }}')"
-                                @click="{{ $scrollIntoViewJsSnippet }}"
                                 wire:loading.attr="disabled"
                         >
                             {!! __('pagination.previous') !!}
@@ -41,7 +28,6 @@ $scrollIntoViewJsSnippet = ($scrollTo !== false)
                         <button
                             type="button"
                             wire:click="nextPage('{{ $paginator->getPageName() }}')"
-                            @click="{{ $scrollIntoViewJsSnippet }}"
                             wire:loading.attr="disabled"
                             class="next"
                         >
@@ -87,7 +73,6 @@ $scrollIntoViewJsSnippet = ($scrollTo !== false)
                                     class="previous-arrow"
                                     rel="prev"
                                     wire:click="previousPage('{{ $paginator->getPageName() }}')"
-                                    @click="{{ $scrollIntoViewJsSnippet }}"
                                     aria-label="{{ __('pagination.previous') }}">
                                 <x-svg.nav-arrow-left />
                             </button>
@@ -116,8 +101,7 @@ $scrollIntoViewJsSnippet = ($scrollTo !== false)
                                         <button type="button"
                                                 class="current-page"
                                                 wire:click="gotoPage({{ $page }}, '{{ $paginator->getPageName() }}')"
-                                                @click="{{ $scrollIntoViewJsSnippet }}"
-                                                aria-label="{{ __('Go to page :page', ['page' => $page]) }}">
+                                                aria-label="{{ __('Aller à la page :page', ['page' => $page]) }}">
                                             {{ $page }}
                                         </button>
                                     @endif
@@ -133,7 +117,6 @@ $scrollIntoViewJsSnippet = ($scrollTo !== false)
                                     class="next-arrow"
                                     rel="next"
                                     wire:click="nextPage('{{ $paginator->getPageName() }}')"
-                                    @click="{{ $scrollIntoViewJsSnippet }}"
                                     aria-label="{{ __('pagination.next') }}"
                             >
                                 <x-svg.nav-arrow-right />

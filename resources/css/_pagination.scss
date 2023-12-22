@@ -110,9 +110,9 @@
                         user-select: none;
 
                         &:hover {
-                            padding: 0.35rem 0.875rem 0.575em;
+                            font-size: 0.9rem;
+                            font-weight: 600;
                             color: $text-slate-500;
-                            text-decoration: $text-slate-500 underline;
                             transition-duration: 0.15s;
                         }
 
@@ -127,7 +127,11 @@
 
                     span.current-page {
                         background-color: $gray-300;
-                        cursor: default;
+
+                        &:hover {
+                            font-weight: 500;
+                            color: $text;
+                        }
                     }
 
                     span.previous-arrow, span.next-arrow {

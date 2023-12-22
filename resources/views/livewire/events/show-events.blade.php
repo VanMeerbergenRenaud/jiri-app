@@ -57,6 +57,12 @@
                     {{ $this->futureEvents->links() }}
                 </div>
             @endif
+            @if($this->pastEvents->isEmpty() && $this->currentEvents->isEmpty() && $this->futureEvents->isEmpty())
+                <div class="empty-event">
+                    <p class="sm:">Aucune épreuve ne correspond à votre recherche.</p>
+                    <livewire:events.add-event-dialog @added="$refresh" />
+                </div>
+            @endif
         @endunless
     </div>
 

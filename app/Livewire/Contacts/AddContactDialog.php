@@ -20,8 +20,6 @@ class AddContactDialog extends Component
         $this->reset('show');
 
         $this->added = true;
-
-        $this->dispatch('added');
     }
 
     public function render()

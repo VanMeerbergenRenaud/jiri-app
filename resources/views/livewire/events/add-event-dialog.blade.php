@@ -14,6 +14,7 @@
                         <input
                             wire:model="form.name"
                             autofocus
+                            placeholder="Jury juin {{ date('Y') }}"
                         >
                         @error('form.name')
                         <div class="error">{{ $message }}</div>@enderror

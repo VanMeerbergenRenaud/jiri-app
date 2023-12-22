@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
         $users = collect([$dominique, $renaud]);
 
         foreach ($users as $user) {
-            Event::factory()->count(20)->create([
+            Event::factory()->count(32)->create([
                 'user_id' => $user->id,
             ]);
 
