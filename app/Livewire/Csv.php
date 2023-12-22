@@ -32,7 +32,7 @@ class Csv
                 $row = [];
 
                 for($i = 0; $i < count($data); $i++) {
-                    if (! isset($columns[$i])) continue;
+                    if (!isset($columns[$i])) continue;
 
                     $row[$columns[$i]] = $data[$i];
                 }
@@ -55,8 +55,3 @@ class Csv
         return $result;
     }
 }
-
-// Theme :
-// Talos Dark
-// Mayukai mono
-// Peachy
