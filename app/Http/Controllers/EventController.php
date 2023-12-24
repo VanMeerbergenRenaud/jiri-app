@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attendance;
 use App\Models\Event;
+use App\Notifications\EvaluatorInvitation;
 use Auth;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
@@ -25,6 +28,24 @@ class EventController extends Controller
         $event = Event::findOrFail($eventId);
 
         return view('pages/events/show', compact('user', 'event'));
+    }
+
+    public function store(Request $request)
+    {
+        $user = auth()->user();
+
+        // Création de l'événement...
+        $event = $user->create($request->all());
+
+        // Création des évaluateurs...
+        foreach ($request->input('evaluators') as $evaluatorData) {
+            $evaluator = $user->attendances()->create($evaluatorData + ['event_id' => $event->id]);
+
+            // Envoi de la notification à l'évaluateur
+            $evaluator->notify(new EvaluatorInvitation($event, $evaluator->token));
+        }
+
+        return redirect()->route('events.show', $event);
     }
 
     // Specific event edition / update
