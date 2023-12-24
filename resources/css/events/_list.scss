@@ -1,16 +1,16 @@
 /* List of events */
-.mainEvents, .mainContacts, .mainProjects {
+.mainEvents, .mainContacts, .mainProjects, .mainEvaluator {
     padding: 2rem 1rem;
 }
 
-.events__intro, .contacts__intro, .projects__intro {
+.events__intro, .contacts__intro, .projects__intro, .evaluators__intro {
     margin-bottom: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: start;
     align-items: start;
 
-    &__info {
+    .intro__infos {
         display: flex;
         align-items: start;
         margin-bottom: 1.25rem;
@@ -181,7 +181,7 @@
             justify-content: space-between;
             align-items: center;
 
-            &__info {
+            .intro__infos {
                 display: flex;
                 align-items: center;
                 margin-bottom: 0;

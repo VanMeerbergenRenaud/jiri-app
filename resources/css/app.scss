@@ -31,12 +31,15 @@
 @import "events/show";
 @import "events/editEdition"; // Event we are editing before the event start official date
 
-/* List of contacts */
+/* List of contacts, projects */
 @import "contacts/index";
-
-/* List of projects */
-// @import "projects/index";
 
 /* List of profils */
 @import "profil/student";
 // @import "profil/evaluator";
+
+/* Dashboard evaluator */
+@import "evaluator/dashboard";
+
+/* 404 */
+@import "404";

@@ -13,7 +13,11 @@ class SecondTable extends Component
     public $students;
     public $evaluators;
 
-    public $projects;
+    public $projects = [
+        'Project 1',
+        'Project 2',
+        'Project 3',
+    ];
 
     public function mount()
     {

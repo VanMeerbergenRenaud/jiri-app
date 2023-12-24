@@ -2,10 +2,10 @@
 
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EvaluatorController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectsController;
-use App\Http\Controllers\StudentController;
 use App\Http\Controllers\WelcomeController;
 use App\Livewire\ImageUpload;
 use Illuminate\Support\Facades\Route;
@@ -60,7 +60,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/images', ImageUpload::class)->name('images.upload');
 
     /* Evaluator Dashboard */
-
+    // Route::get('/event/{event}/{token}', 'EvaluatorController@show')->name('evaluator.show');
+    Route::get('/evaluator', [EvaluatorController::class, 'index'])->name('evaluator.index');
 });
 
 /*

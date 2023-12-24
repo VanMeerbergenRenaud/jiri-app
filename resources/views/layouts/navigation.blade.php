@@ -1,6 +1,6 @@
 <nav x-data="{ open: false }" class="border-b border-gray-100">
     <!-- Primary Navigation Menu -->
-    <div class="mx-auto px-12 sm:px-6 lg:px-8">
+    <div class="mx-auto sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
                 {{-- Logo --}}
@@ -22,6 +22,9 @@
                     </x-breeze.nav-link>
                     <x-breeze.nav-link :href="route('images.upload')" wire:navigate :active="request()->routeIs('images.upload')">
                         {{ __('Images') }}
+                    </x-breeze.nav-link>
+                    <x-breeze.nav-link :href="route('evaluator.index')" wire:navigate :active="request()->routeIs('evaluator.index')">
+                        {{ __('Évaluateur') }}
                     </x-breeze.nav-link>
                 </div>
             </div>

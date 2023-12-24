@@ -22,8 +22,5 @@
 
         <!-- Page Footer -->
         @include('layouts.footer')
-
-        @livewireScripts
-
     </body>
 </html>

@@ -1,0 +1,247 @@
+/* Dashboard */
+.mainEvaluator {
+    padding: 1.5rem 1rem;
+
+    .evaluators__intro {
+
+        .intro__infos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0 1rem;
+
+            img {
+                margin: 0;
+                width: 2.5rem;
+                height: 2.5rem;
+            }
+
+            .title {
+                font-size: 1.15rem;
+                font-weight: 500;
+            }
+
+            .text {
+                font-size: 0.875remrem;
+                font-weight: 400;
+                color: $text-slate-500;
+            }
+        }
+    }
+
+    .search {
+        input {
+            border-radius: 0.75rem;
+            background-color: white;
+        }
+    }
+
+    .pagination nav {
+        padding: 0 0.5rem;
+    }
+
+    /* Mobile */
+    .students__list {
+        margin-top: 1rem;
+        display: block;
+        overflow: hidden;
+        border-radius: 0.75rem;
+        border: $border;
+
+        li {
+            background-color: white;
+        }
+
+        li + li {
+            border-top: $border;
+        }
+
+        &__item {
+            padding: 0.65rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            cursor: pointer;
+
+            &__infos {
+                display: flex;
+                align-items: center;
+                gap: 0 1.25rem;
+
+                img {
+                    width: 2.5rem;
+                    height: 2.5rem;
+                }
+            }
+        }
+
+        &__content {
+            display: block;
+            padding: 0.5rem 1.5rem;
+            border-top: 1px dotted #d9d9d9;
+
+            ul {
+                margin-top: 0.75rem;
+                display: flex;
+                flex-direction: column;
+                gap: 0.65rem;
+
+                li {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    font-weight: 500;
+                    font-size: 1rem;
+
+                    span, time {
+                        font-weight: 400;
+                    }
+                }
+
+                li + li {
+                    border-top: none;
+                }
+            }
+
+            &__link {
+                margin: 1rem 0 0.75rem;
+                display: block;
+                padding: 0.65rem 1rem;
+                width: 100%;
+                text-align: center;
+                font-weight: 500;
+                color: white;
+                border-radius: 0.75rem;
+                background-color: $blue;
+
+                &:hover {
+                    background-color: $blue-dark;
+                    transition: .3s ease-in-out;
+                }
+            }
+        }
+    }
+
+    .table__students {
+        display: none;
+    }
+
+    /* Ipad */
+    @media (min-width: 800px) {
+
+        .students__list {
+            display: none;
+        }
+
+        .search {
+            input {
+                border-radius: 2rem;
+                background-color: $gray-bg;
+            }
+        }
+
+        .table__students {
+            margin-top: 1rem;
+            display: block;
+            overflow-x: scroll;
+            overflow-y: hidden;
+            border: $border;
+            border-radius: 1rem;
+
+            &__thead {
+                display: table;
+                width: 100%;
+                background-color: $gray-900;
+
+                tr {
+                    display: grid;
+                    grid-template-columns: 300px 125px 165px 100px 135px 125px auto;
+                    gap: 0 1rem;
+                    padding: 0 1.5rem;
+                }
+
+                th {
+                    padding: 1rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 0 0.25rem;
+                    font-weight: 500;
+                    font-size: 0.875rem;
+                    text-align: center;
+                    cursor: pointer;
+                }
+
+                th:first-of-type {
+                    justify-content: start;
+                    text-align: left;
+                }
+            }
+
+            &__tbody {
+                display: table;
+                width: 100%;
+                background-color: $gray-bg;
+
+                tr {
+                    display: grid;
+                    grid-template-columns: 300px 125px 165px 100px 135px 125px auto;
+                    gap: 0 1rem;
+                    padding: 0 1.5rem;
+
+                    td {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 0 1rem;
+                        text-align: center;
+
+                        img {
+                            width: 2rem;
+                            height: 2rem;
+                        }
+                    }
+
+                    td:first-of-type {
+                        justify-content: start;
+                        text-align: left;
+                    }
+                }
+            }
+
+            .actions {
+                margin-left: 1rem;
+                max-width: 150px;
+                cursor: default;
+            }
+        }
+
+        .pagination nav {
+            padding: 0 2rem;
+        }
+    }
+
+    /* Desktop */
+    @media (min-width: 1440px) {
+        .table__students {
+            &__thead {
+                tr {
+                    display: grid;
+                    grid-template-columns: 2fr 125px 165px 100px 135px 125px auto;
+                    gap: 0 1.25rem;
+                    padding: 0 1.75rem;
+                }
+            }
+
+            &__tbody {
+                tr {
+                    display: grid;
+                    grid-template-columns: 2fr 125px 165px 100px 135px 125px auto;
+                    gap: 0 1.25rem;
+                    padding: 0 1.75rem;
+                }
+            }
+        }
+    }
+}

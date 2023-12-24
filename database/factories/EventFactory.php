@@ -16,8 +16,8 @@ class EventFactory extends Factory
     {
         return [
             'name' => 'Event '.$this->faker->word,
-            'starting_at' => $this->faker->dateTimeBetween('-1 year', '+1 year'),
-            'duration' => $this->faker->numberBetween(120, 480),
+            'starting_at' => $this->faker->dateTimeBetween('-2 year', '+2 year'),
+            'duration' => $this->faker->time(),
         ];
     }
 }

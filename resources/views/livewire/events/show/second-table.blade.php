@@ -18,28 +18,29 @@
         {{-- Second line for projets --}}
         <tr class="row-2">
             <th scope="row" class="category sticky">Étudiants&nbsp;|&nbsp;Projets</th>
-            @for ($i = 1; $i <= 4; $i++)
+            @foreach($evaluators as $evaluator)
                 @for ($j = 1; $j <= 3; $j++)
                     <th class="project sticky-small">Projet {{ $j }}</th>
                 @endfor
-            @endfor
+            @endforeach
         </thead>
         <tbody>
         @foreach($students as $student)
             <tr class="row-3" wire:key="s{{ $student->id }}">
                 {{-- Students --}}
-                <th scope="row" id="etudiant-{{ $i }}" class="students sticky">
+                <th scope="row" class="students sticky">
                     <img src="{{ $student->contact->avatar ?? asset('img/dominique.png') }}" alt="photo d'un étudiant">
                     {{ $student->contact->name ?? 'Étudiant' }}
                 </th>
-                {{-- Cotes ->  /20 --}}
-                @for ($j = 1; $j <= 4; $j++)
-                    @for ($k = 1; $k <= 3; $k++)
-                        <td headers="etudiant-{{ $i }} jury-{{ $j }} projet-{{ $k }}" class="results">
+                {{-- Cotes sur /20 --}}
+                @foreach($evaluators as $evaluator)
+                    @foreach($projects as $project)
+                        <td wire:key="s-{{ $student->id }} e-{{ $evaluator->id }} p-{{ $project->id ?? 3 }}"
+                            class="results">
                             9/20
                         </td>
-                    @endfor
-                @endfor
+                    @endforeach
+                @endforeach
                 {{-- Moyenne --}}
                 <td class="moy">9 / 20</td>
                 {{-- Cote globale --}}

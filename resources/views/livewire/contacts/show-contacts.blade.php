@@ -12,13 +12,13 @@
         <thead>
             <tr x-data="{ open: false }">
                 <th @click="open = !open" wire:click="sortBy('name')">
-                    Name <x-svg.arrow-down />
+                    Nom <x-svg.arrow-down />
                 </th>
                 <th @click="open = !open" wire:click="sortBy('firstname')">
-                    Firstname <x-svg.arrow-down />
+                    Prénom <x-svg.arrow-down />
                 </th>
                 <th @click="open = !open" wire:click="sortBy('email')">
-                    Email <x-svg.arrow-down />
+                    Adresse mail <x-svg.arrow-down />
                 </th>
                 <th class="actions">Actions</th>
             </tr>

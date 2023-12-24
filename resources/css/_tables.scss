@@ -17,6 +17,12 @@ table {
 
     tbody {
         display: table-row-group;
+
+        tr:last-of-type {
+            td, th {
+                border-bottom: none;
+            }
+        }
     }
 
     tr {

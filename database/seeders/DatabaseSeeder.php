@@ -55,7 +55,7 @@ class DatabaseSeeder extends Seeder
                 $contacts = $user->contacts->random(3);
 
                 foreach ($contacts as $contact) {
-                    Attendance::factory()->count(2)->create([
+                    Attendance::factory()->count(8)->create([
                         'event_id' => $event->id,
                         'contact_id' => $contact->id,
                     ]);
