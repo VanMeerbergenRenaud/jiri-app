@@ -14,7 +14,7 @@
         <script defer src="https://unpkg.com/@alpinejs/ui@3.13.2-beta.0/dist/cdn.min.js"></script>
     </head>
     <body>
-        <header class="flex items-center justify-between gap-2 p-4 m-auto w-full" style="max-width: 1650px">
+        <header class="flex items-center justify-between gap-2 p-4 m-auto w-full" style="max-width: 1650px; border-bottom: 1px solid #E5E9F4;">
             {{-- Logo --}}
             <a href="/" class="flex items-center gap-2">
                 <x-breeze.application-logo class="block w-auto fill-current" />

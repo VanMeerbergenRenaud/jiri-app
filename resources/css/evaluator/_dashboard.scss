@@ -126,9 +126,12 @@
     .table__students {
         display: none;
     }
+}
 
-    /* Ipad */
-    @media (min-width: 800px) {
+/* Ipad */
+@media (min-width: 800px) {
+    .mainEvaluator {
+        padding: 1.5rem 2.5rem;
 
         .students__list {
             display: none;
@@ -206,6 +209,7 @@
                     td:first-of-type {
                         justify-content: start;
                         text-align: left;
+                        font-weight: 500;
                     }
                 }
             }
@@ -214,6 +218,11 @@
                 margin-left: 1rem;
                 max-width: 150px;
                 cursor: default;
+
+                a {
+                    padding: 0.65rem 1.5rem;
+                    border-radius: 0.65rem;
+                }
             }
         }
 
@@ -221,9 +230,17 @@
             padding: 0 2rem;
         }
     }
+}
 
-    /* Desktop */
-    @media (min-width: 1440px) {
+/* Desktop */
+@media (min-width: 1440px) {
+    .mainEvaluator {
+        padding: 1.5rem 4rem;
+
+        .students__list {
+            display: none;
+        }
+
         .table__students {
             &__thead {
                 tr {

@@ -23,9 +23,6 @@
                     <x-breeze.nav-link :href="route('images.upload')" wire:navigate :active="request()->routeIs('images.upload')">
                         {{ __('Images') }}
                     </x-breeze.nav-link>
-                    <x-breeze.nav-link :href="route('evaluator.index')" wire:navigate :active="request()->routeIs('evaluator.index')">
-                        {{ __('Évaluateur') }}
-                    </x-breeze.nav-link>
                 </div>
             </div>
 

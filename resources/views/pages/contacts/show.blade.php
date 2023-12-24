@@ -45,6 +45,18 @@
                                 voir le profil
                             </a>
                         </p>
+
+                        @if($attendance->role == 'evaluator')
+                            <a class="underline p-2 font-bold"
+                               href="{{ route('events.showEvaluator', [
+                                    'event' => $attendance->event->id,
+                                    'evaluator' => $attendance->contact->id,
+                                    'token' => $attendance->token
+                                ]) }}"
+                            >
+                                Accéder au dashboard de l'évaluateur
+                            </a>
+                        @endif
                     </li>
             @endforeach
         </div>

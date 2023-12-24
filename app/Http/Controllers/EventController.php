@@ -53,7 +53,7 @@ class EventController extends Controller
     {
         $user = auth()->user();
 
-        $event = Event::findOrFail($eventId);
+        $event = $user->events()->findOrFail($eventId);
 
         $students = $event->contacts()->get();
 
@@ -64,7 +64,7 @@ class EventController extends Controller
     {
         $data = $this->validateEventData();
 
-        $event = Event::findOrFail($eventId);
+        $event = auth()->user()->events()->findOrFail($eventId);
 
         $event->update($data);
 
@@ -76,10 +76,27 @@ class EventController extends Controller
     {
         $user = auth()->user();
 
-        $event = Event::findOrFail($eventId);
+        $event = $user->events()->findOrFail($eventId);
 
         $contact = $event->contacts()->findOrFail($contactId);
 
         return view('pages/events/show-contact', compact('user', 'event', 'contact'));
+    }
+
+    // Route pour évaluateur spécifique
+    public function showEvaluator($eventId, $contactId, $token)
+    {
+        $user = auth()->user();
+
+        $event = $user->events()->findOrFail($eventId);
+
+        $contact = $event->contacts()->findOrFail($contactId);
+
+        $evaluator = $user->attendances()
+            ->where('event_id', $eventId)
+            ->where('token', $token)
+            ->firstOrFail();
+
+        return view('pages/events/show-evaluator', compact('user', 'event', 'contact', 'evaluator'));
     }
 }

@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\EvaluatorController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectsController;
@@ -47,7 +46,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/events/{event}/edition', [EventController::class, 'editEdition'])->name('events.editEdition');
     Route::patch('/events/{event}/edition', [EventController::class, 'updateEdition'])->name('events.updateEdition');
 
-    // Route d'un contact lié à une épreuve
+    // Evaluator dashboard
+    Route::get('/events/{event}/evaluator/{evaluator}/{token}', [EventController::class, 'showEvaluator'])->name('events.showEvaluator');
+
+    // Route of a specific contact in a specific event
     Route::get('/events/{event}/contacts/{contact}', [EventController::class, 'showContact'])->name('events.showContact');
 
     /* Contacts CRUD */
@@ -58,10 +60,6 @@ Route::middleware('auth')->group(function () {
 
     // Image upload for contacts
     Route::get('/images', ImageUpload::class)->name('images.upload');
-
-    /* Evaluator Dashboard */
-    // Route::get('/event/{event}/{token}', 'EvaluatorController@show')->name('evaluator.show');
-    Route::get('/evaluator', [EvaluatorController::class, 'index'])->name('evaluator.index');
 });
 
 /*
