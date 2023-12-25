@@ -17,11 +17,22 @@ class Dashboard extends Component
 
     public $event;
 
-    #[Computed]
-    public function studentFilter()
+    public $projects;
+
+    public function mount()
     {
         $this->event = auth()->user()->events()->first();
 
+        $this->projects = auth()->user()->events()
+            ->join('duties', 'events.id', '=', 'duties.event_id')
+            ->join('projects', 'duties.project_id', '=', 'projects.id')
+            ->where('events.id', $this->event->id)
+            ->get();
+    }
+
+    #[Computed]
+    public function studentFilter()
+    {
         return auth()->user()->attendances()
             ->join('contacts', 'attendances.contact_id', '=', 'contacts.id')
             ->where('event_id', $this->event->id)

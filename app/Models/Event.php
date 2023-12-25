@@ -91,5 +91,4 @@ class Event extends Model
             ->withPivot('role', 'token')
             ->wherePivot('role', 'evaluator');
     }
-
 }

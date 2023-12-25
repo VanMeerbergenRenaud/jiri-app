@@ -24,14 +24,4 @@ class Implementation extends Model
     {
         return $this->belongsTo(Project::class);
     }
-
-    public function getScoresAttribute($value)
-    {
-        return json_decode($value);
-    }
-
-    public function getUrlsAttribute($value)
-    {
-        return json_decode($value);
-    }
 }

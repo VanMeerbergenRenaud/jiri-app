@@ -30,7 +30,7 @@
                         </li>
                         <li>
                             Projets
-                            <span>{{ 3 ?? 0 }}</span>
+                            <span>{{ $projects->count() ?? 0 }}</span>
                         </li>
                         <li>
                             Évaluations
@@ -94,7 +94,7 @@
                         {{ $student->activity_time ?? '00:00' }}
                     </td>
                     <td>
-                        {{ $student->projects ?? 0 }}
+                        {{ $projects->count() ?? 0 }}
                     </td>
                     <td>
                         {{ $student->evaluations ?? 'Commencer' }}
