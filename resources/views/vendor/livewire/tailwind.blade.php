@@ -1,6 +1,7 @@
 <div class="pagination">
     @if ($paginator->hasPages())
         <nav role="navigation" aria-label="Pagination Navigation">
+            <h3 class="sr-only">Pagination navigation</h3>
 
             {{-- Small device : 2 parts --}}
             <div class="small-device">

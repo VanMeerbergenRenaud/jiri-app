@@ -6,6 +6,7 @@ use App\Models\Contact;
 use Illuminate\Http\UploadedFile;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
+use Storage;
 
 class ContactForm extends Form
 {
@@ -18,7 +19,8 @@ class ContactForm extends Form
     #[Validate('email|nullable')]
     public $email = null;
 
-    public $avatar;
+    #[Validate('image|nullable')]
+    public $avatar = null;
 
     public Contact $contact;
 
@@ -28,7 +30,7 @@ class ContactForm extends Form
         $this->name = $contact->name;
         $this->firstname = $contact->firstname;
         $this->email = $contact->email;
-        $this->avatar = $contact->avatar ?? null;
+        $this->avatar = $contact->avatar;
     }
 
     public function save()
@@ -53,12 +55,16 @@ class ContactForm extends Form
             'name' => $this->name,
             'firstname' => $this->firstname,
             'email' => $this->email,
-            'avatar' => $this->avatar ? $this->storeFile($this->avatar) : $this->contact->avatar,
+            'avatar' => $this->storeFile($this->avatar) ?? $this->contact->avatar,
         ]);
     }
 
-    protected function storeFile(UploadedFile $file)
+    protected function storeFile(UploadedFile $file = null)
     {
+        if (is_null($file)) {
+            return null;
+        }
+
         if ($file->isValid()) {
             // Generate a unique filename
             $filename = md5($file->getClientOriginalName() . time()) . '.' . $file->getClientOriginalExtension();
@@ -67,9 +73,9 @@ class ContactForm extends Form
             $file->storeAs('avatars', $filename);
 
             // Return the file path
-            return 'http://jiri-app.test/public/avatars/' . $filename;
+            return '/avatars/' . $filename;
         } else {
-            return 'Error uploading file';
+            return null;
         }
     }
 }

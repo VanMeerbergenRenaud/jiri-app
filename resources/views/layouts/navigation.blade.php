@@ -1,4 +1,7 @@
 <nav x-data="{ open: false }" class="border-b border-gray-100">
+    <h2 aria-level="2" role="heading" class="sr-only">
+        Menu de navigation principal
+    </h2>
     <!-- Primary Navigation Menu -->
     <div class="mx-auto sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">

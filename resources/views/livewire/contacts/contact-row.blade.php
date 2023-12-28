@@ -1,6 +1,9 @@
 <tr>
     <td class="name capitalize">
-        <img src="{{ url($contact->avatar) ?? asset('img/dominique.png') }}" alt="photo de profil du contact">
+        <img src="{{
+            asset($contact->avatar) . '?' . $contact->updated_at->format("U")
+         ?? asset('img/dominique.png')
+        }}" alt="photo de profil du contact">
 
         {{ $contact->name }}
     </td>
@@ -65,6 +68,10 @@
                                     <span>JPG, JPEG, PNG or SVG (MAX 2000x1200px).</span>
                                     @error('form.avatar')<div class="error">{{ $message }}</div>@enderror
                                 </label>
+
+                                @if ($contact->avatar)
+                                    <img src="{{ $contact->avatar }}" alt="Image du contact" class="w-1/2 h-auto rounded-lg">
+                                @endif
                             </div>
 
                             <x-dialog.footer>

@@ -14,6 +14,12 @@
         <script defer src="https://unpkg.com/@alpinejs/ui@3.13.2-beta.0/dist/cdn.min.js"></script>
     </head>
     <body>
+        <header class="sr-only">
+            <h1 role="heading" aria-level="1">
+                Jiri App
+            </h1>
+        </header>
+
         <!-- Page Navigation -->
         @include('layouts.navigation')
 
