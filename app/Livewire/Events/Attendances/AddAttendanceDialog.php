@@ -9,7 +9,6 @@ use Livewire\Component;
 class AddAttendanceDialog extends Component
 {
     public ContactForm $contactForm;
-
     public AttendanceForm $attendanceForm;
 
     public $show = false;
