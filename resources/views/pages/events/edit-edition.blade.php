@@ -5,10 +5,13 @@
                 :title="'Bonjour ' . $user->name . ' !'"
                 :message="'Votre épreuve ' . $event->name . '  est en cours d‘acheminement.'"
             />
+            <livewire:events.attendances.add-attendance-dialog />
         </div>
 
+        <livewire:events.attendances.show-attendances />
+
         {{-- First Table for students --}}
-        <livewire:events.edit-edition-student :students="$students" :event="$event" />
+        {{--<livewire:events.edit-edition-student :students="$students" :event="$event" />--}}
 
         {{-- Second Table for evaluators --}}
 

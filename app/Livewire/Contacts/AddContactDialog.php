@@ -4,9 +4,12 @@ namespace App\Livewire\Contacts;
 
 use App\Livewire\Forms\ContactForm;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class AddContactDialog extends Component
 {
+    use WithFileUploads;
+    
     public ContactForm $form;
 
     public $show = false;

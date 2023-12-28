@@ -52,7 +52,7 @@ class DatabaseSeeder extends Seeder
 
             // Attendances for each event
             foreach ($events as $event) {
-                $contacts = $user->contacts->unique()->take(3);
+                $contacts = $user->contacts->random(3);
 
                 foreach ($contacts as $contact) {
                     Attendance::factory()->count(8)->create([
@@ -64,7 +64,7 @@ class DatabaseSeeder extends Seeder
 
             // Duties for each event
             foreach ($events as $event) {
-                $projects = $user->projects->unique()->take(3);
+                $projects = $user->projects->random(3);
 
                 foreach ($projects as $project) {
                     Duty::factory()->count(2)->create([
@@ -83,7 +83,7 @@ class DatabaseSeeder extends Seeder
                 $duties = $event->duties;
 
                 foreach ($duties as $duty) {
-                    $contacts = $event->contacts->unique()->take(2);
+                    $contacts = $event->contacts->random(2);
 
                     foreach ($contacts as $contact) {
                         Implementation::factory()->count(1)->create([

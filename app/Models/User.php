@@ -75,6 +75,11 @@ class User extends Authenticatable
 
     public function duties()
     {
-        return $this->hasMany(Duty::class);
+        return $this->hasManyThrough(Duty::class, Event::class);
+    }
+
+    public function implementations()
+    {
+        return $this->hasManyThrough(Implementation::class, Event::class);
     }
 }

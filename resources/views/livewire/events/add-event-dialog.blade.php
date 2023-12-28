@@ -13,11 +13,11 @@
                         Nom
                         <input
                             wire:model="form.name"
+                            type="text"
                             autofocus
                             placeholder="Jury juin {{ date('Y') }}"
                         >
-                        @error('form.name')
-                        <div class="error">{{ $message }}</div>@enderror
+                        @error('form.name')<div class="error">{{ $message }}</div>@enderror
                     </label>
 
                     <label>
@@ -26,8 +26,7 @@
                             wire:model="form.starting_at"
                             type="datetime-local"
                         />
-                        @error('form.starting_at')
-                        <div class="error">{{ $message }}</div>@enderror
+                        @error('form.starting_at')<div class="error">{{ $message }}</div>@enderror
                     </label>
 
                     <label>
@@ -35,9 +34,10 @@
                         <input
                             wire:model="form.duration"
                             type="time"
+                            step="1" minutes="1"
+                            max="23:59"
                         />
-                        @error('form.duration')
-                        <div class="error">{{ $message }}</div>@enderror
+                        @error('form.duration')<div class="error">{{ $message }}</div>@enderror
                     </label>
                 </div>
 

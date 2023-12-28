@@ -12,30 +12,26 @@
                     <label>
                         Nom
                         <input autofocus wire:model="form.name">
-                        @error('form.name')
-                        <div class="error">{{ $message }}</div>@enderror
+                        @error('form.name')<div class="error">{{ $message }}</div>@enderror
                     </label>
 
                     <label>
                         Prénom
                         <input wire:model="form.firstname"/>
-                        @error('form.firstname')
-                        <div class="error">{{ $message }}</div>@enderror
+                        @error('form.firstname')<div class="error">{{ $message }}</div>@enderror
                     </label>
 
                     <label>
                         Email
                         <input wire:model="form.email"/>
-                        @error('form.email')
-                        <div class="error">{{ $message }}</div>@enderror
+                        @error('form.email')<div class="error">{{ $message }}</div>@enderror
                     </label>
 
                     <label for="file_input">
                         Upload file
                         <input id="file_input" wire:model="form.avatar" type="file">
                         <span>JPG, JPEG, PNG or SVG (MAX 2000x1200px).</span>
-                        @error('form.avatar')
-                        <div class="error">{{ $message }}</div>@enderror
+                        @error('form.avatar')<div class="error">{{ $message }}</div>@enderror
                     </label>
                 </div>
 

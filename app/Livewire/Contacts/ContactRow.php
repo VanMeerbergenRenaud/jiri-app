@@ -5,9 +5,12 @@ namespace App\Livewire\Contacts;
 use App\Livewire\Forms\ContactForm;
 use App\Models\Contact;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class ContactRow extends Component
 {
+    use WithFileUploads;
+
     public $contact;
 
     public ContactForm $form;

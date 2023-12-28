@@ -13,7 +13,7 @@
             </a>
             <label for="students">
                 <select id="students">
-                    <option value="" selected disabled>Sélectionnez un autre étudiant !</option>
+                    <option value="" selected disabled>Sélectionnez un autre profil !</option>
                     <option value="1">Etudiant 1</option>
                     <option value="2">Etudiant 2</option>
                 </select>

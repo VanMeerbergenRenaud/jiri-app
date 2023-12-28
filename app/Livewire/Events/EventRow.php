@@ -25,6 +25,22 @@ class EventRow extends Component
         return Carbon::parse($date)->translatedFormat('d D M Y');
     }
 
+    public function formatTime($time)
+    {
+        Carbon::setLocale('fr');
+        $time = Carbon::parse($time);
+        $hours = ltrim($time->format('H'), '0');
+        $minutes = $time->format('i');
+
+        if ($hours > 0) {
+            return $hours . 'h' . $minutes . 'min';
+        } else {
+            return $minutes . 'min';
+        }
+    }
+
+
+
     public function save()
     {
         $this->form->update();
