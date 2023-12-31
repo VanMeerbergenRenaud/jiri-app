@@ -20,6 +20,7 @@ class ShowContactProfil extends Component
 
         $this->contactType = auth()->user()->attendances()
             ->where('contact_id', $contact->id)
+            ->where('event_id', $this->contact->pivot->event_id)
             ->first()
             ->role;
 

@@ -1,9 +1,8 @@
 /* Welcome Start Page */
 .mainWelcome {
-    padding: 0 5rem;
-
     .welcome {
-        padding: 0 3rem;
+        height: 100vh;
+        width: 100%;
 
         p {
             max-width: 400px;
@@ -11,7 +10,8 @@
         }
 
         &__intro {
-            margin: 6.5rem 0 5rem;
+            margin: 5rem 0;
+            padding: 0 2rem;
 
             img {
                 width: 4rem;
@@ -24,10 +24,9 @@
         }
 
         &__login {
-            margin-bottom: 8rem;
             padding: 3rem;
             width: 100%;
-            min-width: 750px;
+            height: 100%;
             max-width: 1000px;
             background-color: $gray-300;
             border: $border;
@@ -44,6 +43,37 @@
 
             .button--classic {
                 padding: 0.8125rem 3rem;
+            }
+        }
+    }
+}
+
+@media (min-width: 750px) {
+    .mainWelcome {
+        .welcome {
+            &__login {
+                padding: 2.5rem 3rem 2rem;
+                max-width: 70vw;
+                height: auto;
+
+                p {
+                    line-height: 1.5;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 1440px) {
+    .mainWelcome {
+        .welcome {
+            &__intro {
+                margin: 8rem auto 6rem;
+            }
+
+            &__login {
+                padding: 2.5rem;
+                max-width: 875px;
             }
         }
     }
