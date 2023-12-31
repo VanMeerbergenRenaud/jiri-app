@@ -71,27 +71,24 @@
                 </tr>
                 </thead>
                 <tbody>
-                @php
-                    $testCol = 7;
-                @endphp
                 <tr class="bilan__row">
                     <th class="bilan__row__title">Projets</th>
-                    @for ($i = 1; $i <= $testCol; $i++)
-                        <th>
-                            Projet {{ $i }}
-                        </th>
-                    @endfor
+                    @foreach ($projects as $project)
+                        <td>
+                            {{ $project->name }}
+                        </td>
+                    @endforeach
                     <th class="global">Cote globale</th>
                     <th class="final">Cote délibée</th>
                 </tr>
                 <tr class="bilan__row">
                     <th class="bilan__row__title">Moyenne des cotes</th>
-                    @for ($i = 1; $i <= $testCol; $i++)
+                    @foreach ($projects as $project)
                         <td>
                             <span class="note">4</span>
                             <span>/ 20</span>
                         </td>
-                    @endfor
+                    @endforeach
                     {{-- TODO : <td> is the AVG of the result --}}
                     <td class="global">
                         <span class="note">4.35</span>
@@ -105,22 +102,22 @@
                 </tr>
                 <tr class="bilan__row">
                     <th rowspan="2" class="bilan__row__title b-b">Coéfficient de la cote globale</th>
-                    @for ($i = 1; $i <= $testCol; $i++)
+                    @foreach ($projects as $project)
                         <td>
                             <span class="note">0.2</span>
                         </td>
-                    @endfor
+                    @endforeach
                     {{-- TODO : cote globale * les coéficients--}}
                     <td class="global">
                         <span class="note">4.25</span>
                     </td>
                 </tr>
                 <tr class="bilan__row">
-                    @for ($i = 1; $i <= $testCol; $i++)
+                    @foreach ($projects as $project)
                         <td class="b-b">
                             <span class="note">0.35</span>
                         </td>
-                    @endfor
+                    @endforeach
                     {{-- TODO : cote globale2 * les coéficients--}}
                     <td class="b-b global">
                         <span class="note">4.75</span>
@@ -135,29 +132,32 @@
                 <h4>Commentaires des membres du jury</h4>
                 {{-- List of comments --}}
                 <ul class="jiriesComment__list">
-                    @for ($i = 1; $i <= 3; $i++)
+                    @for ($i = 1; $i <= 3; $i++) {{-- for each $comments from evaluators --}}
                         <li x-data="{ open: false, isSelected: false }" class="jiriesComment__list__item">
                             <div class="jiriesComment__list__item__infos" :class="{ 'isSelected': isSelected }" @click="open = !open; isSelected = !isSelected">
                                 <div class="jiriesComment__list__item__infos__evaluator">
                                     <img src="{{ asset('img/dominique.png') }}" alt="">
-                                    <span>Toon van den boss</span>
+                                    <span>
+                                        Toon van den boss
+                                        {{--{{ $evaluator->name }}--}}
+                                    </span>
                                 </div>
                                 <span>@include('components.svg.arrow-down')</span>
                             </div>
 
                             {{-- All the ratings & comments for all the projects of a student --}}
                             <ul x-show="open" x-transition.opacity class="jiriesComment__list__item__commentList">
-                                @for ($j = 1; $j <= 4; $j++)
+                                @foreach ($projects as $project)
                                     <li class="jiriesComment__list__item__commentList__item">
                                         <div>
-                                            <h5>Nom du projet</h5>
+                                            <h3 class="font-semibold capitalize">{{ $project->name}}</h3>
                                             <span>11.5 / 20</span>
                                         </div>
                                         <p>
                                             La cote finale calculée automatiquement n’est pas forcément la cote finale qui se trouvera dans le bulletin ok. La cote finale calculée automatiquement...
                                         </p>
                                     </li>
-                                @endfor
+                                @endforeach
                             </ul>
                         </li>
                     @endfor
@@ -167,73 +167,77 @@
             {{-- Basic table --}}
             <table class="infosTable">
                 <thead>
-                <tr>
-                    <th class="user-infos" colspan="100%">
-                        <div>
-                            <img src="{{ asset('img/dominique.png') }}" alt="">
-                            <span>Renaud Van Meerbergen</span>
-                        </div>
-                        <a href="#">Editer les informations</a>
-                    </th>
-                </tr>
+                    <tr>
+                        <th class="user-infos" colspan="100%">
+                            <div>
+                                <img src="{{ $contact->avatar ?? asset('img/dominique.png') }}" alt="Photo du contact">
+                                <span>
+                                    {{ $contact->name }} {{ $contact->firstname }}
+                                </span>
+                            </div>
+                            {{--<a href="#">Editer les informations</a>--}}
+                        </th>
+                    </tr>
                 </thead>
                 <tbody>
-                @php
-                    $testCol = 7;
-                @endphp
-                <tr class="project-list">
-                    @for ($i = 1; $i <= $testCol; $i++)
-                        <th>
-                            Projet {{ $i }}
-                        </th>
-                    @endfor
-                </tr>
-                <tr class="project-info">
-                    @for ($i = 1; $i <= $testCol; $i++)
-                        <td>
-                            <h4 class="title">Projet présenté</h4>
-                            <p>Oui</p>
-                        </td>
-                    @endfor
-                </tr>
-                <tr class="project-info">
-                    @for ($i = 1; $i <= $testCol; $i++)
-                        <td>
-                            <h4 class="title">Réalisation(s)</h4>
-                            <ul>
-                                @for ($j = 1; $j <= 3; $j++)
-                                    <li>
-                                        Design UI
-                                    </li>
-                                @endfor
-                            </ul>
-                        </td>
-                    @endfor
-                </tr>
-                <tr class="project-info">
-                    @for ($i = 1; $i <= $testCol; $i++)
-                        <td>
-                            <h4 class="title">Maquette de design</h4>
-                            <a href="#" class="link">https://adobe.xd/cv-renaud.vmb</a>
-                        </td>
-                    @endfor
-                </tr>
-                <tr class="project-info">
-                    @for ($i = 1; $i <= $testCol; $i++)
-                        <td>
-                            <h4 class="title">Url du site</h4>
-                            <a href="#" class="link">https://renaud-vmb.com</a>
-                        </td>
-                    @endfor
-                </tr>
-                <tr class="project-info">
-                    @for ($i = 1; $i <= $testCol; $i++)
-                        <td>
-                            <h4 class="title">Repository GitHub</h4>
-                            <a href="#" class="link">https://github.com/VanMeerbergenRenaud/Portfolio</a>
-                        </td>
-                    @endfor
-                </tr>
+                    <tr class="project-list">
+                        @foreach ($projects as $project)
+                            <th>
+                                {{ $project->name }}
+                            </th>
+                        @endforeach
+                    </tr>
+                    <tr class="project-info">
+                        @foreach ($projects as $project)
+                            <td>
+                                <h4 class="title">Projet présenté</h4>
+                                <p>Oui</p>
+                            </td>
+                        @endforeach
+                    </tr>
+                    <tr class="project-info">
+                        @foreach ($projects as $project)
+                            <td>
+                                <h4 class="title">Réalisation(s)</h4>
+                                <ul>
+                                    @for ($j = 1; $j <= 3; $j++)
+                                        <li>
+                                            Design UI
+                                        </li>
+                                    @endfor
+                                    {{--@foreach ($tasks as $task)
+                                        <li>
+                                            {{ $task->name }}
+                                        </li>
+                                    @endforeach--}}
+                                </ul>
+                            </td>
+                        @endforeach
+                    </tr>
+                    <tr class="project-info">
+                        @foreach ($projects as $project)
+                            <td>
+                                <h4 class="title">Maquette de design</h4>
+                                <a href="#" class="link">https://adobe.xd/cv-renaud.vmb</a>
+                            </td>
+                        @endforeach
+                    </tr>
+                    <tr class="project-info">
+                        @foreach ($projects as $project)
+                            <td>
+                                <h4 class="title">Url du site</h4>
+                                <a href="#" class="link">https://renaud-vmb.com</a>
+                            </td>
+                        @endforeach
+                    </tr>
+                    <tr class="project-info">
+                        @foreach ($projects as $project)
+                            <td>
+                                <h4 class="title">Repository GitHub</h4>
+                                <a href="#" class="link">https://github.com/VanMeerbergenRenaud/Portfolio</a>
+                            </td>
+                        @endforeach
+                    </tr>
                 </tbody>
             </table>
             <div class="mainProfil__action">

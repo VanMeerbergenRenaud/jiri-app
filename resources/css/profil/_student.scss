@@ -138,7 +138,6 @@
         &__col2 {
             table {
                 max-height: max-content;
-                max-width: 900px;
                 overflow-x: scroll;
 
                 th, td {
@@ -238,10 +237,6 @@
                                 align-items: center;
                                 flex-wrap: wrap;
                                 gap: 0 1rem;
-
-                                li {
-
-                                }
                             }
                         }
                     }
@@ -253,7 +248,6 @@
                 border-radius: 1rem;
                 overflow: hidden;
                 border: $border;
-                max-width: 900px;
 
                 h4 {
                     padding: 1.25rem 1.75rem;
@@ -369,6 +363,7 @@
 
                     td {
                         text-align: center;
+                        min-width: 110px;
                     }
 
                     td:last-child {
@@ -381,7 +376,6 @@
                 }
 
                 &__row {
-
                     &:first-of-type {
                         th {
                             padding: 1.15rem 2rem;
@@ -393,25 +387,6 @@
                             min-width: 150px;
                             background-color: $gray-300;
                         }
-                    }
-
-                    .global {
-                        position: sticky;
-                        right: 150px;
-                        border-left: 1px solid $gray-500;
-                    }
-
-                    .final {
-                        position: sticky;
-                        right: 0;
-                    }
-
-                    &__title {
-                        position: sticky;
-                        left: 0;
-                        text-align: left;
-                        min-width: 250px;
-                        width: 100%;
                     }
                 }
             }
@@ -440,7 +415,7 @@
 
         &__content {
             display: grid;
-            grid-template-columns: 1fr 2.25fr;
+            grid-template-columns: 1fr 2fr;
             gap: 0 2rem;
 
             &__profil {
@@ -460,6 +435,52 @@
                             width: 100%;
                         }
                     }
+                }
+            }
+
+            &__col2 {
+                table, .jiriesComment {
+                    max-width: 950px
+                }
+
+                .bilan {
+                    &__row {
+                        .global {
+                            position: sticky;
+                            right: 150px;
+                            border-left: 1px solid $gray-500;
+                        }
+
+                        .final {
+                            position: sticky;
+                            right: 0;
+                        }
+
+                        &__title {
+                            position: sticky;
+                            left: 0;
+                            text-align: left;
+                            min-width: 250px;
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// For 1440px screens @media
+@media (min-width: 1650px) {
+    .mainProfil {
+        &__content {
+            &__col1 {
+                width: 300px;
+            }
+
+            &__col2 {
+                table, .jiriesComment {
+                    max-width: 1150px
                 }
             }
         }

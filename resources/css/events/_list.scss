@@ -1,5 +1,5 @@
 /* List of events */
-.mainEvents, .mainContacts, .mainProjects, .mainEvaluator {
+.mainEvents, .mainContacts, .mainProjects, .mainEvaluator, .mainEventEdit {
     padding: 2rem 1rem;
 }
 
@@ -169,12 +169,12 @@
 
 
 // For 1440px screen
-@media (min-width: 1050px) {
-    .mainEvents, .mainContacts, .mainProjects {
+@media (min-width: 850px) {
+    .mainEvents, .mainContacts, .mainProjects, .mainEventEdit {
         padding: 2rem 5rem;
     }
 
-    .mainEvents, .mainContacts, .mainProjects {
+    .mainEvents, .mainContacts, .mainProjects, .mainEventEdit {
         .events__intro, .contacts__intro, .projects__intro {
             display: flex;
             flex-direction: row;

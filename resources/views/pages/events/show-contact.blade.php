@@ -3,11 +3,15 @@
         <div class="mainProfil__intro">
             <h2>Profil du contact
             </h2>
-            <p>Découvrez toutes les informations de {{ $contact->name }}.</p>
+            <p>
+                Découvrez toutes les informations de
+                <span class="font-semibold">{{ $contact->name }}</span>
+                pour l'épreuve <span class="font-semibold">{{ $event->name }}</span>.
+            </p>
         </div>
 
         <div class="mainProfil__nav">
-            <a href="/" class="button--gray">
+            <a href="{{ url()->previous() }}" class="button--gray">
                 @include('components.svg.arrow-left')
                 Retour
             </a>

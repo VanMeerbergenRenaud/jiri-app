@@ -1,9 +1,12 @@
 <x-app-layout>
-    <main class="mainProfil">
+    <main class="mainProfil mainProfilShowContact">
         <div class="mainProfil__intro">
-            <h2>Profil du contact
-            </h2>
-            <p>Découvrez toutes les informations de {{ $contact->name }}.</p>
+            <h2>Profil du contact</h2>
+            <p>
+                Listes des épreuves dans lesquelles
+                <span class="font-semibold">{{ $contact->name }}</span>
+                est inscrit.
+            </p>
         </div>
 
         <div class="mainProfil__nav">
@@ -11,9 +14,9 @@
                 @include('components.svg.arrow-left')
                 Retour
             </a>
-            <label for="students">
-                <select id="students">
-                    <option value="" selected disabled>Sélectionnez un autre profil !</option>
+            <label>
+                <select>
+                    <option value="" selected disabled>-- Sélectionnez un autre profil ---</option>
                     <option value="1">Etudiant 1</option>
                     <option value="2">Etudiant 2</option>
                 </select>
@@ -21,40 +24,46 @@
         </div>
 
         {{--Liste des events (attendances) liés aux contacts --}}
-        <div>
-            Listes des épreuves dans lesquelles le contact apparait :
-
-            <ul class="mb-8 mt-2">
+        <div class="contact__attendances">
+            <ul class="contact__attendances__list">
                 @foreach ($contact->attendances->unique('event_id') as $attendance)
-                    <li class="p-4">
+                    <li>
                         <p>
-                            Épreuve :
+                            <span>Épreuve&nbsp;:</span>
                             <a href="{{ route('events.show', $attendance->event) }}">
                                 {{ $attendance->event->name }}
                             </a>
                         </p>
 
                         <p>
-                            Role : {{ $attendance->role }}
+                            <span>Rôle&nbsp;:</span>
+
+                            @php
+                                $translations = [
+                                    'evaluator' => 'évaluateur',
+                                    'student' => 'étudiant',
+                                ];
+                            @endphp
+
+                            <span class="capitalize">{{ $translations[$attendance->role] ?? 'Non défini' }}</span>
                         </p>
 
                         <p>
-                            Profil et résultats :
-                            {{-- TODO : direction vers le profil lié à une épreuve --}}
+                            <span>Profil et résultats&nbsp;:</span>
                             <a href="{{ route('events.showContact', ['event' => $attendance->event, 'contact' => $contact]) }}">
-                                voir le profil
+                                Voir
                             </a>
                         </p>
 
                         @if($attendance->role == 'evaluator')
-                            <a class="underline p-2 font-bold"
+                            <a class="link"
                                href="{{ route('events.showEvaluator', [
-                                    'event' => $attendance->event->id,
-                                    'evaluator' => $attendance->contact->id,
-                                    'token' => $attendance->token
-                                ]) }}"
+                                'event' => $attendance->event->id,
+                                'evaluator' => $attendance->contact->id,
+                                'token' => $attendance->token
+                            ]) }}"
                             >
-                                Accéder au dashboard de l'évaluateur
+                                Dashboard de l'évaluateur
                             </a>
                         @endif
                     </li>
