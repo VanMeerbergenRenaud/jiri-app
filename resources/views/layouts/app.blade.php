@@ -7,11 +7,14 @@
 
         <title>{{ $title ?? 'Jiri app' }}</title>
 
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+
         <!-- Scripts -->
         @vite(['resources/css/app.scss', 'resources/js/app.js'])
 
         <script src="https://cdn.tailwindcss.com"></script>
         <script defer src="https://unpkg.com/@alpinejs/ui@3.13.2-beta.0/dist/cdn.min.js"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
     </head>
     <body>
         <header class="sr-only">

@@ -23,9 +23,6 @@
                     <x-breeze.nav-link :href="route('projects.index')" wire:navigate :active="request()->routeIs('projects.index')">
                         {{ __('Projets') }}
                     </x-breeze.nav-link>
-                    <x-breeze.nav-link :href="route('images.upload')" wire:navigate :active="request()->routeIs('images.upload')">
-                        {{ __('Images') }}
-                    </x-breeze.nav-link>
                 </div>
             </div>
 
@@ -58,7 +55,7 @@
                             <x-breeze.dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                {{ __('Se déconnecter') }}
                             </x-breeze.dropdown-link>
                         </form>
                     </x-slot>
@@ -78,10 +75,10 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
+    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden bg-white rounded-lg mb-4">
         <div class="pt-2 pb-3 space-y-1">
             <x-breeze.responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
-                {{ __('Dashboard') }}
+                {{ __('Accueil') }}
             </x-breeze.responsive-nav-link>
             <x-breeze.responsive-nav-link :href="route('events.index')" :active="request()->routeIs('events.index')" wire:navigate>
                 {{ __('Épreuves') }}
@@ -113,7 +110,7 @@
                     @csrf
 
                     <x-breeze.responsive-nav-link :href="route('logout')" onclick="event.preventDefault();this.closest('form').submit();">
-                        {{ __('Log Out') }}
+                        {{ __('Se déconnecter') }}
                     </x-breeze.responsive-nav-link>
                 </form>
             </div>

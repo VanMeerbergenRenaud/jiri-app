@@ -82,4 +82,9 @@ class User extends Authenticatable
     {
         return $this->hasManyThrough(Implementation::class, Event::class);
     }
+
+    public function tasks(): HasMany
+    {
+        return $this->hasMany(Task::class);
+    }
 }

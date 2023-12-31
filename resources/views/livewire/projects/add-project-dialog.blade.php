@@ -23,28 +23,15 @@
                         <div class="error">{{ $message }}</div>@enderror
                     </label>
 
-                    {{-- List of tasks in a select dropdown --}}
                     <label>
                         Liste des tâches
-                        <select wire:model="form.tasks" class="p-2">
-                            <option value="" selected>Choisissez une ou plusieurs tâches</option>
-                            @if($project->tasks)
-                                @forelse($project->tasks as $task)
-                                    <option wire:key="{{ $task->id }}" value="{{ $task->name }}">{{ $task->name }}</option>
-                                @empty
-                                    <option value="">Aucune tâches disponibles</option>
-                                @endforelse
-                            @else
-                                <option value="">Aucun projet sélectionné</option>
-                            @endif
-                        </select>
-                    </label>
-
-                    {{-- TODO : add a task associted to a project --}}
-                    <label>
-                        Tâches
-                        <input wire:model="form.task">
-                        @error('form.task')
+                        <x-form.select-multiple
+                            wire:model="form.tasks"
+                            tasks="$tasks"
+                            :options="$allTasks->pluck('name')->toArray()"
+                            selected="('form.tasks')"
+                        />
+                        @error('form.tasks')
                         <div class="error">{{ $message }}</div>@enderror
                     </label>
                 </div>

@@ -42,17 +42,8 @@
                 </x-menu.button>
 
                 <x-menu.items>
-                    {{-- Item to show a event --}}
-                    <x-menu.item>
-                        <a class="link w-full" href="{{ route('events.show', $event) }}">
-                            <x-svg.show/>
-
-                            Voir
-                        </a>
-                    </x-menu.item>
-
                     {{-- Dialog to edit a event --}}
-                    <x-dialog wire:model="showEditDialog" class="border-y w-full">
+                    <x-dialog wire:model="showEditDialog" class="w-full">
                         <x-dialog.open>
                             <x-menu.close>
                                 <x-menu.item>

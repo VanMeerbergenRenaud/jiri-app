@@ -1,11 +1,9 @@
 <tr>
-    <td class="name capitalize">
-        {{ $project->name }}
-    </td>
+    <td class="name capitalize">{{ $project->name }}</td>
     <td class="capitalize">{{ str($project->description)->limit(50) }}</td>
-    <td class="capitalize tasks">
-        @foreach($project->tasks as $task)
-            <span wire:key="{{ $task->id }}">{{ $task->name }}</span>
+    <td class="tasks">
+        @foreach($tasks as $task)
+            <span>{{ $task->name }}</span>
         @endforeach
     </td>
     <td class="actions">
@@ -51,11 +49,28 @@
                                 </label>
 
                                 <label>
-                                    Prénom
+                                    Description
                                     <input wire:model="form.description"/>
                                     @error('form.description')
                                     <div class="error">{{ $message }}</div>@enderror
                                 </label>
+
+                                {{-- List of tasks in a select dropdown --}}
+                                Liste des tâches
+                                <x-form.select-multiple
+                                    wire:mode.livel="form.tasks"
+                                    tasks="$tasks"
+                                    :options="$allTasks->pluck('name')->toArray()"
+                                    selected="('form.tasks')"
+                                />
+
+                                <div>
+                                    @foreach($tasks as $task)
+                                        <ul>
+                                            <li class="list-disc">{{ $task->name }}</li>
+                                        </ul>
+                                    @endforeach
+                                </div>
                             </div>
 
                             <x-dialog.footer>
@@ -125,3 +140,4 @@
         </x-menu>
     </td>
 </tr>
+

@@ -2,10 +2,9 @@
 
 namespace App\Livewire\Forms;
 
-use App\Models\Task;
-use Livewire\Form;
 use App\Models\Project;
 use Livewire\Attributes\Validate;
+use Livewire\Form;
 
 class ProjectForm extends Form
 {
@@ -15,20 +14,18 @@ class ProjectForm extends Form
     #[Validate('required|min:3|max:255|nullable')]
     public $description = '';
 
+    // tasks are related to the project from the Task table via the project_id column
     public $tasks = [];
-    public $newTask = '';
+
+    public $selectedTasks = [];
 
     public Project $project;
-    public Task $task;
 
     public function setProject($project)
     {
         $this->project = $project;
         $this->name = $project->name;
         $this->description = $project->description;
-
-        $this->tasks = $project->tasks;
-        $this->newTask = $project->newTask;
     }
 
     public function save()
@@ -38,11 +35,9 @@ class ProjectForm extends Form
         auth()->user()->projects()->create([
             'name' => $this->name,
             'description' => $this->description,
-            'tasks' => $this->tasks,
-            'newTask' => $this->newTask,
         ]);
 
-        $this->reset(['name', 'description', 'newTask']);
+        $this->reset(['name', 'description', 'tasks']);
     }
 
     public function update()
@@ -52,8 +47,7 @@ class ProjectForm extends Form
         $this->project->update([
             'name' => $this->name,
             'description' => $this->description,
-            'tasks' => $this->tasks,
-            'newTask' => $this->newTask,
         ]);
     }
 }
+

@@ -27,7 +27,7 @@ class ShowProjects extends Component
     {
         return auth()->user()->projects()
             ->search('name', $this->search)
-            ->orderBy('name', 'asc')
+            ->orderBy('name')
             ->paginate(8);
     }
 
@@ -52,8 +52,6 @@ class ShowProjects extends Component
 
     public function render()
     {
-        return view('livewire.projects.show-projects', [
-            'tasks' => $this->tasks,
-        ]);
+        return view('livewire.projects.show-projects');
     }
 }

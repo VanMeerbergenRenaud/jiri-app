@@ -6,7 +6,6 @@ use App\Models\Contact;
 use Illuminate\Http\UploadedFile;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
-use Storage;
 
 class ContactForm extends Form
 {

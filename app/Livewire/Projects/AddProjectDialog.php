@@ -12,6 +12,13 @@ class AddProjectDialog extends Component
 
     public $show = false;
 
+    public $allTasks;
+
+    public function mount()
+    {
+        $this->allTasks = auth()->user()->tasks()->get();
+    }
+
     public function add()
     {
         $this->form->save();
@@ -21,7 +28,6 @@ class AddProjectDialog extends Component
 
     public function render()
     {
-        $project = Project::find(1);
-        return view('livewire.projects.add-project-dialog', ['project' => $project]);
+        return view('livewire.projects.add-project-dialog');
     }
 }

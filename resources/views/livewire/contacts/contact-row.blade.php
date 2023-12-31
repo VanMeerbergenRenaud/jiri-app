@@ -1,10 +1,11 @@
 <tr>
     <td class="name capitalize">
-        <img src="{{
-            asset($contact->avatar) . '?' . $contact->updated_at->format("U")
-         ?? asset('img/dominique.png')
-        }}" alt="photo de profil du contact">
-
+        @if($contact->avatar)
+            <img src="{{ asset($contact->avatar) . '?' . $contact->updated_at->format("U") }}"
+                 alt="photo de profil du contact">
+        @else
+            <img src="{{ asset('img/placeholder.png') }}" alt="Image du contact" class="w-1/2 h-auto rounded-lg">
+        @endif
         {{ $contact->name }}
     </td>
     <td class="capitalize">{{ $contact->firstname }}</td>
