@@ -25,7 +25,7 @@ class EventController extends Controller
     {
         $user = auth()->user();
 
-        $event = Event::findOrFail($eventId);
+        $event = $user->events()->findOrFail($eventId);
 
         return view('pages/events/show', compact('user', 'event'));
     }

@@ -22,7 +22,7 @@ class EventRow extends Component
     public function formatDate($date)
     {
         Carbon::setLocale('fr');
-        return Carbon::parse($date)->translatedFormat('d D M Y');
+        return Carbon::parse($date)->translatedFormat('d/m/y à H' . ':' . 'i');
     }
 
     public function formatTime($time)
@@ -38,8 +38,6 @@ class EventRow extends Component
             return $minutes . 'min';
         }
     }
-
-
 
     public function save()
     {

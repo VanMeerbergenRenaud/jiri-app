@@ -29,7 +29,13 @@
                 Configurer l'épreuve
             </a>
 
-            @if(now() >= $event->starting_at)
+            @php
+                $starting_at = Carbon\Carbon::parse($event->starting_at);
+                $duration = Carbon\Carbon::parse($event->duration);
+                $ending_at = $starting_at->addHours($duration->hour)->addMinutes($duration->minute)->addSeconds($duration->second);
+            @endphp
+
+            @if($starting_at <= now() || ($starting_at <= now() && $ending_at >= now()))
                 <a href="{{ route('events.show', ['event' => $event]) }}" wire:navigate class="link__see">Voir</a>
             @else
                 <button type="button" class="link__unavailable">Non disponible</button>

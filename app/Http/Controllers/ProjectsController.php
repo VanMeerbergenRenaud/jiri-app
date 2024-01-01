@@ -19,7 +19,9 @@ class ProjectsController extends Controller
 
     public function show($projectId)
     {
-        $project = Project::findOrFail($projectId);
+        $user = auth()->user();
+
+        $project =  $user->projects()->findOrFail($projectId);
 
         return view('pages/projects/show', compact('project'));
     }

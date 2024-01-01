@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 
 class DashboardController
 {
-    public function index(Request $request)
+    public function index()
     {
-        $user = User::find($request->user()->id);
+        $user = auth()->user();
 
         return view('dashboard', compact('user'));
     }

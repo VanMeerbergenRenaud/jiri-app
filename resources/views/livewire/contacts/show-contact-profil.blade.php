@@ -49,7 +49,7 @@
                 {{-- Form to edit a profil --}}
                 <form class="globalComment">
                     <div class="sectionHeader">
-                        <h4>Commentaire global</h4>
+                        <h3>Commentaire global</h3>
                         <button type="button" wire:click="editComment">Editer</button>
                     </div>
                     <div>
@@ -82,7 +82,7 @@
                             <th class="bilan__row__title">Projets</th>
                             @foreach ($projects as $project)
                                 <td>
-                                    {{ $project->name }}
+                                    <span class="capitalize">{{ $project->name }}</span>
                                 </td>
                             @endforeach
                             <th class="global">Cote globale</th>
@@ -136,7 +136,7 @@
 
                 {{-- Comments of jiries --}}
                 <div class="jiriesComment">
-                    <h4>Commentaires des membres du jury</h4>
+                    <h3 class="title">Commentaires des membres du jury</h3>
                     {{-- List of comments --}}
                     <ul class="jiriesComment__list">
                         @for ($i = 1; $i <= 3; $i++) {{-- for each $comments from evaluators --}}
@@ -157,7 +157,7 @@
                                     @foreach ($projects as $project)
                                         <li class="jiriesComment__list__item__commentList__item">
                                             <div>
-                                                <h3 class="font-semibold capitalize">{{ $project->name}}</h3>
+                                                <h4 class="font-semibold capitalize">{{ $project->name}}</h4>
                                                 <span>11.5 / 20</span>
                                             </div>
                                             <p>

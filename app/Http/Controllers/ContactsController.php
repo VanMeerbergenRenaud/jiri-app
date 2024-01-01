@@ -19,8 +19,10 @@ class ContactsController
 
     public function show($contactId)
     {
-        $contact = Contact::findOrFail($contactId);
+        $user = auth()->user();
 
-        return view('pages/contacts/show', compact('contact'));
+        $contact = $user->contacts()->findOrFail($contactId);
+
+        return view('pages/contacts/show', compact('user', 'contact'));
     }
 }

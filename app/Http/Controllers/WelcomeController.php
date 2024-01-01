@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 
 class WelcomeController
 {
-    public function index(Request $request)
+    public function index()
     {
-        $user = User::find($request->user()->id);
+        $user = auth()->user();
 
         return view('welcome', compact('user'));
     }

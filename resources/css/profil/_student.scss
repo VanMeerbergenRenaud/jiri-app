@@ -249,7 +249,7 @@
                 overflow: hidden;
                 border: $border;
 
-                h4 {
+                .title {
                     padding: 1.25rem 1.75rem;
                     font-size: 0.85rem;
                     font-weight: 500;
@@ -329,7 +329,7 @@
                                     border-bottom: $border;
                                     font-size: 0.925rem;
 
-                                    h5 {
+                                    h4 {
                                         font-weight: 500;
                                     }
                                 }
