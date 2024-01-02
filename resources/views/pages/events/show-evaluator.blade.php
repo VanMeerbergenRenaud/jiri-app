@@ -1,12 +1,12 @@
 <x-evaluator-layout>
-    <main class="mainEvaluator">
-        <div class="evaluators__intro">
-            <livewire:header
-                :title="'Bonjour ' . $evaluator->contact->name . ' 👋🏻.'  ??  'évaluateur 👋🏻.'"
-                :message="'Choisissez un étudiant a évaluer.'"
-            />
-        </div>
+    <div class="header">
+        <x-header
+            :title="'Bonjour ' . $evaluator->contact->name . ' 👋🏻.'  ??  'évaluateur 👋🏻.'"
+            :message="'Choisissez un étudiant a évaluer.'"
+        />
+    </div>
 
+    <main class="mainEvaluator">
         <livewire:evaluator.dashboard />
     </main>
 

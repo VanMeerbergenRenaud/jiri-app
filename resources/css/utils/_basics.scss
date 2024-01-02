@@ -7,11 +7,15 @@ html body {
     color: $text;
     background-color: $gray-bg;
 
-    main {
+    .header, main {
         margin: 0 auto;
-        padding: 0;
+        padding: 1.5rem;
         width: 100%;
-        max-width: 1650px;
+        max-width: 1800px;
+    }
+
+    main {
+        padding: 1rem 1.5rem;
         min-height: 85vh;
         overflow-x: hidden;
     }
@@ -177,8 +181,38 @@ html body {
     }
 }
 
-@media (min-width: 650px) {
-    body {
-        min-width: 650px;
+@media (min-width: 850px) {
+    html body {
+        .header, main {
+            padding: 2rem 2.5rem;
+        }
+
+        main {
+            padding-top: 0.5rem;
+        }
+    }
+}
+
+@media (min-width: 1440px) {
+    html body {
+        .header, main {
+            padding: 2rem 4.75rem;
+        }
+
+        main {
+            padding-top: 0.5rem;
+        }
+    }
+}
+
+@media (min-width: 1680px) {
+    html body {
+        .header, main {
+            padding: 2.5rem 8rem;
+        }
+
+        main {
+            padding-top: 0;
+        }
     }
 }

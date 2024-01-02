@@ -4,8 +4,13 @@
 
 @import "utils/reset";
 @import "utils/variables";
-
 @import "utils/basics";
+
+/* Header */
+@import "header";
+
+/* Inputs */
+@import "inputs";
 
 /* Dialog */
 @import "dialog";
@@ -19,28 +24,25 @@
 /* Pagination */
 @import "pagination";
 
-/* Inputs */
-@import "inputs";
+/*-------------------
+        Pages
+-------------------*/
 
 /* Welcome */
-@import "welcome/start";
+@import "welcome";
 
-/* List of events */
-@import "events/list";
-@import "events/create";
+/* Events */
+@import "events/index";
+@import "events/configure";
 @import "events/show";
-@import "events/editEdition"; // Event we are editing before the event start official date
 
-/* List of contacts, projects */
+/* Contacts, Projects */
 @import "contacts/index";
-@import "contacts/show";
-
-/* List of profils */
-@import "profil/student";
-// @import "profil/evaluator";
+@import "contacts/attendances";
+@import "contacts/profils";
 
 /* Dashboard evaluator */
 @import "evaluator/dashboard";
 
-/* 404 */
-@import "404";
+/* Errors */
+@import "errors/404";

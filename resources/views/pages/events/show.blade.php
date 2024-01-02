@@ -1,12 +1,12 @@
 <x-app-layout>
-    <main class="mainEventShow">
-        <div class="events__intro">
-            <livewire:header
-                :title="'Bonjour ' . $user->name . ' !'"
-                :message="'Votre épreuve ' . $event->name . '  vient de commencer.'"
-            />
-        </div>
+    <header class="header">
+        <x-header
+            :title="'Épreuve en cours'"
+            :message="'Votre épreuve ' . $event->name . '  vient de commencer.'"
+        />
+    </header>
 
+    <main class="mainEventShow">
         {{-- First Table --}}
         <div class="event__show">
             <livewire:events.show.first-table />

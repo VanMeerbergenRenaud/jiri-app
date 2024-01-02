@@ -1,11 +1,11 @@
 <x-app-layout>
+    <header class="header">
+        <x-header
+            :title="'Bonjour ' . $user->name . ' !'"
+            :message="'Votre épreuve ' . $event->name . ' est en cours d’acheminement.'"
+        />
+    </header>
     <main class="mainEventsCreate">
-        <div class="events__intro">
-            <livewire:header
-                :title="'Bonjour ' . $user->name . ' !'"
-                :message="'Votre épreuve ' . $event->name . ' est en cours d’acheminement.'"
-            />
-        </div>
 
         <div class="events__create">
             {{-- Form to create a event --}}

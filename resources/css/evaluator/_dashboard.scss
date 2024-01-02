@@ -1,34 +1,5 @@
 /* Dashboard */
 .mainEvaluator {
-    padding: 1.5rem 1rem;
-
-    .evaluators__intro {
-
-        .intro__infos {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 0 1rem;
-
-            img {
-                margin: 0;
-                width: 2.5rem;
-                height: 2.5rem;
-            }
-
-            .title {
-                font-size: 1.15rem;
-                font-weight: 500;
-            }
-
-            .text {
-                font-size: 0.875remrem;
-                font-weight: 400;
-                color: $text-slate-500;
-            }
-        }
-    }
-
     .search {
         input {
             border-radius: 0.75rem;
@@ -148,8 +119,6 @@
 /* Ipad */
 @media (min-width: 800px) {
     .mainEvaluator {
-        padding: 1.5rem 2.5rem;
-
         .students__list {
             display: none;
         }
@@ -269,8 +238,6 @@
 /* Desktop */
 @media (min-width: 1440px) {
     .mainEvaluator {
-        padding: 1.5rem 4rem;
-
         .students__list {
             display: none;
         }

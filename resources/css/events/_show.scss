@@ -1,11 +1,5 @@
 /* Show an event */
 .mainEventShow {
-    padding: 2rem;
-
-    .events__intro {
-        margin-bottom: 1.5rem;
-        padding: 0 1rem;
-    }
 
     @import "../tables";
 
@@ -240,14 +234,5 @@
                 padding: 1.25rem;
             }
         }
-    }
-}
-
-// media for 1050px screen
-@media (min-width: 1050px) {
-    .mainEventShow {
-        max-width: 1800px;
-        padding: 2rem 5rem;
-        margin: 0 auto;
     }
 }

@@ -1,5 +1,5 @@
+/* Contact Page */
 .mainContacts {
-
     .actions__contact {
         display: flex;
         align-items: center;
@@ -7,7 +7,6 @@
         gap: 1rem;
 
         .search {
-            margin-top: 1.5rem;
             width: 100%;
         }
     }
@@ -123,13 +122,8 @@
 @media (min-width: 650px) {
     .mainContacts {
         .actions__contact {
-            margin-top: 1.5rem;
             display: grid;
             grid-template-columns: 1fr 265px;
-
-            .search, .import {
-                margin-top: 1rem;
-            }
         }
     }
 }

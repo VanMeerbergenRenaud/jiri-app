@@ -1,36 +1,5 @@
 /* List of events */
-.mainEvents, .mainContacts, .mainProjects, .mainEvaluator, .mainEventEdit {
-    padding: 2rem 1rem;
-}
-
-.events__intro, .contacts__intro, .projects__intro, .evaluators__intro {
-    margin-bottom: 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: start;
-
-    .intro__infos {
-        display: flex;
-        align-items: start;
-        margin-bottom: 1.25rem;
-
-        img {
-            margin-top: 0.35rem;
-            margin-right: 1.25rem;
-            width: 3rem;
-            height: 3rem;
-        }
-
-        p {
-            margin-top: 0.2rem;
-        }
-    }
-}
-
 .events {
-    padding: 2rem 0;
-
     .list {
         font-weight: 500;
         margin-bottom: 1.5rem;
@@ -170,63 +139,34 @@
 
 // For 1440px screen
 @media (min-width: 850px) {
-    .mainEvents, .mainContacts, .mainProjects, .mainEventEdit {
-        padding: 2rem 5rem;
-    }
-
-    .mainEvents, .mainContacts, .mainProjects, .mainEventEdit {
-        .events__intro, .contacts__intro, .projects__intro {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-
-            .intro__infos {
+    .events {
+        .list {
+            .item {
                 display: flex;
-                align-items: center;
-                margin-bottom: 0;
+                justify-content: space-between;
+                gap: 0;
+                max-width: 1800px;
 
-                img {
-                    margin-top: 0;
+                &__name {
+                    margin: 0;
+                    align-self: center;
+                    font-size: 1.15rem;
+                    min-width: 165px;
+                    max-width: 165px;
+                    // border-right: 1px solid rgba(63, 67, 83, .25);
                 }
 
-                p {
-                    margin-top: 0.2rem;
+                &__date {
+                    min-width: 165px;
                 }
-            }
-        }
 
-        .events {
-            padding: 1rem 0;
+                &__date, &__time, &__members {
+                    margin: 0;
+                    border: none;
 
-            .list {
-                .item {
-                    display: flex;
-                    justify-content: space-between;
-                    gap: 0;
-                    max-width: 1800px;
-
-                    &__name {
-                        margin: 0;
-                        align-self: center;
-                        font-size: 1.15rem;
-                        min-width: 165px;
-                        max-width: 165px;
-                        // border-right: 1px solid rgba(63, 67, 83, .25);
-                    }
-
-                    &__date {
-                        min-width: 165px;
-                    }
-
-                    &__date, &__time, &__members {
-                        margin: 0;
-                        border: none;
-
-                        span, time {
-                            display: inline-block;
-                            font-weight: 400;
-                        }
+                    span, time {
+                        display: inline-block;
+                        font-weight: 400;
                     }
                 }
             }
@@ -236,29 +176,21 @@
 
 // For 1680px screen
 @media (min-width: 1680px) {
-    .mainEvents {
-        padding: 3rem 8rem;
+    .events {
+        .list {
+            .item {
+                &__name, &__date, &__time, &__members {
+                    margin-left: 2rem;
+                    padding-right: 2.5rem;
+                }
 
-        .events__intro {
-            margin-bottom: 3rem;
-        }
+                &__edition, &__see, &__unavailable {
+                    margin-left: 2rem;
+                }
 
-        .events {
-            .list {
-                .item {
-                    &__name, &__date, &__time, &__members {
-                        margin-left: 2rem;
-                        padding-right: 2.5rem;
-                    }
-
-                    &__edition, &__see, &__unavailable {
-                        margin-left: 2rem;
-                    }
-
-                    &__name {
-                        margin-left: 1rem;
-                        font-size: 1.25rem;
-                    }
+                &__name {
+                    margin-left: 1rem;
+                    font-size: 1.25rem;
                 }
             }
         }

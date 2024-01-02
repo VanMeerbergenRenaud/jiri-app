@@ -1,5 +1,5 @@
 <div>
-    <label class="search w-full mt-2" for="search">
+    <label class="search w-full" for="search">
         @include('components.svg.search')
         <input type="text" name="search" id="search" wire:model.live.debounce="search" placeholder="Rechercher une épreuve...">
     </label>

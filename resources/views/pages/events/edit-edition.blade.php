@@ -1,20 +1,12 @@
 <x-app-layout>
-    <main class="mainEventEdit">
-        <div class="events__intro">
-            <livewire:header
-                :title="'Bonjour ' . $user->name . ' !'"
-                :message="'Votre épreuve ' . $event->name . '  est en cours d‘acheminement.'"
-            />
-            <livewire:events.attendances.add-attendance-dialog />
-        </div>
+    <header class="header">
+        <x-header
+            :title="'Configuration de l‘épreuve'"
+            :message="'Votre épreuve ' . $event->name . '  est en cours d‘acheminement.'"
+        />
+    </header>
 
-        <livewire:events.attendances.show-attendances />
-
-        {{-- First Table for students --}}
-        {{--<livewire:events.edit-edition-student :students="$students" :event="$event" />--}}
-
-        {{-- Second Table for evaluators --}}
-
-        {{-- List of contacts --}}
+    <main class="mainEventEdit mainEventsCreate">
+        <livewire:events.create.container :event="$event" />
     </main>
 </x-app-layout>
