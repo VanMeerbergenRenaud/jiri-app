@@ -30,45 +30,13 @@ class EventController extends Controller
         return view('pages/events/show', compact('user', 'event'));
     }
 
-    public function store(Request $request)
-    {
-        $user = auth()->user();
-
-        // Création de l'événement...
-        $event = $user->create($request->all());
-
-        // Création des évaluateurs...
-        foreach ($request->input('evaluators') as $evaluatorData) {
-            $evaluator = $user->attendances()->create($evaluatorData + ['event_id' => $event->id]);
-
-            // Envoi de la notification à l'évaluateur
-            $evaluator->notify(new EvaluatorInvitation($event, $evaluator->token));
-        }
-
-        return redirect()->route('events.show', $event);
-    }
-
-    // Specific event edition / update
-    public function editEdition($eventId)
+    public function edit($eventId)
     {
         $user = auth()->user();
 
         $event = $user->events()->findOrFail($eventId);
 
-        $students = $event->contacts()->get();
-
-        return view('pages/events/edit-edition', compact('user', 'event', 'students'));
-    }
-
-    public function updateEdition($eventId): RedirectResponse
-    {
-        $data = $this->validateEventData();
-
-        $event = auth()->user()->events()->findOrFail($eventId);
-
-        $event->update($data);
-
-        return redirect()->route('events.editEdition', compact('event'));
+        return view('pages/events/edit', compact('user', 'event'));
     }
 
     // Route d'un contact lié à une épreuve

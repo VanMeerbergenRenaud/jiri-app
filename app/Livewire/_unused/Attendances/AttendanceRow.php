@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Events\Attendances;
+namespace App\Livewire\_unused\Attendances;
 
 use App\Livewire\Forms\AttendanceForm;
 use App\Livewire\Forms\ContactForm;

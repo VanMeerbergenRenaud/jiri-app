@@ -5,12 +5,12 @@
         <label for="search">
             @include('components.svg.search')
             <input
-                type="search"
-                name="search"
-                id="search"
-                placeholder="Rechercher un étudiant..."
-                wire:model.live="search"
-                class="typeSearch"
+                    type="search"
+                    name="search"
+                    id="search"
+                    placeholder="Rechercher un étudiant..."
+                    wire:model.live="search"
+                    class="typeSearch"
             >
         </label>
     </div>
@@ -44,7 +44,7 @@
 
                         @foreach($fields as $fieldName => $placeholder)
                             <td wire:key="student-{{ $student->id }}">
-                                @include('components.form.edit-edition-field', [
+                                @include('components._unused.edit-edition-field', [
                                     'editId' => $editStudentId,
                                     'modelId' => $student->id,
                                     'modelName' => $fieldName,
@@ -61,7 +61,8 @@
                                 <label for="photo" class="file">
                                     @if($editStudentId && $student->id === $editStudentId)
                                         <input type="file" name="photo" id="photo" wire:model="photo">
-                                        @error('photo') <span class="error-message w-full underline text-center mb-2">{{ $message }}</span> @enderror
+                                        @error('photo') <span
+                                                class="error-message w-full underline text-center mb-2">{{ $message }}</span> @enderror
                                         @include('components.svg.upload-file')
                                         <span>JPEG, JPG, PNG only</span>
                                     @else
@@ -79,10 +80,12 @@
                                     @foreach($projects as $project)
                                         <label for="project{{$index}}-{{ $project->id }}">
                                             @if($editStudentId && $student->id === $editStudentId)
-                                                <input type="checkbox" name="project{{ $project->name }}" id="project{{$index}}-{{ $project->id }}" checked>
+                                                <input type="checkbox" name="project{{ $project->name }}"
+                                                       id="project{{$index}}-{{ $project->id }}" checked>
                                                 {{ $project->name }}
                                             @else
-                                                <input type="checkbox" name="project{{ $project->name }}" id="project{{$index}}-{{ $project->id }}" checked disabled>
+                                                <input type="checkbox" name="project{{ $project->name }}"
+                                                       id="project{{$index}}-{{ $project->id }}" checked disabled>
                                                 {{ $project->name }}
                                             @endif
                                         </label>
@@ -101,7 +104,8 @@
                                         Sauvegarder
                                     </button>
                                 @else
-                                    <button type="button" wire:click.prevent="editStudent({{$student->id ?? ''}})" class="ml-4">
+                                    <button type="button" wire:click.prevent="editStudent({{$student->id ?? ''}})"
+                                            class="ml-4">
                                         Editer
                                     </button>
                                 @endif
@@ -142,7 +146,8 @@
 
                             <div>
                                 <label for="firstname">Prénom</label>
-                                <input type="text" name="firstname" id="firstname" placeholder="Prénom" wire:model="firstname">
+                                <input type="text" name="firstname" id="firstname" placeholder="Prénom"
+                                       wire:model="firstname">
                                 @error('firstname') <span class="error-message my-1">{{ $message }}</span> @enderror
                             </div>
 
@@ -162,7 +167,8 @@
                                 <h3 class="projects__title">Projets</h3>
                                 @foreach($projects as $project)
                                     <label for="project{{ $project->name }}">
-                                        <input type="checkbox" name="project{{ $project->name }}" id="project{{ $project->name }}" checked>
+                                        <input type="checkbox" name="project{{ $project->name }}"
+                                               id="project{{ $project->name }}" checked>
                                         {{ $project->name }}
                                     </label>
                                 @endforeach

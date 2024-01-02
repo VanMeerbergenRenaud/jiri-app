@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Events\Configure;
+namespace App\Livewire\Events\Edit;
 
 use Livewire\Attributes\Rule;
 use Livewire\Attributes\Validate;
@@ -13,10 +13,10 @@ class Form extends Component
     #[Validate('required')]
     public $newcontacttype;
 
-    #[Validate('required')]
+    #[Validate('required|min:3')]
     public $newcontactname;
 
-    #[Validate('required')]
+    #[Validate('required|min:3')]
     public $newcontactfirstname;
 
     #[Validate('required|email')]
@@ -46,6 +46,6 @@ class Form extends Component
 
     public function render()
     {
-        return view('livewire.events.configure.form');
+        return view('livewire.events.edit.form');
     }
 }

@@ -25,7 +25,7 @@
             <h1 class="font-semibold mr-8">{{ $title ?? 'Jury juin 2023' }}</h1>
 
             {{-- Avatar of the evaluator --}}
-            <img src="{{ asset('img/dominique.png') }}" alt="" class="rounded-full h-8 w-8">
+            <img src="{{ asset('img/placeholder.png') }}" alt="" class="rounded-full h-8 w-8">
         </header>
 
         <!-- Page Content -->

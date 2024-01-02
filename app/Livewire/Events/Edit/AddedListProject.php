@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Events\Configure;
+namespace App\Livewire\Events\Edit;
 
 use App\Models\Duty;
 use App\Models\Event;
@@ -37,6 +37,6 @@ class AddedListProject extends Component
 
     public function render()
     {
-        return view('livewire.events.configure.added-list-project');
+        return view('livewire.events.edit.added-list-project');
     }
 }

@@ -33,7 +33,7 @@ return [
     | Layout
     |---------------------------------------------------------------------------
     | The view that will be used as the layout when rendering a single component
-    | as an entire page via `Route::get('/post/configure', CreatePost::class);`.
+    | as an entire page via `Route::get('/post/edit', CreatePost::class);`.
     | In this case, the view returned by CreatePost will render into $slot.
     |
     */
@@ -59,7 +59,7 @@ return [
     |
     | Livewire handles file uploads by storing uploads in a temporary directory
     | before the file is stored permanently. All file uploads are directed to
-    | a global endpoint for temporary storage. You may configure this below:
+    | a global endpoint for temporary storage. You may edit this below:
     |
     */
 

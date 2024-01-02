@@ -15,7 +15,7 @@
                     <label for="Photo">Photo</label>
                     <div class="mainProfil__content__profil__form__photo">
                         <div>
-                            <img src="{{ $contact->avatar ?? asset('img/dominique.png') }}" alt="Photo de l'étudiant">
+                            <img src="{{ $contact->avatar ?? asset('img/placeholder.png') }}" alt="Photo de l'étudiant">
                             <button type="button">
                                 @include('components.svg.edit')
                             </button>
@@ -143,7 +143,7 @@
                             <li x-data="{ open: false, isSelected: false }" class="jiriesComment__list__item">
                                 <div class="jiriesComment__list__item__infos" :class="{ 'isSelected': isSelected }" @click="open = !open; isSelected = !isSelected">
                                     <div class="jiriesComment__list__item__infos__evaluator">
-                                        <img src="{{ asset('img/dominique.png') }}" alt="">
+                                        <img src="{{ asset('img/placeholder.png') }}" alt="Photo de l'évaluateur">
                                         <span>
                                             Toon van den boss
                                             {{--{{ $evaluator->name }}--}}
@@ -177,7 +177,7 @@
                         <tr>
                             <th class="user-infos" colspan="100%">
                                 <div>
-                                    <img src="{{ $contact->avatar ?? asset('img/dominique.png') }}" alt="Photo du contact">
+                                    <img src="{{ $contact->avatar ?? asset('img/placeholder.png') }}" alt="Photo du contact">
                                     <span>
                                         {{ $contact->name }} {{ $contact->firstname }}
                                     </span>
@@ -250,7 +250,7 @@
             @else
                 <div class="jiriesComment">
                     <div class="jiriesComment__head">
-                        <img src="{{ $contact->avatar ?? asset('img/dominique.png') }}" alt="Photo du contact">
+                        <img src="{{ $contact->avatar ?? asset('img/placeholder.png') }}" alt="Photo du contact">
                         <span>
                             {{ $contact->name }} {{ $contact->firstname }}
                         </span>
@@ -268,11 +268,11 @@
                                 <li x-data="{ open: false, isSelected: false }" class="jiriesComment__list__item">
                                     <div class="jiriesComment__list__item__infos" :class="{ 'isSelected': isSelected }" @click="open = !open; isSelected = !isSelected">
                                         <div class="jiriesComment__list__item__infos__evaluator">
-                                            <img src="{{ asset('img/dominique.png') }}" alt="">
+                                            <img src="{{ asset('img/placeholder.png') }}" alt="Photo de l'évaluateur">
                                             <span>
-                                            Renaud Van Meerbergen
-                                            {{--{{ $student->name }}--}}
-                                        </span>
+                                                Renaud Van Meerbergen
+                                                {{--{{ $student->name }}--}}
+                                            </span>
                                         </div>
                                         <span>@include('components.svg.arrow-down')</span>
                                     </div>

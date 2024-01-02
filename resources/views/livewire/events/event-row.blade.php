@@ -25,7 +25,7 @@
         </div>
         {{-- Liens : Édition, Voir, Non disponible, Éditer, Supprimer --}}
         <div class="event__actions">
-            <a href="{{ route('events.editEdition', ['event' => $event]) }}" wire:navigate class="link__edition">
+            <a href="{{ route('events.edit', ['event' => $event]) }}" wire:navigate class="link__edition">
                 Configurer l'épreuve
             </a>
 

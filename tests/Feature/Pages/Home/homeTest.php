@@ -10,7 +10,7 @@ it('redirects the unauthenticated user to the home page', function () {
 });
 
 it('displays its events to the authenticated user', function () {
-    $user = User::factory()->configure();
+    $user = User::factory()->edit();
     actingAs($user)
         ->get('/')
         ->assertOk()

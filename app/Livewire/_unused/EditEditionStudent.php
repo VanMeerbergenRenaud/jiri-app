@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Events;
+namespace App\Livewire\_unused;
 
 use App\Models\Attendance;
 use App\Models\Contact;

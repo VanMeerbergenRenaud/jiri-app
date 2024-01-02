@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Events\Attendances;
+namespace App\Livewire\_unused\Attendances;
 
 use App\Models\Attendance;
 use Livewire\Attributes\Computed;

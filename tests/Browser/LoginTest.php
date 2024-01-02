@@ -18,14 +18,14 @@ class LoginTest extends DuskTestCase
                 ->assertSee('Bienvenue');
         });
 
-        /*$user = User::factory()->configure([
+        /*$user = User::factory()->edit([
             'email' => 'renaud.vmb@gmail.com',
             'password' => 'password',
         ]);
 
         $this->browse(function (Browser $browser) use ($user) {
             $browser->loginAs($user)
-                ->visit(route('events.configure'))
+                ->visit(route('events.edit'))
                 ->type('@name', 'My Event')
                 ->type('@starting_at', '2023-01-01T00:00')
                 ->type('@duration', '1')

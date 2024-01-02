@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Events\Configure;
+namespace App\Livewire\Events\Edit;
 
 use Livewire\Component;
 
@@ -10,6 +10,6 @@ class Container extends Component
 
     public function render()
     {
-        return view('livewire.events.configure.container');
+        return view('livewire.events.edit.container');
     }
 }

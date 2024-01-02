@@ -1,5 +1,5 @@
 <div>
-    {{-- Form to configure a new contact --}}
+    {{-- Form to edit a new contact --}}
     <template x-if="createmode">
         <form wire:submit.prevent="save" class="contact__new__form">
             <p>Ajouter un contact</p>

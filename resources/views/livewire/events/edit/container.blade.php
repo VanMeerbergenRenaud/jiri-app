@@ -1,5 +1,5 @@
 <div class="events__create">
-    {{-- Form to configure an event --}}
+    {{-- Form to edit an event --}}
     <form
         {{--action="{{ route('events.update', ['event' => $event]) }}"
         method="POST"--}}
@@ -42,7 +42,7 @@
         </div>
 
         <div class="form__container">
-            {{-- Label & select to configure a user in the database --}}
+            {{-- Label & select to edit a user in the database --}}
             <div class="form__component">
                 <h3 class="title">Ajouter des contacts</h3>
                 <p>Vous pourrez en ajouter encore par la suite sans problème.</p>
@@ -75,15 +75,15 @@
                         {{-- SearchList & Form --}}
                         <div class="filter__contacts"
                              x-data="{
-                                     createmode: false,
-                                     username: ''}
-                                     ">
+                                 createmode: false,
+                                 username: ''}
+                                 "
+                        >
 
-                            <livewire:events.configure.search-list :eventId="$event->id" />
-                            <livewire:events.configure.form />
+                            <livewire:events.edit.search-list :eventId="$event->id" />
+                            <livewire:events.edit.form />
 
-
-                            {{-- Button to configure a new contact --}}
+                            {{-- Button to edit a new contact --}}
                             <button type="button"
                                     class="add-button"
                                     x-show="!createmode"
@@ -96,10 +96,10 @@
                 </div>
 
                 {{-- Added contacts --}}
-                <livewire:events.configure.added-list :eventId="$event->id" />
+                <livewire:events.edit.added-list :eventId="$event->id" />
             </div>
 
-            {{-- Label & select to configure a project in the database --}}
+            {{-- Label & select to edit a project in the database --}}
             <div class="form__component">
                 <h3 class="title">Ajouter des projets</h3>
                 <p>Vous pourrez en ajouter encore par la suite sans problème.</p>
@@ -132,10 +132,10 @@
                         {{-- SearchList & Form --}}
                         <div class="filter__contacts" x-data="{createmode: false}">
 
-                            <livewire:events.configure.search-list-project :eventId="$event->id" />
-                            <livewire:events.configure.form-project />
+                            <livewire:events.edit.search-list-project :eventId="$event->id" />
+                            <livewire:events.edit.form-project />
 
-                            {{-- Button to configure a new contact --}}
+                            {{-- Button to edit a new contact --}}
                             <button type="button"
                                     class="add-button"
                                     x-show="!createmode"
@@ -147,7 +147,7 @@
                 </div>
 
                 {{-- Added projects --}}
-                <livewire:events.configure.added-list-project :eventId="$event->id" />
+                <livewire:events.edit.added-list-project :eventId="$event->id" />
             </div>
         </div>
         <div class="form__submit">

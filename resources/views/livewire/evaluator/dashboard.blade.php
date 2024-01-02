@@ -10,7 +10,7 @@
             <li x-data="{ open: false, isSelected: false }">
                 <div class="students__list__item" :class="{ 'isSelected': isSelected }" @click="open = !open; isSelected = !isSelected">
                     <div class="students__list__item__infos">
-                        <img src="{{ $student->contact->avatar ?? asset('img/dominique.png') }}" alt="">
+                        <img src="{{ $student->contact->avatar ?? asset('img/placeholder.png') }}" alt="">
                         <span>
                             {{ $student->contact->name }} {{ $student->contact->firstname }}
                         </span>
@@ -83,7 +83,7 @@
             @forelse ($this->studentFilter as $student)
                 <tr>
                     <td class="name capitalize">
-                        <img src="{{ $student->contact->avatar ?? asset('img/dominique.png') }}" alt="photo de profil du contact">
+                        <img src="{{ $student->contact->avatar ?? asset('img/placeholder.png') }}" alt="photo de profil du contact">
                         {{ $student->contact->name }}
                         {{ $student->contact->firstname }}
                     </td>

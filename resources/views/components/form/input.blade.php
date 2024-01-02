@@ -4,7 +4,7 @@
     <label for="{{ $name }}">{{ $label }}</label>
     {{-- Input --}}
     <input type="{{ $type }}" class="form-control" id="{{ $name }}" name="{{ $name }}" placeholder="{{ $placeholder ?? '' }}" value="{{ $value ??  '' }}">
-    {{-- Errors --}}
+    {{-- Error --}}
     @error($name)
         <p class="error-message">{{ $message }}</p>
     @enderror

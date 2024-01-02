@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Livewire\Events\Configure;
+namespace App\Livewire\Events\Edit;
 
 use App\Models\Task;
 use Livewire\Attributes\Rule;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class FormProject extends Component
@@ -16,10 +17,10 @@ class FormProject extends Component
 
     public int $eventId;
 
-    #[Rule('required', 'min:2', 'name')]
+    #[Validate('required|min:3')]
     public $newprojectname;
 
-    #[Rule('required', 'min:1', 'newtask')]
+    #[Validate('required|min:2')]
     public $newprojecttask;
 
     public $newprojecttasks = [];
@@ -52,6 +53,6 @@ class FormProject extends Component
 
     public function render()
     {
-        return view('livewire.events.configure.form-project');
+        return view('livewire.events.edit.form-project');
     }
 }

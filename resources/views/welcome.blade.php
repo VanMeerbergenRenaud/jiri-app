@@ -16,7 +16,7 @@
         <main class="mainWelcome flex-center">
             <div class="flex-center welcome">
                 <div class="flex-center welcome__intro">
-                    <img src="{{ auth()->user()->avatarUrl() ?? asset('img/dominique.png') }}" alt="Photo de profil">
+                    <img src="{{ auth()->user()->avatarUrl() ?? asset('img/placeholder.png') }}" alt="Photo de profil">
                     <h2>Enchanté {{ $user->name }} !</h2>
                     <p>Commencer votre aventure dès maintenant.</p>
                 </div>

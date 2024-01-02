@@ -20,7 +20,7 @@
 
         <div class="flex justify-end mt-4">
             <x-breeze.primary-button>
-                {{ __('Confirm') }}
+                {{ __('Confirmer') }}
             </x-breeze.primary-button>
         </div>
     </form>

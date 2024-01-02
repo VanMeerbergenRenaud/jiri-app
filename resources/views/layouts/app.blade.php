@@ -7,21 +7,20 @@
 
         <title>{{ $title ?? 'Jiri app' }}</title>
 
+        <!-- Choices.js Library -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
 
         <!-- Scripts -->
         @vite(['resources/css/app.scss', 'resources/js/app.js'])
 
+        <!-- Tailwind CSS -->
         <script src="https://cdn.tailwindcss.com"></script>
         <script defer src="https://unpkg.com/@alpinejs/ui@3.13.2-beta.0/dist/cdn.min.js"></script>
+        {{-- Choices.js Library --}}
         <script defer src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
     </head>
     <body>
-        <header class="sr-only">
-            <h1 role="heading" aria-level="1">
-                Jiri App
-            </h1>
-        </header>
+        <h1 role="heading" aria-level="1" class="sr-only">Jiri App</h1>
 
         <!-- Page Navigation -->
         @include('layouts.navigation')
