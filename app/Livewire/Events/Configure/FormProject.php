@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Events\Create;
+namespace App\Livewire\Events\Configure;
 
 use App\Models\Task;
 use Livewire\Attributes\Rule;
@@ -52,6 +52,6 @@ class FormProject extends Component
 
     public function render()
     {
-        return view('livewire.events.create.form-project');
+        return view('livewire.events.configure.form-project');
     }
 }

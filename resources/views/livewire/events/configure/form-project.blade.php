@@ -1,5 +1,5 @@
 <div>
-    {{-- Form to create a new project --}}
+    {{-- Form to configure a new project --}}
     <template x-if="createmode">
         <form wire:submit.prevent="save" class="contact__new__form">
             <p>Ajouter un projet</p>

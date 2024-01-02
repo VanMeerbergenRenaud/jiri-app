@@ -15,6 +15,7 @@ class Duty extends Model
     protected $fillable = [
         'event_id',
         'project_id',
+        'name'
     ];
 
     public function event(): BelongsTo

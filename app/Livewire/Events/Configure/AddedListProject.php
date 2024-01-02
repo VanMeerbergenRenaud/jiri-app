@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Events\Create;
+namespace App\Livewire\Events\Configure;
 
 use App\Models\Duty;
 use App\Models\Event;
@@ -28,6 +28,8 @@ class AddedListProject extends Component
 
     public function removeContact(Duty $duty)
     {
+        $duty->implementations()->delete();
+
         $duty->delete();
 
         $this->dispatch('fetchEventProjects');
@@ -35,6 +37,6 @@ class AddedListProject extends Component
 
     public function render()
     {
-        return view('livewire.events.create.added-list-project');
+        return view('livewire.events.configure.added-list-project');
     }
 }

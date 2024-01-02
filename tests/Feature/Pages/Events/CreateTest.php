@@ -4,12 +4,12 @@ use App\Models\User;
 
 use function Pest\Laravel\actingAs;
 
-it('displays a form to create a event', function () {
+it('displays a form to configure a event', function () {
     $user = User::factory()
         ->create();
 
     actingAs($user)
-        ->get('events/create')
+        ->get('events/configure')
         ->assertSee('C’est parti pour une nouvelle expérience')
         ->assertSee('form')
         ->assertSee('Nom')

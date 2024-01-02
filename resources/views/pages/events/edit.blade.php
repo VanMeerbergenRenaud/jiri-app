@@ -8,7 +8,7 @@
     <main class="mainEventsCreate">
 
         <div class="events__create">
-            {{-- Form to create a event --}}
+            {{-- Form to configure a event --}}
             <form
                 action="{{ route('events.update', ['event' => $event]) }}"
                 method="POST"
@@ -52,7 +52,7 @@
                     />
                 </div>
                 <div class="form__container">
-                    {{-- Label & select to create a user in the database --}}
+                    {{-- Label & select to configure a user in the database --}}
                     <div class="form__component">
                         <h4>Ajouter des contacts</h4>
                         <p>Vous pourrez en ajouter encore par la suite sans problème.</p>
@@ -93,7 +93,7 @@
                                     <livewire:events.create.form />
 
 
-                                    {{-- Button to create a new contact --}}
+                                    {{-- Button to configure a new contact --}}
                                     <button type="button"
                                             class="add-button"
                                             x-show="!createmode"
@@ -109,7 +109,7 @@
                         <livewire:events.create.added-list :eventId="$event->id" />
                     </div>
 
-                    {{-- Label & select to create a project in the database --}}
+                    {{-- Label & select to configure a project in the database --}}
                     <div class="form__component">
                         <h4>Ajouter des projets</h4>
                         <p>Vous pourrez en ajouter encore par la suite sans problème.</p>
@@ -145,7 +145,7 @@
                                     <livewire:events.create.search-list-project :eventId="$event->id" />
                                     <livewire:events.create.form-project />
 
-                                    {{-- Button to create a new contact --}}
+                                    {{-- Button to configure a new contact --}}
                                     <button type="button"
                                             class="add-button"
                                             x-show="!createmode"

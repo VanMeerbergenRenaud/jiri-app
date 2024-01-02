@@ -42,9 +42,9 @@
         </div>
 
         <div class="form__container">
-            {{-- Label & select to create a user in the database --}}
+            {{-- Label & select to configure a user in the database --}}
             <div class="form__component">
-                <h3>Ajouter des contacts</h3>
+                <h3 class="title">Ajouter des contacts</h3>
                 <p>Vous pourrez en ajouter encore par la suite sans problème.</p>
 
                 {{-- Dropdown --}}
@@ -79,11 +79,11 @@
                                      username: ''}
                                      ">
 
-                            <livewire:events.create.search-list :eventId="$event->id" />
-                            <livewire:events.create.form />
+                            <livewire:events.configure.search-list :eventId="$event->id" />
+                            <livewire:events.configure.form />
 
 
-                            {{-- Button to create a new contact --}}
+                            {{-- Button to configure a new contact --}}
                             <button type="button"
                                     class="add-button"
                                     x-show="!createmode"
@@ -96,12 +96,12 @@
                 </div>
 
                 {{-- Added contacts --}}
-                <livewire:events.create.added-list :eventId="$event->id" />
+                <livewire:events.configure.added-list :eventId="$event->id" />
             </div>
 
-            {{-- Label & select to create a project in the database --}}
+            {{-- Label & select to configure a project in the database --}}
             <div class="form__component">
-                <h3>Ajouter des projets</h3>
+                <h3 class="title">Ajouter des projets</h3>
                 <p>Vous pourrez en ajouter encore par la suite sans problème.</p>
 
                 {{-- Dropdown --}}
@@ -132,10 +132,10 @@
                         {{-- SearchList & Form --}}
                         <div class="filter__contacts" x-data="{createmode: false}">
 
-                            <livewire:events.create.search-list-project :eventId="$event->id" />
-                            <livewire:events.create.form-project />
+                            <livewire:events.configure.search-list-project :eventId="$event->id" />
+                            <livewire:events.configure.form-project />
 
-                            {{-- Button to create a new contact --}}
+                            {{-- Button to configure a new contact --}}
                             <button type="button"
                                     class="add-button"
                                     x-show="!createmode"
@@ -147,7 +147,7 @@
                 </div>
 
                 {{-- Added projects --}}
-                <livewire:events.create.added-list-project :eventId="$event->id" />
+                <livewire:events.configure.added-list-project :eventId="$event->id" />
             </div>
         </div>
         <div class="form__submit">

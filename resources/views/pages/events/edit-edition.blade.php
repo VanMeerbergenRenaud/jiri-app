@@ -7,6 +7,6 @@
     </header>
 
     <main class="mainEventEdit mainEventsCreate">
-        <livewire:events.create.container :event="$event" />
+        <livewire:events.configure.container :event="$event" />
     </main>
 </x-app-layout>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Events\Create;
+namespace App\Livewire\Events\Configure;
 
 use App\Models\Attendance;
 use App\Models\Contact;
@@ -21,7 +21,10 @@ class SearchList extends Component
     public function searchList()
     {
         return $this->username
-            ? Contact::where('name', 'like', '%'.$this->username.'%')->orderBy('name', 'asc')->get()
+            ? auth()->user()->contacts()
+                ->where('name', 'like', '%'.$this->username.'%')
+                ->orderBy('name')
+                ->get()
             : new Collection();
     }
 
@@ -31,9 +34,9 @@ class SearchList extends Component
         $contact = Contact::find($contactId);
 
         if (! $event->contacts()->where('contact_id', $contact->id)->exists()) {
-            Attendance::create([
-                'contact_id' => $contactId,
+            auth()->user()->attendances()->create([
                 'event_id' => $event->id,
+                'contact_id' => $contactId,
                 'role' => $role,
             ]);
         }
@@ -43,6 +46,6 @@ class SearchList extends Component
 
     public function render()
     {
-        return view('livewire.events.create.search-list');
+        return view('livewire.events.configure.search-list');
     }
 }

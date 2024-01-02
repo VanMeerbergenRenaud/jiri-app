@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Events\Create;
+namespace App\Livewire\Events\Configure;
 
 use App\Models\Duty;
 use App\Models\Event;
@@ -21,7 +21,10 @@ class SearchListProject extends Component
     public function searchList()
     {
         return $this->projectname
-            ? Project::where('name', 'like', '%'.$this->projectname.'%')->orderBy('name', 'asc')->get()
+            ? auth()->user()->projects()
+                ->where('name', 'like', '%'.$this->projectname.'%')
+                ->orderBy('name')
+                ->get()
             : new Collection();
     }
 
@@ -31,13 +34,11 @@ class SearchListProject extends Component
         $project = Project::find($projectId);
 
         if (! $event->duties()->where('project_id', $project->id)->exists()) {
-            $duty = new Duty();
-            $duty->name = $project->name;
-            // Todo : add tasks from the tasks Table
-
-            $duty->event_id = $event->id;
-            $duty->project_id = $project->id;
-            $duty->save();
+            auth()->user()->duties()->create([
+                'event_id' => $event->id,
+                'project_id' => $project->id,
+                'name' => $project->name,
+            ]);
         }
 
         $this->dispatch('fetchEventProjects');
@@ -45,6 +46,6 @@ class SearchListProject extends Component
 
     public function render()
     {
-        return view('livewire.events.create.search-list-project', ['tasks' => $this->tasks]);
+        return view('livewire.events.configure.search-list-project');
     }
 }
