@@ -1,16 +1,10 @@
-<div class="events__create">
-    {{-- Form to edit an event --}}
-    <form
-        {{--action="{{ route('events.update', ['event' => $event]) }}"
-        method="POST"--}}
-        wire:submit.prevent="update"
-        class="form"
-    >
+{{-- Form to edit an event --}}
+<div>
+    <form wire:submit.prevent="update" class="form">
         @csrf
-        @method('PUT')
 
         {{-- Label & input for name, date of beginning and end of the event --}}
-        <div class="form__infos">
+        <div class="form__event-infos">
             <x-form.input
                 type="text"
                 name="name"
@@ -85,7 +79,7 @@
 
                             {{-- Button to edit a new contact --}}
                             <button type="button"
-                                    class="add-button"
+                                    class="button--classic add-contact-button"
                                     x-show="!createmode"
                                     @click="createmode = true">
                                 Ajouter un contact
@@ -137,7 +131,7 @@
 
                             {{-- Button to edit a new contact --}}
                             <button type="button"
-                                    class="add-button"
+                                    class="button--classic add-contact-button"
                                     x-show="!createmode"
                                     @click="createmode = true">
                                 Ajouter un projet

@@ -1,142 +1,96 @@
 /* Create/Edit an event */
 .mainEventsCreate {
-    .events__create {
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: start;
+    margin-top: -1.5rem;
 
-        .form {
-            margin-bottom: 1.5rem;
-            padding: 2rem 3rem 1.5rem;
-            background-color: $gray-300;
-            border-radius: 2rem;
+    .form {
+        margin-bottom: 1.5rem;
+        padding: 1.5rem;
+        background-color: $gray-300;
+        border-radius: 1.5rem;
 
-            &__infos {
+        &__event-infos {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            padding-bottom: 2rem;
+            border-bottom: $border;
+
+            label {
+                display: block;
+                margin-bottom: 0.75rem;
+                font-weight: 500;
+            }
+
+            input {
+                padding: 1rem;
+                border-radius: 0.5rem;
+                min-width: 250px;
+            }
+
+            .error-message {
+                margin-bottom: 1.25rem;
+            }
+        }
+
+        &__container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        &__component {
+            padding: 2rem 0 1rem;
+            border-bottom: $border;
+
+            .title {
+                font-weight: 600;
+                margin-bottom: 0.75rem;
+            }
+
+            /* Dropdown to select a contact */
+            .custom__dropdown {
                 position: relative;
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                grid-gap: 0 2rem;
-                padding-bottom: 2rem;
-                border-bottom: $border;
 
-                label {
-                    display: block;
-                    margin-bottom: 1rem;
-                }
-
-                input {
+                .open-button {
+                    margin: 1.5rem 0 1.75rem;
                     padding: 1rem;
-                    border-radius: 0.5rem;
-                    min-width: 250px;
-                }
-
-                input[type="number"] {
-                    min-width: 145px;
-                    max-width: 150px;
-                }
-
-                .error-message {
-                    margin-bottom: 1.25rem;
-                }
-            }
-
-            &__container {
-                display: flex;
-                flex-direction: column;
-            }
-
-            &__component {
-                padding: 2rem 4rem 1.5rem 0;
-                min-width: 600px;
-                border-bottom: $border;
-
-                .button--classic {
-                    border-radius: 0 0 0.5rem 0.5rem;
-                }
-
-                .title {
-                    font-weight: 600;
-                    margin-bottom: 0.75rem;
-                }
-
-                &__added {
-                    p {
-                        margin-bottom: 1rem;
-                    }
-
-                    ul {
-                        li {
-                            position: relative;
-                            display: grid;
-                            grid-template-columns: 175px 1fr;
-                            align-items: center;
-                            margin-bottom: 0.75rem;
-
-                            .category {
-                                padding: 1rem 1.25rem;
-                                background-color: $gray-500;
-                                border-radius: 0.5rem;
-                                z-index: 2;
-                            }
-
-                            .username {
-                                margin-left: -0.5rem;
-                                padding: 1rem 2.5rem;
-                                background-color: white;
-                                border-radius: 0.5rem;
-
-                                .taskName:before {
-                                    content: "|";
-                                    margin-right: 0.25rem;
-                                }
-
-                                .taskName:first-of-type:before {
-                                    content: "";
-                                    margin-right: 0;
-                                }
-                            }
-
-                            button {
-                                position: absolute;
-                                top: 0.5rem;
-                                right: 1.5rem;
-                                padding: 0.5rem;
-                            }
-                        }
-                    }
-                }
-
-                .no-contact {
-                    margin: 0.5rem 0;
-                    padding: 1rem 1.25rem;
-                    border-radius: 0.5rem;
-                    background-color: $gray-500;
-                }
-            }
-
-            &__component:last-of-type {
-                margin-bottom: 1.5rem;
-            }
-
-            .form__submit {
-                display: flex;
-                justify-content: flex-end;
-                align-items: center;
-
-                .button {
-                    padding: 1rem 5.5rem;
-                    border-radius: 0.5rem;
+                    width: 17.5rem;
                     background-color: white;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
                 }
 
-                .button--classic {
-                    background-color: $gray-700;
-                    margin-left: 2rem;
+                .icon {
+                    height: 1.25rem;
+                    width: 1.25rem;
+                    fill: #718096;
+                }
+
+                .open-panel {
+                    margin-bottom: 2rem;
+                    width: 100%;
+                    background-color: white;
+                    border-radius: 1rem;
+
+                    .close-button {
+                        position: absolute;
+                        top: 0.75rem;
+                        right: 0.5rem;
+                        background-color: #E5E9F4;
+                        border-radius: 2rem;
+                        padding: 0.5rem;
+                    }
+
+                    .add-contact-button {
+                        width: 100%;
+                        padding: 1rem;
+                        border-radius: 0 0 0.75rem 0.75rem;
+                    }
                 }
             }
 
-            /* Filter contact */
+            /* Search list filter for contacts */
             .filter__contacts {
                 width: 100%;
                 background-color: white;
@@ -156,14 +110,15 @@
                     overflow-y: scroll;
 
                     &__item {
+                        position: relative;
                         padding: 1rem;
                         display: flex;
-                        align-items: center;
-                        justify-content: space-between;
+                        flex-direction: column;
+                        gap: 0.5rem;
+                        border-bottom: $border;
 
-                        .projectName {
-                            min-width: 165px;
-                            margin-right: 1.5rem;
+                        .name {
+                            font-weight: 500;
                         }
 
                         .projectTasks {
@@ -184,7 +139,10 @@
                         }
 
                         button {
-                            padding-left: 1rem;
+                            position: absolute;
+                            padding: 0.75rem;
+                            top: 0.25rem;
+                            right: 0.5rem;
                             color: $blue;
                             text-decoration: underline;
                         }
@@ -193,37 +151,42 @@
 
                 .no-contact {
                     margin: 0;
-                    padding: 1rem 0.75rem;
+                    padding: 1rem 0.75rem 1rem 1.5rem;
                     background-color: white;
                     border-radius: 0;
                     border: none;
                 }
             }
 
+            /* Form to create a new contact */
             .contact__new__form {
                 padding: 1.5rem;
                 background-color: $gray-500;
                 border-radius: 0 0 1rem 1rem;
 
                 p {
+                    margin-bottom: 1.5rem;
+                    font-weight: 500;
+                    color: $blue;
                     text-decoration: underline;
-                    margin-bottom: 1.25rem;
                 }
 
                 &__container {
-                    display: grid;
-                    grid-template-columns: 250px 1fr;
-                    gap: 0 1.5rem;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.5rem;
 
                     &__label {
                         display: flex;
                         flex-direction: column;
+                        font-weight: 500;
 
                         select {
-                            margin-top: 0.875rem;
+                            margin-top: 0.75rem;
                             margin-bottom: 1.25rem;
                             padding: 0.875rem;
                             background-color: white;
+                            font-weight: 400;
                         }
                     }
 
@@ -239,6 +202,10 @@
                         display: flex;
                         flex-direction: column;
                         grid-column: 2/3;
+
+                        label {
+                            font-weight: 500;
+                        }
                     }
 
                     button {
@@ -301,228 +268,345 @@
                     }
 
                     .save, .cancel {
-                        margin-top: 3rem;
+                        margin-top: 0;
                     }
                 }
             }
+
+            /* List of the contacts added to the event */
+            &__added {
+                p {
+                    margin-bottom: 1rem;
+                }
+
+                ul {
+                    li {
+                        position: relative;
+                        display: flex;
+                        flex-direction: column;
+                        margin-bottom: 1.15rem;
+
+                        .category {
+                            display: block;
+                            padding: 0.75rem 1.25rem;
+                            background-color: $gray-500;
+                            border-radius: 0.5rem 0.5rem 0 0;
+                            z-index: 2;
+                        }
+
+                        .username {
+                            padding: 0.75rem 1.25rem;
+                            background-color: white;
+                            border-radius: 0 0 0.5rem 0.5rem;
+
+                            .taskName:before {
+                                content: "|";
+                                margin-right: 0.25rem;
+                            }
+
+                            .taskName:first-of-type:before {
+                                content: "";
+                                margin-right: 0;
+                            }
+                        }
+
+                        button {
+                            position: absolute;
+                            top: 0.25rem;
+                            right: 0.5rem;
+                            padding: 0.5rem;
+                            z-index: 3;
+                        }
+                    }
+                }
+            }
+
+            .no-contact {
+                margin: 0.5rem 0;
+                padding: 1rem 1.25rem;
+                border-radius: 0.5rem;
+                background-color: $gray-500;
+            }
+        }
+    }
+
+    &__component:last-of-type {
+        margin-bottom: 1.5rem;
+    }
+
+    /* Final buttons in the form */
+    .form__submit {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem 2rem;
+
+        .button {
+            padding: 1rem 5.5rem;
+            width: 100%;
+            font-weight: 500;
+            text-align: center;
+            border-radius: 0.5rem;
+            background-color: white;
+        }
+
+        .button--classic {
+            background-color: $gray-700;
         }
     }
 }
 
-// For max 950px screen
-@media (max-width: 950px) {
+@media (min-width: 550px) {
     .mainEventsCreate {
-        .events__create {
-            .form {
-                padding: 1rem;
-                width: 100%;
+        .form {
+            &__component {
+                padding: 2rem 0.5rem 1rem;
 
-                &__infos {
-                    margin: 0;
-                    display: flex;
-                    flex-direction: column;
-                    width: 100%;
+                /* Form to create a new contact */
+                .contact__new__form {
+                    &__container {
+                        display: grid;
+                        padding: 0.5rem 1rem 0.5rem 0.5rem;
 
-                    input {
-                        width: 100%;
+                        &__label, .position-right {
+                            grid-column: 1/3;
+                        }
+
+                        .position-right:last-of-type {
+                            border-bottom: 1px solid #dbe2ed;
+                        }
+
+                        .save, .cancel {
+                            display: inline-block;
+                            margin: 0.75rem 0 -0.5rem;
+                        }
                     }
                 }
 
-                .form__submit .button--classic {
-                    margin-left: 0;
+                /* List of the contacts added to the event */
+                &__added {
+                    ul {
+                        li {
+                            display: flex;
+                            flex-direction: row;
+
+                            .category {
+                                display: inline-flex;
+                                padding: 1.15rem 1.25rem;
+                                border-radius: 0.5rem;
+                                min-width: 150px;
+                            }
+
+                            .username {
+                                width: 100%;
+                                margin-left: -1rem;
+                                padding: 1.15rem 2.75rem 1.15rem 2.5rem;
+                                border-radius: 0.5rem;
+                            }
+                        }
+                    }
                 }
             }
-        }
-    }
 
-    .mainEvents {
-        .events .list {
-            width: 100%;
-
-            .item {
-                position: relative;
-                padding: 1.5rem 2.5rem 1rem;
+            .form__submit {
                 display: flex;
                 flex-direction: row;
-                flex-wrap: wrap;
-                gap: 1rem 2.5rem;
-                width: 100%;
+                flex-wrap: nowrap;
+                align-items: center;
+                justify-content: space-between;
 
-                &__name {
-                    margin-bottom: 0.5rem;
-                }
-
-                &__members, p {
-                    margin: 0;
-                }
-
-                .menu {
-                    position: absolute;
-                    right: 1.5rem;
-                    bottom: 1.5rem;
-                }
-
-                .event__actions {
-                    margin-top: 1rem;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: start;
-                    align-items: start;
-                    gap: 1rem;
-                    width: 100%;
-
-                    a {
-                        margin: 0;
-                    }
+                .button {
+                    padding: 1rem 4.5rem;
+                    width: fit-content;
                 }
             }
-        }
-
-        .events .empty {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 2rem;
         }
     }
 }
 
-// For min 950px screen
-@media (min-width: 950px) {
-    .mainEvents {
-        .events .list {
-            .item {
-                display: grid;
-                grid-template-columns: repeat(4, 1fr);
-                gap: 1.5rem 1rem;
+// For min 850px screen
+@media (min-width: 850px) {
+    .mainEventsCreate {
+        margin-top: 0;
 
-                &__name {
-                    margin-bottom: 0.5rem;
-                    grid-column: 1/2;
-                }
+        .form {
+            &__component {
+                &__added {
+                    ul {
+                        li {
+                            .category {
+                                min-width: 215px;
+                            }
 
-                .menu {
-                    position: relative;
-                    right: 0;
-                    bottom: 0;
-                }
+                            .username {
+                                padding: 1.15rem 3.5rem 1.15rem 3.5rem;
+                            }
 
-                .event__actions {
-                    display: flex;
-                    justify-content: start;
-                    align-items: center;
-                    gap: 0 2rem;
-                    grid-column: 1/5;
-
-                    a {
-                        margin: 0;
+                            button {
+                                right: 0.75rem;
+                            }
+                        }
                     }
                 }
             }
-        }
 
-        .events .empty {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            padding: 3rem;
+            /* Final buttons in the form */
+            .form__submit {
+                display: flex;
+                justify-content: flex-end;
+
+                .button {
+                    padding: 1rem 5.5rem;
+                    width: fit-content;
+                }
+            }
+        }
+    }
+}
+
+// For min 1440px screen
+@media (min-width: 1000px) {
+    .mainEventsCreate{
+        .form {
+            &__container {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0;
+            }
+
+            &__component {
+                margin-bottom: 1.5rem;
+                padding-right: 2rem;
+
+                /* Form to create a new contact */
+                .contact__new__form {
+                    &__container {
+                        .save, .cancel {
+                            margin: 1.25rem 0 -0.5rem;
+                        }
+                    }
+                }
+
+                /* List of the contacts added to the event */
+                &__added {
+                    ul {
+                        li {
+                            .category {
+                                min-width: 150px;
+                            }
+
+                            .username {
+                                padding: 1rem 3.5rem 1rem 2.5rem;
+                            }
+                        }
+                    }
+                }
+            }
+
+            &__component:last-of-type {
+                padding-left: 2rem;
+                border-left: $border;
+            }
         }
     }
 }
 
 // For min 1440px screen
 @media (min-width: 1440px) {
-    .mainEvents {
-        .events .list {
-            .item {
-                display: grid;
-                grid-template-columns: repeat(4, 1fr) 3fr;
-                gap: 1rem;
+    .mainEventsCreate {
+        .form {
+            &__component {
+                margin-bottom: 1.5rem;
+                padding: 2rem 2rem 1rem 1.5rem;
 
-                &__name {
-                    margin-bottom: 0;
-                    margin-right: 3.5rem;
-                    grid-column: 1/2;
-                    overflow: auto;
-                }
-
-                div {
-                    min-width: 180px;
-                }
-
-                .menu {
-                    position: relative;
-                    right: 0;
-                    bottom: 0;
-                }
-
-                .event__actions {
-                    display: flex;
-                    justify-content: start;
-                    align-items: center;
-                    gap: 0 2rem;
-                    grid-column: 5/6;
-                    margin-left: -2rem;
-
-                    .link__edition {
-                        min-width: 185px;
+                .custom__dropdown {
+                    .open-panel {
+                        .close-button {
+                            top: 0.65rem;
+                            right: 1.5rem;
+                            padding: 0.65rem;
+                        }
                     }
                 }
-            }
-        }
 
-        .events .list3 {
-            .item {
+                /* Search list filter for contacts */
+                .filter__contacts {
+                    &__list {
+                        padding: 0;
+                        max-height: 300px;
 
-                &__name {
-                    margin-right: 1.5rem;
+                        &__item {
+                            padding: 1rem 0.5rem 1rem 1.5rem;
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            justify-content: space-between;
+
+                            .projectName {
+                                min-width: 165px;
+                                margin-right: 1.25rem;
+                            }
+
+                            .projectTasks {
+                                width: 100%;
+                                display: flex;
+                                align-items: center;
+                                gap: 0 1rem;
+                                padding-right: 1rem;
+
+                                .taskName:before {
+                                    content: "|";
+                                    margin-right: 0.25rem;
+                                }
+
+                                .taskName:first-of-type:before {
+                                    content: "";
+                                    margin-right: 0;
+                                }
+                            }
+
+                            button {
+                                margin-top: -0.5rem;
+                                position: relative;
+                                justify-self: flex-end;
+                            }
+                        }
+                    }
                 }
 
-                .event__actions {
-                    margin-left: -2rem;
-                }
-            }
-        }
-    }
-}
+                .contact__new__form {
+                    &__container {
+                        display: grid;
+                        grid-template-columns: 225px 1fr;
+                        gap: 0.5rem 1.5rem;
 
-// For 1440px screen
-@media (min-width: 1440px) {
-    .mainEventsCreate{
-        .events__create {
-            .form {
-                &__infos {
-                    grid-template-columns: repeat(3, 315px);
-                }
+                        &__label {
+                            grid-column: 1/2;
+                        }
 
-                &__container {
-                    display: grid;
-                    grid-template-columns: repeat(2, 1fr);
-                    gap: 0;
-                }
+                        .position-right {
+                            grid-column: 2/3;
+                        }
 
-                &__component {
-                    margin-bottom: 1.5rem;
-                    padding-right: 2rem;
+                        .position-right:last-of-type {
+                            border-bottom: 0;
+                        }
+
+                        .save, .cancel {
+                            margin: 1.5rem 0 -0.5rem;
+                        }
+                    }
                 }
 
-                &__component:last-of-type {
-                    padding-left: 2rem;
-                    border-left: $border;
-                }
+                &__added {
+                    ul {
+                        li {
+                            .category {
+                                min-width: 175px;
+                            }
 
-                .contact__new__form__container {
-                    display: grid;
-                    grid-template-columns: 225px 1fr;
-                    gap: 0 1.5rem;
-
-                    .project-name, .project-task {
-                        input {
-                            min-width: 200px;
-                            max-width: 215px;
+                            .username {
+                                padding: 1rem 3.5rem 1rem 2.5rem;
+                            }
                         }
                     }
                 }
@@ -534,87 +618,15 @@
 // For min 1680px screen
 @media (min-width: 1680px) {
     .mainEventsCreate {
-        .events__create {
-            .form {
-                &__component {
-                    min-width: 664px;
-                    padding-right: 4rem;
-                }
+        .form {
+            &__component {
+                min-width: 664px;
+                padding-right: 4rem;
+            }
 
-                &__component:last-of-type {
-                    padding-left: 4rem;
-                }
+            &__component:last-of-type {
+                padding-left: 4rem;
             }
         }
-    }
-}
-
-
-/*---------------------
-    Dropdown styles
----------------------*/
-.custom__dropdown {
-    position: relative;
-
-    .open-button {
-        margin: 1.5rem 0 1.75rem;
-        padding: 1rem;
-        width: 18rem;
-        background-color: white;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .icon {
-        height: 1.25rem;
-        width: 1.25rem;
-        fill: #718096;
-    }
-
-    .open-panel {
-        margin-bottom: 2rem;
-        width: 100%;
-        background-color: white;
-        border-radius: 1rem;
-
-        .close-button {
-            position: absolute;
-            top: 0.5rem;
-            right: 1rem;
-            background-color: $gray-500;
-            border-radius: 2rem;
-            padding: 0.85rem;
-        }
-
-        .add-button {
-            @extend .button--classic;
-            width: 100%;
-            border-radius: 0 0 0.75rem 0.75rem;
-        }
-    }
-}
-
-/*---------------------
-    User List styles
----------------------*/
-.user__list {
-    .input {
-        margin-bottom: 0.15rem;
-        padding: 0.75rem;
-        width: 100%;
-        border-radius: 0.5rem;
-    }
-
-    .item {
-        padding: 1rem;
-        margin-top: 0.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .item:last-of-type {
-        margin-bottom: 0.5rem;
     }
 }

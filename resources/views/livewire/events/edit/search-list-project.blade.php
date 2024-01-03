@@ -15,7 +15,7 @@
             <ol class="filter__contacts__list">
                 @foreach($this->searchList as $project)
                     <li class="filter__contacts__list__item" wire:key="{{$project->id}}">
-                        <span class="capitalize projectName">{{ ucfirst($project->name) }}</span>
+                        <span class="capitalize name projectName">{{ ucfirst($project->name) }}</span>
                         <div class="projectTasks">
                             @if($project->tasks->count())
                                 <span>

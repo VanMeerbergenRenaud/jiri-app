@@ -196,3 +196,159 @@
         }
     }
 }
+
+// For max 950px screen
+@media (max-width: 950px) {
+    .mainEvents {
+        .events .list {
+            width: 100%;
+
+            .item {
+                position: relative;
+                padding: 1.5rem 2.5rem 1rem;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 1rem 2.5rem;
+                width: 100%;
+
+                &__name {
+                    margin-bottom: 0.5rem;
+                }
+
+                &__members, p {
+                    margin: 0;
+                }
+
+                .menu {
+                    position: absolute;
+                    right: 1.5rem;
+                    bottom: 1.5rem;
+                }
+
+                .event__actions {
+                    margin-top: 1rem;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: start;
+                    align-items: start;
+                    gap: 1rem;
+                    width: 100%;
+
+                    a {
+                        margin: 0;
+                    }
+                }
+            }
+        }
+
+        .events .empty {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+    }
+}
+
+// For min 950px screen
+@media (min-width: 950px) {
+    .mainEvents {
+        .events .list {
+            .item {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 1.5rem 1rem;
+
+                &__name {
+                    margin-bottom: 0.5rem;
+                    grid-column: 1/2;
+                }
+
+                .menu {
+                    position: relative;
+                    right: 0;
+                    bottom: 0;
+                }
+
+                .event__actions {
+                    display: flex;
+                    justify-content: start;
+                    align-items: center;
+                    gap: 0 2rem;
+                    grid-column: 1/5;
+
+                    a {
+                        margin: 0;
+                    }
+                }
+            }
+        }
+
+        .events .empty {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 3rem;
+        }
+    }
+}
+
+// For min 1440px screen
+@media (min-width: 1440px) {
+    .mainEvents {
+        .events .list {
+            .item {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr) 3fr;
+                gap: 1rem;
+
+                &__name {
+                    margin-bottom: 0;
+                    margin-right: 3.5rem;
+                    grid-column: 1/2;
+                    overflow: auto;
+                }
+
+                div {
+                    min-width: 180px;
+                }
+
+                .menu {
+                    position: relative;
+                    right: 0;
+                    bottom: 0;
+                }
+
+                .event__actions {
+                    display: flex;
+                    justify-content: start;
+                    align-items: center;
+                    gap: 0 2rem;
+                    grid-column: 5/6;
+                    margin-left: -2rem;
+
+                    .link__edition {
+                        min-width: 185px;
+                    }
+                }
+            }
+        }
+
+        .events .list3 {
+            .item {
+
+                &__name {
+                    margin-right: 1.5rem;
+                }
+
+                .event__actions {
+                    margin-left: -2rem;
+                }
+            }
+        }
+    }
+}

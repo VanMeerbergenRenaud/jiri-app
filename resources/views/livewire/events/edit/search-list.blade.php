@@ -15,7 +15,7 @@
             <ol class="filter__contacts__list">
                 @foreach($this->searchList as $contact)
                     <li class="filter__contacts__list__item" wire:key="{{$contact->id}}">
-                        <span class="capitalize">{{ $contact->name }}</span>
+                        <span class="capitalize name">{{ $contact->name }}</span>
                         <span class="capitalize">{{ $contact->firstname }}</span>
                         <span>{{ $contact->email }}</span>
                         <button type="button"

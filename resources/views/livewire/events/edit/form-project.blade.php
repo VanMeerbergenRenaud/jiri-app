@@ -5,7 +5,7 @@
             <p>Ajouter un projet</p>
             <div class="contact__new__form__container">
                 {{-- Nom du projet --}}
-                <div class="project-name">
+                <div class="contact__new__form__container__label">
                     <label for="newprojectname">Nom du projet</label>
                     <input
                         type="text"
@@ -19,7 +19,7 @@
                 </div>
 
                 {{-- Ajouter une tâche --}}
-                <div class="project-task">
+                <div class="position-right">
                     <label for="newprojecttask">Ajouter une tâche</label>
                     <input
                         type="text"

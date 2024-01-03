@@ -6,7 +6,7 @@
         />
     </header>
 
-    <main class="mainEventEdit mainEventsCreate">
+    <main class="mainEventsCreate">
         <livewire:events.edit.container :event="$event" />
     </main>
 </x-app-layout>
