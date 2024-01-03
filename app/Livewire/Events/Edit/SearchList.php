@@ -15,6 +15,8 @@ class SearchList extends Component
 
     public $username = '';
 
+    public $show = false;
+
     public $role; // student or evaluator
 
     #[Computed]
@@ -40,6 +42,8 @@ class SearchList extends Component
                 'role' => $role,
             ]);
         }
+
+        $this->reset('show');
 
         $this->dispatch('fetchEventContacts');
     }

@@ -3,10 +3,16 @@
     <p>Contacts ajoutés</p>
     @if(count($attendanceList) > 0)
         <ul>
+            @php
+                $roleTranslations = [
+                    'student' => 'étudiant',
+                    'evaluator' => 'évaluateur',
+                ];
+             @endphp
             @foreach($attendanceList as $attendance)
                 <li wire:key="{{ $attendance->id }}">
-                    <span class="category capitalize">{{ $attendance->role ?? 'Neutre' }}</span>
-                    <span class="username capitalize">{{ $attendance->contact->name ?? 'NTM' }}</span>
+                    <span class="category capitalize">{{ $roleTranslations[$attendance->role] ?? 'Neutre' }}</span>
+                    <span class="username capitalize">{{ $attendance->contact->name ?? 'Contact inconnu' }}</span>
                     <button type="button" wire:click="removeContact({{ $attendance->id }})">
                         @include('components.svg.trash2')
                     </button>
