@@ -18,7 +18,7 @@ class ContactForm extends Form
     #[Validate('email|nullable')]
     public $email = null;
 
-    #[Validate('image|nullable')]
+    #[Validate('image|max:1024|nullable')]
     public $avatar = null;
 
     public Contact $contact;

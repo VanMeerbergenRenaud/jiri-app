@@ -1,6 +1,6 @@
 /* 404 Page */
 
-.error {
+.error-404 {
     display: grid;
     height: 100%;
     padding: 6rem 1.5rem;
@@ -58,13 +58,13 @@
 }
 
 @media (min-width: 640px) {
-    .error {
+    .error-404 {
         padding: 8rem 0;
     }
 }
 
 @media (min-width: 1024px) {
-    .error {
+    .error-404 {
         padding: 0 2rem;
     }
 }

@@ -27,11 +27,15 @@
                         @error('form.email')<div class="error">{{ $message }}</div>@enderror
                     </label>
 
-                    <label for="file_input">
-                        Upload file
-                        <input id="file_input" wire:model="form.avatar" type="file">
-                        <span>JPG, JPEG, PNG or SVG (MAX 2000x1200px).</span>
+                    <label>
+                        Importer une photo de profil
+                        <input wire:model="form.avatar" type="file">
+                        <span>JPG, JPEG, PNG or SVG (MAX 1024 ko).</span>
                         @error('form.avatar')<div class="error">{{ $message }}</div>@enderror
+
+                        @if($form->avatar)
+                            <img src="{{ $form->avatar->temporaryUrl() }}" alt="Image du contact" class="w-1/2 h-auto rounded-lg">
+                        @endif
                     </label>
                 </div>
 

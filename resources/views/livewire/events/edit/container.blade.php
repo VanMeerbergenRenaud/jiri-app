@@ -1,36 +1,36 @@
 {{-- Form to edit an event --}}
 <div>
-    <form wire:submit.prevent="update" class="form">
+    <form wire:submit.prevent="save" class="form">
         @csrf
 
         {{-- Label & input for name, date of beginning and end of the event --}}
         <div class="form__event-infos">
             <x-form.input
                 type="text"
+                model="form.name"
                 name="name"
-                id="name"
                 min="1"
-                value="{{ $event->name }}"
+                placeholder="Nom de l'épreuve"
                 label="Nom de l'épreuve"
             />
 
             <x-form.input
                 type="datetime-local"
+                model="form.starting_at"
                 name="starting_at"
-                id="starting_at"
-                min="2023-01-01T00:00"
-                max="3000-01-01T00:00"
-                value="{{ $event->starting_at }}"
+                min="2020-01-01T00:00"
+                max="2038-01-01T00:00"
+                placeholder="JJ/MM/AAAA HH:MM"
                 label="Date de début"
             />
 
             <x-form.input
                 type="time"
+                model="form.duration"
                 name="duration"
-                id="duration"
-                min="00:00:00"
+                min="00:01:00"
                 max="23:59:59"
-                value="{{ $event->duration }}"
+                placeholder="HH:MM:SS"
                 label="Durée de l'épreuve"
             />
         </div>

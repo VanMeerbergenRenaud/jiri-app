@@ -13,7 +13,7 @@ class EventForm extends Form
     #[Validate('required|min:3')]
     public $name = '';
 
-    #[Validate('required')]
+    #[Validate('required|date|after_or_equal:2022-01-01|before_or_equal:2038-01-01')]
     public $starting_at = '';
 
     #[Validate('required')]
@@ -23,7 +23,7 @@ class EventForm extends Form
     {
         $this->event = $event;
         $this->name = $event->name;
-        $this->starting_at = Carbon::parse($event->starting_at)->format('Y-m-d\TH:i');
+        $this->starting_at = Carbon::parse($event->starting_at)->format('Y-m-d H:i:s');
         $this->duration = $event->duration;
     }
 

@@ -10,7 +10,7 @@
         <div>
             <x-breeze.input-label for="password" :value="__('Password')" />
 
-            <x-breeze.text-input id="password" class="block mt-1 w-full"
+            <x-breeze.text-input id="password" class="block mt-1 w-full p-2"
                             type="password"
                             name="password"
                             required autocomplete="current-password" />

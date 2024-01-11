@@ -16,7 +16,7 @@
         @vite(['resources/css/app.scss', 'resources/js/app.js'])
     </head>
     <body class="antialiased">
-        <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
+        <div class="relative flex justify-center items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
             @if (Route::has('login'))
                 <div class="p-12 text-right z-10 flex flex-col justify-center align-items-center">
                     @auth
@@ -32,17 +32,10 @@
                             </h1>
                             <p class="mt-12 text-lg text-center text-gray-600 dark:text-gray-400">
                                 Pour commencer, veuillez vous
-                                <a href="{{ route('login') }}"
-                                   class="text-lg text-blue-700 hover:text-gray-900">
-                                    connecter
-                                </a>
-                                @if (Route::has('register'))
-                                    ou vous
-                                <a href="{{ route('register') }}"
-                                   class="ml text-lg text-blue-700 hover:text-gray-900">
-                                    inscrire
-                                </a>
-                                @endif.
+                                <a href="{{ route('login') }}" class="text-lg text-blue-700 hover:text-blue-900 hover:underline">connecter</a>
+                                @if (Route::has('register'))ou vous
+                                <a href="{{ route('register') }}" class="ml text-lg text-blue-700 hover:text-blue-900 hover:underline">inscrire</a>.
+                                @endif
                             </p>
                         </div>
                     @endauth
