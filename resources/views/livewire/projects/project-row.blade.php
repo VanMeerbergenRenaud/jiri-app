@@ -13,17 +13,8 @@
             </x-menu.button>
 
             <x-menu.items>
-                {{-- Item to show a project --}}
-                <x-menu.item>
-                    <a class="link" href="{{ route('projects.show', $project) }}">
-                        <x-svg.show/>
-
-                        Voir
-                    </a>
-                </x-menu.item>
-
                 {{-- Dialog to edit a project --}}
-                <x-dialog wire:model="showEditDialog" class="border-y w-full">
+                <x-dialog wire:model="showEditDialog" class="w-full">
                     <x-dialog.open>
                         <x-menu.close>
                             <x-menu.item>
@@ -85,7 +76,7 @@
                 </x-dialog>
 
                 {{-- Dialog to suppress a project--}}
-                <x-dialog class="w-full">
+                <x-dialog class="border-y w-full">
                     <x-dialog.open>
                         <x-menu.close>
                             <x-menu.item>

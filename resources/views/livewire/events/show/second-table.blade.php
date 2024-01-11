@@ -6,8 +6,10 @@
             <th scope="row" class="category sticky">Membres du jury</th>
             @foreach($evaluators as $evaluator)
                 <th scope="col" colspan="{{ /*$projects->count() ??*/ 3 }}" wire:key="e{{ $evaluator->id }}" class="jiris sticky-small">
-                    <img src="{{ $evaluator->contact->avatar ?? asset('img/placeholder.png') }}" alt="photo d'un membre du jury">
-                    {{ $evaluator->contact->name ?? 'Évaluateur' }}
+                    <a href="{{ route('events.showContact', ['event' => $event, 'contact' => $evaluator->contact]) }}">
+                        <img src="{{ $evaluator->contact->avatar ?? asset('img/placeholder.png') }}" alt="photo d'un membre du jury">
+                        {{ $evaluator->contact->name ?? 'Évaluateur' }}
+                    </a>
                 </th>
             @endforeach
             <th rowspan="{{ $evaluators->count() }}" class="moy sticky">Moyenne</th>
@@ -29,15 +31,16 @@
             <tr class="row-3" wire:key="s{{ $student->id }}">
                 {{-- Students --}}
                 <th scope="row" class="students sticky">
-                    <img src="{{ $student->contact->avatar ?? asset('img/placeholder.png') }}" alt="photo d'un étudiant">
-                    {{ $student->contact->name ?? 'Étudiant' }}
+                    <a href="{{ route('events.showContact', ['event' => $event, 'contact' => $student->contact]) }}">
+                        <img src="{{ $student->contact->avatar ?? asset('img/placeholder.png') }}" alt="photo d'un étudiant">
+                        {{ $student->contact->name ?? 'Étudiant' }}
+                    </a>
                 </th>
                 {{-- Cotes sur /20 --}}
                 @foreach($evaluators as $evaluator)
                     @foreach($projects as $project)
-                        <td wire:key="s-{{ $student->id }} e-{{ $evaluator->id }} p-{{ $project->id ?? 3 }}"
-                            class="results">
-                            9/20
+                        <td wire:key="s-{{ $student->id }} e-{{ $evaluator->id }} p-{{ $project->id ?? 3 }}" class="results">
+                            <span>{{ $project->score ?? '0' }}</span>/20
                         </td>
                     @endforeach
                 @endforeach
@@ -53,4 +56,9 @@
         @endforeach
         </tbody>
     </table>
+    <div class="flex justify-end mt-6">
+        <button class="button--classic" type="button">
+            Modifier les cotes
+        </button>
+    </div>
 </div>

@@ -21,8 +21,8 @@
                             </button>
                         </div>
                         <span>
-                            Accepte les fichiers<br>
-                            de type .png et .jpg
+                            Accepte les fichiers de type<br>
+                            .jpg, .jpeg, .png ou .svg<br>
                         </span>
                     </div>
                     {{-- Nom, prénom, adresse mail, site de référence et compte Github --}}
