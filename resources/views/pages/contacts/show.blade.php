@@ -26,7 +26,7 @@
         {{--Liste des events (attendances) liés aux contacts --}}
         <div class="contact__attendances">
             <ul class="contact__attendances__list">
-                @foreach ($contact->attendances->unique('event_id') as $attendance)
+                @forelse ($contact->attendances->unique('event_id') as $attendance)
                     <li>
                         <p>
                             <span>Épreuve&nbsp;:</span>
@@ -67,7 +67,12 @@
                             </a>
                         @endif
                     </li>
-            @endforeach
+                @empty
+                    <li>
+                        <p>Aucune épreuve liée à ce contact.</p>
+                    </li>
+                @endforelse
+            </ul>
         </div>
     </main>
 </x-app-layout>

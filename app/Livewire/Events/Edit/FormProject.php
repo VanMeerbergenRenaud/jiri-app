@@ -31,7 +31,7 @@ class FormProject extends Component
 
         $this->projects = $this->user->projects()->get();
 
-        $this->tasks = Task::all();
+        $this->tasks = auth()->user()->tasks()->get();
     }
 
     public function save(): void

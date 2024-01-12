@@ -47,17 +47,35 @@
                                 </label>
 
                                 {{-- List of tasks in a select dropdown --}}
-                                Liste des tâches
-                                <x-form.select-multiple
-                                    wire:mode.livel="form.tasks"
-                                    tasks="$tasks"
-                                    :options="$allTasks->pluck('name')->toArray()"
-                                    selected="('form.tasks')"
-                                />
+                                <label>
+                                    Liste des tâches
+                                    <div x-data="{ selectedTask: [] }"
+                                         x-init="() => {
+                                            const selectElement = document.getElementById('tasks2');
+                                            const choices = new Choices(selectElement);
+                                            choices.passedElement.element.addEventListener('change', function(event) {
+                                                selectedTask = Array.from(event.detail.value);
+                                            });
+                                        }">
+                                        <select id="tasks2"
+                                                multiple
+                                                x-ref="selectElement"
+                                                wire:model="form.selectedTasks"
+                                        >
+                                            @foreach($allTasks as $task)
+                                                <option value="{{ $task->name }}"
+                                                        wire:click="addSelectedTask({{ $task->id }})"
+                                                >
+                                                    {{ $task->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </label>
 
                                 <div>
                                     @foreach($tasks as $task)
-                                        <ul>
+                                        <ul class="px-8">
                                             <li class="list-disc">{{ $task->name }}</li>
                                         </ul>
                                     @endforeach

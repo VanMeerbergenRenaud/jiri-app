@@ -2,7 +2,7 @@
     <header class="header">
         <x-header
             :title="'Liste de vos épreuves'"
-            :message="'Voici ci-dessous la liste de tous vos contacts.'"
+            :message="'Voici ci-dessous la liste de tous vos évènements.'"
         />
         <livewire:events.add-event-dialog />
     </header>
