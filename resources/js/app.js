@@ -1,5 +1,6 @@
+// Path: resources/js/bootstrap.js
 import './bootstrap';
 
-import Choices from 'choices.js';
+import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.esm';
 
-window.Choices = Choices;
+Livewire.start()

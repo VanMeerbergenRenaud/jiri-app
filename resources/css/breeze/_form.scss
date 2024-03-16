@@ -1,0 +1,85 @@
+/* Styling of the form for the connection and register page */
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &__field {
+        margin-top: 1rem;
+    }
+
+    &__text {
+        margin-bottom: 1.5rem;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        color: #4B5563;
+        text-align: center;
+        max-width: 450px;
+    }
+
+    label {
+        padding-left: 0.5rem;
+        color: #111827;
+    }
+
+    input {
+        margin: 0.35rem 0;
+        padding: 0.5rem;
+        display: block;
+        width: 95%;
+    }
+
+    ul {
+        margin-top: 0.5rem;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        color: #DC2626;
+
+        li {
+
+        }
+    }
+
+    &__remember-me {
+        display: inline-flex;
+        align-items: center;
+
+        label {
+            margin-left: 0.5rem;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            color: #4B5563;
+        }
+
+        input[type="checkbox"] {
+            margin-left: 1rem;
+            display: inline-flex;
+            width: fit-content;
+            border-radius: 0.25rem;
+            border-color: #D1D5DB;
+            color: #4F46E5;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+    }
+
+    &__footer {
+        margin-top: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0 1.5rem;
+
+        a {
+            color: #6386E3;
+            font-weight: 500;
+            text-decoration: underline;
+            margin-bottom: 1rem;
+
+            &:hover {
+                color: #395592;
+            }
+        }
+    }
+}

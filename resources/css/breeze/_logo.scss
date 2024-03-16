@@ -1,0 +1,22 @@
+/* Logo of the app */
+
+.logo {
+    margin: 1.5rem auto;
+
+    &__link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+
+        svg {
+            display: block;
+            width: 2rem;
+        }
+
+        span {
+            font-weight: 700;
+            color: #374151;
+        }
+    }
+}

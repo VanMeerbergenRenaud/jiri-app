@@ -1,10 +1,13 @@
 <x-app-layout>
     <main class="error-404">
         <div class="error-404__header">
-            <p class="error-404__code">404</p>
-            <h1 class="error-404__title">Page non trouvée...</h1>
+            <h1 class="error-404__code">
+                <span class="sr-only">Page d'erreur</span>
+                404
+            </h1>
+            <h2 class="error-404__title">Page non trouvée…</h2>
             <p class="error-404__description">
-                Désolé mon bro, je n'ai pas su trouver la page que tu cherches...
+                Navrez de vous voir ici, vous essayez d'accéder une page introuvable&nbsp;!
             </p>
             <a href="{{ route('dashboard') }}" class="error-404__button">
                 {{ __('Retourner à l‘accueil') }}

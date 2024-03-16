@@ -1,0 +1,109 @@
+/* Layout for the guest page */
+
+.guest {
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+
+    .title {
+        margin-top: 0.5rem;
+        max-width: 300px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        text-align: center;
+    }
+
+
+    .form {
+        &__footer__3 {
+
+            button {
+                margin-top: 1rem;
+            }
+        }
+    }
+
+}
+
+@media (min-width: 350px) {
+    .guest {
+        .form {
+            &__footer {
+                a {
+                    margin-bottom: 0;
+                }
+
+                button.submit {
+                    margin-top: 2rem;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 450px) {
+    .guest {
+        padding: 0;
+
+        .logo {
+            &__link {
+                svg {
+                    width: 2.5rem;
+                }
+
+                span {
+                    font-size: 1.5rem;
+                }
+            }
+        }
+
+        .title, .form, {
+            margin: 1rem auto;
+            max-width: 400px;
+        }
+
+        .title {
+            margin-top: 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+            max-width: 350px;
+        }
+
+        .form {
+
+            input {
+                width: 100%;
+            }
+
+            &__footer {
+                margin-top: 0.5rem;
+                justify-content: flex-end;
+            }
+
+            &__footer__3 {
+                margin-right: -1rem;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                gap: 0 1rem;
+
+                a, button.submit {
+                    margin: 1rem 0;
+                    display: inline-flex;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 1000px) {
+    .guest {
+        .form {
+            max-width: none;
+            min-width: 425px;
+        }
+    }
+}

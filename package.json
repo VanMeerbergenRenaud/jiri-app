@@ -8,7 +8,6 @@
     "start": "bun run index.ts"
   },
   "devDependencies": {
-    "alpinejs": "^3.13.2",
     "axios": "^1.1.2",
     "bun-types": "latest",
     "laravel-vite-plugin": "^0.8.0",
@@ -19,9 +18,5 @@
   "module": "index.ts",
   "peerDependencies": {
     "typescript": "^5.0.0"
-  },
-  "dependencies": {
-    "choices.js": "^10.2.0",
-    "tom-select": "^2.3.1"
   }
 }

@@ -6,8 +6,15 @@
 @import "utils/variables";
 @import "utils/basics";
 
+@import "breeze/guest-layout";
+@import "breeze/form";
+@import "breeze/logo";
+
 /* Header */
 @import "header";
+
+/* Navigation */
+@import "navigation";
 
 /* Inputs */
 @import "inputs";
@@ -27,6 +34,9 @@
 /*-------------------
         Pages
 -------------------*/
+
+/* Homepage */
+@import "homepage";
 
 /* Welcome */
 @import "welcome";

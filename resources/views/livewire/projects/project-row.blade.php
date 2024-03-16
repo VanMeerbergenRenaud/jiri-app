@@ -48,15 +48,15 @@
 
                                 {{-- List of tasks in a select dropdown --}}
                                 <label>
-                                    Liste des tâches
+                                    Liste des tâches déjà existantes
                                     <div x-data="{ selectedTask: [] }"
                                          x-init="() => {
-                                            const selectElement = document.getElementById('tasks2');
-                                            const choices = new Choices(selectElement);
-                                            choices.passedElement.element.addEventListener('change', function(event) {
-                                                selectedTask = Array.from(event.detail.value);
-                                            });
-                                        }">
+                                const selectElement = document.getElementById('tasks2');
+                                const choices = new Choices(selectElement);
+                                choices.passedElement.element.addEventListener('change', function(event) {
+                                    selectedTask = Array.from(event.detail.value);
+                                });
+                            }">
                                         <select id="tasks2"
                                                 multiple
                                                 x-ref="selectElement"
@@ -71,6 +71,13 @@
                                             @endforeach
                                         </select>
                                     </div>
+                                    @error('form.selectedTasks')<div class="error">{{ $message }}</div>@enderror
+                                </label>
+
+                                <label>
+                                    Nom de la nouvelle tâche
+                                    <input wire:model="form.newTask">
+                                    @error('form.newTask')<div class="error">{{ $message }}</div>@enderror
                                 </label>
 
                                 <div>
