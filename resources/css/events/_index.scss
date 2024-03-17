@@ -1,5 +1,11 @@
 /* List of events */
+
 .events {
+
+    &__list {
+        margin-top: 1.5rem;
+    }
+
     .list {
         font-weight: 500;
         margin-bottom: 1.5rem;
@@ -200,6 +206,8 @@
 // For max 950px screen
 @media (max-width: 950px) {
     .mainEvents {
+        padding: 0 1rem;
+
         .events .list {
             width: 100%;
 
@@ -210,7 +218,6 @@
                 flex-direction: row;
                 flex-wrap: wrap;
                 gap: 1rem 2.5rem;
-                width: 100%;
 
                 &__name {
                     margin-bottom: 0.5rem;
@@ -256,6 +263,8 @@
 // For min 950px screen
 @media (min-width: 950px) {
     .mainEvents {
+        padding: 0 1.5rem;
+
         .events .list {
             .item {
                 display: grid;

@@ -8,10 +8,10 @@
         <meta name="description" content="Jiri est une application web qui permet de gérer des évaluations de projets réalisés par des étudiants.">
         <meta name="keywords" content="jury, évaluation, projet, étudiant, école, application">
 
-        {{-- Favicon --}}
+        <!-- Favicon -->
         <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
-        {{-- Title --}}
-        <title>{{ $title ?? 'Jiri app' }}</title>
+        <!-- Title -->
+        <title>{{ __('Jiri app') }}</title>
 
         @livewireStyles
         @vite(['resources/css/app.scss', 'resources/js/app.js'])

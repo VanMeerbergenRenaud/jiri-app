@@ -10,7 +10,7 @@
         />
     </header>
 
-    <main class="mainEventsCreate">
+    <main class="mainEventsCreate max-width">
         <livewire:events.edit.container :event="$event" />
     </main>
 </x-app-layout>

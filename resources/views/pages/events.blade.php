@@ -11,8 +11,7 @@
         <livewire:events.add-event-dialog />
     </header>
 
-    <main class="mainEvents">
-        {{-- Liste des épreuves --}}
+    <main class="mainEvents max-width">
         <div class="events">
             <livewire:events.show-events />
         </div>

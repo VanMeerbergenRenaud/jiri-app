@@ -3,7 +3,7 @@
         <h1 role="heading" aria-level="1" class="sr-only">Information du contact {{ $contact->name }}</h1>
     @endsection
 
-    <main class="mainProfil mainProfilShowContact">
+    <main class="mainProfil mainProfilShowContact max-width">
         <div class="mainProfil__intro">
             <h2>Profil du contact</h2>
             <p>

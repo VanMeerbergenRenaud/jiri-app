@@ -50,13 +50,7 @@
                                 <label>
                                     Liste des tâches déjà existantes
                                     <div x-data="{ selectedTask: [] }"
-                                         x-init="() => {
-                                const selectElement = document.getElementById('tasks2');
-                                const choices = new Choices(selectElement);
-                                choices.passedElement.element.addEventListener('change', function(event) {
-                                    selectedTask = Array.from(event.detail.value);
-                                });
-                            }">
+                                         x-init="">
                                         <select id="tasks2"
                                                 multiple
                                                 x-ref="selectElement"

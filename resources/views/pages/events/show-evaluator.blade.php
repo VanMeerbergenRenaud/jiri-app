@@ -10,7 +10,7 @@
         />
     </div>
 
-    <main class="mainEvaluator">
+    <main class="mainEvaluator max-width">
         <livewire:evaluator.dashboard />
     </main>
 

@@ -10,7 +10,7 @@
         />
     </header>
 
-    <main class="mainEventShow">
+    <main class="mainEventShow max-width">
         {{-- First Table --}}
         <div class="event__show">
             <livewire:events.show.first-table />
