@@ -1,6 +1,6 @@
 <x-guest-layout>
     <h1 class="title">
-        Veuillez vous connecter à votre compte rapidement juste ici&nbsp;👇🏻.
+        {{ __("Veuillez vous connecter à votre compte rapidement juste ici 👇🏻.") }}
     </h1>
 
     <!-- Session Status -->
@@ -32,13 +32,13 @@
         <div class="form__footer form__footer__3">
             @if (Route::has('register'))
                 <a href="{{ route('register') }}">
-                    Pas encore enregistré&nbsp;?
+                    {{ __("Pas encore enregistré") }}&nbsp;?
                 </a>
             @endif
 
             @if (Route::has('password.request'))
                 <a href="{{ route('password.request') }}">
-                    Mot de passe oublié&nbsp;?
+                    {{ __("Mot de passe oublié") }}&nbsp;?
                 </a>
             @endif
 
