@@ -98,9 +98,13 @@ button {
     border-radius: 0.75rem;
     background-color: $gray-700;
     padding: 0.75rem 1rem;
-    font-size: 0.875rem;
+    font-size: 0.75rem;
     font-weight: 500;
     color: $blue;
+
+    &:hover {
+        background-color: $gray-700;
+    }
 }
 
 .button--gray {
@@ -114,6 +118,15 @@ button {
 
     svg {
         margin-right: 0.5rem;
+    }
+}
+
+.button-danger {
+    background-color: #DC2626;
+    color: #F3F4F6;
+
+    &:hover {
+        background-color: #d53e3e;
     }
 }
 
@@ -133,57 +146,6 @@ button {
 
 .rotate-180 {
     transform: rotate(180deg);
-}
-
-.modal {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0, 0, 0, 0.825);
-    z-index: 10;
-
-    &__dialog {
-        background: $gray-700;
-        border-radius: 1rem;
-        padding: 1.25rem 2rem;
-        max-width: 400px;
-        text-align: center;
-    }
-
-    &__title {
-        font-size: 1.25rem;
-        font-weight: 500;
-        margin-bottom: 1.5rem;
-    }
-
-    select {
-        width: 90%;
-        margin-bottom: 2.5rem;
-    }
-
-    &__buttons {
-        display: flex;
-        justify-content: space-around;
-
-        button {
-            padding: 0.5rem 1rem;
-            font-weight: 500;
-            color: white;
-        }
-
-        .cancel-button {
-            background: $blue-dark;
-        }
-
-        .confirm-button {
-            background: $blue;
-        }
-    }
 }
 
 table {

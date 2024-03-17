@@ -17,6 +17,8 @@
         @vite(['resources/css/app.scss', 'resources/js/app.js'])
     </head>
     <body>
+        @yield('title')
+
         @include('layouts.navigation')
 
         <!-- Content -->

@@ -49,7 +49,7 @@
 
                 <x-menu.items>
                     {{-- Dialog to edit a event --}}
-                    <x-dialog wire:model="showEditDialog" class="w-full">
+                    <x-dialog wire:model="showEditDialog" style="width: 100%">
                         <x-dialog.open>
                             <x-menu.close>
                                 <x-menu.item>

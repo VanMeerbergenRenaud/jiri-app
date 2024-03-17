@@ -1,6 +1,10 @@
 <x-evaluator-layout>
+    @section('title')
+        <h1 role="heading" aria-level="1" class="sr-only">Profil d'un évaluateur</h1>
+    @endsection
+
     <div class="header">
-        <x-header
+        <x-banner
             :title="'Bonjour ' . $evaluator->contact->name . ' 👋🏻.'  ??  'évaluateur 👋🏻.'"
             :message="'Choisissez un étudiant a évaluer.'"
         />

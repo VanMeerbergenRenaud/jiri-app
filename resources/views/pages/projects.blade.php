@@ -1,6 +1,10 @@
 <x-app-layout>
-    <header class="header mb-10">
-        <x-header
+    @section('title')
+        <h1 role="heading" aria-level="1" class="sr-only">Projets de l'administrateur</h1>
+    @endsection
+
+    <header class="header">
+        <x-banner
             :title="'Liste de vos projets'"
             :message="'Voici ci-dessous la liste de tous vos projets.'"
         />

@@ -1,4 +1,8 @@
 <x-app-layout>
+    @section('title')
+        <h1 role="heading" aria-level="1" class="sr-only">Information du contact {{ $contact->name }}</h1>
+    @endsection
+
     <main class="mainProfil mainProfilShowContact">
         <div class="mainProfil__intro">
             <h2>Profil du contact</h2>
