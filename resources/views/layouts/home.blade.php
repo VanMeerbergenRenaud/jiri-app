@@ -13,6 +13,9 @@
         <!-- Body -->
         @yield('content')
 
+    {{-- footer --}}
+
+
         @livewireScriptConfig
         @yield('scripts')
 </html>

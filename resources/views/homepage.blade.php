@@ -341,9 +341,9 @@
             </section>
         </main>
 
-        <footer class="homepage__footer">
+        <x-footer class="homepage__footer">
             2024 Renaud Vmb. Tous droits réservés.
-        </footer>
+        </x-footer>
     </body>
 @endsection
 
