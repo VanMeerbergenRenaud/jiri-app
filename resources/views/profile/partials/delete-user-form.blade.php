@@ -21,7 +21,7 @@
                 @method('delete')
 
                 <div class="form__content">
-                    <x-svg.advertising />
+                    <!-- <x-svg.advertising /> -->
                     <h3 role="heading" aria-level="3" class="title">
                         {{ __('Êtes-vous sûr de vouloir supprimer votre compte ?') }}
                     </h3>
