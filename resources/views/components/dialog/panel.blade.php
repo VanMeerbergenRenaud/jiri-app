@@ -1,6 +1,10 @@
 <template x-teleport="body">
-    <div x-dialog x-model="dialogOpen" class="modal">
-
+    <div
+        x-dialog
+        x-model="dialogOpen"
+        style="display: none"
+        class="modal"
+    >
         <!-- Overlay -->
         <div x-dialog:overlay x-transition:enter.opacity class="modal__overlay"></div>
 
@@ -10,7 +14,7 @@
 
                 <!-- Close Button -->
                 <div class="dialog__close-button">
-                    <button type="button" @click="$dialog.close()">
+                    <button type="button" @click="dialogOpen = false">
                         <span class="sr-only">Fermer la modale</span>
                         <x-svg.cross />
                     </button>

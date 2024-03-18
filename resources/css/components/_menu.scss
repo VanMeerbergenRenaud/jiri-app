@@ -13,21 +13,40 @@
         overflow: hidden;
         z-index: 9;
 
-        .link, .button {
-            padding: 0.5rem 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        button {
             width: 100%;
-            color: #4a5568;
-            font-size: 0.875rem;
             border-radius: 0;
-            cursor: pointer;
 
             &:hover {
-                background-color: $gray-300;
-                color: black;
+               border: $transparent;
             }
         }
+    }
+
+    a {
+        border-radius: 0;
+    }
+
+    a, button {
+        padding: 0.5rem 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0 0.75rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #4a5568;
+        background-color: white;
+        cursor: pointer;
+
+        &:hover {
+            color: black;
+            background-color: $gray-300;
+        }
+    }
+
+    .button {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
     }
 }

@@ -1,12 +1,13 @@
 <tr>
     <td class="name capitalize">
-        @if($contact->avatar)
-            <img src="{{ asset($contact->avatar) . '?' . $contact->updated_at->format("U") }}"
-                 alt="photo de profil du contact">
-        @else
-            <img src="{{ asset('img/placeholder.png') }}" alt="Image du contact" class="w-1/2 h-auto rounded-lg">
-        @endif
-        {{ $contact->name }}
+        <a href="{{ route('contacts.show', $contact) }}">
+            @if($contact->avatar)
+                <img src="{{ asset($contact->avatar) . '?' . $contact->updated_at->format("U") }}" alt="photo de profil du contact">
+            @else
+                <img src="{{ asset('img/placeholder.png') }}" alt="Image du contact">
+            @endif
+            {{ $contact->name }}
+        </a>
     </td>
     <td class="capitalize">{{ $contact->firstname }}</td>
     <td class="lowercase">{{ $contact->email }}</td>
@@ -18,24 +19,22 @@
 
             <x-menu.items>
                 {{-- Item to show a contact --}}
-                <x-menu.item>
-                    <a class="link" href="{{ route('contacts.show', $contact) }}">
-                        <x-svg.show/>
+                <a class="link" href="{{ route('contacts.show', $contact) }}">
+                    <x-svg.show/>
 
-                        Voir
-                    </a>
-                </x-menu.item>
+                    Voir
+                </a>
+
+                <x-divider />
 
                 {{-- Dialog to edit a contact --}}
-                <x-dialog wire:model="showEditDialog" class="border-y w-full">
+                <x-dialog wire:model="showEditDialog">
                     <x-dialog.open>
                         <x-menu.close>
                             <x-menu.item>
-                                <div class="button">
-                                    <x-svg.edit/>
+                                <x-svg.edit/>
 
-                                    Modifier
-                                </div>
+                                Modifier
                             </x-menu.item>
                         </x-menu.close>
                     </x-dialog.open>
@@ -90,16 +89,16 @@
                     </x-dialog.panel>
                 </x-dialog>
 
+                <x-divider />
+
                 {{-- Dialog to suppress a contact--}}
-                <x-dialog class="w-full">
+                <x-dialog>
                     <x-dialog.open>
                         <x-menu.close>
                             <x-menu.item>
-                                <div class="button">
-                                    <x-svg.trash/>
+                                <x-svg.trash/>
 
-                                    Supprimer
-                                </div>
+                                Supprimer
                             </x-menu.item>
                         </x-menu.close>
                     </x-dialog.open>

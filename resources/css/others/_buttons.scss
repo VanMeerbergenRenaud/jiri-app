@@ -1,6 +1,7 @@
 /* Styles of different buttons */
 
 button {
+    margin: 0;
     padding: 0.75rem 1rem;
     display: inline-flex;
     align-items: center;
@@ -17,17 +18,26 @@ button {
     transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
 
     &:hover {
-        background-color: #6386E3;
+        border: $border;
     }
 }
 
-.button--classic {
+.button--white {
+    font-size: 0.875rem;
+    color: $blue-dark;
+    background-color: white;
     border-radius: 0.75rem;
-    background-color: $gray-700;
+
+    &:hover {
+        background-color: #f3f4f6;
+    }
+}
+
+.button--blue {
     padding: 0.75rem 1rem;
-    font-size: 0.75rem;
-    font-weight: 500;
+    border-radius: 0.75rem;
     color: $blue;
+    background-color: $gray-700;
 
     &:hover {
         background-color: $gray-700;
@@ -37,22 +47,22 @@ button {
 .button--gray {
     padding: 0.85rem 1.25rem;
     display: flex;
-    border-radius: 2rem;
-    background-color: $gray-300;
     font-size: 0.875rem;
-    font-weight: 500;
     color: $blue-dark;
+    background-color: $gray-300;
 
     svg {
         margin-right: 0.5rem;
     }
 }
 
-.button-danger {
-    background-color: #DC2626;
+.button--danger {
+    font-size: 0.875rem;
+    text-transform: uppercase;
     color: #F3F4F6;
+    background-color: #d53e3e;
 
     &:hover {
-        background-color: #d53e3e;
+        background-color: #DC2626;
     }
 }

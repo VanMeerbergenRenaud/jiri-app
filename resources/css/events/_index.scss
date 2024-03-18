@@ -13,15 +13,12 @@
         .item {
             margin-top: 1.5rem;
             padding: 2rem 3rem;
-            border: $border;
-            border-radius: 1.5rem;
-            background-color: #D9EBED;
-
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
-
-            max-width: 1600px;
+            border: $border;
+            border-radius: 1.5rem;
+            background-color: #D9EBED;
 
             &__name {
                 grid-column: 1/4;
@@ -42,7 +39,7 @@
             }
 
             a {
-                font-weight: 400;
+                font-weight: 500;
                 text-align: center;
             }
 
@@ -142,7 +139,6 @@
     }
 }
 
-
 // For 850px screen
 @media (min-width: 850px) {
     .events {
@@ -151,7 +147,6 @@
                 display: flex;
                 justify-content: space-between;
                 gap: 0;
-                max-width: 1800px;
 
                 &__name {
                     margin: 0;
@@ -206,7 +201,6 @@
 // For max 950px screen
 @media (max-width: 950px) {
     .mainEvents {
-        padding: 0 1rem;
 
         .events .list {
             width: 100%;
@@ -322,7 +316,7 @@
                     overflow: auto;
                 }
 
-                div {
+                &__name, &__date, &__time, &__members {
                     min-width: 180px;
                 }
 

@@ -7,38 +7,48 @@
         {{ __('Dès que votre compte se sera supprimé, toutes les données et ressources associées seront supprimées de manière permanente. Avant de supprimer votre compte, veuillez télécharger toutes les données ou informations que vous souhaitez conserver.') }}
     </p>
 
-    <button class="button-danger" x-data="" x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')">
-        {{ __('Supprimer le compte') }}
-    </button>
 
-    <x-breeze.modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
-        <form method="post" action="{{ route('profile.destroy') }}" class="form form-danger">
-            @csrf
-            @method('delete')
+    <x-dialog wire:model="show">
+        <x-dialog.open>
+            <button type="button" class="button--danger">
+                {{ __('Supprimer le compte') }}
+            </button>
+        </x-dialog.open>
 
-            <h3 role="heading" aria-level="3" class="form-danger__title">
-                {{ __('Êtes-vous sûr de vouloir supprimer votre compte ?') }}
-            </h3>
+        <x-dialog.panel>
+            <form method="post" action="{{ route('profile.destroy') }}" class="form">
+                @csrf
+                @method('delete')
 
-            <p class="form-danger__text">
-                {{ __('Une fois votre compte supprimé, toutes les données et ressources associées seront supprimées de manière permanente. Veuillez saisir votre mot de passe pour confirmer que vous souhaitez supprimer votre compte de manière permanente.') }}
-            </p>
+                <div class="form__content">
+                    <x-svg.advertising />
+                    <h3 role="heading" aria-level="3" class="title">
+                        {{ __('Êtes-vous sûr de vouloir supprimer votre compte ?') }}
+                    </h3>
 
-            <div class="form__field">
-                <x-breeze.input-label for="password" value="{{ __('Mot de passe') }}" class="sr-only" />
-                <x-breeze.text-input id="password" name="password" type="password" placeholder="{{ __('Mot de passe') }}"/>
-                <x-breeze.input-error :messages="$errors->userDeletion->get('password')" />
-            </div>
+                    <p class="text">
+                        {{ __('Une fois votre compte supprimé, toutes les données et ressources associées seront supprimées de manière permanente. Veuillez saisir votre mot de passe pour confirmer que vous souhaitez supprimer votre compte de manière permanente.') }}
+                    </p>
 
-            <div class="form__footer">
-                <button x-on:click="$dispatch('close')">
-                    {{ __('Annuler') }}
-                </button>
+                    <div class="form__field">
+                        <x-breeze.input-label for="password" value="{{ __('Mot de passe') }}" class="sr-only" />
+                        <x-breeze.text-input id="password" name="password" type="password" placeholder="{{ __('Mot de passe') }}"/>
+                        <x-breeze.input-error :messages="$errors->userDeletion->get('password')" />
+                    </div>
+                </div>
 
-                <button class="button-danger">
-                    {{ __('Supprimer le compte') }}
-                </button>
-            </div>
-        </form>
-    </x-breeze.modal>
+                <x-dialog.footer>
+                    <x-dialog.close>
+                        <button type="button" class="cancel">
+                            {{ __('Annuler') }}
+                        </button>
+                    </x-dialog.close>
+
+                    <button type="submit" class="delete">
+                        {{ __('Supprimer le compte') }}
+                    </button>
+                </x-dialog.footer>
+            </form>
+        </x-dialog.panel>
+    </x-dialog>
 </section>

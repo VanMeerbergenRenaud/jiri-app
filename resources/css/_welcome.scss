@@ -104,6 +104,10 @@
             &__login {
                 padding: 2.5rem 10rem;
                 max-width: 875px;
+
+                &__link {
+                    font-size: 0.875rem;
+                }
             }
         }
     }

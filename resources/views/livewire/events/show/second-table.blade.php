@@ -56,8 +56,8 @@
         @endforeach
         </tbody>
     </table>
-    <div class="flex justify-end mt-6">
-        <button class="button--classic" type="button">
+    <div class="second-table--footer">
+        <button class="button--blue" type="button">
             Modifier les cotes
         </button>
     </div>

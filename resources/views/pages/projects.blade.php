@@ -11,7 +11,7 @@
         <livewire:projects.add-project-dialog />
     </header>
 
-    <main class="mainContacts max-width">
+    <main class="mainContacts max-width p-main">
         <livewire:projects.show-projects />
     </main>
 </x-app-layout>

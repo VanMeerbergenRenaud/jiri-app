@@ -13,6 +13,8 @@
         <!-- Title -->
         <title>{{ __('Jiri app') }}</title>
 
+        <script defer src="https://unpkg.com/@alpinejs/ui@3.13.2-beta.0/dist/cdn.min.js"></script>
+
         @livewireStyles
         @vite(['resources/css/app.scss', 'resources/js/app.js'])
     </head>

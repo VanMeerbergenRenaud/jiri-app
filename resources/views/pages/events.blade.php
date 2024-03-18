@@ -11,7 +11,7 @@
         <livewire:events.add-event-dialog />
     </header>
 
-    <main class="mainEvents max-width">
+    <main class="mainEvents max-width p-main">
         <div class="events">
             <livewire:events.show-events />
         </div>

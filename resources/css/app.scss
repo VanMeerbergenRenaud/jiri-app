@@ -1,69 +1,79 @@
 /*
-    Style of the Jiri app
+ * Style of the Jiri app :
 
     1. Utils
     2. Others
-    3. Layout
-    4. Components
-    5. Pages
-        5.a Events
-        5.b Contacts, Projects
-        5.c Dashboard admin
-        5.d Dashboard evaluator
-    6 Errors
+    3. Components
+    4. Pages
+        4.a Events
+        4.b Contacts / Projects
+        4.c Guest
+        4.d Admin
+        4.e Evaluator
+    5. Errors
+    6. SVG
 */
 
-/*-------------------
-        Utils
-------------------- */
+/*-------------------------
+        1. Utils
+------------------------- */
 @import "utils/reset";
 @import "utils/variables";
 @import "utils/basics";
 
-/*-------------------
-        Others
-------------------- */
+/*--------------------------
+        2. Others
+-------------------------- */
 @import "others/form";
 @import "others/logo";
+@import "others/links";
 @import "others/inputs";
 @import "others/buttons";
+@import "others/spacings";
 @import "others/pagination";
 @import "others/notification";
 
-/*-------------------
-        Layout
-------------------- */
-@import "breeze/guest-layout";
-
-/*-------------------
-      Components
-------------------- */
+/*--------------------------
+       3. Components
+-------------------------- */
 @import "components/navigation";
 @import "components/header";
+@import "components/footer";
 @import "components/dialog";
 @import "components/menu";
 
-/*-------------------
-        Pages
--------------------*/
+/* -------------------------
+         4. Pages
+------------------------- */
 @import "homepage";
 @import "welcome";
 
-/* Events */
+/* ------- Events ------- */
 @import "events/index";
 @import "events/edit";
 @import "events/show";
 
-/* Contacts, Projects */
+/* ------- Contacts / Projets ------- */
 @import "contacts/index";
 @import "contacts/attendances";
 @import "contacts/profils";
 
-/* Dashboard admin */
-@import "admin/profile-admin";
+/* ------- Guest ------- */
+@import "guest/layout";
 
-/* Dashboard evaluator */
+/* ------- Admin ------- */
+@import "admin/profile";
+
+/* ------- Evaluator ------- */
 @import "evaluator/dashboard";
 
-/* Errors */
+/* ---------------------
+       5. Errors
+--------------------- */
 @import "errors/404";
+@import "errors/messages";
+
+/* ---------------------
+        6. SVG
+--------------------- */
+@import "svg/svg";

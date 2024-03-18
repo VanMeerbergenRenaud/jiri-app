@@ -1,0 +1,23 @@
+// Some svg icons used in the app
+
+.svg-advertising {
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    height: fit-content;
+    border-radius: 3rem;
+    background-color: #FEE2E2;
+
+    svg {
+        width: 1.5rem;
+        height: 1.5rem;
+        color: $red;
+    }
+}
+
+.svg-nav-arrow {
+    width: 1.15rem;
+    height: 1.15rem;
+}

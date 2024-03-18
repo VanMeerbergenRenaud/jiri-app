@@ -58,7 +58,7 @@
                                 x-data="{ resize: () => { $el.style.height = '0.5rem'; $el.style.height = $el.scrollHeight + 'px' } }"
                                 x-init="resize()"
                                 @input="resize()"
-                            >{!! $globalComment ?? 'Pas encore de commentaires ajoutés...' !!}</textarea>
+                            >{!! $globalComment ?? 'Pas encore de commentaires ajoutés…' !!}</textarea>
                         </label>
                     </div>
                 </form>

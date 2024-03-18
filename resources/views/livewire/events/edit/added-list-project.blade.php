@@ -15,7 +15,7 @@
                             <span class="normal-case">Aucune tâche n'est associée à ce projet.</span>
                         @endif
                     </span>
-                    <button type="button" wire:click="removeContact({{ $duty->id }})" wire:confirm="Êtes-vous sûr de vouloir supprimer le projet '{{ $duty->name }}' de l'épreuve ?">
+                    <button type="button" class="button--white" wire:click="removeContact({{ $duty->id }})" wire:confirm="Êtes-vous sûr de vouloir supprimer le projet '{{ $duty->name }}' de l'épreuve ?">
                         @include('components.svg.trash2')
                     </button>
                 </li>

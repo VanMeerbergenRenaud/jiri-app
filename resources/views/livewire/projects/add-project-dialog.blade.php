@@ -1,7 +1,7 @@
 <div>
     <x-dialog wire:model="show">
         <x-dialog.open>
-            <button type="button" class="button--classic">Créer un nouveau projet</button>
+            <button type="button" class="button--blue">Créer un nouveau projet</button>
         </x-dialog.open>
 
         <x-dialog.panel>

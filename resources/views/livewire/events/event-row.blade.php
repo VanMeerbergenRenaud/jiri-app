@@ -49,15 +49,13 @@
 
                 <x-menu.items>
                     {{-- Dialog to edit a event --}}
-                    <x-dialog wire:model="showEditDialog" style="width: 100%">
+                    <x-dialog wire:model="showEditDialog">
                         <x-dialog.open>
                             <x-menu.close>
                                 <x-menu.item>
-                                    <div class="button">
-                                        <x-svg.edit/>
+                                    <x-svg.edit/>
 
-                                        Modifier
-                                    </div>
+                                    Modifier
                                 </x-menu.item>
                             </x-menu.close>
                         </x-dialog.open>
@@ -118,16 +116,16 @@
                         </x-dialog.panel>
                     </x-dialog>
 
+                    <x-divider/>
+
                     {{-- Dialog to suppress a event--}}
-                    <x-dialog class="w-full">
+                    <x-dialog>
                         <x-dialog.open>
                             <x-menu.close>
                                 <x-menu.item>
-                                    <div class="button">
-                                        <x-svg.trash/>
+                                    <x-svg.trash/>
 
-                                        Supprimer
-                                    </div>
+                                    Supprimer
                                 </x-menu.item>
                             </x-menu.close>
                         </x-dialog.open>

@@ -79,7 +79,7 @@
 
                             {{-- Button to edit a new contact --}}
                             <button type="button"
-                                    class="button--classic add-contact-button"
+                                    class="button--blue add-contact-button"
                                     x-show="!createmode"
                                     @click="createmode = true">
                                 Ajouter un contact
@@ -131,7 +131,7 @@
 
                             {{-- Button to edit a new contact --}}
                             <button type="button"
-                                    class="button--classic add-contact-button"
+                                    class="button--blue add-contact-button"
                                     x-show="!createmode"
                                     @click="createmode = true">
                                 Ajouter un projet
@@ -146,7 +146,7 @@
         </div>
         <div class="form__submit">
             <a href="{{ route('events.index') }}" class="button">Annuler</a>
-            <button class="button button--classic" type="submit">Sauvegarder</button>
+            <button class="button button--blue" type="submit">Sauvegarder</button>
         </div>
     </form>
 </div>

@@ -1,26 +1,43 @@
-/* Variables */
+/* --------------------------------
+            Variables
+ -------------------------------- */
 
-/*----------- colors -----------*/
+/*--------- Breakpoints --------- */
+/*
+     A) $bp-small -> 768px => mobile
+     B) $bp-medium -> 1024px => tablet
+     C) $bp-large -> 1366px => laptop
+     D) $bp-xlarge -> 1920px => desktop
+     E) $bp-xxlarge -> 2560px => monitor
+ */
+$bp-small: 48rem;
+$bp-medium: 64rem;
+$bp-large: 85.375rem;
+$bp-xlarge: 120rem;
+$bp-xxlarge: 160rem;
+
+/*----------- Colors -----------*/
 $blue: #6386E3;
-$blue-dark: #3F4353; // $text
+$blue-dark: #3F4353; // text
 $blue-save: #6C8DE4; // save button
+$red: #EF4444FF;
 
-/*------- gray variants -------*/
+/*------- Gray variants -------*/
 $gray-bg: #F7F7FA; // background
-$gray-100: rgb(241 245 249);; // input
+$gray-100: #F1F5F9FF; // input
 $gray-300: #F0F1F7; // footer
 $gray-500: #E5E9F4;
 $gray-700: #E7EAF6;
 $gray-900: #F0F1F7;
 
-/*----------- text -----------*/
+/*----------- Text -----------*/
 $text: #3F4353;
-$red: rgb(239 68 68);
-$text-slate-500: rgb(100 116 139);
+$text-slate-500: #64748BFF;
 
-/*---------- borders ----------*/
+/*---------- Borders ----------*/
 $border: 1px solid #E6EAF4;
 $border-focus: 1px solid #DDD;
+$transparent: 1px solid transparent;
 
-/*---------- shadows ----------*/
+/*---------- Shadows ----------*/
 $shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075)
