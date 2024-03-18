@@ -48,13 +48,17 @@ label.search {
 }
 
 .import {
-    padding: 0.5rem 1.5rem;
+    padding: 0.75rem 1.5rem;
     display: flex;
     align-items: center;
     border-radius: 0.5rem;
-    color: #666B7E;
-    background-color: white;
-    border: none;
+    color: $blue-dark;
+    background-color: transparent;
+    border: $border;
+
+    &:hover {
+        background-color: white;
+    }
 
     svg {
         margin-right: 0.5rem;
@@ -62,9 +66,8 @@ label.search {
     }
 
     span {
-        font-size: 0.8rem;
+        font-size: 0.875rem;
         font-weight: 600;
-        text-transform: uppercase;
         min-width: 200px;
     }
 }

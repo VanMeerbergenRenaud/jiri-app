@@ -1,20 +1,23 @@
 /* Basic styles */
 
 body {
-    display: flex;
-    flex-direction: column;
-    scroll-behavior: smooth;
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
     margin: 0 auto;
-    max-width: 2200px;
+    max-width: $bp-xxlarge;
     min-height: 100vh;
 
+    display: flex;
+    flex-direction: column;
+
     font-size: 16px;
+    font-weight: 400;
     line-height: 1.35;
+
     color: $text;
     background-color: $gray-bg;
 
-    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    scroll-behavior: smooth;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
 }
@@ -41,166 +44,32 @@ svg {
     height: auto;
 }
 
-a {
-    border-radius: 0.375rem;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    font-weight: 600;
-    text-decoration: none;
+.rotate-180 {
+    transform: rotate(180deg);
 }
 
-.link--blue {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    color: white;
-    background-color: $blue;
-    border-radius: 2rem;
-
-    &:hover {
-        scale: 1.025;
-    }
+.max-width {
+    margin: 0;
+    max-width: $bp-xxlarge;
 }
 
-button {
-    padding: 0.75rem 1rem;
-    display: inline-flex;
-    align-items: center;
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: white;
-    cursor: pointer;
-    border-radius: 0.5rem;
-    border: 1px solid transparent;
-    background-color: #42568b;
-    transition-duration: 150ms;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
-
-    &:hover {
-        background-color: #6386E3;
-    }
-}
-
-.button--classic {
-    border-radius: 0.75rem;
-    background-color: $gray-700;
-    padding: 0.75rem 1rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: $blue;
-}
-
-.button--gray {
-    padding: 0.85rem 1.25rem;
-    display: flex;
-    border-radius: 2rem;
-    background-color: $gray-300;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: $blue-dark;
-
-    svg {
-        margin-right: 0.5rem;
-    }
-}
-
-.flex-center {
+.f-c {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.error-message {
-    margin-top: 0.5rem;
-    display: inline-block;
-    font-size: 0.75rem;
-    text-transform: initial;
-    color: red;
+.divider {
+    height: 1px;
+    border: none;
+    background:  #e5e7eb;
 }
 
-.rotate-180 {
-    transform: rotate(180deg);
-}
-
-.modal {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0, 0, 0, 0.825);
-    z-index: 10;
-
-    &__dialog {
-        background: $gray-700;
-        border-radius: 1rem;
-        padding: 1.25rem 2rem;
-        max-width: 400px;
-        text-align: center;
-    }
-
-    &__title {
-        font-size: 1.25rem;
-        font-weight: 500;
-        margin-bottom: 1.5rem;
-    }
-
-    select {
-        width: 90%;
-        margin-bottom: 2.5rem;
-    }
-
-    &__buttons {
-        display: flex;
-        justify-content: space-around;
-
-        button {
-            padding: 0.5rem 1rem;
-            font-weight: 500;
-            color: white;
-        }
-
-        .cancel-button {
-            background: $blue-dark;
-        }
-
-        .confirm-button {
-            background: $blue;
-        }
-    }
-}
-
-table {
-    .empty {
-        padding: 1rem;
-        display: flex;
-        align-items: center;
-        width: 100%;
-
-        span {
-            margin-left: 0.65rem;
-            font-size: 0.95rem;
-        }
-    }
+.opacity-50 {
+    opacity: 0.5;
 }
 
 .pagination-links {
-    margin: 1rem 0 3rem;
-}
-
-footer {
-    padding: 1.75rem;
-    color: #666B7E;
-    background-color: $gray-300;
-    border-radius: 1.5rem 1.5rem 0 0;
-
-    p {
-        text-align: center;
-        font-size: 0.875rem;
-    }
+    margin: 1rem auto 3rem;
+    width: 95%;
 }

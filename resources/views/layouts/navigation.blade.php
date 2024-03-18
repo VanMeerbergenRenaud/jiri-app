@@ -2,116 +2,134 @@
     <h2 aria-level="2" role="heading" class="sr-only">
         Menu de navigation principal
     </h2>
-    <!-- Primary Navigation Menu -->
+
+    <!-- Principal navigation menu -->
     <div class="nav__container">
-        <div class="nav__container__desktop">
-            <!-- Logo -->
-            <x-breeze.nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
+        <div class="nav__container__left">
+            <!-- Logo mobile & desktop-->
+            <a href="{{  route('dashboard') }}" class="logo" wire:navigate title="Vers la page d'accueil">
                 <x-logo />
                 <span>Jiri.app</span>
-            </x-breeze.nav-link>
+            </a>
 
-            <!-- Navigation Links -->
-            <div class="nav__container__desktop__links">
-                <x-breeze.nav-link :href="route('events.index')" :active="request()->routeIs('events.index')" wire:navigate>
-                    {{ __('Épreuves') }}
-                </x-breeze.nav-link>
-                <x-breeze.nav-link :href="route('contacts.index')" :active="request()->routeIs('contacts.index')" wire:navigate>
-                    {{ __('Contacts') }}
-                </x-breeze.nav-link>
-                <x-breeze.nav-link :href="route('projects.index')" :active="request()->routeIs('projects.index')" wire:navigate>
-                    {{ __('Projets') }}
-                </x-breeze.nav-link>
+            <!-- Desktop navigation links -->
+            <ul role="menu" class="navigation-links" tabindex="0">
+                <li class="navigation-links__item">
+                    <a href="{{ route('events.index') }}" class="navigation-links__item__link" title="Vers la page des épreuves" wire:navigate>
+                        Épreuves
+                    </a>
+                </li>
+                <li class="navigation-links__item">
+                    <a href="{{ route('contacts.index') }}" class="navigation-links__item__link" title="Vers la page des contacts" wire:navigate>
+                        Contacts
+                    </a>
+                </li>
+                <li class="navigation-links__item">
+                    <a href="{{ route('projects.index') }}" class="navigation-links__item__link" title="Vers la page des projets" wire:navigate>
+                        Projets
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Desktop settings dropdown -->
+        <div x-data="{ dropdownOpen: false }" class="settings-dropdown">
+
+            <!-- Dropdown button -->
+            <button @click="dropdownOpen = !dropdownOpen" class="settings-dropdown__button">
+                @if(Auth::check())
+                <span>{{ Auth::user()->name }}</span>
+                @endif
+
+                <x-svg.arrow-down/>
+            </button>
+
+            <!-- Dropdown content -->
+            <div x-show="dropdownOpen" class="settings-dropdown__content">
+                <a href="{{ route('profile.edit') }}" wire:navigate title="Vers la page d'édition du profil">
+                    Profile
+                </a>
+
+                <x-divider />
+
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+
+                    <a href="{{ route('logout') }}" onclick="event.preventDefault();this.closest('form').submit();" title="Retour à la page de présentation de l'application">
+                        Se déconnecter
+                    </a>
+                </form>
             </div>
         </div>
 
-        <!-- Settings Dropdown -->
-        <div class="nav__container__desktop__dropdown">
-            <x-breeze.dropdown align="right" width="48">
-                <x-slot name="trigger">
-                    <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                        @if(Auth::check())
-                            <div>{{ Auth::user()->name }}</div>
-                        @endif
-
-                        <div class="ml-1">
-                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                            </svg>
-                        </div>
-                    </button>
-                </x-slot>
-
-                <x-slot name="content">
-                    <x-breeze.dropdown-link :href="route('profile.edit')" wire:navigate>
-                        {{ __('Profile') }}
-                    </x-breeze.dropdown-link>
-
-                    <!-- Authentication -->
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-
-                        <x-breeze.dropdown-link :href="route('logout')"
-                                onclick="event.preventDefault();
-                                            this.closest('form').submit();">
-                            {{ __('Se déconnecter') }}
-                        </x-breeze.dropdown-link>
-                    </form>
-                </x-slot>
-            </x-breeze.dropdown>
-        </div>
-
-        <!-- Hamburger -->
-        <div class="-mr-2 flex items-center sm:hidden">
-            <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
-                <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                    <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                    <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
+        <!-- Mobile hamburger -->
+        <div class="hamburger">
+            <button @click="open = !open" type="button" class="hamburger__button">
+                Menu
             </button>
         </div>
     </div>
 
-    <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden bg-white rounded-lg mb-4">
-        <div class="pt-2 pb-3 space-y-1">
-            <x-breeze.responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
-                {{ __('Accueil') }}
-            </x-breeze.responsive-nav-link>
-            <x-breeze.responsive-nav-link :href="route('events.index')" :active="request()->routeIs('events.index')" wire:navigate>
-                {{ __('Épreuves') }}
-            </x-breeze.responsive-nav-link>
-            <x-breeze.responsive-nav-link :href="route('contacts.index')" :active="request()->routeIs('contacts.index')" wire:navigate>
-                {{ __('Contacts') }}
-            </x-breeze.responsive-nav-link>
-            <x-breeze.responsive-nav-link :href="route('projects.index')" :active="request()->routeIs('projects.index')" wire:navigate>
-                {{ __('Projets') }}
-            </x-breeze.responsive-nav-link>
-        </div>
+    <!-- Mobile navigation menu -->
+    <div
+        class="hidden nav__mobile"
+        :class="{'block': open, 'hidden': !open}"
+        x-transition:enter="ease-out duration-200"
+    >
 
-        <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-t border-gray-200">
-            @if(Auth::check())
-                <div class="px-4">
-                    <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                    <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
-                </div>
-            @endif
+        @if(Auth::check())
+            <p class="nav__mobile__user-infos">
+                <span>{{ Auth::user()->name }}</span>
+                <span>{{ Auth::user()->email }}</span>
+            </p>
+        @endif
 
-            <div class="mt-3 space-y-1">
-                <x-breeze.responsive-nav-link :href="route('profile.edit')" wire:navigate>
-                    {{ __('Profile') }}
-                </x-breeze.responsive-nav-link>
+        <x-divider/>
 
-                <!-- Authentication -->
+        <ul role="menu" class="nav__mobile__menu" tabindex="0">
+            <li class="nav__mobile__menu__item">
+                <a href="{{ route('profile.edit') }}" class="nav__mobile__menu__item__link"
+                   title="Vers la page de profil" wire:navigate>
+                    Profil
+                </a>
+            </li>
+            <li class="nav__mobile__menu__item">
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
-                    <x-breeze.responsive-nav-link :href="route('logout')" onclick="event.preventDefault();this.closest('form').submit();">
-                        {{ __('Se déconnecter') }}
-                    </x-breeze.responsive-nav-link>
+                    <a href="{{ route('logout') }}" class="nav__mobile__menu__item__link" title="Se déconnecter"
+                       onclick="event.preventDefault();this.closest('form').submit();">
+                        Se déconnecter
+                    </a>
                 </form>
-            </div>
-        </div>
+            </li>
+
+            <x-divider/>
+
+            <li class="nav__mobile__menu__item">
+                <a href="{{ route('dashboard') }}" class="nav__mobile__menu__item__link"
+                   title="Vers le tableau de bord">
+                    Dashboard
+                </a>
+            </li>
+            <li class="nav__mobile__menu__item">
+                <a href="{{ route('events.index') }}" class="nav__mobile__menu__item__link"
+                   title="Vers la page des épreuves" wire:navigate>
+                    Épreuves
+                </a>
+            </li>
+            <li class="nav__mobile__menu__item">
+                <a href="{{ route('contacts.index') }}" class="nav__mobile__menu__item__link"
+                   title="Vers la page des contacts" wire:navigate>
+                    Contacts
+                </a>
+            </li>
+            <li class="nav__mobile__menu__item">
+                <a href="{{ route('projects.index') }}" class="nav__mobile__menu__item__link"
+                   title="Vers la page des projets" wire:navigate>
+                    Projets
+                </a>
+            </li>
+        </ul>
     </div>
 </nav>

@@ -1,3 +1,3 @@
-<button type="button" x-menu:item class="w-full">
+<button type="button" x-menu:item>
     {{ $slot }}
 </button>

@@ -15,7 +15,6 @@
         display: grid;
         margin-top: 1.25rem;
         width: 100%;
-        max-width: 2000px;
         border: $border;
         border-radius: 1rem;
         overflow-x: scroll;
@@ -43,9 +42,11 @@
             th {
                 padding-left: 1.5rem;
                 padding-right: 2rem;
+                font-weight: 600;
 
                 svg {
-                    display: none;
+                    position: relative;
+                    fill: transparent;
                     transition: opacity 0.2s ease-in-out;
                 }
             }
@@ -55,6 +56,9 @@
 
                 svg {
                     display: inline-flex;
+                    fill: $blue-dark;
+                    top: 0.15rem;
+                    left: 0.25rem;
                 }
             }
         }
@@ -74,19 +78,23 @@
             }
 
             td.name {
-                display: flex;
-                align-items: center;
-                font-weight: 500;
-                color: $blue-dark;
 
-                img {
-                    margin-right: 1.5rem;
-                    height: 2.5rem;
-                    width: 100%;
-                    max-width: 2.5rem;
-                    border-radius: 50%;
-                    border: 1px solid #eee;
-                    overflow: hidden;
+                a {
+                    display: flex;
+                    align-items: center;
+                    font-size: inherit;
+                    font-weight: 500;
+                    color: $blue-dark;
+
+                    img {
+                        margin-right: 1.5rem;
+                        height: 2.5rem;
+                        width: 100%;
+                        max-width: 2.5rem;
+                        border-radius: 50%;
+                        border: 1px solid #eee;
+                        overflow: hidden;
+                    }
                 }
             }
 

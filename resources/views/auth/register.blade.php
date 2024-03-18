@@ -1,6 +1,6 @@
 <x-guest-layout>
     <h1 class="title">
-        Veuillez vous enregistrer et créer votre nouveau compte ci-dessous&nbsp;👇🏻.
+        {{ __("Veuillez vous enregistrer et créer votre nouveau compte ci-dessous 👇🏻.") }}
     </h1>
     <form method="POST" action="{{ route('register') }}" class="form">
         @csrf

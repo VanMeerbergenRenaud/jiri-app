@@ -18,11 +18,9 @@
                     <x-dialog.open>
                         <x-menu.close>
                             <x-menu.item>
-                                <div class="button">
-                                    <x-svg.edit/>
+                                <x-svg.edit/>
 
-                                    Modifier
-                                </div>
+                                Modifier
                             </x-menu.item>
                         </x-menu.close>
                     </x-dialog.open>
@@ -50,13 +48,7 @@
                                 <label>
                                     Liste des tâches déjà existantes
                                     <div x-data="{ selectedTask: [] }"
-                                         x-init="() => {
-                                const selectElement = document.getElementById('tasks2');
-                                const choices = new Choices(selectElement);
-                                choices.passedElement.element.addEventListener('change', function(event) {
-                                    selectedTask = Array.from(event.detail.value);
-                                });
-                            }">
+                                         x-init="">
                                         <select id="tasks2"
                                                 multiple
                                                 x-ref="selectElement"
@@ -100,16 +92,16 @@
                     </x-dialog.panel>
                 </x-dialog>
 
+                <x-divider />
+
                 {{-- Dialog to suppress a project--}}
-                <x-dialog class="border-y w-full">
+                <x-dialog>
                     <x-dialog.open>
                         <x-menu.close>
                             <x-menu.item>
-                                <div class="button">
-                                    <x-svg.trash/>
+                                <x-svg.trash/>
 
-                                    Supprimer
-                                </div>
+                                Supprimer
                             </x-menu.item>
                         </x-menu.close>
                     </x-dialog.open>

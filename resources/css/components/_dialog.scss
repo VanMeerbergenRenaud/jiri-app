@@ -1,4 +1,23 @@
-/* Dialog / Modal*/
+/* Dialog : Modal */
+
+.modal {
+    overflow-y: auto;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+
+    &__overlay {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.25);
+    }
+}
 
 .panel {
     position: relative;
@@ -26,10 +45,14 @@
         padding: 1.5rem 1.5rem 0 0;
 
         button {
-            padding: 0.5rem;
+            padding: 0.75rem 0.8rem;
             color: $blue-dark;
             background-color: $gray-700;
             border-radius: 50%;
+
+            &:hover {
+                background-color: #ebebf1;
+            }
         }
     }
 
@@ -56,7 +79,7 @@
                     gap: 0.5rem;
 
                     input, textarea {
-                        padding: 0.5rem;
+                        padding: 0.75rem;
                         border-radius: 0.5rem;
                         border: $border;
 
@@ -126,7 +149,6 @@
                     padding: 0.5rem 1rem;
                     border: $border;
                     border-radius: 0.5rem;
-                    width: 100%;
                 }
             }
         }
@@ -147,13 +169,18 @@
             text-align: center;
             border-radius: 0.75rem;
             background-color: #5c6ac4;
+            text-transform: uppercase;
             color: #1f2937;
-            padding: 0.55rem 1.75rem;
+            padding: 0.75rem 1.75rem;
             font-weight: 600;
 
             &:disabled {
                 opacity: 0.5;
                 cursor: not-allowed;
+            }
+
+            &:hover {
+                filter: brightness(1.1);
             }
         }
 

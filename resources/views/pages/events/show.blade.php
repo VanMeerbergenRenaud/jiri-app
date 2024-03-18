@@ -1,12 +1,16 @@
 <x-app-layout>
+    @section('title')
+        <h1 role="heading" aria-level="1" class="sr-only">Évènement {{  $event->name }}</h1>
+    @endsection
+
     <header class="header">
-        <x-header
+        <x-banner
             :title="'Épreuve en cours'"
             :message="'Votre épreuve ' . $event->name . '  vient de commencer.'"
         />
     </header>
 
-    <main class="mainEventShow">
+    <main class="mainEventShow max-width p-main">
         {{-- First Table --}}
         <div class="event__show">
             <livewire:events.show.first-table />

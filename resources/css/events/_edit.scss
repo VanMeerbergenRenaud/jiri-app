@@ -285,6 +285,7 @@
                         display: flex;
                         flex-direction: column;
                         margin-bottom: 1.15rem;
+                        color: $text-slate-500;
 
                         .category {
                             display: block;
@@ -292,12 +293,15 @@
                             background-color: $gray-500;
                             border-radius: 0.5rem 0.5rem 0 0;
                             z-index: 2;
+                            text-transform: capitalize;
+                            font-weight: 500;
                         }
 
                         .username {
                             padding: 0.75rem 1.25rem;
                             background-color: white;
                             border-radius: 0 0 0.5rem 0.5rem;
+                            color: $blue-dark;
 
                             .taskName:before {
                                 content: "|";
@@ -349,7 +353,7 @@
             background-color: white;
         }
 
-        .button--classic {
+        .button--blue {
             background-color: $gray-700;
         }
     }

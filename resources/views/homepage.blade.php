@@ -70,7 +70,7 @@
             <!-- Introduction -->
             <section class="homepage__main__intro">
                 <h2 role="heading" aria-level="2" class="homepage__main__intro__title">
-                    Gérer facilement votre jury académique
+                    Gérez facilement votre jury académique
                 </h2>
                 <p class="homepage__main__intro__text">
                     Simplifiez-vous la vie, gagner du temps sur la cotation des projets présentés par vos étudiants.
@@ -293,10 +293,10 @@
                     </div>
                     <div class="price">
                         <h3 class="price__title" role="heading" aria-level="3">
-                            Un essai gratuit à vie via email
+                            Un essai gratuit à vie
                         </h3>
                         <p class="price__text">
-                            <strong>€99</strong>
+                            <strong>€0.00</strong>
                             <span>euro</span>
                         </p>
                         <a href="{{ route('register') }}" class="link--blue price__link">Avoir accès</a>
@@ -341,9 +341,9 @@
             </section>
         </main>
 
-        <footer class="homepage__footer">
+        <x-footer class="homepage__footer">
             2024 Renaud Vmb. Tous droits réservés.
-        </footer>
+        </x-footer>
     </body>
 @endsection
 

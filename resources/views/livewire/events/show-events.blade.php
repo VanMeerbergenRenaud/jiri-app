@@ -4,7 +4,7 @@
         <input type="text" name="search" id="search" wire:model.live.debounce="search" placeholder="Rechercher une épreuve...">
     </label>
 
-    <div wire:loading.class.delay="opacity-50" class="mt-8">
+    <div wire:loading.class.delay="opacity-50" class="events__list">
         @unless($this->pastEvents && $this->currentEvents && $this->futureEvents)
             Liste des épreuves
             <div class="empty">
@@ -59,7 +59,7 @@
             @endif
             @if($this->pastEvents->isEmpty() && $this->currentEvents->isEmpty() && $this->futureEvents->isEmpty())
                 <div class="empty-event">
-                    <p class="sm:">Aucune épreuve ne correspond à votre recherche.</p>
+                    <p>Aucune épreuve ne correspond à votre recherche.</p>
                     <livewire:events.add-event-dialog @added="$refresh" />
                 </div>
             @endif

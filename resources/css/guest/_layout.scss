@@ -19,7 +19,6 @@
 
     .form {
         &__footer__3 {
-
             button {
                 margin-top: 1rem;
             }
@@ -76,6 +75,12 @@
 
             input {
                 width: 100%;
+            }
+
+            &__remember-me {
+                input {
+                    width: auto;
+                }
             }
 
             &__footer {

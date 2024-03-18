@@ -1,7 +1,7 @@
 <div>
     <x-dialog wire:model="show">
         <x-dialog.open>
-            <button type="button" class="button--classic">Créer une nouvelle épreuve</button>
+            <button type="button" class="button--blue">Créer une nouvelle épreuve</button>
         </x-dialog.open>
 
         <x-dialog.panel>

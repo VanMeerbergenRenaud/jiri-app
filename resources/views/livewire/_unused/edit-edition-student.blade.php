@@ -184,7 +184,7 @@
         </template>
 
         <div class="flex justify-end">
-            <button type="button" class="button--classic mt-4 inline-flex items-center gap-2" @click="showModal = true">
+            <button type="button" class="button--blue mt-4 inline-flex items-center gap-2" @click="showModal = true">
                 Ajouter un étudiant
                 @include('components.svg.add')
             </button>

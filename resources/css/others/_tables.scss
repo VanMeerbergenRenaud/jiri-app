@@ -1,4 +1,5 @@
 /* Table Layout */
+
 table {
     scrollbar-width: none;
     display: block;
@@ -50,6 +51,18 @@ table {
 
     th:last-child, td:last-child {
         border-right: none;
+    }
+
+    .empty {
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        width: 100%;
+
+        span {
+            margin-left: 0.65rem;
+            font-size: 0.95rem;
+        }
     }
 
     .category {

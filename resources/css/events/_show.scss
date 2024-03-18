@@ -1,7 +1,7 @@
 /* Show an event */
 .mainEventShow {
 
-    @import "../tables";
+    @import "../others/tables";
 
     /* First Table */
     .event__show {
@@ -106,6 +106,12 @@
             th:last-child {
                 border-right: 1px solid $gray-500;
             }
+        }
+
+        .second-table--footer {
+            margin: 2rem 0;
+            display: flex;
+            justify-content: flex-end;
         }
 
         .row-1, .row-2 {

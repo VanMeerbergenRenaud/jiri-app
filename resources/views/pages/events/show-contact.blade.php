@@ -1,5 +1,9 @@
 <x-app-layout>
-    <main class="mainProfil">
+    @section('title')
+        <h1 role="heading" aria-level="1" class="sr-only">Profil d'un contact</h1>
+    @endsection
+
+    <main class="mainProfil max-width">
         <div class="mainProfil__intro">
             <h2>Profil du contact
             </h2>

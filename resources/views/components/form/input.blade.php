@@ -1,10 +1,10 @@
-{{-- Component to controls inputs --}}
+<!-- Component to controls inputs -->
 <div>
-    {{-- Label --}}
+    <!-- Label -->
     <label for="{{ $name }}">{{ $label }}</label>
-    {{-- Input --}}
+    <!-- Input -->
     <input type="{{ $type }}" wire:model="{{ $model }}" id="{{ $name }}" name="{{ $name }}" placeholder="{{ $placeholder }}" value="{{ $value ??  '' }}">
-    {{-- Error --}}
+    <!-- Error -->
     <div>
         @error($model)
             <p class="error-message">{{ $message }}</p>

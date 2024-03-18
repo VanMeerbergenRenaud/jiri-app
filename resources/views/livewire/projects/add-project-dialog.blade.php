@@ -1,7 +1,7 @@
 <div>
     <x-dialog wire:model="show">
         <x-dialog.open>
-            <button type="button" class="button--classic">Créer un nouveau projet</button>
+            <button type="button" class="button--blue">Créer un nouveau projet</button>
         </x-dialog.open>
 
         <x-dialog.panel>
@@ -29,13 +29,7 @@
                         <label>
                             Liste des tâches déjà existantes
                             <div x-data="{ selectedTask: [] }"
-                                 x-init="() => {
-                                const selectElement = document.getElementById('tasks');
-                                const choices = new Choices(selectElement);
-                                choices.passedElement.element.addEventListener('change', function(event) {
-                                    selectedTask = Array.from(event.detail.value);
-                                });
-                            }">
+                                 x-init="">
                                 <select id="tasks"
                                         multiple
                                         x-ref="selectElement"

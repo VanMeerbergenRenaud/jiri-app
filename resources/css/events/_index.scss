@@ -1,5 +1,11 @@
 /* List of events */
+
 .events {
+
+    &__list {
+        margin-top: 1.5rem;
+    }
+
     .list {
         font-weight: 500;
         margin-bottom: 1.5rem;
@@ -7,15 +13,12 @@
         .item {
             margin-top: 1.5rem;
             padding: 2rem 3rem;
-            border: $border;
-            border-radius: 1.5rem;
-            background-color: #D9EBED;
-
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
-
-            max-width: 1600px;
+            border: $border;
+            border-radius: 1.5rem;
+            background-color: #D9EBED;
 
             &__name {
                 grid-column: 1/4;
@@ -36,7 +39,7 @@
             }
 
             a {
-                font-weight: 400;
+                font-weight: 500;
                 text-align: center;
             }
 
@@ -136,8 +139,7 @@
     }
 }
 
-
-// For 1440px screen
+// For 850px screen
 @media (min-width: 850px) {
     .events {
         .list {
@@ -145,7 +147,6 @@
                 display: flex;
                 justify-content: space-between;
                 gap: 0;
-                max-width: 1800px;
 
                 &__name {
                     margin: 0;
@@ -200,6 +201,7 @@
 // For max 950px screen
 @media (max-width: 950px) {
     .mainEvents {
+
         .events .list {
             width: 100%;
 
@@ -210,7 +212,6 @@
                 flex-direction: row;
                 flex-wrap: wrap;
                 gap: 1rem 2.5rem;
-                width: 100%;
 
                 &__name {
                     margin-bottom: 0.5rem;
@@ -256,6 +257,8 @@
 // For min 950px screen
 @media (min-width: 950px) {
     .mainEvents {
+        padding: 0 1.5rem;
+
         .events .list {
             .item {
                 display: grid;
@@ -313,7 +316,7 @@
                     overflow: auto;
                 }
 
-                div {
+                &__name, &__date, &__time, &__members {
                     min-width: 180px;
                 }
 

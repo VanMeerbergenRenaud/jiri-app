@@ -1,0 +1,68 @@
+/* Styles of different buttons */
+
+button {
+    margin: 0;
+    padding: 0.75rem 1rem;
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: white;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    border: 1px solid transparent;
+    background-color: #42568b;
+    transition-duration: 150ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+
+    &:hover {
+        border: $border;
+    }
+}
+
+.button--white {
+    font-size: 0.875rem;
+    color: $blue-dark;
+    background-color: white;
+    border-radius: 0.75rem;
+
+    &:hover {
+        background-color: #f3f4f6;
+    }
+}
+
+.button--blue {
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+    color: $blue;
+    background-color: $gray-700;
+
+    &:hover {
+        background-color: $gray-700;
+    }
+}
+
+.button--gray {
+    padding: 0.85rem 1.25rem;
+    display: flex;
+    font-size: 0.875rem;
+    color: $blue-dark;
+    background-color: $gray-300;
+
+    svg {
+        margin-right: 0.5rem;
+    }
+}
+
+.button--danger {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    color: #F3F4F6;
+    background-color: #d53e3e;
+
+    &:hover {
+        background-color: #DC2626;
+    }
+}
