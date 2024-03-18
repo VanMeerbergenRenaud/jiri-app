@@ -1,5 +1,5 @@
 <!-- Component to controls form fields -->
-@props(['label', 'name', 'type', 'placeholder', 'attributes' => [], 'messages'])
+@props(['label', 'name', 'placeholder', 'attributes' => [], 'messages'])
 
 <div class="form__field" x-data="{ show: false }">
 
@@ -10,7 +10,7 @@
    <input
         id="{{ $name }}"
         name="{{ $name }}"
-        type="{{ $type }}"
+        type="password"
         placeholder="{{ $placeholder }}"
         required
         autocomplete="current-password"

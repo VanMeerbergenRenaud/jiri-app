@@ -1,5 +1,5 @@
 <!-- Component to controls form fields -->
-@props(['label', 'name', 'type', 'placeholder', 'model' => '', 'attributes' => [], 'messages'])
+@props(['label', 'name', 'type', 'placeholder', 'model' => '', 'attributes' => [], 'messages', 'value' => ''])
 
 <div class="form__field">
     <label for="{{ $name }}">
@@ -11,7 +11,7 @@
         name="{{ $name }}"
         type="{{ $type }}"
         placeholder="{{ $placeholder }}"
-        value="{{ old($name) ?? '' }}"
+        value="{{ old($name) ?? $value}}"
         wire:model="{{ $model }}"
         {{ $attributes }}
     >

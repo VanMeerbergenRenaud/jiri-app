@@ -50,12 +50,17 @@ class ContactForm extends Form
     {
         $this->validate();
 
-        $this->contact->update([
+        $updateData = [
             'name' => $this->name,
             'firstname' => $this->firstname,
             'email' => $this->email,
-            'avatar' => $this->storeFile($this->avatar) ?? $this->contact->avatar,
-        ]);
+        ];
+
+        if ($this->avatar instanceof UploadedFile) {
+            $updateData['avatar'] = $this->storeFile($this->avatar) ?? $this->contact->avatar;
+        }
+
+        $this->contact->update($updateData);
     }
 
     protected function storeFile(UploadedFile $file = null)

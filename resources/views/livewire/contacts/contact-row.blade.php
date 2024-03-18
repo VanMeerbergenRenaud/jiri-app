@@ -1,5 +1,5 @@
 <tr>
-    <td class="name capitalize">
+    <td class="name">
         <a href="{{ route('contacts.show', $contact) }}">
             @if($contact->avatar)
                 <img src="{{ asset($contact->avatar) . '?' . $contact->updated_at->format("U") }}" alt="photo de profil du contact">
@@ -9,8 +9,8 @@
             {{ $contact->name }}
         </a>
     </td>
-    <td class="capitalize">{{ $contact->firstname }}</td>
-    <td class="lowercase">{{ $contact->email }}</td>
+    <td class="firstname">{{ $contact->firstname }}</td>
+    <td class="email">{{ $contact->email }}</td>
     <td class="actions">
         <x-menu>
             <x-menu.button>

@@ -12,7 +12,7 @@
             type="email"
             value="{{  old('email', $request->email) }}"
             placeholder="john.doe@gmail.com"
-            autocomplete="email"
+            autocomplete="username"
             required
             :messages="$errors->get('email')"
             autofocus
@@ -22,7 +22,6 @@
         <x-form.field-password
             label="Mot de passe"
             name="password"
-            type="password"
             placeholder="Min. 8 caractères"
             autocomplete="new-password"
             required
@@ -33,7 +32,6 @@
         <x-form.field-password
             label="Confirmation du mot de passe"
             name="password_confirmation"
-            type="password"
             placeholder="Confirmer votre mot de passe"
             autocomplete="new-password"
             required

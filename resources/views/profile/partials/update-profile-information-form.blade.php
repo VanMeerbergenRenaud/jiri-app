@@ -16,45 +16,56 @@
         @csrf
         @method('patch')
 
-        <div class="form__field">
-            <x-breeze.input-label for="name" :value="__('Nom')"/>
-            <x-breeze.text-input id="name" name="name" type="text" :value="old('name', $user->name)" required autofocus autocomplete="name"/>
-            <x-breeze.input-error class="mt-2" :messages="$errors->get('name')"/>
-        </div>
+        <x-form.field
+            label="{{ __('Nom') }}"
+            name="name"
+            type="text"
+            placeholder="{{ $user->name }}"
+            value="{{ old('name', $user->name) }}"
+            autocomplete="name"
+            required
+            :messages="$errors->get('name')"
+            autofocus
+        />
 
-        <div class="form__field">
-            <x-breeze.input-label for="email" :value="__('Adresse mail')"/>
-            <x-breeze.text-input id="email" name="email" type="email" :value="old('email', $user->email)" required autocomplete="username"/>
-            <x-breeze.input-error class="mt-2" :messages="$errors->get('email')"/>
+        <x-form.field
+            label="{{ __('Adresse mail') }}"
+            name="email"
+            type="email"
+            placeholder="{{ $user->email }}"
+            value="{{ old('email', $user->email) }}"
+            autocomplete="username"
+            required
+            :messages="$errors->get('email')"
+        />
 
-            @if ($user instanceof MustVerifyEmail && ! $user->hasVerifiedEmail())
-                <div>
+        @if ($user instanceof MustVerifyEmail && ! $user->hasVerifiedEmail())
+            <div>
+                <p>
+                    {{ __("Votre adresse mail n'est pas vérifiée.") }}
+
+                    <button form="send-verification" type="submit" class="button--white">
+                        {{ __("Cliquer ici pour renvoyer le mail de vérification.") }}
+                    </button>
+                </p>
+
+                @if (session('status') === 'verification-link-sent')
                     <p>
-                        {{ __("Votre adresse mail n'est pas vérifiée.") }}
-
-                        <button form="send-verification" type="submit">
-                            {{ __("Cliquer ici pour renvoyer le mail de vérification.") }}
-                        </button>
+                        {{ __("Un nouveau lien de vérification a été envoyé à votre adresse mail.") }}
                     </p>
-
-                    @if (session('status') === 'verification-link-sent')
-                        <p>
-                            {{ __("Un nouveau lien de vérification a été envoyé à votre adresse mail.") }}
-                        </p>
-                    @endif
-                </div>
-            @endif
-        </div>
+                @endif
+            </div>
+        @endif
 
         <div class="form__footer">
             <button type="submit">{{ __("Sauvegarder") }}</button>
 
             @if (session('status') === 'profile-updated')
                 <p
-                    x-data="{ show: true }"
-                    x-show="show"
+                    x-data="{ display: true }"
+                    x-show="display"
                     x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
+                    x-init="setTimeout(() => display = false, 2000)"
                 >{{ __('Sauvegardé.') }}</p>
             @endif
         </div>

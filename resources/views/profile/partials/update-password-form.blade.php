@@ -4,30 +4,39 @@
     </h2>
 
     <p class="profile-admin__section__text">
-        {{ __('Assurez-vous que votre compte utilise un mot de passe long et aléatoire pour rester en sécurité.') }}
+        {{ __('Assurez-vous que votre compte utilise un mot de passe long (minimum 8 caractères) et aléatoire pour rester en sécurité.') }}
     </p>
 
-    <form method="post" action="{{ route('password.update') }}" class="form">
+    <form method="post" action="{{ route('password.update') }}" class="form profile-admin__section__form">
         @csrf
         @method('put')
 
-        <div class="form__field">
-            <x-breeze.input-label for="current_password" :value="__('Mot de passe actuel')" />
-            <x-breeze.text-input id="current_password" name="current_password" type="password" autocomplete="current-password" />
-            <x-breeze.input-error :messages="$errors->updatePassword->get('current_password')" />
-        </div>
+        <x-form.field-password
+            label="{{ __('Mot de passe actuel') }}"
+            name="current_password"
+            placeholder="{{ __('Inscrivez votre mot de passe actuel') }}"
+            autocomplete="current-password"
+            required
+            :messages="$errors->updatePassword->get('current_password')"
+        />
 
-        <div class="form__field">
-            <x-breeze.input-label for="password" :value="__('Nouveau mot de passe')" />
-            <x-breeze.text-input id="password" name="password" type="password" autocomplete="new-password" />
-            <x-breeze.input-error :messages="$errors->updatePassword->get('password')" />
-        </div>
+        <x-form.field-password
+            label="{{ __('Nouveau mot de passe') }}"
+            name="password"
+            placeholder="{{ __('Inscrivez votre nouveau mot de passe') }}"
+            autocomplete="new-password"
+            required
+            :messages="$errors->updatePassword->get('password')"
+        />
 
-        <div class="form__field">
-            <x-breeze.input-label for="password_confirmation" :value="__('Confirmer le mot de passe')" />
-            <x-breeze.text-input id="password_confirmation" name="password_confirmation" type="password" autocomplete="new-password" />
-            <x-breeze.input-error :messages="$errors->updatePassword->get('password_confirmation')" />
-        </div>
+        <x-form.field-password
+            label="{{ __('Confirmer le mot de passe') }}"
+            name="password_confirmation"
+            placeholder="{{ __('Confirmer votre nouveau mot de passe') }}"
+            autocomplete="new-password"
+            required
+            :messages="$errors->updatePassword->get('password_confirmation')"
+        />
 
         <div class="form__footer">
             <button>{{ __('Sauvegarder') }}</button>

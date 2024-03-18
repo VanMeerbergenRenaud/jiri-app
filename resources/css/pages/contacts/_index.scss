@@ -98,6 +98,15 @@
                 }
             }
 
+            td.firstname, td.email {
+                max-width: 100%;
+                overflow: scroll;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                scrollbar-width: none;
+                margin-right: 2rem;
+            }
+
             td.tasks {
                 display: flex;
                 align-items: center;

@@ -13,8 +13,15 @@
 
             svg {
                 position: absolute;
-                top: -2.2rem;
-                right: -0.5rem;
+                top: -2rem;
+                right: 0.25rem;
+            }
+
+            @media (min-width: $bp-small) {
+                svg {
+                    top: -2.25rem;
+                    right: -0.5rem;
+                }
             }
         }
     }

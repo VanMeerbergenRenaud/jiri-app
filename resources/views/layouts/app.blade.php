@@ -19,6 +19,10 @@
         @vite(['resources/css/app.scss', 'resources/js/app.js'])
     </head>
     <body>
+        <div wire:offline>
+            Vous êtes actuellement hors ligne veuillez vous reconnecter à un réseau pour continuer à utiliser l'application.
+        </div>
+
         @yield('title')
 
         @include('layouts.navigation')

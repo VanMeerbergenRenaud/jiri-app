@@ -11,7 +11,6 @@
         <x-form.field-password
             label="Mot de passe"
             name="password"
-            type="password"
             placeholder="Quel est votre mot de passe ?"
             autocomplete="current-password"
             required

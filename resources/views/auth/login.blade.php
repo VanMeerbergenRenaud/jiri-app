@@ -15,7 +15,7 @@
             name="email"
             type="email"
             placeholder="john.doe@gmail.com"
-            autocomplete="email"
+            autocomplete="username"
             required
             :messages="$errors->get('email')"
             autofocus
@@ -25,7 +25,6 @@
         <x-form.field-password
             label="Mot de passe"
             name="password"
-            type="password"
             placeholder="Min. 8 caractères"
             autocomplete="current-password"
             required

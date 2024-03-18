@@ -180,6 +180,11 @@
                     align-items: center;
                     text-transform: uppercase;
 
+                    &:hover {
+                        border: $transparent;
+                        filter: brightness(1.05);
+                    }
+
                     svg {
                         margin-left: 0.25rem;
                     }

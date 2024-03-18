@@ -17,7 +17,7 @@
             type="email"
             value="{{  old('email') }}"
             placeholder="john.doe@gmail.com"
-            autocomplete="email"
+            autocomplete="username"
             required
             :messages="$errors->get('email')"
             autofocus
