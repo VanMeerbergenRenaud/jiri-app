@@ -1,6 +1,6 @@
 <x-guest-layout>
     <!-- Session Status -->
-    <x-breeze.auth-session-status :status="session('status')" />
+    <x-auth.session-status :status="session('status')" />
 
     <form method="POST" action="{{ route('password.email') }}" class="form">
         @csrf
@@ -11,11 +11,17 @@
         </p>
 
         <!-- Email Address -->
-        <div>
-            <x-breeze.input-label for="email" :value="__('Email')" />
-            <x-breeze.text-input id="email" type="email" name="email" :value="old('email')" required autofocus />
-            <x-breeze.input-error :messages="$errors->get('email')" />
-        </div>
+        <x-form.field
+            label="Adresse mail"
+            name="email"
+            type="email"
+            value="{{  old('email') }}"
+            placeholder="john.doe@gmail.com"
+            autocomplete="email"
+            required
+            :messages="$errors->get('email')"
+            autofocus
+        />
 
         <div class="form__footer">
             <button type="submit">

@@ -4,15 +4,20 @@
 
         <!-- Warning -->
         <p class="form__text">
-            {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
+            {{ __("Il s'agit d'une zone sécurisée de l'application. Veuillez confirmer votre mot de passe avant de continuer.") }}
         </p>
 
         <!-- Password -->
-        <div>
-            <x-breeze.input-label for="password" :value="__('Password')" />
-            <x-breeze.text-input id="password" type="password" name="password" required autocomplete="current-password" autofocus />
-            <x-breeze.input-error :messages="$errors->get('password')" />
-        </div>
+        <x-form.field-password
+            label="Mot de passe"
+            name="password"
+            type="password"
+            placeholder="Quel est votre mot de passe ?"
+            autocomplete="current-password"
+            required
+            :messages="$errors->get('password')"
+            autofocus
+        />
 
         <div class="form__footer">
             <button type="submit">

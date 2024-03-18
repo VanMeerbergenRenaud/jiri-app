@@ -6,32 +6,49 @@
         @csrf
 
         <!-- Name -->
-        <div class="form__field">
-            <x-breeze.input-label for="name" :value="__('Nom')" />
-            <x-breeze.text-input id="name" type="text" name="name" :value="old('name')" required autocomplete="name" autofocus />
-            <x-breeze.input-error :messages="$errors->get('name')" />
-        </div>
+        <x-form.field
+            label="Nom"
+            name="name"
+            type="text"
+            placeholder="John Doe"
+            autocomplete="name"
+            required
+            :messages="$errors->get('name')"
+            autofocus
+        />
 
         <!-- Email address -->
-        <div class="form__field">
-            <x-breeze.input-label for="email" :value="__('Adresse mail')" />
-            <x-breeze.text-input id="email" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-breeze.input-error :messages="$errors->get('email')" />
-        </div>
+        <x-form.field
+            label="Adresse mail"
+            name="email"
+            type="email"
+            placeholder="john.doe@gmail.com"
+            autocomplete="email"
+            required
+            :messages="$errors->get('email')"
+        />
 
         <!-- Password -->
-        <div class="form__field">
-            <x-breeze.input-label for="password" :value="__('Mot de passe')" />
-            <x-breeze.text-input id="password" type="password" name="password" required autocomplete="new-password"/>
-            <x-breeze.input-error :messages="$errors->get('password')" />
-        </div>
+        <x-form.field-password
+            label="Mot de passe"
+            name="password"
+            type="password"
+            placeholder="Min. 8 caractères"
+            autocomplete="new-password"
+            required
+            :messages="$errors->get('password')"
+        />
 
         <!-- Confirm password -->
-        <div class="form__field">
-            <x-breeze.input-label for="password_confirmation" :value="__('Confirmation du mot de passe')" />
-            <x-breeze.text-input id="password_confirmation" type="password" name="password_confirmation" required autocomplete="new-password" />
-            <x-breeze.input-error :messages="$errors->get('password_confirmation')" />
-        </div>
+        <x-form.field-password
+            label="Confirmation du mot de passe"
+            name="password_confirmation"
+            type="password"
+            placeholder="Confirmer votre mot de passe"
+            autocomplete="new-password"
+            required
+            :messages="$errors->get('password')"
+        />
 
         <div class="form__footer">
             <a href="{{ route('login') }}">

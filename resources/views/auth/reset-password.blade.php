@@ -5,26 +5,40 @@
         <!-- Password Reset Token -->
         <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
-        <!-- Email Address -->
-        <div class="form__field">
-            <x-breeze.input-label for="email" :value="__('Adresse mail')" />
-            <x-breeze.text-input id="email" type="email" name="email" :value="old('email', $request->email)" required autocomplete="username" autofocus />
-            <x-breeze.input-error :messages="$errors->get('email')" />
-        </div>
+        <!-- Email address -->
+        <x-form.field
+            label="Adresse mail"
+            name="email"
+            type="email"
+            value="{{  old('email', $request->email) }}"
+            placeholder="john.doe@gmail.com"
+            autocomplete="email"
+            required
+            :messages="$errors->get('email')"
+            autofocus
+        />
 
         <!-- Password -->
-        <div class="form__field">
-            <x-breeze.input-label for="password" :value="__('Mot de passe')" />
-            <x-breeze.text-input id="password" type="password" name="password" required autocomplete="new-password" />
-            <x-breeze.input-error :messages="$errors->get('password')" />
-        </div>
+        <x-form.field-password
+            label="Mot de passe"
+            name="password"
+            type="password"
+            placeholder="Min. 8 caractères"
+            autocomplete="new-password"
+            required
+            :messages="$errors->get('password')"
+        />
 
-        <!-- Confirm Password -->
-        <div class="form__field">
-            <x-breeze.input-label for="password_confirmation" :value="__('Confirmation du mot de passe')" />
-            <x-breeze.text-input id="password_confirmation" type="password" name="password_confirmation" required autocomplete="new-password" />
-            <x-breeze.input-error :messages="$errors->get('password_confirmation')" />
-        </div>
+        <!-- Confirm password -->
+        <x-form.field-password
+            label="Confirmation du mot de passe"
+            name="password_confirmation"
+            type="password"
+            placeholder="Confirmer votre mot de passe"
+            autocomplete="new-password"
+            required
+            :messages="$errors->get('password')"
+        />
 
         <div class="form__footer">
             <button type="submit">

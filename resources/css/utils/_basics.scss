@@ -44,6 +44,14 @@ svg {
     height: auto;
 }
 
+.hidden {
+    display: none;
+}
+
+.block {
+    display: block;
+}
+
 .rotate-180 {
     transform: rotate(180deg);
 }

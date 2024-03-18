@@ -7,6 +7,16 @@
 
     &__field {
         margin-top: 1rem;
+
+        &__password {
+            position: relative;
+
+            svg {
+                position: absolute;
+                top: -2.2rem;
+                right: -0.5rem;
+            }
+        }
     }
 
     &__text {
