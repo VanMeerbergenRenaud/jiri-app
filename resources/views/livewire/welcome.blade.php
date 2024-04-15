@@ -1,7 +1,6 @@
-@extends('layouts.home')
-
-@section('content')
-    <body class="welcome">
+<div>
+    @section('content')
+        <body class="welcome">
         <main class="welcome__main">
             <div class="welcome__container">
                 <div class="welcome__container__intro">
@@ -18,5 +17,6 @@
             </div>
         </main>
         <x-footer class="welcome__footer" />
-    </body>
-@endsection
+        </body>
+    @endsection
+</div>

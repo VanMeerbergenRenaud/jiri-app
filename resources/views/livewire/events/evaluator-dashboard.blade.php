@@ -1,4 +1,4 @@
-<x-evaluator-layout>
+<div>
     @section('title')
         <h1 role="heading" aria-level="1" class="sr-only">Profil d'un évaluateur</h1>
     @endsection
@@ -10,7 +10,7 @@
         />
     </div>
 
-    <main class="mainEvaluator max-width">
+    <main class="mainEvaluator">
         <livewire:evaluator.dashboard />
     </main>
 
@@ -19,4 +19,4 @@
         <p class="copyright">Copyright - Tous droits réservés</p>
         <p>{{ 'Épreuve - ' . $event->name ?? 'Épreuve du jour' }}</p>
     </footer>
-</x-evaluator-layout>
+</div>

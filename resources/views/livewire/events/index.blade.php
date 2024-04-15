@@ -1,4 +1,4 @@
-<x-app-layout>
+<div>
     @section('title')
         <h1 role="heading" aria-level="1" class="sr-only">Évènements de l'administrateur</h1>
     @endsection
@@ -16,4 +16,4 @@
             <livewire:events.show-events />
         </div>
     </main>
-</x-app-layout>
+</div>

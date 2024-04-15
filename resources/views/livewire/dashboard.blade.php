@@ -1,4 +1,4 @@
-<x-app-layout>
+<div>
     @section('title')
         <h1 role="heading" aria-level="1" class="sr-only">Dashboard de l'administrateur</h1>
     @endsection
@@ -19,4 +19,4 @@
             </p>
         </div>
     </main>
-</x-app-layout>
+</div>

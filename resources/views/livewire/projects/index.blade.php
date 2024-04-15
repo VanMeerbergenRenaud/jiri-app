@@ -1,4 +1,4 @@
-<x-app-layout>
+<div>
     @section('title')
         <h1 role="heading" aria-level="1" class="sr-only">Projets de l'administrateur</h1>
     @endsection
@@ -14,4 +14,4 @@
     <main class="mainContacts max-width p-main">
         <livewire:projects.show-projects />
     </main>
-</x-app-layout>
+</div>

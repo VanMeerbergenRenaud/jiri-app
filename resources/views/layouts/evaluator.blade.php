@@ -14,7 +14,7 @@
         @vite(['resources/css/app.scss', 'resources/js/app.js'])
     </head>
     <body>
-        <header class="flex items-center justify-between gap-2 p-4 m-auto w-full" style="max-width: 1650px; border-bottom: 1px solid #E5E9F4;">
+        <header class="evaluator__header" style="max-width: 1650px; border-bottom: 1px solid #E5E9F4;">
             <!-- Logo -->
             <a href="/" class="logo__link">
                 <x-logo />
@@ -22,10 +22,10 @@
             </a>
 
             <!-- Name of the event -->
-            <h1 class="font-semibold mr-8">{{ $title ?? 'Jury juin 2023' }}</h1>
+            <h1 class="evaluator__header__title">{{ $title ?? 'Jury juin 2023' }}</h1>
 
             <!-- Avatar of the evaluator -->
-            <img src="{{ asset('img/placeholder.png') }}" alt="" class="rounded-full h-8 w-8">
+            <img src="{{ asset('img/placeholder.png') }}" alt="" class="evaluator__header__img">
         </header>
 
         <!-- Page Content -->

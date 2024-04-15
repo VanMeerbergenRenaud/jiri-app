@@ -1,4 +1,4 @@
-<x-app-layout>
+<div>
     @section('title')
         <h1 role="heading" aria-level="1" class="sr-only">Information du contact {{ $contact->name }}</h1>
     @endsection
@@ -54,14 +54,14 @@
 
                         <p>
                             <span>Profil et résultats&nbsp;:</span>
-                            <a href="{{ route('events.showContact', ['event' => $attendance->event, 'contact' => $contact]) }}">
+                            <a href="{{ route('events.contact-profil', ['event' => $attendance->event, 'contact' => $contact]) }}">
                                 Voir
                             </a>
                         </p>
 
                         @if($attendance->role == 'evaluator')
                             <a class="link"
-                               href="{{ route('events.showEvaluator', [
+                               href="{{ route('events.evaluator-dashboard', [
                                 'event' => $attendance->event->id,
                                 'evaluator' => $attendance->contact->id,
                                 'token' => $attendance->token
@@ -79,4 +79,4 @@
             </ul>
         </div>
     </main>
-</x-app-layout>
+</div>

@@ -1,4 +1,4 @@
-<x-app-layout>
+<div>
     @section('title')
         <h1 role="heading" aria-level="1" class="sr-only">Évènement {{  $event->name }}</h1>
     @endsection
@@ -22,4 +22,4 @@
             <livewire:events.show.second-table />
         </div>
     </main>
-</x-app-layout>
+</div>

@@ -1,4 +1,4 @@
-<x-app-layout>
+<div>
     @section('title')
         <h1 role="heading" aria-level="1" class="sr-only">Profil d'un contact</h1>
     @endsection
@@ -30,4 +30,4 @@
 
         <livewire:contacts.show-contact-profil :$contact />
     </main>
-</x-app-layout>
+</div>

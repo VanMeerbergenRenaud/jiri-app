@@ -1,13 +1,19 @@
 <?php
 
-use App\Http\Controllers\ContactsController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\EventController;
-use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ProjectsController;
-use App\Http\Controllers\WelcomeController;
-use App\Livewire\ImageUpload;
+
+use App\Livewire\Homepage;
+use App\Livewire\Welcome;
+use App\Livewire\Dashboard;
+use App\Livewire\Events\Index as EIndex;
+use App\Livewire\Events\Show as EShow;
+use App\Livewire\Events\Edit as EEdit;
+use App\Livewire\Events\ContactProfil as EContactProfil;
+use App\Livewire\Events\EvaluatorDashboard as EEvaluatorDashboard;
+use App\Livewire\Contacts\Index as CIndex;
+use App\Livewire\Contacts\Show as CShow;
+use App\Livewire\Projects\Index as PIndex;
+use App\Livewire\Projects\Show as PShow;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,18 +28,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 /* Homepage */
-Route::get('/', [HomepageController::class, 'index'])
+Route::get('/', Homepage::class)
     ->middleware('guest')
     ->name('homepage');
 
 /* Homepage authenticated user */
-Route::get('/welcome', [WelcomeController::class, 'index'])
+Route::get('/welcome', Welcome::class)
     ->middleware(['auth', 'verified'])
     ->name('welcome');
 
 Route::middleware('auth')->group(function () {
     /* Dashboard */
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', Dashboard::class)->name('dashboard');
 
     /* Profile RUD */
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -41,19 +47,30 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     /* Events CRUD */
-    Route::resource('events', EventController::class);
+    Route::name('events.')->prefix('events')->group(function () {
+        Route::get('/', EIndex::class)->name('index');
+        // Route::get('/create', Create::class)->name('create');
+        Route::get('/{event}', EShow::class)->name('show');
+        Route::get('/{event}/edit', EEdit::class)->name('edit');
+
+        // Contact profil data in a specific event
+        Route::get('/{event}/contacts/{contact}', EContactProfil::class)->name('contact-profil');
+
+        // Evaluator dashboard
+        Route::get('/{event}/evaluator/{contact}/{token}', EEvaluatorDashboard::class)->name('evaluator-dashboard');
+    });
 
     /* Contacts CRUD */
-    Route::resource('contacts', ContactsController::class);
+    Route::name('contacts.')->prefix('contacts')->group(function () {
+        Route::get('/', CIndex::class)->name('index');
+        Route::get('/{contact}', CShow::class)->name('show');
+    });
 
     /* Projects CRUD */
-    Route::resource('projects', ProjectsController::class);
-
-    // Evaluator dashboard
-    Route::get('/events/{event}/evaluator/{evaluator}/{token}', [EventController::class, 'showEvaluator'])->name('events.showEvaluator');
-
-    // Route of a specific contact in a specific event
-    Route::get('/events/{event}/contacts/{contact}', [EventController::class, 'showContact'])->name('events.showContact');
+    Route::name('projects.')->prefix('projects')->group(function () {
+        Route::get('/', PIndex::class)->name('index');
+        Route::get('/{project}', PShow::class)->name('show');
+    });
 });
 
 require __DIR__.'/auth.php';

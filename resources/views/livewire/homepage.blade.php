@@ -1,7 +1,6 @@
-@extends('layouts.home')
-
-@section('content')
-    <body class="homepage">
+<div>
+    @section('content')
+        <body class="homepage">
         <header class="homepage__header" role="banner">
             <h1 role="heading" aria-level="1" class="sr-only">Jiri app</h1>
 
@@ -344,25 +343,26 @@
         <x-footer class="homepage__footer">
             2024 Renaud Vmb. Tous droits réservés.
         </x-footer>
-    </body>
-@endsection
+        </body>
+    @endsection
 
-@section('scripts')
-    <script>
-        function scrollReveal() {
-            const revealLine = 150;
-            const revealElement = document.querySelectorAll(".reveal");
-            for (let i = 0; i < revealElement.length; i++) {
-                const windowHeight = window.innerHeight;
-                const revealTop = revealElement[i].getBoundingClientRect().top;
-                if (revealTop < windowHeight - revealLine) {
-                    revealElement[i].classList.add("active");
-                } else {
-                    revealElement[i].classList.remove("active");
+    @section('scripts')
+        <script>
+            function scrollReveal() {
+                const revealLine = 150;
+                const revealElement = document.querySelectorAll(".reveal");
+                for (let i = 0; i < revealElement.length; i++) {
+                    const windowHeight = window.innerHeight;
+                    const revealTop = revealElement[i].getBoundingClientRect().top;
+                    if (revealTop < windowHeight - revealLine) {
+                        revealElement[i].classList.add("active");
+                    } else {
+                        revealElement[i].classList.remove("active");
+                    }
                 }
             }
-        }
 
-        window.addEventListener("scroll", scrollReveal);
-    </script>
-@endsection
+            window.addEventListener("scroll", scrollReveal);
+        </script>
+    @endsection
+</div>

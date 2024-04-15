@@ -1,4 +1,4 @@
-<x-app-layout>
+<div>
     @section('title')
         <h1 role="heading" aria-level="1" class="sr-only">Édition de l'évènement</h1>
     @endsection
@@ -13,4 +13,4 @@
     <main class="mainEventsCreate max-width p-main">
         <livewire:events.edit.container :event="$event" />
     </main>
-</x-app-layout>
+</div>

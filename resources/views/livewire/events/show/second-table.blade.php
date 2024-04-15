@@ -6,7 +6,7 @@
             <th scope="row" class="category sticky">Membres du jury</th>
             @foreach($evaluators as $evaluator)
                 <th scope="col" colspan="{{ /*$projects->count() ??*/ 3 }}" wire:key="e{{ $evaluator->id }}" class="jiris sticky-small">
-                    <a href="{{ route('events.showContact', ['event' => $event, 'contact' => $evaluator->contact]) }}">
+                    <a href="{{ route('events.contact-profil', ['event' => $event, 'contact' => $evaluator->contact]) }}">
                         <img src="{{ $evaluator->contact->avatar ?? asset('img/placeholder.png') }}" alt="photo d'un membre du jury">
                         {{ $evaluator->contact->name ?? 'Évaluateur' }}
                     </a>
@@ -31,7 +31,7 @@
             <tr class="row-3" wire:key="s{{ $student->id }}">
                 {{-- Students --}}
                 <th scope="row" class="students sticky">
-                    <a href="{{ route('events.showContact', ['event' => $event, 'contact' => $student->contact]) }}">
+                    <a href="{{ route('events.contact-profil', ['event' => $event, 'contact' => $student->contact]) }}">
                         <img src="{{ $student->contact->avatar ?? asset('img/placeholder.png') }}" alt="photo d'un étudiant">
                         {{ $student->contact->name ?? 'Étudiant' }}
                     </a>

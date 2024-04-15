@@ -1,0 +1,29 @@
+<?php
+
+namespace App\Livewire\Events;
+
+use Livewire\Component;
+
+class ContactProfil extends Component
+{
+    public $eventId;
+    public $contactId;
+
+    public function mount($event, $contact)
+    {
+        $this->eventId = $event;
+        $this->contactId = $contact;
+    }
+
+    public function render()
+    {
+        $user = auth()->user();
+
+        $event = $user->events()->findOrFail($this->eventId);
+
+        $contact = $event->contacts()->findOrFail($this->contactId);
+
+        return view('livewire.events.contact-profil', compact('user', 'event', 'contact'))
+            ->layout('layouts.app');
+    }
+}

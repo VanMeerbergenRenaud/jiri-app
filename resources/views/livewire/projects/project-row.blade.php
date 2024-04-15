@@ -1,5 +1,9 @@
 <tr>
-    <td class="name capitalize">{{ $project->name }}</td>
+    <td class="name capitalize">
+        <a href="{{ route('projects.show', $project) }}" title="Voir le projet">
+            {{ $project->name }}
+        </a>
+    </td>
     <td class="capitalize">{{ str($project->description)->limit(50) }}</td>
     <td class="tasks">
         @foreach($tasks as $task)
