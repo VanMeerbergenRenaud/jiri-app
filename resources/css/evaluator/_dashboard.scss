@@ -31,6 +31,10 @@
         padding: 0 0.5rem;
     }
 
+    .empty__list {
+        padding: 0.5rem 1rem;
+    }
+
     /* Mobile */
     .students__list {
         margin-top: 1rem;
@@ -149,6 +153,10 @@
                 background-color: $gray-bg;
             }
         }
+        
+        .empty__list {
+            padding: 1rem 1.5rem;
+        }
 
         .table__students {
             margin-top: 1rem;
@@ -209,6 +217,7 @@
                         img {
                             width: 2rem;
                             height: 2rem;
+                            border-radius: 2rem;
                         }
                     }
 

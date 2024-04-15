@@ -16,7 +16,7 @@
     <body>
         <header class="evaluator__header" style="max-width: 1650px; border-bottom: 1px solid #E5E9F4;">
             <!-- Logo -->
-            <a href="/" class="logo__link">
+            <a href="{{ url()->current() }}" class="logo__link">
                 <x-logo />
                 <span>Jiri.app</span>
             </a>

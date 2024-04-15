@@ -57,7 +57,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/{event}/contacts/{contact}', EContactProfil::class)->name('contact-profil');
 
         // Evaluator dashboard
-        Route::get('/{event}/evaluator/{contact}/{token}', EEvaluatorDashboard::class)->name('evaluator-dashboard');
+        Route::get('/{event}/contact/{contact}/{token}', EEvaluatorDashboard::class)
+            ->middleware('evaluator')
+            ->name('evaluator-dashboard');
     });
 
     /* Contacts CRUD */

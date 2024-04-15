@@ -3,11 +3,12 @@
         <div class="error__header">
             <h1 class="error__code">
                 <span class="sr-only">Page d'erreur</span>
-                404
+                401
             </h1>
-            <h2 class="error__title">Page non trouvée…</h2>
+            <h2 class="error__title">Page non autorisée…</h2>
             <p class="error__description">
-                Navrez de vous voir ici, vous essayez d'accéder une page introuvable&nbsp;!
+                Vous essayez d'accéder une page à laquelle vous n'avez pas le droit d'accéder&nbsp;!<br>
+                Ne tentez pas de passer par la fenêtre, vous n'y arriverez pas&nbsp;!
             </p>
             <a href="{{ route('dashboard') }}" class="error__button">
                 {{ __('Retourner à l‘accueil') }}

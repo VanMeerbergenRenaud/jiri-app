@@ -47,7 +47,7 @@
                 </div>
             </li>
         @empty
-            <li class="p-2 px-4">
+            <li class="empty__list">
                 Aucun étudiant trouvé.
             </li>
         @endforelse
@@ -108,7 +108,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="100%" class="px-6 py-4 min-w-80">
+                    <td colspan="100%" class="empty__list">
                         Aucun étudiant trouvé.
                     </td>
                 </tr>

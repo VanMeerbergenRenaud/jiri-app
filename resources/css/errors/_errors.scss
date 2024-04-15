@@ -1,6 +1,6 @@
-/* 404 Page */
+/* 403, 404 pages */
 
-.error-404 {
+.error {
     display: grid;
     height: 82.5vh;
     padding: 1.5rem;
@@ -52,19 +52,19 @@
         box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 
         &:hover {
-            background-color: #6366F1;
+            background-color: #42568B;
         }
     }
 }
 
 @media (min-width: 640px) {
-    .error-404 {
+    .error {
         padding: 8rem 0;
     }
 }
 
 @media (min-width: 1024px) {
-    .error-404 {
+    .error {
         padding: 0 2rem;
     }
 }

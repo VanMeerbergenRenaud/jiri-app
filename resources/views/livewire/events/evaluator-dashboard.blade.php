@@ -10,7 +10,7 @@
         />
     </div>
 
-    <main class="mainEvaluator">
+    <main class="mainEvaluator p-main">
         <livewire:evaluator.dashboard />
     </main>
 

@@ -63,7 +63,7 @@
                             <a class="link"
                                href="{{ route('events.evaluator-dashboard', [
                                 'event' => $attendance->event->id,
-                                'evaluator' => $attendance->contact->id,
+                                'contact' => $attendance->contact->id,
                                 'token' => $attendance->token
                             ]) }}"
                             >
