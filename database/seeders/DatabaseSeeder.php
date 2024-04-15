@@ -71,11 +71,6 @@ class DatabaseSeeder extends Seeder
                         'event_id' => $event->id,
                         'project_id' => $project->id,
                     ]);
-
-                    Task::factory()->count(1)->create([
-                        'project_id' => $project->id,
-                        'user_id' => $user->id,
-                    ]);
                 }
             }
 

@@ -18,8 +18,6 @@ class ImplementationFactory extends Factory
         return [
             'url' => $this->faker->url(),
             'score' => $this->faker->numberBetween(0, 20),
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
         ];
     }
 }

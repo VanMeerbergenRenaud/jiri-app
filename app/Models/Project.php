@@ -31,9 +31,4 @@ class Project extends Model
     {
         return $this->hasMany(Duty::class);
     }
-
-    public function tasks(): HasMany
-    {
-        return $this->hasMany(Task::class);
-    }
 }

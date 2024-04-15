@@ -9,50 +9,37 @@
                 <div class="form__content">
                     <h2 class="title">Créer un nouveau projet</h2>
 
-                    {{--@unless($projectCreated)--}}
-                        <label>
-                            Nom
-                            <input autofocus wire:model="form.name">
-                            @error('form.name')
-                            <div class="error">{{ $message }}</div>@enderror
-                        </label>
+                    {{-- Name, description, tasks --}}
+                    <x-form.field
+                        label="Nom"
+                        name="name"
+                        type="text"
+                        model="form.name"
+                        value="{{ old('name') }}"
+                        placeholder="Nom du projet"
+                        :messages="$errors->get('nom')"
+                        required
+                        autofocus
+                    />
 
-                        <label>
-                            Description
-                            <textarea wire:model="form.description" rows="3"></textarea>
-                            @error('form.description')
-                            <div class="error">{{ $message }}</div>@enderror
-                        </label>
-                    {{--@else--}}
-                        <p class="font-semibold">Veuillez maintenant ajouter une ou plusieurs tâches au projet.</p>
+                    <x-form.textarea
+                        label="Description"
+                        name="description"
+                        model="form.description"
+                        value="{{ old('description') }}"
+                        placeholder="Informations sur le projet"
+                        :messages="$errors->get('description')"
+                    />
 
-                        <label>
-                            Liste des tâches déjà existantes
-                            <div x-data="{ selectedTask: [] }"
-                                 x-init="">
-                                <select id="tasks"
-                                        multiple
-                                        x-ref="selectElement"
-                                        wire:model="form.selectedTasks"
-                                >
-                                    @foreach($allTasks as $task)
-                                        <option value="{{ $task->name }}"
-                                                wire:click="addSelectedTask({{ $task->id }})"
-                                        >
-                                            {{ $task->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            @error('form.selectedTasks')<div class="error">{{ $message }}</div>@enderror
-                        </label>
-
-                        <label>
-                            Nom de la nouvelle tâche
-                            <input wire:model="form.newTask">
-                            @error('form.newTask')<div class="error">{{ $message }}</div>@enderror
-                        </label>
-                    {{--@endif--}}
+                    <x-form.field
+                        label="Tâches"
+                        name="tasks"
+                        type="text"
+                        model="form.tasks"
+                        value="{{ old('tasks') }}"
+                        placeholder="Tâches à réaliser"
+                        :messages="$errors->get('tasks')"
+                    />
                 </div>
 
                 <x-dialog.footer>

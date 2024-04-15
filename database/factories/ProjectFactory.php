@@ -18,8 +18,10 @@ class ProjectFactory extends Factory
         return [
             'name' => $this->faker->words(2, true),
             'description' => $this->faker->text(),
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
+            'tasks' => json_encode(
+                // Each projet has between 3 and 10 tasks
+                $this->faker->words($this->faker->numberBetween(3, 10))
+            ),
         ];
     }
 }

@@ -9,9 +9,6 @@ class ProjectRow extends Component
 {
     public $project;
 
-    public $allTasks;
-    public $tasks = [];
-
     public ProjectForm $form;
 
     public $showEditDialog = false;
@@ -19,10 +16,6 @@ class ProjectRow extends Component
     public function mount()
     {
         $this->form->setProject($this->project);
-
-        $this->allTasks = auth()->user()->tasks()->get();
-
-        $this->tasks = $this->project->tasks;
     }
 
     public function save()

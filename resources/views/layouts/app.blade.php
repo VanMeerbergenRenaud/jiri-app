@@ -10,9 +10,11 @@
 
         <!-- Favicon -->
         <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+
         <!-- Title -->
         <title>{{ __('Jiri app') }}</title>
 
+        <!-- Alpine -->
         <script defer src="https://unpkg.com/@alpinejs/ui@3.13.2-beta.0/dist/cdn.min.js"></script>
 
         @livewireStyles

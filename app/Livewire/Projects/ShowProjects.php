@@ -15,13 +15,6 @@ class ShowProjects extends Component
 
     public $saved = false;
 
-    public $tasks = [];
-
-    public function mount()
-    {
-        $this->tasks = auth()->user()->projects()->with('tasks')->get();
-    }
-
     #[Computed]
     public function projectFilter()
     {
@@ -42,7 +35,7 @@ class ShowProjects extends Component
         }
 
         $project->events()->detach();
-        $project->tasks()->delete();
+
         $project->delete();
 
         sleep(1);

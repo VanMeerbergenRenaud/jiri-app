@@ -58,7 +58,7 @@ Route::middleware('auth')->group(function () {
 
         // Evaluator dashboard
         Route::get('/{event}/contact/{contact}/{token}', EEvaluatorDashboard::class)
-            ->middleware('evaluator')
+            //->middleware('evaluator')
             ->name('evaluator-dashboard');
     });
 

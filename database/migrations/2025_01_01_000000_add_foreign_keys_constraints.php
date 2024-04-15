@@ -32,10 +32,6 @@ return new class extends Migration
             $table->foreignId('duty_id')->constrained();
             $table->foreignId('contact_id')->constrained();
         });
-        Schema::table('tasks', function (Blueprint $table) {
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('project_id')->constrained();
-        });
     }
 
     /**
@@ -63,10 +59,6 @@ return new class extends Migration
         Schema::table('implementations', function (Blueprint $table) {
             $table->dropForeign(['duty_id']);
             $table->dropForeign(['contact_id']);
-        });
-        Schema::table('tasks', function (Blueprint $table) {
-            $table->dropForeign(['user_id']);
-            $table->dropForeign(['project_id']);
         });
     }
 };

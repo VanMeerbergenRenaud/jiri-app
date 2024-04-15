@@ -16,6 +16,16 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
+     * Determine if the user is an evaluator.
+     *
+     * @return bool
+     */
+    public function isEvaluator(): bool
+    {
+        return $this->role === 'evaluator';
+    }
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
@@ -81,21 +91,5 @@ class User extends Authenticatable
     public function implementations()
     {
         return $this->hasManyThrough(Implementation::class, Event::class);
-    }
-
-    public function tasks(): HasMany
-    {
-        return $this->hasMany(Task::class);
-    }
-
-    /**
-     * Determine if the user is an evaluator.
-     *
-     * @return bool
-     */
-    public function isEvaluator(): bool
-    {
-        // Replace the following line with your own logic
-        return $this->role === 'evaluator';
     }
 }

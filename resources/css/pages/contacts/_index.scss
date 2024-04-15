@@ -77,6 +77,13 @@
                 justify-self: start;
             }
 
+            td.empty {
+                padding: 0.75rem 1.5rem;
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+            }
+
             td.name {
 
                 a {

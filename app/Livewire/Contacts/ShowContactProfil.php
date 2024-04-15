@@ -28,11 +28,6 @@ class ShowContactProfil extends Component
         $this->projects = auth()->user()->duties()
             ->where('event_id', $this->contact->pivot->event_id)
             ->get();
-
-        // Fetch tasks related to the project
-        $this->tasks = auth()->user()->tasks()
-            ->where('project_id', $this->projects->first()->id)
-            ->get();
     }
 
     public function render()
