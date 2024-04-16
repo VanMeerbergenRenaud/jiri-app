@@ -35,7 +35,7 @@
     &__content {
 
         .sectionHeader {
-            padding: 1.15rem 2rem;
+            padding: 0.75rem 1.25rem 0.5rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -49,6 +49,13 @@
             button {
                 font-size: 0.9rem;
                 color: $blue;
+                background-color: transparent;
+                text-align: right;
+
+                &:hover {
+                    text-decoration: underline;
+                    border: 1px solid transparent;
+                }
             }
         }
 
@@ -56,7 +63,7 @@
             margin-bottom: 2.5rem;
             background-color: $gray-bg;
             border: $border;
-            border-radius: 1rem;
+            border-radius: 1.5rem;
             overflow: hidden;
 
             &__form {
@@ -125,12 +132,19 @@
             overflow: hidden;
             border: $border;
 
+            .form__field {
+                margin: 0;
+            }
+
             textarea {
+                font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+                border: none;
                 resize: none;
                 outline: none;
-                border: none;
-                padding: 1.35rem 1.5rem;
-                width: 100%;
+                padding: 1.15rem 1.35rem;
+                width: 87.5%;
+                letter-spacing: -0.01em;
+                color: $text;
                 background-color: $gray-bg;
             }
         }
@@ -176,7 +190,7 @@
                             top: 0;
                             right: 0;
                             padding: 1.15rem 1.5rem;
-                            font-size: 0.85rem;
+                            font-size: 0.9rem;
                             font-weight: 500;
                             color: $blue;
                             text-transform: initial;
@@ -360,16 +374,21 @@
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
+                    font-size: 0.9rem;
                     font-weight: 500;
                     border-right: none;
                     background-color: #F0F1F7;
 
                     a {
                         margin-right: -1rem;
-                        padding: 1rem;
-                        font-size: 0.85rem;
+                        padding: 1.375rem;
+                        font-size: 0.9rem;
                         font-weight: 500;
                         color: #6386E3;
+
+                        &:hover {
+                            text-decoration: underline;
+                        }
                     }
                 }
 
@@ -438,7 +457,7 @@
 
         &__content {
             display: grid;
-            grid-template-columns: 1fr 3fr;
+            grid-template-columns: 300px auto;
             gap: 0 2rem;
 
             &__profil {
@@ -463,15 +482,16 @@
 
             &__col2 {
                 table, .jiriesComment {
-                    max-width: 950px
+                    max-width: calc(90vw - 350px);
                 }
 
                 .bilan {
                     &__row {
                         .global {
                             position: sticky;
-                            right: 150px;
+                            right: 195px;
                             border-left: 1px solid $gray-500;
+                            z-index: 4;
                         }
 
                         .final {
@@ -493,8 +513,8 @@
     }
 }
 
-// For 1440px screens @media
-@media (min-width: 1650px) {
+// For 1650px screens @media
+@media (min-width: 1750px) {
     .mainProfil {
         &__content {
             &__col1 {
@@ -503,7 +523,7 @@
 
             &__col2 {
                 table, .jiriesComment {
-                    max-width: 1150px
+                    max-width: calc(95vw - 350px);
                 }
             }
         }

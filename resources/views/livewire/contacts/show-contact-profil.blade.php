@@ -52,15 +52,21 @@
                         <h3>Commentaire global</h3>
                         <button type="button" wire:click="editComment">Editer</button>
                     </div>
-                    <div>
-                        <label>
-                            <textarea
-                                x-data="{ resize: () => { $el.style.height = '0.5rem'; $el.style.height = $el.scrollHeight + 'px' } }"
-                                x-init="resize()"
-                                @input="resize()"
-                            >{!! $globalComment ?? 'Pas encore de commentaires ajoutés…' !!}</textarea>
-                        </label>
-                    </div>
+
+                    <x-form.textarea
+                        label="Commentaire global"
+                        name="globalComment"
+                        model="globalComment"
+                        placeholder="Ajouter un commentaire global"
+                        value="{{ $globalComment }}"
+                        :messages="$errors->get('globalComment')"
+                        srOnly="true"
+                        x-data="{ resize: () => { $el.style.height = '0.5rem'; $el.style.height = $el.scrollHeight + 'px' } }"
+                        x-init="resize()"
+                        @input="resize()"
+                        maxlength="750"
+                    />
+
                 </form>
             @endif
 

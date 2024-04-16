@@ -14,7 +14,7 @@
         @vite(['resources/css/app.scss', 'resources/js/app.js'])
     </head>
     <body>
-        <header class="evaluator__header" style="max-width: 1650px; border-bottom: 1px solid #E5E9F4;">
+        <header class="evaluator__header">
             <!-- Logo -->
             <a href="{{ url()->current() }}" class="logo__link">
                 <x-logo />

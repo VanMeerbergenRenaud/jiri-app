@@ -8,9 +8,17 @@ class Show extends Component
 {
     public $contactId;
 
+    public $contacts;
+
     public function mount($contact)
     {
         $this->contactId = $contact;
+        $this->contacts = auth()->user()->contacts;
+    }
+
+    public function redirectUser($contactId)
+    {
+        return redirect()->route('contacts.show', ['contact' => $contactId]);
     }
 
     public function render()

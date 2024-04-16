@@ -14,6 +14,8 @@ class ShowContactProfil extends Component
 
     public $tasks;
 
+    public $globalComment;
+
     public function mount($contact)
     {
         $this->contact = $contact;
@@ -28,6 +30,8 @@ class ShowContactProfil extends Component
         $this->projects = auth()->user()->duties()
             ->where('event_id', $this->contact->pivot->event_id)
             ->get();
+
+        $this->globalComment = 'À changer';
     }
 
     public function render()

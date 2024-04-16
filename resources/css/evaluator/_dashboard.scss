@@ -6,6 +6,7 @@
     gap: 0.5rem;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid #E5E9F4;
 
     &__title {
         margin-right: 2rem;
@@ -153,7 +154,7 @@
                 background-color: $gray-bg;
             }
         }
-        
+
         .empty__list {
             padding: 1rem 1.5rem;
         }
@@ -295,8 +296,7 @@
     .footerEvaluator {
         margin: -1rem auto 0;
         padding: 1.75rem 3rem;
-        max-width: 1650px;
-        width: 100%;
+        width: 95%;
 
         p.copyright {
             margin-left: -6rem;

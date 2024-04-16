@@ -125,6 +125,18 @@
 
             th {
                 background-color: #EAEBF0;
+                position: relative;
+
+                a {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
             }
 
             .sticky {
@@ -155,7 +167,7 @@
                 padding: 4rem 1.25rem 1rem 1.75rem;
                 vertical-align: bottom;
                 writing-mode: sideways-lr;
-                min-width: 4.5rem;
+                max-width: 2.5rem;
             }
 
             .moy {
@@ -231,8 +243,21 @@
 
             /* List of students */
             .students {
-                text-align: left;
+                position: relative;
                 padding: 1.25rem 2.5rem;
+                text-align: left;
+
+                a {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                    padding-left: 2rem;
+                }
             }
 
             /* List of results */

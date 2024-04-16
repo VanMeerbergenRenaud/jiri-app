@@ -18,13 +18,16 @@
                 @include('components.svg.arrow-left')
                 Retour
             </a>
-            <label>
-                <select>
-                    <option value="" selected disabled>-- Sélectionnez un autre profil ---</option>
-                    <option value="1">Etudiant 1</option>
-                    <option value="2">Etudiant 2</option>
-                </select>
-            </label>
+
+            <x-form.select
+                label="Nom d'un autre contact"
+                name="name"
+                placeholder="Sélectionner un autre profil -"
+                :options="$contacts"
+                :messages="$errors->get('name')"
+                srOnly="true"
+                wire:change="redirectUser($event.target.value)"
+            />
         </div>
 
         {{--Liste des events (attendances) liés aux contacts --}}

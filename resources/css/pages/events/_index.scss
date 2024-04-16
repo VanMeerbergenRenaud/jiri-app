@@ -328,11 +328,10 @@
 
                 .event__actions {
                     display: flex;
-                    justify-content: start;
+                    justify-content: end;
                     align-items: center;
                     gap: 0 2rem;
                     grid-column: 5/6;
-                    margin-left: -2rem;
 
                     .link__edition {
                         min-width: 185px;
@@ -353,5 +352,12 @@
                 }
             }
         }
+    }
+}
+
+// For min 1920px screen
+@media (min-width: 1920px) {
+    .p-main {
+        padding: 0.5rem 3.5rem;
     }
 }
