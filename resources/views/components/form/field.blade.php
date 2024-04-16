@@ -1,8 +1,8 @@
 <!-- Component to controls form fields -->
-@props(['label', 'name', 'type', 'placeholder', 'model' => '', 'attributes' => [], 'messages', 'value' => ''])
+@props(['label', 'name', 'type', 'placeholder', 'model' => '', 'attributes' => [], 'messages', 'value' => '', 'srOnly' => false,])
 
 <div class="form__field">
-    <label for="{{ $name }}">
+    <label for="{{ $name }}" {{ $srOnly ? 'class=sr-only' : '' }}>
         {{ ucfirst($label) }}
     </label>
 

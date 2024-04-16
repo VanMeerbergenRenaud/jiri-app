@@ -17,7 +17,11 @@ class SearchList extends Component
 
     public $show = false;
 
-    public $role; // student or evaluator
+    public $roles = [
+        'student' => 'Étudiant',
+        'evaluator' => 'Évaluateur',
+        'neutre' => 'Neutre',
+    ];
 
     #[Computed]
     public function searchList()

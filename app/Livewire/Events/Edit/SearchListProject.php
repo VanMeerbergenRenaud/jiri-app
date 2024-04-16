@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Events\Edit;
 
-use App\Models\Duty;
 use App\Models\Event;
 use App\Models\Project;
 use Illuminate\Database\Eloquent\Collection;
@@ -14,8 +13,6 @@ class SearchListProject extends Component
     public $eventId;
 
     public $projectname = '';
-
-    public $tasks = [];
 
     #[Computed]
     public function searchList()
@@ -38,6 +35,8 @@ class SearchListProject extends Component
                 'event_id' => $event->id,
                 'project_id' => $project->id,
                 'name' => $project->name,
+                'description' => $project->description,
+                'tasks' => $project->tasks,
             ]);
         }
 

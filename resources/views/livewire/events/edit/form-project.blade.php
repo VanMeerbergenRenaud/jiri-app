@@ -18,23 +18,9 @@
                     @enderror
                 </div>
 
-                {{-- Ajouter une tâche --}}
-                <div class="position-right">
-                    <label for="newprojecttask">Ajouter une tâche</label>
-                    <input
-                        type="text"
-                        id="newprojecttask"
-                        wire:model="newprojecttask"
-                        placeholder="Ex : CV"
-                    >
-                    @error('newprojecttask')
-                    <div class="error-message">{{ $message }}</div>
-                    @enderror
-                </div>
-
                 {{-- Tasks --}}
                 <div class="project-tasks">
-                    <label for="newprojecttasks">Listes des tâches</label>
+                    {{--<label for="newprojecttasks">Listes des tâches</label>
                     <select id="newprojecttasks" wire:model="newprojecttasks">
                         <option value="0" selected>Sélectionner une ou plusieurs tâche(s)</option>
                         @foreach($tasks as $task)
@@ -43,7 +29,7 @@
                     </select>
                     @error('newprojecttasks')
                     <div class="error-message">{{ $message }}</div>
-                    @enderror
+                    @enderror--}}
                 </div>
 
                 {{-- Button to cancel the new contact --}}

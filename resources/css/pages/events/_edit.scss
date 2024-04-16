@@ -12,7 +12,7 @@
             position: relative;
             display: flex;
             flex-wrap: wrap;
-            gap: 1.5rem;
+            gap: 1rem;
             padding-bottom: 2rem;
             border-bottom: $border;
 
@@ -54,11 +54,12 @@
                 .open-button {
                     margin: 1.5rem 0 1.75rem;
                     padding: 1rem;
-                    width: 17.5rem;
-                    background-color: white;
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
+                    width: 17.5rem;
+                    color: #8B97A8;
+                    background-color: white;
                 }
 
                 .icon {
@@ -77,14 +78,28 @@
                         position: absolute;
                         top: 0.75rem;
                         right: 0.5rem;
-                        background-color: #E5E9F4;
+                        background-color: #E7EAF6;
                         border-radius: 2rem;
                         padding: 0.5rem;
+
+                        svg {
+                            fill: #9fa7b2;
+                        }
+
+                        &:hover {
+                            background-color: #9fa7b2;
+                            border: 1px solid transparent;
+
+                            svg {
+                                fill: whitesmoke;
+                            }
+                        }
                     }
 
                     .add-contact-button {
                         width: 100%;
-                        padding: 1rem;
+                        padding: 1rem 1.5rem;
+                        font-size: 0.75rem;
                         border-radius: 0 0 0.75rem 0.75rem;
                     }
                 }
@@ -97,12 +112,23 @@
                 border-radius: 1rem;
                 border: $border;
 
+                .form__field {
+                    margin: 0;
+                }
+
                 &__input {
-                    padding: 0.875rem;
-                    width: 100%;
-                    border-bottom: $border;
+                    padding: 0.875rem 1.25rem;
+                    width: calc(100% - 2.75rem);
+                    font-size: 0.875rem;
+                    border: 1px solid transparent;
                     border-radius: 1rem 1rem 0 0;
                 }
+
+                input {
+                    margin: 0 auto;
+                    border-bottom: $border;
+                }
+
 
                 &__list {
                     padding: 0;
@@ -115,6 +141,7 @@
                         display: flex;
                         flex-direction: column;
                         gap: 0.5rem;
+                        font-size: 0.875rem;
                         border-bottom: $border;
 
                         .name {
@@ -140,11 +167,13 @@
 
                         button {
                             position: absolute;
-                            padding: 0.75rem;
-                            top: 0.25rem;
-                            right: 0.5rem;
+                            top: 0.5rem;
+                            right: 0.65rem;
+                            padding: 0.75rem 1.25rem;
+                            font-size: 0.75rem;
+                            text-transform: initial;
                             color: $blue;
-                            text-decoration: underline;
+                            background-color: #E7EAF6;
                         }
                     }
                 }
@@ -152,9 +181,10 @@
                 .no-contact {
                     margin: 0;
                     padding: 1rem 0.75rem 1rem 1.5rem;
-                    background-color: white;
-                    border-radius: 0;
+                    font-size: 0.875rem;
                     border: none;
+                    border-radius: 0;
+                    background-color: white;
                 }
             }
 
@@ -166,6 +196,7 @@
 
                 p {
                     margin-bottom: 1.5rem;
+                    font-size: 0.875rem;
                     font-weight: 500;
                     color: $blue;
                     text-decoration: underline;
@@ -180,6 +211,7 @@
                         display: flex;
                         flex-direction: column;
                         font-weight: 500;
+                        font-size: 0.875rem;
 
                         select {
                             margin-top: 0.75rem;
@@ -359,9 +391,13 @@
     }
 }
 
-@media (min-width: 550px) {
+@media (min-width: 665px) {
     .mainEventsCreate {
         .form {
+            &__event-infos {
+                gap: 2.5rem;
+            }
+
             &__component {
                 padding: 2rem 0.5rem 1rem;
 
@@ -433,6 +469,9 @@
         margin-top: 0;
 
         .form {
+            &__event-infos {
+                gap: 2.5rem;
+            }
             &__component {
                 &__added {
                     ul {

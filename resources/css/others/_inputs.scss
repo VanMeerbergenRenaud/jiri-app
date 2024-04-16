@@ -1,8 +1,10 @@
 /* Inputs */
 
 input, textarea, select {
+    font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     margin: 0;
     padding: 0;
+    color: $text;
     border: $border;
     border-radius: 0.5rem;
     background-color: white;

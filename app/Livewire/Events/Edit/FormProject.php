@@ -2,8 +2,6 @@
 
 namespace App\Livewire\Events\Edit;
 
-use App\Models\Task;
-use Livewire\Attributes\Rule;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
@@ -20,18 +18,17 @@ class FormProject extends Component
     #[Validate('required|min:3')]
     public $newprojectname;
 
-    #[Validate('required|min:2')]
-    public $newprojecttask;
+    #[Validate('required|min:3|max:255')]
+    public $newprojectdescription;
 
-    public $newprojecttasks = [];
+    #[Validate('nullable')]
+    public $newprojecttasks;
 
     public function mount()
     {
         $this->user = auth()->user();
 
         $this->projects = $this->user->projects()->get();
-
-        $this->tasks = auth()->user()->tasks()->get();
     }
 
     public function save(): void
@@ -40,13 +37,11 @@ class FormProject extends Component
 
         $project = $this->user->projects()->create([
             'name' => $this->newprojectname,
-            'description' => 'Some description',
+            'description' => $this->newprojectdescription,
+            'tasks' => $this->newprojecttasks,
         ]);
 
-        $project->tasks()->create([
-            'name' => $this->newprojecttask,
-            'project_id' => $project->id,
-        ]);
+        $this->projects->push($project);// Add the new project to the projects collection
 
         $this->reset();
     }

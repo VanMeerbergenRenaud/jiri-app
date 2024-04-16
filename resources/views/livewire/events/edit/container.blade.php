@@ -5,33 +5,35 @@
 
         {{-- Label & input for name, date of beginning and end of the event --}}
         <div class="form__event-infos">
-            <x-form.input
+            <x-form.field
+                name="name"
+                label="Nom de l'épreuve"
                 type="text"
                 model="form.name"
-                name="name"
-                min="1"
                 placeholder="Nom de l'épreuve"
-                label="Nom de l'épreuve"
+                :messages="$errors->get('form.name')"
             />
 
-            <x-form.input
+            <x-form.field
+                label="Date de début"
+                name="starting_at"
                 type="datetime-local"
                 model="form.starting_at"
-                name="starting_at"
                 min="2020-01-01T00:00"
                 max="2038-01-01T00:00"
-                placeholder="JJ/MM/AAAA HH:MM"
-                label="Date de début"
+                placeholder="{{ now()->format('Y-m-d\TH:i') }}"
+                :messages="$errors->get('form.starting_at')"
             />
 
-            <x-form.input
+            <x-form.field
+                label="Durée de l'épreuve"
+                name="duration"
                 type="time"
                 model="form.duration"
-                name="duration"
                 min="00:01:00"
                 max="23:59:59"
-                placeholder="HH:MM:SS"
-                label="Durée de l'épreuve"
+                placeholder="00:00:00"
+                :messages="$errors->get('form.duration')"
             />
         </div>
 
