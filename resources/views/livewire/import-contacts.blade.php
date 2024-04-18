@@ -89,7 +89,6 @@
             <x-notifications
                 icon="import"
                 title="Liste de contact ajouté avec succès !"
-                message="Vous avez ajouté tout vos contacts."
                 method="$set('imported', false)"
             />
         @endif

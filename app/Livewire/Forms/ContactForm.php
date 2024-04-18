@@ -48,7 +48,13 @@ class ContactForm extends Form
 
     public function update()
     {
-        $this->validate();
+        $rules = [
+            'name' => 'required|min:3',
+            'firstname' => 'required|min:3',
+            'email' => 'email|nullable',
+        ];
+
+        $this->validate($rules);
 
         $updateData = [
             'name' => $this->name,
@@ -69,7 +75,11 @@ class ContactForm extends Form
             return null;
         }
 
-        if ($file->isValid()) {
+        try {
+            if (!$file->isValid()) {
+                throw new \Exception('File upload error: ' . $file->getErrorMessage());
+            }
+
             // Generate a unique filename
             $filename = md5($file->getClientOriginalName() . time()) . '.' . $file->getClientOriginalExtension();
 
@@ -78,7 +88,8 @@ class ContactForm extends Form
 
             // Return the file path
             return '/avatars/' . $filename;
-        } else {
+        } catch (\Exception $e) {
+            $this->addError('avatar', $e->getMessage());
             return null;
         }
     }

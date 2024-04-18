@@ -22,14 +22,9 @@
                     <x-svg.show />
                 @endif
             </div>
-            <div class="text">
-                <p class="text-sm font-medium text-gray-900">
-                    {{ $title }}
-                </p>
-                <p class="mt-1 text-sm text-gray-500">
-                    {{ $message }}
-                </p>
-            </div>
+            <p class="text">
+                {{ $title }}
+            </p>
             <div class="cross" @click="show = false">
                 <button type="button" wire:click="{{ $method }}">
                     <x-svg.cross />

@@ -1,14 +1,15 @@
 <div>
-    {{-- SearchList of projects --}}
-    <label for="projectname">
-        <input
-            type="text"
-            id="projectname"
-            wire:model.live="projectname"
-            class="filter__contacts__input"
-            placeholder="Chercher un projet à ajouter"
-        >
-    </label>
+    <x-form.field
+        label="Nom d'utilisateur"
+        name="projectname"
+        type="text"
+        class="filter__contacts__input"
+        placeholder="Chercher un projet à ajouter"
+        :messages="$errors->get('projectname')"
+        srOnly="true"
+        model="projectname"
+        wire:model.live="projectname"
+    />
     <div x-data="{showSelectType: false, selectedProjectId: null}">
         {{-- List of projects --}}
         @unless($this->searchList->isEmpty())

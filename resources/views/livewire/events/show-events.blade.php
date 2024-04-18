@@ -5,10 +5,10 @@
     </label>
 
     <div wire:loading.class.delay="opacity-50" class="events__list">
-        @unless($this->pastEvents && $this->currentEvents && $this->futureEvents)
+        @unless($this->pastEvents || $this->currentEvents || $this->futureEvents)
             Liste des épreuves
             <div class="empty">
-                <p class="px-2">Aucune épreuve n’a encore été créée jusqu’à présent.</p>
+                <p>Aucune épreuve n’a encore été créée jusqu’à présent.</p>
                 <livewire:events.add-event-dialog @added="$refresh" />
             </div>
         @else
@@ -60,7 +60,6 @@
             @if($this->pastEvents->isEmpty() && $this->currentEvents->isEmpty() && $this->futureEvents->isEmpty())
                 <div class="empty-event">
                     <p>Aucune épreuve ne correspond à votre recherche.</p>
-                    <livewire:events.add-event-dialog @added="$refresh" />
                 </div>
             @endif
         @endunless
@@ -71,7 +70,6 @@
             <x-notifications
                 icon="delete"
                 title="Épreuve supprimée avec succès !"
-                message="Vous avez dit au revoir à cette épreuve..."
                 method="$set('saved', false)"
             />
         @endif

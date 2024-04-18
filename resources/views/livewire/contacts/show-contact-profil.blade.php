@@ -5,20 +5,24 @@
                 <div class="sectionHeader">
                     Profil
 
-                    <button type="button" wire:click="editProfil">Editer le profil</button>
+                    <x-dialog wire:model="showEditDialog">
+                        <x-dialog.open>
+                            <button type="button">Editer le profil</button>
+                        </x-dialog.open>
+                        <x-dialog.panel>
+                            <x-contact.editForm :contact="$contact" :form="$form" />
+                        </x-dialog.panel>
+                    </x-dialog>
                 </div>
                 {{-- Form to edit a profil --}}
-                <form action="" method="post" class="mainProfil__content__profil__form">
-                    @csrf
-                    @method('PUT')
-
+                <div class="mainProfil__content__profil__form">
                     <label for="Photo">Photo</label>
                     <div class="mainProfil__content__profil__form__photo">
                         <div>
                             <img src="{{ $contact->avatar ?? asset('img/placeholder.png') }}" alt="Photo de l'étudiant">
-                            <button type="button">
+                            <span>
                                 @include('components.svg.edit')
-                            </button>
+                            </span>
                         </div>
                         <span>
                             Accepte les fichiers de type<br>
@@ -42,12 +46,14 @@
                         <h3 class="title">Compte GitHub</h3>
                         <p class="text">{{ $contact->github ?? 'Non renseigné' }}</p>
                     </div>
-                </form>
+                </div>
             </div>
 
             @if($contactType  === 'student')
-                {{-- Form to edit a profil --}}
-                <form class="globalComment">
+                {{-- Form to edit the globalComment --}}
+                <form class="globalComment" action="" method="POST">
+                    @csrf
+
                     <div class="sectionHeader">
                         <h3>Commentaire global</h3>
                         <button type="button" wire:click="editComment">Editer</button>

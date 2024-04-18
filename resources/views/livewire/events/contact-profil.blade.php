@@ -19,13 +19,15 @@
                 @include('components.svg.arrow-left')
                 Retour
             </a>
-            <label for="students">
-                <select id="students">
-                    <option value="" selected disabled>Sélectionnez un autre profil !</option>
-                    <option value="1">Etudiant 1</option>
-                    <option value="2">Etudiant 2</option>
-                </select>
-            </label>
+            <x-form.select
+                label="Nom d'un autre contact du même événement"
+                name="name"
+                placeholder="Sélectionner un autre profil -"
+                :options="$event->contacts"
+                :messages="$errors->get('name')"
+                srOnly="true"
+                wire:change="redirectUser($event.target.value)"
+            />
         </div>
 
         <livewire:contacts.show-contact-profil :$contact />

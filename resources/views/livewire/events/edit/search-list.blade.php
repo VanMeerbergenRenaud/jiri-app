@@ -8,6 +8,7 @@
         placeholder="Chercher un contact à ajouter"
         :messages="$errors->get('username')"
         srOnly="true"
+        model="username"
         wire:model.live="username"
     />
     <div x-data="{showSelectType: false, selectedContactId: null, selectedRole: null}">

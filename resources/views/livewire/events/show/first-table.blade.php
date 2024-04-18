@@ -2,7 +2,9 @@
     <table class="first-table">
         <thead>
             <tr class="row-1">
-                <th scope="row" colspan="100%">Tableau récapitulatif des passages</th>
+                <th scope="row" colspan="100%">
+                    Tableau récapitulatif des passages
+                </th>
             </tr>
             <tr class="row-2">
                 <th class="category">Étudiants | Jury</th>

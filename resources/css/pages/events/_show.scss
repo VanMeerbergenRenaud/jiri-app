@@ -17,13 +17,13 @@
             z-index: 2;
 
             th {
+                position: relative;
                 padding: 1.25rem;
                 font-size: 0.75rem;
                 font-weight: 500;
                 text-transform: uppercase;
                 border-radius: 1rem 1rem 0 0;
                 background-color: $gray-500;
-                width: 100%;
             }
         }
 
@@ -85,7 +85,7 @@
 
     /* Second Table */
 
-    $width: 4.5rem; // width of .moy, .cg, .cga & .cd
+    $width: 5.05rem; // width of .moy, .cg, .cga & .cd
 
     .event__show__results {
         img {
@@ -167,12 +167,14 @@
                 padding: 4rem 1.25rem 1rem 1.75rem;
                 vertical-align: bottom;
                 writing-mode: sideways-lr;
+                min-width: 2rem;
                 max-width: 2.5rem;
             }
 
             .moy {
                 right: calc($width*3);
                 background-color: #D9EBED;
+                border-left: $border;
             }
             .cg {
                 right: calc($width*2);
@@ -236,14 +238,17 @@
                 padding: 0.35rem;
             }
 
-            .moy {right: calc($width*3)}
+            .moy {
+                right: calc($width*3);
+                border-left: $border;
+            }
             .cg {right: calc($width*2)}
             .cga {right: calc($width*1)}
             .cd {right: 0}
 
             /* List of students */
             .students {
-                position: relative;
+                position: sticky;
                 padding: 1.25rem 2.5rem;
                 text-align: left;
 

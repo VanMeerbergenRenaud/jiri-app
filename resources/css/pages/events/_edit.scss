@@ -16,6 +16,15 @@
             padding-bottom: 2rem;
             border-bottom: $border;
 
+            .form__field {
+                margin-top: 0.5rem;
+                width: 100%;
+
+                input {
+                    width: calc(100% - 2rem);
+                }
+            }
+
             label {
                 display: block;
                 margin-bottom: 0.75rem;
@@ -25,11 +34,11 @@
             input {
                 padding: 1rem;
                 border-radius: 0.5rem;
-                min-width: 250px;
             }
 
             .error-message {
                 margin-bottom: 1.25rem;
+                color: red;
             }
         }
 
@@ -190,16 +199,16 @@
 
             /* Form to create a new contact */
             .contact__new__form {
+                margin: 0;
                 padding: 1.5rem;
                 background-color: $gray-500;
                 border-radius: 0 0 1rem 1rem;
 
                 p {
                     margin-bottom: 1.5rem;
-                    font-size: 0.875rem;
-                    font-weight: 500;
-                    color: $blue;
-                    text-decoration: underline;
+                    font-size: 0.94rem;
+                    font-weight: 600;
+                    color: $blue-dark;
                 }
 
                 &__container {
@@ -212,13 +221,13 @@
                         flex-direction: column;
                         font-weight: 500;
                         font-size: 0.875rem;
+                        padding-left: 0;
 
                         select {
                             margin-top: 0.75rem;
                             margin-bottom: 1.25rem;
                             padding: 0.875rem;
                             background-color: white;
-                            font-weight: 400;
                         }
                     }
 
@@ -236,25 +245,9 @@
                         grid-column: 2/3;
 
                         label {
+                            font-size: 0.875rem;
                             font-weight: 500;
                         }
-                    }
-
-                    button {
-                        margin-top: 0.5rem;
-                        padding: 0.75rem 1.5rem;
-                        border-radius: 0.5rem;
-                        background-color: transparent;
-                        text-decoration: underline;
-                    }
-
-                    button + button {
-                        &:hover {
-                            background-color: $gray-bg;
-                        }
-
-                        text-decoration: none;
-                        background-color: white;
                     }
 
                     .error-message {
@@ -276,31 +269,17 @@
                         }
                     }
 
-                    .project-name, .project-task {
-                        label {
+                    .dialog__footer__buttons {
+                        display: grid;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 1rem;
+
+                        button {
+                            margin-top: 0;
                             display: inline-block;
+                            text-align: center;
                         }
-
-                        input {
-                            margin-bottom: 0.5rem;
-                        }
-                    }
-
-                    .project-tasks {
-                        margin-top: 0.875rem;
-                        grid-column: 1/3;
-
-                        select {
-                            display: block;
-                            margin-top: 0.875rem;
-                            margin-bottom: 1rem;
-                            padding: 0.875rem;
-                            background-color: white;
-                        }
-                    }
-
-                    .save, .cancel {
-                        margin-top: 0;
                     }
                 }
             }
@@ -370,6 +349,37 @@
         margin-bottom: 1.5rem;
     }
 
+    .contact__ponderation {
+        padding: 0 1rem;
+
+        &__title {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        &__text {
+            margin: 0.5rem 0 1.5rem;
+            font-size: 0.875rem;
+            color: $text-slate-500;
+        }
+
+        &__list {
+            margin: 1rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 1rem;
+
+            .form__field {
+                margin: 0;
+            }
+
+            input {
+                width: auto;
+            }
+        }
+    }
+
     /* Final buttons in the form */
     .form__submit {
         display: flex;
@@ -394,10 +404,6 @@
 @media (min-width: 665px) {
     .mainEventsCreate {
         .form {
-            &__event-infos {
-                gap: 2.5rem;
-            }
-
             &__component {
                 padding: 2rem 0.5rem 1rem;
 
@@ -415,9 +421,11 @@
                             border-bottom: 1px solid #dbe2ed;
                         }
 
-                        .save, .cancel {
-                            display: inline-block;
-                            margin: 0.75rem 0 -0.5rem;
+                        .dialog__footer__buttons {
+                            margin-top: 0.5rem;
+                            display: flex;
+                            justify-content: flex-end;
+                            grid-column: 1/3;
                         }
                     }
                 }
@@ -455,6 +463,7 @@
                 justify-content: space-between;
 
                 .button {
+                    font-size: 0.875rem;
                     padding: 1rem 4.5rem;
                     width: fit-content;
                 }
@@ -470,8 +479,18 @@
 
         .form {
             &__event-infos {
-                gap: 2.5rem;
+                flex-wrap: nowrap;
+
+                .form__field {
+                    width: fit-content;
+                    min-width: 250px;
+
+                    input {
+                        max-width: 250px;
+                    }
+                }
             }
+
             &__component {
                 &__added {
                     ul {
@@ -511,6 +530,16 @@
 @media (min-width: 1000px) {
     .mainEventsCreate{
         .form {
+            &__event-infos {
+                .form__field {
+                    min-width: 265px;
+
+                    input {
+                        max-width: 265px;
+                    }
+                }
+            }
+
             &__container {
                 display: grid;
                 grid-template-columns: repeat(2, 1fr);
@@ -524,9 +553,7 @@
                 /* Form to create a new contact */
                 .contact__new__form {
                     &__container {
-                        .save, .cancel {
-                            margin: 1.25rem 0 -0.5rem;
-                        }
+                        // TODO
                     }
                 }
 
@@ -620,7 +647,7 @@
                 .contact__new__form {
                     &__container {
                         display: grid;
-                        grid-template-columns: repeat(2, 1fr);
+                        grid-template-columns: 250px auto;
                         gap: 0.5rem 1.5rem;
 
                         &__label {
@@ -636,8 +663,8 @@
                             border-bottom: 0;
                         }
 
-                        .save, .cancel {
-                            margin: 1.5rem 0 -0.5rem;
+                        .dialog__footer__buttons {
+                            margin-right: -1rem;
                         }
                     }
                 }

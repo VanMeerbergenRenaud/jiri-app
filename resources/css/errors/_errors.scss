@@ -1,6 +1,6 @@
 /* 403, 404 pages */
 
-.error {
+.p-error {
     display: grid;
     height: 82.5vh;
     padding: 1.5rem;
@@ -58,13 +58,13 @@
 }
 
 @media (min-width: 640px) {
-    .error {
+    .p-error {
         padding: 8rem 0;
     }
 }
 
 @media (min-width: 1024px) {
-    .error {
+    .p-error {
         padding: 0 2rem;
     }
 }

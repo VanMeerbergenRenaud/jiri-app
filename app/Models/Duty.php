@@ -9,6 +9,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Duty extends Model
 {
+    /*
+    * Duty est le concept qui lie un project et un jiri.
+    * C'est l'idée d'un devoir à réaliser.
+    * Il peut être caractérisé par des liens et des tâches.
+    */
+
     use HasFactory;
 
     // event, project

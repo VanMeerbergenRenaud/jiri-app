@@ -97,7 +97,8 @@
     }
 
     .empty-event {
-        padding: 1rem;
+        margin: 1.5rem 0 2rem;
+        padding: 1rem 1.5rem;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -117,13 +118,18 @@
         }
     }
 
-    .empty {
-        margin-top: 1rem;
-        padding: 5.5rem 0;
+    .empty-event-start {
+        margin: 1rem auto 2rem;
+        padding: 2.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         border: $border;
         border-radius: 1.5rem;
 
         p, a {
+            text-align: center;
             font-size: 1rem;
             font-weight: 500;
         }

@@ -1,9 +1,10 @@
 <div>
     {{-- Form to edit a new contact --}}
     <template x-if="createmode">
-        <form wire:submit.prevent="save" class="contact__new__form">
-            <p>Ajouter un contact</p>
+        <form wire:submit.prevent="save" class="contact__new__form form">
+            <p>Ajouter votre nouveau contact</p>
             <div class="contact__new__form__container">
+
                 {{-- Type de contact --}}
                 <label for="newcontacttype" class="contact__new__form__container__label">
                     Type
@@ -11,60 +12,57 @@
                         <option value="" selected>Sélectionner le type</option>
                         <option value="student">Étudiants</option>
                         <option value="evaluator">Évaluateurs</option>
-                        <option value="neutre">Neutre</option>
                     </select>
                     @error('newcontacttype')
-                    <div class="error-message">{{ $message }}</div>
+                        <div class="error-message">{{ $message }}</div>
                     @enderror
                 </label>
+
                 {{-- Nom du contact --}}
                 <div class="position-right">
-                    <label for="newcontactname">Nom du contact</label>
-                    <input
+                    <x-form.field
+                        label="Nom du contact"
+                        name="newcontactname"
                         type="text"
-                        id="newcontactname"
-                        wire:model="newcontactname"
                         placeholder="Ex : Vilain"
-                    >
-                    @error('newcontactname')
-                    <div class="error-message">{{ $message }}</div>
-                    @enderror
+                        model="newcontactname"
+                        :messages="$errors->get('newcontactname')"
+                    />
                 </div>
+
                 {{-- Prénom du contact --}}
                 <div class="position-right">
-                    <label for="newcontactfirstname">Prénom du contact</label>
-                    <input
+                    <x-form.field
+                        label="Prénom du contact"
+                        name="newcontactfirstname"
                         type="text"
-                        id="newcontactfirstname"
-                        wire:model="newcontactfirstname"
                         placeholder="Ex : Dominique"
-                    >
-                    @error('newcontactfirstname')
-                    <div class="error-message">{{ $message }}</div>
-                    @enderror
+                        model="newcontactfirstname"
+                        :messages="$errors->get('newcontactfirstname')"
+                    />
                 </div>
+
                 {{-- Adresse mail du contact --}}
                 <div class="position-right">
-                    <label for="newcontactemail">Adresse mail du contact</label>
-                    <input
+                    <x-form.field
+                        label="Adresse mail du contact"
+                        name="newcontactemail"
                         type="email"
-                        id="newcontactemail"
-                        wire:model="newcontactemail"
                         placeholder="Ex : dominique.vilain@hepl.be"
-                    >
-                    @error('newcontactemail')
-                    <div class="error-message">{{ $message }}</div>
-                    @enderror
+                        model="newcontactemail"
+                        :messages="$errors->get('newcontactemail')"
+                    />
                 </div>
-                {{-- Button to cancel the new contact --}}
-                <button type="button" class="cancel" @click="createmode = false">
-                    Annuler
-                </button>
-                {{-- Button to save the new contact --}}
-                <button type="submit" class="save">
-                    Enregistrer
-                </button>
-                {{-- Validation message --}}
+
+                {{-- Footer buttons --}}
+                <div class="dialog__footer__buttons">
+                    <button type="button" class="cancel" @click="createmode = false">
+                        Annuler
+                    </button>
+                    <button type="submit" class="save">
+                        Enregistrer
+                    </button>
+                </div>
             </div>
         </form>
     </template>

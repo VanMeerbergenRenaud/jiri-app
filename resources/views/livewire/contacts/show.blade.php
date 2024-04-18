@@ -62,13 +62,13 @@
                             </a>
                         </p>
 
-                        @if($attendance->role == 'evaluator')
+                        @if($attendance->role == 'evaluator' && isset($attendance->token))
                             <a class="link"
                                href="{{ route('events.evaluator-dashboard', [
-                                'event' => $attendance->event->id,
-                                'contact' => $attendance->contact->id,
-                                'token' => $attendance->token
-                            ]) }}"
+                                    'event' => $attendance->event->id,
+                                    'contact' => $attendance->contact->id,
+                                    'token' => $attendance->token
+                                ]) }}"
                             >
                                 Dashboard de l'évaluateur
                             </a>

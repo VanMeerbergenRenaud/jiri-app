@@ -2,10 +2,14 @@
 
 namespace App\Livewire\Contacts;
 
+use App\Livewire\Forms\ContactForm;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class ShowContactProfil extends Component
 {
+    use WithFileUploads;
+
     public $contact;
 
     public $contactType;
@@ -16,9 +20,23 @@ class ShowContactProfil extends Component
 
     public $globalComment;
 
+    public ContactForm $form;
+
+    public $showEditDialog = false;
+
+    public function save()
+    {
+        $this->form->update();
+
+        $this->contact->refresh();
+
+        $this->reset('showEditDialog');
+    }
+
     public function mount($contact)
     {
         $this->contact = $contact;
+        $this->form->setContact($this->contact);
 
         $this->contactType = auth()->user()->attendances()
             ->where('contact_id', $contact->id)

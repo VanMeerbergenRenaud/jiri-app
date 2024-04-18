@@ -2,45 +2,42 @@
     {{-- Form to edit a new project --}}
     <template x-if="createmode">
         <form wire:submit.prevent="save" class="contact__new__form">
-            <p>Ajouter un projet</p>
+            <p>Ajouter votre nouveau projet</p>
             <div class="contact__new__form__container">
+
                 {{-- Nom du projet --}}
                 <div class="contact__new__form__container__label">
-                    <label for="newprojectname">Nom du projet</label>
-                    <input
+                    <x-form.field
+                        label="Nom du projet"
+                        name="newprojectname"
                         type="text"
-                        id="newprojectname"
-                        wire:model="newprojectname"
                         placeholder="Ex : Portfolio"
-                    >
-                    @error('newprojectname')
-                    <div class="error-message">{{ $message }}</div>
-                    @enderror
+                        model="newprojectname"
+                        :messages="$errors->get('newprojectname')"
+                    />
                 </div>
 
                 {{-- Tasks --}}
-                <div class="project-tasks">
-                    {{--<label for="newprojecttasks">Listes des tâches</label>
-                    <select id="newprojecttasks" wire:model="newprojecttasks">
-                        <option value="0" selected>Sélectionner une ou plusieurs tâche(s)</option>
-                        @foreach($tasks as $task)
-                            <option value="{{ $task->name }}">{{ ucfirst($task->name) }}</option>
-                        @endforeach
-                    </select>
-                    @error('newprojecttasks')
-                    <div class="error-message">{{ $message }}</div>
-                    @enderror--}}
+                <div class="contact__new__form__container__label">
+                    <x-form.field
+                        label="Tâches"
+                        name="newprojecttasks"
+                        type="text"
+                        placeholder="Ex : Développement"
+                        model="newprojecttasks"
+                        :messages="$errors->get('newprojecttasks')"
+                    />
                 </div>
 
-                {{-- Button to cancel the new contact --}}
-                <button type="button" class="cancel" @click="createmode = false">
-                    Annuler
-                </button>
-                {{-- Button to save the new contact --}}
-                <button type="submit" class="save">
-                    Enregistrer
-                </button>
-                {{-- Validation message --}}
+                {{-- Footer buttons --}}
+                <div class="dialog__footer__buttons">
+                    <button type="button" class="cancel" @click="createmode = false">
+                        Annuler
+                    </button>
+                    <button type="submit" class="save">
+                        Enregistrer
+                    </button>
+                </div>
             </div>
         </form>
     </template>

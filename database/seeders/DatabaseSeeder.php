@@ -33,6 +33,13 @@ class DatabaseSeeder extends Seeder
                 'password' => bcrypt('password'),
             ]);
 
+        User::factory()
+            ->create([
+                'name' => 'Test',
+                'email' => 'test@gmail.com',
+                'password' => bcrypt('password'),
+            ]);
+
         $users = collect([$dominique, $renaud]);
 
         foreach ($users as $user) {

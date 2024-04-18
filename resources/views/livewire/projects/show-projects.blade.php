@@ -40,7 +40,6 @@
             <x-notifications
                 icon="delete"
                 title="Projet supprimé avec succès !"
-                message="Vous avez supprimé un projet qui facilitera sûrement la vie de vos étudiants."
                 method="$set('saved', false)"
             />
         @endif

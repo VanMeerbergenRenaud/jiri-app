@@ -15,6 +15,11 @@ class ContactProfil extends Component
         $this->contactId = $contact;
     }
 
+    public function redirectUser($contactId)
+    {
+        return redirect()->route('events.contact-profil', ['event' => $this->eventId, 'contact' => $contactId]);
+    }
+
     public function render()
     {
         $user = auth()->user();
