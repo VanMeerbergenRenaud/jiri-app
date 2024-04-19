@@ -29,6 +29,7 @@ class EvaluatorDashboard extends Component
             ->firstOrFail();
 
         return view('livewire.events.evaluator-dashboard', compact('user', 'event', 'contact', 'evaluator'))
-            ->layout('layouts.evaluator');
+            ->layout('layouts.evaluator')
+            ->title($event->name);
     }
 }

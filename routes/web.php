@@ -1,17 +1,16 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-
 use App\Livewire\Homepage;
 use App\Livewire\Welcome;
 use App\Livewire\Dashboard;
+use App\Livewire\Contacts\Index as CIndex;
+use App\Livewire\Contacts\Show as CShow;
+use App\Livewire\Contacts\ContactProfil as EContactProfil;
 use App\Livewire\Events\Index as EIndex;
 use App\Livewire\Events\Show as EShow;
 use App\Livewire\Events\Edit as EEdit;
-use App\Livewire\Events\ContactProfil as EContactProfil;
 use App\Livewire\Events\EvaluatorDashboard as EEvaluatorDashboard;
-use App\Livewire\Contacts\Index as CIndex;
-use App\Livewire\Contacts\Show as CShow;
 use App\Livewire\Projects\Index as PIndex;
 use App\Livewire\Projects\Show as PShow;
 use Illuminate\Support\Facades\Route;
@@ -39,7 +38,7 @@ Route::get('/welcome', Welcome::class)
 
 Route::middleware('auth')->group(function () {
     /* Dashboard */
-    Route::get('/dashboard', Dashboard::class)->name('dashboard');
+    Route::get('/', Dashboard::class)->name('dashboard');
 
     /* Profile RUD */
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

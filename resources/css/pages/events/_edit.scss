@@ -354,13 +354,14 @@
         border-bottom: $border;
 
         &__title {
+            margin-top: 1.5rem;
             font-size: 1rem;
             font-weight: 600;
         }
 
         &__text {
             margin: 0.5rem 0 1.5rem;
-            font-size: 0.875rem;
+            font-size: 0.94rem;
             color: $text-slate-500;
         }
 
@@ -378,6 +379,11 @@
             input {
                 width: auto;
             }
+        }
+
+        &__empty {
+            margin: 0 0 1.5rem;
+            font-size: 0.94rem;
         }
     }
 
@@ -576,6 +582,12 @@
             &__component:last-of-type {
                 padding-left: 2rem;
                 border-left: $border;
+            }
+
+            .contact__ponderation {
+                &__title {
+                    margin-top: 0;
+                }
             }
         }
     }

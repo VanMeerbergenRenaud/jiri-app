@@ -30,6 +30,11 @@ class SearchListProject extends Component
         $event = Event::find($this->eventId);
         $project = Project::find($projectId);
 
+        // Avoid duplicate projects in a event
+        if ($event->projects->contains($project)) {
+            return;
+        }
+
         auth()->user()->eventProjects()->create([
             'event_id' => $event->id,
             'project_id' => $project->id,

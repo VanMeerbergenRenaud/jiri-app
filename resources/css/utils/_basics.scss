@@ -52,6 +52,10 @@ svg {
     display: block;
 }
 
+.capitalize {
+    text-transform: capitalize;
+}
+
 .rotate-180 {
     transform: rotate(180deg);
 }

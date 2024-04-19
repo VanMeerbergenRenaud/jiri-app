@@ -19,11 +19,9 @@
                         <span class="capitalize name projectName">{{ ucfirst($project->name) }}</span>
                         <div class="projectTasks">
                             @if(!empty($project->tasks))
-                                <span>
-                                    @foreach($project->tasks as $task)
-                                        <span class="taskName">{{ ucfirst($task->name) }}</span>
-                                    @endforeach
-                                </span>
+                                @foreach(json_decode($project->tasks, true) as $task)
+                                    <span class="taskName">{{ ucfirst($task) }}</span>
+                                @endforeach
                             @else
                                 <span class="underline">
                                     Aucune tâche associée à ce projet.

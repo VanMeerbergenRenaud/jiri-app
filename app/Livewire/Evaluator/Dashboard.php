@@ -18,16 +18,14 @@ class Dashboard extends Component
     public $event;
 
     public $projects;
+    public $students;
 
     public function mount()
     {
         $this->event = auth()->user()->events()->first();
 
-        $this->projects = auth()->user()->events()
-            ->join('duties', 'events.id', '=', 'duties.event_id')
-            ->join('projects', 'duties.project_id', '=', 'projects.id')
-            ->where('events.id', $this->event->id)
-            ->get();
+        $this->projects = $this->event->projects;
+        $this->students = $this->event->students;
     }
 
     #[Computed]

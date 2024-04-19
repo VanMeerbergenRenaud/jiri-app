@@ -22,7 +22,7 @@
             </a>
 
             <!-- Name of the event -->
-            <h1 class="evaluator__header__title">{{ $title ?? 'Jury juin 2023' }}</h1>
+            <h1 class="evaluator__header__title">{{ $title ?? 'Dashboard évaluateur' }}</h1>
 
             <!-- Avatar of the evaluator -->
             <img src="{{ asset('img/placeholder.png') }}" alt="" class="evaluator__header__img">

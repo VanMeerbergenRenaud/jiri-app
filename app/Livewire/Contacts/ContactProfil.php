@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Events;
+namespace App\Livewire\Contacts;
 
 use Livewire\Component;
 
@@ -28,7 +28,7 @@ class ContactProfil extends Component
 
         $contact = $event->contacts()->findOrFail($this->contactId);
 
-        return view('livewire.events.contact-profil', compact('user', 'event', 'contact'))
+        return view('livewire.contacts.contact-profil', compact('user', 'event', 'contact'))
             ->layout('layouts.app');
     }
 }
