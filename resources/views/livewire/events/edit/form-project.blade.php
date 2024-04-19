@@ -23,7 +23,7 @@
                         label="Tâches"
                         name="newprojecttasks"
                         type="text"
-                        placeholder="Ex : Développement"
+                        placeholder="Ex : Intégration"
                         model="newprojecttasks"
                         :messages="$errors->get('newprojecttasks')"
                     />

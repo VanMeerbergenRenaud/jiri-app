@@ -6,7 +6,6 @@ use App\Models\Attendance;
 use App\Models\Contact;
 use App\Models\eventProject;
 use App\Models\Event;
-use App\Models\Implementation;
 use App\Models\Project;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -58,10 +57,10 @@ class DatabaseSeeder extends Seeder
 
             // Attendances for each event
             foreach ($events as $event) {
-                $contacts = $user->contacts->random(3);
+                $contacts = $user->contacts->random(6);
 
                 foreach ($contacts as $contact) {
-                    Attendance::factory()->count(8)->create([
+                    Attendance::factory()->create([
                         'event_id' => $event->id,
                         'contact_id' => $contact->id,
                     ]);
@@ -70,7 +69,7 @@ class DatabaseSeeder extends Seeder
 
             // eventProjects for each event
             foreach ($events as $event) {
-                $projects = $user->projects->random(3);
+                $projects = $user->projects->random(5);
 
                 $totalPonderation = 0;
                 $ponderations = [];

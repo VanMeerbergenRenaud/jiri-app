@@ -18,7 +18,7 @@
                     <li class="filter__contacts__list__item" wire:key="{{$project->id}}">
                         <span class="capitalize name projectName">{{ ucfirst($project->name) }}</span>
                         <div class="projectTasks">
-                            {{--@if($project->tasks->count())
+                            @if(!empty($project->tasks))
                                 <span>
                                     @foreach($project->tasks as $task)
                                         <span class="taskName">{{ ucfirst($task->name) }}</span>
@@ -28,7 +28,7 @@
                                 <span class="underline">
                                     Aucune tâche associée à ce projet.
                                 </span>
-                            @endif--}}
+                            @endif
                         </div>
                         <button type="button" wire:click="addProject({{ $project->id }})">
                             Ajouter

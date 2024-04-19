@@ -7,7 +7,7 @@
                 <li wire:key="{{ $project->id }}">
                     <span class="category capitalize">{{ $project->name ?? 'Pas de nom' }}</span>
                     <span class="username capitalize">
-                    @if(!empty($project->tasks))
+                        @if(!empty($project->tasks))
                             @foreach(json_decode($project->tasks, true) as $task)
                                 <span class="taskName">{{ ucfirst($task) }}</span>
                             @endforeach
