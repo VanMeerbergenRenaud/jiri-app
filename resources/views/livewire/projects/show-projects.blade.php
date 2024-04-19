@@ -23,7 +23,7 @@
                 />
             @empty
                 <tr>
-                    <td colspan="100%" class="py-2 min-w-80">
+                    <td colspan="100%" class="empty">
                         Aucun project trouvé.
                     </td>
                 </tr>

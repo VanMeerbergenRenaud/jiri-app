@@ -15,6 +15,11 @@ class Project extends Model
     protected $fillable = [
         'name',
         'description',
+        'tasks',
+    ];
+
+    protected $casts = [
+        'tasks' => 'array',
     ];
 
     public function user(): BelongsTo
@@ -22,13 +27,13 @@ class Project extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function events(): BelongsToMany
+    public function events()
     {
-        return $this->belongsToMany(Event::class, 'duties', 'project_id', 'event_id');
+        return $this->belongsToMany(Event::class);
     }
 
-    public function duties(): HasMany
+    public function eventProjects(): HasMany
     {
-        return $this->hasMany(Duty::class);
+        return $this->hasMany(EventProject::class);
     }
 }

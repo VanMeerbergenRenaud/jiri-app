@@ -68,12 +68,12 @@ class ShowEvents extends Component
     {
         $event = Event::findOrFail($eventId);
 
-        foreach ($event->duties as $duty) {
-            $duty->implementations()->delete();
+        foreach ($event->eventProjects() as $eventProject) {
+            $eventProject->implementations()->delete();
         }
 
         $event->attendances()->delete();
-        $event->duties()->delete();
+        $event->eventProjects()->delete();
         $event->delete();
 
         sleep(1);

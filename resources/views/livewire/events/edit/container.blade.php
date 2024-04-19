@@ -148,12 +148,6 @@
         </div>
 
         {{-- Pondération --}}
-        <?php
-            $projects = $event->duties;
-
-            $totalPercentage = 100;
-            $remainingPercentage = 25;
-        ?>
         <div class="contact__ponderation">
             <h3 role="heading" aria-level="3" class="contact__ponderation__title">Pondération</h3>
             <p class="contact__ponderation__text">
@@ -180,8 +174,8 @@
 
         {{-- Submit buttons --}}
         <div class="form__submit">
-            <a href="{{ route('events.index') }}" class="button">Annuler</a>
-            <button class="button button--blue" type="submit">Sauvegarder</button>
+            <a href="{{ route('events.index') }}" class="save">Annuler</a>
+            <button class="cancel" type="submit">Sauvegarder</button>
         </div>
     </form>
 </div>

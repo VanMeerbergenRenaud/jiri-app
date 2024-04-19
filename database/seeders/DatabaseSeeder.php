@@ -4,11 +4,10 @@ namespace Database\Seeders;
 
 use App\Models\Attendance;
 use App\Models\Contact;
-use App\Models\Duty;
+use App\Models\eventProject;
 use App\Models\Event;
 use App\Models\Implementation;
 use App\Models\Project;
-use App\Models\Task;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -69,31 +68,37 @@ class DatabaseSeeder extends Seeder
                 }
             }
 
-            // Duties for each event
+            // eventProjects for each event
             foreach ($events as $event) {
                 $projects = $user->projects->random(3);
 
+                $totalPonderation = 0;
+                $ponderations = [];
+
                 foreach ($projects as $project) {
-                    Duty::factory()->count(2)->create([
+                    $ponderation = mt_rand(1, 100);
+                    $totalPonderation += $ponderation;
+                    $ponderations[] = $ponderation;
+                }
+
+                // Adjust ponderations if total is not 100
+                if ($totalPonderation !== 100) {
+                    $ponderations = array_map(function ($ponderation) use ($totalPonderation) {
+                        return round(($ponderation / $totalPonderation) * 100);
+                    }, $ponderations);
+                }
+
+                $ponderationsSum = array_sum($ponderations);
+                if ($ponderationsSum != 100) {
+                    $ponderations[0] += 100 - $ponderationsSum;
+                }
+
+                foreach ($projects as $index => $project) {
+                    EventProject::factory()->create([
                         'event_id' => $event->id,
                         'project_id' => $project->id,
+                        'ponderation' => $ponderations[$index],
                     ]);
-                }
-            }
-
-            // Implementations for each event (duty & contact id)
-            foreach ($events as $event) {
-                $duties = $event->duties;
-
-                foreach ($duties as $duty) {
-                    $contacts = $event->contacts->random(2);
-
-                    foreach ($contacts as $contact) {
-                        Implementation::factory()->count(1)->create([
-                            'duty_id' => $duty->id,
-                            'contact_id' => $contact->id,
-                        ]);
-                    }
                 }
             }
         }

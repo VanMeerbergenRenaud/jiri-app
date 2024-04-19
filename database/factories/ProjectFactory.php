@@ -19,7 +19,6 @@ class ProjectFactory extends Factory
             'name' => $this->faker->words(2, true),
             'description' => $this->faker->text(),
             'tasks' => json_encode(
-                // Each projet has between 3 and 10 tasks
                 $this->faker->words($this->faker->numberBetween(3, 10))
             ),
         ];

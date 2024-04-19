@@ -25,20 +25,17 @@ class SearchListProject extends Component
             : new Collection();
     }
 
-    public function addDuty($projectId)
+    public function addProject($projectId)
     {
         $event = Event::find($this->eventId);
         $project = Project::find($projectId);
 
-        if (! $event->duties()->where('project_id', $project->id)->exists()) {
-            auth()->user()->duties()->create([
-                'event_id' => $event->id,
-                'project_id' => $project->id,
-                'name' => $project->name,
-                'description' => $project->description,
-                'tasks' => $project->tasks,
-            ]);
-        }
+        auth()->user()->eventProjects()->create([
+            'event_id' => $event->id,
+            'project_id' => $project->id,
+            'ponderation' => 1,
+            'link' => 'https://example.com',
+        ]);
 
         $this->dispatch('fetchEventProjects');
     }

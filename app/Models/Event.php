@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -31,21 +30,6 @@ class Event extends Model
             ->withPivot(['role', 'token']);
     }
 
-    public function attendances(): HasMany
-    {
-        return $this->hasMany(Attendance::class);
-    }
-
-    public function duties(): HasMany
-    {
-        return $this->hasMany(Duty::class);
-    }
-
-    public function implementations(): HasMany
-    {
-        return $this->hasMany(Implementation::class);
-    }
-
     public function contacts(): BelongsToMany
     {
         return $this->belongsToMany(
@@ -60,10 +44,21 @@ class Event extends Model
     {
         return $this->belongsToMany(
             Project::class,
-            'implementations',
+            'event_project',
             'event_id',
             'project_id'
-        );
+        )
+            ->withPivot('ponderation', 'link');
+    }
+
+    public function attendances(): HasMany
+    {
+        return $this->hasMany(Attendance::class);
+    }
+
+    public function eventProjects(): HasMany
+    {
+        return $this->hasMany(EventProject::class);
     }
 
     public function students(): BelongsToMany

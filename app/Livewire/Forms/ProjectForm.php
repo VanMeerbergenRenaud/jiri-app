@@ -3,20 +3,19 @@
 namespace App\Livewire\Forms;
 
 use App\Models\Project;
-use App\Models\Task;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
 class ProjectForm extends Form
 {
-    #[Validate('required|min:3')]
+    #[Validate('required|min:3|max:255')]
     public $name = '';
 
     #[Validate('required|min:3|max:255')]
     public $description = '';
 
     #[Validate('nullable')]
-    public $selectedTasks = [];
+    public $tasks = [""];
 
     public Project $project;
 
@@ -25,21 +24,20 @@ class ProjectForm extends Form
         $this->project = $project;
         $this->name = $project->name;
         $this->description = $project->description;
-        $this->selectedTasks = $project->selectedTasks;
+        $this->tasks = $project->tasks;
     }
 
     public function save()
     {
         $this->validate();
 
-        // Create a new project
-        $project = auth()->user()->projects()->create([
+        auth()->user()->projects()->create([
             'name' => $this->name,
             'description' => $this->description,
-            'selectedTasks' => $this->selectedTasks,
+            'tasks' => $this->tasks,
         ]);
 
-        $this->reset(['name', 'description', 'selectedTasks']);
+        $this->reset(['name', 'description', 'tasks']);
     }
 
     public function update()
@@ -49,7 +47,7 @@ class ProjectForm extends Form
         $this->project->update([
             'name' => $this->name,
             'description' => $this->description,
-            'selectedTasks' => $this->selectedTasks,
+            'tasks' => $this->tasks,
         ]);
     }
 }

@@ -6,7 +6,7 @@
     </td>
     <td class="capitalize">{{ str($project->description)->limit(50) }}</td>
     <td class="tasks">
-        {{ $project->tasks }}
+        {{ implode(' | ', json_decode($project->tasks)) }}
     </td>
     <td class="actions">
         <x-menu>

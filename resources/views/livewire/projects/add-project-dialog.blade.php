@@ -17,8 +17,7 @@
                         model="form.name"
                         value="{{ old('name') }}"
                         placeholder="Nom du projet"
-                        :messages="$errors->get('nom')"
-                        required
+                        :messages="$errors->get('form.name')"
                         autofocus
                     />
 
@@ -28,7 +27,7 @@
                         model="form.description"
                         value="{{ old('description') }}"
                         placeholder="Informations sur le projet"
-                        :messages="$errors->get('description')"
+                        :messages="$errors->get('form.description')"
                     />
 
                     <x-form.field
@@ -38,7 +37,7 @@
                         model="form.tasks"
                         value="{{ old('tasks') }}"
                         placeholder="Tâches à réaliser"
-                        :messages="$errors->get('tasks')"
+                        :messages="$errors->get('form.tasks')"
                     />
                 </div>
 

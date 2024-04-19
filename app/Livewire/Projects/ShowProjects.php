@@ -28,14 +28,6 @@ class ShowProjects extends Component
     {
         $project = Project::findOrFail($projectId);
 
-        // Delete the associated duties and their implementations
-        foreach ($project->duties as $duty) {
-            $duty->implementations()->delete();
-            $duty->delete();
-        }
-
-        $project->events()->detach();
-
         $project->delete();
 
         sleep(1);

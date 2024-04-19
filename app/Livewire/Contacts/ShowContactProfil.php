@@ -45,7 +45,7 @@ class ShowContactProfil extends Component
             ->role;
 
         // Fetch projects related to the event with duties
-        $this->projects = auth()->user()->duties()
+        $this->projects = auth()->user()->eventProjects()
             ->where('event_id', $this->contact->pivot->event_id)
             ->get();
 

@@ -30,7 +30,7 @@
                                 </span>
                             @endif--}}
                         </div>
-                        <button type="button" wire:click="addDuty({{ $project->id }})">
+                        <button type="button" wire:click="addProject({{ $project->id }})">
                             Ajouter
                         </button>
                     </li>

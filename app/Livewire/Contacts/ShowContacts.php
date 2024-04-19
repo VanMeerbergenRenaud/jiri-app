@@ -44,7 +44,7 @@ class ShowContacts extends Component
         $contact = Contact::findOrFail($contactId);
 
         $contact->events()->detach();
-        $contact->projects()->detach();
+
         $contact->delete();
 
         sleep(1);
