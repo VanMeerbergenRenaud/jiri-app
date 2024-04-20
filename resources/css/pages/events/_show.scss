@@ -11,6 +11,20 @@
         display: flex;
         align-items: center;
         gap: 1rem;
+
+        label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            margin-right: -0.5rem;
+        }
+
+        select {
+            padding: 0.65rem 3rem 0.65rem 1rem;
+            background-color: $gray-100;
+            border-radius: 0.75rem;
+            text-indent: 0;
+        }
     }
 
     /* First Table */
@@ -174,6 +188,10 @@
             }
 
             .moy, .cg, .cga, .cd {
+                writing-mode: vertical-rl;
+            }
+
+            .moy, .cg, .cga, .cd {
                 // sticky
                 position: sticky;
                 left: 0;
@@ -290,14 +308,22 @@
     }
 }
 
-@media (min-width: 850px) {
+@media (min-width: 625px) {
     .mainEventShow {
         .event__status {
             position: absolute;
-            top: -4.25rem;
+            top: -5.25rem;
             left: 0;
             right: 2rem;
             justify-content: flex-end;
+        }
+    }
+}
+
+@media (min-width: 850px) {
+    .mainEventShow {
+        .event__status {
+            top: -4.25rem;
         }
     }
 }

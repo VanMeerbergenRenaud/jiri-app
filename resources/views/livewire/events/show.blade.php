@@ -11,11 +11,28 @@
     </header>
 
     <main class="mainEventShow max-width p-main">
-        {{-- TODO: Event status action buttons --}}
-        <div class="event__status">
-            Status : {{ $event->status() }}
-            <button wire:click="pauseEvent">Pause</button>
-            <button wire:click="endEvent">Terminer</button>
+        {{-- Event status action buttons --}}
+        <div class="event__status" x-data="{
+            activeButton: null,
+            changeStatus: function() {
+                if (this.activeButton === 'start') {
+                    $wire.startEvent();
+                } else if (this.activeButton === 'pause') {
+                    $wire.pauseEvent();
+                } else if (this.activeButton === 'end') {
+                    $wire.endEvent();
+                }
+            }
+        }">
+            <label for="status">Status&nbsp;:</label>
+            <select id="status"
+                    x-model="activeButton"
+                    x-on:change="changeStatus()"
+            >
+                <option value="start">Start</option>
+                <option value="pause">Pause</option>
+                <option value="end">End</option>
+            </select>
         </div>
 
         {{-- First Table --}}

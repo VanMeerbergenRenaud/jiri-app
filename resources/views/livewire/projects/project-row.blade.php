@@ -109,7 +109,7 @@
                                         <h3 class="title">Supprimer le projet</h3>
                                         <p class="description">
                                             Êtes-vous sûre de vouloir supprimer le projet
-                                            <strong> {{ $project->name }}</strong>&nbsp;? Toutes les données seront supprimées. Cette action est irréversible.
+                                            <span class="font-semibold"> {{ $project->name }}</span>&nbsp;? Toutes les données seront supprimées. Cette action est irréversible.
                                         </p>
                                         <label class="confirm-deletion">
                                             Veuillez tapper "CONFIRMER" pour confirmer la suppression.

@@ -130,10 +130,10 @@
                                     <div class="advertising">
                                         <x-svg.advertising/>
                                         <div class="advertising__content">
-                                            <h3 class="title">Supprimer le event</h3>
+                                            <h3 class="title">Supprimer l'épreuve</h3>
                                             <p class="description">
-                                                Êtes-vous sûre de vouloir supprimer le event
-                                                <strong> {{ $event->name }} {{ $event->firstname }}</strong>&nbsp;? Toutes les données seront supprimées. Cette action est irréversible.
+                                                Êtes-vous sûre de vouloir supprimer l'épreuve
+                                                <span class="font-semibold"> {{ $event->name }} </span>&nbsp;? Toutes les données seront supprimées. Cette action est irréversible.
                                             </p>
                                             <label class="confirm-deletion">
                                                 Veuillez tapper "CONFIRMER" pour confirmer la suppression.

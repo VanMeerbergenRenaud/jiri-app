@@ -67,7 +67,7 @@
                                         <h3 class="title">Supprimer le contact</h3>
                                         <p class="description">
                                             Êtes-vous sûre de vouloir supprimer le contact
-                                            <strong> {{ $contact->name }} {{ $contact->firstname }}</strong>&nbsp;? Toutes les données seront supprimées. Cette action est irréversible.
+                                            <span class="font-semibold"> {{ $contact->name }} {{ $contact->firstname }}</span>&nbsp;? Toutes les données seront supprimées. Cette action est irréversible.
                                         </p>
                                         <label class="confirm-deletion">
                                             Veuillez tapper "CONFIRMER" pour confirmer la suppression.
