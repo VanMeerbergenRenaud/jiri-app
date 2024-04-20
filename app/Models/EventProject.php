@@ -12,7 +12,8 @@ class EventProject extends Pivot
     protected $fillable = [
         'event_id',
         'project_id',
-        'ponderation',
+        'ponderation1',
+        'ponderation2',
         'link',
     ];
 

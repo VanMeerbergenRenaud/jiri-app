@@ -11,12 +11,8 @@ class ShowContactProfil extends Component
     use WithFileUploads;
 
     public $contact;
-
-    public $contactType;
-
     public $projects;
-
-    public $tasks;
+    public $contactType;
 
     public $globalComment;
 
@@ -39,17 +35,22 @@ class ShowContactProfil extends Component
         $this->form->setContact($this->contact);
 
         $this->contactType = auth()->user()->attendances()
-            ->where('contact_id', $contact->id)
             ->where('event_id', $this->contact->pivot->event_id)
+            ->where('contact_id', $contact->id)
             ->first()
             ->role;
 
-        // Fetch projects related to the event with duties
         $this->projects = auth()->user()->eventProjects()
             ->where('event_id', $this->contact->pivot->event_id)
             ->get();
 
         $this->globalComment = 'À changer';
+    }
+
+    // TODO : Change the role of the contact by updating its role in the attendances table (evaluator or student)
+    public function editContactRole($role)
+    {
+
     }
 
     public function render()

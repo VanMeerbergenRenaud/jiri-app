@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -48,7 +49,7 @@ class Event extends Model
             'event_id',
             'project_id'
         )
-            ->withPivot('ponderation', 'link');
+            ->withPivot('ponderation1', 'ponderation2', 'link');
     }
 
     public function attendances(): HasMany
@@ -85,5 +86,20 @@ class Event extends Model
             )
             ->withPivot('role', 'token')
             ->wherePivot('role', 'evaluator');
+    }
+
+    public function isAvailable()
+    {
+        $ending_at = Carbon::parse($this->starting_at)->addMinutes($this->duration);
+        return $ending_at <= now();
+    }
+
+    public function status()
+    {
+        if ($this->isAvailable()) {
+            return 'en cours'; // ou passé
+        } else {
+            return 'terminé';
+        }
     }
 }

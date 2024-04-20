@@ -1,7 +1,7 @@
 /* Navigation section */
 .nav {
     border-bottom: 1px solid $gray-500;
-    z-index: 2;
+    z-index: 10;
 
     .hidden, .navigation-links, .settings-dropdown {
         display: none;
@@ -41,7 +41,6 @@
         border: 1px solid #e5e7eb;
         background-color: #fbfbfb;
         overflow: hidden;
-        z-index: 3;
 
         &__user-infos {
             padding: 0.75rem 1rem;

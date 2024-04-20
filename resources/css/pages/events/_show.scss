@@ -1,7 +1,17 @@
 /* Show an event */
 .mainEventShow {
+    position: relative;
 
     @import "../../others/tables";
+
+    .event__status {
+        position: relative;
+        padding: 0 0.75rem;
+        top: -2rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
 
     /* First Table */
     .event__show {
@@ -269,6 +279,18 @@
             .results {
                 padding: 1.25rem 0.75rem;
             }
+        }
+    }
+}
+
+@media (min-width: 850px) {
+    .mainEventShow {
+        .event__status {
+            position: absolute;
+            top: -4.25rem;
+            left: 0;
+            right: 2rem;
+            justify-content: flex-end;
         }
     }
 }

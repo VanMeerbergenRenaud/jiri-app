@@ -14,7 +14,8 @@ class EventProjectFactory extends Factory
     public function definition()
     {
         return [
-            'ponderation' => $this->faker->numberBetween(1, 100),
+            'ponderation1' => $this->faker->numberBetween(1, 100),
+            'ponderation2' => $this->faker->numberBetween(1, 100),
             'link' => $this->faker->url(),
         ];
     }

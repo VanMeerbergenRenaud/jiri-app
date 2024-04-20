@@ -11,6 +11,13 @@
     </header>
 
     <main class="mainEventShow max-width p-main">
+        {{-- TODO: Event status action buttons --}}
+        <div class="event__status">
+            Status : {{ $event->status() }}
+            <button wire:click="pauseEvent">Pause</button>
+            <button wire:click="endEvent">Terminer</button>
+        </div>
+
         {{-- First Table --}}
         <div class="event__show">
             <livewire:events.show.first-table />

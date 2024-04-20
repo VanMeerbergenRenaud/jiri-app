@@ -80,7 +80,7 @@ class DatabaseSeeder extends Seeder
                     $ponderations[] = $ponderation;
                 }
 
-                // Adjust ponderations if total is not 100
+                // Adjust ponderations if the total is not 100
                 if ($totalPonderation !== 100) {
                     $ponderations = array_map(function ($ponderation) use ($totalPonderation) {
                         return round(($ponderation / $totalPonderation) * 100);
@@ -96,7 +96,8 @@ class DatabaseSeeder extends Seeder
                     EventProject::factory()->create([
                         'event_id' => $event->id,
                         'project_id' => $project->id,
-                        'ponderation' => $ponderations[$index],
+                        'ponderation1' => $ponderations[$index],
+                        'ponderation2' => $ponderations[$index],
                     ]);
                 }
             }

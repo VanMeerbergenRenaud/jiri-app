@@ -14,7 +14,7 @@
                         label="Nom de l'épreuve"
                         type="text"
                         model="form.name"
-                        placeholder="Nom de l'épreuve"
+                        placeholder="Ex : Jury juin {{ now()->year }}"
                         :messages="$errors->get('form.name')"
                     />
 

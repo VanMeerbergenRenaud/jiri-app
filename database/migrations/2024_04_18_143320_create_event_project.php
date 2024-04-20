@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('event_project', function (Blueprint $table) {
             $table->id();
-            $table->integer('ponderation');
+            $table->integer('ponderation1');
+            $table->integer('ponderation2');
             $table->string('link');
             $table->timestamps();
         });

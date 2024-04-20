@@ -27,7 +27,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 /* Homepage */
-Route::get('/', Homepage::class)
+Route::get('/home', Homepage::class)
     ->middleware('guest')
     ->name('homepage');
 
