@@ -27,8 +27,8 @@ class SearchListProject extends Component
 
     public function addProject($projectId)
     {
-        $event = Event::find($this->eventId);
-        $project = Project::find($projectId);
+        $event = auth()->user()->events()->findOrFail($this->eventId);
+        $project = auth()->user()->projects()->findOrFail($projectId);
 
         // Avoid duplicate projects in a event
         if ($event->projects->contains($project)) {

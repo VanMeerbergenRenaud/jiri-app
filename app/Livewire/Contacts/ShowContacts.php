@@ -41,7 +41,7 @@ class ShowContacts extends Component
 
     public function delete($contactId)
     {
-        $contact = Contact::findOrFail($contactId);
+        $contact = auth()->user()->contacts()->findOrFail($contactId);
 
         $contact->events()->detach();
 

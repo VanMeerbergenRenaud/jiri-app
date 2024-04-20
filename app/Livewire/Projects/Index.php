@@ -8,11 +8,9 @@ class Index extends Component
 {
     public function render()
     {
-        $user = auth()->user();
+        $projects = auth()->user()->projects;
 
-        $projects = $user->projects()->get();
-
-        return view('livewire.projects.index', compact('user', 'projects'))
+        return view('livewire.projects.index', compact('projects'))
             ->layout('layouts.app');
     }
 }

@@ -46,7 +46,7 @@ class ShowEvents extends Component
 
     public function delete($eventId)
     {
-        $event = Event::findOrFail($eventId);
+        $event = auth()->user()->events()->findOrFail($eventId);
 
         $event->eventContacts()->delete();
         $event->eventProjects()->delete();

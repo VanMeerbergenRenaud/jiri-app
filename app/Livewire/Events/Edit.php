@@ -15,11 +15,9 @@ class Edit extends Component
 
     public function render()
     {
-        $user = auth()->user();
+        $event = auth()->user()->events()->findOrFail($this->eventId);
 
-        $event = $user->events()->findOrFail($this->eventId);
-
-        return view('livewire.events.edit', compact('user', 'event'))
+        return view('livewire.events.edit', compact('event'))
             ->layout('layouts.app');
     }
 }

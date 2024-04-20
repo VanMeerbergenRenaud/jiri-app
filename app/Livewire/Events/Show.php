@@ -39,9 +39,7 @@ class Show extends Component
 
     public function render()
     {
-        $user = auth()->user();
-
-        return view('livewire.events.show', compact('user'))
+        return view('livewire.events.show')
             ->layout('layouts.app');
     }
 }

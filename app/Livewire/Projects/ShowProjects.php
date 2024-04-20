@@ -26,7 +26,7 @@ class ShowProjects extends Component
 
     public function delete($projectId)
     {
-        $project = Project::findOrFail($projectId);
+        $project = auth()->user()->projects()->findOrFail($projectId);
 
         $project->delete();
 

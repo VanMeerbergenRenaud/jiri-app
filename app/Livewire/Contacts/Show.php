@@ -23,11 +23,9 @@ class Show extends Component
 
     public function render()
     {
-        $user = auth()->user();
+        $contact = auth()->user()->contacts()->findOrFail($this->contactId);
 
-        $contact = $user->contacts()->findOrFail($this->contactId);
-
-        return view('livewire.contacts.show', compact('user', 'contact'))
+        return view('livewire.contacts.show', compact('contact'))
             ->layout('layouts.app');
     }
 }

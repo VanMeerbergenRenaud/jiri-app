@@ -36,8 +36,8 @@ class SearchList extends Component
 
     public function addContact($contactId, $role)
     {
-        $event = Event::find($this->eventId);
-        $contact = Contact::find($contactId);
+        $event = auth()->user()->events()->findOrFail($this->eventId);
+        $contact = auth()->user()->contacts()->findOrFail($contactId);
 
         if (! $event->contacts()->where('contact_id', $contact->id)->exists()) {
             auth()->user()->eventContacts()->create([

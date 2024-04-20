@@ -8,11 +8,9 @@ class Index extends Component
 {
     public function render()
     {
-        $user = auth()->user();
+        $contacts = auth()->user()->contacts()->get();
 
-        $contacts = $user->contacts()->get();
-
-        return view('livewire.contacts.index', compact('user', 'contacts'))
+        return view('livewire.contacts.index', compact('contacts'))
             ->layout('layouts.app');
     }
 }

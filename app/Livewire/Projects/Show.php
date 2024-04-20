@@ -22,11 +22,9 @@ class Show extends Component
 
     public function render()
     {
-        $user = auth()->user();
+        $project = auth()->user()->projects->find($this->projectId);
 
-        $project = $user->projects()->findOrFail($this->projectId);
-
-        return view('livewire.projects.show', compact('user', 'project'))
+        return view('livewire.projects.show', compact('project'))
             ->layout('layouts.app');
     }
 }

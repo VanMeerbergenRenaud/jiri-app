@@ -22,13 +22,11 @@ class ContactProfil extends Component
 
     public function render()
     {
-        $user = auth()->user();
-
-        $event = $user->events()->findOrFail($this->eventId);
+        $event = auth()->user()->events()->findOrFail($this->eventId);
 
         $contact = $event->contacts()->findOrFail($this->contactId);
 
-        return view('livewire.contacts.contact-profil', compact('user', 'event', 'contact'))
+        return view('livewire.contacts.contact-profil', compact('event', 'contact'))
             ->layout('layouts.app');
     }
 }

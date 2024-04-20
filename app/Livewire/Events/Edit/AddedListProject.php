@@ -23,7 +23,7 @@ class AddedListProject extends Component
     #[On('fetchEventProjects')]
     public function fetchEventProjects()
     {
-        $event = Event::find($this->eventId);
+        $event = auth()->user()->events()->findOrFail($this->eventId);
         $this->projectsList = $event->projects;
     }
 
