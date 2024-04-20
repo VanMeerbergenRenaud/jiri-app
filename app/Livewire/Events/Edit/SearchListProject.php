@@ -38,7 +38,8 @@ class SearchListProject extends Component
         auth()->user()->eventProjects()->create([
             'event_id' => $event->id,
             'project_id' => $project->id,
-            'ponderation' => 1,
+            'ponderation1' => 1,
+            'ponderation2' => 1,
             'link' => 'https://example.com',
         ]);
 
