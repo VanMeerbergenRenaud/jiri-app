@@ -27,16 +27,20 @@ class ContactForm extends Form
 
     public function rules()
     {
-        return [
+        $rules = [
             'name' => 'required|min:3',
             'firstname' => 'required|min:3',
             'email' => [
-                'required',
-                'email',
-                Rule::unique('contacts')->ignore($this->contact->id),
                 'nullable',
+                'email',
             ],
         ];
+
+        if (isset($this->contact->id)) {
+            $rules['email'][] = Rule::unique('contacts')->ignore($this->contact->id);
+        }
+
+        return $rules;
     }
 
     public function save()
@@ -55,9 +59,7 @@ class ContactForm extends Form
 
     public function update()
     {
-        $rules = $this->rules();
-
-        $this->validate($rules);
+        $this->validate($this->rules());
 
         $updateData = [
             'name' => $this->name,

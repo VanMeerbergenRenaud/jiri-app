@@ -21,6 +21,9 @@ select {
     -webkit-appearance: none;
 }
 
+input[type="number"] {
+    min-width: 8rem;
+}
 
 label.search {
     position: relative;

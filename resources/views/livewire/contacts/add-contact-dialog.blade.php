@@ -9,23 +9,33 @@
                 <div class="form__content">
                     <h2 class="title">Créer un nouveau contact</h2>
 
-                    <label>
-                        Nom
-                        <input autofocus wire:model="form.name">
-                        @error('form.name')<div class="error">{{ $message }}</div>@enderror
-                    </label>
+                    <x-form.field
+                        label="Nom"
+                        name="name"
+                        type="text"
+                        model="form.name"
+                        placeholder="John"
+                        :messages="$errors->get('form.name')"
+                        autofocus
+                    />
 
-                    <label>
-                        Prénom
-                        <input wire:model="form.firstname"/>
-                        @error('form.firstname')<div class="error">{{ $message }}</div>@enderror
-                    </label>
+                    <x-form.field
+                        label="Prénom"
+                        name="firstname"
+                        type="text"
+                        model="form.firstname"
+                        placeholder="Doe"
+                        :messages="$errors->get('form.firstname')"
+                    />
 
-                    <label>
-                        Email
-                        <input wire:model="form.email"/>
-                        @error('form.email')<div class="error">{{ $message }}</div>@enderror
-                    </label>
+                    <x-form.field
+                        label="Email"
+                        name="email"
+                        type="email"
+                        model="form.email"
+                        placeholder="john.doe@gmail.com"
+                        :messages="$errors->get('form.email')"
+                    />
 
                     <label>
                         Importer une photo de profil
