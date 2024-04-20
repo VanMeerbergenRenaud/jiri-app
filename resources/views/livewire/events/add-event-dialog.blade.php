@@ -5,7 +5,7 @@
         </x-dialog.open>
 
         <x-dialog.panel>
-            <form wire:submit="add" class="form">
+            <form wire:submit="add" class="form" wire:loading.class.delay="opacity-50">
                 <div class="form__content">
                     <h2 class="title">Créer une nouvelle épreuve</h2>
 

@@ -37,16 +37,18 @@
                         :messages="$errors->get('form.email')"
                     />
 
-                    <label>
-                        Importer une photo de profil
-                        <input wire:model="form.avatar" type="file">
-                        <span>JPG, JPEG, PNG or SVG (MAX 1024 ko).</span>
-                        @error('form.avatar')<div class="error">{{ $message }}</div>@enderror
+                    <x-form.field
+                        label="Importer une photo de profil"
+                        name="avatar"
+                        type="file"
+                        model="form.avatar"
+                        placeholder="JPG, JPEG, PNG ou SVG (MAX 1024 ko)"
+                        :messages="$errors->get('form.avatar')"
+                    />
 
-                        @if($form->avatar)
-                            <img src="{{ $form->avatar->temporaryUrl() }}" alt="Image du contact" class="w-1/2 h-auto rounded-lg">
-                        @endif
-                    </label>
+                    @if($form->avatar)
+                        <img src="{{ $form->avatar->temporaryUrl() }}" alt="Image du contact" class="temporary_url">
+                    @endif
                 </div>
 
                 <x-dialog.footer>

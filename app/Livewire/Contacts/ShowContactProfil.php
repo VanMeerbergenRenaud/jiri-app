@@ -11,23 +11,15 @@ class ShowContactProfil extends Component
     use WithFileUploads;
 
     public $contact;
-    public $projects;
-    public $contactType;
-
-    public $globalComment;
 
     public ContactForm $form;
 
     public $showEditDialog = false;
 
-    public function save()
-    {
-        $this->form->update();
-
-        $this->contact->refresh();
-
-        $this->reset('showEditDialog');
-    }
+    // Other properties
+    public $projects;
+    public $contactType;
+    public $globalComment;
 
     public function mount($contact)
     {
@@ -45,6 +37,15 @@ class ShowContactProfil extends Component
             ->get();
 
         $this->globalComment = 'À changer';
+    }
+
+    public function save()
+    {
+        $this->form->update();
+
+        $this->contact->refresh();
+
+        $this->reset('showEditDialog');
     }
 
     // TODO : Change the role of the contact by updating its role in the attendances table (evaluator or student)

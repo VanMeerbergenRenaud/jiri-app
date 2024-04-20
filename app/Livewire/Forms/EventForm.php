@@ -31,13 +31,18 @@ class EventForm extends Form
     {
         $this->validate();
 
-        auth()->user()->events()->create([
+        $this->event = auth()->user()->events()->create([
             'name' => $this->name,
             'starting_at' => $this->starting_at,
             'duration' => $this->duration,
         ]);
 
         $this->reset(['name', 'starting_at', 'duration']);
+
+        sleep(1);
+
+        // Redirect to the edit page of the newly created event
+        return redirect()->route('events.edit', ['event' => $this->event->id]);
     }
 
     public function update()

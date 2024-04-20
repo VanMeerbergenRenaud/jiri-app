@@ -9,11 +9,11 @@
                 <div class="contact__new__form__container__label">
                     <x-form.field
                         label="Nom du projet"
-                        name="newprojectname"
+                        name="name"
                         type="text"
                         placeholder="Ex : Portfolio"
-                        model="newprojectname"
-                        :messages="$errors->get('newprojectname')"
+                        model="name"
+                        :messages="$errors->get('name')"
                     />
                 </div>
 
@@ -21,11 +21,11 @@
                 <div class="contact__new__form__container__label">
                     <x-form.field
                         label="Tâches"
-                        name="newprojecttasks"
+                        name="tasks"
                         type="text"
                         placeholder="Ex : Intégration"
-                        model="newprojecttasks"
-                        :messages="$errors->get('newprojecttasks')"
+                        model="tasks"
+                        :messages="$errors->get('tasks')"
                     />
                 </div>
 

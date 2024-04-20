@@ -11,7 +11,10 @@ class EventProjectForm extends Form
     public EventProject $eventProject;
 
     #[Validate('numeric|min:1|max:100')]
-    public $ponderation = 1;
+    public $ponderation1 = 1;
+
+    #[Validate('numeric|min:1|max:100')]
+    public $ponderation2 = 1;
 
     #[Validate('url|nullable')]
     public $link = 'https://example.com';
@@ -19,7 +22,8 @@ class EventProjectForm extends Form
     public function setEventProject($eventProject)
     {
         $this->eventProject = $eventProject;
-        $this->ponderation = $eventProject->ponderation;
+        $this->ponderation1 = $eventProject->ponderation1;
+        $this->ponderation2 = $eventProject->ponderation2;
         $this->link = $eventProject->link;
     }
 
@@ -28,11 +32,12 @@ class EventProjectForm extends Form
         $this->validate();
 
         auth()->user()->eventProjects()->create([
-            'ponderation' => $this->ponderation,
+            'ponderation1' => $this->ponderation1,
+            'ponderation2' => $this->ponderation2,
             'link' => $this->link,
         ]);
 
-        $this->reset(['ponderation', 'link']);
+        $this->reset(['ponderation1', 'ponderation2', 'link']);
     }
 
     public function update()
@@ -40,7 +45,8 @@ class EventProjectForm extends Form
         $this->validate();
 
         $this->eventProject->update([
-            'ponderation' => $this->ponderation,
+            'ponderation1' => $this->ponderation1,
+            'ponderation2' => $this->ponderation2,
             'link' => $this->link,
         ]);
     }

@@ -6,10 +6,10 @@
             @else
                 <img src="{{ asset('img/placeholder.png') }}" alt="Image du contact">
             @endif
-            {{ $contact->name }}
+            {{ ucwords($contact->name) }}
         </a>
     </td>
-    <td class="firstname">{{ $contact->firstname }}</td>
+    <td class="firstname">{{ ucwords($contact->firstname) }}</td>
     <td class="email">{{ $contact->email }}</td>
     <td class="actions">
         <x-menu>

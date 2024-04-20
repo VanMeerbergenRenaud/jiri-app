@@ -2,37 +2,17 @@
 
 namespace App\Livewire\Events\Edit;
 
-use Livewire\Attributes\Rule;
-use Livewire\Attributes\Validate;
+use App\Livewire\Forms\ContactForm;
+use App\Livewire\Forms\EventContactsForm;
 use Livewire\Component;
 
 class Form extends Component
 {
-    public int $eventId;
+    public $eventId;
 
-    #[Validate('required')]
-    public $newcontacttype;
-
-    #[Validate('required|min:3')]
-    public $newcontactname;
-
-    #[Validate('required|min:3')]
-    public $newcontactfirstname;
-
-    #[Validate('required|email')]
-    public $newcontactemail;
-
-    public function save(): void
+    public function save()
     {
-        $this->validate();
-
-        auth()->user()->contacts()->create([
-            'name' => $this->newcontactname,
-            'firstname' => $this->newcontactfirstname,
-            'email' => $this->newcontactemail,
-        ]);
-
-        $this->reset();
+        dd('save');
     }
 
     public function render()

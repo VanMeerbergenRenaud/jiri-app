@@ -2,10 +2,13 @@
 
 namespace App\Livewire\Events\Edit;
 
+use App\Livewire\Forms\EventProjectForm;
 use Livewire\Component;
 
 class Ponderation extends Component
 {
+    public EventProjectForm $eventProjectForm;
+
     public $event;
 
     public $projects;
