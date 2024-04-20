@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\EventContact;
 use App\Models\Contact;
-use App\Models\eventProject;
 use App\Models\Event;
+use App\Models\EventContact;
+use App\Models\eventProject;
 use App\Models\Project;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -71,33 +71,49 @@ class DatabaseSeeder extends Seeder
             foreach ($events as $event) {
                 $projects = $user->projects->random(5);
 
-                $totalPonderation = 0;
-                $ponderations = [];
+                $totalPonderation1 = 0;
+                $totalPonderation2 = 0;
+                $ponderations1 = [];
+                $ponderations2 = [];
 
                 foreach ($projects as $project) {
-                    $ponderation = mt_rand(1, 100);
-                    $totalPonderation += $ponderation;
-                    $ponderations[] = $ponderation;
+                    $ponderation1 = mt_rand(1, 100);
+                    $ponderation2 = mt_rand(1, 100);
+                    $totalPonderation1 += $ponderation1;
+                    $totalPonderation2 += $ponderation2;
+                    $ponderations1[] = $ponderation1;
+                    $ponderations2[] = $ponderation2;
                 }
 
                 // Adjust ponderations if the total is not 100
-                if ($totalPonderation !== 100) {
-                    $ponderations = array_map(function ($ponderation) use ($totalPonderation) {
-                        return round(($ponderation / $totalPonderation) * 100);
-                    }, $ponderations);
+                if ($totalPonderation1 !== 100) {
+                    $ponderations1 = array_map(function ($ponderation) use ($totalPonderation1) {
+                        return round(($ponderation / $totalPonderation1) * 100);
+                    }, $ponderations1);
                 }
 
-                $ponderationsSum = array_sum($ponderations);
-                if ($ponderationsSum != 100) {
-                    $ponderations[0] += 100 - $ponderationsSum;
+                if ($totalPonderation2 !== 100) {
+                    $ponderations2 = array_map(function ($ponderation) use ($totalPonderation2) {
+                        return round(($ponderation / $totalPonderation2) * 100);
+                    }, $ponderations2);
+                }
+
+                $ponderationsSum1 = array_sum($ponderations1);
+                if ($ponderationsSum1 != 100) {
+                    $ponderations1[0] += 100 - $ponderationsSum1;
+                }
+
+                $ponderationsSum2 = array_sum($ponderations2);
+                if ($ponderationsSum2 != 100) {
+                    $ponderations2[0] += 100 - $ponderationsSum2;
                 }
 
                 foreach ($projects as $index => $project) {
                     EventProject::factory()->create([
                         'event_id' => $event->id,
                         'project_id' => $project->id,
-                        'ponderation1' => $ponderations[$index],
-                        'ponderation2' => $ponderations[$index],
+                        'ponderation1' => $ponderations1[$index],
+                        'ponderation2' => $ponderations2[$index],
                     ]);
                 }
             }
