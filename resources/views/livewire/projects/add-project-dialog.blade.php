@@ -6,6 +6,8 @@
 
         <x-dialog.panel>
             <form wire:submit="add" class="form">
+                @csrf
+
                 <div class="form__content">
                     <h2 class="title">Créer un nouveau projet</h2>
 

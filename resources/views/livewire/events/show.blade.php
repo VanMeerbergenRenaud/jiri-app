@@ -25,7 +25,6 @@
 
         {{-- Second Table --}}
         <div class="event__show__results">
-            <h2 class="title">Tableau de résumé des cotes</h2>
             <livewire:events.show.second-table />
         </div>
     </main>

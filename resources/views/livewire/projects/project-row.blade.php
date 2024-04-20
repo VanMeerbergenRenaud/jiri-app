@@ -15,6 +15,15 @@
             </x-menu.button>
 
             <x-menu.items>
+                {{-- Item to show a project --}}
+                <a class="link" href="{{ route('projects.show', $project) }}">
+                    <x-svg.show/>
+
+                    Voir
+                </a>
+
+                <x-divider />
+
                 {{-- Dialog to edit a project --}}
                 <x-dialog wire:model="showEditDialog" class="w-full">
                     <x-dialog.open>
@@ -29,6 +38,7 @@
 
                     <x-dialog.panel>
                         <form wire:submit="save" class="form">
+                            @csrf
                             <div class="form__content">
                                 <h2 class="title">Modifier le project</h2>
 

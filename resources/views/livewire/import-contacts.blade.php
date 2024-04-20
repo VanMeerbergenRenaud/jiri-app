@@ -9,6 +9,7 @@
 
         <x-dialog.panel>
             <form wire:submit.prevent="import" class="form">
+                @csrf
 
                 @unless($upload)
                 <div class="form__content">

@@ -57,7 +57,7 @@ class DatabaseSeeder extends Seeder
 
             // Event Contacts for each event
             foreach ($events as $event) {
-                $contacts = $user->contacts->random(6);
+                $contacts = $user->contacts->random(14);
 
                 foreach ($contacts as $contact) {
                     EventContact::factory()->create([

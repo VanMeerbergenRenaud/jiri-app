@@ -30,7 +30,7 @@
             />
         </div>
 
-        {{--Liste des events (eventContacts) liés aux contacts --}}
+        {{--Liste des épreuves liées au projet--}}
         <div class="contact__eventContacts">
             <ul class="contact__eventContacts__list">
                 @forelse($project->events as $event)
@@ -44,7 +44,7 @@
                     </li>
                 @empty
                     <li>
-                        <p>Aucune épreuve liée à ce contact.</p>
+                        <p>Aucune épreuve liée à ce projet.</p>
                     </li>
                 @endforelse
             </ul>

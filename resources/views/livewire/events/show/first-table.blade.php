@@ -37,4 +37,9 @@
         @endforeach
         </tbody>
     </table>
+    <div class="first-table--footer">
+        <button class="button--blue" type="button">
+            Mode plein écran
+        </button>
+    </div>
 </div>

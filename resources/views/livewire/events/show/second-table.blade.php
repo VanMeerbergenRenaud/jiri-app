@@ -1,11 +1,12 @@
 <div>
+    <h2 class="title">Tableau de résumé des cotes</h2>
     <table class="second-table">
         <thead>
-        {{-- First line for jiris members --}}
+        {{-- First line for evaluators --}}
         <tr class="row-1">
             <th scope="row" class="category sticky">Membres du jury</th>
             @foreach($evaluators as $evaluator)
-                <th scope="col" colspan="{{ /*$projects->count() ??*/ 3 }}" wire:key="e{{ $evaluator->id }}" class="jiris sticky-small">
+                <th scope="col" colspan="{{ $projects->count() ?? 1 }}" wire:key="e{{ $evaluator->id }}" class="jiris sticky-small">
                     <a href="{{ route('events.contact-profil', ['event' => $event, 'contact' => $evaluator->contact]) }}">
                         <img src="{{ $evaluator->contact->avatar ?? asset('img/placeholder.png') }}" alt="photo d'un membre du jury">
                         {{ $evaluator->contact->name ?? 'Évaluateur' }}
@@ -21,9 +22,11 @@
         <tr class="row-2">
             <th scope="row" class="category sticky">Étudiants&nbsp;|&nbsp;Projets</th>
             @foreach($evaluators as $evaluator)
-                @for ($j = 1; $j <= 3; $j++)
-                    <th class="project sticky-small">Projet {{ $j }}</th>
-                @endfor
+                @foreach($projects as $project)
+                    <th class="project sticky-small">
+                        {{ $project->name ?? 'Projet' }}
+                    </th>
+                @endforeach
             @endforeach
         </thead>
         <tbody>
@@ -36,10 +39,10 @@
                         {{ $student->contact->name ?? 'Étudiant' }}
                     </a>
                 </th>
-                {{-- Cotes sur /20 --}}
+                {{-- Score sur /20 --}}
                 @foreach($evaluators as $evaluator)
                     @foreach($projects as $project)
-                        <td wire:key="s-{{ $student->id }} e-{{ $evaluator->id }} p-{{ $project->id ?? 3 }}" class="results">
+                        <td wire:key="s-{{ $student->id }} e-{{ $evaluator->id }} p-{{ $project->id }}" class="results">
                             <span>{{ $project->score ?? '0' }}</span>/20
                         </td>
                     @endforeach

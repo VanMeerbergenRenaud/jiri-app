@@ -2,6 +2,8 @@
     {{-- Form to edit a new project --}}
     <template x-if="createmode">
         <form wire:submit.prevent="save" class="contact__new__form">
+            @csrf
+
             <p>Ajouter votre nouveau projet</p>
             <div class="contact__new__form__container">
 

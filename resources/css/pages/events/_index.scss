@@ -56,28 +56,31 @@
                     color: $blue;
                     background-color: white;
                     border-radius: 0.75rem;
+
+                    &:hover {
+                        background-color: $gray-300;
+                    }
                 }
 
                 &__see {
                     padding: 0.875rem 3rem;
                     border-radius: 1.5rem;
                     background-color: white;
+
+                    &:hover {
+                        background-color: $gray-300;
+                    }
                 }
 
                 &__unavailable {
                     cursor: not-allowed;
                     padding: 0.875rem 1rem;
                     font-size: 0.875rem;
-                    min-width: 150px;
+                    min-width: 125px;
                     text-align: center;
                     border-radius: 1.5rem;
                     color: $text-slate-500;
                     background-color: #F7F7FA;
-                }
-
-                &__edit, &__delete {
-                    padding: 0.5rem;
-                    align-self: center;
                 }
             }
         }

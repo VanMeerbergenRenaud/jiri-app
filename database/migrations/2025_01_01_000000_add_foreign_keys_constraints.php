@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('events', function (Blueprint $table) {
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
         });
         Schema::table('contacts', function (Blueprint $table) {
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
         });
         Schema::table('projects', function (Blueprint $table) {
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
         });
         Schema::table('event_contact', function (Blueprint $table) {
             $table->foreignId('event_id')->constrained()->onDelete('cascade');

@@ -13,11 +13,7 @@ class SecondTable extends Component
     public $students;
     public $evaluators;
 
-    public $projects = [
-        'Project 1',
-        'Project 2',
-        'Project 3',
-    ];
+    public $projects;
 
     public function mount()
     {
@@ -32,7 +28,7 @@ class SecondTable extends Component
         $this->students = $this->contacts->where('role', 'student');
         $this->evaluators = $this->contacts->where('role', 'evaluator');
 
-        // TODO : get projects from the event
+        $this->projects = $this->event->projects;
     }
 
     public function render()

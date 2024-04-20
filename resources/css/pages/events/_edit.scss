@@ -366,19 +366,28 @@
             color: $text-slate-500;
         }
 
-        &__list {
-            margin: 1rem 0;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 1rem;
+        &__lists {
+            &__list {
+                margin: 1rem 0;
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                gap: 1rem;
+                color: $text;
+                font-size: 0.94rem;
+                font-weight: 500;
 
-            .form__field {
-                margin: 0;
-            }
+                .form__field {
+                    margin: 0;
+                    color: $text;
+                    font-size: 0.875rem;
+                    font-weight: 400;
+                    width: 100%;
 
-            input {
-                width: auto;
+                    input {
+                        width: 35%;
+                    }
+                }
             }
         }
 
@@ -529,6 +538,33 @@
                     }
                 }
             }
+
+            .contact__ponderation {
+                &__lists {
+                    margin: 0.5rem 0;
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 0 2.5rem;
+
+                    &__list {
+                        margin: 1rem 0 0;
+                        padding: 0.75rem 0 2rem;
+                        border-right: $border;
+
+                        .form__field {
+                            padding-left: 0.1rem;
+
+                            input {
+                                width: 55%;
+                            }
+                        }
+
+                        .form__field:first-of-type {
+                            margin-top: 0.25rem;
+                        }
+                    }
+                }
+            }
         }
     }
 }
@@ -588,6 +624,15 @@
             .contact__ponderation {
                 &__title {
                     margin-top: 0;
+                }
+
+                &__text {
+                    margin-top: 1rem;
+                    padding-right: 2rem;
+                }
+
+                &__lists {
+                    padding: 0 1.25rem;
                 }
             }
         }
