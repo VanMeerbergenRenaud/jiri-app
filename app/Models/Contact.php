@@ -27,7 +27,7 @@ class Contact extends Model
     public function events(): BelongsToMany
     {
         return $this
-            ->belongsToMany(Event::class, 'attendances', 'contact_id', 'event_id')
+            ->belongsToMany(Event::class, 'event_contact', 'contact_id', 'event_id')
             ->withPivot(['role', 'token']);
     }
 
@@ -38,8 +38,8 @@ class Contact extends Model
             ->withPivot(['role']);
     }
 
-    public function attendances(): HasMany
+    public function eventContacts(): HasMany
     {
-        return $this->hasMany(Attendance::class);
+        return $this->hasMany(EventContact::class);
     }
 }

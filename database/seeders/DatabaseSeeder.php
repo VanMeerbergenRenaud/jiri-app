@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Attendance;
+use App\Models\EventContact;
 use App\Models\Contact;
 use App\Models\eventProject;
 use App\Models\Event;
@@ -55,12 +55,12 @@ class DatabaseSeeder extends Seeder
 
             $events = $user->events;
 
-            // Attendances for each event
+            // Event Contacts for each event
             foreach ($events as $event) {
                 $contacts = $user->contacts->random(6);
 
                 foreach ($contacts as $contact) {
-                    Attendance::factory()->create([
+                    EventContact::factory()->create([
                         'event_id' => $event->id,
                         'contact_id' => $contact->id,
                     ]);

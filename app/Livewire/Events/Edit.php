@@ -7,12 +7,10 @@ use Livewire\Component;
 class Edit extends Component
 {
     public $eventId;
-    public $ponderation;
 
     public function mount($event)
     {
         $this->eventId = $event;
-        //$this->ponderation = $event->pivot->ponderation;
     }
 
     public function render()

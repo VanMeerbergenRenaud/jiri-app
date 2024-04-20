@@ -23,7 +23,7 @@ class EvaluatorDashboard extends Component
         $event = $user->events()->findOrFail($this->eventId);
         $contact = $event->contacts()->findOrFail($this->contactId);
 
-        $evaluator = $user->attendances()
+        $evaluator = $user->eventContacts()
             ->where('event_id', $this->eventId)
             ->where('token', $this->tokenValue)
             ->firstOrFail();

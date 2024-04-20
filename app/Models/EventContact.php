@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Attendance extends Model
+class EventContact extends Model
 {
     use HasFactory;
+
+    protected $table = 'event_contact';
 
     protected $fillable = [
         'role',

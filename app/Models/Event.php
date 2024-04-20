@@ -27,7 +27,7 @@ class Event extends Model
     public function events(): BelongsToMany
     {
         return $this
-            ->belongsToMany(Event::class, 'attendances', 'contact_id', 'event_id')
+            ->belongsToMany(Event::class, 'event_contact', 'contact_id', 'event_id')
             ->withPivot(['role', 'token']);
     }
 
@@ -35,7 +35,7 @@ class Event extends Model
     {
         return $this->belongsToMany(
             Contact::class,
-            'attendances',
+            'event_contact',
             'event_id',
             'contact_id'
         );
@@ -52,9 +52,9 @@ class Event extends Model
             ->withPivot('ponderation1', 'ponderation2', 'link');
     }
 
-    public function attendances(): HasMany
+    public function eventContacts(): HasMany
     {
-        return $this->hasMany(Attendance::class);
+        return $this->hasMany(EventContact::class);
     }
 
     public function eventProjects(): HasMany
@@ -67,7 +67,7 @@ class Event extends Model
         return $this
             ->belongsToMany(
                 Contact::class,
-                'attendances',
+                'event_contact',
                 'event_id',
                 'contact_id'
             )
@@ -80,7 +80,7 @@ class Event extends Model
         return $this
             ->belongsToMany(
                 Contact::class,
-                'attendances',
+                'event_contact',
                 'event_id',
                 'contact_id'
             )

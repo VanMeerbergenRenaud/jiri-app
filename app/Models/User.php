@@ -78,9 +78,9 @@ class User extends Authenticatable
         return $this->hasMany(Project::class);
     }
 
-    public function attendances(): hasManyThrough
+    public function eventContacts(): hasManyThrough
     {
-        return $this->hasManyThrough(Attendance::class, Event::class);
+        return $this->hasManyThrough(EventContact::class, Event::class);
     }
 
     public function eventProjects(): hasManyThrough

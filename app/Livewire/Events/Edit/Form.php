@@ -32,15 +32,6 @@ class Form extends Component
             'email' => $this->newcontactemail,
         ]);
 
-        // create the attendance as well
-        /*auth()->user()->attendances()->create([
-            'event_id' => $this->eventId,
-            'role' => $this->newcontacttype,
-            'name' => $this->newcontactname,
-            'firstname' => $this->newcontactfirstname,
-            'email' => $this->newcontactemail,
-        ]);*/
-
         $this->reset();
     }
 

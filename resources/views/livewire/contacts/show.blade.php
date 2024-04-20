@@ -30,15 +30,15 @@
             />
         </div>
 
-        {{--Liste des events (attendances) liés aux contacts --}}
-        <div class="contact__attendances">
-            <ul class="contact__attendances__list">
-                @forelse ($contact->attendances->unique('event_id') as $attendance)
+        {{--Liste des events (eventContacts) liés aux contacts --}}
+        <div class="contact__eventContacts">
+            <ul class="contact__eventContacts__list">
+                @forelse ($contact->eventContacts->unique('event_id') as $eventContacts)
                     <li>
                         <p>
                             <span>Épreuve&nbsp;:</span>
-                            <a href="{{ route('events.show', $attendance->event) }}">
-                                {{ $attendance->event->name }}
+                            <a href="{{ route('events.show', $eventContacts->event) }}">
+                                {{ $eventContacts->event->name }}
                             </a>
                         </p>
 
@@ -52,22 +52,22 @@
                                 ];
                             @endphp
 
-                            <span class="capitalize">{{ $translations[$attendance->role] ?? 'Non défini' }}</span>
+                            <span class="capitalize">{{ $translations[$eventContacts->role] ?? 'Non défini' }}</span>
                         </p>
 
                         <p>
                             <span>Profil et résultats&nbsp;:</span>
-                            <a href="{{ route('events.contact-profil', ['event' => $attendance->event, 'contact' => $contact]) }}">
+                            <a href="{{ route('events.contact-profil', ['event' => $eventContacts->event, 'contact' => $contact]) }}">
                                 Voir
                             </a>
                         </p>
 
-                        @if($attendance->role == 'evaluator' && isset($attendance->token))
+                        @if($eventContacts->role == 'evaluator' && isset($eventContacts->token))
                             <a class="link"
                                href="{{ route('events.evaluator-dashboard', [
-                                    'event' => $attendance->event->id,
-                                    'contact' => $attendance->contact->id,
-                                    'token' => $attendance->token
+                                    'event' => $eventContacts->event->id,
+                                    'contact' => $eventContacts->contact->id,
+                                    'token' => $eventContacts->token
                                 ]) }}"
                             >
                                 Dashboard de l'évaluateur

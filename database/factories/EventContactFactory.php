@@ -2,16 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\Attendance;
+use App\Models\EventContact;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
 /**
- * @extends Factory<Attendance>
+ * @extends Factory<EventContact>
  */
-class AttendanceFactory extends Factory
+class EventContactFactory extends Factory
 {
-    protected $model = Attendance::class;
+    protected $model = EventContact::class;
+
+
 
     public function definition(): array
     {

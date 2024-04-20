@@ -48,7 +48,7 @@ class ShowEvents extends Component
     {
         $event = Event::findOrFail($eventId);
 
-        $event->attendances()->delete();
+        $event->eventContacts()->delete();
         $event->eventProjects()->delete();
 
         $event->delete();

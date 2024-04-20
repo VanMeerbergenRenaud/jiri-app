@@ -1,6 +1,6 @@
 /* Contacts infos about events */
 .mainProfilShowContact {
-    .contact__attendances {
+    .contact__eventContacts {
         &__list {
             display: flex;
             flex-wrap: wrap;
@@ -46,7 +46,7 @@
 
 @media (min-width: 950px) {
     .mainProfilShowContact {
-        .contact__attendances {
+        .contact__eventContacts {
             &__list {
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
@@ -75,7 +75,7 @@
 
 @media (min-width: 1440px) {
     .mainProfilShowContact {
-        .contact__attendances {
+        .contact__eventContacts {
             &__list {
                 display: grid;
                 grid-template-columns: repeat(4, 1fr);

@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Events\Edit;
 
-use App\Models\Attendance;
+use App\Models\EventContact;
 use App\Models\Event;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Attributes\On;
@@ -12,7 +12,7 @@ class AddedList extends Component
 {
     public $eventId;
 
-    public Collection $attendanceList;
+    public Collection $eventContactsList;
 
     public function mount()
     {
@@ -23,12 +23,12 @@ class AddedList extends Component
     public function fetchEventContacts()
     {
         $event = Event::find($this->eventId);
-        $this->attendanceList = $event->attendances;
+        $this->eventContactsList = $event->eventContacts;
     }
 
-    public function removeContact(Attendance $attendance)
+    public function removeContact(EventContact $eventContacts)
     {
-        $attendance->delete();
+        $eventContacts->delete();
 
         $this->dispatch('fetchEventContacts');
     }

@@ -20,7 +20,7 @@ return new class extends Migration
         Schema::table('projects', function (Blueprint $table) {
             $table->foreignId('user_id')->constrained();
         });
-        Schema::table('attendances', function (Blueprint $table) {
+        Schema::table('event_contact', function (Blueprint $table) {
             $table->foreignId('event_id')->constrained()->onDelete('cascade');
             $table->foreignId('contact_id')->constrained()->onDelete('cascade');
         });
@@ -44,7 +44,7 @@ return new class extends Migration
         Schema::table('projects', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
         });
-        Schema::table('attendances', function (Blueprint $table) {
+        Schema::table('event_contact', function (Blueprint $table) {
             $table->dropForeign(['event_id']);
             $table->dropForeign(['contact_id']);
         });

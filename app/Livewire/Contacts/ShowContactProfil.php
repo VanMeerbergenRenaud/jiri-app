@@ -34,7 +34,7 @@ class ShowContactProfil extends Component
         $this->contact = $contact;
         $this->form->setContact($this->contact);
 
-        $this->contactType = auth()->user()->attendances()
+        $this->contactType = auth()->user()->eventContacts()
             ->where('event_id', $this->contact->pivot->event_id)
             ->where('contact_id', $contact->id)
             ->first()

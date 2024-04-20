@@ -4,21 +4,14 @@ namespace App\Livewire\Forms;
 
 use App\Models\Contact;
 use Illuminate\Http\UploadedFile;
-use Livewire\Attributes\Validate;
+use Illuminate\Validation\Rule;
 use Livewire\Form;
 
 class ContactForm extends Form
 {
-    #[Validate('required|min:3')]
     public $name = '';
-
-    #[Validate('required|min:3')]
     public $firstname = '';
-
-    #[Validate('email|nullable')]
     public $email = null;
-
-    #[Validate('image|max:1024|nullable')]
     public $avatar = null;
 
     public Contact $contact;
@@ -30,6 +23,20 @@ class ContactForm extends Form
         $this->firstname = $contact->firstname;
         $this->email = $contact->email;
         $this->avatar = $contact->avatar;
+    }
+
+    public function rules()
+    {
+        return [
+            'name' => 'required|min:3',
+            'firstname' => 'required|min:3',
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('contacts')->ignore($this->contact->id),
+                'nullable',
+            ],
+        ];
     }
 
     public function save()
@@ -48,11 +55,7 @@ class ContactForm extends Form
 
     public function update()
     {
-        $rules = [
-            'name' => 'required|min:3',
-            'firstname' => 'required|min:3',
-            'email' => 'email|nullable',
-        ];
+        $rules = $this->rules();
 
         $this->validate($rules);
 

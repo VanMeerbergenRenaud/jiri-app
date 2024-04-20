@@ -31,8 +31,8 @@ class Dashboard extends Component
     #[Computed]
     public function studentFilter()
     {
-        return auth()->user()->attendances()
-            ->join('contacts', 'attendances.contact_id', '=', 'contacts.id')
+        return auth()->user()->eventContacts()
+            ->join('contacts', 'event_contact.contact_id', '=', 'contacts.id')
             ->where('event_id', $this->event->id)
             ->where('role', 'student')
             ->where('contacts.name', 'like', '%'.$this->search.'%')
