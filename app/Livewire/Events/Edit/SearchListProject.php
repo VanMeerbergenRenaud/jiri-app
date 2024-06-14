@@ -2,8 +2,6 @@
 
 namespace App\Livewire\Events\Edit;
 
-use App\Models\Event;
-use App\Models\Project;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
@@ -17,11 +15,15 @@ class SearchListProject extends Component
     #[Computed]
     public function searchList()
     {
+        $event = auth()->user()->events()->findOrFail($this->eventId);
+        $addedProjectIds = $event->projects->pluck('id');
+
         return $this->projectname
             ? auth()->user()->projects()
-                ->where('name', 'like', '%'.$this->projectname.'%')
-                ->orderBy('name')
-                ->get()
+            ->where('name', 'like', '%' . $this->projectname . '%')
+            ->whereNotIn('id', $addedProjectIds)
+            ->orderBy('name')
+            ->get()
             : new Collection();
     }
 

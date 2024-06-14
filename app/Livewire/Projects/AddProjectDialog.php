@@ -13,6 +13,13 @@ class AddProjectDialog extends Component
 
     public $show = false;
 
+    public $tasks = [];
+
+    public function mount()
+    {
+        $this->tasks = json_encode(auth()->user()->projects->pluck('tasks'));
+    }
+
     public function add()
     {
         $this->form->save();

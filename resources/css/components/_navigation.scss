@@ -167,6 +167,9 @@
                             cursor: pointer;
                         }
                     }
+                    .active {
+                        color: $text;
+                    }
                 }
             }
 

@@ -14,7 +14,7 @@
         </div>
 
         <div class="mainProfil__nav">
-            <a href="{{ url()->previous() }}" class="button--gray">
+            <a href="{{ url()->previous() }}" class="button--gray" title="Retour à la page précédente" wire:navigate>
                 @include('components.svg.arrow-left')
                 Retour
             </a>

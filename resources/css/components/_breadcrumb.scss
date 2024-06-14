@@ -1,0 +1,25 @@
+/* Fil d'Arianne */
+.breadcrumb {
+    margin: 0 auto;
+    padding: 0 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+
+    &__list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.25rem;
+        align-items: center;
+
+        &__item {
+            display: flex;
+            gap: 0.25rem;
+            align-items: center;
+
+            &__link {
+                font-weight: 600;
+            }
+        }
+    }
+}

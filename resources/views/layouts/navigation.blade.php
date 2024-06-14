@@ -15,17 +15,23 @@
             <!-- Desktop navigation links -->
             <ul role="menu" class="navigation-links" tabindex="0">
                 <li class="navigation-links__item">
-                    <a href="{{ route('events.index') }}" class="navigation-links__item__link" title="Vers la page des épreuves" wire:navigate>
+                    <a href="{{ route('events.index') }}"
+                       class="navigation-links__item__link {{ Route::currentRouteNamed('events.index') ? 'active' : '' }}"
+                       title="Vers la page des épreuves" wire:navigate>
                         Épreuves
                     </a>
                 </li>
                 <li class="navigation-links__item">
-                    <a href="{{ route('contacts.index') }}" class="navigation-links__item__link" title="Vers la page des contacts" wire:navigate>
+                    <a href="{{ route('contacts.index') }}"
+                       class="navigation-links__item__link {{ Route::currentRouteNamed('contacts.index') ? 'active' : '' }}"
+                       title="Vers la page des contacts" wire:navigate>
                         Contacts
                     </a>
                 </li>
                 <li class="navigation-links__item">
-                    <a href="{{ route('projects.index') }}" class="navigation-links__item__link" title="Vers la page des projets" wire:navigate>
+                    <a href="{{ route('projects.index') }}"
+                       class="navigation-links__item__link {{ Route::currentRouteNamed('projects.index') ? 'active' : '' }}"
+                       title="Vers la page des projets" wire:navigate>
                         Projets
                     </a>
                 </li>

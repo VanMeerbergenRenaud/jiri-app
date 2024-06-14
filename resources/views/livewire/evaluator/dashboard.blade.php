@@ -33,7 +33,7 @@
                             <span>{{ $projects->count() ?? 0 }}</span>
                         </li>
                         <li>
-                            Évaluations
+                            Moyenne
                             <span>{{ 'Modifier' ?? 'Commencer' }}</span>
                         </li>
                         <li>
@@ -41,7 +41,10 @@
                             <span>{{ 'Publiées' ?? 'Non publiées' }}</span>
                         </li>
                         <li>
-                            <a href="#" class="students__list__content__link">Évaluer</a>
+                            <a href="{{ route('events.evaluator-dashboard-evaluation' , ['event' => $event, 'contact' => $student->contact, 'token' => $student->token]) }}"
+                               class="students__list__content__link">
+                                Évaluer
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -70,7 +73,7 @@
                     Projets <x-svg.arrow-down />
                 </th>
                 <th @click="open = !open" wire:click="sortBy('evaluations')">
-                    Évaluations <x-svg.arrow-down />
+                    Moyenne <x-svg.arrow-down />
                 </th>
                 <th @click="open = !open" wire:click="sortBy('gradesStatus')">
                     Cotes <x-svg.arrow-down />
@@ -103,7 +106,12 @@
                         {{ $student->gradesStatus ?? 'Non publiées' }}
                     </td>
                     <td class="actions">
-                        <a href="#" class="students__list__content__link">Évaluer</a>
+                        <a href="{{ route('events.evaluator-dashboard-evaluation' , ['event' => $event, 'contact' => $student->contact, 'token' => $student->token]) }}"
+                           class="students__list__content__link"
+                           wire:navigate
+                        >
+                            Évaluer
+                        </a>
                     </td>
                 </tr>
             @empty

@@ -32,7 +32,7 @@
                         :messages="$errors->get('form.description')"
                     />
 
-                    <x-form.field
+                    {{--<x-form.field
                         label="Tâches"
                         name="tasks"
                         type="text"
@@ -40,7 +40,20 @@
                         value="{{ old('tasks') }}"
                         placeholder="Tâches à réaliser"
                         :messages="$errors->get('form.tasks')"
-                    />
+                    />--}}
+
+                    <label for="tasks">Tâches</label>
+                    <select
+                        id="tasks"
+                        multiple
+                        name="tasks"
+                        model="form.tasks"
+                        placeholder="Tâches à réaliser"
+                    >
+                        @foreach (json_decode($tasks) as $task)
+                            <option value="{{ $task }}" selected>{{ $task }}</option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <x-dialog.footer>

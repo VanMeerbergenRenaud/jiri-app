@@ -2,9 +2,6 @@
 
 namespace App\Livewire\Events\Edit;
 
-use App\Models\EventContact;
-use App\Models\Contact;
-use App\Models\Event;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
@@ -26,9 +23,13 @@ class SearchList extends Component
     #[Computed]
     public function searchList()
     {
+        $event = auth()->user()->events()->findOrFail($this->eventId);
+        $existingContactIds = $event->contacts()->pluck('contacts.id');
+
         return $this->username
             ? auth()->user()->contacts()
-                ->where('name', 'like', '%'.$this->username.'%')
+                ->where('name', 'like', '%' . $this->username . '%')
+                ->whereNotIn('id', $existingContactIds)
                 ->orderBy('name')
                 ->get()
             : new Collection();
