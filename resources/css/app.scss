@@ -67,7 +67,10 @@
 @import "admin/profile";
 
 /* ------- Evaluator ------- */
-@import "evaluator/dashboard";
+@import "pages/evaluator/dashboard";
+@import "pages/evaluator/dashboard-event";
+@import "pages/evaluator/evaluation";
+@import "pages/evaluator/summary";
 
 /* ---------------------
        5. Errors

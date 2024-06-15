@@ -1,0 +1,95 @@
+/* Evaluation mode for the project of a student */
+.evaluation-nav {
+    position: relative;
+    margin: 1.5rem auto 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 600px;
+
+    .inline-block {
+        position: relative;
+        margin-bottom: 2rem;
+        //position: absolute;
+        //left: 0;
+    }
+
+    .button--gray {
+        font-weight: 500;
+        cursor: pointer;
+    }
+}
+
+.evaluation {
+    margin: 3rem 2rem 0;
+    width: fit-content;
+    border: 1px solid $gray-500;
+    border-radius: 1.5rem;
+    overflow: hidden;
+
+    &__header {
+        padding: 1.25rem 5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1.5rem;
+        background-color: $gray-300;
+
+        img {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 2.5rem;
+        }
+
+        p {
+            font-size: 0.94rem;
+            font-weight: 500;
+        }
+    }
+
+    &__text {
+        margin: 2rem auto;
+        text-align: center;
+        font-size: 0.94rem;
+        max-width: 250px;
+    }
+
+    &__list {
+        margin-bottom: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+
+        &__item {
+            margin: 0 auto;
+            width: 225px;
+
+            &__link {
+                justify-content: center;
+                font-weight: 400;
+                transition: font-weight 0.2s;
+
+                &:hover {
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .evaluation-nav {
+        margin-top: 6rem;
+
+        .inline-block {
+            margin: 0;
+            position: absolute;
+            left: -2rem;
+        }
+    }
+
+    .evaluation {
+        margin: 4rem auto 0;
+    }
+}

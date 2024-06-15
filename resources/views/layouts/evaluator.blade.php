@@ -16,7 +16,8 @@
     <body>
         <header class="evaluator__header">
             <!-- Logo -->
-            <a href="{{ url()->current() }}" class="logo__link">
+            {{-- TODO : change the route to 'evaluator-events-dashboard' --}}
+            <a href="{{ url()->current() }}" class="logo__link" title="Vers la page de toutes mes épreuves">
                 <x-logo />
                 <span>Jiri.app</span>
             </a>
@@ -25,7 +26,8 @@
             <h1 class="evaluator__header__title">{{ $title ?? 'Dashboard évaluateur' }}</h1>
 
             <!-- Avatar of the evaluator -->
-            <img src="{{ asset('img/placeholder.png') }}" alt="" class="evaluator__header__img">
+            {{-- TODO : add a route so the evaluator can change his profile --}}
+            <img src="{{ asset('img/placeholder.png') }}" alt="photo de profil du contact" class="evaluator__header__img">
         </header>
 
         <!-- Page Content -->

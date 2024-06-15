@@ -64,11 +64,9 @@
 
                         @if($eventContacts->role == 'evaluator' && isset($eventContacts->token))
                             <a class="link"
-                               href="{{ route('events.evaluator-dashboard', [
-                                    'event' => $eventContacts->event->id,
-                                    'contact' => $eventContacts->contact->id,
-                                    'token' => $eventContacts->token
-                                ]) }}"
+                               href="{{ route('events.evaluator-dashboard-event',
+                                   ['event' => $eventContacts->event, 'contact_id' => $eventContacts->contact->id, 'token' => $eventContacts->token])
+                               }}"
                             >
                                 Dashboard de l'évaluateur
                             </a>

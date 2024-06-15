@@ -1,4 +1,4 @@
-/* Dashboard */
+/* Dashboard for a specific event */
 
 .evaluator__header {
     display: flex;
@@ -21,7 +21,11 @@
 }
 
 .mainEvaluator {
+    min-height: 72vh;
+
     .search {
+        margin-bottom: 1.5rem;
+
         input {
             border-radius: 0.75rem;
             background-color: white;
@@ -68,6 +72,7 @@
                 img {
                     width: 2.5rem;
                     height: 2.5rem;
+                    border-radius: 2.5rem;
                 }
             }
         }
@@ -216,9 +221,9 @@
                         text-align: center;
 
                         img {
-                            width: 2rem;
-                            height: 2rem;
-                            border-radius: 2rem;
+                            width: 2.25rem;
+                            height: 2.25rem;
+                            border-radius: 2.25rem;
                         }
                     }
 
