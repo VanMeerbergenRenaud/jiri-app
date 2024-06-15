@@ -49,8 +49,10 @@
                                 <span>{{ 'Publiées' ?? 'Non publiées' }}</span>
                             </li>
                             <li>
-                                <a href="{{ route('events.evaluator-evaluation-start' , ['event' => $event, 'token' => $student->token]) }}"
-                                   class="students__list__content__link">
+                                <a href="{{ route('events.evaluator-evaluation-start' , ['event' => $event, 'contact' => $student->contact, 'token' => $student->token]) }}"
+                                   class="students__list__content__link"
+                                   wire:navigate
+                                >
                                     Évaluer
                                 </a>
                             </li>

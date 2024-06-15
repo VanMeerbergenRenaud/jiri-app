@@ -21,6 +21,7 @@
 }
 
 .mainEvaluator {
+    margin-top: -1.75rem;
     min-height: 72vh;
 
     .search {
@@ -149,6 +150,8 @@
 /* Ipad */
 @media (min-width: 800px) {
     .mainEvaluator {
+        margin-top: 0;
+
         .students__list {
             display: none;
         }
@@ -301,7 +304,7 @@
     .footerEvaluator {
         margin: -1rem auto 0;
         padding: 1.75rem 3rem;
-        width: 95%;
+        max-width: 90%;
 
         p.copyright {
             margin-left: -6rem;

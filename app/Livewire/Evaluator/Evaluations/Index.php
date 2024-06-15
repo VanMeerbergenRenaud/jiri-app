@@ -11,8 +11,13 @@ class Index extends Component
     public function render()
     {
         $contact = auth()->user()->contacts()->findOrFail(request()->contact);
+        $eventContact = $contact->eventContacts()->first();
 
-        return view('livewire.evaluator.evaluations.index', compact('contact'))
+        // Fetch the event and token related to the contact
+        $event = $eventContact->event;
+        $token = $eventContact->token;
+
+        return view('livewire.evaluator.evaluations.index', compact('contact', 'event', 'token'))
             ->layout('layouts.evaluator', ['title' => 'Evaluation en cours']);
     }
 }

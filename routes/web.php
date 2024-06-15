@@ -13,6 +13,7 @@ use App\Livewire\Events\Edit as EEdit;
 use App\Livewire\Evaluator\Dashboard as EEvaluatorDashboard;
 use App\Livewire\Events\EvaluatorDashboard as EEvaluatorEventDashboard;
 use App\Livewire\Evaluator\Evaluations\Index as EEvaluatorEvaluationIndex;
+use App\Livewire\Evaluator\Evaluations\Edit as EEvaluatorEvaluationEdit;
 use App\Livewire\Evaluator\Evaluations\Show as EEvaluatorEvaluationShow;
 use App\Livewire\Projects\Index as PIndex;
 use App\Livewire\Projects\Show as PShow;
@@ -73,6 +74,10 @@ Route::middleware('auth')->group(function () {
         // Route that let the evaluator start an evaluation
         Route::get('/{event}/{token}/evaluation-start', EEvaluatorEvaluationIndex::class)
             ->name('evaluator-evaluation-start');
+
+        // Route that let the evaluator start an evaluation
+        Route::get('/{event}/{token}/evaluation-edit', EEvaluatorEvaluationEdit::class)
+            ->name('evaluator-evaluation-edit');
 
         // Route that let the evaluator see the summary of the evaluations
         Route::get('/{event}/{token}/evaluation-summary', EEvaluatorEvaluationShow::class)
