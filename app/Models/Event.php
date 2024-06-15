@@ -27,30 +27,15 @@ class Event extends Model
     public function events(): BelongsToMany
     {
         return $this
-            ->belongsToMany(Event::class, 'attendances', 'contact_id', 'event_id')
+            ->belongsToMany(Event::class, 'event_contact', 'contact_id', 'event_id')
             ->withPivot(['role', 'token']);
-    }
-
-    public function attendances(): HasMany
-    {
-        return $this->hasMany(Attendance::class);
-    }
-
-    public function duties(): HasMany
-    {
-        return $this->hasMany(Duty::class);
-    }
-
-    public function implementations(): HasMany
-    {
-        return $this->hasMany(Implementation::class);
     }
 
     public function contacts(): BelongsToMany
     {
         return $this->belongsToMany(
             Contact::class,
-            'attendances',
+            'event_contact',
             'event_id',
             'contact_id'
         );
@@ -60,10 +45,21 @@ class Event extends Model
     {
         return $this->belongsToMany(
             Project::class,
-            'implementations',
+            'event_project',
             'event_id',
             'project_id'
-        );
+        )
+            ->withPivot('ponderation1', 'ponderation2', 'link');
+    }
+
+    public function eventContacts(): HasMany
+    {
+        return $this->hasMany(EventContact::class);
+    }
+
+    public function eventProjects(): HasMany
+    {
+        return $this->hasMany(EventProject::class);
     }
 
     public function students(): BelongsToMany
@@ -71,7 +67,7 @@ class Event extends Model
         return $this
             ->belongsToMany(
                 Contact::class,
-                'attendances',
+                'event_contact',
                 'event_id',
                 'contact_id'
             )
@@ -84,11 +80,26 @@ class Event extends Model
         return $this
             ->belongsToMany(
                 Contact::class,
-                'attendances',
+                'event_contact',
                 'event_id',
                 'contact_id'
             )
             ->withPivot('role', 'token')
             ->wherePivot('role', 'evaluator');
+    }
+
+    public function isAvailable()
+    {
+        $ending_at = Carbon::parse($this->starting_at)->addMinutes($this->duration);
+        return $ending_at <= now();
+    }
+
+    public function status()
+    {
+        if ($this->isAvailable()) {
+            return 'en cours'; // ou passé
+        } else {
+            return 'terminé';
+        }
     }
 }

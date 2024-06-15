@@ -12,29 +12,21 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('events', function (Blueprint $table) {
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
         });
         Schema::table('contacts', function (Blueprint $table) {
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
         });
         Schema::table('projects', function (Blueprint $table) {
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
         });
-        Schema::table('attendances', function (Blueprint $table) {
-            $table->foreignId('event_id')->constrained();
-            $table->foreignId('contact_id')->constrained();
+        Schema::table('event_contact', function (Blueprint $table) {
+            $table->foreignId('event_id')->constrained()->onDelete('cascade');
+            $table->foreignId('contact_id')->constrained()->onDelete('cascade');
         });
-        Schema::table('duties', function (Blueprint $table) {
-            $table->foreignId('event_id')->constrained();
-            $table->foreignId('project_id')->constrained();
-        });
-        Schema::table('implementations', function (Blueprint $table) {
-            $table->foreignId('duty_id')->constrained();
-            $table->foreignId('contact_id')->constrained();
-        });
-        Schema::table('tasks', function (Blueprint $table) {
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('project_id')->constrained();
+        Schema::table('event_project', function (Blueprint $table) {
+            $table->foreignId('event_id')->constrained()->onDelete('cascade');
+            $table->foreignId('project_id')->constrained()->onDelete('cascade');
         });
     }
 
@@ -52,20 +44,12 @@ return new class extends Migration
         Schema::table('projects', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
         });
-        Schema::table('attendances', function (Blueprint $table) {
+        Schema::table('event_contact', function (Blueprint $table) {
             $table->dropForeign(['event_id']);
             $table->dropForeign(['contact_id']);
         });
-        Schema::table('duties', function (Blueprint $table) {
+        Schema::table('event_project', function (Blueprint $table) {
             $table->dropForeign(['event_id']);
-            $table->dropForeign(['project_id']);
-        });
-        Schema::table('implementations', function (Blueprint $table) {
-            $table->dropForeign(['duty_id']);
-            $table->dropForeign(['contact_id']);
-        });
-        Schema::table('tasks', function (Blueprint $table) {
-            $table->dropForeign(['user_id']);
             $table->dropForeign(['project_id']);
         });
     }

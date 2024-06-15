@@ -51,7 +51,6 @@
             <x-notifications
                 icon="delete"
                 title="Contact supprimé avec succès !"
-                message="Vous avez dit au revoir à ce contact..."
                 method="$set('saved', false)"
             />
         @endif

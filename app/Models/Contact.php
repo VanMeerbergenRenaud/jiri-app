@@ -27,24 +27,19 @@ class Contact extends Model
     public function events(): BelongsToMany
     {
         return $this
-            ->belongsToMany(Event::class, 'attendances', 'contact_id', 'event_id')
+            ->belongsToMany(Event::class, 'event_contact', 'contact_id', 'event_id')
             ->withPivot(['role', 'token']);
     }
 
     public function projects(): BelongsToMany
     {
         return $this
-            ->belongsToMany(Project::class, 'implementations', 'contact_id', 'project_id')
-            ->withPivot(['urls', 'scores', 'tasks']);
+            ->belongsToMany(Project::class, 'project_contacts', 'contact_id', 'project_id')
+            ->withPivot(['role']);
     }
 
-    public function attendances()
+    public function eventContacts(): HasMany
     {
-        return $this->hasMany(Attendance::class);
-    }
-
-    public function implementations(): HasMany
-    {
-        return $this->HasMany(Implementation::class);
+        return $this->hasMany(EventContact::class);
     }
 }

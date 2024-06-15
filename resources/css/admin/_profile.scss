@@ -16,29 +16,49 @@
         }
 
         &__text {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             font-size: 1rem;
             font-weight: 400;
         }
 
         .form {
-            label {
-                font-size: 0.94rem;
-            }
-
-            input {
-                padding: 0.65rem 0.75rem;
-            }
-
             &__footer {
                 margin-top: 1.25rem;
                 justify-content: flex-start;
             }
         }
+
+        &__form {
+            .form__field__password svg {
+                position: absolute;
+                top: -2rem;
+                right: 0;
+            }
+        }
+
+        button {
+            &:hover {
+                border: $transparent;
+                filter: brightness(1.05);
+            }
+        }
     }
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 500px) {
+    .profile-admin {
+        &__section {
+            &__form {
+                .form__field__password svg {
+                    top: -2.15rem;
+                    right: 1rem;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: $bp-medium) {
     .profile-admin {
         margin: 0 auto;
         padding: 0 2rem;

@@ -13,24 +13,15 @@ class AddProjectDialog extends Component
 
     public $show = false;
 
-    public $allTasks;
-
-    public $selectedTasks = [];
+    public $tasks = [];
 
     public function mount()
     {
-        $this->allTasks = auth()->user()->tasks()->get();
-    }
-
-    public function addSelectedTask(Task $task)
-    {
-        $this->selectedTasks[] = $task;
+        $this->tasks = json_encode(auth()->user()->projects->pluck('tasks'));
     }
 
     public function add()
     {
-        $this->form->selectedTasks = $this->selectedTasks;
-
         $this->form->save();
 
         $this->reset('show');

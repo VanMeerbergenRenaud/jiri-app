@@ -37,26 +37,28 @@
        3. Components
 -------------------------- */
 @import "components/navigation";
+@import "components/breadcrumb";
 @import "components/header";
 @import "components/footer";
 @import "components/dialog";
 @import "components/menu";
+@import "components/multiple-select";
 
 /* -------------------------
          4. Pages
 ------------------------- */
-@import "homepage";
-@import "welcome";
+@import "pages/homepage";
+@import "pages/welcome";
 
 /* ------- Events ------- */
-@import "events/index";
-@import "events/edit";
-@import "events/show";
+@import "pages/events/index";
+@import "pages/events/edit";
+@import "pages/events/show";
 
 /* ------- Contacts / Projets ------- */
-@import "contacts/index";
-@import "contacts/attendances";
-@import "contacts/profils";
+@import "pages/contacts/index";
+@import "pages/contacts/eventContact";
+@import "pages/contacts/profils";
 
 /* ------- Guest ------- */
 @import "guest/layout";
@@ -65,15 +67,18 @@
 @import "admin/profile";
 
 /* ------- Evaluator ------- */
-@import "evaluator/dashboard";
+@import "pages/evaluator/dashboard";
+@import "pages/evaluator/dashboard-event";
+@import "pages/evaluator/evaluation";
+@import "pages/evaluator/summary";
 
 /* ---------------------
        5. Errors
 --------------------- */
-@import "errors/404";
+@import "errors/errors";
 @import "errors/messages";
 
 /* ---------------------
         6. SVG
 --------------------- */
-@import "svg/svg";
+@import "others/svg";

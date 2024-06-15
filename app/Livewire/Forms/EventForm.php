@@ -23,21 +23,26 @@ class EventForm extends Form
     {
         $this->event = $event;
         $this->name = $event->name;
-        $this->starting_at = Carbon::parse($event->starting_at)->format('Y-m-d H:i:s');
-        $this->duration = $event->duration;
+        $this->starting_at = Carbon::parse($event->starting_at)->format('Y-m-d\TH:i'); // format to exclude seconds
+        $this->duration = Carbon::parse($event->duration)->format('H:i'); // format to exclude seconds
     }
 
     public function save()
     {
         $this->validate();
 
-        auth()->user()->events()->create([
+        $this->event = auth()->user()->events()->create([
             'name' => $this->name,
             'starting_at' => $this->starting_at,
             'duration' => $this->duration,
         ]);
 
         $this->reset(['name', 'starting_at', 'duration']);
+
+        sleep(1);
+
+        // Redirect to the edit page of the newly created event
+        return redirect()->route('events.edit', ['event' => $this->event->id]);
     }
 
     public function update()

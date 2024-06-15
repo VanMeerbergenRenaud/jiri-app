@@ -16,6 +16,7 @@ d'évaluer et de noter le travail des étudiants, tout en facilitant le processu
 4. [Détails techniques](#schéma-de-la-base-de-données)
 5. [Contribution & contact](#contribution--contact)
 6. [Licence](#licence)
+7. [Installation](#installation)
 
 ## Contexte 📖
 
@@ -88,3 +89,37 @@ J'espère que cette application améliorera votre système d'encodage de résult
 l'expérience des membres du jury, des professeurs et des étudiants.
 
 Merci au king de la qualité web @dominiquevilain pour avoir initialisé la base de donnée de ce projet ! 🏆
+
+## Installation 🎉
+
+Pour commencer, clonez ce repo :
+```
+git clone https://github.com/VanMeerbergenRenaud/jiri-app.git
+```
+Ensuite, copiez votre fichier .env.example, renommez le .env et configurez ensuite votre connexion à la base de données.
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=YOUR-DATABASE-NAME
+DB_USERNAME=YOUR-DATABASE-USERNAME
+DB_PASSWORD=YOUR-DATABASE-PASSWROD
+```
+Exécuter les packages et helpers nécessaires :
+```
+composer install
+npm install
+```
+Générer une nouvelle clé d'application :
+```
+php artisan key:generate
+```
+Exécutez les migrations et les seeders :
+```
+php artisan migrate
+php artisan db:seed
+```
+Enfin, lancez le serveur en local :
+```
+bun run dev
+```

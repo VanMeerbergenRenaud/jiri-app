@@ -1,7 +1,7 @@
 {{-- AddedList of contacts --}}
 <div class="form__component__added">
     <p>Contacts ajoutés</p>
-    @if(count($attendanceList) > 0)
+    @if(count($eventContactsList) > 0)
         <ul>
             @php
                 $roleTranslations = [
@@ -9,11 +9,11 @@
                     'evaluator' => 'évaluateur',
                 ];
              @endphp
-            @foreach($attendanceList as $attendance)
-                <li wire:key="{{ $attendance->id }}">
-                    <span class="category capitalize">{{ $roleTranslations[$attendance->role] ?? 'Neutre' }}</span>
-                    <span class="username capitalize">{{ $attendance->contact->name ?? 'Contact inconnu' }}</span>
-                    <button class="button--white" type="button" wire:click="removeContact({{ $attendance->id }})" wire:confirm="Êtes-vous sûr de vouloir supprimer le contact '{{ $attendance->contact->name }}' de l'épreuve ?">
+            @foreach($eventContactsList as $eventContacts)
+                <li wire:key="{{ $eventContacts->id }}">
+                    <span class="category capitalize">{{ $roleTranslations[$eventContacts->role] ?? 'Neutre' }}</span>
+                    <span class="username capitalize">{{ $eventContacts->contact->name ?? 'Contact inconnu' }}</span>
+                    <button class="button--white" type="button" wire:click="removeContact({{ $eventContacts->id }})" wire:confirm="Êtes-vous sûr de vouloir supprimer le contact '{{ $eventContacts->contact->name }}' de l'épreuve ?">
                         @include('components.svg.trash2')
                     </button>
                 </li>

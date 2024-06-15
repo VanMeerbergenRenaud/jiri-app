@@ -11,9 +11,6 @@ class AddContactDialog extends Component
 {
     use WithFileUploads;
 
-    #[Validate('image|max:1024')]
-    public $photo;
-
     public ContactForm $form;
 
     public $show = false;

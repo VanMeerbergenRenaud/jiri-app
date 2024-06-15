@@ -1,10 +1,12 @@
 <tr>
-    <td class="name capitalize">{{ $project->name }}</td>
+    <td class="name capitalize">
+        <a href="{{ route('projects.show', $project) }}" title="Voir le projet">
+            {{ $project->name }}
+        </a>
+    </td>
     <td class="capitalize">{{ str($project->description)->limit(50) }}</td>
     <td class="tasks">
-        @foreach($tasks as $task)
-            <span>{{ $task->name }}</span>
-        @endforeach
+        {{ implode(' | ', json_decode($project->tasks)) }}
     </td>
     <td class="actions">
         <x-menu>
@@ -13,6 +15,15 @@
             </x-menu.button>
 
             <x-menu.items>
+                {{-- Item to show a project --}}
+                <a class="link" href="{{ route('projects.show', $project) }}">
+                    <x-svg.show/>
+
+                    Voir
+                </a>
+
+                <x-divider />
+
                 {{-- Dialog to edit a project --}}
                 <x-dialog wire:model="showEditDialog" class="w-full">
                     <x-dialog.open>
@@ -27,58 +38,59 @@
 
                     <x-dialog.panel>
                         <form wire:submit="save" class="form">
+                            @csrf
                             <div class="form__content">
                                 <h2 class="title">Modifier le project</h2>
 
-                                <label>
-                                    Nom
-                                    <input autofocus wire:model="form.name">
-                                    @error('form.name')
-                                    <div class="error">{{ $message }}</div>@enderror
-                                </label>
+                                {{-- Nom, description, tâches selection --}}
+                                <x-form.field
+                                    label="Nom"
+                                    name="name"
+                                    type="text"
+                                    model="form.name"
+                                    placeholder="Nom du projet"
+                                    value="{{ $project->name }}"
+                                    :messages="$errors->get('nom')"
+                                    required
+                                    autofocus
+                                />
 
-                                <label>
-                                    Description
-                                    <input wire:model="form.description"/>
-                                    @error('form.description')
-                                    <div class="error">{{ $message }}</div>@enderror
-                                </label>
+                                <x-form.textarea
+                                    label="Description"
+                                    name="description"
+                                    model="form.description"
+                                    placeholder="Informations sur le projet"
+                                    value="{{ $project->description }}"
+                                    :messages="$errors->get('description')"
+                                />
 
-                                {{-- List of tasks in a select dropdown --}}
-                                <label>
-                                    Liste des tâches déjà existantes
-                                    <div x-data="{ selectedTask: [] }"
-                                         x-init="">
-                                        <select id="tasks2"
-                                                multiple
-                                                x-ref="selectElement"
-                                                wire:model="form.selectedTasks"
-                                        >
-                                            @foreach($allTasks as $task)
-                                                <option value="{{ $task->name }}"
-                                                        wire:click="addSelectedTask({{ $task->id }})"
-                                                >
-                                                    {{ $task->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    @error('form.selectedTasks')<div class="error">{{ $message }}</div>@enderror
-                                </label>
+                                {{--<x-form.field
+                                    label="Tâches"
+                                    name="tasks"
+                                    type="text"
+                                    model="form.tasks"
+                                    placeholder="Tâches à réaliser"
+                                    value="{{ $project->tasks }}"
+                                    :messages="$errors->get('tasks')"
+                                />--}}
 
-                                <label>
-                                    Nom de la nouvelle tâche
-                                    <input wire:model="form.newTask">
-                                    @error('form.newTask')<div class="error">{{ $message }}</div>@enderror
-                                </label>
-
-                                <div>
-                                    @foreach($tasks as $task)
-                                        <ul class="px-8">
-                                            <li class="list-disc">{{ $task->name }}</li>
-                                        </ul>
+                                <label for="tasks">Tâches</label>
+                                <ul>
+                                    @foreach (json_decode($project->tasks) as $task)
+                                        <li>{{ $task }}</li>
                                     @endforeach
-                                </div>
+                                </ul>
+                                <select
+                                    id="tasks"
+                                    multiple
+                                    name="tasks"
+                                    model="form.tasks"
+                                    placeholder="Tâches à réaliser"
+                                >
+                                    @foreach (json_decode($tasks) as $task)
+                                        <option value="{{ $task }}" selected>{{ $task }}</option>
+                                    @endforeach
+                                </select>
                             </div>
 
                             <x-dialog.footer>
@@ -115,7 +127,7 @@
                                         <h3 class="title">Supprimer le projet</h3>
                                         <p class="description">
                                             Êtes-vous sûre de vouloir supprimer le projet
-                                            <strong> {{ $project->name }}</strong>&nbsp;? Toutes les données seront supprimées. Cette action est irréversible.
+                                            <span class="font-semibold"> {{ $project->name }}</span>&nbsp;? Toutes les données seront supprimées. Cette action est irréversible.
                                         </p>
                                         <label class="confirm-deletion">
                                             Veuillez tapper "CONFIRMER" pour confirmer la suppression.
@@ -148,4 +160,3 @@
         </x-menu>
     </td>
 </tr>
-

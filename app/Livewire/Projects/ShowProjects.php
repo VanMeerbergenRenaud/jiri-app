@@ -15,13 +15,6 @@ class ShowProjects extends Component
 
     public $saved = false;
 
-    public $tasks = [];
-
-    public function mount()
-    {
-        $this->tasks = auth()->user()->projects()->with('tasks')->get();
-    }
-
     #[Computed]
     public function projectFilter()
     {
@@ -33,16 +26,8 @@ class ShowProjects extends Component
 
     public function delete($projectId)
     {
-        $project = Project::findOrFail($projectId);
+        $project = auth()->user()->projects()->findOrFail($projectId);
 
-        // Delete the associated duties and their implementations
-        foreach ($project->duties as $duty) {
-            $duty->implementations()->delete();
-            $duty->delete();
-        }
-
-        $project->events()->detach();
-        $project->tasks()->delete();
         $project->delete();
 
         sleep(1);

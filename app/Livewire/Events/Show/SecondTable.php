@@ -13,18 +13,14 @@ class SecondTable extends Component
     public $students;
     public $evaluators;
 
-    public $projects = [
-        'Project 1',
-        'Project 2',
-        'Project 3',
-    ];
+    public $projects;
 
     public function mount()
     {
         $this->event = auth()->user()->events()
             ->findOrFail(request()->route('event'));
 
-        $this->contacts = auth()->user()->attendances()
+        $this->contacts = auth()->user()->eventContacts()
             ->where('event_id', $this->event->id)
             ->with('contact')
             ->get();
@@ -32,7 +28,7 @@ class SecondTable extends Component
         $this->students = $this->contacts->where('role', 'student');
         $this->evaluators = $this->contacts->where('role', 'evaluator');
 
-        // TODO : get projects from the event
+        $this->projects = $this->event->projects;
     }
 
     public function render()

@@ -2,8 +2,8 @@
 
 namespace App\Livewire\Events\Edit;
 
-use Livewire\Component;
 use App\Livewire\Forms\EventForm;
+use Livewire\Component;
 
 class Container extends Component
 {

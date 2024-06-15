@@ -18,7 +18,7 @@ class FirstTable extends Component
         $this->event = auth()->user()->events()
             ->findOrFail(request()->route('event'));
 
-        $this->contacts = auth()->user()->attendances()
+        $this->contacts = auth()->user()->eventContacts()
             ->where('event_id', $this->event->id)
             ->with('contact')
             ->get();

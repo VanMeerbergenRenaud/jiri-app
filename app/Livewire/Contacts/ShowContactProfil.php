@@ -2,37 +2,56 @@
 
 namespace App\Livewire\Contacts;
 
+use App\Livewire\Forms\ContactForm;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class ShowContactProfil extends Component
 {
+    use WithFileUploads;
+
     public $contact;
 
-    public $contactType;
+    public ContactForm $form;
 
+    public $showEditDialog = false;
+
+    // Other properties
     public $projects;
-
-    public $tasks;
+    public $contactType;
+    public $globalComment;
 
     public function mount($contact)
     {
         $this->contact = $contact;
+        $this->form->setContact($this->contact);
 
-        $this->contactType = auth()->user()->attendances()
-            ->where('contact_id', $contact->id)
+        $this->contactType = auth()->user()->eventContacts()
             ->where('event_id', $this->contact->pivot->event_id)
+            ->where('contact_id', $contact->id)
             ->first()
             ->role;
 
-        // Fetch projects related to the event with duties
-        $this->projects = auth()->user()->duties()
+        $this->projects = auth()->user()->eventProjects()
             ->where('event_id', $this->contact->pivot->event_id)
             ->get();
 
-        // Fetch tasks related to the project
-        $this->tasks = auth()->user()->tasks()
-            ->where('project_id', $this->projects->first()->id)
-            ->get();
+        $this->globalComment = 'À changer';
+    }
+
+    public function save()
+    {
+        $this->form->update();
+
+        $this->contact->refresh();
+
+        $this->reset('showEditDialog');
+    }
+
+    // TODO : Change the role of the contact by updating its role in the attendances table (evaluator or student)
+    public function editContactRole($role)
+    {
+
     }
 
     public function render()

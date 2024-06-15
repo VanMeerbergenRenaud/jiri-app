@@ -3,23 +3,19 @@
 namespace App\Livewire\Forms;
 
 use App\Models\Project;
-use App\Models\Task;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
 class ProjectForm extends Form
 {
-    #[Validate('required|min:3')]
+    #[Validate('required|min:3|max:255')]
     public $name = '';
 
-    #[Validate('required|min:3|max:255|nullable')]
+    #[Validate('required|min:3|max:255')]
     public $description = '';
 
     #[Validate('nullable')]
-    public $selectedTasks = [];
-
-    #[Validate('min:2|nullable')]
-    public $newTask = '';
+    public $tasks = [""];
 
     public Project $project;
 
@@ -28,39 +24,20 @@ class ProjectForm extends Form
         $this->project = $project;
         $this->name = $project->name;
         $this->description = $project->description;
-        $this->selectedTasks = $project->selectedTasks;
-        $this->newTask = $project->newTask;
+        $this->tasks = $project->tasks;
     }
 
     public function save()
     {
         $this->validate();
 
-        // Create a new project
-        $project = auth()->user()->projects()->create([
+        auth()->user()->projects()->create([
             'name' => $this->name,
             'description' => $this->description,
+            'tasks' => $this->tasks,
         ]);
 
-        // If newTask is not empty, create a new task
-        if (!empty($this->newTask)) {
-            $task = new Task();
-            $task->name = $this->newTask;
-            $task->project_id = $project->id;
-            $task->user_id = auth()->user()->id;
-            $task->save();
-        }
-
-        // Add selected tasks to all the tasks related to a project
-        if (!empty($this->selectedTasks)) {
-            foreach ($this->selectedTasks as $selectedTask) {
-                $selectedTask->project_id = $project->id;
-                $selectedTask->user_id = auth()->user()->id;
-                $selectedTask->save();
-            }
-        }
-
-        $this->reset(['name', 'description', 'selectedTasks', 'newTask']);
+        $this->reset(['name', 'description', 'tasks']);
     }
 
     public function update()
@@ -70,8 +47,7 @@ class ProjectForm extends Form
         $this->project->update([
             'name' => $this->name,
             'description' => $this->description,
-            'selectedTasks' => $this->selectedTasks,
-            'newTask' => $this->newTask,
+            'tasks' => $this->tasks,
         ]);
     }
 }

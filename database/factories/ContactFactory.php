@@ -20,8 +20,6 @@ class ContactFactory extends Factory
             'firstname' => $this->faker->firstName(),
             'email' => $this->faker->unique()->safeEmail(),
             'avatar' => $this->faker->imageUrl(),
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
         ];
     }
 }

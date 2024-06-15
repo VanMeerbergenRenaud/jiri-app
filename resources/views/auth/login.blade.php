@@ -4,29 +4,37 @@
     </h1>
 
     <!-- Session Status -->
-    <x-breeze.auth-session-status :status="session('status')" />
+    <x-auth.session-status :status="session('status')" />
 
     <form method="POST" action="{{ route('login') }}" class="form">
         @csrf
 
         <!-- Email Address -->
-        <div class="form__field">
-            <x-breeze.input-label for="email" :value="__('Email')" />
-            <x-breeze.text-input id="email" type="email" name="email" :value="old('email')" required autocomplete="username" autofocus />
-            <x-breeze.input-error :messages="$errors->get('email')" />
-        </div>
+        <x-form.field
+            label="Adresse mail"
+            name="email"
+            type="email"
+            placeholder="john.doe@gmail.com"
+            autocomplete="username"
+            required
+            :messages="$errors->get('email')"
+            autofocus
+        />
 
         <!-- Password -->
-        <div class="form__field">
-            <x-breeze.input-label for="password" :value="__('Mot de passe')" />
-            <x-breeze.text-input id="password" type="password" name="password" required autocomplete="current-password" />
-            <x-breeze.input-error :messages="$errors->get('password')" />
-        </div>
+        <x-form.field-password
+            label="Mot de passe"
+            name="password"
+            placeholder="Min. 8 caractères"
+            autocomplete="current-password"
+            required
+            :messages="$errors->get('password')"
+        />
 
         <!-- Remember Me -->
         <div class="form__field form__remember-me">
-            <x-breeze.text-input id="remember_me" type="checkbox" name="password"/>
-            <x-breeze.input-label for="remember_me" :value="__('Se rappeler de moi')" />
+            <input id="remember_me" type="checkbox" name="password"/>
+            <label for="remember_me">{{  __('Se rappeler de moi') }}</label>
         </div>
 
         <div class="form__footer form__footer__3">

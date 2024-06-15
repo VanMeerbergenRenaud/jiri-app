@@ -22,6 +22,10 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+main {
+    min-height: 70vh;
+}
+
 h2 {
     font-size: 1.25rem;
     font-weight: 600;
@@ -42,6 +46,26 @@ img {
 svg {
     width: 1rem;
     height: auto;
+}
+
+.hidden {
+    display: none;
+}
+
+.block {
+    display: block;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
+
+.font-semibold {
+    font-weight: 600;
 }
 
 .rotate-180 {

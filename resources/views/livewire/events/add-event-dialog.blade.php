@@ -5,40 +5,40 @@
         </x-dialog.open>
 
         <x-dialog.panel>
-            <form wire:submit="add" class="form">
+            <form wire:submit="add" class="form" wire:loading.class.delay="opacity-50">
                 <div class="form__content">
                     <h2 class="title">Créer une nouvelle épreuve</h2>
 
-                    <label>
-                        Nom
-                        <input
-                            wire:model="form.name"
-                            type="text"
-                            autofocus
-                            placeholder="Jury juin {{ date('Y') }}"
-                        >
-                        @error('form.name')<div class="error">{{ $message }}</div>@enderror
-                    </label>
+                    <x-form.field
+                        name="name"
+                        label="Nom de l'épreuve"
+                        type="text"
+                        model="form.name"
+                        placeholder="Ex : Jury juin {{ now()->year }}"
+                        :messages="$errors->get('form.name')"
+                    />
 
-                    <label>
-                        Commencement
-                        <input
-                            wire:model="form.starting_at"
-                            type="datetime-local"
-                        />
-                        @error('form.starting_at')<div class="error">{{ $message }}</div>@enderror
-                    </label>
+                    <x-form.field
+                        label="Date de début"
+                        name="starting_at"
+                        type="datetime-local"
+                        model="form.starting_at"
+                        min="2020-01-01T00:00"
+                        max="2038-01-01T00:00"
+                        placeholder="{{ now()->format('Y-m-d\TH:i') }}"
+                        :messages="$errors->get('form.starting_at')"
+                    />
 
-                    <label>
-                        Durée
-                        <input
-                            wire:model="form.duration"
-                            type="time"
-                            step="1" minutes="1"
-                            max="23:59"
-                        />
-                        @error('form.duration')<div class="error">{{ $message }}</div>@enderror
-                    </label>
+                    <x-form.field
+                        label="Durée de l'épreuve"
+                        name="duration"
+                        type="time"
+                        model="form.duration"
+                        min="00:01:00"
+                        max="23:59:00"
+                        placeholder="00:00:00"
+                        :messages="$errors->get('form.duration')"
+                    />
                 </div>
 
                 <x-dialog.footer>
@@ -57,7 +57,6 @@
             <x-notifications
                 icon="add"
                 title="Épreuve ajoutée avec succès !"
-                message="Vous avez ajouté une nouvelle épreuve."
                 method="$set('saved', false)"
             />
         @endif

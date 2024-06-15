@@ -9,6 +9,7 @@
 
         <x-dialog.panel>
             <form wire:submit.prevent="import" class="form">
+                @csrf
 
                 @unless($upload)
                 <div class="form__content">
@@ -89,7 +90,6 @@
             <x-notifications
                 icon="import"
                 title="Liste de contact ajouté avec succès !"
-                message="Vous avez ajouté tout vos contacts."
                 method="$set('imported', false)"
             />
         @endif

@@ -23,7 +23,7 @@
                 />
             @empty
                 <tr>
-                    <td colspan="100%" class="py-2 min-w-80">
+                    <td colspan="100%" class="empty">
                         Aucun project trouvé.
                     </td>
                 </tr>
@@ -40,7 +40,6 @@
             <x-notifications
                 icon="delete"
                 title="Projet supprimé avec succès !"
-                message="Vous avez supprimé un projet qui facilitera sûrement la vie de vos étudiants."
                 method="$set('saved', false)"
             />
         @endif

@@ -1,13 +1,22 @@
 <?php
 
-use App\Http\Controllers\ContactsController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\EventController;
-use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ProjectsController;
-use App\Http\Controllers\WelcomeController;
-use App\Livewire\ImageUpload;
+use App\Livewire\Homepage;
+use App\Livewire\Welcome;
+use App\Livewire\Dashboard;
+use App\Livewire\Contacts\Index as CIndex;
+use App\Livewire\Contacts\Show as CShow;
+use App\Livewire\Contacts\ContactProfil as EContactProfil;
+use App\Livewire\Events\Index as EIndex;
+use App\Livewire\Events\Show as EShow;
+use App\Livewire\Events\Edit as EEdit;
+use App\Livewire\Evaluator\Dashboard as EEvaluatorDashboard;
+use App\Livewire\Events\EvaluatorDashboard as EEvaluatorEventDashboard;
+use App\Livewire\Evaluator\Evaluations\Index as EEvaluatorEvaluationIndex;
+use App\Livewire\Evaluator\Evaluations\Edit as EEvaluatorEvaluationEdit;
+use App\Livewire\Evaluator\Evaluations\Show as EEvaluatorEvaluationShow;
+use App\Livewire\Projects\Index as PIndex;
+use App\Livewire\Projects\Show as PShow;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,39 +30,71 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/* Homepage */
-Route::get('/', [HomepageController::class, 'index'])
+/*----- Homepage guest user -----*/
+Route::get('/home', Homepage::class)
     ->middleware('guest')
     ->name('homepage');
 
-/* Homepage authenticated user */
-Route::get('/welcome', [WelcomeController::class, 'index'])
+/*----- Homepage authenticated user -----*/
+Route::get('/welcome', Welcome::class)
     ->middleware(['auth', 'verified'])
     ->name('welcome');
 
 Route::middleware('auth')->group(function () {
-    /* Dashboard */
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    /*----- Admin dashboard -----*/
+    Route::get('/', Dashboard::class)->name('dashboard');
 
-    /* Profile RUD */
+    /*----- Profile CRUD -----*/
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    /* Events CRUD */
-    Route::resource('events', EventController::class);
+    /*----- Events CRUD -----*/
+    Route::name('events.')->prefix('events')->group(function () {
+        Route::get('/', EIndex::class)->name('index');
+        // Route::get('/create', Create::class)->name('create');
+        Route::get('/{event}', EShow::class)->name('show');
+        Route::get('/{event}/edit', EEdit::class)->name('edit');
 
-    /* Contacts CRUD */
-    Route::resource('contacts', ContactsController::class);
+        /*----- Contact -----*/
+        // Contact profil data in a specific event
+        Route::get('/{event}/contacts/{contact}', EContactProfil::class)
+            ->name('contact-profil');
 
-    /* Projects CRUD */
-    Route::resource('projects', ProjectsController::class);
+        /*----- Evaluator -----*/
+        // Route for the dashboard of an evaluator with all the events
+        Route::get('/{token}', EEvaluatorDashboard::class)
+            //->middleware('evaluator')
+            ->name('evaluator-dashboard');
 
-    // Evaluator dashboard
-    Route::get('/events/{event}/evaluator/{evaluator}/{token}', [EventController::class, 'showEvaluator'])->name('events.showEvaluator');
+        // Route for the specific event of an evaluator
+        Route::get('/{event}/{token}', EEvaluatorEventDashboard::class)
+            ->name('evaluator-dashboard-event');
 
-    // Route of a specific contact in a specific event
-    Route::get('/events/{event}/contacts/{contact}', [EventController::class, 'showContact'])->name('events.showContact');
+        // Route that let the evaluator start an evaluation
+        Route::get('/{event}/{token}/evaluation-start', EEvaluatorEvaluationIndex::class)
+            ->name('evaluator-evaluation-start');
+
+        // Route that let the evaluator start an evaluation
+        Route::get('/{event}/{token}/evaluation-edit', EEvaluatorEvaluationEdit::class)
+            ->name('evaluator-evaluation-edit');
+
+        // Route that let the evaluator see the summary of the evaluations
+        Route::get('/{event}/{token}/evaluation-summary', EEvaluatorEvaluationShow::class)
+            ->name('evaluator-evaluation-summary');
+    });
+
+    /*----- Contacts CRUD -----*/
+    Route::name('contacts.')->prefix('contacts')->group(function () {
+        Route::get('/', CIndex::class)->name('index');
+        Route::get('/{contact}', CShow::class)->name('show');
+    });
+
+    /*----- Projects CRUD -----*/
+    Route::name('projects.')->prefix('projects')->group(function () {
+        Route::get('/', PIndex::class)->name('index');
+        Route::get('/{project}', PShow::class)->name('show');
+    });
 });
 
 require __DIR__.'/auth.php';

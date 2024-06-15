@@ -14,18 +14,20 @@
         @vite(['resources/css/app.scss', 'resources/js/app.js'])
     </head>
     <body>
-        <header class="flex items-center justify-between gap-2 p-4 m-auto w-full" style="max-width: 1650px; border-bottom: 1px solid #E5E9F4;">
+        <header class="evaluator__header">
             <!-- Logo -->
-            <a href="/" class="logo__link">
+            {{-- TODO : change the route to 'evaluator-events-dashboard' --}}
+            <a href="{{ url()->current() }}" class="logo__link" title="Vers la page de toutes mes épreuves">
                 <x-logo />
                 <span>Jiri.app</span>
             </a>
 
             <!-- Name of the event -->
-            <h1 class="font-semibold mr-8">{{ $title ?? 'Jury juin 2023' }}</h1>
+            <h1 class="evaluator__header__title">{{ $title ?? 'Dashboard évaluateur' }}</h1>
 
             <!-- Avatar of the evaluator -->
-            <img src="{{ asset('img/placeholder.png') }}" alt="" class="rounded-full h-8 w-8">
+            {{-- TODO : add a route so the evaluator can change his profile --}}
+            <img src="{{ asset('img/placeholder.png') }}" alt="photo de profil du contact" class="evaluator__header__img">
         </header>
 
         <!-- Page Content -->

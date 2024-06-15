@@ -1,12 +1,13 @@
 /* Inputs */
 
 input, textarea, select {
+    font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     margin: 0;
     padding: 0;
+    color: $text;
     border: $border;
     border-radius: 0.5rem;
     background-color: white;
-    max-width: 1600px;
 }
 
 select {
@@ -20,6 +21,9 @@ select {
     -webkit-appearance: none;
 }
 
+input[type="number"] {
+    min-width: 8rem;
+}
 
 label.search {
     position: relative;
@@ -29,7 +33,6 @@ label.search {
     background-color: $gray-bg;
 
     input {
-        max-width: 1800px;
         width: 100%;
         padding: 0.75rem 3.5rem 0.75rem;
         font-size: 1rem;
@@ -68,7 +71,6 @@ label.search {
     span {
         font-size: 0.875rem;
         font-weight: 600;
-        min-width: 200px;
     }
 }
 

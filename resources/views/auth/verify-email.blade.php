@@ -1,5 +1,4 @@
 <x-guest-layout>
-
     @if (session('status') == 'verification-link-sent')
         <p>
             {{ __("Un nouveau lien de vérification a été envoyé à l'adresse e-mail que vous avez fournie lors de votre enregistrement.") }}
