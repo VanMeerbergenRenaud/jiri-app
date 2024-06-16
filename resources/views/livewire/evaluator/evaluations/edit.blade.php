@@ -1,72 +1,43 @@
 <div>
     <main class="mainEvaluationEdit">
-        <div class="evaluation-nav">
 
-            {{-- Part 1: --}}
-            <div class="inline-block">
-                <a href="{{ url()->previous() }}" class="button--gray" title="Retour à la page précédente" wire:navigate>
-                    @include('components.svg.arrow-left')
-                    Retour
-                </a>
-            </div>
+        {{-- Naviagtion & breadcrumb --}}
+        <x-evaluation-nav/>
 
-            <!-- Fil d'Ariane -->
-            <nav aria-label="breadcrumb" class="breadcrumb">
-                <ol class="breadcrumb__list">
-                    <li class="breadcrumb__list__item">
-                        <a href="#" class="breadcrumb__list__item__link">
-                            Mes épreuves
-                            {{--{{ route('events.evalautor-dashboard') }}"> pour les events d'un évaluateur --}}
-                        </a>
-                        <x-svg.nav-arrow-right/>
-                    </li>
-                    <li class="breadcrumb__list__item">
-                        <a href="#" class="breadcrumb__list__item__link">
-                            Tableau de bord
-                            {{--{{ route('events.evaluator-dashboard-event') }}"> pour le dashboard d'un event spécifique --}}
-                        </a>
-                        <x-svg.nav-arrow-right/>
-                    </li>
-                    <li>
-                        <span aria-current="page" class="breadcrumb__list__item__link">Évaluation</span>
-                    </li>
-                </ol>
-            </nav>
-        </div>
-
-        {{-- Part 2 : Evaluate de project --}}
+        {{-- Evaluate de project --}}
         <form action="" class="evaluationForm">
             @csrf
 
-            <div class="evaluation">
-                <div class="evaluation__header">
+            <section class="evaluationEdit">
+                <h2 role="heading" aria-level="2" class="sr-only">Informations sur le projet</h2>
+                <div class="evaluationEdit__header">
                     {{--<img src="{{ $contact->avatar }}" alt="{{ $contact->name }}">
                     <p>{{ $contact->name }} {{ $contact->firstname }}</p>--}}
                     <img src="{{ asset('img/placeholder.png') }}" alt="}">
                     <p>Renaud Van Meerbergen</p>
                 </div>
-                <ul class="evaluation__listEdit">
-                    <li class="evaluation__listEdit__item">
+                <ul class="evaluationEdit__list">
+                    <li class="evaluationEdit__list__item">
                         <span class="label">Url du projet</span>
                         <a href="" class="link">renaud-vmb.com</a>
                     </li>
-                    <li class="evaluation__listEdit__item">
+                    <li class="evaluationEdit__list__item">
                         <span class="label">Repository Github</span>
                         <a href="" class="link">github.com/renaudvmb/portfolio</a>
                     </li>
-                    <li class="evaluation__listEdit__item">
+                    <li class="evaluationEdit__list__item">
                         <span class="label">Présentation</span>
                         <p>Design | Intégration | WP</p>
                     </li>
                     <hr>
-                    <li class="evaluation__listEdit__item">
+                    <li class="evaluationEdit__list__item">
                         <label for="eventStatus" class="label">Status</label>
                         <select name="eventStatus" id="eventStatus">
                             <option value="vu">Vu</option>
                             <option value="non-vu">Non vu</option>
                         </select>
                     </li>
-                    <li class="evaluation__listEdit__item">
+                    <li class="evaluationEdit__list__item">
                         <label for="eventReview" class="label">Cote du projet</label>
                         <p class="eventReview" x-data="{ score: 0 }">
                             <select name="eventReview" id="eventReview" x-model="score">
@@ -88,13 +59,13 @@
                     </span>
                         </p>
                     </li>
-                    <li class="evaluation__listEdit__item eventComment">
+                    <li class="evaluationEdit__list__item eventComment">
                         <label for="eventComment" class="label">Commentaire</label>
                         <textarea name="eventComment" id="eventComment" cols="30" rows="10" placeholder="Inscrivez un commentaire…"></textarea>
                     </li>
                 </ul>
-            </div>
-            <div class="evaluation__footer">
+            </section>
+            <div class="evaluationEdit__footer">
                 <button type="submit" class="button--gray">Publier globalement</button>
             </div>
         </form>
