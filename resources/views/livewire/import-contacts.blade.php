@@ -15,8 +15,8 @@
                 <div class="form__content">
                     <h2 class="title">Ajoutez votre fichier excel</h2>
 
-                    <label for="upload">
-                        Upload file
+                    <label for="upload" class="upload">
+                        Charger votre fichier
                         <input id="upload" wire:model="upload" type="file">
                         @error('upload')
                         <div class="error">{{ $message }}</div>
@@ -33,7 +33,7 @@
                             Veuillez sélectionner la colonne correspondante à celle de votre fichier importé.
                         </p>
 
-                        <label for="name">
+                        <label for="name" class="upload">
                             Nom
                             <select wire:model="fieldColumnMap.name" id="name">
                                 <option value="" disabled>Sélectionnez une colonne</option>
@@ -46,7 +46,7 @@
                             @enderror
                         </label>
 
-                        <label for="firstname">
+                        <label for="firstname" class="upload">
                             Prénom
                             <select wire:model="fieldColumnMap.firstname" id="firstname">
                                 <option value="" disabled>Sélectionnez une colonne</option>
@@ -59,7 +59,7 @@
                             @enderror
                         </label>
 
-                        <label for="email">
+                        <label for="email" class="upload">
                             Email
                             <select wire:model="fieldColumnMap.email" id="email">
                                 <option value="" disabled>Sélectionnez une colonne</option>

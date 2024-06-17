@@ -21,13 +21,16 @@ class ShowContacts extends Component
     public $saved = false;
 
     #[Computed]
-    public function contactFilter()
-    {
-        return auth()->user()->contacts()
-            ->search('name', $this->search)
-            ->orderBy($this->sortField, $this->sortDirection)
-            ->paginate(8);
-    }
+public function contactFilter()
+{
+    return auth()->user()->contacts()
+        ->where(function($query) {
+            $query->where('name', 'like', '%' . $this->search . '%')
+                  ->orWhere('firstname', 'like', '%' . $this->search . '%');
+        })
+        ->orderBy($this->sortField, $this->sortDirection)
+        ->paginate(8);
+}
 
     public function sortBy($field)
     {
