@@ -9,7 +9,9 @@
     border-bottom: 1px solid #E5E9F4;
 
     &__title {
-        margin-right: 2rem;
+        text-align: center;
+        margin-right: 0;
+        font-size: 0.85rem;
         font-weight: 600;
     }
 
@@ -149,6 +151,13 @@
 
 /* Ipad */
 @media (min-width: 800px) {
+    .evaluator__header {
+        &__title {
+            margin-right: 2rem;
+            font-size: 1rem;
+        }
+    }
+
     .mainEvaluator {
         margin-top: 0;
 

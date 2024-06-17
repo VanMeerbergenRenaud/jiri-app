@@ -33,4 +33,10 @@
             </ul>
         </section>
     </main>
+
+    <footer class="footerEvaluator">
+        <p>Tableau de bord de {{ $evaluator->name ?? 'John Doe' }}</p>
+        <p class="copyright">Copyright - Tous droits réservés</p>
+        <p>Épreuve - {{ $event->name ?? 'Épreuve du jour' }}</p>
+    </footer>
 </div>
