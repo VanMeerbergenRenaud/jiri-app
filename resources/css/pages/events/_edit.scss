@@ -287,8 +287,23 @@
 
             /* List of the contacts added to the event */
             &__added {
+
                 p {
-                    margin-bottom: 1rem;
+                    margin: 2.5rem 0 1.5rem;
+                    font-weight: 600;
+                }
+
+                &__category {
+                    margin: 0.25rem 0 1rem;
+                    display: inline-block;
+                    color: $blue-dark;
+                    font-size: 0.875rem;
+                    font-weight: 500;
+                    text-transform: uppercase;
+                }
+
+                ul:first-of-type {
+                    margin-bottom: 2rem;
                 }
 
                 ul {
@@ -298,6 +313,7 @@
                         flex-direction: column;
                         margin-bottom: 1.15rem;
                         color: $text-slate-500;
+                        font-size: 0.875rem;
 
                         .category {
                             display: block;
@@ -314,6 +330,7 @@
                             background-color: white;
                             border-radius: 0 0 0.5rem 0.5rem;
                             color: $blue-dark;
+                            font-weight: 400;
 
                             .taskName:before {
                                 content: "|";
@@ -326,6 +343,13 @@
                             }
                         }
 
+                        .exchange {
+                            position: absolute;
+                            right: 3rem;
+                            padding: 0.5rem;
+                            z-index: 3;
+                        }
+
                         button {
                             position: absolute;
                             top: 0.25rem;
@@ -333,6 +357,10 @@
                             padding: 0.5rem;
                             z-index: 3;
                         }
+                    }
+
+                    .no-contact {
+                        color: $text;
                     }
                 }
             }
@@ -342,6 +370,7 @@
                 padding: 1rem 1.25rem;
                 border-radius: 0.5rem;
                 background-color: $gray-500;
+                font-weight: 400;
             }
         }
     }
@@ -530,6 +559,10 @@
                                 padding: 1.15rem 3.5rem 1.15rem 3.5rem;
                             }
 
+                            .exchange {
+                                top: 0.65rem;
+                            }
+
                             button {
                                 top: 0.65rem;
                                 right: 0.75rem;
@@ -609,7 +642,7 @@
                             }
 
                             .username {
-                                padding: 1rem 3.5rem 1rem 2.5rem;
+                                padding: 1rem 4.5rem 1rem 2.5rem;
                             }
                         }
                     }
