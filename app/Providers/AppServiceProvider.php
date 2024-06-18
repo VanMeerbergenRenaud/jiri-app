@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -24,5 +25,7 @@ class AppServiceProvider extends ServiceProvider
         Builder::macro('search', function($field, $string) {
             return $string ? $this->where($field, 'like', '%' . $string . '%') : $this;
         });
+
+        Model::unguard();
     }
 }

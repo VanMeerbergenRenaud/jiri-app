@@ -53,9 +53,13 @@
                 {{ __('Déjà enregistré ?') }}
             </a>
 
-            <button type="submit">
-                {{ __('S‘enregistrer') }}
-            </button>
+            <div class="form__footer__login">
+                <x-auth.github-login />
+
+                <button type="submit">
+                    {{ __('S‘enregistrer') }}
+                </button>
+            </div>
         </div>
     </form>
 </x-guest-layout>

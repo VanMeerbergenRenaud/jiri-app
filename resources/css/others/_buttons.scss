@@ -1,6 +1,6 @@
 /* Styles of different buttons */
 
-button {
+button, .github-login {
     margin: 0;
     padding: 0.75rem 1rem;
     display: inline-flex;
@@ -65,5 +65,21 @@ button {
 
     &:hover {
         background-color: #DC2626;
+    }
+}
+
+.form .github-login {
+    padding: 0.6rem 1rem;
+    gap: 0.65rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: white;
+    border: $transparent;
+    background-color: #222;
+
+    &:hover {
+        color: white;
+        background-color: #121212;
+        border: $border;
     }
 }

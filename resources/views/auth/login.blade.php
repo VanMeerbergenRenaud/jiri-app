@@ -37,7 +37,7 @@
             <label for="remember_me">{{  __('Se rappeler de moi') }}</label>
         </div>
 
-        <div class="form__footer form__footer__3">
+        <div class="form__footer form__footer__4">
             @if (Route::has('register'))
                 <a href="{{ route('register') }}">
                     {{ __("Pas encore enregistré") }}&nbsp;?
@@ -49,6 +49,8 @@
                     {{ __("Mot de passe oublié") }}&nbsp;?
                 </a>
             @endif
+
+            <x-auth.github-login />
 
             <button type="submit" class="submit">
                 {{ __('Se connecter') }}
