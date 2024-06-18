@@ -11,7 +11,7 @@
         model="username"
         wire:model.live="username"
     />
-    <div x-data="{showSelectType: false, selectedContactId: null, selectedRole: null}">
+    <div x-data="{showSelectType: false, selectedContactId: null, selectedRole: 'student'}">
         {{-- List of contacts --}}
         @unless($this->searchList->isEmpty())
             <ol class="filter__contacts__list">

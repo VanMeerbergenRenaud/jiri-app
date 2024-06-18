@@ -28,6 +28,19 @@ return new class extends Migration
             $table->foreignId('event_id')->constrained()->onDelete('cascade');
             $table->foreignId('project_id')->constrained()->onDelete('cascade');
         });
+        // evaluation
+        /*Schema::table('evaluations', function (Blueprint $table) {
+            $table->foreignId('event_id')->constrained()->onDelete('cascade');
+            $table->foreignId('contact_id')->constrained()->onDelete('cascade');
+        });
+        // performances
+        Schema::table('performances', function (Blueprint $table) {
+            $table->foreignId('evaluation_id')->constrained()->onDelete('cascade');
+        });
+        // implementations
+        Schema::table('implementations', function (Blueprint $table) {
+            $table->foreignId('evaluation_id')->constrained()->onDelete('cascade');
+        });*/
     }
 
     /**
@@ -52,5 +65,18 @@ return new class extends Migration
             $table->dropForeign(['event_id']);
             $table->dropForeign(['project_id']);
         });
+        /*// evaluation
+        Schema::table('evaluations', function (Blueprint $table) {
+            $table->dropForeign(['event_id']);
+            $table->dropForeign(['contact_id']);
+        });
+        // performances
+        Schema::table('performances', function (Blueprint $table) {
+            $table->dropForeign(['evaluation_id']);
+        });
+        // implementations
+        Schema::table('implementations', function (Blueprint $table) {
+            $table->dropForeign(['evaluation_id']);
+        });*/
     }
 };

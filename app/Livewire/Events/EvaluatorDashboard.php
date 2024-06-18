@@ -31,8 +31,6 @@ class EvaluatorDashboard extends Component
         $this->projects = $this->event->projects;
         $this->students = $this->event->students;
 
-
-
         // Find the evaluator contact
         $this->evaluator = $this->event->contacts()->findOrFail($this->contactId);
     }

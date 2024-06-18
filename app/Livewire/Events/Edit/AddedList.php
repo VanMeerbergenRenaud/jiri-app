@@ -46,6 +46,17 @@ class AddedList extends Component
 
     public function render()
     {
-        return view('livewire.events.edit.added-list');
+        $students = $this->eventContactsList->filter(function ($eventContact) {
+            return $eventContact->role == 'student';
+        });
+        $evaluators = $this->eventContactsList->filter(function ($eventContact) {
+            return $eventContact->role == 'evaluator';
+        });
+
+        $roleTranslations = [
+            'student' => 'étudiant',
+            'evaluator' => 'évaluateur',
+        ];
+        return view('livewire.events.edit.added-list', compact('students', 'evaluators', 'roleTranslations'));
     }
 }

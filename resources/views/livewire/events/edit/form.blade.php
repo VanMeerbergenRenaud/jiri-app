@@ -1,56 +1,61 @@
 <div>
     {{-- Form to edit a new contact --}}
     <template x-if="createmode">
-        <form wire:submit.prevent="save" class="contact__new__form form">
+        <form
+            wire:submit="addContactToEvent"
+            class="contact__new__form form"
+        >
             <p>Ajouter votre nouveau contact</p>
             <div class="contact__new__form__container">
 
                 {{-- Type de contact --}}
-                <label for="newcontacttype" class="contact__new__form__container__label">
-                    Type
-                    <select id="newcontacttype" wire:model="newcontacttype">
-                        <option value="" selected>Sélectionner le type</option>
-                        <option value="student">Étudiants</option>
-                        <option value="evaluator">Évaluateurs</option>
+                <div>
+                    <label for="role">
+                        Veuillez choisir un rôle ci-dessous&nbsp;:
+                    </label>
+                    <select name="role" id="role" wire:model="role">
+                        <option disabled selected value="">Choisissez un type</option>
+                        <option value="student">Étudiant</option>
+                        <option value="evaluator">Évaluateur</option>
                     </select>
-                    @error('newcontacttype')
-                        <div class="error-message">{{ $message }}</div>
+                    @error('role')
+                    <span class="error">{{ $message }}</span>
                     @enderror
-                </label>
+                </div>
 
                 {{-- Nom du contact --}}
                 <div class="position-right">
                     <x-form.field
-                        label="Nom du contact"
-                        name="newcontactname"
+                        label="Nom du nouveau contact"
+                        name="name"
                         type="text"
-                        placeholder="Ex : Vilain"
-                        model="newcontactname"
-                        :messages="$errors->get('newcontactname')"
+                        model="name"
+                        placeholder="Vilain"
+                        :messages="$errors->get('name')"
                     />
                 </div>
 
                 {{-- Prénom du contact --}}
                 <div class="position-right">
                     <x-form.field
-                        label="Prénom du contact"
-                        name="newcontactfirstname"
+                        label="Prénom du nouveau contact"
+                        name="firstname"
                         type="text"
-                        placeholder="Ex : Dominique"
-                        model="newcontactfirstname"
-                        :messages="$errors->get('newcontactfirstname')"
+                        model="firstname"
+                        placeholder="Dominique"
+                        :messages="$errors->get('firstname')"
                     />
                 </div>
 
                 {{-- Adresse mail du contact --}}
                 <div class="position-right">
                     <x-form.field
-                        label="Adresse mail du contact"
-                        name="newcontactemail"
+                        label="Adresse mail du nouveau contact"
+                        name="email"
                         type="email"
-                        placeholder="Ex : dominique.vilain@hepl.be"
-                        model="newcontactemail"
-                        :messages="$errors->get('newcontactemail')"
+                        model="email"
+                        placeholder="john.doe@gmail.com"
+                        :messages="$errors->get('email')"
                     />
                 </div>
 

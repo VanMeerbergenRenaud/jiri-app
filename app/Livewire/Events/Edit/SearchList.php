@@ -3,6 +3,7 @@
 namespace App\Livewire\Events\Edit;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Str;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 
@@ -17,7 +18,6 @@ class SearchList extends Component
     public $roles = [
         'student' => 'Étudiant',
         'evaluator' => 'Évaluateur',
-        'neutre' => 'Neutre',
     ];
 
     #[Computed]
@@ -45,6 +45,7 @@ class SearchList extends Component
                 'event_id' => $event->id,
                 'contact_id' => $contactId,
                 'role' => $role,
+                'token' => Str::random(64),
             ]);
         }
 

@@ -14,6 +14,7 @@ class EventContact extends Model
 
     protected $fillable = [
         'role',
+        'token',
         'contact_id',
         'event_id',
     ];

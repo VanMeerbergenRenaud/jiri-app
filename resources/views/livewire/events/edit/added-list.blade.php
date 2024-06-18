@@ -1,18 +1,4 @@
 {{-- AddedList of contacts --}}
-<?php
-$students = $eventContactsList->filter(function ($eventContact) {
-    return $eventContact->role == 'student';
-});
-
-$evaluators = $eventContactsList->filter(function ($eventContact) {
-    return $eventContact->role == 'evaluator';
-});
-
-$roleTranslations = [
-    'student' => 'étudiant',
-    'evaluator' => 'évaluateur',
-];
-?>
 <div class="form__component__added">
     <p>Contacts ajoutés</p>
     @if(count($eventContactsList) > 0)
@@ -27,7 +13,7 @@ $roleTranslations = [
                         <span class="category capitalize">{{ $roleTranslations[$student->role] ?? 'Neutre' }}</span>
                         <span class="username capitalize">{{ $student->contact->name ?? 'Contact inconnu' }}</span>
 
-                        <x-dialog wire:model="show">
+                        <x-dialog>
                             <x-dialog.open>
                                 <button class="button--white exchange" type="button">
                                     @include('components.svg.rotate')
@@ -49,7 +35,7 @@ $roleTranslations = [
                                 </x-dialog.footer>
                             </x-dialog.panel>
                         </x-dialog>
-                        <x-dialog wire:model="show">
+                        <x-dialog>
                             <x-dialog.open>
                                 <button class="button--white" type="button">
                                     @include('components.svg.trash2')
@@ -89,7 +75,7 @@ $roleTranslations = [
                         <span class="category capitalize">{{ $roleTranslations[$evaluator->role] ?? 'Neutre' }}</span>
                         <span class="username capitalize">{{ $evaluator->contact->name ?? 'Contact inconnu' }}</span>
 
-                        <x-dialog wire:model="show">
+                        <x-dialog>
                             <x-dialog.open>
                                 <button class="button--white exchange" type="button">
                                     @include('components.svg.rotate')
@@ -111,7 +97,7 @@ $roleTranslations = [
                                 </x-dialog.footer>
                             </x-dialog.panel>
                         </x-dialog>
-                        <x-dialog wire:model="show">
+                        <x-dialog>
                             <x-dialog.open>
                                 <button class="button--white" type="button">
                                     @include('components.svg.trash2')
