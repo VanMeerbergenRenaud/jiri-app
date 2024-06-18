@@ -15,11 +15,7 @@ class Project extends Model
     protected $fillable = [
         'name',
         'description',
-        'tasks',
-    ];
-
-    protected $casts = [
-        'tasks' => 'array',
+        'url_readme',
     ];
 
     public function user(): BelongsTo
