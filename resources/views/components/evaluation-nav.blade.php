@@ -15,14 +15,12 @@
             <li class="breadcrumb__list__item">
                 <a href="#" class="breadcrumb__list__item__link">
                     Mes épreuves
-                    {{--{{ route('events.evalautor-dashboard') }}"> pour les events d'un évaluateur --}}
                 </a>
                 <x-svg.nav-arrow-right/>
             </li>
             <li class="breadcrumb__list__item">
                 <a href="#" class="breadcrumb__list__item__link">
                     Tableau de bord
-                    {{--{{ route('events.evaluator-dashboard-event') }}"> pour le dashboard d'un event spécifique --}}
                 </a>
                 <x-svg.nav-arrow-right/>
             </li>

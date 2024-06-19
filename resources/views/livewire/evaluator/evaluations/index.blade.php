@@ -17,19 +17,18 @@
             <ul class="evaluationStart__list">
 
                 <!-- TODO: boucle foreach des projets -->
-
-                <li class="evaluationStart__list__item">
-                    <a href="{{ route('events.evaluator-evaluation-edit', ['event' => $event, 'token' => $token]) }}"
-                       class="evaluationStart__list__item__link button--gray">
-                        Portfolio
-                    </a>
-                </li>
-                <li class="evaluationStart__list__item">
-                    <a href="" class="evaluationStart__list__item__link button--gray">Intégration wordpress</a>
-                </li>
-                <li class="evaluationStart__list__item">
-                    <a href="" class="evaluationStart__list__item__link button--gray">Projet 3</a>
-                </li>
+                @foreach($projects as $project)
+                    <li class="evaluationStart__list__item">
+                        <a href="{{ route('events.evaluator-evaluation-edit' , [
+                            'event' => $event,
+                            'contact' => $contact->id,
+                            'token' => $token
+                        ]) }}"
+                           class="evaluationStart__list__item__link button--gray">
+                            {{ $project->name }}
+                        </a>
+                    </li>
+                @endforeach
             </ul>
         </section>
     </main>

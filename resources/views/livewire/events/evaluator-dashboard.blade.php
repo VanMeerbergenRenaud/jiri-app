@@ -51,6 +51,7 @@
                             <li>
                                 <a href="{{ route('events.evaluator-evaluation-start' , [
                                         'event' => $event,
+                                        'contact' => $student->contact->id,
                                         'token' => $student->token
                                     ]) }}"
                                    class="students__list__content__link"
@@ -121,6 +122,7 @@
                     <td class="actions">
                         <a href="{{ route('events.evaluator-evaluation-start' , [
                                 'event' => $event,
+                                'contact' => $student->contact->id,
                                 'token' => $student->token
                             ]) }}"
                            class="students__list__content__link"

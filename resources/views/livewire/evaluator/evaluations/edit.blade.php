@@ -11,23 +11,27 @@
             <section class="evaluationEdit">
                 <h2 role="heading" aria-level="2" class="sr-only">Informations sur le projet</h2>
                 <div class="evaluationEdit__header">
-                    {{--<img src="{{ $contact->avatar }}" alt="{{ $contact->name }}">
-                    <p>{{ $contact->name }} {{ $contact->firstname }}</p>--}}
-                    <img src="{{ asset('img/placeholder.png') }}" alt="}">
-                    <p>Renaud Van Meerbergen</p>
+                    <img src="{{ $contact->avatar ?? asset('img/placeholder.png') }}" alt="{{ $contact->name }}">
+                    <p>{{ $contact->name }} {{ $contact->firstname }}</p>
                 </div>
                 <ul class="evaluationEdit__list">
                     <li class="evaluationEdit__list__item">
                         <span class="label">Url du projet</span>
-                        <a href="" class="link">renaud-vmb.com</a>
+                        <a href="" class="link">
+                            {{ $project->link ?? 'https://www.renaudv.com' }}
+                        </a>
                     </li>
                     <li class="evaluationEdit__list__item">
                         <span class="label">Repository Github</span>
-                        <a href="" class="link">github.com/renaudvmb/portfolio</a>
+                        <a href="" class="link">
+                            {{ $project->github ?? 'github.com/renaudvmb/portfolio' }}
+                        </a>
                     </li>
                     <li class="evaluationEdit__list__item">
                         <span class="label">Présentation</span>
-                        <p>Design | Intégration | WP</p>
+                        <p>
+                            {{ $project->tasks ?? 'Aucune tâche définie' }}
+                        </p>
                     </li>
                     <hr>
                     <li class="evaluationEdit__list__item">
@@ -61,7 +65,7 @@
                     </li>
                     <li class="evaluationEdit__list__item eventComment">
                         <label for="eventComment" class="label">Commentaire</label>
-                        <textarea name="eventComment" id="eventComment" cols="30" rows="10" placeholder="Inscrivez un commentaire…"></textarea>
+                        <textarea name="eventComment" id="eventComment" cols="30" rows="10" placeholder="Inscrivez un commentaire…">{{ old('eventComment') ?? '' }}</textarea>
                     </li>
                 </ul>
             </section>

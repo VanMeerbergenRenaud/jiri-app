@@ -5,7 +5,7 @@
         <div class="mainEvaluationSummary__header">
 
             {{-- Naviagtion & breadcrumb --}}
-            <x-evaluation-nav/>
+            <x-evaluation-nav :event="$event" :contact="$contact" :token="$token"/>
 
             {{-- Evaluation infos (status,timer) --}}
             <div class="evaluation-infos">
@@ -28,58 +28,18 @@
         <section class="evaluationSummary">
            <h2 role="heading" aria-level="2" class="sr-only">Résumé des évaluations</h2>
             <div class="evaluationSummary__header">
-                <img src="{{ $contact->avatar ?? asset('img/placeholder.png') }}" alt="">
-                <p>{{ $contact->name ?? 'Van Meerbergen' }} {{ $contact->firstname ?? 'Renaud'}}</p>
+                <img src="{{ $contact->avatar ?? asset('img/placeholder.png') }}" alt="{{ $contact->name }}">
+                <p>{{ $contact->name }} {{ $contact->firstname }}</p>
             </div>
-
-            <?php
-            $projects = [
-                (object)[
-                    'name' => 'Portfolio',
-                    'url' => 'https://renaud-vmb.com',
-                    'repo' => 'https://renaud-vmb.com',
-                    'presentation' => 'Design | Intégration | WP',
-                    'status' => 'Vu',
-                    'score' => 16,
-                    'comment' => 'La cote finale calculée automatiquement n’est pas forcément la cote finale qui se trouvera dans le bulletin de l’étudiant. En effet, si après le calcul par l’application, les membres du jury s’accordent oralement pour dire que celui-ci a créé une cote artificiellement élevée ou basse par rapport à l’estimation. La cote finale calculée automatiquement n’est pas forcément la cote finale qui se trouvera dans le bulletin de l’étudiant. En effet, si après le calcul par l’application.'
-                ],
-                (object)[
-                    'name' => 'CV',
-                    'url' => 'https://renaud-vmb.com',
-                    'repo' => 'https://renaud-vmb.com',
-                    'presentation' => 'Design | Intégration | WP',
-                    'status' => 'Vu',
-                    'score' => 13.5,
-                    'comment' => 'Très bon travail, continuez comme ça !'
-                ],
-                (object)[
-                    'name' => 'CV',
-                    'url' => 'https://renaud-vmb.com',
-                    'repo' => 'https://renaud-vmb.com',
-                    'presentation' => 'Design | Intégration | WP',
-                    'status' => 'Vu',
-                    'score' => 13.5,
-                    'comment' => 'Très bon travail, continuez comme ça !'
-                ],
-                (object)[
-                    'name' => 'Globalement',
-                    'url' => '/',
-                    'repo' => '/',
-                    'presentation' => '/',
-                    'status' => 'Vu',
-                    'score' => 13,
-                    'comment' => 'Très bon travail, continuez comme ça !'
-                ],
-            ];
-            ?>
 
             <table class="evaluationSummary__table">
                 <thead>
                     <tr>
                         <th>Résumé des projets</th>
                         @foreach($projects as $project)
-                            <th>{{ $project->name }}</th>
+                            <th>{{ $project->name ?? 'aucun' }}</th>
                         @endforeach
+                        <th>Globalement</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -89,25 +49,34 @@
                         </th>
                         @foreach($projects as $project)
                             <td>
-                                <a href="{{ $project->url }}">{{ $project->url ?? 'non mentionné' }}</a>
+                                <a href="{{ $project->link ?? '#' }}">{{ $project->url ?? 'non mentionné' }}</a>
                             </td>
                         @endforeach
+                        <td>
+                            /
+                        </td>
                     </tr>
                     <tr>
                         <th>Repo Github</th>
                         @foreach($projects as $project)
                             <td>
-                                <a href="{{ $project->repo }}">{{ $project->repo ?? 'non mentionné' }}</a>
+                                <a href="{{ $project->repo ?? '#' }}">{{ $project->repo ?? 'non mentionné' }}</a>
                             </td>
                         @endforeach
+                        <td>
+                            /
+                        </td>
                     </tr>
                     <tr>
                         <th>Présentation</th>
                         @foreach($projects as $project)
                             <td>
-                                <p>{{ $project->presentation ?? 'non mentionné' }}</p>
+                                <p>{{ $project->tasks ?? 'non mentionné' }}</p>
                             </td>
                         @endforeach
+                        <td>
+                            /
+                        </td>
                     </tr>
                     <tr>
                         <th>Status</th>
@@ -116,6 +85,9 @@
                                 {{ $project->status ?? 'non vu' }}
                             </td>
                         @endforeach
+                        <td>
+                            {{ $project->status ?? 'non vu' }}
+                        </td>
                     </tr>
                     <tr>
                         <th>Cote</th>
@@ -124,6 +96,9 @@
                                 <span>{{ $project->score ?? '?' }}</span>/20
                             </td>
                         @endforeach
+                        <td>
+                            <span>{{ $project->moyScore ?? '?' }}</span>/20
+                        </td>
                     </tr>
                     <tr>
                         <th>Commentaire</th>
@@ -133,6 +108,10 @@
                                 <button type="submit" class="button--gray">Modifier</button>
                             </td>
                         @endforeach
+                        <td class="comment">
+                            <p>{{ $project->globalComment ?? 'Aucun commentaire global ajouté.' }}</p>
+                            <button type="submit" class="button--gray">Modifier</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
