@@ -63,12 +63,12 @@ Route::middleware('auth')->group(function () {
 
         /*----- Evaluator -----*/
         // Route for the dashboard of an evaluator with all the events
-        Route::get('/{token}', EEvaluatorDashboard::class)
-            //->middleware('evaluator')
+        Route::get('/evaluator/{contact}', EEvaluatorDashboard::class)
             ->name('evaluator-dashboard');
 
         // Route for the specific event of an evaluator
-        Route::get('/{event}/{token}', EEvaluatorEventDashboard::class)
+        Route::get('/{event}/{contact}/{token}', EEvaluatorEventDashboard::class)
+            ->middleware('evaluator')
             ->name('evaluator-dashboard-event');
 
         // Route that let the evaluator start an evaluation
@@ -98,4 +98,3 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
-require __DIR__.'/pages.php';

@@ -1,7 +1,7 @@
 <div>
     <div class="header">
         <x-banner
-            :title="'Bonjour ' . $evaluator->name . ' 👋🏻.'  ??  'évaluateur 👋🏻.'"
+            :title="'Bonjour ' . $contact->name . ' 👋🏻.'  ??  'évaluateur 👋🏻.'"
             :message="'Choisissez un étudiant a évaluer.'"
         />
     </div>
@@ -49,7 +49,10 @@
                                 <span>{{ 'Publiées' ?? 'Non publiées' }}</span>
                             </li>
                             <li>
-                                <a href="{{ route('events.evaluator-evaluation-start' , ['event' => $event, 'contact' => $student->contact, 'token' => $student->token]) }}"
+                                <a href="{{ route('events.evaluator-evaluation-start' , [
+                                        'event' => $event,
+                                        'token' => $student->token
+                                    ]) }}"
                                    class="students__list__content__link"
                                    wire:navigate
                                 >
@@ -116,7 +119,10 @@
                         {{ $student->gradesStatus ?? 'Non publiées' }}
                     </td>
                     <td class="actions">
-                        <a href="{{ route('events.evaluator-evaluation-start' , ['event' => $event, 'contact' => $student->contact, 'token' => $student->token]) }}"
+                        <a href="{{ route('events.evaluator-evaluation-start' , [
+                                'event' => $event,
+                                'token' => $student->token
+                            ]) }}"
                            class="students__list__content__link"
                            wire:navigate
                         >
@@ -141,7 +147,7 @@
     </main>
 
     <footer class="footerEvaluator">
-        <p>Tableau de bord de {{ $evaluator->name ?? 'John Doe' }}</p>
+        <p>Tableau de bord de {{ $contact->name ?? 'John Doe' }}</p>
         <p class="copyright">Copyright - Tous droits réservés</p>
         <p>Épreuve - {{ $event->name ?? 'Épreuve du jour' }}</p>
     </footer>

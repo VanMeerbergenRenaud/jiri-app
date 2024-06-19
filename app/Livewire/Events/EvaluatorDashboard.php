@@ -20,19 +20,17 @@ class EvaluatorDashboard extends Component
     public $projects;
     public $students;
 
-    public $evaluator;
-    public $contactId;
+    public $contact;
 
     public function mount()
     {
         $this->event = auth()->user()->events()->findOrFail(request()->event);
-        $this->contactId = request()->contact_id;
+
+        // Find the evaluator contact
+        $this->contact = auth()->user()->contacts()->findOrFail(request()->contact);
 
         $this->projects = $this->event->projects;
         $this->students = $this->event->students;
-
-        // Find the evaluator contact
-        $this->evaluator = $this->event->contacts()->findOrFail($this->contactId);
     }
 
     #[Computed]
@@ -61,6 +59,6 @@ class EvaluatorDashboard extends Component
     public function render()
     {
         return view('livewire.events.evaluator-dashboard', ['sortField' => $this->sortField])
-            ->layout('layouts.evaluator', ['title' => 'Tableau de bord']);
+            ->layout('layouts.evaluator');
     }
 }

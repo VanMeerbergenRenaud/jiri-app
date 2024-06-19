@@ -11,6 +11,6 @@ class Show extends Component
     public function render()
     {
         return view('livewire.evaluator.evaluations.show')
-            ->layout('layouts.evaluator', ['title' => 'Résumé des évaluations']);
+            ->layout('layouts.evaluator');
     }
 }

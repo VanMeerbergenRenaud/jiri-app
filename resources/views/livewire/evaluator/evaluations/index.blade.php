@@ -8,7 +8,7 @@
         <section class="evaluationStart">
             <h2 role="heading" aria-level="2" class="sr-only">Les projets à évaluer</h2>
             <div class="evaluationStart__header">
-                <img src="{{ $contact->avatar }}" alt="{{ $contact->name }}">
+                <img src="{{ $contact->avatar ?? asset('img/placeholder.png') }}" alt="{{ $contact->name }}">
                 <p>{{ $contact->name }} {{ $contact->firstname }}</p>
             </div>
             <p class="evaluationStart__text">

@@ -18,6 +18,6 @@ class Index extends Component
         $token = $eventContact->token;
 
         return view('livewire.evaluator.evaluations.index', compact('contact', 'event', 'token'))
-            ->layout('layouts.evaluator', ['title' => 'Evaluation en cours']);
+            ->layout('layouts.evaluator');
     }
 }

@@ -47,7 +47,7 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 });
 
-// Route for GitHub OAuth
+// GitHub OAuth
 Route::get('/auth/redirect', function() {
     return Socialite::driver('github')->redirect();
 });
