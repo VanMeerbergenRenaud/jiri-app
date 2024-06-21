@@ -193,7 +193,7 @@
 
             .moy, .cg, .cga, .cd {
                 position: sticky;
-                top: -0.2rem;
+                top: 0;
                 left: 0;
                 z-index: 3;
 
@@ -231,14 +231,14 @@
             .sticky {
                 position: sticky;
                 left: 0;
-                top: 3.6rem;
+                top: 3.5rem;
                 z-index: 3;
             }
 
             .sticky-small {
                 position: sticky;
                 left: 0;
-                top: 3.6rem;
+                top: 3.5rem;
                 z-index: 2;
                 min-width: 2rem;
             }
@@ -307,6 +307,23 @@
     }
 }
 
+.footerEvent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    p:first-of-type, p:last-of-type {
+        font-weight: 500;
+        color: $text;
+    }
+
+    p.copyright {
+        order: 1;
+    }
+}
+
 @media (min-width: 625px) {
     .mainEventShow {
         .event__status {
@@ -323,6 +340,31 @@
     .mainEventShow {
         .event__status {
             top: -4.25rem;
+        }
+    }
+
+    .footerEvent {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+
+        p.copyright {
+            margin-left: -1rem;
+            order: 0;
+        }
+    }
+}
+
+@media (min-width: 1440px) {
+    .footerEvaluator {
+        margin: -1rem auto 0;
+        padding: 1.75rem 3rem;
+        max-width: 95%;
+
+        p.copyright {
+            margin-left: -6rem;
         }
     }
 }

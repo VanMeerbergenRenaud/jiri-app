@@ -10,6 +10,9 @@ use App\Livewire\Contacts\ContactProfil as EContactProfil;
 use App\Livewire\Events\Index as EIndex;
 use App\Livewire\Events\Show as EShow;
 use App\Livewire\Events\Edit as EEdit;
+use App\Livewire\Events\Event\Evaluators as EEvaluators;
+use App\Livewire\Events\Event\Students as EStudents;
+use App\Livewire\Events\Event\Projects as EProjects;
 use App\Livewire\Evaluator\Dashboard as EEvaluatorDashboard;
 use App\Livewire\Events\EvaluatorDashboard as EEvaluatorEventDashboard;
 use App\Livewire\Evaluator\Evaluations\Index as EEvaluatorEvaluationIndex;
@@ -52,7 +55,6 @@ Route::middleware('auth')->group(function () {
     /*----- Events CRUD -----*/
     Route::name('events.')->prefix('events')->group(function () {
         Route::get('/', EIndex::class)->name('index');
-        // Route::get('/create', Create::class)->name('create');
         Route::get('/{event}', EShow::class)->name('show');
         Route::get('/{event}/edit', EEdit::class)->name('edit');
 
@@ -61,11 +63,25 @@ Route::middleware('auth')->group(function () {
         Route::get('/{event}/contacts/{contact}', EContactProfil::class)
             ->name('contact-profil');
 
-        /*----- Evaluator -----*/
+        /*----- Admin event dashboard -----*/
+        // Route for the dashboard of an event with all the data
+        Route::get('/{event}/evaluators', EEvaluators::class)
+            ->name('event.dashboard.evaluators');
+
+        // Route for the dashboard of an event with all the contacts
+        Route::get('/{event}/students', EStudents::class)
+            ->name('event.dashboard.students');
+
+        // Route for the dashboard of an event with all the projects
+        Route::get('/{event}/projects', EProjects::class)
+            ->name('event.dashboard.projects');
+
+        /*----- Evaluator dashboard -----*/
         // Route for the dashboard of an evaluator with all the events
         Route::get('/evaluator/{contact}', EEvaluatorDashboard::class)
             ->name('evaluator-dashboard');
 
+        /*----- Evaluator event dashboard -----*/
         // Route for the specific event of an evaluator
         Route::get('/{event}/{contact}/{token}', EEvaluatorEventDashboard::class)
             ->middleware('evaluator')
@@ -84,7 +100,7 @@ Route::middleware('auth')->group(function () {
             ->name('evaluator-evaluation-summary');
     });
 
-    /*----- Contacts CRUD -----*/
+    /*----- Students CRUD -----*/
     Route::name('contacts.')->prefix('contacts')->group(function () {
         Route::get('/', CIndex::class)->name('index');
         Route::get('/{contact}', CShow::class)->name('show');
