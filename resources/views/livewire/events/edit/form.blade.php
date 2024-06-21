@@ -9,18 +9,15 @@
             <div class="contact__new__form__container">
 
                 {{-- Type de contact --}}
-                <div>
+                <div class="contact__new__form__container__select">
                     <label for="role">
-                        Veuillez choisir un rôle ci-dessous&nbsp;:
+                        Rôle du contact
                     </label>
                     <select name="role" id="role" wire:model="role">
                         <option disabled selected value="">Choisissez un type</option>
                         <option value="student">Étudiant</option>
                         <option value="evaluator">Évaluateur</option>
                     </select>
-                    @error('role')
-                    <span class="error">{{ $message }}</span>
-                    @enderror
                 </div>
 
                 {{-- Nom du contact --}}
@@ -71,4 +68,14 @@
             </div>
         </form>
     </template>
+
+    <div>
+        @if($saved)
+            <x-notifications
+                icon="success"
+                title="Contact créé et ajouté à l'épreuve !"
+                method="$set('saved', false)"
+            />
+        @endif
+    </div>
 </div>

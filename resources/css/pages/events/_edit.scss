@@ -217,18 +217,16 @@
                     flex-direction: column;
                     gap: 0.5rem;
 
-                    &__label {
-                        display: flex;
-                        flex-direction: column;
-                        font-weight: 500;
-                        font-size: 0.875rem;
-                        padding-left: 0;
+                    &__select {
+                       label {
+                           display: block;
+                           margin-bottom: 0.875rem;
+                           font-size: 0.875rem;
+                           font-weight: 500;
+                       }
 
                         select {
-                            margin-top: 0.75rem;
                             margin-bottom: 1.25rem;
-                            padding: 0.875rem;
-                            background-color: white;
                         }
                     }
 
@@ -474,7 +472,13 @@
                         display: grid;
                         padding: 0.5rem 1rem 0.5rem 0.5rem;
 
-                        &__label, .position-right {
+                        &__select {
+                            label {
+                                margin-top: 0.35rem;
+                            }
+                        }
+
+                        .position-right {
                             grid-column: 1/3;
                         }
 

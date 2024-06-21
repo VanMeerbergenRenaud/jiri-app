@@ -15,6 +15,8 @@ class SearchList extends Component
 
     public $show = false;
 
+    public $added = false;
+
     public $roles = [
         'student' => 'Étudiant',
         'evaluator' => 'Évaluateur',
@@ -52,6 +54,8 @@ class SearchList extends Component
         $this->reset('show');
 
         $this->dispatch('fetchEventContacts');
+
+        $this->added = true;
     }
 
     public function render()

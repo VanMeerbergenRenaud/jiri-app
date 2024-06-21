@@ -68,4 +68,12 @@
             <p class="no-contact">Aucun contact trouvé.</p>
         @endunless
     </div>
+
+    @if($added)
+        <x-notifications
+            icon="add"
+            title="Contact ajouté à l'épreuve !"
+            method="$set('saved', false)"
+        />
+    @endif
 </div>

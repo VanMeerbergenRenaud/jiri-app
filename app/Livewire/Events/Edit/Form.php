@@ -18,6 +18,8 @@ class Form extends Component
     public $email;
     public $role = 'student';
 
+    public $saved = false;
+
     public $eventId;
 
     public function mount()
@@ -54,6 +56,8 @@ class Form extends Component
         $this->reset(['name', 'firstname', 'email', 'role']);
 
         $this->dispatch('fetchEventContacts');
+
+        $this->saved = true;
     }
 
     public function render()
