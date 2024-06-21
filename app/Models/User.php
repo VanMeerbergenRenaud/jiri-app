@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
@@ -14,16 +12,6 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-
-    /**
-     * Determine if the user is an evaluator.
-     *
-     * @return bool
-     */
-    public function isEvaluator(): bool
-    {
-        return $this->role === 'evaluator';
-    }
 
     /**
      * The attributes that should be hidden for serialization.
@@ -44,13 +32,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
-    // Using Gravatar for user profile image
-    public function avatarUrl()
-    {
-        $hash = md5(strtolower(trim($this->email)));
-        return "https://www.gravatar.com/avatar/$hash";
-    }
 
     public function events(): HasMany
     {

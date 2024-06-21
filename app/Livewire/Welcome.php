@@ -10,7 +10,9 @@ class Welcome extends Component
     {
         $user = auth()->user();
 
-        return view('livewire.welcome', compact('user'))
+        $avatar = $user->github_avatar ?? asset('img/default-avatar.png');
+
+        return view('livewire.welcome', compact('user', 'avatar'))
             ->layout('layouts.home', ['title' => 'Welcome']);
     }
 }

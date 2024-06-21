@@ -9,8 +9,8 @@
             <p class="p-error__description">
                 Navrez de vous voir ici, vous essayez d'accéder une page introuvable&nbsp;!
             </p>
-            <a href="{{ route('dashboard') }}" class="p-error__button">
-                {{ __('Retourner à l‘accueil') }}
+            <a href="{{ url()->previous() }}" class="p-error__button">
+                {{ __('Retourner à la page précédente') }}
             </a>
         </div>
     </main>

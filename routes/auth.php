@@ -56,13 +56,15 @@ Route::get('/auth/callback', function() {
     $githubUser = Socialite::driver('github')->user();
 
     $user = User::updateOrCreate([
-        'github_id' => $githubUser->id,
+        'github_id' => $githubUser->getId(),
     ], [
-        'name' => $githubUser->name,
-        'email' => $githubUser->email,
+        'name' => $githubUser->getName(),
+        'email' => $githubUser->getEmail(),
         'email_verified_at' => now(),
-        'password' => '',
+        'password' => 'dummypassword$123',
         'github_token' => $githubUser->token,
+        'github_avatar' => $githubUser->getAvatar(),
+        'remember_token' => Str::random(10),
     ]);
 
     Auth::login($user);

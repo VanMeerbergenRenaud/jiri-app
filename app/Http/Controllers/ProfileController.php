@@ -42,11 +42,14 @@ class ProfileController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-        $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current_password'],
-        ]);
-
         $user = $request->user();
+
+        // The password is not required for users who logged in via GitHub.
+        if (!$user->github_id) {
+            $request->validateWithBag('userDeletion', [
+                'password' => ['required', 'current_password'],
+            ]);
+        }
 
         Auth::logout();
 
@@ -57,5 +60,4 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
-
 }

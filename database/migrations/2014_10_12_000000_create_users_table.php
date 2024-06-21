@@ -17,11 +17,10 @@ return new class extends Migration
             $table->string('email')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
-            // GitHub OAuth start
-            $table->string('github_id')->nullable();
+            // GitHub Auth
+            $table->string('github_id')->nullable()->unique();
             $table->string('github_token')->nullable();
-            $table->string('github_refresh_token')->nullable();
-            // GitHub OAuth end
+            $table->string('github_avatar')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

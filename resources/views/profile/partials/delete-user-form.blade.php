@@ -29,13 +29,19 @@
                         {{ __('Une fois votre compte supprimé, toutes les données et ressources associées seront supprimées de manière permanente. Veuillez saisir votre mot de passe pour confirmer que vous souhaitez supprimer votre compte de manière permanente.') }}
                     </p>
 
-                    <x-form.field-password
-                        label="Mot de passe"
-                        name="password"
-                        type="password"
-                        placeholder="Inscrivez votre mot de passe"
-                        :messages="$errors->userDeletion->get('password')"
-                    />
+                   @if(auth()->user()->github_id)
+                        <p class="text">
+                            <span class="bold">NB :</span> Votre compte est lié à GitHub. Pour supprimer votre compte, vous ne nécessitez pas de remplir de mot de passe pour confirmer la suppression.
+                        </p>
+                    @else
+                        <x-form.field-password
+                            label="Mot de passe"
+                            name="password"
+                            type="password"
+                            placeholder="Inscrivez votre mot de passe"
+                            :messages="$errors->userDeletion->get('password')"
+                        />
+                    @endif
                 </div>
 
                 <x-dialog.footer>
