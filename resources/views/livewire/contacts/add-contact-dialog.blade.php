@@ -15,7 +15,6 @@
                         type="text"
                         model="form.name"
                         placeholder="John"
-                        :messages="$errors->get('form.name')"
                         autofocus
                     />
 
@@ -25,7 +24,6 @@
                         type="text"
                         model="form.firstname"
                         placeholder="Doe"
-                        :messages="$errors->get('form.firstname')"
                     />
 
                     <x-form.field
@@ -34,7 +32,6 @@
                         type="email"
                         model="form.email"
                         placeholder="john.doe@gmail.com"
-                        :messages="$errors->get('form.email')"
                     />
 
                     <x-form.field
@@ -43,7 +40,6 @@
                         type="file"
                         model="form.avatar"
                         placeholder="JPG, JPEG, PNG ou SVG (MAX 1024 ko)"
-                        :messages="$errors->get('form.avatar')"
                     />
 
                     @if($form->avatar)

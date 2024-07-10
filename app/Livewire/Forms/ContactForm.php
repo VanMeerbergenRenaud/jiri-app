@@ -5,13 +5,21 @@ namespace App\Livewire\Forms;
 use App\Models\Contact;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Validation\Rule;
+use Livewire\Attributes\Validate;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Livewire\Form;
 
 class ContactForm extends Form
 {
-    public $name = '';
-    public $firstname = '';
+    #[Validate('required|min:3')]
+    public string $name = '';
+
+    #[Validate('required|min:3')]
+    public string $firstname = '';
+
+    #[Validate('nullable|email')]
     public $email = null;
+
     public $avatar = null;
 
     public Contact $contact;

@@ -6,7 +6,6 @@
         type="text"
         class="filter__contacts__input"
         placeholder="Chercher un contact à ajouter"
-        :messages="$errors->get('username')"
         srOnly="true"
         model="username"
         wire:model.live="username"

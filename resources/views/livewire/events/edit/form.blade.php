@@ -28,7 +28,6 @@
                         type="text"
                         model="name"
                         placeholder="Vilain"
-                        :messages="$errors->get('name')"
                     />
                 </div>
 
@@ -40,7 +39,6 @@
                         type="text"
                         model="firstname"
                         placeholder="Dominique"
-                        :messages="$errors->get('firstname')"
                     />
                 </div>
 
@@ -52,7 +50,6 @@
                         type="email"
                         model="email"
                         placeholder="john.doe@gmail.com"
-                        :messages="$errors->get('email')"
                     />
                 </div>
 

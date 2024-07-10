@@ -120,6 +120,12 @@
                 flex-wrap: wrap;
                 padding-left: 1.35rem;
 
+                a {
+                    color: inherit;
+                    font-weight: inherit;
+                    text-decoration: underline;
+                }
+
                 span {
                     display: flex;
                     align-items: center;

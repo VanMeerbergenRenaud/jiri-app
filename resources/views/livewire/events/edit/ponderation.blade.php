@@ -21,7 +21,6 @@
                                 max="100"
                                 placeholder="Ex : {{ $remainingPercentage }}"
                                 model="form.ponderation1"
-                                :messages="$errors->get('form.ponderation1')"
                             />
                         </li>
                     @endforeach
@@ -38,7 +37,6 @@
                                 max="100"
                                 placeholder="Ex : {{ $remainingPercentage }}"
                                 model="form.ponderation2"
-                                :messages="$errors->get('form.ponderation2')"
                             />
                         </li>
                     @endforeach

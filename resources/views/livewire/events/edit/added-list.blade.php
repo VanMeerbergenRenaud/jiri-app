@@ -23,7 +23,7 @@
                             <x-dialog.panel>
                                 <div class="form__content">
                                     <h2 class="title">Changement de rôle</h2>
-                                    <p>Êtes-vous sûr de vouloir échanger le rôle de <span class="bold">{{ $student->contact->name }}</span> en évaluateur ?</p>
+                                    <p>Êtes-vous sûr de vouloir échanger le rôle de <span class="bold">{{ ucfirst($student->contact->name) }}</span> en évaluateur ?</p>
                                 </div>
 
                                 <x-dialog.footer>
@@ -45,7 +45,7 @@
                             <x-dialog.panel>
                                 <div class="form__content">
                                     <h2 class="title">Suppression du contact de l'épreuve</h2>
-                                    <p>Êtes-vous sûr de vouloir supprimer l'étudiant <span class="bold">{{ $student->contact->name }}</span> de l'épreuve ?</p>
+                                    <p>Êtes-vous sûr de vouloir supprimer l'étudiant <span class="bold">{{ ucfirst($student->contact->name) }}</span> de l'épreuve ?</p>
                                 </div>
 
                                 <x-dialog.footer>
@@ -85,7 +85,7 @@
                             <x-dialog.panel>
                                 <div class="form__content">
                                     <h2 class="title">Changement de rôle</h2>
-                                    <p>Êtes-vous sûr de vouloir échanger le rôle de <span class="bold">{{ $evaluator->contact->name }}</span> en étudiant ?</p>
+                                    <p>Êtes-vous sûr de vouloir échanger le rôle de <span class="bold">{{ ucfirst($evaluator->contact->name) }}</span> en étudiant ?</p>
                                 </div>
 
                                 <x-dialog.footer>
@@ -107,7 +107,7 @@
                             <x-dialog.panel>
                                     <div class="form__content">
                                         <h2 class="title">Suppression du contact de l'épreuve</h2>
-                                        <p>Êtes-vous sûr de vouloir supprimer l'évaluateur <span class="bold">{{ $evaluator->contact->name }}</span> de l'épreuve ?</p>
+                                        <p>Êtes-vous sûr de vouloir supprimer l'évaluateur <span class="bold">{{ ucfirst($evaluator->contact->name) }}</span> de l'épreuve ?</p>
                                     </div>
 
                                     <x-dialog.footer>
