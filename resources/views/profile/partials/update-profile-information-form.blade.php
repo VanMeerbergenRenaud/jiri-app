@@ -16,7 +16,7 @@
         @csrf
         @method('patch')
 
-        <x-form.field
+        <x-form.breeze-field
             label="{{ __('Nom') }}"
             name="name"
             type="text"
@@ -28,7 +28,7 @@
             autofocus
         />
 
-        <x-form.field
+        <x-form.breeze-field
             label="{{ __('Adresse mail') }}"
             name="email"
             type="email"

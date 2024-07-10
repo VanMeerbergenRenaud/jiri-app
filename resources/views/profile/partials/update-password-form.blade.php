@@ -11,7 +11,7 @@
         @csrf
         @method('put')
 
-        <x-form.field-password
+        <x-form.breeze-field-password
             label="{{ __('Mot de passe actuel') }}"
             name="current_password"
             placeholder="{{ __('Inscrivez votre mot de passe actuel') }}"
@@ -20,7 +20,7 @@
             :messages="$errors->updatePassword->get('current_password')"
         />
 
-        <x-form.field-password
+        <x-form.breeze-field-password
             label="{{ __('Nouveau mot de passe') }}"
             name="password"
             placeholder="{{ __('Inscrivez votre nouveau mot de passe') }}"
@@ -29,7 +29,7 @@
             :messages="$errors->updatePassword->get('password')"
         />
 
-        <x-form.field-password
+        <x-form.breeze-field-password
             label="{{ __('Confirmer le mot de passe') }}"
             name="password_confirmation"
             placeholder="{{ __('Confirmer votre nouveau mot de passe') }}"

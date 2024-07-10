@@ -34,7 +34,7 @@
                             <span class="bold">NB :</span> Votre compte est lié à GitHub. Pour supprimer votre compte, vous ne nécessitez pas de remplir de mot de passe pour confirmer la suppression.
                         </p>
                     @else
-                        <x-form.field-password
+                        <x-form.breeze-field-password
                             label="Mot de passe"
                             name="password"
                             type="password"

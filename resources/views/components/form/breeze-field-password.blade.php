@@ -1,5 +1,5 @@
 <!-- Component to controls form fields -->
-@props(['label', 'name', 'placeholder', 'attributes' => [], 'messages', 'model' => ''])
+@props(['label', 'name', 'placeholder', 'attributes' => [], 'messages'])
 
 <div class="form__field" x-data="{ show: false }">
 
@@ -7,12 +7,11 @@
         {{ ucfirst($label) }}
     </label>
 
-   <input
+    <input
         id="{{ $name }}"
         name="{{ $name }}"
         type="password"
         placeholder="{{ $placeholder }}"
-        wire:model.blur="{{ $model }}"
         required
         autocomplete="current-password"
         x-bind:type="show ? 'text' : 'password'"
@@ -33,11 +32,11 @@
         </svg>
     </div>
 
-    @error ($model)
+    @if ($messages)
         <ul class="error-message">
-            @foreach ($errors->get($model) as $message)
+            @foreach ($messages as $message)
                 <li class="error-message__item">{{ $message }}</li>
             @endforeach
         </ul>
-    @enderror
+    @endif
 </div>

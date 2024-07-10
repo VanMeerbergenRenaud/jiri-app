@@ -10,7 +10,7 @@
         @csrf
 
         <!-- Email Address -->
-        <x-form.field
+        <x-form.breeze-field
             label="Adresse mail"
             name="email"
             type="email"
@@ -22,7 +22,7 @@
         />
 
         <!-- Password -->
-        <x-form.field-password
+        <x-form.breeze-field-password
             label="Mot de passe"
             name="password"
             placeholder="Min. 8 caractères"

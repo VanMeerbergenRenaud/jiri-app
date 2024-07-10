@@ -11,7 +11,7 @@
         </p>
 
         <!-- Email Address -->
-        <x-form.field
+        <x-form.breeze-field
             label="Adresse mail"
             name="email"
             type="email"
@@ -19,8 +19,8 @@
             placeholder="john.doe@gmail.com"
             autocomplete="username"
             required
-            :messages="$errors->get('email')"
             autofocus
+            :messages="$errors->get('email')"
         />
 
         <div class="form__footer">
