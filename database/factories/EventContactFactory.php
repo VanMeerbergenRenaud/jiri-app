@@ -13,8 +13,6 @@ class EventContactFactory extends Factory
 {
     protected $model = EventContact::class;
 
-
-
     public function definition(): array
     {
         return [

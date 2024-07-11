@@ -3,10 +3,14 @@
 namespace Database\Seeders;
 
 use App\Models\Contact;
+use App\Models\EvaluatorEvaluation;
+use App\Models\EvaluatorGlobalComment;
 use App\Models\Event;
 use App\Models\EventContact;
-use App\Models\eventProject;
+use App\Models\EventGlobalComment;
 use App\Models\Project;
+use App\Models\ProjectPonderation;
+use App\Models\Task;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -64,6 +68,16 @@ class DatabaseSeeder extends Seeder
                         'event_id' => $event->id,
                         'contact_id' => $contact->id,
                     ]);
+
+                    EventGlobalComment::factory()->create([
+                        'event_id' => $event->id,
+                        'contact_id' => $contact->id,
+                    ]);
+
+                    EvaluatorGlobalComment::factory()->create([
+                        'event_id' => $event->id,
+                        'contact_id' => $contact->id,
+                    ]);
                 }
             }
 
@@ -109,12 +123,39 @@ class DatabaseSeeder extends Seeder
                 }
 
                 foreach ($projects as $index => $project) {
-                    EventProject::factory()->create([
+                    ProjectPonderation::factory()->create([
                         'event_id' => $event->id,
                         'project_id' => $project->id,
                         'ponderation1' => $ponderations1[$index],
                         'ponderation2' => $ponderations2[$index],
                     ]);
+                }
+
+                Task::factory()->count(20)->create();
+
+                // Create the project_task pivot table
+                foreach ($projects as $project) {
+                    $tasks = Task::all()->random(5);
+
+                    foreach ($tasks as $task) {
+                        $project->tasks()->attach($task->id);
+                    }
+                }
+            }
+
+            // Evaluations for each event
+            foreach ($events as $event) {
+                $contacts = $user->contacts->random(14);
+                $projects = $user->projects->random(5);
+
+                foreach ($contacts as $contact) {
+                    foreach ($projects as $project) {
+                        EvaluatorEvaluation::factory()->create([
+                            'event_id' => $event->id,
+                            'contact_id' => $contact->id,
+                            'project_id' => $project->id,
+                        ]);
+                    }
                 }
             }
         }

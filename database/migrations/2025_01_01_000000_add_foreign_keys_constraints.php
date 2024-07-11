@@ -24,23 +24,36 @@ return new class extends Migration
             $table->foreignId('event_id')->constrained()->onDelete('cascade');
             $table->foreignId('contact_id')->constrained()->onDelete('cascade');
         });
-        Schema::table('event_project', function (Blueprint $table) {
-            $table->foreignId('event_id')->constrained()->onDelete('cascade');
+
+        // evaluator evaluation
+        Schema::table('evaluator_evaluation', function (Blueprint $table) {
             $table->foreignId('project_id')->constrained()->onDelete('cascade');
-        });
-        // evaluation
-        /*Schema::table('evaluations', function (Blueprint $table) {
             $table->foreignId('event_id')->constrained()->onDelete('cascade');
             $table->foreignId('contact_id')->constrained()->onDelete('cascade');
         });
-        // performances
-        Schema::table('performances', function (Blueprint $table) {
-            $table->foreignId('evaluation_id')->constrained()->onDelete('cascade');
+
+        // pivot tables
+        Schema::table('project_task', function (Blueprint $table) {
+            $table->foreignId('project_id')->constrained()->onDelete('cascade');
+            $table->foreignId('task_id')->constrained()->onDelete('cascade');
         });
-        // implementations
-        Schema::table('implementations', function (Blueprint $table) {
-            $table->foreignId('evaluation_id')->constrained()->onDelete('cascade');
-        });*/
+
+        // project ponderation
+        Schema::table('project_ponderation', function (Blueprint $table) {
+            $table->foreignId('event_id')->constrained()->onDelete('cascade');
+            $table->foreignId('project_id')->constrained()->onDelete('cascade');
+        });
+
+        // global comments tables
+        Schema::table('evaluator_global_comment', function (Blueprint $table) {
+            $table->foreignId('event_id')->constrained()->onDelete('cascade');
+            $table->foreignId('contact_id')->constrained()->onDelete('cascade');
+        });
+
+        Schema::table('event_global_comment', function (Blueprint $table) {
+            $table->foreignId('event_id')->constrained()->onDelete('cascade');
+            $table->foreignId('contact_id')->constrained()->onDelete('cascade');
+        });
     }
 
     /**
@@ -61,22 +74,34 @@ return new class extends Migration
             $table->dropForeign(['event_id']);
             $table->dropForeign(['contact_id']);
         });
-        Schema::table('event_project', function (Blueprint $table) {
+
+        // evaluator evaluation
+        Schema::table('evaluator_evaluation', function (Blueprint $table) {
+            $table->dropForeign(['project_id']);
+            $table->dropForeign(['event_contact_id']);
+        });
+
+        // pivot tables
+        Schema::table('project_task', function (Blueprint $table) {
+            $table->dropForeign(['project_id']);
+            $table->dropForeign(['task_id']);
+        });
+
+        // project ponderation
+        Schema::table('project_ponderation', function (Blueprint $table) {
             $table->dropForeign(['event_id']);
             $table->dropForeign(['project_id']);
         });
-        /*// evaluation
-        Schema::table('evaluations', function (Blueprint $table) {
+
+        // global comments tables
+        Schema::table('evaluator_global_comment', function (Blueprint $table) {
             $table->dropForeign(['event_id']);
             $table->dropForeign(['contact_id']);
         });
-        // performances
-        Schema::table('performances', function (Blueprint $table) {
-            $table->dropForeign(['evaluation_id']);
+
+        Schema::table('event_global_comment', function (Blueprint $table) {
+            $table->dropForeign(['event_id']);
+            $table->dropForeign(['contact_id']);
         });
-        // implementations
-        Schema::table('implementations', function (Blueprint $table) {
-            $table->dropForeign(['evaluation_id']);
-        });*/
     }
 };

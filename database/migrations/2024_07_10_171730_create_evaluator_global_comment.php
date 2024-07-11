@@ -11,14 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('events', function (Blueprint $table) {
+        Schema::create('evaluator_global_comment', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->timestamp('starting_at');
-            $table->time('duration');
-            $table->timestamp('started_at')->nullable();
-            $table->timestamp('paused_at')->nullable();
-            $table->timestamp('finished_at')->nullable();
+            $table->text('globalComment')->nullable();
+            $table->decimal('globalCote', 5, 2)->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('events');
+        Schema::dropIfExists('evaluator_global_comment');
     }
 };

@@ -16,7 +16,6 @@ class EventProjectFactory extends Factory
         return [
             'ponderation1' => $this->faker->numberBetween(1, 100),
             'ponderation2' => $this->faker->numberBetween(1, 100),
-            'link' => $this->faker->url(),
         ];
     }
 }

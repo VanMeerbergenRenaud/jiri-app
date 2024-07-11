@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('performances', function (Blueprint $table) {
+        Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->decimal('calculated_score', 5, 2)->nullable();
-            $table->decimal('adjusted_score', 5, 2)->nullable();
-            $table->text('globalComment')->nullable();
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -25,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('performances');
+        Schema::dropIfExists('tasks');
     }
 };
