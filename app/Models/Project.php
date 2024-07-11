@@ -32,4 +32,10 @@ class Project extends Model
     {
         return $this->hasMany(EventProject::class);
     }
+
+    // Un projet peut avoir plusieurs tâches
+    public function tasks()
+    {
+        return $this->belongsToMany(Task::class, 'project_task');
+    }
 }

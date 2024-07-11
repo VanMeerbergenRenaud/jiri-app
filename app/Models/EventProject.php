@@ -14,7 +14,6 @@ class EventProject extends Pivot
         'project_id',
         'ponderation1',
         'ponderation2',
-        'link',
     ];
 
     public function event()
