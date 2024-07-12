@@ -48,11 +48,11 @@ Route::middleware('auth')->group(function () {
 });
 
 // GitHub OAuth
-Route::get('/auth/redirect', function() {
+Route::get('/auth/redirect', function () {
     return Socialite::driver('github')->redirect();
 });
 
-Route::get('/auth/callback', function() {
+Route::get('/auth/callback', function () {
     $githubUser = Socialite::driver('github')->user();
 
     $user = User::updateOrCreate([

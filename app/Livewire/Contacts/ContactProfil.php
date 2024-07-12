@@ -7,6 +7,7 @@ use Livewire\Component;
 class ContactProfil extends Component
 {
     public $eventId;
+
     public $contactId;
 
     public function mount($event, $contact)

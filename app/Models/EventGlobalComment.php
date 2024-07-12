@@ -14,4 +14,9 @@ class EventGlobalComment extends Model
     protected $fillable = [
         'globalComment',
     ];
+
+    public function event()
+    {
+        return $this->belongsTo(Event::class);
+    }
 }

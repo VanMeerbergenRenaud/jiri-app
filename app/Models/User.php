@@ -33,6 +33,9 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    /**
+     * Initial tables : events, contacts, projects
+     */
     public function events(): HasMany
     {
         return $this->hasMany(Event::class);
@@ -48,13 +51,43 @@ class User extends Authenticatable
         return $this->hasMany(Project::class);
     }
 
+    /**
+     * Tables related to a specific event
+     */
+
+    // Contacts associated with an event
     public function eventContacts(): hasManyThrough
     {
         return $this->hasManyThrough(EventContact::class, Event::class);
     }
 
-    public function eventProjects(): hasManyThrough
+    // Tasks associated with an event
+    public function tasks(): HasMany
     {
-        return $this->hasManyThrough(EventProject::class, Event::class);
+        return $this->hasMany(Task::class);
+    }
+
+    // Ponderations of a project in an event
+    public function projectPonderation(): hasManyThrough
+    {
+        return $this->hasManyThrough(ProjectPonderation::class, Event::class);
+    }
+
+    // Evaluation information from an event
+    public function evaluatorsEvaluation(): hasManyThrough
+    {
+        return $this->hasManyThrough(EvaluatorEvaluation::class, Event::class);
+    }
+
+    // Comment from an event to a student
+    public function eventGlobalComment(): HasManyThrough
+    {
+        return $this->hasManyThrough(EventGlobalComment::class, Event::class);
+    }
+
+    // Comment from an evaluator to a student
+    public function evaluatorGlobalComment(): HasManyThrough
+    {
+        return $this->hasManyThrough(EvaluatorGlobalComment::class, Event::class);
     }
 }

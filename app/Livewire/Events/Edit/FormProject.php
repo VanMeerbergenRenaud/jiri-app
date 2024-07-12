@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Events\Edit;
 
-use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class FormProject extends Component

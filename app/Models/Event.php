@@ -45,11 +45,11 @@ class Event extends Model
     {
         return $this->belongsToMany(
             Project::class,
-            'event_project',
+            'project_ponderation',
             'event_id',
             'project_id'
         )
-            ->withPivot('ponderation1', 'ponderation2', 'link');
+            ->withPivot('ponderation1', 'ponderation2');
     }
 
     public function eventContacts(): HasMany
@@ -57,9 +57,9 @@ class Event extends Model
         return $this->hasMany(EventContact::class);
     }
 
-    public function eventProjects(): HasMany
+    public function projectPonderation(): HasMany
     {
-        return $this->hasMany(EventProject::class);
+        return $this->hasMany(ProjectPonderation::class);
     }
 
     public function students(): BelongsToMany
@@ -91,6 +91,7 @@ class Event extends Model
     public function isAvailable()
     {
         $ending_at = Carbon::parse($this->starting_at)->addMinutes($this->duration);
+
         return $ending_at <= now();
     }
 
@@ -101,5 +102,16 @@ class Event extends Model
         } else {
             return 'terminé';
         }
+    }
+
+    // Global comments
+    public function eventGlobalComment(): HasMany
+    {
+        return $this->hasMany(EventGlobalComment::class);
+    }
+
+    public function evaluatorGlobalComment(): HasMany
+    {
+        return $this->hasMany(EvaluatorGlobalComment::class);
     }
 }

@@ -81,7 +81,7 @@ class DatabaseSeeder extends Seeder
                 }
             }
 
-            // eventProjects for each event
+            // ProjectPonderation for each event
             foreach ($events as $event) {
                 $projects = $user->projects->random(5);
 

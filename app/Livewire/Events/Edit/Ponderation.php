@@ -2,18 +2,19 @@
 
 namespace App\Livewire\Events\Edit;
 
-use App\Livewire\Forms\EventProjectForm;
+use App\Models\ProjectPonderation;
 use Livewire\Component;
 
 class Ponderation extends Component
 {
-    public EventProjectForm $eventProjectForm;
+    public ProjectPonderation $projectPonderation;
 
     public $event;
 
     public $projects;
 
     public $totalPercentage = 100;
+
     public $remainingPercentage = 25;
 
     public function mount($event)

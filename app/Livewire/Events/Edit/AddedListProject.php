@@ -2,9 +2,8 @@
 
 namespace App\Livewire\Events\Edit;
 
-use App\Models\Event;
-use App\Models\EventProject;
 use App\Models\Project;
+use App\Models\ProjectPonderation;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -29,7 +28,7 @@ class AddedListProject extends Component
 
     public function removeProject(Project $project)
     {
-        $eventProject = EventProject::where('event_id', $this->eventId)
+        $eventProject = ProjectPonderation::where('event_id', $this->eventId)
             ->where('project_id', $project->id)
             ->firstOrFail();
 

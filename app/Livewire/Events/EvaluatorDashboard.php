@@ -13,11 +13,13 @@ class EvaluatorDashboard extends Component
     public $search = '';
 
     public $sortField = 'name';
+
     public $sortDirection = 'asc';
 
     public $event;
 
     public $projects;
+
     public $students;
 
     public $contact;
@@ -40,8 +42,8 @@ class EvaluatorDashboard extends Component
             ->join('contacts', 'event_contact.contact_id', '=', 'contacts.id')
             ->where('event_id', $this->event->id)
             ->where('role', 'student')
-            ->where('contacts.name', 'like', '%' . $this->search . '%')
-            ->orderBy('contacts.' . $this->sortField, $this->sortDirection)
+            ->where('contacts.name', 'like', '%'.$this->search.'%')
+            ->orderBy('contacts.'.$this->sortField, $this->sortDirection)
             ->paginate(8);
     }
 

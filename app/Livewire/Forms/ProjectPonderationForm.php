@@ -2,13 +2,13 @@
 
 namespace App\Livewire\Forms;
 
-use App\Models\EventProject;
+use App\Models\ProjectPonderation;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
-class EventProjectForm extends Form
+class ProjectPonderationForm extends Form
 {
-    public EventProject $eventProject;
+    public ProjectPonderation $projectPonderation;
 
     #[Validate('numeric|min:1|max:100')]
     public $ponderation1 = 1;
@@ -16,38 +16,32 @@ class EventProjectForm extends Form
     #[Validate('numeric|min:1|max:100')]
     public $ponderation2 = 1;
 
-    #[Validate('url|nullable')]
-    public $link = 'https://example.com';
-
     public function setEventProject($eventProject)
     {
-        $this->eventProject = $eventProject;
+        $this->projectPonderation = $eventProject;
         $this->ponderation1 = $eventProject->ponderation1;
         $this->ponderation2 = $eventProject->ponderation2;
-        $this->link = $eventProject->link;
     }
 
     public function save()
     {
         $this->validate();
 
-        auth()->user()->eventProjects()->create([
+        auth()->user()->projectPonderation()->create([
             'ponderation1' => $this->ponderation1,
             'ponderation2' => $this->ponderation2,
-            'link' => $this->link,
         ]);
 
-        $this->reset(['ponderation1', 'ponderation2', 'link']);
+        $this->reset(['ponderation1', 'ponderation2']);
     }
 
     public function update()
     {
         $this->validate();
 
-        $this->eventProject->update([
+        $this->projectPonderation->update([
             'ponderation1' => $this->ponderation1,
             'ponderation2' => $this->ponderation2,
-            'link' => $this->link,
         ]);
     }
 }

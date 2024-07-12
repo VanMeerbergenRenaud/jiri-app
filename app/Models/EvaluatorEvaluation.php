@@ -16,6 +16,11 @@ class EvaluatorEvaluation extends Model
         'comment',
         'status',
         'timer',
-        'public'
+        'public',
     ];
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class, 'project_id');
+    }
 }

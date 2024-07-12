@@ -3,7 +3,6 @@
 namespace App\Livewire\Events\Edit;
 
 use App\Models\Contact;
-use App\Models\EventContact;
 use Illuminate\Support\Str;
 use Livewire\Component;
 
@@ -14,8 +13,11 @@ use Livewire\Component;
 class Form extends Component
 {
     public $name;
+
     public $firstname;
+
     public $email;
+
     public $role = 'student';
 
     public $saved = false;
@@ -49,7 +51,7 @@ class Form extends Component
             'contact_id' => $contact->id,
             'event_id' => $this->eventId,
             'role' => $this->role,
-            'token' =>  Str::random(64),
+            'token' => Str::random(64),
         ]);
 
         // Reset the form fields

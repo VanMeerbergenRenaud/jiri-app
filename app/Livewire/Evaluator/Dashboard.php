@@ -7,6 +7,7 @@ use Livewire\Component;
 class Dashboard extends Component
 {
     public $events;
+
     public $contact;
 
     public function mount()

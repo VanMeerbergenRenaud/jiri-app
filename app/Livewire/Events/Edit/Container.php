@@ -8,6 +8,7 @@ use Livewire\Component;
 class Container extends Component
 {
     public $event;
+
     public EventForm $form;
 
     public function mount()

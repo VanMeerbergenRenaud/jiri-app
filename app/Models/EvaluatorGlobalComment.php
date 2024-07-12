@@ -13,6 +13,6 @@ class EvaluatorGlobalComment extends Model
 
     protected $fillable = [
         'globalComment',
-        'globalCote'
+        'globalCote',
     ];
 }

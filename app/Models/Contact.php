@@ -31,15 +31,13 @@ class Contact extends Model
             ->withPivot(['role', 'token']);
     }
 
-    public function projects(): BelongsToMany
-    {
-        return $this
-            ->belongsToMany(Project::class, 'project_contacts', 'contact_id', 'project_id')
-            ->withPivot(['role']);
-    }
-
     public function eventContacts(): HasMany
     {
         return $this->hasMany(EventContact::class);
+    }
+
+    public function projectPonderation(): HasMany
+    {
+        return $this->hasMany(ProjectPonderation::class);
     }
 }

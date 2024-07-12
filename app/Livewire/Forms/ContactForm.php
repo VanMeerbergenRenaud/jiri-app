@@ -6,7 +6,6 @@ use App\Models\Contact;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Validate;
-use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Livewire\Form;
 
 class ContactForm extends Form
@@ -82,27 +81,28 @@ class ContactForm extends Form
         $this->contact->update($updateData);
     }
 
-    protected function storeFile(UploadedFile $file = null)
+    protected function storeFile(?UploadedFile $file = null)
     {
         if (is_null($file)) {
             return null;
         }
 
         try {
-            if (!$file->isValid()) {
-                throw new \Exception('File upload error: ' . $file->getErrorMessage());
+            if (! $file->isValid()) {
+                throw new \Exception('File upload error: '.$file->getErrorMessage());
             }
 
             // Generate a unique filename
-            $filename = md5($file->getClientOriginalName() . time()) . '.' . $file->getClientOriginalExtension();
+            $filename = md5($file->getClientOriginalName().time()).'.'.$file->getClientOriginalExtension();
 
             // Store the file in the `avatars` folder
             $file->storeAs('avatars', $filename);
 
             // Return the file path
-            return '/avatars/' . $filename;
+            return '/avatars/'.$filename;
         } catch (\Exception $e) {
             $this->addError('avatar', $e->getMessage());
+
             return null;
         }
     }

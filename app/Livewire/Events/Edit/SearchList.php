@@ -30,7 +30,7 @@ class SearchList extends Component
 
         return $this->username
             ? auth()->user()->contacts()
-                ->where('name', 'like', '%' . $this->username . '%')
+                ->where('name', 'like', '%'.$this->username.'%')
                 ->whereNotIn('id', $existingContactIds)
                 ->orderBy('name')
                 ->get()

@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Events\Edit;
 
-use App\Models\Event;
 use App\Models\EventContact;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Attributes\On;
@@ -57,6 +56,7 @@ class AddedList extends Component
             'student' => 'étudiant',
             'evaluator' => 'évaluateur',
         ];
+
         return view('livewire.events.edit.added-list', compact('students', 'evaluators', 'roleTranslations'));
     }
 }

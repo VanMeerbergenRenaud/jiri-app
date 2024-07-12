@@ -13,6 +13,16 @@ class ProjectPonderation extends Model
 
     protected $fillable = [
         'ponderation1',
-        'ponderation2'
+        'ponderation2',
     ];
+
+    public function event()
+    {
+        return $this->belongsTo(Event::class);
+    }
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
 }

@@ -3,11 +3,11 @@
 namespace App\Livewire\Events;
 
 use Livewire\Component;
-use App\Models\Event;
 
 class Show extends Component
 {
     public $eventId;
+
     public $event;
 
     public function mount($event)

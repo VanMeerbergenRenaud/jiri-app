@@ -9,8 +9,11 @@ use Livewire\Component;
 class Show extends Component
 {
     public $event;
+
     public $contact;
+
     public $token;
+
     public $projects;
 
     public function mount()

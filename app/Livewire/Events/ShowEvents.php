@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Events;
 
-use App\Models\Event;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -20,7 +19,7 @@ class ShowEvents extends Component
     private function getEvents($operator, $pageName)
     {
         return auth()->user()->events()
-            ->where('name', 'like', '%' . $this->search . '%')
+            ->where('name', 'like', '%'.$this->search.'%')
             ->where('starting_at', $operator, now())
             ->orderBy('starting_at')
             ->paginate(4, pageName: $pageName);
@@ -49,7 +48,7 @@ class ShowEvents extends Component
         $event = auth()->user()->events()->findOrFail($eventId);
 
         $event->eventContacts()->delete();
-        $event->eventProjects()->delete();
+        $event->projectPonderation()->delete();
 
         $event->delete();
 

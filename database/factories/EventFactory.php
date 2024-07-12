@@ -15,7 +15,7 @@ class EventFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => 'Jury ' . $this->faker->word,
+            'name' => 'Jury '.$this->faker->word,
             'starting_at' => $this->faker->dateTimeBetween('-2 year', '+2 year')->format('Y-m-d\TH:i'),
             'duration' => $this->faker->date('H:i'),
         ];

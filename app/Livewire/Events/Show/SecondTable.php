@@ -11,6 +11,7 @@ class SecondTable extends Component
     public $contacts;
 
     public $students;
+
     public $evaluators;
 
     public $projects;

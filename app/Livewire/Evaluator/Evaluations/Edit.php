@@ -7,8 +7,11 @@ use Livewire\Component;
 class Edit extends Component
 {
     public $event;
+
     public $contact;
+
     public $token;
+
     public $projects;
 
     public function mount()

@@ -48,7 +48,8 @@ class ImportContacts extends Component
             ->toArray();
     }
 
-    public function import() {
+    public function import()
+    {
         $this->validate();
 
         Csv::from($this->upload)

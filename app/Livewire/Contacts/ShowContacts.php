@@ -13,6 +13,7 @@ class ShowContacts extends Component
     public $search = '';
 
     public $sortField = 'name';
+
     public $sortDirection = 'asc';
 
     // protected $queryString = ['sortField', 'sortDirection', 'perPage'];
@@ -23,9 +24,9 @@ class ShowContacts extends Component
     public function contactFilter()
     {
         return auth()->user()->contacts()
-            ->where(function($query) {
-                $query->where('name', 'like', '%' . $this->search . '%')
-                      ->orWhere('firstname', 'like', '%' . $this->search . '%');
+            ->where(function ($query) {
+                $query->where('name', 'like', '%'.$this->search.'%')
+                    ->orWhere('firstname', 'like', '%'.$this->search.'%');
             })
             ->orderBy($this->sortField, $this->sortDirection)
             ->paginate(8);
