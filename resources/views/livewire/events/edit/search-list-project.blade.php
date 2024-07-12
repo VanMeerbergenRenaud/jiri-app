@@ -5,7 +5,6 @@
         type="text"
         class="filter__contacts__input"
         placeholder="Chercher un projet à ajouter"
-        :messages="$errors->get('projectname')"
         srOnly="true"
         model="projectname"
         wire:model.live="projectname"
@@ -18,7 +17,8 @@
                     <li class="filter__contacts__list__item" wire:key="{{$project->id}}">
                         <span class="capitalize name projectName">{{ ucfirst($project->name) }}</span>
                         <div class="projectTasks">
-                            @if(!empty($project->tasks))
+                            {{ $project->url_readme }}
+                            {{--@if(!empty($project->tasks))
                                 @foreach(json_decode($project->tasks, true) as $task)
                                     <span class="taskName">{{ ucfirst($task) }}</span>
                                 @endforeach
@@ -26,7 +26,7 @@
                                 <span class="underline">
                                     Aucune tâche associée à ce projet.
                                 </span>
-                            @endif
+                            @endif--}}
                         </div>
                         <button type="button" wire:click="addProject({{ $project->id }})">
                             Ajouter

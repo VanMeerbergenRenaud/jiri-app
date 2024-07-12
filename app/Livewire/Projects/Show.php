@@ -7,6 +7,7 @@ use Livewire\Component;
 class Show extends Component
 {
     public $projectId;
+
     public $projects;
 
     public function mount($project)

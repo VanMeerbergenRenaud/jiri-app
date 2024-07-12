@@ -144,16 +144,9 @@
                 margin: 0;
             }
 
-            textarea {
-                font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-                border: none;
-                resize: none;
-                outline: none;
-                padding: 1.15rem 1.35rem;
-                width: 87.5%;
-                letter-spacing: -0.01em;
-                color: $text;
-                background-color: $gray-bg;
+            &__text {
+                padding: 0.85rem 1.5rem;
+                color: $text-slate-500;
             }
         }
 
@@ -390,14 +383,16 @@
                     border-right: none;
                     background-color: #F0F1F7;
 
-                    a {
+                    button {
                         margin-right: -1rem;
                         padding: 1.375rem;
                         font-size: 0.9rem;
                         font-weight: 500;
                         color: #6386E3;
+                        background-color: transparent;
 
                         &:hover {
+                            border: 1px solid transparent;
                             text-decoration: underline;
                         }
                     }
@@ -539,4 +534,14 @@
             }
         }
     }
+}
+
+.globalComment__textarea {
+    margin-top: -0.75rem;
+    padding: 0.75rem 1rem;
+    display: block;
+    width: calc(100% - 2rem);
+    resize: none;
+    color: #111827;
+    font-size: 0.875rem;
 }

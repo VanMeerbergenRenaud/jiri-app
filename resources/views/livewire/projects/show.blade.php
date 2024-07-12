@@ -8,7 +8,7 @@
             <h2>Information du projet</h2>
             <p>
                 Listes des évènements dans lesquelles le projet
-                <span class="font-semibold">{{ $project->name }}</span>
+                <span class="font-semibold">{{ ucfirst($project->name) }}</span>
                 est inscrit.
             </p>
         </div>

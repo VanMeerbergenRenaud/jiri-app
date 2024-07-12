@@ -9,7 +9,7 @@
             <tr>
                 <th>Nom</th>
                 <th>Description</th>
-                <th>Tâches</th>
+                <th>Url / Read.me</th>
                 <th class="actions">Actions</th>
             </tr>
         </thead>

@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Projects;
 
-use App\Models\Project;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 use Livewire\WithPagination;

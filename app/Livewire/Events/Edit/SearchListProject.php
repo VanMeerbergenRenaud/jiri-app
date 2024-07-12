@@ -20,10 +20,10 @@ class SearchListProject extends Component
 
         return $this->projectname
             ? auth()->user()->projects()
-            ->where('name', 'like', '%' . $this->projectname . '%')
-            ->whereNotIn('id', $addedProjectIds)
-            ->orderBy('name')
-            ->get()
+                ->where('name', 'like', '%'.$this->projectname.'%')
+                ->whereNotIn('id', $addedProjectIds)
+                ->orderBy('name')
+                ->get()
             : new Collection();
     }
 
@@ -32,17 +32,16 @@ class SearchListProject extends Component
         $event = auth()->user()->events()->findOrFail($this->eventId);
         $project = auth()->user()->projects()->findOrFail($projectId);
 
-        // Avoid duplicate projects in a event
+        // Avoid duplicate projects in an event
         if ($event->projects->contains($project)) {
             return;
         }
 
-        auth()->user()->eventProjects()->create([
+        auth()->user()->projectPonderation()->create([
             'event_id' => $event->id,
             'project_id' => $project->id,
             'ponderation1' => 1,
             'ponderation2' => 1,
-            'link' => 'https://example.com',
         ]);
 
         $this->dispatch('fetchEventProjects');

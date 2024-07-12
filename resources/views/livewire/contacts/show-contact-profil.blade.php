@@ -51,28 +51,53 @@
 
             @if($contactType  === 'student')
                 {{-- Form to edit the globalComment --}}
-                <form class="globalComment" action="" method="POST">
+                <form class="globalComment" wire:submit.prevent="editComment">
                     @csrf
 
                     <div class="sectionHeader">
                         <h3>Commentaire global</h3>
-                        <button type="button" wire:click="editComment">Editer</button>
+
+                        <x-dialog>
+                            <x-dialog.open>
+                                <button type="button">
+                                    Editer
+                                </button>
+                            </x-dialog.open>
+
+                            <x-dialog.panel>
+                                <div class="form__content">
+                                    <h2 class="title">Commentaire global</h2>
+                                    <p class="text">
+                                        Veuillez ajouter un commentaire global pour l’étudiant.
+                                    </p>
+                                    <x-form.textarea
+                                        label="Commentaire global"
+                                        name="globalComment"
+                                        model="globalComment"
+                                        placeholder="Ajouter un commentaire global"
+                                        value="{{ $globalComment }}"
+                                        srOnly="true"
+                                        maxlength="1000"
+                                        class="globalComment__textarea"
+                                    />
+                                </div>
+
+                                <x-dialog.footer>
+                                    <x-dialog.close>
+                                        <button type="button" class="cancel">Annuler</button>
+                                    </x-dialog.close>
+
+                                    <button type="button" wire:click="editComment"
+                                            class="save">Enregistrer
+                                    </button>
+                                </x-dialog.footer>
+                            </x-dialog.panel>
+                        </x-dialog>
                     </div>
 
-                    <x-form.textarea
-                        label="Commentaire global"
-                        name="globalComment"
-                        model="globalComment"
-                        placeholder="Ajouter un commentaire global"
-                        value="{{ $globalComment }}"
-                        :messages="$errors->get('globalComment')"
-                        srOnly="true"
-                        x-data="{ resize: () => { $el.style.height = '0.5rem'; $el.style.height = $el.scrollHeight + 'px' } }"
-                        x-init="resize()"
-                        @input="resize()"
-                        maxlength="750"
-                    />
-
+                    <p class="globalComment__text">
+                        {{ $globalComment }}
+                    </p>
                 </form>
             @endif
 
@@ -80,12 +105,40 @@
         <div class="mainProfil__content__col2">
             @if($contactType === 'student')
                 {{-- Bilan --}}
+                <form wire:submit.prevent="editPonderation">
+                    @csrf
+
                 <table class="bilan">
                     <thead>
                     <tr>
                         <th class="bilan__head" colspan="100%">
                             <h3>Bilan de l’étudiant</h3>
-                            <a href="#">Editer les informations</a>
+
+                            <x-dialog>
+                                <x-dialog.open>
+                                    <button type="button">
+                                        Editer les informations
+                                    </button>
+                                </x-dialog.open>
+
+                                <x-dialog.panel>
+                                    <div class="form__content">
+                                        <h2 class="title">Editer les informations</h2>
+                                        <p>
+                                            Editer les cotes ainsi que les pondérations des projets de l’étudiant.
+                                        </p>
+                                    </div>
+
+                                    <x-dialog.footer>
+                                        <x-dialog.close>
+                                            <button type="button" class="cancel">Annuler</button>
+                                        </x-dialog.close>
+
+                                        <button type="button" wire:click="editPonderation" class="save">Sauvegardé
+                                        </button>
+                                    </x-dialog.footer>
+                                </x-dialog.panel>
+                            </x-dialog>
                         </th>
                     </tr>
                     </thead>
@@ -130,10 +183,10 @@
 
                         {{-- TODO : cote globale * les coéficients--}}
                         <td class="global">
-                            <span class="note">4.25 * {{ $projects->sum(function ($project) {
-                                    return $project->ponderation1 / 100;
-                                }) }}
-                            </span>
+                                <span class="note">{{ $projects->sum(function ($project) {
+                                        return $project->ponderation1;
+                                    }) }} %
+                                </span>
                         </td>
                     </tr>
                     <tr class="bilan__row">
@@ -144,31 +197,32 @@
                         @endforeach
                         {{-- TODO : cote globale2 * les coéficients--}}
                         <td class="b-b global">
-                            <span class="note">4.75 *
-                                {{ $projects->sum(function ($project) {
-                                    return $project->ponderation2 / 100;
-                                }) }}
-                            </span>
+                                <span class="note">
+                                    {{ $projects->sum(function ($project) {
+                                        return $project->ponderation2;
+                                    }) }} %
+                                </span>
                         </td>
                     </tr>
                     </tbody>
                 </table>
+                </form>
 
                 {{-- Comments of jiries --}}
                 <div class="jiriesComment">
                     <h3 class="title">Commentaires des membres du jury</h3>
                     {{-- List of comments --}}
                     <ul class="jiriesComment__list">
-                        @for ($i = 1; $i <= 3; $i++)
+                        @foreach ($evaluators as $evaluator)
                             {{-- for each $comments from evaluators --}}
                             <li x-data="{ open: false, isSelected: false }" class="jiriesComment__list__item">
                                 <div class="jiriesComment__list__item__infos" :class="{ 'isSelected': isSelected }"
                                      @click="open = !open; isSelected = !isSelected">
                                     <div class="jiriesComment__list__item__infos__evaluator">
-                                        <img src="{{ asset('img/placeholder.png') }}" alt="Photo de l'évaluateur">
+                                        <img src="{{ $evaluator->contact->avatar ?? asset('img/placeholder.png') }}"
+                                             alt="Photo de l'évaluateur">
                                         <span>
-                                            Toon van den boss
-                                            {{--{{ $evaluator->name }}--}}
+                                            {{ $evaluator->contact->name }} {{ $evaluator->contact->firstname }}
                                         </span>
                                     </div>
                                     <span>@include('components.svg.arrow-down')</span>
@@ -176,22 +230,22 @@
 
                                 {{-- All the ratings & comments for all the projects of a student --}}
                                 <ul x-show="open" x-transition.opacity class="jiriesComment__list__item__commentList">
-                                    @foreach ($projects as $project)
+                                    @foreach ($this->evaluation as $evaluation)
                                         <li class="jiriesComment__list__item__commentList__item">
                                             <div>
-                                                <h4 class="font-semibold capitalize">{{ $project->project->name }}</h4>
-                                                <span>11.5 / 20</span>
+                                                <h4 class="font-semibold capitalize">{{ $evaluation->project->name }}</h4>
+                                                <span>
+                                                    {{ $evaluation->score ?? 'Non renseigné' }} / 20
+                                                </span>
                                             </div>
                                             <p>
-                                                La cote finale calculée automatiquement n’est pas forcément la cote
-                                                finale qui se trouvera dans le bulletin ok. La cote finale calculée
-                                                automatiquement...
+                                                {{ $evaluation->comment ?? 'Aucun commentaire n’a encore été enregistré jusqu’à présent pour ce projet.' }}
                                             </p>
                                         </li>
                                     @endforeach
                                 </ul>
                             </li>
-                        @endfor
+                        @endforeach
                     </ul>
                 </div>
 
@@ -233,7 +287,7 @@
                                 <h4 class="title">Réalisation(s)</h4>
                                 <ul>
                                     <li>
-                                        {{ ucwords(implode(' | ', json_decode($project->project->tasks))) ?? "Non renseigné" }}
+                                        {{--{{ ucwords(implode(' | ', json_decode($project->project->tasks))) ?? "Non renseigné" }}--}}
                                     </li>
                                 </ul>
                             </td>

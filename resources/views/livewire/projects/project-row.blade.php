@@ -6,7 +6,10 @@
     </td>
     <td class="capitalize">{{ str($project->description)->limit(50) }}</td>
     <td class="tasks">
-        {{ implode(' | ', json_decode($project->tasks)) }}
+        {{--{{ implode(' | ', json_decode($project->tasks)) }}--}}
+        <a href="{{ $project->url_readme }}" class="" title="Voir le Read.me" target="_blank">
+            {{ $project->url_readme }}
+        </a>
     </td>
     <td class="actions">
         <x-menu>
@@ -50,7 +53,6 @@
                                     model="form.name"
                                     placeholder="Nom du projet"
                                     value="{{ $project->name }}"
-                                    :messages="$errors->get('nom')"
                                     required
                                     autofocus
                                 />
@@ -61,7 +63,15 @@
                                     model="form.description"
                                     placeholder="Informations sur le projet"
                                     value="{{ $project->description }}"
-                                    :messages="$errors->get('description')"
+                                />
+
+                                <x-form.field
+                                    label="Url de présentation"
+                                    name="url_readme"
+                                    type="text"
+                                    model="form.url_readme"
+                                    placeholder="https://example.com"
+                                    value="{{ $project->url_readme }}"
                                 />
 
                                 {{--<x-form.field
@@ -74,7 +84,7 @@
                                     :messages="$errors->get('tasks')"
                                 />--}}
 
-                                <label for="tasks">Tâches</label>
+                                {{--<label for="tasks">Tâches</label>
                                 <ul>
                                     @foreach (json_decode($project->tasks) as $task)
                                         <li>{{ $task }}</li>
@@ -90,7 +100,7 @@
                                     @foreach (json_decode($tasks) as $task)
                                         <option value="{{ $task }}" selected>{{ $task }}</option>
                                     @endforeach
-                                </select>
+                                </select>--}}
                             </div>
 
                             <x-dialog.footer>

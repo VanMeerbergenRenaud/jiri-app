@@ -19,7 +19,6 @@
                         model="form.name"
                         value="{{ old('name') }}"
                         placeholder="Nom du projet"
-                        :messages="$errors->get('form.name')"
                         autofocus
                     />
 
@@ -29,7 +28,15 @@
                         model="form.description"
                         value="{{ old('description') }}"
                         placeholder="Informations sur le projet"
-                        :messages="$errors->get('form.description')"
+                    />
+
+                    <x-form.field
+                        label="Url de présentation"
+                        name="url_readme"
+                        type="text"
+                        model="form.url_readme"
+                        value="{{ old('url_readme') }}"
+                        placeholder="https://example.com"
                     />
 
                     {{--<x-form.field
@@ -42,7 +49,7 @@
                         :messages="$errors->get('form.tasks')"
                     />--}}
 
-                    <label for="tasks">Tâches</label>
+                    {{--<label for="tasks">Tâches</label>
                     <select
                         id="tasks"
                         multiple
@@ -53,7 +60,7 @@
                         @foreach (json_decode($tasks) as $task)
                             <option value="{{ $task }}" selected>{{ $task }}</option>
                         @endforeach
-                    </select>
+                    </select>--}}
                 </div>
 
                 <x-dialog.footer>

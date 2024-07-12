@@ -9,7 +9,7 @@ class ProjectRow extends Component
 {
     public $project;
 
-    public $tasks;
+    //public $tasks;
 
     public ProjectForm $form;
 
@@ -18,7 +18,7 @@ class ProjectRow extends Component
     public function mount()
     {
         $this->form->setProject($this->project);
-        $this->tasks = json_encode(auth()->user()->projects->pluck('tasks'));
+        //$this->tasks = json_encode(auth()->user()->projects->pluck('tasks'));
     }
 
     public function save()
