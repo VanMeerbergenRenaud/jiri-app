@@ -21,7 +21,7 @@ class ContactRow extends Component
         $this->form->setContact($this->contact);
     }
 
-    public function save()
+    public function saveContact()
     {
         $this->form->update();
 

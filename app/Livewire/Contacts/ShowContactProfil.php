@@ -12,22 +12,20 @@ class ShowContactProfil extends Component
     use WithFileUploads;
 
     public $contact;
+    public $contactType;
 
     public ContactForm $form;
 
-    public $showEditDialog = false;
-
-    // Other properties
     public $projects;
-
-    public $contactType;
-
     public $evaluators;
-
-    public $evaluation;
+    public $students;
+    public $evaluationOfEachEvaluatorForStudent;
+    public $evaluationOfEvaluatorForEachStudent;
 
     #[Validate('nullable|max:1000')]
     public $globalComment;
+
+    public $showEditDialog = false;
 
     public function mount($contact)
     {
@@ -40,31 +38,55 @@ class ShowContactProfil extends Component
             ->first()
             ->role;
 
-        $this->projects = auth()->user()->projectPonderation()
+       $this->projects = auth()->user()->projectPonderations()
+            ->with('project')
             ->where('event_id', $this->contact->pivot->event_id)
             ->get();
 
         // Get the global comment of the contact
-        $this->globalComment = auth()->user()->eventGlobalComment()
+        $this->globalComment = auth()->user()->eventGlobalComments()
             ->where('event_id', $this->contact->pivot->event_id)
             ->where('contact_id', $this->contact->id)
             ->first()
         ->globalComment;
 
-        // Get all the evaluators of the event that rated the contact
+        /*
+         * Get the evaluators and students of the event
+        */
         $this->evaluators = auth()->user()->eventContacts()
             ->where('event_id', $this->contact->pivot->event_id)
             ->where('role', 'evaluator')
             ->get();
 
-        // Get the evaluation of the contact from the evaluatorsEvaluation table (project, event and contact id)
-        $this->evaluation = auth()->user()->evaluatorsEvaluation()
+        $this->students = auth()->user()->eventContacts()
             ->where('event_id', $this->contact->pivot->event_id)
-            ->where('contact_id', $this->contact->id)
+            ->where('role', 'student')
             ->get();
+
+        /*
+         * Get the evaluations of all the evaluators that evaluated the student (student profil)
+        */
+        $this->evaluationOfEachEvaluatorForStudent = auth()->user()->evaluatorsEvaluations()
+            ->where('event_id', $this->contact->pivot->event_id)
+            //->where('event_contact_id', $this->contact->id)// // the evaluators
+            ->where('contact_id', $this->contact->id)// the student evaluated
+            //->where('status', 'evaluated')
+            ->get();
+
+        /*
+         * Get the evaluations from an evaluator to all the student he evaluates (evaluator profil)
+        */
+        $this->evaluationOfEvaluatorForEachStudent = auth()->user()->evaluatorsEvaluations()
+            ->where('event_id', $this->contact->pivot->event_id)
+            //->where('contact_id', ?)// several contacts (students) evaluated by the same evaluator
+            ->where('event_contact_id', $this->contact->id) // the evaluator
+            //->where('status', 'evaluated')
+            ->get();
+
+        //dd($this->evaluationOfEvaluatorForEachStudent);
     }
 
-    public function save()
+    public function saveContact()
     {
         $this->form->update();
 
@@ -80,8 +102,10 @@ class ShowContactProfil extends Component
         dd('need to save the global comment of the contact');
     }
 
-    // TODO : Change the role of the contact by updating its role in the attendances table (evaluator or student)
-    public function editContactRole($role) {}
+    public function editContactRole()
+    {
+        dd('need to change the role of the contact');
+    }
 
     public function render()
     {

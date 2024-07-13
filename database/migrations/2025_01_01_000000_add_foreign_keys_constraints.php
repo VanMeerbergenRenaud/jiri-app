@@ -29,7 +29,9 @@ return new class extends Migration
         Schema::table('evaluator_evaluation', function (Blueprint $table) {
             $table->foreignId('project_id')->constrained()->onDelete('cascade');
             $table->foreignId('event_id')->constrained()->onDelete('cascade');
+            // Need the contact_id to know who is the student
             $table->foreignId('contact_id')->constrained()->onDelete('cascade');
+            $table->foreignId('event_contact_id');
         });
 
         // pivot tables
@@ -78,6 +80,7 @@ return new class extends Migration
         // evaluator evaluation
         Schema::table('evaluator_evaluation', function (Blueprint $table) {
             $table->dropForeign(['project_id']);
+            $table->dropForeign(['contact_id']);
             $table->dropForeign(['event_contact_id']);
         });
 

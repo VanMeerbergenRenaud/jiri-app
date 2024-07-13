@@ -24,20 +24,9 @@ class Contact extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function events(): BelongsToMany
-    {
-        return $this
-            ->belongsToMany(Event::class, 'event_contact', 'contact_id', 'event_id')
-            ->withPivot(['role', 'token']);
-    }
-
+    // A contact can be assigned to one or more events
     public function eventContacts(): HasMany
     {
         return $this->hasMany(EventContact::class);
-    }
-
-    public function projectPonderation(): HasMany
-    {
-        return $this->hasMany(ProjectPonderation::class);
     }
 }

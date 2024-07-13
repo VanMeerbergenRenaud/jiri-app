@@ -25,17 +25,25 @@ class Project extends Model
         return $this->belongsTo(User::class);
     }
 
+    // A project can belong to one or many events
     public function events(): BelongsToMany
     {
         return $this->belongsToMany(Event::class, 'project_ponderation');
     }
 
-    public function projectPonderation(): HasMany
+    // A project can have one or many ponderations
+    public function projectPonderations(): HasMany
     {
         return $this->hasMany(ProjectPonderation::class);
     }
 
-    // Un projet peut avoir plusieurs tâches
+    // A project can have one or many evaluations
+    public function evaluations(): HasMany
+    {
+        return $this->hasMany(EvaluatorEvaluation::class);
+    }
+
+    // A project can have one or many tasks
     public function tasks(): BelongsToMany
     {
         return $this->belongsToMany(Task::class, 'project_task');

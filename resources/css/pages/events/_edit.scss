@@ -630,13 +630,6 @@
                 margin-bottom: 1.5rem;
                 padding-right: 2rem;
 
-                /* Form to create a new contact */
-                .contact__new__form {
-                    &__container {
-                        // TODO
-                    }
-                }
-
                 /* List of the contacts added to the event */
                 &__added {
                     ul {
@@ -721,6 +714,7 @@
                     }
                 }
 
+                /* Form to create a new contact */
                 .contact__new__form {
                     &__container {
                         display: grid;

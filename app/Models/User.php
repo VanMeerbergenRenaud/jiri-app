@@ -68,25 +68,25 @@ class User extends Authenticatable
     }
 
     // Ponderations of a project in an event
-    public function projectPonderation(): hasManyThrough
+    public function projectPonderations(): hasManyThrough
     {
         return $this->hasManyThrough(ProjectPonderation::class, Event::class);
     }
 
     // Evaluation information from an event
-    public function evaluatorsEvaluation(): hasManyThrough
+    public function evaluatorsEvaluations(): hasManyThrough
     {
         return $this->hasManyThrough(EvaluatorEvaluation::class, Event::class);
     }
 
     // Comment from an event to a student
-    public function eventGlobalComment(): HasManyThrough
+    public function eventGlobalComments(): HasManyThrough
     {
         return $this->hasManyThrough(EventGlobalComment::class, Event::class);
     }
 
     // Comment from an evaluator to a student
-    public function evaluatorGlobalComment(): HasManyThrough
+    public function evaluatorGlobalComments(): HasManyThrough
     {
         return $this->hasManyThrough(EvaluatorGlobalComment::class, Event::class);
     }

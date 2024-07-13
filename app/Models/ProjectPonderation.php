@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ProjectPonderation extends Model
 {
@@ -16,12 +17,14 @@ class ProjectPonderation extends Model
         'ponderation2',
     ];
 
-    public function event()
+    // The project ponderation belongs to an event
+    public function event(): BelongsTo
     {
         return $this->belongsTo(Event::class);
     }
 
-    public function project()
+    // The project ponderation belongs to a project
+    public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class);
     }

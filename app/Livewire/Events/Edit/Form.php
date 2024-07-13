@@ -4,6 +4,7 @@ namespace App\Livewire\Events\Edit;
 
 use App\Models\Contact;
 use Illuminate\Support\Str;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 /*
@@ -12,8 +13,10 @@ use Livewire\Component;
 */
 class Form extends Component
 {
+    #[Validate('required|min:3')]
     public $name;
 
+    #[Validate('required|min:3')]
     public $firstname;
 
     public $email;

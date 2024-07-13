@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class EventGlobalComment extends Model
 {
@@ -15,8 +16,9 @@ class EventGlobalComment extends Model
         'globalComment',
     ];
 
-    public function event()
+    // The global comment belongs to the evaluation of an event wrote by the user
+    public function eventEvaluation(): BelongsTo
     {
-        return $this->belongsTo(Event::class);
+        return $this->belongsTo(Event::class, 'event_id');
     }
 }

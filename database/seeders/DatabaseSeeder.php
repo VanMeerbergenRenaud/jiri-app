@@ -152,8 +152,9 @@ class DatabaseSeeder extends Seeder
                     foreach ($projects as $project) {
                         EvaluatorEvaluation::factory()->create([
                             'event_id' => $event->id,
-                            'contact_id' => $contact->id,
                             'project_id' => $project->id,
+                            'contact_id' => $contact->id,
+                            'event_contact_id' => 26,
                         ]);
                     }
                 }

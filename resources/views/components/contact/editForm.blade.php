@@ -1,4 +1,4 @@
-<form wire:submit="save" class="form">
+<form wire:submit="saveContact" class="form">
     <div class="form__content">
         <h2 class="title">Modifier le contact</h2>
 

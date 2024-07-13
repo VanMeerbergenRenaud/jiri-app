@@ -51,7 +51,7 @@
 
             @if($contactType  === 'student')
                 {{-- Form to edit the globalComment --}}
-                <form class="globalComment" wire:submit.prevent="editComment">
+                <form class="globalComment" wire:submit.prevent="saveGlobalComment">
                     @csrf
 
                     <div class="sectionHeader">
@@ -87,7 +87,7 @@
                                         <button type="button" class="cancel">Annuler</button>
                                     </x-dialog.close>
 
-                                    <button type="button" wire:click="editComment"
+                                    <button type="button" wire:click="saveGlobalComment"
                                             class="save">Enregistrer
                                     </button>
                                 </x-dialog.footer>
@@ -197,11 +197,11 @@
                         @endforeach
                         {{-- TODO : cote globale2 * les coéficients--}}
                         <td class="b-b global">
-                                <span class="note">
-                                    {{ $projects->sum(function ($project) {
-                                        return $project->ponderation2;
-                                    }) }} %
-                                </span>
+                            <span class="note">
+                                {{ $projects->sum(function ($project) {
+                                    return $project->ponderation2;
+                                }) }} %
+                            </span>
                         </td>
                     </tr>
                     </tbody>
@@ -219,27 +219,50 @@
                                 <div class="jiriesComment__list__item__infos" :class="{ 'isSelected': isSelected }"
                                      @click="open = !open; isSelected = !isSelected">
                                     <div class="jiriesComment__list__item__infos__evaluator">
-                                        <img src="{{ $evaluator->contact->avatar ?? asset('img/placeholder.png') }}"
-                                             alt="Photo de l'évaluateur">
+                                        <img src="{{ $evaluator->contact->avatar ?? asset('img/placeholder.png') }}" alt="Photo de l'évaluateur">
                                         <span>
-                                            {{ $evaluator->contact->name }} {{ $evaluator->contact->firstname }}
+                                            {{ $evaluator->contact->name ?? 'Évaluateur' }} {{ $evaluator->contact->firstname ?? 'inconnu' }}
                                         </span>
                                     </div>
-                                    <span>@include('components.svg.arrow-down')</span>
+                                    <span>
+                                        @include('components.svg.arrow-down')
+                                    </span>
                                 </div>
 
                                 {{-- All the ratings & comments for all the projects of a student --}}
                                 <ul x-show="open" x-transition.opacity class="jiriesComment__list__item__commentList">
-                                    @foreach ($this->evaluation as $evaluation)
+                                    @foreach ($projects as $project)
                                         <li class="jiriesComment__list__item__commentList__item">
                                             <div>
-                                                <h4 class="font-semibold capitalize">{{ $evaluation->project->name }}</h4>
+                                                <h4 class="font-semibold capitalize">
+                                                    {{ $project->project->name ?? 'Projet inconnu' }}
+                                                </h4>
                                                 <span>
-                                                    {{ $evaluation->score ?? 'Non renseigné' }} / 20
+                                                    @if($evaluationOfEachEvaluatorForStudent
+                                                            ->where('project_id', $project->project->id)
+                                                            ->where('event_contact_id', $evaluator->contact->id)->isEmpty())
+                                                        ? / 20
+                                                    @else
+                                                        @foreach($evaluationOfEachEvaluatorForStudent
+                                                                ->where('project_id', $project->project->id)
+                                                                ->where('event_contact_id', $evaluator->contact->id) as $test)
+                                                            {{ $test->score ?? 'Non renseigné' }} / 20
+                                                        @endforeach
+                                                    @endif
                                                 </span>
                                             </div>
                                             <p>
-                                                {{ $evaluation->comment ?? 'Aucun commentaire n’a encore été enregistré jusqu’à présent pour ce projet.' }}
+                                                @if($evaluationOfEachEvaluatorForStudent
+                                                        ->where('project_id', $project->project->id)
+                                                        ->where('event_contact_id', $evaluator->contact->id)->isEmpty())
+                                                    Aucun commentaire n’a encore été enregistré jusqu’à présent pour ce projet.
+                                                @else
+                                                    @foreach($evaluationOfEachEvaluatorForStudent
+                                                            ->where('project_id', $project->project->id)
+                                                            ->where('event_contact_id', $evaluator->contact->id) as $test)
+                                                        {{ $test->comment ?? 'Aucun commentaire n’a encore été enregistré jusqu’à présent pour ce projet.' }}
+                                                    @endforeach
+                                                @endif
                                             </p>
                                         </li>
                                     @endforeach
@@ -255,11 +278,10 @@
                     <tr>
                         <th class="user-infos" colspan="100%">
                             <div>
-                                <img src="{{ $contact->avatar ?? asset('img/placeholder.png') }}"
-                                     alt="Photo du contact">
+                                <img src="{{ $contact->avatar ?? asset('img/placeholder.png') }}" alt="Photo du contact">
                                 <span>
-                                        {{ $contact->name }} {{ $contact->firstname }}
-                                    </span>
+                                    {{ $contact->name }} {{ $contact->firstname }}
+                                </span>
                             </div>
                             {{--<a href="#">Editer les informations</a>--}}
                         </th>
@@ -342,16 +364,14 @@
                         {{-- 3. Liste de chaque commentaire pour chaque travail présenté par un étudiant --}}
 
                         @if($contactType === 'evaluator')
-                            @for ($i = 1; $i <= 3; $i++)
-                                {{-- for each $comments of the evaluator for the student --}}
+                            @foreach ($students as $student)
                                 <li x-data="{ open: false, isSelected: false }" class="jiriesComment__list__item">
                                     <div class="jiriesComment__list__item__infos" :class="{ 'isSelected': isSelected }"
                                          @click="open = !open; isSelected = !isSelected">
                                         <div class="jiriesComment__list__item__infos__evaluator">
-                                            <img src="{{ asset('img/placeholder.png') }}" alt="Photo de l'évaluateur">
+                                            <img src="{{ $student->contact->avatar ?? asset('img/placeholder.png') }}" alt="Photo de l'évaluateur">
                                             <span>
-                                                Renaud Van Meerbergen
-                                                {{--{{ $student->name }}--}}
+                                                {{ $student->contact->name }} {{ $student->contact->firstname }}
                                             </span>
                                         </div>
                                         <span>@include('components.svg.arrow-down')</span>
@@ -363,19 +383,41 @@
                                         @foreach ($projects as $project)
                                             <li class="jiriesComment__list__item__commentList__item">
                                                 <div>
-                                                    <h3 class="font-semibold capitalize">{{ $project->project->name }}</h3>
-                                                    <span>11.5 / 20</span>
+                                                    <h3 class="font-semibold capitalize">
+                                                        {{ $project->project->name ?? 'Projet inconnu' }}
+                                                    </h3>
+                                                    <span>
+                                                        @if($evaluationOfEvaluatorForEachStudent
+                                                                ->where('project_id', $project->project->id)
+                                                                ->where('contact_id', $student->contact->id)->isEmpty())
+                                                            ? / 20
+                                                        @else
+                                                            @foreach($evaluationOfEvaluatorForEachStudent
+                                                                    ->where('project_id', $project->project->id)
+                                                                    ->where('contact_id', $student->contact->id) as $test)
+                                                                {{ $test->score ?? 'Non renseigné' }} / 20
+                                                            @endforeach
+                                                        @endif
+                                                    </span>
                                                 </div>
                                                 <p>
-                                                    La cote finale calculée automatiquement n’est pas forcément la cote
-                                                    finale qui se trouvera dans le bulletin ok. La cote finale calculée
-                                                    automatiquement...
+                                                    @if($evaluationOfEvaluatorForEachStudent
+                                                            ->where('project_id', $project->project->id)
+                                                            ->where('contact_id', $student->contact->id)->isEmpty())
+                                                        Aucun commentaire n’a encore été enregistré jusqu’à présent pour ce projet.
+                                                    @else
+                                                        @foreach($evaluationOfEvaluatorForEachStudent
+                                                                ->where('project_id', $project->project->id)
+                                                                ->where('contact_id', $student->contact->id) as $test)
+                                                            {{ $test->comment ?? 'Aucun commentaire n’a encore été enregistré jusqu’à présent pour ce projet.' }}
+                                                        @endforeach
+                                                    @endif
                                                 </p>
                                             </li>
                                         @endforeach
                                     </ul>
                                 </li>
-                            @endfor
+                            @endforeach
                         @else
                             <p class="empty">
                                 Aucune cote n’a encore été enregistrée jusqu’à présent.
@@ -385,10 +427,11 @@
                 </div>
             @endif
             {{-- Action --}}
-            <div class="mainProfil__action">
+            <form class="mainProfil__action" wire:submit.prevent="editContactRole">
+                @csrf
                 <h4 class="title">Action</h4>
                 <button type="button" wire:click="editContactRole" class="button--gray">Changer le statut du profil</button>
-            </div>
+            </form>
         </div>
     </div>
 </div>
