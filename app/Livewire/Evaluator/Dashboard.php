@@ -7,16 +7,17 @@ use Livewire\Component;
 class Dashboard extends Component
 {
     public $events;
-
     public $contact;
 
     public function mount()
     {
-        $this->contact = auth()->user()->contacts()->findOrFail(request()->contact);
+        $this->contact = auth()->user()->contacts()
+            ->findOrFail(request()->contact);
 
         // Get all the events of the contact where he is an evaluator only
-        $this->events = $this->contact->events()
-            ->wherePivot('role', 'evaluator')
+        $this->events = auth()->user()->eventContacts()
+            ->where('role', 'evaluator')
+            ->where('contact_id', request()->contact)
             ->get();
     }
 

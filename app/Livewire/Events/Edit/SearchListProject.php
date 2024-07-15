@@ -37,7 +37,7 @@ class SearchListProject extends Component
             return;
         }
 
-        auth()->user()->projectPonderation()->create([
+        auth()->user()->projectPonderations()->create([
             'event_id' => $event->id,
             'project_id' => $project->id,
             'ponderation1' => 1,

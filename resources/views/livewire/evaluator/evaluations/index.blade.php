@@ -15,8 +15,6 @@
                 Sélectionnez un projet pour commencer l'évaluation.
             </p>
             <ul class="evaluationStart__list">
-
-                <!-- TODO: boucle foreach des projets -->
                 @foreach($projects as $project)
                     <li class="evaluationStart__list__item">
                         <a href="{{ route('events.evaluator-evaluation-edit' , [

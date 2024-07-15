@@ -9,17 +9,16 @@
 
     <!-- Main content -->
     <main class="mainEvaluatorDashboard">
-        {{-- List all the event of the evaluator / all the event attendances --}}
         <ul>
             @foreach($events as $event)
                 <li>
                     <a href="{{ route('events.evaluator-dashboard-event', [
-                            'event' => $event,
+                            'event' => $event->event,
                             'contact' => $contact->id,
-                            'token' => $event->pivot->token,
+                            'token' => $event->token
                         ]) }}" wire:navigate
                     >
-                        {{ $event->name }}
+                        {{ $event->id }} - {{ $event->event->name }}
                     </a>
                 </li>
             @endforeach

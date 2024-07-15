@@ -160,6 +160,7 @@
 
     .mainEvaluator {
         margin-top: 0;
+        padding: 0 2rem;
 
         .students__list {
             display: none;
@@ -261,10 +262,6 @@
             th.actions {
                 padding-right: 1.35rem;
             }
-        }
-
-        .pagination nav {
-            padding: 0 2rem;
         }
     }
 

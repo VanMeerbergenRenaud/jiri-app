@@ -24,15 +24,20 @@ class EvaluatorDashboard extends Component
 
     public $contact;
 
-    public function mount()
-    {
-        $this->event = auth()->user()->events()->findOrFail(request()->event);
+    public $evaluations;
 
-        // Find the evaluator contact
-        $this->contact = auth()->user()->contacts()->findOrFail(request()->contact);
+    public function mount($event, $contact)
+    {
+        $this->event = auth()->user()->events()
+            ->findOrFail($event);
+
+        $this->contact = auth()->user()->contacts()
+            ->findOrFail($contact);
 
         $this->projects = $this->event->projects;
         $this->students = $this->event->students;
+
+        $this->evaluations = null;
     }
 
     #[Computed]
@@ -40,10 +45,12 @@ class EvaluatorDashboard extends Component
     {
         return auth()->user()->eventContacts()
             ->join('contacts', 'event_contact.contact_id', '=', 'contacts.id')
-            ->where('event_id', $this->event->id)
-            ->where('role', 'student')
-            ->where('contacts.name', 'like', '%'.$this->search.'%')
-            ->orderBy('contacts.'.$this->sortField, $this->sortDirection)
+            ->where([
+                ['event_id', $this->event->id],
+                ['role', 'student'],
+                ['contacts.name', 'like', '%' . $this->search . '%'],
+            ])
+            ->orderBy("contacts.{$this->sortField}", $this->sortDirection)
             ->paginate(8);
     }
 

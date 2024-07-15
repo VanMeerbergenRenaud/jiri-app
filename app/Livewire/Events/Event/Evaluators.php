@@ -10,14 +10,12 @@ class Evaluators extends Component
 
     public function mount($event)
     {
-        $this->event = $event;
+        $this->event = auth()->user()->events()->findOrFail($event);
     }
 
     public function render()
     {
-        $event = auth()->user()->events()->findOrFail($this->event);
-
-        return view('livewire.events.event.evaluators', compact('event'))
+        return view('livewire.events.event.evaluators')
             ->layout('layouts.event-dashboard');
     }
 }

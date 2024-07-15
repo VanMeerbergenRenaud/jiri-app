@@ -71,7 +71,9 @@
                         <th>Présentation</th>
                         @foreach($projects as $project)
                             <td>
-                                <p>{{ $project->tasks ?? 'non mentionné' }}</p>
+                                @foreach($tasks as $task)
+                                    <span>{{ $task->name ?? 'non mentionné' }}</span> |
+                                @endforeach
                             </td>
                         @endforeach
                         <td>
@@ -82,11 +84,11 @@
                         <th>Status</th>
                         @foreach($projects as $project)
                             <td>
-                                {{ $project->status ?? 'non vu' }}
+                                {{ $project->evaluation->status ?? 'non vu' }}
                             </td>
                         @endforeach
                         <td>
-                            {{ $project->status ?? 'non vu' }}
+                            {{ $project->evaluation->status ?? 'non vu' }}
                         </td>
                     </tr>
                     <tr>

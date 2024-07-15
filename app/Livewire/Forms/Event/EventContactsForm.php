@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Forms;
+namespace App\Livewire\Forms\Event;
 
 use App\Models\EventContact;
 use Livewire\Attributes\Validate;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Forms;
+namespace App\Livewire\Forms\Event;
 
 use App\Models\ProjectPonderation;
 use Livewire\Attributes\Validate;
@@ -27,7 +27,7 @@ class ProjectPonderationForm extends Form
     {
         $this->validate();
 
-        auth()->user()->projectPonderation()->create([
+        auth()->user()->projectPonderations()->create([
             'ponderation1' => $this->ponderation1,
             'ponderation2' => $this->ponderation2,
         ]);

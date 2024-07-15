@@ -30,11 +30,11 @@
                         <ul>
                             <li>
                                 Visibilité
-                                <span>{{ 'Vu' ?? 'Non vu' }}</span>
+                                <span>{{ $evaluation->status ?? 'Non vu' }}</span>
                             </li>
                             <li>
                                 Temps d'activité
-                                <time>{{ '3h 10min' ?? '00:00' }}</time>
+                                <time>{{ $evaluation->timer ?? '00:00' }}</time>
                             </li>
                             <li>
                                 Projets
@@ -42,11 +42,11 @@
                             </li>
                             <li>
                                 Moyenne
-                                <span>{{ 'Modifier' ?? 'Commencer' }}</span>
+                                <span>{{ $evaluation->score ?? 'Commencer' }}</span>
                             </li>
                             <li>
                                 Cotes
-                                <span>{{ 'Publiées' ?? 'Non publiées' }}</span>
+                                <span>{{ $evaluation->status ?? 'Non publiées' }}</span>
                             </li>
                             <li>
                                 <a href="{{ route('events.evaluator-evaluation-start' , [
@@ -99,25 +99,96 @@
             <tbody wire:loading.class="opacity-50" class="table__students__tbody">
             @forelse ($this->studentFilter as $student)
                 <tr>
+                    @php
+                        $evaluations = auth()->user()->evaluatorsEvaluations()
+                            ->where('event_id', $this->event->id)
+                            ->where('contact_id', $this->contact->id)
+                            ->where('event_contact_id', $student->contact->id)
+                            ->get();
+                    @endphp
                     <td class="name capitalize">
                         <img src="{{ $student->contact->avatar ?? asset('img/placeholder.png') }}" alt="photo de profil du contact">
                         {{ $student->contact->name }}
                         {{ $student->contact->firstname }}
                     </td>
                     <td>
-                        {{ $student->visibility ?? 'Non vu' }}
+                        @php
+                            $allEvaluated = true;
+
+                            foreach($evaluations as $evaluation) {
+                                if($evaluation->status === 'not evaluated') {
+                                    $allEvaluated = false;
+                                    break;
+                                }
+                            }
+                        @endphp
+
+                        {{ $allEvaluated ? 'Évalué' : 'Non évalué' }}
                     </td>
                     <td>
-                        {{ $student->activity_time ?? '00:00' }}
+                        @php
+                            $totalSeconds = collect($evaluations)->map(function ($evaluation) {
+                                list($hours, $minutes, $seconds) = explode(':', $evaluation->timer ?? '00:00:00');
+                                return ($hours * 3600) + ($minutes * 60) + $seconds;
+                            })->sum();
+
+                            $hours = floor($totalSeconds / 3600);
+                            $minutes = floor(($totalSeconds % 3600) / 60);
+                            $seconds = $totalSeconds % 60;
+
+                            $dateTime = $hours . ':' . $minutes . ':' . $seconds;
+                            $dateTime = date('H:i:s', strtotime($dateTime));
+
+                            $formattedTotalTime = '';
+
+                            if ($totalSeconds >= 3600) {
+                                $formattedTotalTime = sprintf('%dh%02dmin', $hours, $minutes);
+                            } elseif ($totalSeconds > 0) {
+                                $formattedTotalTime = sprintf('%dmin', ($hours * 60) + $minutes);
+                            } else {
+                                $formattedTotalTime = '0';
+                            }
+
+                        @endphp
+
+                        <time datetime="{{ $dateTime }}">
+                            {{ $formattedTotalTime }}
+                        </time>
                     </td>
                     <td>
                         {{ $projects->count() ?? 0 }}
                     </td>
                     <td>
-                        {{ $student->evaluations ?? 'Commencer' }}
+                        @php
+                            $sumScores = 0;
+                            $countScores = 0;
+
+                            foreach($evaluations as $evaluation) {
+                                if (isset($evaluation->score)) {
+                                    $sumScores += $evaluation->score;
+                                    $countScores++;
+                                }
+                            }
+                            $averageScore = $countScores > 0
+                                ? ($sumScores / $countScores)
+                                : 0;
+                        @endphp
+
+                        {{ number_format($averageScore, 2) }} / 20
                     </td>
                     <td>
-                        {{ $student->gradesStatus ?? 'Non publiées' }}
+                        @php
+                            $allPublic = true;
+
+                            foreach($evaluations as $evaluation) {
+                                if($evaluation->public === 0) {
+                                    $allPublic = false;
+                                    break;
+                                }
+                            }
+                        @endphp
+
+                        {{ $allPublic ? 'Publié' : 'Non publié' }}
                     </td>
                     <td class="actions">
                         <a href="{{ route('events.evaluator-evaluation-start' , [
