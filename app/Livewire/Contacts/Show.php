@@ -6,14 +6,15 @@ use Livewire\Component;
 
 class Show extends Component
 {
-    public $contactId;
-
     public $contacts;
+    public $contact;
 
     public function mount($contact)
     {
-        $this->contactId = $contact;
         $this->contacts = auth()->user()->contacts;
+        $this->contact = auth()->user()->contacts()
+            ->with(['eventContacts.event', 'eventContacts.contact'])
+            ->findOrFail($contact);
     }
 
     public function redirectUser($contactId)
@@ -23,9 +24,7 @@ class Show extends Component
 
     public function render()
     {
-        $contact = auth()->user()->contacts()->findOrFail($this->contactId);
-
-        return view('livewire.contacts.show', compact('contact'))
+        return view('livewire.contacts.show')
             ->layout('layouts.app');
     }
 }

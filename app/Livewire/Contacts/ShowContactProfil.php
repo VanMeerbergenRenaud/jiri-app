@@ -3,6 +3,7 @@
 namespace App\Livewire\Contacts;
 
 use App\Livewire\Forms\ContactForm;
+use JetBrains\PhpStorm\NoReturn;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -13,14 +14,12 @@ class ShowContactProfil extends Component
 
     public $contact;
     public $contactType;
-
     public ContactForm $form;
-
     public $projects;
     public $evaluators;
     public $students;
-    public $evaluationOfEachEvaluatorForStudent;
-    public $evaluationOfEvaluatorForEachStudent;
+    public $evaluationsOfEvaluators;
+    public $evaluationsFromEvaluator;
 
     #[Validate('nullable|max:1000')]
     public $globalComment;
@@ -30,81 +29,137 @@ class ShowContactProfil extends Component
     public function mount($contact)
     {
         $this->contact = $contact;
-        $this->form->setContact($this->contact);
+        $this->form->setContact($contact);
 
-        $this->contactType = auth()->user()->eventContacts()
-            ->where('event_id', $this->contact->pivot->event_id)
-            ->where('contact_id', $contact->id)
+        $eventId = $this->contact->pivot->event_id;
+        $contactId = $this->contact->id;
+
+        $user = auth()->user();
+
+        // The contact type is the role of the contact in the event -> it's the profile of the contact
+        $this->contactType = $user->eventContacts()
+            ->where('event_id', $eventId)
+            ->where('contact_id', $contactId)
             ->first()
             ->role;
 
-       $this->projects = auth()->user()->projectPonderations()
+        $this->projects = $user->projectPonderations()
             ->with('project')
-            ->where('event_id', $this->contact->pivot->event_id)
+            ->where('event_id', $eventId)
             ->get();
 
-        // Get the global comment of the contact
-        $this->globalComment = auth()->user()->eventGlobalComments()
-            ->where('event_id', $this->contact->pivot->event_id)
-            ->where('contact_id', $this->contact->id)
+        $this->globalComment = $user->eventGlobalComments()
+            ->where('event_id', $eventId)
+            ->where('contact_id', $contactId)
             ->first()
-        ->globalComment;
+            ->globalComment ?? null;
 
-        /*
-         * Get the evaluators and students of the event
-        */
-        $this->evaluators = auth()->user()->eventContacts()
-            ->where('event_id', $this->contact->pivot->event_id)
-            ->where('role', 'evaluator')
-            ->get();
-
-        $this->students = auth()->user()->eventContacts()
-            ->where('event_id', $this->contact->pivot->event_id)
+        $this->students = $user->eventContacts()
+            ->where('event_id', $eventId)
             ->where('role', 'student')
             ->get();
 
-        /*
-         * Get the evaluations of all the evaluators that evaluated the student (student profil)
-        */
-        $this->evaluationOfEachEvaluatorForStudent = auth()->user()->evaluatorsEvaluations()
-            ->where('event_id', $this->contact->pivot->event_id)
-            //->where('event_contact_id', $this->contact->id)// // the evaluators
-            ->where('contact_id', $this->contact->id)// the student evaluated
-            //->where('status', 'evaluated')
+        $this->evaluators = $user->eventContacts()
+            ->where('event_id', $eventId)
+            ->where('role', 'evaluator')
             ->get();
 
-        /*
-         * Get the evaluations from an evaluator to all the student he evaluates (evaluator profil)
-        */
-        $this->evaluationOfEvaluatorForEachStudent = auth()->user()->evaluatorsEvaluations()
-            ->where('event_id', $this->contact->pivot->event_id)
-            //->where('contact_id', ?)// several contacts (students) evaluated by the same evaluator
-            ->where('event_contact_id', $this->contact->id) // the evaluator
-            //->where('status', 'evaluated')
+        // Get the evaluations of all the evaluators that evaluated the student (student profil)
+        $this->evaluationsOfEvaluators = $user->evaluatorsEvaluations()
+            ->where('event_id', $eventId)
+            ->where('contact_id', $contactId)
+            ->where('status', 'evaluated')
             ->get();
 
-        //dd($this->evaluationOfEvaluatorForEachStudent);
+        // Get the evaluations from an evaluator to all the student he evaluates (evaluator profil)
+        $this->evaluationsFromEvaluator = $user->evaluatorsEvaluations()
+            ->where('event_id', $eventId)
+            ->where('event_contact_id', $contactId)
+            ->where('status', 'evaluated')
+            ->get();
     }
 
     public function saveContact()
     {
         $this->form->update();
-
         $this->contact->refresh();
-
         $this->reset('showEditDialog');
     }
 
-    public function saveGlobalComment()
+    #[NoReturn] public function saveGlobalComment()
     {
-        $this->validate();
-
         dd('need to save the global comment of the contact');
     }
 
-    public function editContactRole()
+    #[NoReturn] public function editContactRole()
     {
         dd('need to change the role of the contact');
+    }
+
+    /*
+     * Evaluations:
+     * 1. Get the evaluations of a student by all the evaluators
+     * 2. Get the evaluations of an evaluator to all the students he evaluates
+    */
+
+    public function getProjectEvaluationsOfTheStudentS($project, $evaluator)
+    {
+        return $this->evaluationsOfEvaluators
+            ->where('project_id', $project->project->id)
+            ->where('event_contact_id', $evaluator->contact->id);
+    }
+
+    public function getProjectEvaluationsFromEvaluatorS($project, $student)
+    {
+        return $this->evaluationsFromEvaluator
+            ->where('project_id', $project->project->id)
+            ->where('contact_id', $student->contact->id);
+    }
+
+    /*
+     * Scores:
+     * 1. Calculate the total score, the number of evaluators and the average score
+     * 2. Calculate the average score of a project
+     * 3. Calculate the weighted score of a student
+    */
+    private function calculateScoreMetrics($projectId)
+    {
+        $projectEvaluations = $this->evaluationsOfEvaluators->where('project_id', $projectId);
+        $totalScore = $projectEvaluations->sum('score');
+        $evaluatorCount = $projectEvaluations->count('score');
+
+        return [
+            'totalScore' => $totalScore,
+            'evaluatorCount' => $evaluatorCount,
+            'averageScore' => $evaluatorCount > 0 ? ($totalScore / $evaluatorCount) : 0,
+        ];
+    }
+
+    public function calculateAverageScore($projectId)
+    {
+        $metrics = $this->calculateScoreMetrics($projectId);
+        return $metrics['evaluatorCount'] > 0 ? $metrics['averageScore'] : '?';
+    }
+
+    public function calculateWeightedScore($ponderationKey)
+    {
+        $totalWeightedScore = 0;
+        $totalPonderation = 0;
+
+        foreach ($this->projects as $project) {
+            $metrics = $this->calculateScoreMetrics($project->project->id);
+            $averageScore = $metrics['averageScore'];
+            $ponderation = $project->$ponderationKey;
+
+            $totalWeightedScore += $averageScore * ($ponderation / 100);
+            $totalPonderation += $ponderation;
+        }
+
+        $finalGrade = $totalPonderation > 0
+            ? ($totalWeightedScore / $totalPonderation) * 100
+            : 0;
+
+        return number_format($finalGrade, 2);
     }
 
     public function render()

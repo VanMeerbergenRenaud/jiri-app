@@ -16,7 +16,7 @@ class ContactForm extends Form
     #[Validate('required|min:3')]
     public string $firstname = '';
 
-    #[Validate('nullable|email')]
+    #[Validate('nullable|email|unique:contacts,email')]
     public $email = null;
 
     public $avatar = null;

@@ -14,7 +14,7 @@ class ProjectForm extends Form
     #[Validate('required|min:3|max:255')]
     public $description = '';
 
-    #[Validate('nullable')]
+    #[Validate('nullable|url')]
     public $url_readme = '';
 
     public Project $project;

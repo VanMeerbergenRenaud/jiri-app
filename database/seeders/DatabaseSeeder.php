@@ -21,13 +21,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $dominique = User::factory()
-            ->create([
-                'name' => 'Renaud Van Meerbergen',
-                'email' => 'renaud.vanmeerbergen@gmail.com',
-                'password' => bcrypt('password'),
-            ]);
-
         $renaud = User::factory()
             ->create([
                 'name' => 'Renaud Vmb',
@@ -42,7 +35,7 @@ class DatabaseSeeder extends Seeder
                 'password' => bcrypt('password'),
             ]);
 
-        $users = collect([$dominique, $renaud]);
+        $users = collect([$renaud]);
 
         foreach ($users as $user) {
             Event::factory()->count(32)->create([
@@ -78,11 +71,19 @@ class DatabaseSeeder extends Seeder
                         'event_id' => $event->id,
                         'contact_id' => $contact->id,
                     ]);
-                }
-            }
 
-            // ProjectPonderation for each event
-            foreach ($events as $event) {
+                    $projects = $user->projects->random(5);
+                    foreach ($projects as $project) {
+                        EvaluatorEvaluation::factory()->create([
+                            'event_id' => $event->id,
+                            'project_id' => $project->id,
+                            'contact_id' => $contact->id,
+                            'event_contact_id' => rand(1, 5),
+                    ]);
+                }
+                }
+
+                /* Projects */
                 $projects = $user->projects->random(5);
 
                 $totalPonderation1 = 0;
@@ -139,23 +140,6 @@ class DatabaseSeeder extends Seeder
 
                     foreach ($tasks as $task) {
                         $project->tasks()->attach($task->id);
-                    }
-                }
-            }
-
-            // Evaluations for each event
-            foreach ($events as $event) {
-                $contacts = $user->contacts->random(14);
-                $projects = $user->projects->random(5);
-
-                foreach ($contacts as $contact) {
-                    foreach ($projects as $project) {
-                        EvaluatorEvaluation::factory()->create([
-                            'event_id' => $event->id,
-                            'project_id' => $project->id,
-                            'contact_id' => $contact->id,
-                            'event_contact_id' => 26,
-                        ]);
                     }
                 }
             }
