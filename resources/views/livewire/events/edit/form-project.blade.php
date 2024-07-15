@@ -15,7 +15,6 @@
                         type="text"
                         placeholder="Ex : Portfolio"
                         model="name"
-                        :messages="$errors->get('name')"
                     />
                 </div>
 
@@ -27,7 +26,6 @@
                         type="text"
                         placeholder="Ex : Intégration"
                         model="tasks"
-                        :messages="$errors->get('tasks')"
                     />
                 </div>
 

@@ -7,7 +7,6 @@ use Livewire\Component;
 class ContactProfil extends Component
 {
     public $eventId;
-
     public $contactId;
 
     public function mount($event, $contact)
@@ -24,7 +23,6 @@ class ContactProfil extends Component
     public function render()
     {
         $event = auth()->user()->events()->findOrFail($this->eventId);
-
         $contact = $event->contacts()->findOrFail($this->contactId);
 
         return view('livewire.contacts.contact-profil', compact('event', 'contact'))

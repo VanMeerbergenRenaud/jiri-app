@@ -24,7 +24,6 @@
                 name="name"
                 placeholder="Sélectionner un autre profil -"
                 :options="$contacts"
-                :messages="$errors->get('name')"
                 srOnly="true"
                 wire:change="redirectUser($event.target.value)"
             />

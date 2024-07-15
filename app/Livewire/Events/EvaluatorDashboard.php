@@ -11,32 +11,25 @@ class EvaluatorDashboard extends Component
     use WithPagination;
 
     public $search = '';
-
     public $sortField = 'name';
-
     public $sortDirection = 'asc';
 
     public $event;
-
-    public $projects;
+    public $evaluator;
+    public $token;
 
     public $students;
-
-    public $contact;
-
+    public $projects;
     public $evaluations;
 
-    public function mount($event, $contact)
+    public function mount($event, $contact, $token)
     {
-        $this->event = auth()->user()->events()
-            ->findOrFail($event);
-
-        $this->contact = auth()->user()->contacts()
-            ->findOrFail($contact);
+        $this->event = auth()->user()->events()->findOrFail($event);
+        $this->evaluator = auth()->user()->contacts()->findOrFail($contact);
+        $this->token = $token;
 
         $this->projects = $this->event->projects;
         $this->students = $this->event->students;
-
         $this->evaluations = null;
     }
 

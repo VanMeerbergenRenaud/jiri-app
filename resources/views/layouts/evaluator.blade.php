@@ -10,12 +10,13 @@
         {{-- Title --}}
         <title>{{ $title ?? 'Dashboard évaluateur' }}</title>
 
+        <!-- Alpine -->
+        <script defer src="https://unpkg.com/@alpinejs/ui@3.13.2-beta.0/dist/cdn.min.js"></script>
+
         @livewireStyles
         @vite(['resources/css/app.scss', 'resources/js/app.js'])
     </head>
     <body>
-        <livewire:evaluator.header />
-
         <!-- Page Content -->
         {{ $slot }}
 

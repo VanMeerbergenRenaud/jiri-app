@@ -13,13 +13,21 @@
         <h2 role="heading" aria-level="2" class="sr-only">Menu de navigation pour un évaluateur</h2>
         <ol class="breadcrumb__list">
             <li class="breadcrumb__list__item">
-                <a href="#" class="breadcrumb__list__item__link">
+                <a href="{{ route('events.evaluator-dashboard', [
+                                'contact' => $evaluator,
+                    ]) }}"
+                   class="breadcrumb__list__item__link">
                     Mes épreuves
                 </a>
                 <x-svg.nav-arrow-right/>
             </li>
             <li class="breadcrumb__list__item">
-                <a href="#" class="breadcrumb__list__item__link">
+                <a href="{{ route('events.evaluator-dashboard-event', [
+                            'contact' => $evaluator,
+                            'event' => $event,
+                            'token' => $token
+                    ]) }}"
+                   class="breadcrumb__list__item__link">
                     Tableau de bord
                 </a>
                 <x-svg.nav-arrow-right/>

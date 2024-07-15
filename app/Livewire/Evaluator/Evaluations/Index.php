@@ -8,20 +8,18 @@ use Livewire\Component;
 class Index extends Component
 {
     public $event;
-    public $contact;
+    public $evaluator;
     public $token;
 
-    public $projects = null;
+    public $student;
+    public $projects;
 
-    public function mount($event, $contact, $token)
+    public function mount($event, $contact, $token, $student)
     {
-        $this->event = auth()->user()->events()
-            ->findOrFail($event);
-
-        $this->contact = $this->event->contacts()
-            ->findOrFail($contact);
-
+        $this->event = auth()->user()->events()->findOrFail($event);
+        $this->evaluator = auth()->user()->contacts()->findOrFail($contact);
         $this->token = $token;
+        $this->student = $this->event->contacts()->findOrFail($student);
 
         $this->projects = $this->event->projects;
     }

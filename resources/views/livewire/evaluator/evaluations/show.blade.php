@@ -1,11 +1,13 @@
 <div>
+    <livewire:evaluator.header :evaluator="$evaluator" :event="$event" />
+
     <main class="mainEvaluationSummary">
 
         {{-- Header --}}
         <div class="mainEvaluationSummary__header">
 
             {{-- Naviagtion & breadcrumb --}}
-            <x-evaluation-nav :event="$event" :contact="$contact" :token="$token"/>
+            <x-evaluation-nav :event="$event" :evaluator="$evaluator" :token="$token"/>
 
             {{-- Evaluation infos (status,timer) --}}
             <div class="evaluation-infos">
@@ -19,7 +21,7 @@
 
                 <span class="evaluation-infos__timer">
                     <x-svg.clock/>
-                    Temps passé avec l'étudiant&nbsp;:&nbsp;{{ $evaluation->time ?? '00h00' }}
+                    Temps passé avec l'étudiant&nbsp;:&nbsp;{{ $this->formatTimer($timer) ?? '00h00min' }}
                 </span>
             </div>
         </div>
@@ -28,8 +30,8 @@
         <section class="evaluationSummary">
            <h2 role="heading" aria-level="2" class="sr-only">Résumé des évaluations</h2>
             <div class="evaluationSummary__header">
-                <img src="{{ $contact->avatar ?? asset('img/placeholder.png') }}" alt="{{ $contact->name }}">
-                <p>{{ $contact->name }} {{ $contact->firstname }}</p>
+                <img src="{{ $student->avatar ?? asset('img/placeholder.png') }}" alt="{{ $student->name }}">
+                <p>{{ $student->name }} {{ $student->firstname }}</p>
             </div>
 
             <table class="evaluationSummary__table">
@@ -49,7 +51,9 @@
                         </th>
                         @foreach($projects as $project)
                             <td>
-                                <a href="{{ $project->link ?? '#' }}">{{ $project->url ?? 'non mentionné' }}</a>
+                                <a href="{{ $project->url_readme ?? '#' }}" target="_blank" title="Lien vers le projet descriptif">
+                                    {{ $project->url_readme ?? 'non mentionné' }}
+                                </a>
                             </td>
                         @endforeach
                         <td>
@@ -60,7 +64,9 @@
                         <th>Repo Github</th>
                         @foreach($projects as $project)
                             <td>
-                                <a href="{{ $project->repo ?? '#' }}">{{ $project->repo ?? 'non mentionné' }}</a>
+                                <a href="{{ $project->repo ?? '#' }}" target="_blank" title="Lien vers le repo Github">
+                                    {{ $project->repo ?? 'non mentionné' }}
+                                </a>
                             </td>
                         @endforeach
                         <td>
@@ -84,35 +90,94 @@
                         <th>Status</th>
                         @foreach($projects as $project)
                             <td>
-                                {{ $project->evaluation->status ?? 'non vu' }}
+                                {{ $info->where('project_id', $project->id)->first()->status ?? 'non vu' }}
                             </td>
                         @endforeach
                         <td>
-                            {{ $project->evaluation->status ?? 'non vu' }}
+                            @if($info->where('status', 'evaluated')->count() === $projects->count())
+                                <span class="status--evaluated">Tout vu</span>
+                            @else
+                                <span class="status--not-evaluated">Tout non vu</span>
+                            @endif
                         </td>
                     </tr>
                     <tr>
                         <th>Cote</th>
                         @foreach($projects as $project)
                             <td>
-                                <span>{{ $project->score ?? '?' }}</span>/20
+                                <span>{{ $info->where('project_id', $project->id)->first()->score ?? '?' }}</span> / 20
                             </td>
                         @endforeach
                         <td>
-                            <span>{{ $project->moyScore ?? '?' }}</span>/20
+                            @php
+                                $scoredProjects = $info->filter(function ($evaluation) {
+                                    return !is_null($evaluation->score);
+                                });
+
+                                $totalScore = $scoredProjects->sum('score');
+
+                                $globalCote = $scoredProjects->count() > 0
+                                    ? $totalScore / $scoredProjects->count()
+                                    : null;
+                            @endphp
+                            <span>{{ number_format($globalCote, 2) ?? '?' }}</span> / 20
                         </td>
                     </tr>
                     <tr>
                         <th>Commentaire</th>
                         @foreach($projects as $project)
                             <td class="comment">
-                                <p>{{ $project->comment ?? 'Aucun commentaire ajouté.' }}</p>
-                                <button type="submit" class="button--gray">Modifier</button>
+                                <p>{{ $info->where('project_id', $project->id)->first()->comment ?? 'Aucun commentaire ajouté.' }}</p>
+                                <a href="{{ route('events.evaluator-evaluation-edit' , [
+                                        'event' => $event,
+                                        'contact' => $evaluator,
+                                        'token' => $token,
+                                        'student' => $student,
+                                        'project' => $project,
+                                    ]) }}">Modifier</a>
                             </td>
                         @endforeach
                         <td class="comment">
-                            <p>{{ $project->globalComment ?? 'Aucun commentaire global ajouté.' }}</p>
-                            <button type="submit" class="button--gray">Modifier</button>
+                            <p>{{ $globalComment ?? 'Aucun commentaire global ajouté.' }}</p>
+                            <form wire:submit.prevent="updateGlobalComment">
+                                @csrf
+
+                                <x-dialog wire:model="show">
+                                    <x-dialog.open>
+                                        <button type="button" class="button--gray">
+                                            Modifier
+                                        </button>
+                                    </x-dialog.open>
+
+                                    <x-dialog.panel>
+                                        <div class="form__content">
+                                            <h2 class="title">Commentaire global</h2>
+                                            <p class="text">
+                                                Veuillez ajouter votre commentaire global pour <span class="bold">{{ $student->name }}</span>.
+                                            </p>
+                                            <x-form.textarea
+                                                label="Commentaire global"
+                                                name="globalComment"
+                                                model="globalComment"
+                                                placeholder="Ajouter un commentaire global"
+                                                srOnly="true"
+                                                maxlength="1000"
+                                                class="globalComment__textarea"
+                                            />
+                                        </div>
+
+                                        <x-dialog.footer>
+                                            <x-dialog.close>
+                                                <button type="button" class="cancel">Annuler</button>
+                                            </x-dialog.close>
+
+                                            <button wire:click="updateGlobalComment" class="save">
+                                                Enregistrer
+                                            </button>
+                                        </x-dialog.footer>
+                                    </x-dialog.panel>
+                                </x-dialog>
+                            </form>
                         </td>
                     </tr>
                 </tbody>
@@ -121,8 +186,8 @@
     </main>
 
     <footer class="footerEvaluator">
-        <p>Tableau de bord de {{ $evaluator->name ?? 'John Doe' }}</p>
+        <p>Tableau de bord de {{ $evaluator->name ?? 'Nom inconnu' }}</p>
         <p class="copyright">Copyright - Tous droits réservés</p>
-        <p>Épreuve - {{ $event->name ?? 'Épreuve du jour' }}</p>
+        <p>Épreuve - {{ $event->name ?? 'Épreuve non mentionnée' }}</p>
     </footer>
 </div>

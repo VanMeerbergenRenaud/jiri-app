@@ -58,4 +58,14 @@
             </form>
         </div>
     </div>
+    <div>
+        @if($commentSaved)
+            <x-notifications
+                icon="success"
+                title="Commentaire global modifié"
+                message="Le commentaire global a été modifié avec succès."
+                method="$set('saved', false)"
+            />
+        @endif
+    </div>
 </div>

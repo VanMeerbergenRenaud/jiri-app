@@ -4,7 +4,7 @@
     <div class="sectionHeader">
         <h3>Commentaire global</h3>
 
-        <x-dialog>
+        <x-dialog wire:model="showCommentDialog">
             <x-dialog.open>
                 <button type="button">
                     Editer
@@ -34,7 +34,8 @@
                         <button type="button" class="cancel">Annuler</button>
                     </x-dialog.close>
 
-                    <button type="button" wire:click="saveGlobalComment"
+                    <button type="button"
+                            wire:click="saveGlobalComment"
                             class="save">Enregistrer
                     </button>
                 </x-dialog.footer>

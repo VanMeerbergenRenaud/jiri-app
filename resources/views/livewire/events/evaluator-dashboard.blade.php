@@ -1,7 +1,9 @@
 <div>
+    <livewire:evaluator.header :evaluator="$evaluator" :event="$event" />
+
     <div class="header">
         <x-banner
-            :title="'Bonjour ' . $contact->name . ' 👋🏻.'  ??  'évaluateur 👋🏻.'"
+            :title="'Bonjour ' . $evaluator->name . ' 👋🏻.'  ??  'cher évaluateur 👋🏻.'"
             :message="'Choisissez un étudiant a évaluer.'"
         />
     </div>
@@ -51,8 +53,9 @@
                             <li>
                                 <a href="{{ route('events.evaluator-evaluation-start' , [
                                         'event' => $event,
-                                        'contact' => $student->contact->id,
-                                        'token' => $student->token
+                                        'contact' => $evaluator,
+                                        'token' => $token,
+                                        'student' => $student->contact
                                     ]) }}"
                                    class="students__list__content__link"
                                    wire:navigate
@@ -102,7 +105,7 @@
                     @php
                         $evaluations = auth()->user()->evaluatorsEvaluations()
                             ->where('event_id', $this->event->id)
-                            ->where('contact_id', $this->contact->id)
+                            ->where('contact_id', $this->evaluator->id)
                             ->where('event_contact_id', $student->contact->id)
                             ->get();
                     @endphp
@@ -193,8 +196,9 @@
                     <td class="actions">
                         <a href="{{ route('events.evaluator-evaluation-start' , [
                                 'event' => $event,
-                                'contact' => $student->contact->id,
-                                'token' => $student->token
+                                'contact' => $evaluator,
+                                'token' => $token,
+                                'student' => $student->contact
                             ]) }}"
                            class="students__list__content__link"
                            wire:navigate
@@ -220,9 +224,9 @@
     </main>
 
     <footer class="footerEvaluator">
-        <p>Tableau de bord de {{ $contact->name ?? 'John Doe' }}</p>
+        <p>Tableau de bord de {{ $evaluator->name ?? 'Nom inconnu' }}</p>
         <p class="copyright">Copyright - Tous droits réservés</p>
-        <p>Épreuve - {{ $event->name ?? 'Épreuve du jour' }}</p>
+        <p>Épreuve - {{ $event->name ?? 'Épreuve non mentionnée' }}</p>
     </footer>
 </div>
 

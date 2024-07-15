@@ -24,7 +24,7 @@
                         @php
                             $evaluationsOfEvaluator = $evaluationsOfEvaluators
                                 ->where('project_id', $project->project->id)
-                                ->where('event_contact_id', $evaluator->contact->id)
+                                ->where('contact_id', $evaluator->contact->id)
                         @endphp
                         <li class="jiriesComment__list__item__commentList__item">
                             <div>
@@ -52,6 +52,20 @@
                             </p>
                         </li>
                     @endforeach
+                    {{-- TODO: add global comment --}}
+                    <li class="jiriesComment__list__item__commentList__item">
+                        <div>
+                            <h3 class="font-semibold capitalize">
+                                Commentaire global
+                            </h3>
+                            <span>
+                                {{ '?' }} / 20
+                            </span>
+                        </div>
+                        <p>
+                            {{ 'Aucun commentaire global enregistré.' }}
+                        </p>
+                    </li>
                 </ul>
             </li>
         @endforeach

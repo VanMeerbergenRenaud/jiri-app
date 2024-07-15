@@ -48,7 +48,7 @@ class ShowEvents extends Component
         $event = auth()->user()->events()->findOrFail($eventId);
 
         $event->eventContacts()->delete();
-        $event->projectPonderation()->delete();
+        $event->projectPonderations()->delete();
 
         $event->delete();
 

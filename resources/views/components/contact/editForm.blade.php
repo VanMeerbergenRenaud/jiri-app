@@ -9,7 +9,6 @@
             model="form.name"
             placeholder="John"
             value="{{ $contact->name }}"
-            :messages="$errors->get('form.name')"
             autofocus
         />
 
@@ -20,7 +19,6 @@
             model="form.firstname"
             placeholder="Doe"
             value="{{ $contact->firstname }}"
-            :messages="$errors->get('form.firstname')"
         />
 
         <x-form.field
@@ -30,7 +28,6 @@
             model="form.email"
             placeholder="john.doe@gmail.com"
             value="{{ $contact->email }}"
-            :messages="$errors->get('form.email')"
         />
 
         <x-form.field
@@ -40,7 +37,6 @@
             model="form.avatar"
             placeholder="JPG, JPEG, PNG ou SVG (MAX 1024 ko)"
             value="{{ $contact->avatar }}"
-            :messages="$errors->get('form.avatar')"
         />
 
         @if($form->avatar instanceof \Illuminate\Http\UploadedFile)

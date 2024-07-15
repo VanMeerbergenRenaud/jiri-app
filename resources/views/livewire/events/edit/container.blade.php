@@ -11,7 +11,6 @@
                 type="text"
                 model="form.name"
                 placeholder="Nom de l'épreuve"
-                :messages="$errors->get('form.name')"
             />
 
             <x-form.field
@@ -22,7 +21,6 @@
                 min="2020-01-01T00:00"
                 max="2038-01-01T00:00"
                 placeholder="{{ now()->format('Y-m-d\TH:i') }}"
-                :messages="$errors->get('form.starting_at')"
             />
 
             <x-form.field
@@ -33,7 +31,6 @@
                 min="00:01:00"
                 max="23:59:00"
                 placeholder="00:00:00"
-                :messages="$errors->get('form.duration')"
             />
         </div>
 

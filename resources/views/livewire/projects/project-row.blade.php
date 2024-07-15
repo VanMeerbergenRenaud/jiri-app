@@ -73,34 +73,6 @@
                                     placeholder="https://example.com"
                                     value="{{ $project->url_readme }}"
                                 />
-
-                                {{--<x-form.field
-                                    label="Tâches"
-                                    name="tasks"
-                                    type="text"
-                                    model="form.tasks"
-                                    placeholder="Tâches à réaliser"
-                                    value="{{ $project->tasks }}"
-                                    :messages="$errors->get('tasks')"
-                                />--}}
-
-                                {{--<label for="tasks">Tâches</label>
-                                <ul>
-                                    @foreach (json_decode($project->tasks) as $task)
-                                        <li>{{ $task }}</li>
-                                    @endforeach
-                                </ul>
-                                <select
-                                    id="tasks"
-                                    multiple
-                                    name="tasks"
-                                    model="form.tasks"
-                                    placeholder="Tâches à réaliser"
-                                >
-                                    @foreach (json_decode($tasks) as $task)
-                                        <option value="{{ $task }}" selected>{{ $task }}</option>
-                                    @endforeach
-                                </select>--}}
                             </div>
 
                             <x-dialog.footer>

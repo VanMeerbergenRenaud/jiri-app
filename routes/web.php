@@ -88,15 +88,15 @@ Route::middleware('auth')->group(function () {
             ->name('evaluator-dashboard-event');
 
         // Route that let the evaluator start an evaluation
-        Route::get('/{event}/{contact}/{token}/evaluation-start', EEvaluatorEvaluationIndex::class)
+        Route::get('/{event}/{contact}/{token}/evaluation-start/{student}', EEvaluatorEvaluationIndex::class)
             ->name('evaluator-evaluation-start');
 
         // Route that let the evaluator start an evaluation
-        Route::get('/{event}/{contact}/{token}/evaluation-edit', EEvaluatorEvaluationEdit::class)
+        Route::get('/{event}/{contact}/{token}/evaluation-edit/{student}/{project}', EEvaluatorEvaluationEdit::class)
             ->name('evaluator-evaluation-edit');
 
         // Route that let the evaluator see the summary of the evaluations
-        Route::get('/{event}/{contact}/{token}/evaluation-summary', EEvaluatorEvaluationShow::class)
+        Route::get('/{event}/{contact}/{token}/evaluation-summary/{student}', EEvaluatorEvaluationShow::class)
             ->name('evaluator-evaluation-summary');
     });
 

@@ -13,6 +13,7 @@ class ShowContactProfil extends Component
     use WithFileUploads;
 
     public $contact;
+    public $event;
     public $contactType;
     public ContactForm $form;
     public $projects;
@@ -21,62 +22,69 @@ class ShowContactProfil extends Component
     public $evaluationsOfEvaluators;
     public $evaluationsFromEvaluator;
 
-    #[Validate('nullable|max:1000')]
+    #[Validate('nullable|min:3|max:1000')]
     public $globalComment;
 
     public $showEditDialog = false;
+    public $showCommentDialog = false;
+    public $commentSaved = false;
 
-    public function mount($contact)
+    public $evaluatorGlobalComment;
+    public $evaluatorGlobalCote;
+
+    public function mount($event, $contact)
     {
+        $this->event = $event;
         $this->contact = $contact;
+
         $this->form->setContact($contact);
 
-        $eventId = $this->contact->pivot->event_id;
-        $contactId = $this->contact->id;
-
-        $user = auth()->user();
-
         // The contact type is the role of the contact in the event -> it's the profile of the contact
-        $this->contactType = $user->eventContacts()
-            ->where('event_id', $eventId)
-            ->where('contact_id', $contactId)
+        $this->contactType = auth()->user()->eventContacts()
+            ->where('event_id', $this->event->id)
+            ->where('contact_id', $this->contact->id)
             ->first()
             ->role;
 
-        $this->projects = $user->projectPonderations()
+        $this->projects = auth()->user()->projectPonderations()
             ->with('project')
-            ->where('event_id', $eventId)
+            ->where('event_id', $this->event->id)
             ->get();
 
-        $this->globalComment = $user->eventGlobalComments()
-            ->where('event_id', $eventId)
-            ->where('contact_id', $contactId)
-            ->first()
-            ->globalComment ?? null;
-
-        $this->students = $user->eventContacts()
-            ->where('event_id', $eventId)
+        $this->students = auth()->user()->eventContacts()
+            ->where('event_id', $this->event->id)
             ->where('role', 'student')
             ->get();
 
-        $this->evaluators = $user->eventContacts()
-            ->where('event_id', $eventId)
+        $this->evaluators = auth()->user()->eventContacts()
+            ->where('event_id', $this->event->id)
             ->where('role', 'evaluator')
             ->get();
 
-        // Get the evaluations of all the evaluators that evaluated the student (student profil)
-        $this->evaluationsOfEvaluators = $user->evaluatorsEvaluations()
-            ->where('event_id', $eventId)
-            ->where('contact_id', $contactId)
+        /*
+         * Evaluations:
+         * 1. Get the evaluations of all the evaluators that evaluated the student (student profil)
+         * 2. Get the evaluations from an evaluator to all the student he evaluates (evaluator profil)
+         * 3. Get the global comment of the admin user for the student
+        */
+
+        $this->evaluationsOfEvaluators = auth()->user()->evaluatorsEvaluations()
+            ->where('event_id', $this->event->id)
+            ->where('event_contact_id', $this->contact->id)
             ->where('status', 'evaluated')
             ->get();
 
-        // Get the evaluations from an evaluator to all the student he evaluates (evaluator profil)
-        $this->evaluationsFromEvaluator = $user->evaluatorsEvaluations()
-            ->where('event_id', $eventId)
-            ->where('event_contact_id', $contactId)
+        $this->evaluationsFromEvaluator = auth()->user()->evaluatorsEvaluations()
+            ->where('event_id', $this->event->id)
+            ->where('contact_id', $this->contact->id)
             ->where('status', 'evaluated')
             ->get();
+
+        $this->globalComment = auth()->user()->eventGlobalComments()
+            ->where('event_id', $this->event->id)
+            ->where('contact_id', $this->contact->id)
+            ->first()
+            ->globalComment ?? null;
     }
 
     public function saveContact()
@@ -86,34 +94,29 @@ class ShowContactProfil extends Component
         $this->reset('showEditDialog');
     }
 
-    #[NoReturn] public function saveGlobalComment()
+    public function saveGlobalComment()
     {
-        dd('need to save the global comment of the contact');
+        $this->validate([
+            'globalComment' => 'nullable|min:3|max:1000'
+        ]);
+
+        auth()->user()->eventGlobalComments()
+            ->updateOrCreate(
+                [
+                    'event_id' => $this->event->id,
+                    'contact_id' => $this->contact->id
+                ],
+                ['globalComment' => $this->globalComment]
+            );
+
+        $this->reset('showCommentDialog');
+
+        $this->commentSaved = true;
     }
 
     #[NoReturn] public function editContactRole()
     {
         dd('need to change the role of the contact');
-    }
-
-    /*
-     * Evaluations:
-     * 1. Get the evaluations of a student by all the evaluators
-     * 2. Get the evaluations of an evaluator to all the students he evaluates
-    */
-
-    public function getProjectEvaluationsOfTheStudentS($project, $evaluator)
-    {
-        return $this->evaluationsOfEvaluators
-            ->where('project_id', $project->project->id)
-            ->where('event_contact_id', $evaluator->contact->id);
-    }
-
-    public function getProjectEvaluationsFromEvaluatorS($project, $student)
-    {
-        return $this->evaluationsFromEvaluator
-            ->where('project_id', $project->project->id)
-            ->where('contact_id', $student->contact->id);
     }
 
     /*

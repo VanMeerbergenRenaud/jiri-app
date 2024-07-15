@@ -6,11 +6,13 @@ use Livewire\Component;
 
 class Header extends Component
 {
-    public $contact;
+    public $event;
+    public $evaluator;
 
-    public function mount()
+    public function mount($event, $evaluator)
     {
-        $this->contact = auth()->user()->contacts()->findOrFail(request()->contact);
+        $this->event = $event;
+        $this->evaluator = $evaluator;
     }
 
     public function render()
