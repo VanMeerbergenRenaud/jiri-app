@@ -64,7 +64,7 @@
                 icon="add"
                 title="Contact ajouté avec succès !"
                 message="Vous avez ajouté un nouveau contact."
-                method="$set('saved', false)"
+                method="$set('added', false)"
             />
         @endif
     </div>

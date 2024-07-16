@@ -64,7 +64,7 @@
                 icon="success"
                 title="Commentaire global modifié"
                 message="Le commentaire global a été modifié avec succès."
-                method="$set('saved', false)"
+                method="$set('commentSaved', false)"
             />
         @endif
     </div>

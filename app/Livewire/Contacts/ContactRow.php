@@ -24,9 +24,7 @@ class ContactRow extends Component
     public function saveContact()
     {
         $this->form->update();
-
         $this->contact->refresh();
-
         $this->reset('showEditDialog');
     }
 

@@ -11,11 +11,14 @@
         </a>
 
         <!-- Title of the page -->
-        <h1 class="evaluator__header__title">{{ $evaluator->name ?? 'Tableau de bord principal' }}</h1>
+        <h1 class="evaluator__header__title">{{ __('Tableau de bord principal') }}</h1>
 
         <!-- Avatar of the evaluator -->
-        {{-- TODO : add a route for the evaluator profil so he can change his profile --}}
-        <img src="{{ $evaluator->avatar ?? asset('img/placeholder.png') }}" alt="profil de {{ $evaluator->name }}" class="evaluator__header__img">
+        {{-- TODO : add a modal for the evaluator profil so he can change his profile --}}
+        <img src="{{ $evaluator->avatar ?? asset('img/placeholder.png') }}"
+             alt="profil de {{ $evaluator->name }}"
+             class="evaluator__header__img"
+        >
     </header>
 
     <!-- Header -->
@@ -28,19 +31,36 @@
 
     <!-- Main content -->
     <main class="mainEvaluatorDashboard">
-        <ul>
+        <ul class="mainEvaluatorDashboard__list">
             @foreach($events as $event)
-                <li>
+                <li class="mainEvaluatorDashboard__list__item">
                     <a href="{{ route('events.evaluator-dashboard-event', [
                             'event' => $event->event,
                             'contact' => $evaluator,
                             'token' => $event->token
-                        ]) }}" wire:navigate
+                        ]) }}"
+                        class="mainEvaluatorDashboard__list__item__link"
+                        title="Vers le dashboard de l'épreuve {{ $event->event->name }}"
+                        wire:navigate
                     >
-                        {{ $event->id }} - {{ $event->event->name }}
+                        @php
+                            $date = Carbon\Carbon::parse($event->event->starting_at);
+                        @endphp
+                        <span><strong>Nom de l'épreuve</strong>: {{ $event->event->name }}</span>
+                        <span>
+                            <strong>Date de commencement</strong>: <time datetime="{{ $date->format('Y-m-d') }}">
+                                {{ $date->format('d/m/Y') }}
+                            </time>
+                        </span>
                     </a>
                 </li>
             @endforeach
         </ul>
     </main>
+
+    <footer class="footerEvaluator">
+        <p>Tableau de bord de {{ $evaluator->name ?? 'Nom inconnu' }}</p>
+        <p class="copyright">Copyright - Tous droits réservés</p>
+        <p>Épreuves de l'évaluateur</p>
+    </footer>
 </div>

@@ -6,8 +6,8 @@ use Livewire\Component;
 
 class Show extends Component
 {
-    public $contacts;
     public $contact;
+    public $contacts;
 
     public function mount($contact)
     {

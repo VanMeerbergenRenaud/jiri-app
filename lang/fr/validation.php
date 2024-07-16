@@ -188,7 +188,7 @@ return [
 
     'attributes' => [
         'name' => 'nom',
-        'first_name' => 'prénom',
+        'firstname' => 'prénom',
         'username' => 'nom d\'utilisateur',
         'email' => 'adresse email',
         'password' => 'mot de passe',

@@ -18,6 +18,7 @@ class Dashboard extends Component
         $this->events = auth()->user()->eventContacts()
             ->where('role', 'evaluator')
             ->where('contact_id', $this->evaluator->id)
+            ->orderBy('starting_at')
             ->get();
     }
 

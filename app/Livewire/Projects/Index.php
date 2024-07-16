@@ -6,11 +6,16 @@ use Livewire\Component;
 
 class Index extends Component
 {
+    public $projects;
+
+    public function mount()
+    {
+        $this->projects = auth()->user()->projects;
+    }
+
     public function render()
     {
-        $projects = auth()->user()->projects;
-
-        return view('livewire.projects.index', compact('projects'))
+        return view('livewire.projects.index')
             ->layout('layouts.app');
     }
 }

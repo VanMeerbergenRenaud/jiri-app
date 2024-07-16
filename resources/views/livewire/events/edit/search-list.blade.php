@@ -72,7 +72,7 @@
         <x-notifications
             icon="add"
             title="Contact ajouté à l'épreuve !"
-            method="$set('saved', false)"
+            method="$set('added', false)"
         />
     @endif
 </div>

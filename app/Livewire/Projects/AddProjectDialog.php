@@ -10,19 +10,13 @@ class AddProjectDialog extends Component
     public ProjectForm $form;
 
     public $show = false;
-
-    // public $tasks = [];
-
-    public function mount()
-    {
-        // $this->tasks = json_encode(auth()->user()->projects->pluck('tasks'));
-    }
+    public $added = false;
 
     public function add()
     {
         $this->form->save();
-
         $this->reset('show');
+        $this->added = true;
     }
 
     public function render()

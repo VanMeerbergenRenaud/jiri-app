@@ -11,14 +11,10 @@ class ShowContacts extends Component
     use WithPagination;
 
     public $search = '';
-
     public $sortField = 'name';
-
     public $sortDirection = 'asc';
 
-    // protected $queryString = ['sortField', 'sortDirection', 'perPage'];
-
-    public $saved = false;
+    public $deleted = false;
 
     #[Computed]
     public function contactFilter()
@@ -46,19 +42,17 @@ class ShowContacts extends Component
     {
         $contact = auth()->user()->contacts()->findOrFail($contactId);
 
-        $contact->events()->detach();
-
+        $contact->eventContacts()->delete();
         $contact->delete();
 
         sleep(1);
 
-        $this->saved = true;
+        $this->deleted = true;
     }
 
     public function render()
     {
         return view('livewire.contacts.show-contacts', [
-            'saved' => $this->saved,
             'sortField' => $this->sortField,
         ]);
     }

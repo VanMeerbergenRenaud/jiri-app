@@ -50,4 +50,15 @@
             </form>
         </x-dialog.panel>
     </x-dialog>
+
+    <div>
+        @if($added)
+            <x-notifications
+                icon="add"
+                title="Projet ajouté avec succès !"
+                message="Vous avez ajouté un nouveau projet."
+                method="$set('added', false)"
+            />
+        @endif
+    </div>
 </div>

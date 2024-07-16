@@ -14,7 +14,7 @@ class ShowEvents extends Component
 
     public $search = '';
 
-    public $saved = false;
+    public $deleted = false;
 
     private function getEvents($operator, $pageName)
     {
@@ -49,18 +49,15 @@ class ShowEvents extends Component
 
         $event->eventContacts()->delete();
         $event->projectPonderations()->delete();
-
         $event->delete();
 
         sleep(1);
 
-        $this->saved = true;
+        $this->deleted = true;
     }
 
     public function render()
     {
-        return view('livewire.events.show-events', [
-            'saved' => $this->saved,
-        ]);
+        return view('livewire.events.show-events');
     }
 }

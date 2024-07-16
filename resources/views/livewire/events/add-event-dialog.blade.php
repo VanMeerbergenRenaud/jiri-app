@@ -54,7 +54,7 @@
             <x-notifications
                 icon="add"
                 title="Épreuve ajoutée avec succès !"
-                method="$set('saved', false)"
+                method="$set('added', false)"
             />
         @endif
     </div>

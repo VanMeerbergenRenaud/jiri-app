@@ -11,8 +11,7 @@ class ShowProjects extends Component
     use WithPagination;
 
     public $search = '';
-
-    public $saved = false;
+    public $deleted = false;
 
     #[Computed]
     public function projectFilter()
@@ -27,11 +26,13 @@ class ShowProjects extends Component
     {
         $project = auth()->user()->projects()->findOrFail($projectId);
 
+        $project->tasks()->delete();
+        $project->projectPonderations()->delete();
         $project->delete();
 
         sleep(1);
 
-        $this->saved = true;
+        $this->deleted = true;
     }
 
     public function render()

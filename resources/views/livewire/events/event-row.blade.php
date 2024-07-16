@@ -59,44 +59,33 @@
                                 <div class="form__content">
                                     <h2 class="title">Modifier l'épreuve</h2>
 
-                                    <label>
-                                        Nom
-                                        <input
-                                            type="text"
-                                            name="name"
-                                            wire:model="form.name"
-                                            placeholder="Nom de l'épreuve"
-                                            autofocus
-                                            min="1"
-                                        >
-                                        @error('form.name')<div class="error">{{ $message }}</div>@enderror
-                                    </label>
+                                    <x-form.field
+                                        name="name"
+                                        label="Nom de l'épreuve"
+                                        type="text"
+                                        model="form.name"
+                                        placeholder="Ex : Jury juin {{ now()->year }}"
+                                    />
 
-                                    <label>
-                                        Date de début
-                                        <input
-                                            type="datetime-local"
-                                            name="starting_at"
-                                            wire:model="form.starting_at"
-                                            min="2020-01-01T00:00"
-                                            max="2038-01-01T00:00"
-                                            placeholder="JJ/MM/AAAA HH:MM"
-                                        />
-                                        @error('form.starting_at')<div class="error">{{ $message }}</div>@enderror
-                                    </label>
+                                    <x-form.field
+                                        label="Date de début"
+                                        name="starting_at"
+                                        type="datetime-local"
+                                        model="form.starting_at"
+                                        min="2020-01-01T00:00"
+                                        max="2038-01-01T00:00"
+                                        placeholder="{{ now()->format('Y-m-d\TH:i') }}"
+                                    />
 
-                                    <label>
-                                        Durée
-                                        <input
-                                            type="time"
-                                            name="duration"
-                                            wire:model="form.duration"
-                                            min="00:01:00"
-                                            max="23:59:59"
-                                            placeholder="HH:MM:SS"
-                                        />
-                                        @error('form.duration')<div class="error">{{ $message }}</div>@enderror
-                                    </label>
+                                    <x-form.field
+                                        label="Durée de l'épreuve"
+                                        name="duration"
+                                        type="time"
+                                        model="form.duration"
+                                        min="00:01:00"
+                                        max="23:59:00"
+                                        placeholder="00:00:00"
+                                    />
                                 </div>
 
                                 <x-dialog.footer>
