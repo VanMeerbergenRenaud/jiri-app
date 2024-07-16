@@ -48,8 +48,8 @@ class Edit extends Component
             ])->first();
 
         $this->timer = $evaluation->timer ?? null;
-        $this->status = $evaluation->status ?? 'null';
-        $this->score = $evaluation->score ?? null;
+        $this->status = $evaluation->status ?? 'not evaluated';
+        $this->score = $evaluation->score ?? '0';
         $this->comment = $evaluation->comment ?? null;
     }
 

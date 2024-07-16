@@ -20,8 +20,27 @@
                 </select>
 
                 <span class="evaluation-infos__timer">
+                    @php
+                        // Récupérer les évaluations associées à l'étudiant
+                        $infos = $info->where('event_contact_id', $student->id);
+
+                        // Calculer le temps total en secondes avec la fonction sum de Laravel
+                        $totalSeconds = $infos->sum(function ($evaluation) {
+                            list($hours, $minutes, $seconds) = explode(':', $evaluation->timer ?? '00:00:00');
+                            return ($hours * 3600) + ($minutes * 60) + $seconds;
+                        });
+
+                        // Convertir le temps total en heures, minutes et secondes
+                        $hours = floor($totalSeconds / 3600);
+                        $minutes = floor(($totalSeconds % 3600) / 60);
+                        $seconds = $totalSeconds % 60;
+
+                        // Formater en 00:00:00
+                        $formattedTime = sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);
+                    @endphp
+
                     <x-svg.clock/>
-                    Temps passé avec l'étudiant&nbsp;:&nbsp;{{ $this->formatTimer($timer) ?? '00h00min' }}
+                    Temps passé avec l'étudiant&nbsp;:&nbsp;<time datetime="{{ $formattedTime }}">{{ $formattedTime }}</time>
                 </span>
             </div>
         </div>
@@ -90,7 +109,14 @@
                         <th>Status</th>
                         @foreach($projects as $project)
                             <td>
-                                {{ $info->where('project_id', $project->id)->first()->status ?? 'non vu' }}
+                                @php
+                                    $evaluation = $info->firstWhere('project_id', $project->id);
+                                @endphp
+                                @if($evaluation && $evaluation->status === 'evaluated')
+                                    Vu
+                                @else
+                                    Non vu
+                                @endif
                             </td>
                         @endforeach
                         <td>

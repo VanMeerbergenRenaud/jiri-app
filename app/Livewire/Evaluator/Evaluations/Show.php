@@ -34,24 +34,15 @@ class Show extends Component
 
         $this->projects = $this->event->projects;
 
-        // These are the task related to a project in the event
         $this->tasks = $this->projects->first()->tasks;
 
-        // This is the global comment of the evaluator
         $this->globalComment = auth()->user()->evaluatorGlobalComments()
             ->where('event_id', $this->event->id)
             ->where('contact_id', $this->student->id)
             ->first()
             ->globalComment ?? null;
 
-        // Timer -> somme de tous les timers des évaluations
-        $this->timer = auth()->user()->evaluatorsEvaluations()
-            ->where('event_id', $this->event->id)
-            ->where('contact_id', $this->evaluator->id)
-            ->where('event_contact_id', $this->student->id)
-            ->sum('timer');
-
-        // Status
+        // Status, score, comment, timer
         $this->info = auth()->user()->evaluatorsEvaluations()
             ->where('event_id', $this->event->id)
             ->where('contact_id', $this->evaluator->id)
@@ -75,23 +66,6 @@ class Show extends Component
         ]);
 
         $this->show = false;
-    }
-
-    protected function formatTimer($timer)
-    {
-        $hours = intval(substr($timer, 0, 2));
-        $minutes = intval(substr($timer, 2, 2));
-        $seconds = intval(substr($timer, 4, 2));
-
-        if ($hours >= 24) {
-            $days = intdiv($hours, 24);
-            $hours = $hours % 24;
-            $formattedTime = "{$days}j{$hours}h{$minutes}min";
-        } else {
-            $formattedTime = "{$hours}h{$minutes}min{$seconds}s";
-        }
-
-        return $formattedTime;
     }
 
     public function render()

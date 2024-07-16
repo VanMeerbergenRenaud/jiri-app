@@ -9,6 +9,7 @@
     </div>
 
     <main class="mainEvaluator p-main">
+
         <label class="search" for="search">
             @include('components.svg.search')
             <input type="text" name="search" id="search" wire:model.live.debounce="search" placeholder="Rechercher un étudiant...">
@@ -17,6 +18,13 @@
         {{-- Mobile --}}
         <ul class="students__list">
             @forelse($this->studentFilter as $student)
+                @php
+                    $evaluations = auth()->user()->evaluatorsEvaluations()
+                        ->where('event_id', $this->event->id)
+                        ->where('contact_id', $this->evaluator->id)
+                        ->where('event_contact_id', $student->contact->id)
+                        ->get();
+                @endphp
                 <li x-data="{ open: false, isSelected: false }">
                     <div class="students__list__item" :class="{ 'isSelected': isSelected }" @click="open = !open; isSelected = !isSelected">
                         <div class="students__list__item__infos">
@@ -32,11 +40,40 @@
                         <ul>
                             <li>
                                 Visibilité
-                                <span>{{ $evaluation->status ?? 'Non vu' }}</span>
+                                @php
+                                    $allEvaluated = true;
+
+                                    foreach($evaluations as $evaluation) {
+                                        if($evaluation->status === 'not evaluated') {
+                                            $allEvaluated = false;
+                                            break;
+                                        }
+                                    }
+                                @endphp
+
+                                <span>{{ $allEvaluated ? 'Évalué' : 'Non évalué' }}</span>
                             </li>
                             <li>
                                 Temps d'activité
-                                <time>{{ $evaluation->timer ?? '00:00' }}</time>
+                                @php
+                                    $totalSeconds = $evaluations->sum(function ($evaluation) {
+                                        list($hours, $minutes, $seconds) = explode(':', $evaluation->timer ?? '00:00:00');
+                                        return ($hours * 3600) + ($minutes * 60) + $seconds;
+                                    });
+
+                                    $hours = floor($totalSeconds / 3600);
+                                    $minutes = floor(($totalSeconds % 3600) / 60);
+
+                                    $formattedTotalTime = $totalSeconds >= 3600
+                                        ? sprintf('%dh%02dmin', $hours, $minutes)
+                                        : ($totalSeconds > 0
+                                            ? sprintf('%dmin', ($hours * 60) + $minutes)
+                                            : '0');
+                                @endphp
+
+                                <time datetime="{{ sprintf('%02d:%02d', $hours, $minutes) }}">
+                                    {{ $formattedTotalTime }}
+                                </time>
                             </li>
                             <li>
                                 Projets
@@ -44,11 +81,28 @@
                             </li>
                             <li>
                                 Moyenne
-                                <span>{{ $evaluation->score ?? 'Commencer' }}</span>
+                                @php
+                                    $sumScores = $evaluations->sum('score');
+                                    $countScores = $evaluations->count();
+                                    $averageScore = $countScores > 0 ? ($sumScores / $countScores) : 0;
+                                @endphp
+
+                                <span>{{ number_format($averageScore, 2) }} / 20</span>
                             </li>
                             <li>
                                 Cotes
-                                <span>{{ $evaluation->status ?? 'Non publiées' }}</span>
+                                @php
+                                    $allPublic = true;
+
+                                    foreach($evaluations as $evaluation) {
+                                        if($evaluation->public === 0) {
+                                            $allPublic = false;
+                                            break;
+                                        }
+                                    }
+                                @endphp
+
+                                <span>{{ $allPublic ? 'Publié' : 'Non publié' }}</span>
                             </li>
                             <li>
                                 <a href="{{ route('events.evaluator-evaluation-start' , [
@@ -77,38 +131,28 @@
         <table class="table__students">
             <thead class="table__students__thead">
             <tr x-data="{ open: false }">
-                <th @click="open = !open" wire:click="sortBy('name')">
+                <th @click="open = !open" wire:click="sortByDirection">
                     Nom <x-svg.arrow-down />
                 </th>
-                <th @click="open = !open" wire:click="sortBy('visibility')">
-                    Visibilité <x-svg.arrow-down />
-                </th>
-                <th @click="open = !open" wire:click="sortBy('activity_time')">
-                    Temps d'activité <x-svg.arrow-down />
-                </th>
-                <th @click="open = !open" wire:click="sortBy('projects')">
-                    Projets <x-svg.arrow-down />
-                </th>
-                <th @click="open = !open" wire:click="sortBy('evaluations')">
-                    Moyenne <x-svg.arrow-down />
-                </th>
-                <th @click="open = !open" wire:click="sortBy('gradesStatus')">
-                    Cotes <x-svg.arrow-down />
-                </th>
+                <th>Visibilité</th>
+                <th>Temps d'activité</th>
+                <th>Projets</th>
+                <th>Moyenne</th>
+                <th>Cotes</th>
                 <th class="actions">Actions</th>
             </tr>
             </thead>
 
             <tbody wire:loading.class="opacity-50" class="table__students__tbody">
             @forelse ($this->studentFilter as $student)
+                @php
+                    $evaluations = auth()->user()->evaluatorsEvaluations()
+                        ->where('event_id', $this->event->id)
+                        ->where('contact_id', $this->evaluator->id)
+                        ->where('event_contact_id', $student->contact->id)
+                        ->get();
+                @endphp
                 <tr>
-                    @php
-                        $evaluations = auth()->user()->evaluatorsEvaluations()
-                            ->where('event_id', $this->event->id)
-                            ->where('contact_id', $this->evaluator->id)
-                            ->where('event_contact_id', $student->contact->id)
-                            ->get();
-                    @endphp
                     <td class="name capitalize">
                         <img src="{{ $student->contact->avatar ?? asset('img/placeholder.png') }}" alt="photo de profil du contact">
                         {{ $student->contact->name }}
@@ -125,36 +169,26 @@
                                 }
                             }
                         @endphp
-
                         {{ $allEvaluated ? 'Évalué' : 'Non évalué' }}
                     </td>
                     <td>
                         @php
-                            $totalSeconds = collect($evaluations)->map(function ($evaluation) {
+                            $totalSeconds = $evaluations->sum(function ($evaluation) {
                                 list($hours, $minutes, $seconds) = explode(':', $evaluation->timer ?? '00:00:00');
                                 return ($hours * 3600) + ($minutes * 60) + $seconds;
-                            })->sum();
+                            });
 
                             $hours = floor($totalSeconds / 3600);
                             $minutes = floor(($totalSeconds % 3600) / 60);
-                            $seconds = $totalSeconds % 60;
 
-                            $dateTime = $hours . ':' . $minutes . ':' . $seconds;
-                            $dateTime = date('H:i:s', strtotime($dateTime));
-
-                            $formattedTotalTime = '';
-
-                            if ($totalSeconds >= 3600) {
-                                $formattedTotalTime = sprintf('%dh%02dmin', $hours, $minutes);
-                            } elseif ($totalSeconds > 0) {
-                                $formattedTotalTime = sprintf('%dmin', ($hours * 60) + $minutes);
-                            } else {
-                                $formattedTotalTime = '0';
-                            }
-
+                            $formattedTotalTime = $totalSeconds >= 3600
+                                ? sprintf('%dh%02dmin', $hours, $minutes)
+                                : ($totalSeconds > 0
+                                    ? sprintf('%dmin', ($hours * 60) + $minutes)
+                                    : '0');
                         @endphp
 
-                        <time datetime="{{ $dateTime }}">
+                        <time datetime="{{ sprintf('%02d:%02d', $hours, $minutes) }}">
                             {{ $formattedTotalTime }}
                         </time>
                     </td>
@@ -163,18 +197,9 @@
                     </td>
                     <td>
                         @php
-                            $sumScores = 0;
-                            $countScores = 0;
-
-                            foreach($evaluations as $evaluation) {
-                                if (isset($evaluation->score)) {
-                                    $sumScores += $evaluation->score;
-                                    $countScores++;
-                                }
-                            }
-                            $averageScore = $countScores > 0
-                                ? ($sumScores / $countScores)
-                                : 0;
+                            $sumScores = $evaluations->sum('score');
+                            $countScores = $evaluations->count();
+                            $averageScore = $countScores > 0 ? ($sumScores / $countScores) : 0;
                         @endphp
 
                         {{ number_format($averageScore, 2) }} / 20

@@ -60,13 +60,13 @@
                     </li>
                     <li class="evaluationEdit__list__item">
                         <label for="eventReview" class="label">Cote du projet</label>
-                        <div class="eventReview" x-data="{ score: 0 }">
-                            <select name="eventReview" id="eventReview" x-model="score" wire:model.blur="score">
+                        <div class="eventReview">
+                            <select name="eventReview" id="eventReview" wire:model="score">
                                 <option disabled selected value="">Choisir une appréciation</option>
                                 <option value="0">A besoin d'un miracle</option>
                                 <option value="2">Peut mieux faire</option>
-                                <option value="4">Pas mal du tout</option>
-                                <option value="6">Pas fou fou</option>
+                                <option value="4">Pas fou fou</option>
+                                <option value="6">Pas mauvais</option>
                                 <option value="8">On sent un effort</option>
                                 <option value="10">Travail honnête</option>
                                 <option value="12">Belle tentative</option>
@@ -76,11 +76,7 @@
                                 <option value="20">Chef-d'œuvre</option>
                             </select>
                             <span class="eventReview__score">
-                                <input type="text"
-                                       x-model="score"
-                                       wire:model.blur="score"
-                                       value="{{ $score ?? '0' }}"
-                                />/ 20
+                                <input type="text" wire:model="score"/>/ 20
                             </span>
                         </div>
                         @error('score')
