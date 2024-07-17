@@ -25,7 +25,7 @@
                                 <button type="button"
                                         @click="
                                             selectedContactId = {{ $contact->id }};
-                                            selectedEventId = {{ $eventId }}"
+                                            selectedEventId = {{ $event }}"
                                 >
                                     Ajouter
                                 </button>

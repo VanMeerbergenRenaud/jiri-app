@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Events\Edit;
 
-use App\Models\Contact;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -13,31 +12,33 @@ use Livewire\Component;
 */
 class Form extends Component
 {
-    #[Validate('required|min:3')]
+    #[Validate('required|min:3|max:50')]
     public $name;
 
-    #[Validate('required|min:3')]
+    #[Validate('required|min:3|max:50')]
     public $firstname;
 
+    #[Validate('email|nullable')]
     public $email;
 
+    #[Validate('required|in:student,evaluator')]
     public $role = 'student';
 
     public $saved = false;
 
-    public $eventId;
+    public $event;
 
-    public function mount()
+    public function mount($event)
     {
-        $this->eventId = request()->route('event');
+        $this->event = $event;
     }
 
     public function addContactToEvent()
     {
         // Validate the form data
         $this->validate([
-            'name' => 'required|min:3',
-            'firstname' => 'required|min:3',
+            'name' => 'required|min:3|max:50',
+            'firstname' => 'required|min:3|max:50',
             'email' => 'email|nullable',
             'role' => 'required|in:student,evaluator',
         ]);
@@ -52,7 +53,7 @@ class Form extends Component
         // Create a new event contact with a random token
         auth()->user()->eventContacts()->create([
             'contact_id' => $contact->id,
-            'event_id' => $this->eventId,
+            'event_id' => $this->event->id,
             'role' => $this->role,
             'token' => Str::random(64),
         ]);

@@ -73,8 +73,8 @@
                                  "
                         >
 
-                            <livewire:events.edit.search-list :eventId="$event->id" />
-                            <livewire:events.edit.form />
+                            <livewire:events.edit.search-list :event="$event" />
+                            <livewire:events.edit.form :event="$event" />
 
                             {{-- Button to edit a new contact --}}
                             <button type="button"
@@ -89,7 +89,7 @@
                 </div>
 
                 {{-- Added contacts --}}
-                <livewire:events.edit.added-list :eventId="$event->id" />
+                <livewire:events.edit.added-list :event="$event" />
             </div>
 
             {{-- Label & select to edit a project in the database --}}
@@ -125,8 +125,8 @@
                         {{-- SearchList & Form --}}
                         <div class="filter__contacts" x-data="{createmode: false}">
 
-                            <livewire:events.edit.search-list-project :eventId="$event->id" />
-                            <livewire:events.edit.form-project />
+                            <livewire:events.edit.search-list-project :event="$event" />
+                            <livewire:events.edit.form-project :event="$event" />
 
                             {{-- Button to edit a new contact --}}
                             <button type="button"
@@ -140,7 +140,7 @@
                 </div>
 
                 {{-- Added projects --}}
-                <livewire:events.edit.added-list-project :eventId="$event->id" />
+                <livewire:events.edit.added-list-project :event="$event" />
             </div>
         </div>
 

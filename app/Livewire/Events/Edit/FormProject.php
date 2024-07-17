@@ -6,7 +6,12 @@ use Livewire\Component;
 
 class FormProject extends Component
 {
-    public $eventId;
+    public $event;
+
+    public function mount($event)
+    {
+        $this->event = $event;
+    }
 
     public function save()
     {

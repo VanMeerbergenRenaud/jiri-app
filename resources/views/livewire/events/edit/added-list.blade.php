@@ -1,4 +1,12 @@
 {{-- AddedList of contacts --}}
+@php
+    $roleTranslations = [
+        'student' => 'Étudiant',
+        'evaluator' => 'Évaluateur',
+    ];
+    $students = $eventContactsList->where('role', 'student');
+    $evaluators = $eventContactsList->where('role', 'evaluator');
+@endphp
 <div class="form__component__added">
     <p>Contacts ajoutés</p>
     @if(count($eventContactsList) > 0)

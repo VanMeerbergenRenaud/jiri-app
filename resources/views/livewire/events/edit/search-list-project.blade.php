@@ -38,4 +38,12 @@
             <p class="no-contact">Aucun project trouvé.</p>
         @endunless
     </div>
+
+    @if($added)
+        <x-notifications
+            icon="add"
+            title="Projet ajouté à l'épreuve !"
+            method="$set('added', false)"
+        />
+    @endif
 </div>

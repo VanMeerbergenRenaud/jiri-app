@@ -9,24 +9,21 @@ use Livewire\Component;
 
 class SearchList extends Component
 {
-    public $eventId;
-
+    public $event;
     public $username = '';
 
     public $show = false;
-
     public $added = false;
 
-    public $roles = [
-        'student' => 'Étudiant',
-        'evaluator' => 'Évaluateur',
-    ];
+    public function mount($event)
+    {
+        $this->event = $event;
+    }
 
     #[Computed]
     public function searchList()
     {
-        $event = auth()->user()->events()->findOrFail($this->eventId);
-        $existingContactIds = $event->contacts()->pluck('contacts.id');
+        $existingContactIds = $this->event->contacts->pluck('id');
 
         return $this->username
             ? auth()->user()->contacts()
@@ -39,12 +36,11 @@ class SearchList extends Component
 
     public function addContact($contactId, $role)
     {
-        $event = auth()->user()->events()->findOrFail($this->eventId);
         $contact = auth()->user()->contacts()->findOrFail($contactId);
 
-        if (! $event->contacts()->where('contact_id', $contact->id)->exists()) {
+        if (! $this->event->contacts()->where('contact_id', $contact->id)->exists()) {
             auth()->user()->eventContacts()->create([
-                'event_id' => $event->id,
+                'event_id' => $this->event->id,
                 'contact_id' => $contactId,
                 'role' => $role,
                 'token' => Str::random(64),

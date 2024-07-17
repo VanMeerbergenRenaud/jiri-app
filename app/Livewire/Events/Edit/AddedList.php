@@ -9,54 +9,40 @@ use Livewire\Component;
 
 class AddedList extends Component
 {
-    public $eventId;
+    public $event;
 
     public Collection $eventContactsList;
 
-    public function mount()
+    public function mount($event)
     {
+        $this->event = $event;
         $this->fetchEventContacts();
     }
 
     #[On('fetchEventContacts')]
     public function fetchEventContacts()
     {
-        $event = auth()->user()->events()->find($this->eventId);
-        $this->eventContactsList = $event->eventContacts;
+        $this->eventContactsList = $this->event->eventContacts;
     }
 
-    public function removeContact(EventContact $eventContacts)
+    public function removeContact(EventContact $eventContact)
     {
-        $eventContacts->delete();
+        $eventContact->delete();
 
         $this->dispatch('fetchEventContacts');
     }
 
-    public function exchangeRole($eventContactId)
+    public function exchangeRole(EventContact $eventContact)
     {
-        $eventContact = auth()->user()->events()->find($this->eventId)->eventContacts()->find($eventContactId);
-
-        $eventContact->role = $eventContact->role === 'student' ? 'evaluator' : 'student';
+        $eventContact->role = ($eventContact->role === 'student') ? 'evaluator' : 'student';
 
         $eventContact->save();
 
-        $this->dispatch('fetchEventContacts');
+        $this->fetchEventContacts();
     }
 
     public function render()
     {
-        $students = $this->eventContactsList->filter(function ($eventContact) {
-            return $eventContact->role == 'student';
-        });
-        $evaluators = $this->eventContactsList->filter(function ($eventContact) {
-            return $eventContact->role == 'evaluator';
-        });
-
-        $roleTranslations = [
-            'student' => 'étudiant',
-            'evaluator' => 'évaluateur',
-        ];
-
-        return view('livewire.events.edit.added-list', compact('students', 'evaluators', 'roleTranslations'));
+        return view('livewire.events.edit.added-list');
     }
 }

@@ -13,6 +13,7 @@ class Container extends Component
 
     public function mount()
     {
+        $this->event = auth()->user()->events()->findOrFail(request()->route('event'));
         $this->form->setEvent($this->event);
     }
 

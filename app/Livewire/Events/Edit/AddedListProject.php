@@ -10,29 +10,25 @@ use Livewire\Component;
 
 class AddedListProject extends Component
 {
-    public $eventId;
+    public $event;
 
     public Collection $projectsList;
 
-    public function mount()
+    public function mount($event)
     {
+        $this->event = $event;
         $this->fetchEventProjects();
     }
 
     #[On('fetchEventProjects')]
     public function fetchEventProjects()
     {
-        $event = auth()->user()->events()->findOrFail($this->eventId);
-        $this->projectsList = $event->projects;
+        $this->projectsList = $this->event->projectPonderations;
     }
 
-    public function removeProject(Project $project)
+    public function removeProject(ProjectPonderation $projectPonderation)
     {
-        $eventProject = ProjectPonderation::where('event_id', $this->eventId)
-            ->where('project_id', $project->id)
-            ->firstOrFail();
-
-        $eventProject->delete();
+        $projectPonderation->delete();
 
         $this->dispatch('fetchEventProjects');
     }
