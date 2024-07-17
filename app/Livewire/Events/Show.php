@@ -7,7 +7,6 @@ use Livewire\Component;
 class Show extends Component
 {
     public $eventId;
-
     public $event;
 
     public function mount($event)

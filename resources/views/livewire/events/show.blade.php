@@ -1,5 +1,4 @@
 <div>
-
     {{--
         Changer le layout et créer une nouvelle page avec une nouvelle navigation
         pour afficher les détails de l'évènement en cours.
@@ -53,4 +52,10 @@
             <livewire:events.show.second-table />
         </div>
     </main>
+
+    <footer class="footerEvent">
+        <p>Tableau de bord de {{ auth()->user()->name ?? 'John Doe' }}</p>
+        <p class="copyright">Copyright - Tous droits réservés</p>
+        <p>Épreuve - {{ $event->name ?? 'Épreuve du jour' }}</p>
+    </footer>
 </div>

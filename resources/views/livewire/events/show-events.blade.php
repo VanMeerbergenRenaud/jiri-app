@@ -1,8 +1,13 @@
 <div>
-    <label class="search w-full" for="search">
-        @include('components.svg.search')
-        <input type="text" name="search" id="search" wire:model.live.debounce="search" placeholder="Rechercher une épreuve...">
-    </label>
+    @if($events->isEmpty())
+        <div class="empty-event">
+            <p>Aucune épreuve n'a encore été créée jusqu'à présent.</p>
+        </div>
+    @else
+        <label class="search w-full" for="search">
+            @include('components.svg.search')
+            <input type="text" name="search" id="search" wire:model.live.debounce="search" placeholder="Rechercher une épreuve...">
+        </label>
 
     <div wire:loading.class.delay="opacity-50" class="events__list">
         @unless($this->pastEvents || $this->currentEvents || $this->futureEvents)
@@ -64,7 +69,7 @@
             @endif
         @endunless
 
-        
+
             {{--@if($events->isEmpty() ||
                 $availableEvent->isEmpty() &&
                 $currentEvent->isEmpty() &&
@@ -130,6 +135,8 @@
                 </div>
             @endif--}}
     </div>
+    @endif
+
 
     <div>
         @if($deleted)

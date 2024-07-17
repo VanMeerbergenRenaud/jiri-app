@@ -8,12 +8,13 @@
 
         .search {
             width: 100%;
+            margin-bottom: 1rem;
         }
     }
 
     .table__contact {
         display: grid;
-        margin-top: 1.25rem;
+        margin-top: 1.5rem;
         width: 100%;
         border: $border;
         border-radius: 1rem;
@@ -154,6 +155,10 @@
         .actions__contact {
             display: grid;
             grid-template-columns: 1fr 250px;
+
+            .search {
+                margin-bottom: 0;
+            }
         }
     }
     .mb-contacts {

@@ -92,11 +92,6 @@
         display: grid;
         gap: 1.5rem;
 
-        // Empty state
-        &__empty {
-
-        }
-
         // List of available event
         &__available {
             padding: 1.5rem;
@@ -227,7 +222,7 @@
 
             &__text {
                 position: relative;
-                padding-bottom: 2.5rem;
+                padding-bottom: 3.5rem;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -286,6 +281,14 @@
         &__stats {
             &__available {
                 width: 350px;
+            }
+
+            &__empty {
+                width: 350px;
+
+                &__text {
+                    padding-bottom: 2.5rem;
+                }
             }
         }
     }
@@ -376,6 +379,7 @@
             &__empty {
                 padding: 1.5rem 2rem;
                 grid-column: 1 / 3;
+                width: auto;
 
                 &__text {
                     padding-bottom: 0;

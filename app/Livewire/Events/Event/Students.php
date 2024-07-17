@@ -8,16 +8,14 @@ class Students extends Component
 {
     public $event;
 
-    public function mount($event)
+    public function mount()
     {
-        $this->event = $event;
+        $this->event = auth()->user()->events()->findOrFail(request()->event);
     }
 
     public function render()
     {
-        $event = auth()->user()->events()->findOrFail($this->event);
-
-        return view('livewire.events.event.students', compact('event'))
+        return view('livewire.events.event.students')
             ->layout('layouts.event-dashboard');
     }
 }

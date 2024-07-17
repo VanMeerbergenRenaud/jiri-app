@@ -3,7 +3,7 @@
 .events {
 
     &__list {
-        margin-top: 1.5rem;
+        margin-top: 2rem;
     }
 
     .list {
@@ -100,7 +100,7 @@
     }
 
     .empty-event {
-        margin: 1.5rem 0 2rem;
+        margin: 0;
         padding: 1rem 1.5rem;
         display: flex;
         flex-direction: row;
@@ -151,6 +151,7 @@
 // For 850px screen
 @media (min-width: 850px) {
     .events {
+
         .list {
             .item {
                 display: flex;
@@ -266,8 +267,6 @@
 // For min 950px screen
 @media (min-width: 950px) {
     .mainEvents {
-        padding: 0 1.5rem;
-
         .events .list {
             .item {
                 display: grid;
@@ -316,17 +315,19 @@
             .item {
                 display: grid;
                 grid-template-columns: repeat(4, 1fr) 3fr;
+                align-items: center;
                 gap: 1rem;
 
                 &__name {
                     margin-bottom: 0;
                     margin-right: 3.5rem;
                     grid-column: 1/2;
-                    overflow: auto;
+                    overflow: scroll;
+                    scrollbar-width: none;
                 }
 
                 &__name, &__date, &__time, &__members {
-                    min-width: 180px;
+                    min-width: 172px;
                 }
 
                 .menu {
@@ -361,12 +362,5 @@
                 }
             }
         }
-    }
-}
-
-// For min 1920px screen
-@media (min-width: 1920px) {
-    .p-main {
-        padding: 0.5rem 3.5rem;
     }
 }

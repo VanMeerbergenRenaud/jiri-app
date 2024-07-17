@@ -14,18 +14,31 @@
   padding: 0;
 }
 
-.p-main {
-  padding: 1rem;
+.p-main, .header {
+  padding: 1rem 1.5rem;
+}
+
+@media (min-width: $bp-small) {
+    .p-main, .header {
+        padding: 1rem 1.5rem;
+    }
 }
 
 @media (min-width: $bp-medium) {
-    .p-main {
-        padding: 0 1.5rem;
+    .p-main, .header {
+        padding: 1rem 2rem;
     }
 }
 
 @media (min-width: $bp-xlarge) {
-    .p-main {
-        padding: 0 2rem;
+    .p-main, .header {
+        padding: 1rem 2.5rem;
+    }
+}
+
+// For min 1920px screen
+@media (min-width: 1920px) {
+    .p-main, .header {
+        padding: 0.5rem 3.5rem;
     }
 }

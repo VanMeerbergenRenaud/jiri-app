@@ -59,7 +59,6 @@
                     </p>
                 </div>
             @else
-
                 <div class="mainDashboard__stats__available">
                     <h3 role="heading" aria-level="3" class="mainDashboard__stats__available__title">
                         Épreuves à commencer

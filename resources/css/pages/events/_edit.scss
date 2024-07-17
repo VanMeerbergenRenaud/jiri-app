@@ -420,7 +420,10 @@
 
         &__empty {
             margin: 0 0 1.5rem;
-            font-size: 0.94rem;
+            padding: 1rem 1.25rem;
+            border-radius: 0.5rem;
+            background-color: #E5E9F4;
+            font-weight: 400;
         }
     }
 

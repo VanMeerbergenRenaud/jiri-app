@@ -10,7 +10,13 @@
         />
     </header>
 
-    <main>
-
+    <main class="p-main">
+        À faire (design sur xd)
     </main>
+
+    <footer class="footerEvent">
+        <p>Tableau de bord de {{ auth()->user()->name ?? 'John Doe' }}</p>
+        <p class="copyright">Copyright - Tous droits réservés</p>
+        <p>Épreuve - {{ $event->name ?? 'Épreuve du jour' }}</p>
+    </footer>
 </div>

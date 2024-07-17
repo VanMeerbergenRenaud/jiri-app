@@ -200,6 +200,7 @@ return [
         'duration' => 'de la durée',
         'url_readme' => 'de l‘url de présentation',
         'globalComment' => 'du commentaire global',
-        'ponderation' => 'de la pondération',
+        'ponderation1' => 'de la pondération 1',
+        'ponderation2' => 'de la pondération 2',
     ],
 ];

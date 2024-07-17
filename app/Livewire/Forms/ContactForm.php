@@ -10,10 +10,10 @@ use Livewire\Form;
 
 class ContactForm extends Form
 {
-    #[Validate('required|min:3')]
+    #[Validate('required|min:3|max:50')]
     public string $name = '';
 
-    #[Validate('required|min:3')]
+    #[Validate('required|min:3|max:50')]
     public string $firstname = '';
 
     #[Validate('nullable|email|unique:contacts,email')]

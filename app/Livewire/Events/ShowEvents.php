@@ -16,6 +16,11 @@ class ShowEvents extends Component
 
     public $deleted = false;
 
+    public function mount()
+    {
+        $this->events = auth()->user()->events;
+    }
+
     private function getEvents($operator, $pageName)
     {
         return auth()->user()->events()

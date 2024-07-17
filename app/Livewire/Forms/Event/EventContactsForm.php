@@ -13,7 +13,7 @@ class EventContactsForm extends Form
     #[Validate('required|min:3')]
     public $role = '';
 
-    #[Validate('required|min:3')]
+    #[Validate('required|min:10')]
     public $token = '';
 
     public function setEventContacts($eventContacts)
