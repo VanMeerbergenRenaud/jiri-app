@@ -142,10 +142,10 @@
                 {{-- Added projects --}}
                 <livewire:events.edit.added-list-project :event="$event" />
             </div>
-        </div>
 
-        {{-- Pondération --}}
-        <livewire:events.edit.ponderation :event="$event" />
+            {{-- Pondération --}}
+            <livewire:events.edit.ponderation :event="$event" />
+        </div>
 
         {{-- Submit buttons --}}
         <div class="form__submit">
