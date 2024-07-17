@@ -7,6 +7,7 @@ use Livewire\Component;
 class ContactProfil extends Component
 {
     public $event;
+
     public $contact;
 
     public function mount($event, $contact)
@@ -19,7 +20,7 @@ class ContactProfil extends Component
     {
         return redirect()->route('events.contact-profil', [
             'event' => $this->event->id,
-            'contact' => $contactId
+            'contact' => $contactId,
         ]);
     }
 

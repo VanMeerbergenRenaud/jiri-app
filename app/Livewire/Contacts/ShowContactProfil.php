@@ -13,23 +13,34 @@ class ShowContactProfil extends Component
     use WithFileUploads;
 
     public $contact;
+
     public $event;
+
     public $contactType;
+
     public ContactForm $form;
+
     public $projects;
+
     public $evaluators;
+
     public $students;
+
     public $evaluationsOfEvaluators;
+
     public $evaluationsFromEvaluator;
 
     #[Validate('nullable|min:3|max:1000')]
     public $globalComment;
 
     public $showEditDialog = false;
+
     public $showCommentDialog = false;
+
     public $commentSaved = false;
 
     public $evaluatorGlobalComment;
+
     public $evaluatorGlobalCote;
 
     public function mount($event, $contact)
@@ -97,14 +108,14 @@ class ShowContactProfil extends Component
     public function saveGlobalComment()
     {
         $this->validate([
-            'globalComment' => 'nullable|min:3|max:1000'
+            'globalComment' => 'nullable|min:3|max:1000',
         ]);
 
         auth()->user()->eventGlobalComments()
             ->updateOrCreate(
                 [
                     'event_id' => $this->event->id,
-                    'contact_id' => $this->contact->id
+                    'contact_id' => $this->contact->id,
                 ],
                 ['globalComment' => $this->globalComment]
             );
@@ -114,7 +125,8 @@ class ShowContactProfil extends Component
         $this->commentSaved = true;
     }
 
-    #[NoReturn] public function editContactRole()
+    #[NoReturn]
+    public function editContactRole()
     {
         dd('need to change the role of the contact');
     }
@@ -141,6 +153,7 @@ class ShowContactProfil extends Component
     public function calculateAverageScore($projectId)
     {
         $metrics = $this->calculateScoreMetrics($projectId);
+
         return $metrics['evaluatorCount'] > 0 ? $metrics['averageScore'] : '?';
     }
 

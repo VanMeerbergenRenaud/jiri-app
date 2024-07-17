@@ -8,12 +8,17 @@ use Livewire\Component;
 class Edit extends Component
 {
     public $event;
+
     public $evaluator;
+
     public $token;
+
     public $student;
 
     public $tasks;
+
     public $project;
+
     public $projects;
 
     #[Validate('required')]

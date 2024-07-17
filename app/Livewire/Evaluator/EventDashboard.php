@@ -11,13 +11,17 @@ class EventDashboard extends Component
     use WithPagination;
 
     public $search = '';
+
     public $sortDirection = 'asc';
 
     public $event;
+
     public $evaluator;
+
     public $token;
 
     public $students;
+
     public $projects;
 
     public function mount($event, $contact, $token)
@@ -37,8 +41,8 @@ class EventDashboard extends Component
             ->join('contacts', 'event_contact.contact_id', 'contacts.id')
             ->where('event_id', $this->event->id)
             ->where('role', 'student')
-            ->where('contacts.name', 'like', '%' . $this->search . '%')
-            ->orderBy("contacts.name", $this->sortDirection)
+            ->where('contacts.name', 'like', '%'.$this->search.'%')
+            ->orderBy('contacts.name', $this->sortDirection)
             ->paginate(8);
     }
 

@@ -8,13 +8,6 @@
                     <span class="category capitalize">{{ $project->name ?? 'Pas de nom' }}</span>
                     <span class="username capitalize">
                         {{ $project->url_readme }}
-                        {{--@if(!empty($project->tasks))
-                            @foreach(json_decode($project->tasks, true) as $task)
-                                <span class="taskName">{{ ucfirst($task) }}</span>
-                            @endforeach
-                        @else
-                            <span class="normal-case">Aucune tâche n'est associée à ce projet.</span>
-                        @endif--}}
                     </span>
 
                     <x-dialog>
@@ -44,6 +37,6 @@
             @endforeach
         </ul>
     @else
-        <p class="no-contact">Aucun projets ajouté pour le moment.</p>
+        <p class="no-contact">Aucun projet ajouté pour le moment.</p>
     @endif
 </div>

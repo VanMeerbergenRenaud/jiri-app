@@ -79,8 +79,8 @@ class DatabaseSeeder extends Seeder
                             'project_id' => $project->id,
                             'contact_id' => $contact->id,
                             'event_contact_id' => rand(1, 5),
-                    ]);
-                }
+                        ]);
+                    }
                 }
 
                 /* Projects */

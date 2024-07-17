@@ -8,10 +8,13 @@ use Livewire\Component;
 class Index extends Component
 {
     public $event;
+
     public $evaluator;
+
     public $token;
 
     public $student;
+
     public $projects;
 
     public function mount($event, $contact, $token, $student)

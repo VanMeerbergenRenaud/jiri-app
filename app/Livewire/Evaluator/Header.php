@@ -7,6 +7,7 @@ use Livewire\Component;
 class Header extends Component
 {
     public $event;
+
     public $evaluator;
 
     public function mount($event, $evaluator)

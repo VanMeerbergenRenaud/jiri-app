@@ -10,17 +10,22 @@ use Livewire\Component;
 class Show extends Component
 {
     public $event;
+
     public $evaluator;
+
     public $token;
 
     public $student;
+
     public $projects;
+
     public $tasks;
 
     #[Validate('required', 'string', 'max:255')]
     public $globalComment;
 
     public $info;
+
     public $timer;
 
     public $show = false;

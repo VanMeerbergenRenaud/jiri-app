@@ -11,6 +11,7 @@ class ShowProjects extends Component
     use WithPagination;
 
     public $search = '';
+
     public $deleted = false;
 
     #[Computed]

@@ -13,6 +13,7 @@ class AddContactDialog extends Component
     public ContactForm $form;
 
     public $show = false;
+
     public $added = false;
 
     public function add()
