@@ -1,4 +1,4 @@
-{{-- Form to edit an event --}}
+{{-- FormNewContact to edit an event --}}
 <div>
     <form wire:submit.prevent="save" class="form">
         @csrf
@@ -65,7 +65,7 @@
                             @include('components.svg.cross')
                         </button>
 
-                        {{-- SearchList & Form --}}
+                        {{-- SearchListContact & FormNewContact --}}
                         <div class="filter__contacts"
                              x-data="{
                                  createmode: false,
@@ -73,8 +73,8 @@
                                  "
                         >
 
-                            <livewire:events.edit.search-list :event="$event" />
-                            <livewire:events.edit.form :event="$event" />
+                            <livewire:events.edit.search-list-contact :event="$event" />
+                            <livewire:events.edit.form-new-contact :event="$event" />
 
                             {{-- Button to edit a new contact --}}
                             <button type="button"
@@ -89,7 +89,7 @@
                 </div>
 
                 {{-- Added contacts --}}
-                <livewire:events.edit.added-list :event="$event" />
+                <livewire:events.edit.added-list-contact :event="$event" />
             </div>
 
             {{-- Label & select to edit a project in the database --}}
@@ -122,11 +122,11 @@
                             @include('components.svg.cross')
                         </button>
 
-                        {{-- SearchList & Form --}}
+                        {{-- SearchListContact & FormNewContact --}}
                         <div class="filter__contacts" x-data="{createmode: false}">
 
                             <livewire:events.edit.search-list-project :event="$event" />
-                            <livewire:events.edit.form-project :event="$event" />
+                            <livewire:events.edit.form-new-project :event="$event" />
 
                             {{-- Button to edit a new contact --}}
                             <button type="button"

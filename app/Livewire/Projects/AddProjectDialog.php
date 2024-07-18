@@ -10,7 +10,6 @@ class AddProjectDialog extends Component
     public ProjectForm $form;
 
     public $show = false;
-
     public $added = false;
 
     public function add()

@@ -41,6 +41,7 @@
                         model="form.avatar"
                         placeholder="JPG, JPEG, PNG ou SVG (MAX 1024 ko)"
                     />
+                    <span class="avatar-infos">Format : JPG, JPEG ou PNG (MAX 1024 ko)</span>
 
                     @if($form->avatar)
                         <img src="{{ $form->avatar->temporaryUrl() }}" alt="Image du contact" class="temporary_url">

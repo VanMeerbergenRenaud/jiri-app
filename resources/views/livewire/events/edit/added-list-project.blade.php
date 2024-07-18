@@ -1,4 +1,4 @@
-{{-- AddedList of projects --}}
+{{-- AddedListContact of projects --}}
 <div class="form__component__added">
     <p>Projets ajoutés</p>
     @if(count($projectsList) > 0)
@@ -6,7 +6,7 @@
             @foreach($projectsList as $project)
                 <li wire:key="{{ $project->project->id }}">
                     <span class="category capitalize">{{ $project->project->name ?? 'Pas de nom' }}</span>
-                    <span class="username capitalize">
+                    <span class="username">
                         {{ $project->project->url_readme }}
                     </span>
 

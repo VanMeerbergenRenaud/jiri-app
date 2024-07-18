@@ -1,5 +1,5 @@
 <div>
-    {{-- Form to edit a new project --}}
+    {{-- FormNewContact to edit a new project --}}
     <template x-if="createmode">
         <form wire:submit.prevent="addProjectToEvent" class="contact__new__form">
             @csrf
@@ -22,10 +22,10 @@
                 <div class="project__form">
                     <x-form.field
                         label="Url de présentation"
-                        name="readme_url"
+                        name="url_readme"
                         type="text"
                         placeholder="https://github.com/project/read_me"
-                        model="readme_url"
+                        model="url_readme"
                     />
                 </div>
 
@@ -36,17 +36,6 @@
                         name="description"
                         placeholder="Réalisation de mon portfolio"
                         model="description"
-                    />
-                </div>
-
-                {{-- Associés des tâches --}}
-                <div class="project__form">
-                    <x-form.field
-                        label="Associés des tâches"
-                        name="task_associates"
-                        type="text"
-                        placeholder="John Doe, Jane Doe"
-                        model="task_associates"
                     />
                 </div>
 

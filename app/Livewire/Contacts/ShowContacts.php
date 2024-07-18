@@ -11,9 +11,7 @@ class ShowContacts extends Component
     use WithPagination;
 
     public $search = '';
-
     public $sortField = 'name';
-
     public $sortDirection = 'asc';
 
     public $deleted = false;

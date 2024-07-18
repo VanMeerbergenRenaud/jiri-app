@@ -40,6 +40,24 @@ class DatabaseSeeder extends Seeder
         foreach ($users as $user) {
             Event::factory()->count(32)->create([
                 'user_id' => $user->id,
+                'started_at' => null,
+                'paused_at' => null,
+                'finished_at' => null,
+            ]);
+
+            Event::factory()->count(3)->create([
+                'user_id' => $user->id,
+                'paused_at' => null,
+                'finished_at' => null,
+            ]);
+
+            Event::factory()->count(2)->create([
+                'user_id' => $user->id,
+                'finished_at' => null,
+            ]);
+
+            Event::factory()->count(1)->create([
+                'user_id' => $user->id,
             ]);
 
             Contact::factory()->count(25)->create([

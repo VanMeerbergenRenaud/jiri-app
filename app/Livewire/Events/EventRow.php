@@ -43,9 +43,7 @@ class EventRow extends Component
     public function save()
     {
         $this->form->update();
-
         $this->event->refresh();
-
         $this->reset('showEditDialog');
     }
 

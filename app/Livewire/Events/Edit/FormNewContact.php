@@ -10,8 +10,11 @@ use Livewire\Component;
     It is a form that allows the user to select a role
     for the contact (student or evaluator) and add the new contact to the event.
 */
-class Form extends Component
+class FormNewContact extends Component
 {
+    public $event;
+    public $saved = false;
+
     #[Validate('required|min:3|max:50')]
     public $name;
 
@@ -23,10 +26,6 @@ class Form extends Component
 
     #[Validate('required|in:student,evaluator')]
     public $role = 'student';
-
-    public $saved = false;
-
-    public $event;
 
     public function mount($event)
     {
@@ -68,6 +67,6 @@ class Form extends Component
 
     public function render()
     {
-        return view('livewire.events.edit.form');
+        return view('livewire.events.edit.form-new-contact');
     }
 }

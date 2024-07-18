@@ -1,4 +1,4 @@
-{{-- AddedList of contacts --}}
+{{-- AddedListContact of contacts --}}
 @php
     $roleTranslations = [
         'student' => 'Étudiant',

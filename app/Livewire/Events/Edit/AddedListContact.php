@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
-class AddedList extends Component
+class AddedListContact extends Component
 {
     public $event;
 
@@ -43,6 +43,6 @@ class AddedList extends Component
 
     public function render()
     {
-        return view('livewire.events.edit.added-list');
+        return view('livewire.events.edit.added-list-contact');
     }
 }

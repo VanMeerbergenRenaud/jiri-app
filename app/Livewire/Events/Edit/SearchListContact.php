@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 
-class SearchList extends Component
+class SearchListContact extends Component
 {
     public $event;
     public $username = '';
@@ -56,6 +56,6 @@ class SearchList extends Component
 
     public function render()
     {
-        return view('livewire.events.edit.search-list');
+        return view('livewire.events.edit.search-list-contact');
     }
 }

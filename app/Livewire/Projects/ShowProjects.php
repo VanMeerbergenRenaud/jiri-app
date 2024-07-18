@@ -27,8 +27,8 @@ class ShowProjects extends Component
     {
         $project = auth()->user()->projects()->findOrFail($projectId);
 
-        $project->tasks()->delete();
         $project->projectPonderations()->delete();
+        $project->tasks()->delete();
         $project->delete();
 
         sleep(1);

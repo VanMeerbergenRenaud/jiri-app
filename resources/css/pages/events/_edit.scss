@@ -198,7 +198,7 @@
                 }
             }
 
-            /* Form to create a new contact */
+            /* FormNewContact to create a new contact */
             .contact__new__form {
                 margin: 0;
                 padding: 1.5rem;
@@ -268,7 +268,7 @@
                 }
             }
 
-            /* Form to create a new project */
+            /* FormNewContact to create a new project */
             .project__new__form__container {
                 display: grid;
                 grid-template-columns: 0.9fr 1.1fr;
@@ -571,7 +571,7 @@
             &__component {
                 padding: 2rem 0.5rem 1rem;
 
-                /* Form to create a new contact */
+                /* FormNewContact to create a new contact */
                 .contact__new__form {
                     &__container {
                         display: grid;
@@ -842,7 +842,7 @@
                     }
                 }
 
-                /* Form to create a new contact */
+                /* FormNewContact to create a new contact */
                 .contact__new__form {
                     &__container {
                         display: grid;

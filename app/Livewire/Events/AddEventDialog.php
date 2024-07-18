@@ -10,7 +10,6 @@ class AddEventDialog extends Component
     public EventForm $form;
 
     public $show = false;
-
     public $added = false;
 
     public function add()

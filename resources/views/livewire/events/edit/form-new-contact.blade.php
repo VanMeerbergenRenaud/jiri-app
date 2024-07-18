@@ -1,5 +1,5 @@
 <div>
-    {{-- Form to edit a new contact --}}
+    {{-- FormNewContact to edit a new contact --}}
     <template x-if="createmode">
         <form
             wire:submit="addContactToEvent"

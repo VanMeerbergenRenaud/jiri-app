@@ -1,5 +1,5 @@
 <div>
-    {{-- SearchList of contacts --}}
+    {{-- SearchListContact of contacts --}}
     <x-form.field
         label="Nom d'utilisateur"
         name="username"
