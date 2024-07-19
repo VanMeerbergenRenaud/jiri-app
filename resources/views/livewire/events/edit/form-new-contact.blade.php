@@ -67,11 +67,11 @@
     </template>
 
     <div>
-        @if($saved)
+        @if($newContact)
             <x-notifications
-                icon="success"
-                title="Contact créé et ajouté à l'épreuve !"
-                method="$set('saved', false)"
+                icon="add"
+                title="Nouveau contact ajouté à l'épreuve !"
+                method="$set('newContact', false)"
             />
         @endif
     </div>

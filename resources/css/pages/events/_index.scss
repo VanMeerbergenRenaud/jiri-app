@@ -2,6 +2,12 @@
 
 .events {
 
+    $available : #e4c5c587;
+    $current : #ebded7;
+    $pause : #dae1e6;
+    $finish : #D9EBED;
+    $comingSoon : #D3E7F2;
+
     &__list {
         margin-top: 2rem;
     }
@@ -62,40 +68,92 @@
                     }
                 }
 
-                &__see {
-                    padding: 0.875rem 3rem;
+                &__current {
+                    padding: 0.875rem 2rem;
                     border-radius: 1.5rem;
+                    color: #b29280;
                     background-color: white;
 
                     &:hover {
-                        background-color: $gray-300;
+                        background-color: $gray-100;
+                    }
+                }
+
+                &__pause {
+                    padding: 0.875rem 2rem;
+                    border-radius: 1.5rem;
+                    color: #6f8491;
+                    background-color: white;
+
+                    &:hover {
+                        background-color: $gray-100;
+                    }
+                }
+
+                &__finish {
+                    padding: 0.875rem 2rem;
+                    border-radius: 1.5rem;
+                    color: #4f8f94;
+                    background-color: white;
+
+                    &:hover {
+                        background-color: $gray-100;
+                    }
+                }
+
+                &__available, &__unavailable {
+                    padding: 0.875rem 1.5rem;
+                    font-size: 0.875rem;
+                    min-width: 155px;
+                    text-align: center;
+                    border-radius: 1.5rem;
+                    color: $text-slate-500;
+                    background-color: #F7F7FA;
+                }
+
+                &__available {
+                    cursor: grab;
+                    color: #c793a5;
+                    background-color: white;
+                    min-width: 115px;
+
+                    &:hover {
+                        background-color: $gray-100;
                     }
                 }
 
                 &__unavailable {
                     cursor: not-allowed;
-                    padding: 0.875rem 1rem;
-                    font-size: 0.875rem;
-                    min-width: 125px;
-                    text-align: center;
-                    border-radius: 1.5rem;
-                    color: $text-slate-500;
-                    background-color: #F7F7FA;
+                    min-width: 155px;
                 }
             }
         }
     }
 
     /* nth-of-type ne convient pas ici */
-    .list2 {
+    .list-available {
         .item {
-            background-color: #E1E8ED;
+            background-color: $available;
         }
     }
-
-    .list3 {
+    .list-current {
         .item {
-            background-color: #D3E7F2;
+            background-color: $current;
+        }
+    }
+    .list-pause {
+        .item {
+            background-color: $pause;
+        }
+    }
+    .list-finish {
+        .item {
+            background-color: $finish;
+        }
+    }
+    .list-comingSoon {
+        .item {
+            background-color: $comingSoon;
         }
     }
 
@@ -123,7 +181,7 @@
 
     .empty-event-start {
         margin: 1rem auto 2rem;
-        padding: 2.5rem;
+        padding: 2rem;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -138,7 +196,7 @@
         }
 
         p {
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         a {
@@ -343,8 +401,8 @@
                     gap: 0 2rem;
                     grid-column: 5/6;
 
-                    .link__edition {
-                        min-width: 185px;
+                    a {
+                        min-width: 80px;
                     }
                 }
             }

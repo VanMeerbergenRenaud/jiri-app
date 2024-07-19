@@ -13,7 +13,7 @@ use Livewire\Component;
 class FormNewContact extends Component
 {
     public $event;
-    public $saved = false;
+    public $newContact = false;
 
     #[Validate('required|min:3|max:50')]
     public $name;
@@ -62,7 +62,7 @@ class FormNewContact extends Component
 
         $this->dispatch('fetchEventContacts');
 
-        $this->saved = true;
+        $this->newContact = true;
     }
 
     public function render()

@@ -2,13 +2,14 @@
 
 namespace App\Livewire\Events\Edit;
 
+use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class FormNewProject extends Component
 {
     public $event;
-    public $saved = false;
+    public $newProject = false;
 
     #[Validate('required|min:2|max:50')]
     public $name = '';
@@ -53,7 +54,7 @@ class FormNewProject extends Component
 
         $this->dispatch('fetchEventProjects');
 
-        $this->saved = true;
+        $this->newProject = true;
     }
 
     public function render()

@@ -144,7 +144,9 @@
             </div>
 
             {{-- Pondération --}}
-            <livewire:events.edit.ponderation :event="$event" />
+            
+                <livewire:events.edit.ponderation :event="$event" />
+            
         </div>
 
         {{-- Submit buttons --}}

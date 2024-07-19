@@ -51,4 +51,12 @@
             </div>
         </form>
     </template>
+
+    @if($newProject)
+        <x-notifications
+            icon="add"
+            title="Nouveau projet ajouté à l'épreuve !"
+            method="$set('newProject', false)"
+        />
+    @endif
 </div>

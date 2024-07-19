@@ -471,44 +471,35 @@
                         &:last-of-type {
                             border-top: $border;
                         }
-                    }
 
-                    .error-percentage {
-                        padding: 0.75rem 1rem;
-                        border-radius: 0.5rem;
-                        font-weight: 500;
-                        background-color: #FED7D7;
+                        .error-percentage {
+                            margin-top: 1rem;
+                            padding: 0.75rem 1rem;
+                            border-radius: 0.5rem;
+                            font-weight: 500;
+                            background-color: #FED7D7;
 
-                        ul {
-                            margin: 0;
+                            ul {
+                                margin: 0;
+                            }
                         }
                     }
 
-                    &__validation {
-                        padding: 1rem 0 1.5rem;
+                    .adjustPonderation {
                         grid-column: 1/3;
-                        display: flex;
-                        flex-direction: row;
-                        flex-wrap: wrap;
-                        justify-content: space-between;
-                        align-items: center;
-                        gap: 1rem;
-                        border-bottom: $border;
+                        margin: 0.875rem 0;
+                        padding: 0.75rem 2rem;
+                        justify-content: center;
+                        font-size: 0.75rem;
+                        color: #3F4353;
+                        background-color: white;
+                        border-radius: 0.5rem;
+                        width: 100%;
+                        text-transform: initial;
 
-                        .adjustPonderation {
-                            padding: 0.75rem 2rem;
-                            justify-content: center;
-                            font-size: 0.75rem;
-                            color: #3F4353;
-                            background-color: white;
-                            border-radius: 0.5rem;
-                            width: 100%;
-                            text-transform: initial;
-
-                            &:hover {
-                                opacity: 0.9;
-                                border: 1px solid whitesmoke;
-                            }
+                        &:hover {
+                            opacity: 0.9;
+                            border: 1px solid whitesmoke;
                         }
                     }
                 }

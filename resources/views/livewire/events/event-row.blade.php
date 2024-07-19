@@ -30,7 +30,49 @@
             </a>
 
             @if($event->isAvailable())
-                <a href="{{ route('events.show', ['event' => $event]) }}" wire:navigate class="link__see">Voir</a>
+                <x-dialog>
+                    <x-dialog.open>
+                        <button type="button" class="link__available">Démarrer</button>
+                    </x-dialog.open>
+
+                    <x-dialog.panel>
+                        <form class="form" wire:submit.prevent="startEvent({{ $event->id }})">
+                            <div class="form__content">
+                                <h2 class="title">Commencer l'épreuve</h2>
+                                <span class="bold">{{ $event->name }}</span>
+                                <ul>
+                                    <li>
+                                        <span>Date de début :</span>
+                                        {{ $event->starting_at }}
+                                    </li>
+                                    <li>
+                                        <span>Durée :</span>
+                                        {{ $event->duration }}
+                                    </li>
+                                    <li>
+                                        Status: éligible
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <x-dialog.footer>
+                                <x-dialog.close>
+                                    <button type="button" class="cancel">Annuler</button>
+                                </x-dialog.close>
+
+                                <button type="submit" class="save"
+                                        wire:submit="startEvent({{ $event->id }})">Commencer
+                                </button>
+                            </x-dialog.footer>
+                        </form>
+                    </x-dialog.panel>
+                </x-dialog>
+            @elseif($event->isCurrent())
+                <a href="{{ route('events.show', ['event' => $event]) }}" wire:navigate class="link__current">Voir</a>
+            @elseif($event->isPaused())
+                <a href="{{ route('events.show', ['event' => $event]) }}" wire:navigate class="link__pause">Continuer</a>
+            @elseif($event->isFinished())
+                <a href="{{ route('events.show', ['event' => $event]) }}" wire:navigate class="link__finish">Récapitulatif</a>
             @else
                 <button type="button" class="link__unavailable">Non disponible</button>
             @endif

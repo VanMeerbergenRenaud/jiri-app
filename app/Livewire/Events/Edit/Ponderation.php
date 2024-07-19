@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Events\Edit;
 
-use App\Models\ProjectPonderation;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -11,7 +10,6 @@ class Ponderation extends Component
     public $event;
 
     public $ponderationOfProjects;
-    public ProjectPonderation $projectPonderation;
 
     public $ponderation1 = 1;
     public $ponderation2 = 1;
@@ -89,7 +87,7 @@ class Ponderation extends Component
 
         // Total percentage validation
         if (!$this->validateTotalPercentage()) {
-            return;
+            return false;
         }
 
         // Update the new ponderation of each project
@@ -100,16 +98,13 @@ class Ponderation extends Component
                     'event_id' => $this->event->id,
                     'project_id' => $projectId,
                 ], [
-                    'ponderation1' => $this->ponderations[$projectId]['ponderation1'],
-                    'ponderation2' => $this->ponderations[$projectId]['ponderation2'],
+                    'ponderation1' => $this->ponderations[$projectId]['ponderation1'] ?? 1,
+                    'ponderation2' => $this->ponderations[$projectId]['ponderation2'] ?? 1,
                 ]
             );
         }
 
-        $this->dispatch('fetchEventProjects');
-
-        // Notification
-        $this->savePonderation = true;
+        return redirect()->route('events.index');
     }
 
     public function render()

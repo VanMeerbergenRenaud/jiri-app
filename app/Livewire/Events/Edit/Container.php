@@ -20,9 +20,7 @@ class Container extends Component
     public function save()
     {
         $this->form->update();
-
         $this->event->refresh();
-
         return redirect()->route('events.index');
     }
 

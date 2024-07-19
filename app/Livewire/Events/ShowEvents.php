@@ -21,33 +21,6 @@ class ShowEvents extends Component
         $this->events = auth()->user()->events;
     }
 
-    private function getEvents($operator, $pageName)
-    {
-        return auth()->user()->events()
-            ->where('name', 'like', '%'.$this->search.'%')
-            ->where('starting_at', $operator, now())
-            ->orderBy('starting_at')
-            ->paginate(4, pageName: $pageName);
-    }
-
-    #[Computed]
-    public function pastEvents()
-    {
-        return $this->getEvents('<', 'past-page');
-    }
-
-    #[Computed]
-    public function currentEvents()
-    {
-        return $this->getEvents('=', 'current-page');
-    }
-
-    #[Computed]
-    public function futureEvents()
-    {
-        return $this->getEvents('>', 'future-page');
-    }
-
     public function delete($eventId)
     {
         $event = auth()->user()->events()->findOrFail($eventId);
@@ -63,6 +36,46 @@ class ShowEvents extends Component
 
     public function render()
     {
-        return view('livewire.events.show-events');
+        $finishedEvents = auth()->user()->events()
+            ->where('finished_at', '!=', null)
+            ->where('name', 'like', '%' . $this->search . '%')
+            ->orderBy('starting_at')
+            ->paginate(4, ['*'], 'finishedEvents');
+
+        $availableEvents = auth()->user()->events()
+            ->where('starting_at', '<', now())
+            ->where('started_at', '=', null)
+            ->where('paused_at', '=', null)
+            ->where('finished_at', '=', null)
+            ->where('name', 'like', '%' . $this->search . '%')
+            ->orderBy('starting_at')
+            ->paginate(4, ['*'], 'availableEvents');
+
+        $currentEvents = auth()->user()->events()
+            ->where('started_at', '!=', null)
+            ->where('paused_at', '=', null)
+            ->where('finished_at', '=', null)
+            ->where('name', 'like', '%' . $this->search . '%')
+            ->orderBy('starting_at')
+            ->paginate(4, ['*'], 'currentEvents');
+
+        $pausedEvents = auth()->user()->events()
+            ->where('started_at', '!=', null)
+            ->where('paused_at', '!=', null)
+            ->where('finished_at', '=', null)
+            ->where('name', 'like', '%' . $this->search . '%')
+            ->orderBy('starting_at')
+            ->paginate(4, ['*'], 'pausedEvents');
+
+        $comingSoonEvents = auth()->user()->events()
+            ->where('starting_at', '>', now())
+            ->where('started_at', '=', null)
+            ->where('paused_at', '=', null)
+            ->where('finished_at', '=', null)
+            ->where('name', 'like', '%' . $this->search . '%')
+            ->orderBy('starting_at')
+            ->paginate(4, ['*'], 'comingSoonEvents');
+
+        return view('livewire.events.show-events', compact('finishedEvents', 'availableEvents', 'currentEvents', 'pausedEvents', 'comingSoonEvents'));
     }
 }

@@ -104,11 +104,24 @@ class Event extends Model
         return $this->hasMany(EvaluatorGlobalComment::class);
     }
 
-    // An event can be started, in progress or finished
+    // An event can available, current, paused, finished or coming soon
     public function isAvailable()
     {
-        $ending_at = Carbon::parse($this->starting_at)->addMinutes($this->duration);
+        return $this->starting_at < now() && $this->started_at === null && $this->paused_at === null && $this->finished_at === null;
+    }
 
-        return $ending_at <= now();
+    public function isCurrent()
+    {
+        return $this->started_at !== null && $this->paused_at === null && $this->finished_at === null;
+    }
+
+    public function isPaused()
+    {
+        return $this->started_at !== null && $this->paused_at !== null && $this->finished_at === null;
+    }
+
+    public function isFinished()
+    {
+        return $this->finished_at !== null;
     }
 }
