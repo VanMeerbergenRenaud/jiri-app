@@ -3,7 +3,9 @@
 namespace App\Livewire\Events;
 
 use App\Livewire\Forms\EventForm;
+use App\Mail\EvaluatorInvitation;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
 class EventRow extends Component
@@ -45,6 +47,34 @@ class EventRow extends Component
         $this->form->update();
         $this->event->refresh();
         $this->reset('showEditDialog');
+    }
+
+    public function startEvent($eventId)
+    {
+        $eventId = $this->event->id;
+
+        // 1. Add a time to the started_at column
+        $this->event->update([
+            'started_at' => now(),
+        ]);
+
+        $evaluators = auth()->user()->eventContacts()
+            ->where('event_id', $eventId)
+            ->where('role', 'evaluator')
+            ->get();
+
+        // 2. Send an email to all the evaluator's participants
+        foreach ($evaluators as $evaluator) {
+            $contactId = $evaluator->contact->id;
+            $token = $evaluator->token;
+
+            if ($evaluator) {
+                $email = $evaluator->contact->email;
+                Mail::to($email)->send(new EvaluatorInvitation($eventId, $contactId, $token));
+            } else {
+                dd('No evaluator found');
+            }
+        }
     }
 
     public function render()

@@ -10,16 +10,13 @@ class EvaluatorInvitation extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $token;
-
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($token)
+    public function __construct(public $event, public $contact, public $token)
     {
-        $this->token = $token;
     }
 
     /**
@@ -30,9 +27,11 @@ class EvaluatorInvitation extends Mailable
     public function build()
     {
         return $this->subject('Invitation à évaluer un événement')
-                    ->view('emails.evaluator_invitation')
-                    ->with([
-                        'token' => $this->token,
-                    ]);
+            ->view('emails.evaluator_invitation')
+            ->with([
+                'event' => $this->event,
+                'contact' => $this->contact,
+                'token' => $this->token,
+            ]);
     }
 }
