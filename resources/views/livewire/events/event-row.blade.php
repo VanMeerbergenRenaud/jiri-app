@@ -38,19 +38,41 @@
                     <x-dialog.panel>
                         <form class="form" wire:submit.prevent="startEvent({{ $event->id }})">
                             <div class="form__content">
-                                <h2 class="title">Commencer l'épreuve</h2>
-                                <span class="bold">{{ $event->name }}</span>
-                                <ul>
-                                    <li>
-                                        <span>Date de début :</span>
-                                        {{ $event->starting_at }}
+                                <h2 class="title">Commencer l'épreuve&nbsp;:&nbsp;{{ $event->name }}</h2>
+                                <ul class="event__actions__list">
+                                    <li class="event__actions__list__item">
+                                        <h3 class="event__actions__list__item__title">
+                                            Informations importantes
+                                        </h3>
+                                        <p class="event__actions__list__item__text">
+                                            Lorsque vous appuierez sur le bouton "Commencer", l'épreuve sera lancée et les participants pourront commencer à voter.
+                                            Chaque évaluateur recevra un email avec un lien unique pour accéder à la plateforme de vote et un timer se lancera automatiquement
+                                            pour voir la durée de l'épreuve. Assurez-vous que tout est prêt avant de lancer l'épreuve <span class="bold">{{ $event->name }}</span>.
+                                        </p>
                                     </li>
-                                    <li>
-                                        <span>Durée :</span>
-                                        {{ $event->duration }}
-                                    </li>
-                                    <li>
-                                        Status: éligible
+                                    <li class="event__actions__list__item">
+                                        <span class="event__actions__list__item__subtitle">
+                                            Récapitulatif des informations de l'épreuve
+                                        </span>
+                                        <p class="event__actions__list__item__info">
+                                            <span>Date de début&nbsp;:</span>
+                                            {{ Carbon\Carbon::parse($event->starting_at)->format('d/m/Y à H\hi') }}
+                                        </p>
+
+                                        <p class="event__actions__list__item__info">
+                                            <span>Durée prévue&nbsp;:</span>
+                                            {{ Carbon\Carbon::parse($event->duration)->format('H\hi') }}
+                                        </p>
+
+                                        <p class="event__actions__list__item__info">
+                                            <span>Participants&nbsp;:</span>
+                                            {{ $event->contacts->count() }}
+                                        </p>
+
+                                        <p class="event__actions__list__item__info">
+                                            <span>Projets&nbsp;:</span>
+                                            {{ $event->projects->count() }}
+                                        </p>
                                     </li>
                                 </ul>
                             </div>
@@ -60,8 +82,10 @@
                                     <button type="button" class="cancel">Annuler</button>
                                 </x-dialog.close>
 
-                                <button type="submit" class="save"
-                                        wire:submit="startEvent({{ $event->id }})">Commencer
+                                <button type="submit"
+                                        class="save"
+                                        wire:submit="startEvent({{ $event->id }})">
+                                    Commencer
                                 </button>
                             </x-dialog.footer>
                         </form>

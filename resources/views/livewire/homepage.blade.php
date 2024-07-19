@@ -177,7 +177,7 @@
                             <p class="text">
                                 {{ $example['text'] }}
                             </p>
-                            <a href="{{ $example['url'] }}" title="Vers la page d'inscription"
+                            <a href="{{ route('register') }}" title="Vers la page d'inscription"
                                class="homepage__main__examples__section__container__link">
                                 En savoir plus
                             </a>
@@ -214,7 +214,7 @@
                     <div class="homepage__main__benefits__container__img reveal">
                         <img src="{{  asset("img/homepage/stats.png") }}"
                              alt="image de l'appli">
-                        <a href="/" title="Vers la page d'inscription" class="link--blue">
+                        <a href="{{ route('register') }}" title="Vers la page d'inscription" class="link--blue">
                             Commencer
                         </a>
                     </div>
@@ -334,7 +334,7 @@
                 <h2 role="heading" aria-level="2" class="homepage__main__cta__title">
                     Prêt à créer le jury académique de vos rêves ?
                 </h2>
-                <a href="/" title="Vers la page d'inscription" class="link--blue homepage__main__cta__link">
+                <a href="{{ route('register') }}" title="Vers la page d'inscription" class="link--blue homepage__main__cta__link">
                     Commencer
                 </a>
             </section>

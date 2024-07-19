@@ -322,6 +322,57 @@
     }
 }
 
+.form__content {
+    .event__actions__list {
+        margin: 0 0 1.5rem;
+        display: flex;
+        flex-direction: column;
+
+        &__item {
+            font-size: 1rem;
+            color: $blue-dark;
+            padding-right: 1rem;
+
+            &__title {
+                text-transform: uppercase;
+                font-size: 0.875rem;
+                font-weight: 500;
+                color: $blue-dark;
+            }
+
+            &__text {
+                margin: 0.75rem 0;
+                color: $text-slate-500;
+            }
+
+            &__subtitle {
+                display: block;
+                margin: 1.5rem 0 1rem;
+                text-transform: uppercase;
+                font-size: 0.875rem;
+                font-weight: 500;
+                color: $blue-dark;
+            }
+
+            &__info {
+                margin-top: 0.5rem;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 0.5rem;
+                font-size: 0.94rem;
+                color: $text-slate-500;
+                max-width: 345px;
+
+                span {
+                    color: $blue-dark;
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+}
+
 // For min 950px screen
 @media (min-width: 950px) {
     .mainEvents {
