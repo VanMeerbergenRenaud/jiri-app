@@ -41,7 +41,7 @@
 
             <!-- Profile img -->
             <div class="nav__links">
-                @if($eventInProgress === null)
+                @if($eventInProgress->finished_at === null)
                     <form wire:submit.prevent="quitEvent">
                         @csrf
 
@@ -50,7 +50,7 @@
                         </button>
                     </form>
                 @else
-                    <a href="{{ route('dashboard') }}" wire:navigate title="Retourner au tableau de bord">
+                    <a href="{{ route('events.index') }}" wire:navigate title="Retourner au tableau de bord">
                         <x-svg.back />
                     </a>
                 @endif

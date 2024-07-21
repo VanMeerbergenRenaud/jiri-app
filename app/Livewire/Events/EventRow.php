@@ -53,27 +53,29 @@ class EventRow extends Component
     {
         $eventId = $this->event->id;
 
-        // 1. Add a time to the started_at column
-        $this->event->update([
-            'started_at' => now(),
-        ]);
-
         $evaluators = auth()->user()->eventContacts()
             ->where('event_id', $eventId)
             ->where('role', 'evaluator')
             ->get();
 
-        // 2. Send an email to all the evaluator's participants
+        // 1. Send an email to all the evaluator's participants
         foreach ($evaluators as $evaluator) {
             $contactId = $evaluator->contact->id;
+            $email = $evaluator->contact->email;
             $token = $evaluator->token;
 
             if ($evaluator) {
-                $email = $evaluator->contact->email;
-                Mail::to($email)->send(new EvaluatorInvitation($eventId, $contactId, $token));
-            } else {
-                dd('No evaluator found');
+                if (! empty($email)) {
+                    Mail::to($email)->send(new EvaluatorInvitation($eventId, $contactId, $token));
+                }
             }
+
+            // 2. Add a time to the started_at column
+            $this->event->update([
+                'started_at' => now(),
+            ]);
+
+            return redirect()->route('events.show', $eventId);
         }
     }
 

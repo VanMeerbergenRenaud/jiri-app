@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Events;
 
-use Livewire\Attributes\Computed;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -38,7 +37,7 @@ class ShowEvents extends Component
     {
         $finishedEvents = auth()->user()->events()
             ->where('finished_at', '!=', null)
-            ->where('name', 'like', '%' . $this->search . '%')
+            ->where('name', 'like', '%'.$this->search.'%')
             ->orderBy('starting_at')
             ->paginate(4, ['*'], 'finishedEvents');
 
@@ -47,7 +46,7 @@ class ShowEvents extends Component
             ->where('started_at', '=', null)
             ->where('paused_at', '=', null)
             ->where('finished_at', '=', null)
-            ->where('name', 'like', '%' . $this->search . '%')
+            ->where('name', 'like', '%'.$this->search.'%')
             ->orderBy('starting_at')
             ->paginate(4, ['*'], 'availableEvents');
 
@@ -55,7 +54,7 @@ class ShowEvents extends Component
             ->where('started_at', '!=', null)
             ->where('paused_at', '=', null)
             ->where('finished_at', '=', null)
-            ->where('name', 'like', '%' . $this->search . '%')
+            ->where('name', 'like', '%'.$this->search.'%')
             ->orderBy('starting_at')
             ->paginate(4, ['*'], 'currentEvents');
 
@@ -63,7 +62,7 @@ class ShowEvents extends Component
             ->where('started_at', '!=', null)
             ->where('paused_at', '!=', null)
             ->where('finished_at', '=', null)
-            ->where('name', 'like', '%' . $this->search . '%')
+            ->where('name', 'like', '%'.$this->search.'%')
             ->orderBy('starting_at')
             ->paginate(4, ['*'], 'pausedEvents');
 
@@ -72,7 +71,7 @@ class ShowEvents extends Component
             ->where('started_at', '=', null)
             ->where('paused_at', '=', null)
             ->where('finished_at', '=', null)
-            ->where('name', 'like', '%' . $this->search . '%')
+            ->where('name', 'like', '%'.$this->search.'%')
             ->orderBy('starting_at')
             ->paginate(4, ['*'], 'comingSoonEvents');
 

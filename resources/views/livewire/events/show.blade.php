@@ -44,12 +44,12 @@
 
         {{-- First Table --}}
         <div class="event__show">
-            <livewire:events.show.first-table />
+            <livewire:events.show.first-table :event="$event" :contacts="$contacts" :evaluators="$evaluators" :students="$students" />
         </div>
 
         {{-- Second Table --}}
         <div class="event__show__results">
-            <livewire:events.show.second-table />
+            <livewire:events.show.second-table :event="$event" :contacts="$contacts" :evaluators="$evaluators" :students="$students" />
         </div>
     </main>
 

@@ -12,7 +12,9 @@ class Ponderation extends Component
     public $ponderationOfProjects;
 
     public $ponderation1 = 1;
+
     public $ponderation2 = 1;
+
     public $ponderations = [];
 
     public $savePonderation = false;
@@ -58,18 +60,21 @@ class Ponderation extends Component
         if ($totalPonderation1 !== $expectedTotal && $totalPonderation2 !== $expectedTotal) {
             $this->addError('ponderation1', "⚠︎ La somme totale des pondérations pour le projets doit être égale à $expectedTotal%. Votre somme est de $totalPonderation1% pour la pondération 1.");
             $this->addError('ponderation2', "⚠︎ La somme totale des pondérations pour le projets doit être égale à $expectedTotal%. Votre somme est de $totalPonderation2% pour la pondération 2.");
+
             return false;
         }
 
         // If only the ponderation 1 is incorrect
         if ($totalPonderation1 !== $expectedTotal) {
             $this->addError('ponderation1', "⚠︎ La somme totale des pondérations pour le ou les divers projets doit être égale à $expectedTotal%. Votre somme est de $totalPonderation1% pour la pondération 1.");
+
             return false;
         }
 
         // If only the ponderation 2 is incorrect
         if ($totalPonderation2 !== $expectedTotal) {
             $this->addError('ponderation2', "⚠︎ La somme totale des pondérations pour le ou les divers projets doit être égale à $expectedTotal%. Votre somme est de $totalPonderation2% pour la pondération 2.");
+
             return false;
         }
 
@@ -86,7 +91,7 @@ class Ponderation extends Component
         ]);
 
         // Total percentage validation
-        if (!$this->validateTotalPercentage()) {
+        if (! $this->validateTotalPercentage()) {
             return false;
         }
 
@@ -95,12 +100,12 @@ class Ponderation extends Component
             $projectId = $projectPonderation->project_id;
 
             auth()->user()->projectPonderations()->updateOrCreate([
-                    'event_id' => $this->event->id,
-                    'project_id' => $projectId,
-                ], [
-                    'ponderation1' => $this->ponderations[$projectId]['ponderation1'] ?? 1,
-                    'ponderation2' => $this->ponderations[$projectId]['ponderation2'] ?? 1,
-                ]
+                'event_id' => $this->event->id,
+                'project_id' => $projectId,
+            ], [
+                'ponderation1' => $this->ponderations[$projectId]['ponderation1'] ?? 1,
+                'ponderation2' => $this->ponderations[$projectId]['ponderation2'] ?? 1,
+            ]
             );
         }
 

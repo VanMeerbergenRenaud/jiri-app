@@ -75,6 +75,23 @@
                                         </p>
                                     </li>
                                 </ul>
+                                @if($event->contacts->whereNull('email')->count() > 0)
+                                    <div class="event__actions__list__evaluators">
+                                        <p class="event__actions__list__evaluators__text">
+                                            <x-svg.warning/>
+                                            Attention, les évaluateurs suivants n'ont pas d'email enregistré. Ils ne
+                                            recevront pas de lien pour accéder à leur tableau de bord de l'épreuve.
+                                        </p>
+                                        <p class="event__actions__list__evaluators__list">
+                                            <span>Évaluateurs sans email&nbsp;:</span>
+                                            @foreach($event->contacts as $contact)
+                                                @if($contact->email === null)
+                                                    {{ ucfirst($contact->name) }},
+                                                @endif
+                                            @endforeach
+                                        </p>
+                                    </div>
+                                @endif
                             </div>
 
                             <x-dialog.footer>

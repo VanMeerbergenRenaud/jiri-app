@@ -15,9 +15,7 @@ class EvaluatorInvitation extends Mailable
      *
      * @return void
      */
-    public function __construct(public $event, public $contact, public $token)
-    {
-    }
+    public function __construct(public $event, public $contact, public $token) {}
 
     /**
      * Build the message.

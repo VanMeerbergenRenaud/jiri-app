@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Events;
 
-use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
 class Index extends Component

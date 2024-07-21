@@ -13,6 +13,7 @@ use Livewire\Component;
 class FormNewContact extends Component
 {
     public $event;
+
     public $newContact = false;
 
     #[Validate('required|min:3|max:50')]

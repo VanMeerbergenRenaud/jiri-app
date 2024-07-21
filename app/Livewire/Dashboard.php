@@ -11,8 +11,11 @@ class Dashboard extends Component
     public $events;
 
     public $availableEvent;
+
     public $currentEvent;
+
     public $pausedEvent;
+
     public $finishedEvent;
 
     public $timerStarted = false;

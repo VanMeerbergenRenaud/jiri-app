@@ -9,6 +9,7 @@ use Livewire\Component;
 class SearchListProject extends Component
 {
     public $event;
+
     public $projectname = '';
 
     public $added = false;

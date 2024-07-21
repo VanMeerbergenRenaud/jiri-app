@@ -10,9 +10,11 @@ use Livewire\Component;
 class SearchListContact extends Component
 {
     public $event;
+
     public $username = '';
 
     public $show = false;
+
     public $added = false;
 
     public function mount($event)

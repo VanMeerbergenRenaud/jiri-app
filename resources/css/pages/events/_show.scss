@@ -114,7 +114,7 @@
     }
 
     /* Second Table */
-    $width: 5.05rem; // width of .moy, .cg, .cga & .cd
+    $width: 5.05rem; // width of .moy, .cg & .cd
 
     .event__show__results {
         img {
@@ -187,11 +187,11 @@
                 min-width: 225px;
             }
 
-            .moy, .cg, .cga, .cd {
+            .moy, .cg .cd {
                 writing-mode: vertical-rl;
             }
 
-            .moy, .cg, .cga, .cd {
+            .moy, .cg, .cd {
                 position: sticky;
                 top: 0;
                 left: 0;
@@ -202,20 +202,17 @@
                 writing-mode: sideways-lr;
                 min-width: 2rem;
                 max-width: 2.5rem;
+                height: 165px;
             }
 
             .moy {
-                right: calc($width*3);
+                right: calc($width*2);
                 background-color: #D9EBED;
                 border-left: $border;
             }
             .cg {
-                right: calc($width*2);
-                background-color: #D9DDED;
-            }
-            .cga {
                 right: calc($width*1);
-                background-color: #E5E6EB;
+                background-color: #D9DDED;
             }
             .cd {
                 right: 0;
@@ -231,14 +228,14 @@
             .sticky {
                 position: sticky;
                 left: 0;
-                top: 3.1rem;
+                top: 3.9rem;
                 z-index: 3;
             }
 
             .sticky-small {
                 position: sticky;
                 left: 0;
-                top: 3.1rem;
+                top: 3.9rem;
                 z-index: 2;
                 min-width: 2rem;
             }
@@ -264,7 +261,7 @@
                 z-index: 2;
             }
 
-            .moy, .cg, .cga, .cd {
+            .moy, .cg, .cd {
                 // sticky
                 position: sticky;
                 left: 0;
@@ -273,11 +270,10 @@
             }
 
             .moy {
-                right: calc($width*3);
+                right: calc($width*2);
                 border-left: $border;
             }
-            .cg {right: calc($width*2)}
-            .cga {right: calc($width*1)}
+            .cg {right: calc($width*1)}
             .cd {right: 0}
 
             /* List of students */

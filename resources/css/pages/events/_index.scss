@@ -115,7 +115,8 @@
                     cursor: grab;
                     color: #c793a5;
                     background-color: white;
-                    min-width: 115px;
+                    justify-content: center;
+                    min-width: 145px;
 
                     &:hover {
                         background-color: $gray-100;
@@ -363,6 +364,39 @@
                 font-size: 0.94rem;
                 color: $text-slate-500;
                 max-width: 345px;
+
+                span {
+                    color: $blue-dark;
+                    font-weight: 500;
+                }
+            }
+        }
+
+        &__evaluators {
+
+            &__text {
+                max-width: 520px;
+                font-size: 0.94rem;
+                font-weight: 500;
+                color: $red;
+
+                svg {
+                    position: relative;
+                    top: 0.1rem;
+                    margin-right: 0.2rem;
+                    fill: $red;
+                }
+            }
+
+            &__list {
+                max-width: 515px;
+                margin-top: 1rem;
+                display: flex;
+                align-items: center;
+                justify-content: start;
+                gap: 0.5rem;
+                font-size: 0.94rem;
+                color: $text-slate-500;
 
                 span {
                     color: $blue-dark;

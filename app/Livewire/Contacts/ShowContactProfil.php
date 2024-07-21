@@ -112,11 +112,10 @@ class ShowContactProfil extends Component
         ]);
 
         auth()->user()->eventGlobalComments()
-            ->updateOrCreate(
-                [
-                    'event_id' => $this->event->id,
-                    'contact_id' => $this->contact->id,
-                ],
+            ->updateOrCreate([
+                'event_id' => $this->event->id,
+                'contact_id' => $this->contact->id,
+            ],
                 ['globalComment' => $this->globalComment]
             );
 
@@ -154,7 +153,11 @@ class ShowContactProfil extends Component
     {
         $metrics = $this->calculateScoreMetrics($projectId);
 
-        return $metrics['evaluatorCount'] > 0 ? $metrics['averageScore'] : '?';
+        $finalScore = $metrics['evaluatorCount'] > 0
+            ? $metrics['averageScore']
+            : 0;
+
+        return number_format($finalScore, 2);
     }
 
     public function calculateWeightedScore($ponderationKey)

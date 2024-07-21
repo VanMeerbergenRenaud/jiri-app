@@ -14,18 +14,12 @@ class FirstTable extends Component
 
     public $evaluators;
 
-    public function mount()
+    public function mount($event, $contacts, $students, $evaluators)
     {
-        $this->event = auth()->user()->events()
-            ->findOrFail(request()->route('event'));
-
-        $this->contacts = auth()->user()->eventContacts()
-            ->where('event_id', $this->event->id)
-            ->with('contact')
-            ->get();
-
-        $this->students = $this->contacts->where('role', 'student');
-        $this->evaluators = $this->contacts->where('role', 'evaluator');
+        $this->event = $event;
+        $this->contacts = $contacts;
+        $this->students = $students;
+        $this->evaluators = $evaluators;
     }
 
     public function render()

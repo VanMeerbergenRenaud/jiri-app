@@ -2,13 +2,13 @@
 
 namespace App\Livewire\Events\Edit;
 
-use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class FormNewProject extends Component
 {
     public $event;
+
     public $newProject = false;
 
     #[Validate('required|min:2|max:50')]

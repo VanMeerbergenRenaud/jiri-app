@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Events\Edit;
 
-use App\Models\Project;
 use App\Models\ProjectPonderation;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Attributes\On;
