@@ -88,15 +88,17 @@ class DatabaseSeeder extends Seeder
                     EvaluatorGlobalComment::factory()->create([
                         'event_id' => $event->id,
                         'contact_id' => $contact->id,
+                        'event_contact_id' => $user->contacts->random()->id,
                     ]);
 
                     $projects = $user->projects->random(5);
+
                     foreach ($projects as $project) {
                         EvaluatorEvaluation::factory()->create([
                             'event_id' => $event->id,
                             'project_id' => $project->id,
                             'contact_id' => $contact->id,
-                            'event_contact_id' => rand(1, 5),
+                            'event_contact_id' => $user->contacts->random()->id,
                         ]);
                     }
                 }
@@ -150,11 +152,11 @@ class DatabaseSeeder extends Seeder
                     ]);
                 }
 
-                Task::factory()->count(8)->create();
+                Task::factory()->count(4)->create();
 
                 // Create the project_task pivot table
                 foreach ($projects as $project) {
-                    $tasks = Task::all()->random(3);
+                    $tasks = Task::all()->random(2);
 
                     foreach ($tasks as $task) {
                         $project->tasks()->attach($task->id);

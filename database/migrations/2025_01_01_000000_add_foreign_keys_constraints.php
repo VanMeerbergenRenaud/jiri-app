@@ -50,6 +50,7 @@ return new class extends Migration
         Schema::table('evaluator_global_comment', function (Blueprint $table) {
             $table->foreignId('event_id')->constrained()->onDelete('cascade');
             $table->foreignId('contact_id')->constrained()->onDelete('cascade');
+            $table->foreignId('event_contact_id');
         });
 
         Schema::table('event_global_comment', function (Blueprint $table) {
@@ -100,6 +101,7 @@ return new class extends Migration
         Schema::table('evaluator_global_comment', function (Blueprint $table) {
             $table->dropForeign(['event_id']);
             $table->dropForeign(['contact_id']);
+            $table->dropForeign(['event_contact_id']);
         });
 
         Schema::table('event_global_comment', function (Blueprint $table) {

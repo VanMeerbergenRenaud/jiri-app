@@ -52,18 +52,27 @@
                             </p>
                         </li>
                     @endforeach
-                    {{-- TODO: add global comment --}}
+
                     <li class="jiriesComment__list__item__commentList__item">
+                        @php
+                            $scoredProjects = $evaluationsOfEvaluators->where('contact_id', $evaluator->contact->id);
+
+                            $totalScore = $scoredProjects->sum('score');
+
+                            $globalCote = $scoredProjects->count() > 0
+                                ? $totalScore / $scoredProjects->count()
+                                : null;
+                        @endphp
                         <div>
                             <h3 class="font-semibold capitalize">
                                 Commentaire global
                             </h3>
                             <span>
-                                {{ '?' }} / 20
+                                {{ $globalCote ?? '?' }} / 20
                             </span>
                         </div>
                         <p>
-                            {{ 'Aucun commentaire global enregistré.' }}
+                            {{ $this->getGlobalEvaluatorInfos('globalComment', $evaluator->contact->id) ?? 'Aucun commentaire global enregistré.' }}
                         </p>
                     </li>
                 </ul>

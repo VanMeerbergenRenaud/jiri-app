@@ -14,7 +14,7 @@ class EvaluatorGlobalCommentFactory extends Factory
     {
         return [
             'globalComment' => $this->faker->text(),
-            'globalCote' => $this->faker->numberBetween(0, 20),
+            //'globalCote' => $this->faker->numberBetween(0, 20),
         ];
     }
 }

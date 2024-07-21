@@ -43,7 +43,8 @@ class Show extends Component
 
         $this->globalComment = auth()->user()->evaluatorGlobalComments()
             ->where('event_id', $this->event->id)
-            ->where('contact_id', $this->student->id)
+            ->where('contact_id', $this->evaluator->id)
+            ->where('event_contact_id', $this->student->id)
             ->first()
             ->globalComment ?? null;
 
@@ -63,7 +64,8 @@ class Show extends Component
 
         auth()->user()->evaluatorGlobalComments()->updateOrCreate([
             'event_id' => $this->event->id,
-            'contact_id' => $this->student->id,
+            'contact_id' => $this->evaluator->id,
+            'event_contact_id' => $this->student->id,
         ], [
             'globalComment' => $this->globalComment,
             'created_at' => now(),
@@ -71,6 +73,11 @@ class Show extends Component
         ]);
 
         $this->show = false;
+    }
+
+    public function updateGlobalCote()
+    {
+        // the global cote is automatically calculated in the view
     }
 
     public function render()

@@ -60,15 +60,24 @@
 
                         <li class="jiriesComment__list__item__commentList__item">
                             <div>
+                                @php
+                                    $scoredProjects = $evaluationsFromEvaluator->where('event_contact_id', $student->contact->id);
+
+                                    $totalScore = $scoredProjects->sum('score');
+
+                                    $globalCote = $scoredProjects->count() > 0
+                                        ? $totalScore / $scoredProjects->count()
+                                        : null;
+                                @endphp
                                 <h3 class="font-semibold capitalize">
                                     Commentaire global
                                 </h3>
                                 <span>
-                                    {{ '?' }} / 20
+                                    {{ $globalCote ?? '?' }} / 20
                                 </span>
                             </div>
                             <p>
-                                {{ 'Aucun commentaire global enregistré.' }}
+                                {{ $this->getGlobalEvaluatorInfosFromEvaluator('globalComment', $student->contact->id) ?? 'Aucun commentaire global enregistré.' }}
                             </p>
                         </li>
                     </ul>

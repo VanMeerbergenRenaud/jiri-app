@@ -98,6 +98,24 @@ class ShowContactProfil extends Component
             ->globalComment ?? null;
     }
 
+    public function getGlobalEvaluatorInfos($info, $evaluatorId)
+    {
+        return auth()->user()->evaluatorGlobalComments()
+            ->where('event_id', $this->event->id)
+            ->where('contact_id', $evaluatorId)
+            ->where('event_contact_id', $this->contact->id)
+            ->first()->$info ?? null;
+    }
+
+    public function getGlobalEvaluatorInfosFromEvaluator($info, $studentId)
+    {
+        return auth()->user()->evaluatorGlobalComments()
+            ->where('event_id', $this->event->id)
+            ->where('contact_id', $this->contact->id)
+            ->where('event_contact_id', $studentId)
+            ->first()->$info ?? null;
+    }
+
     public function saveContact()
     {
         $this->form->update();
@@ -136,6 +154,7 @@ class ShowContactProfil extends Component
      * 2. Calculate the average score of a project
      * 3. Calculate the weighted score of a student
     */
+
     private function calculateScoreMetrics($projectId)
     {
         $projectEvaluations = $this->evaluationsOfEvaluators->where('project_id', $projectId);

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('evaluator_global_comment', function (Blueprint $table) {
             $table->id();
             $table->text('globalComment')->nullable();
-            $table->decimal('globalCote', 5, 2)->nullable();
+            //$table->decimal('globalCote', 5, 2)->nullable();
             $table->timestamps();
         });
     }
