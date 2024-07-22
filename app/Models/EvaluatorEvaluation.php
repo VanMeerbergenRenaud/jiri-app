@@ -31,4 +31,10 @@ class EvaluatorEvaluation extends Model
     {
         return $this->belongsTo(Project::class);
     }
+
+    // The evaluation belongs to a contact
+    public function contact(): BelongsTo
+    {
+        return $this->belongsTo(Contact::class);
+    }
 }

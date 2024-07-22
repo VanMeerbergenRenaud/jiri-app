@@ -22,6 +22,16 @@ class FirstTable extends Component
         $this->evaluators = $evaluators;
     }
 
+    public function getStatus($evaluatorId, $studentId)
+    {
+        $status = $this->event->evaluatorsEvaluations
+            ->where('contact_id', $evaluatorId)
+            ->where('event_contact_id', $studentId)
+            ->first();
+
+        return $status->status ?? null;
+    }
+
     public function render()
     {
         return view('livewire.events.show.first-table');

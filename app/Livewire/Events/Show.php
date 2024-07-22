@@ -14,11 +14,16 @@ class Show extends Component
 
     public $evaluators;
 
+    public $projects;
+
     public function mount($event)
     {
-        $this->event = auth()->user()->events()->findOrFail($event);
+        $this->event = auth()->user()->events()
+            ->with(['eventContacts', 'projects'])
+            ->findOrFail($event);
 
-        $this->contacts = $this->event->eventContacts;
+        $this->projects = $this->event->projects;
+        $this->contacts = $this->event->eventContacts->load('contact');
 
         $this->students = $this->contacts->where('role', 'student');
         $this->evaluators = $this->contacts->where('role', 'evaluator');

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Livewire\Events\Show;
 
 use Livewire\Component;
@@ -7,42 +6,42 @@ use Livewire\Component;
 class SecondTable extends Component
 {
     public $event;
-
     public $contacts;
-
     public $students;
-
     public $evaluators;
-
     public $projects;
+    public $evaluations;
+    public $ponderations;
 
-    public function mount($event, $contacts, $students, $evaluators)
+    public function mount($event, $contacts, $students, $evaluators, $projects)
     {
         $this->event = $event;
         $this->contacts = $contacts;
         $this->students = $students;
         $this->evaluators = $evaluators;
+        $this->projects = $projects;
 
-        $this->projects = $this->event->projects;
+        // Load evaluations and ponderations with eager loading
+        $this->evaluations = auth()->user()->evaluatorsEvaluations()
+            ->with('event', 'project', 'contact')
+            ->where('event_id', $event->id)
+            ->where('status', 'evaluated')
+            ->get();
+
+        $this->ponderations = auth()->user()->projectPonderations()
+            ->with('project')
+            ->where('event_id', $event->id)
+            ->get();
     }
-
-    /*
-     * Scores:
-     * 1. Find the score related to a student
-     * 2. Calculate the average score of a student
-     * 3. Calculate the sum of the scores of a student
-     * 4. Calculate the global score of a student with ponderation 1 or 2
-    */
 
     public function getScore($studentContactId, $evaluatorContactId, $projectId)
     {
-        return auth()->user()->evaluatorsEvaluations()
-            ->where('event_id', $this->event->id)
-            ->where('event_contact_id', $studentContactId)
-            ->where('project_id', $projectId)
+        $evaluation = $this->evaluations->where('event_contact_id', $studentContactId)
             ->where('contact_id', $evaluatorContactId)
-            ->where('status', 'evaluated')
-            ->first()->score ?? null;
+            ->where('project_id', $projectId)
+            ->first();
+
+        return $evaluation->score ?? null;
     }
 
     public function getAverageScore($studentContactId)
@@ -70,14 +69,10 @@ class SecondTable extends Component
         $totalWeightedScore = 0;
         $totalPonderation = 0;
 
-        $ponderationsOfProjects = auth()->user()->projectPonderations()
-            ->where('event_id', $this->event->id)
-            ->get();
-
-        foreach ($ponderationsOfProjects as $project) {
-            $metrics = $this->calculateScoreMetrics($project->project->id, $studentContactId);
+        foreach ($this->ponderations as $projectPonderation) {
+            $metrics = $this->calculateScoreMetrics($projectPonderation->project->id, $studentContactId);
             $averageScore = $metrics['averageScore'];
-            $ponderation = $project->$ponderationKey;
+            $ponderation = $projectPonderation->$ponderationKey;
 
             $totalWeightedScore += $averageScore * ($ponderation / 100);
             $totalPonderation += $ponderation;
@@ -92,13 +87,9 @@ class SecondTable extends Component
 
     private function calculateScoreMetrics($projectId, $studentContactId)
     {
-        $evaluations = auth()->user()->evaluatorsEvaluations()
-            ->where('event_id', $this->event->id)
-            ->where('event_contact_id', $studentContactId)
-            ->where('status', 'evaluated')
-            ->get();
-
-        $projectEvaluations = $evaluations->where('project_id', $projectId);
+        $projectEvaluations = $this->evaluations
+            ->where('project_id', $projectId)
+            ->where('event_contact_id', $studentContactId);
 
         $totalScore = $projectEvaluations->sum('score');
         $evaluatorCount = $projectEvaluations->count('score');

@@ -29,11 +29,14 @@
     <main class="mainEventShow max-width p-main">
         {{-- Event status action buttons --}}
         <div class="event__status">
+            <label for="timer">Durée&nbsp;:</label>
+            <span id="timer">00:00:00</span>
+
             <label for="status">Status&nbsp;:</label>
             <select id="status">
                 <option value="start">En cours</option>
                 <option value="pause">Mettre en pause</option>
-                <option value="end">Arrêter</option>
+                <option value="end">Terminer</option>
             </select>
             {{--
                 If 'en cours' -> nothing happen, the dashboard is active by default
@@ -49,7 +52,7 @@
 
         {{-- Second Table --}}
         <div class="event__show__results">
-            <livewire:events.show.second-table :event="$event" :contacts="$contacts" :evaluators="$evaluators" :students="$students" />
+            <livewire:events.show.second-table :event="$event" :contacts="$contacts" :evaluators="$evaluators" :students="$students" :projects="$projects" />
         </div>
     </main>
 
