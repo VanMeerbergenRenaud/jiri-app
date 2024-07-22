@@ -70,7 +70,7 @@
 
                 &__current {
                     padding: 0.875rem 2rem;
-                    border-radius: 1.5rem;
+                    border-radius: 0.75rem;
                     color: #b29280;
                     background-color: white;
 
@@ -81,7 +81,7 @@
 
                 &__pause {
                     padding: 0.875rem 2rem;
-                    border-radius: 1.5rem;
+                    border-radius: 0.75rem;
                     color: #6f8491;
                     background-color: white;
 
@@ -92,7 +92,7 @@
 
                 &__finish {
                     padding: 0.875rem 2rem;
-                    border-radius: 1.5rem;
+                    border-radius: 0.75rem;
                     color: #4f8f94;
                     background-color: white;
 
@@ -106,7 +106,7 @@
                     font-size: 0.875rem;
                     min-width: 155px;
                     text-align: center;
-                    border-radius: 1.5rem;
+                    border-radius: 0.75rem;
                     color: $text-slate-500;
                     background-color: #F7F7FA;
                 }

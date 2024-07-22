@@ -16,8 +16,10 @@ class EventRow extends Component
 
     public $showEditDialog = false;
 
-    public function mount()
+    public function mount($event)
     {
+        $this->event = $event;
+
         $this->form->setEvent($this->event);
     }
 
@@ -49,12 +51,9 @@ class EventRow extends Component
         $this->reset('showEditDialog');
     }
 
-    public function startEvent($eventId)
+    public function startEvent()
     {
-        $eventId = $this->event->id;
-
-        $evaluators = auth()->user()->eventContacts()
-            ->where('event_id', $eventId)
+        $evaluators = $this->event->eventContacts()
             ->where('role', 'evaluator')
             ->get();
 
@@ -66,7 +65,7 @@ class EventRow extends Component
 
             if ($evaluator) {
                 if (! empty($email)) {
-                    Mail::to($email)->send(new EvaluatorInvitation($eventId, $contactId, $token));
+                    Mail::to($email)->send(new EvaluatorInvitation($this->event->id, $contactId, $token));
                 }
             }
 
@@ -74,9 +73,9 @@ class EventRow extends Component
             $this->event->update([
                 'started_at' => now(),
             ]);
-
-            return redirect()->route('events.show', $eventId);
         }
+
+        return redirect()->route('events.show', $this->event->id);
     }
 
     public function render()

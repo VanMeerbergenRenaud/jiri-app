@@ -36,7 +36,7 @@
                     </x-dialog.open>
 
                     <x-dialog.panel>
-                        <form class="form" wire:submit.prevent="startEvent({{ $event->id }})">
+                        <form class="form" wire:submit.prevent="startEvent">
                             <div class="form__content">
                                 <h2 class="title">Commencer l'épreuve&nbsp;:&nbsp;{{ $event->name }}</h2>
                                 <ul class="event__actions__list">
@@ -101,7 +101,7 @@
 
                                 <button type="submit"
                                         class="save"
-                                        wire:submit="startEvent({{ $event->id }})">
+                                        wire:submit="startEvent">
                                     Commencer
                                 </button>
                             </x-dialog.footer>

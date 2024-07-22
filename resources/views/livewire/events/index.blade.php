@@ -13,7 +13,7 @@
 
     <main class="mainEvents max-width p-main">
         <div class="events">
-            <livewire:events.show-events />
+            <livewire:events.show-events :events="$events" />
         </div>
     </main>
 </div>
