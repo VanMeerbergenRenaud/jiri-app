@@ -37,4 +37,9 @@ class EvaluatorEvaluation extends Model
     {
         return $this->belongsTo(Contact::class);
     }
+
+    public function eventContact(): BelongsTo
+    {
+        return $this->belongsTo(EventContact::class);
+    }
 }

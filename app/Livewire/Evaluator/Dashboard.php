@@ -17,6 +17,7 @@ class Dashboard extends Component
 
         // Get all the events of the contact where he is an evaluator only
         $this->events = auth()->user()->eventContacts()
+            ->with('event')
             ->where('role', 'evaluator')
             ->where('contact_id', $this->evaluator->id)
             ->orderBy('starting_at')

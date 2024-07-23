@@ -21,7 +21,7 @@ class Edit extends Component
 
     public $projects;
 
-    #[Validate('required')]
+    #[Validate('nullable')]
     public $timer;
 
     #[Validate('required')]
@@ -61,7 +61,7 @@ class Edit extends Component
     public function addEvaluation()
     {
         $this->validate([
-            'timer' => 'required',
+            'timer' => 'nullable',
             'status' => 'required',
             'score' => 'required|numeric|min:0|max:20',
             'comment' => 'required|string|max:255',

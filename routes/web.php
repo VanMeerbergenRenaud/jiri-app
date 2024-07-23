@@ -89,14 +89,17 @@ Route::middleware('auth')->group(function () {
 
         // Route that let the evaluator start an evaluation
         Route::get('/{event}/{contact}/{token}/evaluation-start/{student}', EEvaluatorEvaluationIndex::class)
+            ->middleware('evaluator')
             ->name('evaluator-evaluation-start');
 
         // Route that let the evaluator start an evaluation
         Route::get('/{event}/{contact}/{token}/evaluation-edit/{student}/{project}', EEvaluatorEvaluationEdit::class)
+            ->middleware('evaluator')
             ->name('evaluator-evaluation-edit');
 
         // Route that let the evaluator see the summary of the evaluations
         Route::get('/{event}/{contact}/{token}/evaluation-summary/{student}', EEvaluatorEvaluationShow::class)
+            ->middleware('evaluator')
             ->name('evaluator-evaluation-summary');
     });
 
