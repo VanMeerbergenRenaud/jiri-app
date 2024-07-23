@@ -2,7 +2,6 @@
     <h3 class="title">Commentaires des membres du jury</h3>
     <ul class="jiriesComment__list">
         @foreach ($evaluators as $evaluator)
-            {{-- for each $comments from evaluators --}}
             <li x-data="{ open: false, isSelected: false }" class="jiriesComment__list__item">
                 <div class="jiriesComment__list__item__infos" :class="{ 'isSelected': isSelected }"
                      @click="open = !open; isSelected = !isSelected">
@@ -68,11 +67,11 @@
                                 Commentaire global
                             </h3>
                             <span>
-                                {{ $globalCote ?? '?' }} / 20
+                                {{ number_format($globalCote, 2) ?? '?' }} / 20
                             </span>
                         </div>
                         <p>
-                            {{ $this->getGlobalEvaluatorInfos('globalComment', $evaluator->contact->id) ?? 'Aucun commentaire global enregistré.' }}
+                            {{ $this->getGlobalCommentForStudent($evaluator->contact->id) ?? 'Aucun commentaire global enregistré.' }}
                         </p>
                     </li>
                 </ul>

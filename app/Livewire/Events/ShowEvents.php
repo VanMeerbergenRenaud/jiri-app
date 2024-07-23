@@ -36,14 +36,14 @@ class ShowEvents extends Component
     public function render()
     {
         $finishedEvents = auth()->user()->events()
-            ->with('contacts', 'projects')
+            ->withCount('contacts', 'projects')
             ->where('finished_at', '!=', null)
             ->where('name', 'like', '%'.$this->search.'%')
             ->orderBy('starting_at')
             ->paginate(4, ['*'], 'finishedEvents');
 
         $availableEvents = auth()->user()->events()
-            ->with('contacts', 'projects')
+            ->withCount('contacts', 'projects')
             ->where('starting_at', '<', now())
             ->where('started_at', '=', null)
             ->where('paused_at', '=', null)
@@ -53,7 +53,7 @@ class ShowEvents extends Component
             ->paginate(4, ['*'], 'availableEvents');
 
         $currentEvents = auth()->user()->events()
-            ->with('contacts', 'projects')
+            ->withCount('contacts', 'projects')
             ->where('started_at', '!=', null)
             ->where('paused_at', '=', null)
             ->where('finished_at', '=', null)
@@ -62,7 +62,7 @@ class ShowEvents extends Component
             ->paginate(4, ['*'], 'currentEvents');
 
         $pausedEvents = auth()->user()->events()
-            ->with('contacts', 'projects')
+            ->withCount('contacts', 'projects')
             ->where('started_at', '!=', null)
             ->where('paused_at', '!=', null)
             ->where('finished_at', '=', null)
@@ -71,7 +71,7 @@ class ShowEvents extends Component
             ->paginate(4, ['*'], 'pausedEvents');
 
         $comingSoonEvents = auth()->user()->events()
-            ->with('contacts', 'projects')
+            ->withCount('contacts', 'projects')
             ->where('starting_at', '>', now())
             ->where('started_at', '=', null)
             ->where('paused_at', '=', null)

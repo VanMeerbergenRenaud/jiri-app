@@ -16,8 +16,8 @@
         <div class="item__members">
             Participants<br>
             <p>
-                @isset($event->contacts)
-                    <span>{{ $event->contacts->count() }} enregistrés</span>
+                @isset($event->contacts_count)
+                    <span>{{ $event->contacts_count }} enregistrés</span>
                 @else
                     <span>0 enregistré</span>
                 @endisset
@@ -66,16 +66,16 @@
 
                                         <p class="event__actions__list__item__info">
                                             <span>Participants&nbsp;:</span>
-                                            {{ $event->contacts->count() }}
+                                            {{ $event->contacts_count }}
                                         </p>
 
                                         <p class="event__actions__list__item__info">
                                             <span>Projets&nbsp;:</span>
-                                            {{ $event->projects->count() }}
+                                            {{ $event->projects_count }}
                                         </p>
                                     </li>
                                 </ul>
-                                @if($event->contacts->whereNull('email')->count() > 0)
+                                @if($event->contacts()->whereNull('email')->count() > 0)
                                     <div class="event__actions__list__evaluators">
                                         <p class="event__actions__list__evaluators__text">
                                             <x-svg.warning/>

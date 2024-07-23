@@ -50,70 +50,73 @@ class ShowContactProfil extends Component
 
         $this->form->setContact($contact);
 
-        // The contact type is the role of the contact in the event -> it's the profile of the contact
-        $this->contactType = auth()->user()->eventContacts()
-            ->where('event_id', $this->event->id)
+        // Preload the necessary relationships in a single query
+        $user = auth()->user()->load([
+            'eventContacts' => function($query) use ($event) {
+                $query->where('event_id', $event->id)->with(['contact' => function($query) {
+                    $query->where('id', '!=', $this->contact->id);
+                }]);
+            },
+            'projectPonderations' => function($query) use ($event) {
+                $query->where('event_id', $event->id)->with('project');
+            },
+            'evaluatorsEvaluations' => function($query) use ($event) {
+                $query->where('event_id', $event->id)->where('status', 'evaluated');
+            },
+            'eventGlobalComments' => function($query) use ($event, $contact) {
+                $query->where('event_id', $event->id)->where('contact_id', $contact->id);
+            },
+            'evaluatorGlobalComments' => function($query) use ($event) {
+                $query->where('event_id', $event->id);
+            }
+        ]);
+
+        // Set contact type
+        $this->contactType = $user->eventContacts()
             ->where('contact_id', $this->contact->id)
+            ->where('event_id', $this->event->id)
             ->first()
-            ->role;
+            ->role ?? null;
 
-        $this->projects = auth()->user()->projectPonderations()
-            ->with('project')
+        // Load the projects, students and evaluators
+        $this->projects = $user->projectPonderations;
+
+        $this->students = $user->eventContacts
             ->where('event_id', $this->event->id)
-            ->get();
+            ->where('role', 'student');
 
-        $this->students = auth()->user()->eventContacts()
+        $this->evaluators = $user->eventContacts
             ->where('event_id', $this->event->id)
-            ->where('role', 'student')
-            ->get();
+            ->where('role', 'evaluator');
 
-        $this->evaluators = auth()->user()->eventContacts()
-            ->where('event_id', $this->event->id)
-            ->where('role', 'evaluator')
-            ->get();
+        // Load evaluations for a student and from an evaluator
+        $this->evaluationsOfEvaluators = $user->evaluatorsEvaluations->where('event_contact_id', $this->contact->id);
+        $this->evaluationsFromEvaluator = $user->evaluatorsEvaluations->where('contact_id', $this->contact->id);
 
-        /*
-         * Evaluations:
-         * 1. Get the evaluations of all the evaluators that evaluated the student (student profil)
-         * 2. Get the evaluations from an evaluator to all the student he evaluates (evaluator profil)
-         * 3. Get the global comment of the admin user for the student
-        */
-
-        $this->evaluationsOfEvaluators = auth()->user()->evaluatorsEvaluations()
-            ->where('event_id', $this->event->id)
-            ->where('event_contact_id', $this->contact->id)
-            ->where('status', 'evaluated')
-            ->get();
-
-        $this->evaluationsFromEvaluator = auth()->user()->evaluatorsEvaluations()
-            ->where('event_id', $this->event->id)
-            ->where('contact_id', $this->contact->id)
-            ->where('status', 'evaluated')
-            ->get();
-
-        $this->globalComment = auth()->user()->eventGlobalComments()
-            ->where('event_id', $this->event->id)
-            ->where('contact_id', $this->contact->id)
+        //  Load global comment
+        $this->globalComment = $user->eventGlobalComments
             ->first()
             ->globalComment ?? null;
     }
 
-    public function getGlobalEvaluatorInfos($info, $evaluatorId)
+    public function getGlobalCommentForStudent($evaluatorId)
     {
-        return auth()->user()->evaluatorGlobalComments()
+        return auth()->user()->evaluatorGlobalComments
             ->where('event_id', $this->event->id)
             ->where('contact_id', $evaluatorId)
             ->where('event_contact_id', $this->contact->id)
-            ->first()->$info ?? null;
+            ->first()
+            ->globalComment ?? null;
     }
 
-    public function getGlobalEvaluatorInfosFromEvaluator($info, $studentId)
+    public function getGlobalCommentForEvaluator($studentId)
     {
-        return auth()->user()->evaluatorGlobalComments()
+        return auth()->user()->evaluatorGlobalComments
             ->where('event_id', $this->event->id)
             ->where('contact_id', $this->contact->id)
             ->where('event_contact_id', $studentId)
-            ->first()->$info ?? null;
+            ->first()
+            ->globalComment ?? null;
     }
 
     public function saveContact()

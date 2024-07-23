@@ -73,11 +73,11 @@
                                     Commentaire global
                                 </h3>
                                 <span>
-                                    {{ $globalCote ?? '?' }} / 20
+                                    {{ number_format($globalCote, 2) ?? '?' }} / 20
                                 </span>
                             </div>
                             <p>
-                                {{ $this->getGlobalEvaluatorInfosFromEvaluator('globalComment', $student->contact->id) ?? 'Aucun commentaire global enregistré.' }}
+                                {{ $this->getGlobalCommentForEvaluator($student->contact->id) ?? 'Aucun commentaire global enregistré.' }}
                             </p>
                         </li>
                     </ul>

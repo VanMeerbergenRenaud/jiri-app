@@ -16,7 +16,7 @@
         <tr class="project-list">
             @foreach ($projects as $project)
                 <th>
-                    {{ $project->project->name }}
+                    {{ $project->project->name ?? 'Projet inconnu' }}
                 </th>
             @endforeach
         </tr>
@@ -24,7 +24,9 @@
             @foreach ($projects as $project)
                 <td>
                     <h4 class="title">Projet présenté</h4>
-                    <p>Oui</p>
+                    <p>
+                        {{ $project->project->status ?? 'Non présenté' }}
+                    </p>
                 </td>
             @endforeach
         </tr>
@@ -34,7 +36,9 @@
                     <h4 class="title">Réalisation(s)</h4>
                     <ul>
                         <li>
-                            {{--{{ ucwords(implode(' | ', json_decode($project->project->tasks))) ?? "Non renseigné" }}--}}
+                            {{--@foreach ($project->project->tasks as $task)
+                                {{ $task->name ?? 'Non renseigné' }} |
+                            @endforeach--}}
                         </li>
                     </ul>
                 </td>
@@ -44,8 +48,8 @@
             @foreach ($projects as $project)
                 <td>
                     <h4 class="title">Maquette de design</h4>
-                    <a href="{{ $project->design ?? "#" }}" class="link" title="Vers la maquette de design">
-                        {{ $project->design ?? "https://adobe.xd/cv-renaud.vmb" }}
+                    <a href="{{ $project->design ?? "#" }}" target="_blank" class="link" title="Vers la maquette de design">
+                        {{ $project->design ?? "https://adobe.xd/renaud.vmb" }}
                     </a>
                 </td>
             @endforeach
@@ -54,8 +58,8 @@
             @foreach ($projects as $project)
                 <td>
                     <h4 class="title">Url du site</h4>
-                    <a href="{{ $project->site ?? "#" }}" class="link" title="Vers le site du projet">
-                        {{ $project->site ?? "Non renseigné" }}
+                    <a href="{{ $project->project->url_readme ?? "#" }}" target="_blank" class="link" title="Vers le site du projet">
+                        {{ $project->project->url_readme ?? "Non renseigné" }}
                     </a>
                 </td>
             @endforeach
@@ -64,7 +68,7 @@
             @foreach ($projects as $project)
                 <td>
                     <h4 class="title">Repository GitHub</h4>
-                    <a href="{{ $project->github ?? "#" }}" class="link" title="Vers le repository GitHub">
+                    <a href="{{ $project->github ?? "#" }}" target="_blank" class="link" title="Vers le repository GitHub">
                         {{ $project->github ?? "https://github.com/VanMeerbergenRenaud/jiri-app" }}
                     </a>
                 </td>

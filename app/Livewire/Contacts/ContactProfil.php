@@ -13,7 +13,7 @@ class ContactProfil extends Component
     public function mount($event, $contact)
     {
         $this->event = auth()->user()->events()->findOrFail($event);
-        $this->contact = $this->event->contacts()->findOrFail($contact);
+        $this->contact = auth()->user()->contacts()->findOrFail($contact);
     }
 
     public function redirectUser($contactId)
