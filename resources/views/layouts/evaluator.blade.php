@@ -17,7 +17,10 @@
         @vite(['resources/css/app.scss', 'resources/js/app.js'])
     </head>
     <body>
-        <!-- Page Content -->
+        <div wire:offline class="offline">
+            Vous êtes actuellement hors ligne veuillez vous reconnecter à un réseau pour continuer à utiliser l'application.
+        </div>
+
         {{ $slot }}
 
         @livewireScriptConfig
