@@ -21,11 +21,11 @@ class Navbar extends Component
     public function quitEvent()
     {
         // Todo stop the timer and add a finished time to the event
-        $this->eventInProgress->update([
+        /*$this->eventInProgress->update([
             'finished_at' => now(),
-        ]);
+        ]);*/
 
-        return redirect()->route('events.index');
+        return redirect()->route('dashboard');
     }
 
     public function render()

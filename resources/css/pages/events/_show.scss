@@ -12,7 +12,7 @@
         align-items: center;
         gap: 1rem;
 
-        label {
+        &__title {
             font-size: 0.75rem;
             font-weight: 500;
             text-transform: uppercase;
@@ -83,25 +83,21 @@
                 z-index: 1;
             }
 
-            td {
+            .selectStatus {
                 position: relative;
                 width: 100%;
+                padding: 0;
 
-                label {
-                    width: 0;
+                .form__field {
+                    margin: 0;
+                }
+
+                select {
+                    text-align: center;
+                    width: 100%;
                     height: 4rem;
-
-                    .input {
-                        visibility: hidden;
-                        width: 0;
-                        height: 0;
-                    }
-
-                    svg {
-                        position: absolute;
-                        top: 30%;
-                        left: 45%;
-                    }
+                    border: none;
+                    background: transparent;
                 }
             }
         }
@@ -249,6 +245,7 @@
                 padding: 1rem 1.25rem 1rem 1.75rem;
                 vertical-align: bottom;
                 writing-mode: sideways-lr;
+                height: 151px;
             }
         }
 
