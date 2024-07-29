@@ -25,6 +25,7 @@
                     $allEvaluated = $studentEvaluations->every(fn($evaluation) => $evaluation->status === 'evaluated') && $studentEvaluations->isNotEmpty() ? 'Évalué' : 'Non évalué';
 
                     // Calculer le temps d'activité total
+                    // Calculer le temps d'activité total et l'affiché au format en heures minutes secondes -> 01h01min01s
                     $totalSeconds = $studentEvaluations->sum(function ($evaluation) {
                         list($hours, $minutes, $seconds) = explode(':', $evaluation->timer ?? '00:00:00');
                         return ($hours * 3600) + ($minutes * 60) + $seconds;
@@ -32,10 +33,17 @@
 
                     $hours = floor($totalSeconds / 3600);
                     $minutes = floor(($totalSeconds % 3600) / 60);
+                    $seconds = $totalSeconds % 60;
 
-                    $formattedTotalTime = $totalSeconds >= 3600
-                        ? sprintf('%dh%02dmin', $hours, $minutes)
-                        : ($totalSeconds > 0 ? sprintf('%dmin', ($hours * 60) + $minutes) : '0');
+                    if ($totalSeconds >= 3600) {
+                        $formattedTotalTime = sprintf('%2dh%02dmin', $hours, $minutes);
+                    } elseif ($totalSeconds >= 60) {
+                        $formattedTotalTime = sprintf('%2dmin%02ds', $minutes, $seconds);
+                    } elseif ($totalSeconds > 0) {
+                        $formattedTotalTime = sprintf('%2ds', $seconds);
+                    } else {
+                        $formattedTotalTime = '00:00:00';
+                    }
 
                     // Calculer le nombre de projets évalués sur le total
                     $projectsEvaluated = $studentEvaluations->filter(fn($evaluation) => $evaluation->project_id !== null);
@@ -52,7 +60,7 @@
                 <li x-data="{ open: false, isSelected: false }">
                     <div class="students__list__item" :class="{ 'isSelected': isSelected }" @click="open = !open; isSelected = !isSelected">
                         <div class="students__list__item__infos">
-                            <img src="{{ $student->contact->avatar ?? asset('img/placeholder.png') }}" alt="">
+                            <img src="{{ $student->contact->avatar ?? asset('img/placeholder.png') }}" alt="photo de profil">
                             <span>
                             {{ $student->contact->name }} {{ $student->contact->firstname }}
                         </span>
@@ -71,7 +79,7 @@
                                 Temps d'activité
 
                                 <time datetime="{{ sprintf('%02d:%02d', $hours, $minutes) }}">
-                                    {{ $formattedTotalTime ?? '00:00' }}
+                                    {{ $formattedTotalTime ?? '00:00:00' }}
                                 </time>
                             </li>
                             <li>
@@ -88,18 +96,36 @@
 
                                 <span>{{ $allPublic ? 'Publié' : 'Non publié' }}</span>
                             </li>
-                            <li>
-                                <a href="{{ route('events.evaluator-evaluation-start' , [
-                                        'event' => $event,
-                                        'contact' => $evaluator,
-                                        'token' => $token,
-                                        'student' => $student->contact
-                                    ]) }}"
-                                   class="students__list__content__link"
-                                   wire:navigate
-                                >
-                                    Évaluer
-                                </a>
+                            <li class="mobile-actions">
+                                <x-menu>
+                                    <x-menu.button>
+                                        <x-svg.dots/>
+                                    </x-menu.button>
+
+                                    <x-menu.items>
+                                        <x-menu.close>
+                                            <x-menu.item wire:click="evaluateStudent({{ $student->contact->id }})">
+                                                <x-svg.edit/>
+
+                                                <span class="students__list__content__link">
+                                            Évalué l'étudiant
+                                        </span>
+                                            </x-menu.item>
+                                        </x-menu.close>
+
+                                        <x-divider/>
+
+                                        <x-menu.close>
+                                            <x-menu.item wire:click="evaluationsSummary({{ $student->contact->id }})">
+                                                <x-svg.show />
+
+                                                <span class="students__list__content__link">
+                                            Voir le récap
+                                        </span>
+                                            </x-menu.item>
+                                        </x-menu.close>
+                                    </x-menu.items>
+                                </x-menu>
                             </li>
                         </ul>
                     </div>
@@ -135,7 +161,7 @@
                     // Calculer la visibilité
                     $allEvaluated = $studentEvaluations->every(fn($evaluation) => $evaluation->status === 'evaluated') && $studentEvaluations->isNotEmpty() ? 'Évalué' : 'Non évalué';
 
-                    // Calculer le temps d'activité total
+                    // Calculer le temps d'activité total et l'affiché au format en heures minutes secondes -> 01h01min01s
                     $totalSeconds = $studentEvaluations->sum(function ($evaluation) {
                         list($hours, $minutes, $seconds) = explode(':', $evaluation->timer ?? '00:00:00');
                         return ($hours * 3600) + ($minutes * 60) + $seconds;
@@ -143,10 +169,17 @@
 
                     $hours = floor($totalSeconds / 3600);
                     $minutes = floor(($totalSeconds % 3600) / 60);
+                    $seconds = $totalSeconds % 60;
 
-                    $formattedTotalTime = $totalSeconds >= 3600
-                        ? sprintf('%dh%02dmin', $hours, $minutes)
-                        : ($totalSeconds > 0 ? sprintf('%dmin', ($hours * 60) + $minutes) : '0');
+                    if ($totalSeconds >= 3600) {
+                        $formattedTotalTime = sprintf('%2dh%02dmin', $hours, $minutes);
+                    } elseif ($totalSeconds >= 60) {
+                        $formattedTotalTime = sprintf('%2dmin%02ds', $minutes, $seconds);
+                    } elseif ($totalSeconds > 0) {
+                        $formattedTotalTime = sprintf('%2ds', $seconds);
+                    } else {
+                        $formattedTotalTime = '00:00:00';
+                    }
 
                     // Calculer le nombre de projets évalués sur le total
                     $projectsEvaluated = $studentEvaluations->filter(fn($evaluation) => $evaluation->project_id !== null);
@@ -163,7 +196,7 @@
 
                 <tr>
                     <td class="name capitalize">
-                        <img src="{{ $student->contact->avatar ?? asset('img/placeholder.png') }}" alt="photo de profil du contact">
+                        <img src="{{ $student->contact->avatar ?? asset('img/placeholder.png') }}" alt="photo de profil">
                         {{ $student->contact->name }}
                         {{ $student->contact->firstname }}
                     </td>
@@ -185,17 +218,35 @@
                         {{ $allPublic ? 'Publié' : 'Non publié' }}
                     </td>
                     <td class="actions">
-                        <a href="{{ route('events.evaluator-evaluation-start' , [
-                            'event' => $event,
-                            'contact' => $evaluator,
-                            'token' => $token,
-                            'student' => $student->contact
-                        ]) }}"
-                           class="students__list__content__link"
-                           wire:navigate
-                        >
-                            Évaluer
-                        </a>
+                        <x-menu>
+                            <x-menu.button>
+                                <x-svg.dots/>
+                            </x-menu.button>
+
+                            <x-menu.items>
+                                <x-menu.close>
+                                    <x-menu.item wire:click="evaluateStudent({{ $student->contact->id }})">
+                                        <x-svg.edit/>
+
+                                        <span class="students__list__content__link">
+                                            Évalué l'étudiant
+                                        </span>
+                                    </x-menu.item>
+                                </x-menu.close>
+
+                                <x-divider/>
+
+                                <x-menu.close>
+                                    <x-menu.item wire:click="evaluationsSummary({{ $student->contact->id }})">
+                                        <x-svg.show />
+
+                                        <span class="students__list__content__link">
+                                            Voir le récap
+                                        </span>
+                                    </x-menu.item>
+                                </x-menu.close>
+                            </x-menu.items>
+                        </x-menu>
                     </td>
                 </tr>
             @empty

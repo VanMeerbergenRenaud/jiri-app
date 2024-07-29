@@ -24,23 +24,31 @@
                         // Récupérer les évaluations associées à l'étudiant
                         $infos = $info->where('event_contact_id', $student->id);
 
-                        // Calculer le temps total en secondes avec la fonction sum de Laravel
+                        // Calculer le temps d'activité total et l'affiché au format en heures minutes secondes -> 01h01min01s
                         $totalSeconds = $infos->sum(function ($evaluation) {
                             list($hours, $minutes, $seconds) = explode(':', $evaluation->timer ?? '00:00:00');
                             return ($hours * 3600) + ($minutes * 60) + $seconds;
                         });
 
-                        // Convertir le temps total en heures, minutes et secondes
                         $hours = floor($totalSeconds / 3600);
                         $minutes = floor(($totalSeconds % 3600) / 60);
                         $seconds = $totalSeconds % 60;
 
-                        // Formater en 00:00:00
+                        if ($totalSeconds >= 3600) {
+                            $formattedTotalTime = sprintf('%2dh%02dmin', $hours, $minutes);
+                        } elseif ($totalSeconds >= 60) {
+                            $formattedTotalTime = sprintf('%2dmin%02ds', $minutes, $seconds);
+                        } elseif ($totalSeconds > 0) {
+                            $formattedTotalTime = sprintf('%2ds', $seconds);
+                        } else {
+                            $formattedTotalTime = '00:00:00';
+                        }
+
                         $formattedTime = sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);
                     @endphp
 
                     <x-svg.clock/>
-                    Temps passé avec l'étudiant&nbsp;:&nbsp;<time datetime="{{ $formattedTime }}">{{ $formattedTime }}</time>
+                    Temps passé avec l'étudiant&nbsp;:&nbsp;<time datetime="{{ $formattedTime }}">{{ $formattedTotalTime }}</time>
                 </span>
             </div>
         </div>
@@ -123,7 +131,7 @@
                             @if($info->where('status', 'evaluated')->count() === $projects->count())
                                 <span class="status--evaluated">Tout vu</span>
                             @else
-                                <span class="status--not-evaluated">Tout non vu</span>
+                                <span class="status--not-evaluated">Non vu totalement</span>
                             @endif
                         </td>
                     </tr>

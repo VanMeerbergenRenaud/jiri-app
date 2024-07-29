@@ -16,11 +16,7 @@
         <div class="item__members">
             Participants<br>
             <p>
-                @isset($event->contacts_count)
-                    <span>{{ $event->contacts_count }} enregistrés</span>
-                @else
-                    <span>0 enregistré</span>
-                @endisset
+                <span>{{ $event->contacts_count ?? '0' }} enregistré{{ $event->contacts_count < 2 ? '' : 's' }}</span>
             </p>
         </div>
         {{-- Liens : Édition, Voir, Non disponible, Éditer, Supprimer --}}
@@ -66,29 +62,48 @@
 
                                         <p class="event__actions__list__item__info">
                                             <span>Participants&nbsp;:</span>
-                                            {{ $event->contacts_count }}
+                                            {{ $event->contacts_count ?? '0' }}
                                         </p>
 
                                         <p class="event__actions__list__item__info">
                                             <span>Projets&nbsp;:</span>
-                                            {{ $event->projects_count }}
+                                            {{ $event->projects_count ?? '0' }}
                                         </p>
                                     </li>
                                 </ul>
-                                @if($event->contacts()->whereNull('email')->count() > 0)
-                                    <div class="event__actions__list__evaluators">
-                                        <p class="event__actions__list__evaluators__text">
+                                {{-- if there are no participants --}}
+                                @if(session()->has('errorParticipants'))
+                                    <div class="event__actions__list__error">
+                                        <p class="event__actions__list__error__text">
                                             <x-svg.warning/>
-                                            Attention, les évaluateurs suivants n'ont pas d'email enregistré. Ils ne
-                                            recevront pas de lien pour accéder à leur tableau de bord de l'épreuve.
+                                            {{ session('errorParticipants') }}
                                         </p>
-                                        <p class="event__actions__list__evaluators__list">
-                                            <span>Évaluateurs sans email&nbsp;:</span>
-                                            @foreach($event->contacts as $contact)
-                                                @if($contact->email === null)
-                                                    {{ ucfirst($contact->name) }},
-                                                @endif
-                                            @endforeach
+                                    </div>
+                                @endif
+                                {{-- if there are evaluators without email --}}
+                                @if(session()->has('errorNoEvaluator'))
+                                    <div class="event__actions__list__error">
+                                        <p class="event__actions__list__error__text">
+                                            <x-svg.warning/>
+                                            {{ session('errorNoEvaluator') }}
+                                        </p>
+                                    </div>
+                                @endif
+                                {{-- if there are evaluators without email --}}
+                                @if(session()->has('errorEvaluatorEmail'))
+                                    <div class="event__actions__list__error">
+                                        <p class="event__actions__list__error__text">
+                                            <x-svg.warning/>
+                                            {{ session('errorEvaluatorEmail') }}
+                                        </p>
+                                    </div>
+                                @endif
+                                {{-- if there are no projects --}}
+                                @if(session()->has('errorNoProject'))
+                                    <div class="event__actions__list__error">
+                                        <p class="event__actions__list__error__text">
+                                            <x-svg.warning/>
+                                            {{ session('errorNoProject') }}
                                         </p>
                                     </div>
                                 @endif
@@ -238,4 +253,12 @@
             </x-menu>
         </div>
     </li>
+
+    @if($saved)
+        <x-notifications
+            icon="success"
+            title="Épreuve modifiée avec succès"
+            method="$set('saved', false)"
+        />
+    @endif
 </div>

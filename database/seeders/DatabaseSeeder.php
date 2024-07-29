@@ -159,11 +159,11 @@ class DatabaseSeeder extends Seeder
                     ]);
                 }
 
-                Task::factory()->count(4)->create();
+                Task::factory()->count(3)->create();
 
                 // Create the project_task pivot table
                 foreach ($projects as $project) {
-                    $tasks = Task::all()->random(2);
+                    $tasks = Task::all()->random(1);
 
                     foreach ($tasks as $task) {
                         $project->tasks()->attach($task->id);

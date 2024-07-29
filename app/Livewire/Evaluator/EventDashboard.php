@@ -36,6 +36,26 @@ class EventDashboard extends Component
         $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
     }
 
+    public function evaluateStudent($studentId)
+    {
+        return redirect()->route('events.evaluator-evaluation-start', [
+            'event' => $this->event->id,
+            'contact' => $this->evaluator,
+            'token' => $this->token,
+            'student' => $studentId,
+        ]);
+    }
+
+    public function evaluationsSummary($studentId)
+    {
+        return redirect()->route('events.evaluator-evaluation-summary', [
+            'event' => $this->event->id,
+            'contact' => $this->evaluator,
+            'token' => $this->token,
+            'student' => $studentId,
+        ]);
+    }
+
     public function render()
     {
         $students = auth()->user()->eventContacts()

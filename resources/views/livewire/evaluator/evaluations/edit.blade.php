@@ -38,26 +38,32 @@
                         </p>
                     </li>
                     <hr>
-                    {{--timer--}}
-                    {{-- TODO : déclencher le timer lorsque l'utilisateur est sur la page --}}
+
                     <li class="evaluationEdit__list__item item">
-                        <x-form.field
-                            label="Temps passé"
-                            name="timer"
-                            type="time"
-                            model="timer"
-                            value="{{ $timer ?? '00:00:00' }}"
-                            placeholder="00:00:00"
-                        />
+                        <div class="form__field">
+                            <span>Temps passé</span>
+                            @if($status === 'evaluated' && $score !== null && $comment !== null)
+                                <span>
+                                    {{ $timer ?? 'Terminé' }}
+                                </span>
+                            @else
+                                <span wire:poll.1s="updateTimer">
+                                    {{ $hours ?? '00' }}:{{ $minutes ?? '00' }}:{{ $seconds ?? '00' }}
+                                </span>
+                            @endif
+                        </div>
                     </li>
+
                     <li class="evaluationEdit__list__item">
                         <label for="eventStatus" class="label">Status</label>
                         <select name="eventStatus" id="eventStatus" wire:model.blur="status">
-                            <option disabled selected value="">Choisir un status</option>
+                            <option disabled selected>Choisir un status</option>
                             <option value="evaluated">Vu</option>
+                            <option value="pending">En cours</option>
                             <option value="not evaluated">Non vu</option>
                         </select>
                     </li>
+
                     <li class="evaluationEdit__list__item">
                         <label for="eventReview" class="label">Cote du projet</label>
                         <div class="eventReview">
@@ -85,6 +91,7 @@
                             </ul>
                         @enderror
                     </li>
+
                     <li class="evaluationEdit__list__item eventComment">
                         <x-form.textarea
                             label="Commentaire"

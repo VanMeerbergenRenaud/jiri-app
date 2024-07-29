@@ -13,6 +13,8 @@ class ProjectRow extends Component
 
     public $showEditDialog = false;
 
+    public $saved = false;
+
     public function mount()
     {
         $this->form->setProject($this->project);
@@ -23,6 +25,7 @@ class ProjectRow extends Component
         $this->form->update();
         $this->project->refresh();
         $this->reset('showEditDialog');
+        $this->saved = true;
     }
 
     public function render()

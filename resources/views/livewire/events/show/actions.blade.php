@@ -39,13 +39,33 @@
         <x-dialog wire:model="eventOnPause">
             <x-dialog.panel>
                 <div class="form__content">
-                    <h2 class="title">Modification du status</h2>
+                    <h2 aria-level="2" role="heading" class="title">Modification du status</h2>
                     <p>L'épreuve à été mise en pause. Voulez-vous la continuer ou plutôt la terminer définitevement&nbsp;?</p>
                 </div>
 
                 <x-dialog.footer>
                     <button type="button" wire:click="finishEvent" class="cancel">Terminer</button>
                     <button type="button" wire:click="continueEvent" class="save">Continuer</button>
+                </x-dialog.footer>
+            </x-dialog.panel>
+        </x-dialog>
+    @endif
+
+    @if($event->started_at === null && $event->paused_at === null && $event->finished_at === null)
+        <x-dialog wire:model="eventNotStarted">
+            <x-dialog.panel>
+                <div class="form__content">
+                    <h2 aria-level="2" role="heading" class="title">Épreuve non démarrée</h2>
+                    <p>
+                        L'épreuve <span class="font-semibold">{{ $event->name }}</span> n'a pas encore commencé.
+                    </p>
+                    <p>
+                        Veuillez démarrer l'épreuve depuis la vue d'ensemble des épreuves en cliquant sur le bouton 'Démarrer'.
+                    </p>
+                </div>
+
+                <x-dialog.footer>
+                    <button type="button" wire:click="startEvent" class="save">Continuer</button>
                 </x-dialog.footer>
             </x-dialog.panel>
         </x-dialog>

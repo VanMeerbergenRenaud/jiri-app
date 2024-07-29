@@ -140,5 +140,13 @@
                 </x-dialog>
             </x-menu.items>
         </x-menu>
+
+        @if($saved)
+            <x-notifications
+                icon="success"
+                title="Projet modifié avec succès"
+                method="$set('saved', false)"
+            />
+        @endif
     </td>
 </tr>
