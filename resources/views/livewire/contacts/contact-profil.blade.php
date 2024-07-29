@@ -24,12 +24,11 @@
                 name="name"
                 placeholder="Sélectionner un autre profil -"
                 :options="$event->contacts"
-                :messages="$errors->get('name')"
                 srOnly="true"
                 wire:change="redirectUser($event.target.value)"
             />
         </div>
 
-        <livewire:contacts.show-contact-profil :$contact />
+        <livewire:contacts.show-contact-profil :$event :$contact />
     </main>
 </div>

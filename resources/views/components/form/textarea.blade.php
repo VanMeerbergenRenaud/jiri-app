@@ -13,15 +13,15 @@
         rows="5"
         placeholder="{{ $placeholder }}"
         value="{{ old($name) ?? $value}}"
-        wire:model="{{ $model }}"
+        wire:model.blur="{{ $model }}"
         {{ $attributes }}
     ></textarea>
 
-    @if ($messages)
+    @error ($model)
         <ul class="error-message">
-            @foreach ((array) $messages as $message)
+            @foreach ($errors->get($model) as $message)
                 <li class="error-message__item">{{ $message }}</li>
             @endforeach
         </ul>
-    @endif
+    @enderror
 </div>

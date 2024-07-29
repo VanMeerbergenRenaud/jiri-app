@@ -38,6 +38,7 @@
 -------------------------- */
 @import "components/navigation";
 @import "components/breadcrumb";
+@import "components/offline";
 @import "components/header";
 @import "components/footer";
 @import "components/dialog";
@@ -49,6 +50,7 @@
 ------------------------- */
 @import "pages/homepage";
 @import "pages/welcome";
+@import "pages/dashboard";
 
 /* ------- Events ------- */
 @import "pages/events/index";

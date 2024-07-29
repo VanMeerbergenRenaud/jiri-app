@@ -23,7 +23,7 @@ body {
 }
 
 main {
-    min-height: 70vh;
+    min-height: 80vh;
 }
 
 h2 {
@@ -58,6 +58,14 @@ svg {
 
 .inline-block {
     display: inline-block;
+}
+
+.bold {
+    font-weight: 500;
+}
+
+.uppercase {
+    text-transform: uppercase;
 }
 
 .capitalize {

@@ -29,8 +29,8 @@ class ImportContacts extends Component
     ];
 
     protected $messages = [
-        'fieldColumnMap.name.required' => 'The name column is required.',
-        'fieldColumnMap.firstname.required' => 'The firstname column is required.',
+        'fieldColumnMap.name.required' => 'La colonne nom est obligatoire.',
+        'fieldColumnMap.firstname.required' => 'La colonne prénom est obligatoire.',
     ];
 
     public function updatedUpload()
@@ -48,17 +48,22 @@ class ImportContacts extends Component
             ->toArray();
     }
 
-    public function import() {
+    public function import()
+    {
         $this->validate();
 
         Csv::from($this->upload)
             ->eachRow(function ($row) {
-                auth()->user()->contacts()->create(
+                auth()->user()->contacts()->updateOrCreate(
                     $this->extractFieldsFromRow($row));
             });
 
         $this->reset();
 
         $this->imported = true;
+
+        sleep(1);
+
+        return redirect()->route('contacts.index');
     }
 }

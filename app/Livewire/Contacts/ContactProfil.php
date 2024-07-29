@@ -6,27 +6,27 @@ use Livewire\Component;
 
 class ContactProfil extends Component
 {
-    public $eventId;
-    public $contactId;
+    public $event;
+
+    public $contact;
 
     public function mount($event, $contact)
     {
-        $this->eventId = $event;
-        $this->contactId = $contact;
+        $this->event = auth()->user()->events()->findOrFail($event);
+        $this->contact = auth()->user()->contacts()->findOrFail($contact);
     }
 
     public function redirectUser($contactId)
     {
-        return redirect()->route('events.contact-profil', ['event' => $this->eventId, 'contact' => $contactId]);
+        return redirect()->route('events.contact-profil', [
+            'event' => $this->event->id,
+            'contact' => $contactId,
+        ]);
     }
 
     public function render()
     {
-        $event = auth()->user()->events()->findOrFail($this->eventId);
-
-        $contact = $event->contacts()->findOrFail($this->contactId);
-
-        return view('livewire.contacts.contact-profil', compact('event', 'contact'))
+        return view('livewire.contacts.contact-profil')
             ->layout('layouts.app');
     }
 }

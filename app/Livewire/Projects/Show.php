@@ -6,13 +6,14 @@ use Livewire\Component;
 
 class Show extends Component
 {
-    public $projectId;
+    public $project;
+
     public $projects;
 
     public function mount($project)
     {
-        $this->projectId = $project;
         $this->projects = auth()->user()->projects;
+        $this->project = auth()->user()->projects()->findOrFail($project);
     }
 
     public function redirectUser($projectId)
@@ -22,9 +23,7 @@ class Show extends Component
 
     public function render()
     {
-        $project = auth()->user()->projects->find($this->projectId);
-
-        return view('livewire.projects.show', compact('project'))
+        return view('livewire.projects.show')
             ->layout('layouts.app');
     }
 }

@@ -3,43 +3,35 @@
 namespace App\Livewire\Events;
 
 use Livewire\Component;
-use App\Models\Event;
 
 class Show extends Component
 {
-    public $eventId;
     public $event;
+
+    public $contacts;
+
+    public $students;
+
+    public $evaluators;
+
+    public $projects;
 
     public function mount($event)
     {
-        $this->eventId = $event;
-        $this->event = auth()->user()->events()->findOrFail($this->eventId);
-    }
+        $this->event = auth()->user()->events()
+            ->with(['eventContacts', 'projects'])
+            ->findOrFail($event);
 
-    private function updateEvent($field)
-    {
-        $this->event->$field = now();
-        $this->event->save();
-    }
+        $this->projects = $this->event->projects;
+        $this->contacts = $this->event->eventContacts->load('contact');
 
-    public function startEvent()
-    {
-        $this->updateEvent('started_at');
-    }
-
-    public function pauseEvent()
-    {
-        $this->updateEvent('paused_at');
-    }
-
-    public function endEvent()
-    {
-        $this->updateEvent('finished_at');
+        $this->students = $this->contacts->where('role', 'student');
+        $this->evaluators = $this->contacts->where('role', 'evaluator');
     }
 
     public function render()
     {
         return view('livewire.events.show')
-            ->layout('layouts.app');
+            ->layout('layouts.event-dashboard');
     }
 }

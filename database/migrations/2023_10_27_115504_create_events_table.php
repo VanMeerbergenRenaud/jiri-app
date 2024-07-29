@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string('name');
             $table->timestamp('starting_at');
             $table->time('duration');
+            $table->time('started_at')->nullable();
+            $table->time('paused_at')->nullable();
+            $table->time('finished_at')->nullable();
             $table->timestamps();
         });
     }

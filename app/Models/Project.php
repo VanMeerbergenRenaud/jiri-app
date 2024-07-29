@@ -12,14 +12,12 @@ class Project extends Model
 {
     use HasFactory;
 
+    protected $table = 'projects';
+
     protected $fillable = [
         'name',
         'description',
-        'tasks',
-    ];
-
-    protected $casts = [
-        'tasks' => 'array',
+        'url_readme',
     ];
 
     public function user(): BelongsTo
@@ -27,13 +25,27 @@ class Project extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function events()
+    // A project can belong to one or many events
+    public function events(): BelongsToMany
     {
-        return $this->belongsToMany(Event::class);
+        return $this->belongsToMany(Event::class, 'project_ponderation');
     }
 
-    public function eventProjects(): HasMany
+    // A project can have one or many ponderations
+    public function projectPonderations(): HasMany
     {
-        return $this->hasMany(EventProject::class);
+        return $this->hasMany(ProjectPonderation::class);
+    }
+
+    // A project can have one or many evaluations
+    public function evaluations(): HasMany
+    {
+        return $this->hasMany(EvaluatorEvaluation::class);
+    }
+
+    // A project can have one or many tasks
+    public function tasks(): BelongsToMany
+    {
+        return $this->belongsToMany(Task::class, 'project_task');
     }
 }

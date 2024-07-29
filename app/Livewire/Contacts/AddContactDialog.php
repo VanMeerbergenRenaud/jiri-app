@@ -3,7 +3,6 @@
 namespace App\Livewire\Contacts;
 
 use App\Livewire\Forms\ContactForm;
-use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -20,9 +19,7 @@ class AddContactDialog extends Component
     public function add()
     {
         $this->form->save();
-
         $this->reset('show');
-
         $this->added = true;
     }
 

@@ -8,7 +8,7 @@
             <h2>Information du projet</h2>
             <p>
                 Listes des évènements dans lesquelles le projet
-                <span class="font-semibold">{{ $project->name }}</span>
+                <span class="font-semibold">{{ ucfirst($project->name) }}</span>
                 est inscrit.
             </p>
         </div>
@@ -24,7 +24,6 @@
                 name="name"
                 placeholder="Sélectionner un autre projet -"
                 :options="$projects"
-                :messages="$errors->get('name')"
                 srOnly="true"
                 wire:change="redirectUser($event.target.value)"
             />

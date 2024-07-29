@@ -57,6 +57,9 @@
     }
 
     &__panel {
+        max-height: 80vh;
+        overflow: scroll;
+
         .form {
             &__content {
                 display: flex;
@@ -75,7 +78,6 @@
 
                 label {
                     display: flex;
-                    flex-direction: column;
                     gap: 0.5rem;
 
                     input, textarea {
@@ -117,6 +119,18 @@
                     border-radius: 0.5rem;
                     width: 50%;
                     height: auto;
+                }
+
+                .upload {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0;
+                }
+
+                .avatar-infos {
+                    margin-top: -1rem;
+                    padding-left: 0.5rem;
+                    font-size: 0.75rem;
                 }
             }
         }

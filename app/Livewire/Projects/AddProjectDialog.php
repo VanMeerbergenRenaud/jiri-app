@@ -3,8 +3,6 @@
 namespace App\Livewire\Projects;
 
 use App\Livewire\Forms\ProjectForm;
-use App\Models\Project;
-use App\Models\Task;
 use Livewire\Component;
 
 class AddProjectDialog extends Component
@@ -13,18 +11,13 @@ class AddProjectDialog extends Component
 
     public $show = false;
 
-    public $tasks = [];
-
-    public function mount()
-    {
-        $this->tasks = json_encode(auth()->user()->projects->pluck('tasks'));
-    }
+    public $added = false;
 
     public function add()
     {
         $this->form->save();
-
         $this->reset('show');
+        $this->added = true;
     }
 
     public function render()

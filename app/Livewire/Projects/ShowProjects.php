@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Projects;
 
-use App\Models\Project;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -13,7 +12,7 @@ class ShowProjects extends Component
 
     public $search = '';
 
-    public $saved = false;
+    public $deleted = false;
 
     #[Computed]
     public function projectFilter()
@@ -28,11 +27,13 @@ class ShowProjects extends Component
     {
         $project = auth()->user()->projects()->findOrFail($projectId);
 
+        $project->projectPonderations()->delete();
+        $project->tasks()->delete();
         $project->delete();
 
         sleep(1);
 
-        $this->saved = true;
+        $this->deleted = true;
     }
 
     public function render()

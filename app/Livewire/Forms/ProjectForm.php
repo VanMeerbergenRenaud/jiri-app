@@ -8,14 +8,14 @@ use Livewire\Form;
 
 class ProjectForm extends Form
 {
-    #[Validate('required|min:3|max:255')]
+    #[Validate('required|min:2|max:50')]
     public $name = '';
 
     #[Validate('required|min:3|max:255')]
     public $description = '';
 
-    #[Validate('nullable')]
-    public $tasks = [""];
+    #[Validate('nullable|url')]
+    public $url_readme = '';
 
     public Project $project;
 
@@ -24,7 +24,7 @@ class ProjectForm extends Form
         $this->project = $project;
         $this->name = $project->name;
         $this->description = $project->description;
-        $this->tasks = $project->tasks;
+        $this->url_readme = $project->url_readme;
     }
 
     public function save()
@@ -34,10 +34,10 @@ class ProjectForm extends Form
         auth()->user()->projects()->create([
             'name' => $this->name,
             'description' => $this->description,
-            'tasks' => $this->tasks,
+            'url_readme' => $this->url_readme,
         ]);
 
-        $this->reset(['name', 'description', 'tasks']);
+        $this->reset(['name', 'description', 'url_readme']);
     }
 
     public function update()
@@ -47,8 +47,7 @@ class ProjectForm extends Form
         $this->project->update([
             'name' => $this->name,
             'description' => $this->description,
-            'tasks' => $this->tasks,
+            'url_readme' => $this->url_readme,
         ]);
     }
 }
-

@@ -6,18 +6,16 @@ use Livewire\Component;
 
 class Edit extends Component
 {
-    public $eventId;
+    public $event;
 
     public function mount($event)
     {
-        $this->eventId = $event;
+        $this->event = auth()->user()->events()->findOrFail($event);
     }
 
     public function render()
     {
-        $event = auth()->user()->events()->findOrFail($this->eventId);
-
-        return view('livewire.events.edit', compact('event'))
+        return view('livewire.events.edit')
             ->layout('layouts.app');
     }
 }

@@ -1,7 +1,7 @@
 <div>
     <label class="search w-full" for="search">
         @include('components.svg.search')
-        <input type="text" name="search" id="search" wire:model.live="search" placeholder="Rechercher un projet...">
+        <input type="text" name="search" id="search" wire:model.live.debounce="search" placeholder="Rechercher un projet...">
     </label>
 
     <table class="table__contact">
@@ -9,7 +9,7 @@
             <tr>
                 <th>Nom</th>
                 <th>Description</th>
-                <th>Tâches</th>
+                <th>Url / Read.me</th>
                 <th class="actions">Actions</th>
             </tr>
         </thead>
@@ -36,11 +36,11 @@
     </div>
 
     <div>
-        @if($saved)
+        @if($deleted)
             <x-notifications
                 icon="delete"
                 title="Projet supprimé avec succès !"
-                method="$set('saved', false)"
+                method="$set('deleted', false)"
             />
         @endif
     </div>

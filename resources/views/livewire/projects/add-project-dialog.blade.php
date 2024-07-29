@@ -19,7 +19,6 @@
                         model="form.name"
                         value="{{ old('name') }}"
                         placeholder="Nom du projet"
-                        :messages="$errors->get('form.name')"
                         autofocus
                     />
 
@@ -29,31 +28,16 @@
                         model="form.description"
                         value="{{ old('description') }}"
                         placeholder="Informations sur le projet"
-                        :messages="$errors->get('form.description')"
                     />
 
-                    {{--<x-form.field
-                        label="Tâches"
-                        name="tasks"
+                    <x-form.field
+                        label="Url de présentation"
+                        name="url_readme"
                         type="text"
-                        model="form.tasks"
-                        value="{{ old('tasks') }}"
-                        placeholder="Tâches à réaliser"
-                        :messages="$errors->get('form.tasks')"
-                    />--}}
-
-                    <label for="tasks">Tâches</label>
-                    <select
-                        id="tasks"
-                        multiple
-                        name="tasks"
-                        model="form.tasks"
-                        placeholder="Tâches à réaliser"
-                    >
-                        @foreach (json_decode($tasks) as $task)
-                            <option value="{{ $task }}" selected>{{ $task }}</option>
-                        @endforeach
-                    </select>
+                        model="form.url_readme"
+                        value="{{ old('url_readme') }}"
+                        placeholder="https://example.com"
+                    />
                 </div>
 
                 <x-dialog.footer>
@@ -66,4 +50,15 @@
             </form>
         </x-dialog.panel>
     </x-dialog>
+
+    <div>
+        @if($added)
+            <x-notifications
+                icon="add"
+                title="Projet ajouté avec succès !"
+                message="Vous avez ajouté un nouveau projet."
+                method="$set('added', false)"
+            />
+        @endif
+    </div>
 </div>

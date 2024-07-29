@@ -16,9 +16,7 @@ class AddEventDialog extends Component
     public function add()
     {
         $this->form->save();
-
         $this->reset('show');
-
         $this->added = true;
     }
 

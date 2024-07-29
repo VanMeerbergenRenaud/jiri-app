@@ -1,22 +1,25 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Livewire\Homepage;
-use App\Livewire\Welcome;
-use App\Livewire\Dashboard;
+use App\Livewire\Contacts\ContactProfil as EContactProfil;
 use App\Livewire\Contacts\Index as CIndex;
 use App\Livewire\Contacts\Show as CShow;
-use App\Livewire\Contacts\ContactProfil as EContactProfil;
+use App\Livewire\Dashboard;
+use App\Livewire\Evaluator\Dashboard as EEvaluatorDashboard;
+use App\Livewire\Evaluator\Evaluations\Edit as EEvaluatorEvaluationEdit;
+use App\Livewire\Evaluator\Evaluations\Index as EEvaluatorEvaluationIndex;
+use App\Livewire\Evaluator\Evaluations\Show as EEvaluatorEvaluationShow;
+use App\Livewire\Evaluator\EventDashboard as EEvaluatorEventDashboard;
+use App\Livewire\Events\Edit as EEdit;
+use App\Livewire\Events\Event\Evaluators as EEvaluators;
+use App\Livewire\Events\Event\Projects as EProjects;
+use App\Livewire\Events\Event\Students as EStudents;
 use App\Livewire\Events\Index as EIndex;
 use App\Livewire\Events\Show as EShow;
-use App\Livewire\Events\Edit as EEdit;
-use App\Livewire\Evaluator\Dashboard as EEvaluatorDashboard;
-use App\Livewire\Events\EvaluatorDashboard as EEvaluatorEventDashboard;
-use App\Livewire\Evaluator\Evaluations\Index as EEvaluatorEvaluationIndex;
-use App\Livewire\Evaluator\Evaluations\Edit as EEvaluatorEvaluationEdit;
-use App\Livewire\Evaluator\Evaluations\Show as EEvaluatorEvaluationShow;
+use App\Livewire\Homepage;
 use App\Livewire\Projects\Index as PIndex;
 use App\Livewire\Projects\Show as PShow;
+use App\Livewire\Welcome;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -52,7 +55,6 @@ Route::middleware('auth')->group(function () {
     /*----- Events CRUD -----*/
     Route::name('events.')->prefix('events')->group(function () {
         Route::get('/', EIndex::class)->name('index');
-        // Route::get('/create', Create::class)->name('create');
         Route::get('/{event}', EShow::class)->name('show');
         Route::get('/{event}/edit', EEdit::class)->name('edit');
 
@@ -61,30 +63,47 @@ Route::middleware('auth')->group(function () {
         Route::get('/{event}/contacts/{contact}', EContactProfil::class)
             ->name('contact-profil');
 
-        /*----- Evaluator -----*/
+        /*----- Admin event dashboard -----*/
+        // Route for the dashboard of an event with all the data
+        Route::get('/{event}/evaluators', EEvaluators::class)
+            ->name('event.dashboard.evaluators');
+
+        // Route for the dashboard of an event with all the contacts
+        Route::get('/{event}/students', EStudents::class)
+            ->name('event.dashboard.students');
+
+        // Route for the dashboard of an event with all the projects
+        Route::get('/{event}/projects', EProjects::class)
+            ->name('event.dashboard.projects');
+
+        /*----- Evaluator dashboard -----*/
         // Route for the dashboard of an evaluator with all the events
-        Route::get('/{token}', EEvaluatorDashboard::class)
-            //->middleware('evaluator')
+        Route::get('/evaluator/{contact}', EEvaluatorDashboard::class)
             ->name('evaluator-dashboard');
 
+        /*----- Evaluator event dashboard -----*/
         // Route for the specific event of an evaluator
-        Route::get('/{event}/{token}', EEvaluatorEventDashboard::class)
+        Route::get('/{event}/{contact}/{token}', EEvaluatorEventDashboard::class)
+            ->middleware('evaluator')
             ->name('evaluator-dashboard-event');
 
         // Route that let the evaluator start an evaluation
-        Route::get('/{event}/{token}/evaluation-start', EEvaluatorEvaluationIndex::class)
+        Route::get('/{event}/{contact}/{token}/evaluation-start/{student}', EEvaluatorEvaluationIndex::class)
+            ->middleware('evaluator')
             ->name('evaluator-evaluation-start');
 
         // Route that let the evaluator start an evaluation
-        Route::get('/{event}/{token}/evaluation-edit', EEvaluatorEvaluationEdit::class)
+        Route::get('/{event}/{contact}/{token}/evaluation-edit/{student}/{project}', EEvaluatorEvaluationEdit::class)
+            ->middleware('evaluator')
             ->name('evaluator-evaluation-edit');
 
         // Route that let the evaluator see the summary of the evaluations
-        Route::get('/{event}/{token}/evaluation-summary', EEvaluatorEvaluationShow::class)
+        Route::get('/{event}/{contact}/{token}/evaluation-summary/{student}', EEvaluatorEvaluationShow::class)
+            ->middleware('evaluator')
             ->name('evaluator-evaluation-summary');
     });
 
-    /*----- Contacts CRUD -----*/
+    /*----- Students CRUD -----*/
     Route::name('contacts.')->prefix('contacts')->group(function () {
         Route::get('/', CIndex::class)->name('index');
         Route::get('/{contact}', CShow::class)->name('show');
@@ -98,4 +117,3 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
-require __DIR__.'/pages.php';

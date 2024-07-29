@@ -1,5 +1,61 @@
 /* Dashboard for all the event */
+.mainEvaluatorDashboard {
+    padding: 1rem 1.5rem;
 
-.evaluator-events {
+    &__list {
+        margin: -0.5rem 0 3rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
 
+        &__item {
+
+            &__link {
+                display: block;
+                padding: 1.25rem 2rem;
+                background-color: $gray-300;
+                border-radius: 0.75rem;
+                font-weight: 500;
+
+                strong {
+                    font-weight: 600;
+                }
+
+                span {
+                    font-size: 0.875rem;
+                    display: block;
+                }
+
+                span + span {
+                    margin-top: 0.5rem;
+                }
+
+                &:hover {
+                    color: $blue-dark;
+                    background-color: $gray-500;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .mainEvaluatorDashboard {
+        padding: 2.5rem;
+
+        &__list {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 2rem;
+
+            &__item {
+                width: max-content;
+
+                &__link {
+                    padding: 1.5rem 3rem 1.5rem 2rem;
+                }
+            }
+        }
+    }
 }

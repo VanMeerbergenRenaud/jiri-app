@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\EventContact;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Carbon;
 
 /**
  * @extends Factory<EventContact>
@@ -12,8 +11,6 @@ use Illuminate\Support\Carbon;
 class EventContactFactory extends Factory
 {
     protected $model = EventContact::class;
-
-
 
     public function definition(): array
     {

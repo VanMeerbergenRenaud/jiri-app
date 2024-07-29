@@ -6,11 +6,16 @@ use Livewire\Component;
 
 class Index extends Component
 {
+    public $contacts;
+
+    public function mount()
+    {
+        $this->contacts = auth()->user()->contacts;
+    }
+
     public function render()
     {
-        $contacts = auth()->user()->contacts()->get();
-
-        return view('livewire.contacts.index', compact('contacts'))
+        return view('livewire.contacts.index')
             ->layout('layouts.app');
     }
 }

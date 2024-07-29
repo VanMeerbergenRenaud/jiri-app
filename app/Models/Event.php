@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -24,13 +23,7 @@ class Event extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function events(): BelongsToMany
-    {
-        return $this
-            ->belongsToMany(Event::class, 'event_contact', 'contact_id', 'event_id')
-            ->withPivot(['role', 'token']);
-    }
-
+    // An event can have one or more contacts
     public function contacts(): BelongsToMany
     {
         return $this->belongsToMany(
@@ -41,27 +34,24 @@ class Event extends Model
         );
     }
 
+    // An event can have one or more projects
     public function projects(): BelongsToMany
     {
         return $this->belongsToMany(
             Project::class,
-            'event_project',
+            'project_ponderation',
             'event_id',
             'project_id'
-        )
-            ->withPivot('ponderation1', 'ponderation2', 'link');
+        );
     }
 
+    // An event can have one or more contacts assigned to it
     public function eventContacts(): HasMany
     {
         return $this->hasMany(EventContact::class);
     }
 
-    public function eventProjects(): HasMany
-    {
-        return $this->hasMany(EventProject::class);
-    }
-
+    // An event can have one or more students assigned to it
     public function students(): BelongsToMany
     {
         return $this
@@ -75,6 +65,7 @@ class Event extends Model
             ->wherePivot('role', 'student');
     }
 
+    // An event can have one or more evaluators assigned to it
     public function evaluators(): BelongsToMany
     {
         return $this
@@ -88,18 +79,54 @@ class Event extends Model
             ->wherePivot('role', 'evaluator');
     }
 
-    public function isAvailable()
+    // An event can have one or more ponderations assigned to a project
+    public function projectPonderations(): HasMany
     {
-        $ending_at = Carbon::parse($this->starting_at)->addMinutes($this->duration);
-        return $ending_at <= now();
+        return $this->hasMany(ProjectPonderation::class);
     }
 
-    public function status()
+    // An event can have one or more evaluations from the evaluators
+    public function evaluatorsEvaluations(): HasMany
     {
-        if ($this->isAvailable()) {
-            return 'en cours'; // ou passé
-        } else {
-            return 'terminé';
-        }
+        return $this->hasMany(EvaluatorEvaluation::class);
+    }
+
+    // An event can have one or more evaluation statuses from the evaluators
+    public function evaluatorsEvaluationsStatuses(): HasMany
+    {
+        return $this->hasMany(EvaluatorEvaluationStatus::class);
+    }
+
+    // An event can have one or more global comments wrote by the user for a student
+    public function eventGlobalComments(): HasMany
+    {
+        return $this->hasMany(EventGlobalComment::class);
+    }
+
+    // An event can have one or more global comments wrote by the evaluator for a student
+    public function evaluatorGlobalComments(): HasMany
+    {
+        return $this->hasMany(EvaluatorGlobalComment::class);
+    }
+
+    // An event can available, current, paused, finished or coming soon
+    public function isAvailable()
+    {
+        return $this->starting_at < now() && $this->started_at === null && $this->paused_at === null && $this->finished_at === null;
+    }
+
+    public function isCurrent()
+    {
+        return $this->started_at !== null && $this->paused_at === null && $this->finished_at === null;
+    }
+
+    public function isPaused()
+    {
+        return $this->started_at !== null && $this->paused_at !== null && $this->finished_at === null;
+    }
+
+    public function isFinished()
+    {
+        return $this->finished_at !== null;
     }
 }

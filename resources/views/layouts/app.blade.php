@@ -21,7 +21,7 @@
         @vite(['resources/css/app.scss', 'resources/js/app.js'])
     </head>
     <body>
-        <div wire:offline>
+        <div wire:offline class="offline">
             Vous êtes actuellement hors ligne veuillez vous reconnecter à un réseau pour continuer à utiliser l'application.
         </div>
 
@@ -29,7 +29,6 @@
 
         @include('layouts.navigation')
 
-        <!-- Content -->
         {{ $slot }}
 
         @include('components.footer')

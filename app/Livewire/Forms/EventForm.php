@@ -10,7 +10,7 @@ class EventForm extends Form
 {
     public $event;
 
-    #[Validate('required|min:3')]
+    #[Validate('required|min:3|max:50')]
     public $name = '';
 
     #[Validate('required|date|after_or_equal:2022-01-01|before_or_equal:2038-01-01')]

@@ -11,7 +11,7 @@
         <livewire:contacts.add-contact-dialog />
     </header>
 
-    <main class="mainContacts max-width p-main">
+    <main class="mainContacts max-width p-main mb-contacts">
         <livewire:contacts.show-contacts />
     </main>
 </div>

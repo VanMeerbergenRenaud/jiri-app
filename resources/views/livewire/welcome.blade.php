@@ -4,8 +4,8 @@
         <main class="welcome__main">
             <div class="welcome__container">
                 <div class="welcome__container__intro">
-                    <img src="{{ auth()->user()->avatarUrl() ?? asset('img/placeholder.png') }}" class="welcome__container__intro__img" alt="Photo de profil">
-                    <h1 role="heading" aria-level="1" class="welcome__container__intro__title">Enchanté {{ $user->name }} !</h1>
+                    <img src="{{ $avatar ?? asset('img/placeholder.png') }}" class="welcome__container__intro__img" alt="Photo de profil">
+                    <h1 role="heading" aria-level="1" class="welcome__container__intro__title">Enchanté {{ ucfirst($user->name) }} !</h1>
                     <p class="welcome__container__intro__text">Commencer votre aventure dès maintenant.</p>
                 </div>
 

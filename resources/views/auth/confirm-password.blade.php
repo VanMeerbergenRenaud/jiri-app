@@ -8,7 +8,7 @@
         </p>
 
         <!-- Password -->
-        <x-form.field-password
+        <x-form.breeze-field-password
             label="Mot de passe"
             name="password"
             placeholder="Quel est votre mot de passe ?"

@@ -1,4 +1,4 @@
-<form wire:submit="save" class="form">
+<form wire:submit="saveContact" class="form">
     <div class="form__content">
         <h2 class="title">Modifier le contact</h2>
 
@@ -9,7 +9,6 @@
             model="form.name"
             placeholder="John"
             value="{{ $contact->name }}"
-            :messages="$errors->get('form.name')"
             autofocus
         />
 
@@ -20,7 +19,6 @@
             model="form.firstname"
             placeholder="Doe"
             value="{{ $contact->firstname }}"
-            :messages="$errors->get('form.firstname')"
         />
 
         <x-form.field
@@ -30,7 +28,6 @@
             model="form.email"
             placeholder="john.doe@gmail.com"
             value="{{ $contact->email }}"
-            :messages="$errors->get('form.email')"
         />
 
         <x-form.field
@@ -40,7 +37,6 @@
             model="form.avatar"
             placeholder="JPG, JPEG, PNG ou SVG (MAX 1024 ko)"
             value="{{ $contact->avatar }}"
-            :messages="$errors->get('form.avatar')"
         />
 
         @if($form->avatar instanceof \Illuminate\Http\UploadedFile)

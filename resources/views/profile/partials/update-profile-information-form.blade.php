@@ -16,11 +16,11 @@
         @csrf
         @method('patch')
 
-        <x-form.field
+        <x-form.breeze-field
             label="{{ __('Nom') }}"
             name="name"
             type="text"
-            placeholder="{{ $user->name }}"
+            placeholder="{{ $user->name ?? 'john doe' }}"
             value="{{ old('name', $user->name) }}"
             autocomplete="name"
             required
@@ -28,11 +28,11 @@
             autofocus
         />
 
-        <x-form.field
+        <x-form.breeze-field
             label="{{ __('Adresse mail') }}"
             name="email"
             type="email"
-            placeholder="{{ $user->email }}"
+            placeholder="{{ $user->email ?? 'john.doe@gmail.com' }}"
             value="{{ old('email', $user->email) }}"
             autocomplete="username"
             required

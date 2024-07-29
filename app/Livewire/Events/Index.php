@@ -6,11 +6,16 @@ use Livewire\Component;
 
 class Index extends Component
 {
+    public $events;
+
+    public function mount()
+    {
+        $this->events = auth()->user()->events;
+    }
+
     public function render()
     {
-        $events = auth()->user()->events()->get();
-
-        return view('livewire.events.index', compact('events'))
+        return view('livewire.events.index')
             ->layout('layouts.app');
     }
 }

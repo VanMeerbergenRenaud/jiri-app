@@ -3,7 +3,9 @@
 namespace App\Livewire\Events;
 
 use App\Livewire\Forms\EventForm;
+use App\Mail\EvaluatorInvitation;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
 class EventRow extends Component
@@ -14,15 +16,18 @@ class EventRow extends Component
 
     public $showEditDialog = false;
 
-    public function mount()
+    public function mount($event)
     {
+        $this->event = $event;
+
         $this->form->setEvent($this->event);
     }
 
     public function formatDate($date)
     {
         Carbon::setLocale('fr');
-        return Carbon::parse($date)->translatedFormat('d/m/y à H' . ':' . 'i');
+
+        return Carbon::parse($date)->translatedFormat('d/m/y à H'.':'.'i');
     }
 
     public function formatTime($time)
@@ -33,19 +38,44 @@ class EventRow extends Component
         $minutes = $time->format('i');
 
         if ($hours > 0) {
-            return $hours . 'h' . $minutes . 'min';
+            return $hours.'h'.$minutes.'min';
         } else {
-            return $minutes . 'min';
+            return $minutes.'min';
         }
     }
 
     public function save()
     {
         $this->form->update();
-
         $this->event->refresh();
-
         $this->reset('showEditDialog');
+    }
+
+    public function startEvent()
+    {
+        $evaluators = $this->event->eventContacts()
+            ->where('role', 'evaluator')
+            ->get();
+
+        // 1. Send an email to all the evaluator's participants
+        foreach ($evaluators as $evaluator) {
+            $contactId = $evaluator->contact->id;
+            $email = $evaluator->contact->email;
+            $token = $evaluator->token;
+
+            if ($evaluator) {
+                if (! empty($email)) {
+                    Mail::to($email)->send(new EvaluatorInvitation($this->event->id, $contactId, $token));
+                }
+            }
+
+            // 2. Add a time to the started_at column
+            $this->event->update([
+                'started_at' => now(),
+            ]);
+        }
+
+        return redirect()->route('events.show', $this->event->id);
     }
 
     public function render()

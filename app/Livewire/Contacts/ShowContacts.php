@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Contacts;
 
-use App\Models\Contact;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -14,17 +13,19 @@ class ShowContacts extends Component
     public $search = '';
 
     public $sortField = 'name';
+
     public $sortDirection = 'asc';
 
-    // protected $queryString = ['sortField', 'sortDirection', 'perPage'];
-
-    public $saved = false;
+    public $deleted = false;
 
     #[Computed]
     public function contactFilter()
     {
         return auth()->user()->contacts()
-            ->search('name', $this->search)
+            ->where(function ($query) {
+                $query->where('name', 'like', '%'.$this->search.'%')
+                    ->orWhere('firstname', 'like', '%'.$this->search.'%');
+            })
             ->orderBy($this->sortField, $this->sortDirection)
             ->paginate(8);
     }
@@ -43,19 +44,17 @@ class ShowContacts extends Component
     {
         $contact = auth()->user()->contacts()->findOrFail($contactId);
 
-        $contact->events()->detach();
-
+        $contact->eventContacts()->delete();
         $contact->delete();
 
         sleep(1);
 
-        $this->saved = true;
+        $this->deleted = true;
     }
 
     public function render()
     {
         return view('livewire.contacts.show-contacts', [
-            'saved' => $this->saved,
             'sortField' => $this->sortField,
         ]);
     }

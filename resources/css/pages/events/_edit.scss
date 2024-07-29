@@ -198,7 +198,7 @@
                 }
             }
 
-            /* Form to create a new contact */
+            /* FormNewContact to create a new contact */
             .contact__new__form {
                 margin: 0;
                 padding: 1.5rem;
@@ -217,18 +217,16 @@
                     flex-direction: column;
                     gap: 0.5rem;
 
-                    &__label {
-                        display: flex;
-                        flex-direction: column;
-                        font-weight: 500;
-                        font-size: 0.875rem;
-                        padding-left: 0;
+                    &__select {
+                       label {
+                           display: block;
+                           margin-bottom: 0.875rem;
+                           font-size: 0.875rem;
+                           font-weight: 500;
+                       }
 
                         select {
-                            margin-top: 0.75rem;
                             margin-bottom: 1.25rem;
-                            padding: 0.875rem;
-                            background-color: white;
                         }
                     }
 
@@ -255,21 +253,6 @@
                         margin: -0.75rem 0 1.5rem 0.5rem;
                     }
 
-                    .success-message {
-                        grid-column: 1/3;
-
-                        p {
-                            margin: 2rem 0 0;
-                            padding: 1rem;
-                            font-weight: 500;
-                            text-align: center;
-                            color: green;
-                            border-radius: 0.5rem;
-                            text-decoration: none;
-                            background-color: white;
-                        }
-                    }
-
                     .dialog__footer__buttons {
                         display: grid;
                         justify-content: center;
@@ -285,10 +268,79 @@
                 }
             }
 
+            /* FormNewContact to create a new project */
+            .project__new__form__container {
+                display: grid;
+                grid-template-columns: 0.9fr 1.1fr;
+                gap: 0.5rem 1rem;
+                padding: 0.5rem 1rem 0.5rem 0.5rem;
+
+                .project__form {
+
+                    label {
+                        font-size: 0.875rem;
+                        font-weight: 500;
+                    }
+
+                    input {
+                        width: calc(100% - 2rem);
+                    }
+
+                    input, textarea {
+                        margin-top: 0.94rem;
+                        margin-bottom: 1.25rem;
+                        font-size: 0.94rem;
+                        font-weight: 400;
+                        padding: 0.875rem 0.75rem;
+                        background-color: white;
+                        min-width: 200px;
+                    }
+                }
+
+                .project__form:has(textarea) {
+                    grid-column: 1/3;
+
+                    textarea {
+                        min-height: 100px;
+                        max-width: 100%;
+                    }
+                }
+
+                .dialog__footer__buttons {
+                    grid-column: 1/3;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: end;
+                    align-items: center;
+                    gap: 1rem;
+
+                    button {
+                        margin-top: 0;
+                        display: inline-block;
+                        text-align: center;
+                    }
+                }
+            }
+
             /* List of the contacts added to the event */
             &__added {
+
                 p {
-                    margin-bottom: 1rem;
+                    margin: 2.5rem 0 1.5rem;
+                    font-weight: 600;
+                }
+
+                &__category {
+                    margin: 0.25rem 0 1rem;
+                    display: inline-block;
+                    color: $blue-dark;
+                    font-size: 0.875rem;
+                    font-weight: 500;
+                    text-transform: uppercase;
+                }
+
+                ul:first-of-type {
+                    margin-bottom: 2rem;
                 }
 
                 ul {
@@ -298,6 +350,7 @@
                         flex-direction: column;
                         margin-bottom: 1.15rem;
                         color: $text-slate-500;
+                        font-size: 0.875rem;
 
                         .category {
                             display: block;
@@ -314,6 +367,7 @@
                             background-color: white;
                             border-radius: 0 0 0.5rem 0.5rem;
                             color: $blue-dark;
+                            font-weight: 400;
 
                             .taskName:before {
                                 content: "|";
@@ -326,6 +380,13 @@
                             }
                         }
 
+                        .exchange {
+                            position: absolute;
+                            right: 3rem;
+                            padding: 0.5rem;
+                            z-index: 3;
+                        }
+
                         button {
                             position: absolute;
                             top: 0.25rem;
@@ -333,6 +394,10 @@
                             padding: 0.5rem;
                             z-index: 3;
                         }
+                    }
+
+                    .no-contact {
+                        color: $text;
                     }
                 }
             }
@@ -342,63 +407,115 @@
                 padding: 1rem 1.25rem;
                 border-radius: 0.5rem;
                 background-color: $gray-500;
+                font-weight: 400;
             }
         }
-    }
 
-    &__component:last-of-type {
-        margin-bottom: 1.5rem;
-    }
+        &__ponderation {
+            position: relative;
+            border-bottom: $border;
 
-    .contact__ponderation {
-        padding: 0 1rem;
-        border-bottom: $border;
+            .contact__ponderation {
 
-        &__title {
-            margin-top: 1.5rem;
-            font-size: 1rem;
-            font-weight: 600;
-        }
+                &__title {
+                    margin-top: 1.5rem;
+                    font-size: 1rem;
+                    font-weight: 600;
+                }
 
-        &__text {
-            margin: 0.5rem 0 1.5rem;
-            font-size: 0.94rem;
-            color: $text-slate-500;
-        }
+                &__text {
+                    margin: 0.5rem 0 1.5rem;
+                    font-size: 0.94rem;
+                    color: $text-slate-500;
+                }
 
-        &__lists {
-            &__list {
-                margin: 1rem 0;
-                display: flex;
-                flex-wrap: wrap;
-                align-items: center;
-                gap: 1rem;
-                color: $text;
-                font-size: 0.94rem;
-                font-weight: 500;
+                &__lists {
 
-                .form__field {
-                    margin: 0;
-                    color: $text;
-                    font-size: 0.875rem;
-                    font-weight: 400;
-                    width: 100%;
+                    &__list {
+                        margin: 0;
+                        padding: 1rem 0;
+                        color: $text;
+                        font-size: 1rem;
+                        font-weight: 500;
 
-                    input {
-                        width: 35%;
+                        .form__field {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 0;
+                            color: $text;
+                            font-size: 0.875rem;
+                            font-weight: 400;
+                            width: 100%;
+
+                            label {
+                                margin: 0;
+                                padding: 0.75rem 1.25rem;
+                                border-radius: 0.5rem 0.5rem 0 0;
+                                font-weight: 500;
+                                color: $blue-dark;
+                                background-color: $gray-500;
+                                width: calc(100% - 2.875rem);
+                            }
+
+                            input {
+                                margin: 0;
+                                padding: 0.75rem 1.25rem;
+                                width: calc(100% - 3rem);
+                                color: $text;
+                                background-color: white;
+                                border: 1px solid transparent;
+                                border-radius: 0 0 0.5rem 0.5rem;
+                            }
+                        }
+
+                        &:last-of-type {
+                            border-top: $border;
+                        }
+
+                        .error-percentage {
+                            margin-top: 1rem;
+                            padding: 0.75rem 1rem;
+                            border-radius: 0.5rem;
+                            font-weight: 500;
+                            background-color: #FED7D7;
+
+                            ul {
+                                margin: 0;
+                            }
+                        }
+                    }
+
+                    .adjustPonderation {
+                        grid-column: 1/3;
+                        margin: 0.875rem 0;
+                        padding: 0.75rem 2rem;
+                        justify-content: center;
+                        font-size: 0.75rem;
+                        color: #3F4353;
+                        background-color: white;
+                        border-radius: 0.5rem;
+                        width: 100%;
+                        text-transform: initial;
+
+                        &:hover {
+                            opacity: 0.9;
+                            border: 1px solid whitesmoke;
+                        }
                     }
                 }
-            }
-        }
 
-        &__empty {
-            margin: 0 0 1.5rem;
-            font-size: 0.94rem;
+                &__empty {
+                    margin: 0 0 1.5rem;
+                    padding: 1rem 1.25rem;
+                    border-radius: 0.5rem;
+                    background-color: #E5E9F4;
+                    font-weight: 400;
+                }
         }
     }
 
     /* Final buttons in the form */
-    .form__submit {
+        &__submit {
         margin-top: 1.5rem;
         display: flex;
         justify-content: center;
@@ -433,19 +550,31 @@
     }
 }
 
+    &__component:last-of-type {
+        margin-bottom: 1.5rem;
+    }
+
+}
+
 @media (min-width: 665px) {
     .mainEventsCreate {
         .form {
             &__component {
                 padding: 2rem 0.5rem 1rem;
 
-                /* Form to create a new contact */
+                /* FormNewContact to create a new contact */
                 .contact__new__form {
                     &__container {
                         display: grid;
                         padding: 0.5rem 1rem 0.5rem 0.5rem;
 
-                        &__label, .position-right {
+                        &__select {
+                            label {
+                                margin-top: 0.35rem;
+                            }
+                        }
+
+                        .position-right {
                             grid-column: 1/3;
                         }
 
@@ -487,7 +616,8 @@
                 }
             }
 
-            .form__submit {
+            &__submit {
+                margin-bottom: 1rem;
                 display: flex;
                 flex-direction: row;
                 flex-wrap: nowrap;
@@ -530,6 +660,10 @@
                                 padding: 1.15rem 3.5rem 1.15rem 3.5rem;
                             }
 
+                            .exchange {
+                                top: 0.65rem;
+                            }
+
                             button {
                                 top: 0.65rem;
                                 right: 0.75rem;
@@ -539,37 +673,59 @@
                 }
             }
 
-            .contact__ponderation {
-                &__lists {
-                    margin: 0.5rem 0;
-                    display: grid;
-                    grid-template-columns: repeat(2, 1fr);
-                    gap: 0 2.5rem;
+            &__ponderation {
+                border-bottom: $border;
 
-                    &__list {
-                        margin: 1rem 0 0;
-                        padding: 0.75rem 0 2rem;
-                        border-right: $border;
+                .contact__ponderation {
 
-                        .form__field {
-                            padding-left: 0.1rem;
+                    &__lists {
+                        margin: 0.5rem 0;
+                        display: grid;
+                        grid-template-columns: repeat(2, 1fr);
+                        gap: 0;
 
-                            input {
-                                width: 55%;
+                        &__list {
+                            margin: 0;
+                            padding: 1rem 0;
+
+                            &:first-of-type {
+                                padding-right: 2rem;
+                            }
+
+                            &:last-of-type {
+                                border-top: none;
+                                border-left: $border;
+                                padding-left: 2rem;
+                            }
+
+                            .form__field {
+                                margin: 1rem 0;
+
+                                label {
+
+                                }
+
+                                input {
+
+                                }
                             }
                         }
 
-                        .form__field:first-of-type {
-                            margin-top: 0.25rem;
+                        &__validation {
+                            border-bottom: none;
                         }
                     }
                 }
+            }
+
+            &__submit {
+                grid-column: 1/3;
             }
         }
     }
 }
 
-// For min 1440px screen
+// For min 100px screen
 @media (min-width: 1000px) {
     .mainEventsCreate{
         .form {
@@ -591,14 +747,7 @@
 
             &__component {
                 margin-bottom: 1.5rem;
-                padding-right: 2rem;
-
-                /* Form to create a new contact */
-                .contact__new__form {
-                    &__container {
-                        // TODO
-                    }
-                }
+                padding-right: 1.5rem;
 
                 /* List of the contacts added to the event */
                 &__added {
@@ -609,30 +758,30 @@
                             }
 
                             .username {
-                                padding: 1rem 3.5rem 1rem 2.5rem;
+                                padding: 1rem 4.5rem 1rem 2.5rem;
                             }
                         }
                     }
                 }
             }
 
-            &__component:last-of-type {
+            &__component:nth-of-type(2) {
                 padding-left: 2rem;
                 border-left: $border;
             }
 
-            .contact__ponderation {
-                &__title {
-                    margin-top: 0;
-                }
+            &__ponderation {
+                grid-column: 1/3;
 
-                &__text {
-                    margin-top: 1rem;
-                    padding-right: 2rem;
-                }
+                .contact__ponderation {
+                    &__title {
+                        margin-top: 0;
+                    }
 
-                &__lists {
-                    padding: 0 1.25rem;
+                    &__text {
+                        margin-top: 1rem;
+                        padding-right: 2rem;
+                    }
                 }
             }
         }
@@ -684,6 +833,7 @@
                     }
                 }
 
+                /* FormNewContact to create a new contact */
                 .contact__new__form {
                     &__container {
                         display: grid;
@@ -700,7 +850,7 @@
                         }
 
                         .position-right:last-of-type {
-                            border-bottom: 0;
+                            border-bottom: none;
                         }
 
                         .dialog__footer__buttons {
@@ -718,6 +868,47 @@
 
                             .username {
                                 padding: 1rem 3.5rem 1rem 2.5rem;
+                            }
+                        }
+                    }
+                }
+            }
+
+            &__ponderation {
+                padding: 0.5rem 1.5rem;
+
+                .contact__ponderation {
+
+                    &__text {
+                        max-width: 1200px;
+                    }
+
+                    &__lists {
+                        display: grid;
+                        grid-template-columns: repeat(2, 600px);
+                        gap: 0;
+
+                        &__list {
+                            margin: 1rem 0 0.5rem;
+                            padding: 0;
+
+                            .form__field {
+                                margin: 1rem 0;
+                                display: grid;
+                                grid-template-columns: 400px auto;
+                                gap: 0;
+
+                                label {
+                                    padding: 0.75rem 1.25rem;
+                                    border-radius: 0.5rem 0 0 0.5rem;
+                                }
+
+                                input {
+                                    position: relative;
+                                    right: 0.5rem;
+                                    padding: 0.75rem 1.25rem;
+                                    border-radius: 0 0.5rem 0.5rem 0;
+                                }
                             }
                         }
                     }

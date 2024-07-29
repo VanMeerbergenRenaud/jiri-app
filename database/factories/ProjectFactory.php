@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\Project;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Carbon;
 
 /**
  * @extends Factory<Project>
@@ -18,9 +17,7 @@ class ProjectFactory extends Factory
         return [
             'name' => $this->faker->words(2, true),
             'description' => $this->faker->text(),
-            'tasks' => json_encode(
-                $this->faker->words($this->faker->numberBetween(2, 7))
-            ),
+            'url_readme' => $this->faker->url(),
         ];
     }
 }

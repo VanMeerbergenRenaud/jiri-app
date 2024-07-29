@@ -31,8 +31,10 @@ class Csv
             while (($data = fgetcsv($handle, 1000, ';')) !== false) {
                 $row = [];
 
-                for($i = 0; $i < count($data); $i++) {
-                    if (!isset($columns[$i])) continue;
+                for ($i = 0; $i < count($data); $i++) {
+                    if (! isset($columns[$i])) {
+                        continue;
+                    }
 
                     $row[$columns[$i]] = $data[$i];
                 }

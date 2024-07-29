@@ -24,7 +24,6 @@
                 name="name"
                 placeholder="Sélectionner un autre profil -"
                 :options="$contacts"
-                :messages="$errors->get('name')"
                 srOnly="true"
                 wire:change="redirectUser($event.target.value)"
             />
@@ -64,8 +63,11 @@
 
                         @if($eventContacts->role == 'evaluator' && isset($eventContacts->token))
                             <a class="link"
-                               href="{{ route('events.evaluator-dashboard-event',
-                                   ['event' => $eventContacts->event, 'contact_id' => $eventContacts->contact->id, 'token' => $eventContacts->token])
+                               href="{{ route('events.evaluator-dashboard-event', [
+                                    'event' => $eventContacts->event,
+                                    'contact' => $eventContacts->contact->id,
+                                    'token' => $eventContacts->token
+                                    ])
                                }}"
                             >
                                 Dashboard de l'évaluateur

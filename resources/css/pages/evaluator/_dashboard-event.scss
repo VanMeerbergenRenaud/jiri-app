@@ -9,7 +9,9 @@
     border-bottom: 1px solid #E5E9F4;
 
     &__title {
-        margin-right: 2rem;
+        text-align: center;
+        margin-right: 0;
+        font-size: 0.85rem;
         font-weight: 600;
     }
 
@@ -62,7 +64,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 100%;
+            width: calc(100% - 2rem);
             cursor: pointer;
 
             &__infos {
@@ -149,8 +151,16 @@
 
 /* Ipad */
 @media (min-width: 800px) {
+    .evaluator__header {
+        &__title {
+            margin-right: 2rem;
+            font-size: 1rem;
+        }
+    }
+
     .mainEvaluator {
-        margin-top: 0;
+        margin-top: 1rem;
+        padding: 0 2rem;
 
         .students__list {
             display: none;
@@ -253,10 +263,6 @@
                 padding-right: 1.35rem;
             }
         }
-
-        .pagination nav {
-            padding: 0 2rem;
-        }
     }
 
     .footerEvaluator {
@@ -285,7 +291,7 @@
                 tr {
                     display: grid;
                     grid-template-columns: 2fr 125px 165px 100px 135px 125px auto;
-                    gap: 0 1.25rem;
+                    gap: 0 1.4rem;
                     padding: 0 1.75rem;
                 }
             }

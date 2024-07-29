@@ -6,17 +6,17 @@
         <tr class="row-1">
             <th scope="row" class="category sticky">Membres du jury</th>
             @foreach($evaluators as $evaluator)
-                <th scope="col" colspan="{{ $projects->count() ?? 1 }}" wire:key="e{{ $evaluator->id }}" class="jiris sticky-small">
+                <th scope="col" colspan="{{ $projects->count() ?? 1 }}" class="jiris sticky-small">
                     <a href="{{ route('events.contact-profil', ['event' => $event, 'contact' => $evaluator->contact]) }}">
-                        <img src="{{ $evaluator->contact->avatar ?? asset('img/placeholder.png') }}" alt="photo d'un membre du jury">
+                        <img src="{{ $evaluator->contact->avatar ?? asset('img/placeholder.png') }}"
+                             alt="photo d'un membre du jury">
                         {{ $evaluator->contact->name ?? 'Évaluateur' }}
                     </a>
                 </th>
             @endforeach
             <th rowspan="{{ $evaluators->count() }}" class="moy sticky">Moyenne</th>
             <th rowspan="{{ $evaluators->count() }}" class="cg sticky">Cote globale</th>
-            <th rowspan="{{ $evaluators->count() }}" class="cga sticky">Cote globale avantageuse</th>
-            <th rowspan="{{ $evaluators->count() }}" class="cd sticky">Cote de délibée</th>
+            <th rowspan="{{ $evaluators->count() }}" class="cd sticky">Cote délibée</th>
         </tr>
         {{-- Second line for projets --}}
         <tr class="row-2">
@@ -26,42 +26,46 @@
                     <th class="project sticky-small">
                         {{ $project->name ?? 'Projet' }}
                     </th>
-                @endforeach
             @endforeach
+        @endforeach
         </thead>
         <tbody>
         @foreach($students as $student)
-            <tr class="row-3" wire:key="s{{ $student->id }}">
+            <tr class="row-3">
                 {{-- Students --}}
                 <th scope="row" class="students sticky">
                     <a href="{{ route('events.contact-profil', ['event' => $event, 'contact' => $student->contact]) }}">
-                        <img src="{{ $student->contact->avatar ?? asset('img/placeholder.png') }}" alt="photo d'un étudiant">
+                        <img src="{{ $student->contact->avatar ?? asset('img/placeholder.png') }}"
+                             alt="photo d'un étudiant">
                         {{ $student->contact->name ?? 'Étudiant' }}
                     </a>
                 </th>
                 {{-- Score sur /20 --}}
                 @foreach($evaluators as $evaluator)
                     @foreach($projects as $project)
-                        <td wire:key="s-{{ $student->id }} e-{{ $evaluator->id }} p-{{ $project->id }}" class="results">
-                            <span>{{ $project->score ?? '0' }}</span>/20
+                        <td class="results">
+                            <span>
+                                {{ $this->getScore(
+                                       $student->contact->id,
+                                       $evaluator->contact->id,
+                                       $project->id
+                                   ) ?? '?' }}</span>/20
                         </td>
                     @endforeach
                 @endforeach
-                {{-- Moyenne --}}
-                <td class="moy">9 / 20</td>
-                {{-- Cote globale --}}
-                <td class="cg">11 / 20</td>
-                {{-- Cote globale avantageuse --}}
-                <td class="cga">8 / 20</td>
-                {{-- Cote délibée --}}
-                <td class="cd">10 / 20</td>
+                {{-- Average --}}
+                <td class="moy">{{ $this->getAverageScore($student->contact->id) ?? '?' }} / 20</td>
+                {{-- Score ponderation 1 | Globale --}}
+                <td class="cg">{{ $this->calculateWeightedScore('ponderation1', $student->contact->id) ?? '?' }} / 20</td>
+                {{-- Score ponderation 2 | Délibé --}}
+                <td class="cd">{{ $this->calculateWeightedScore('ponderation2', $student->contact->id) ?? '?' }} / 20</td>
             </tr>
         @endforeach
         </tbody>
     </table>
     <div class="second-table--footer">
         <button class="button--blue" type="button">
-            Modifier les cotes
+            Mode plein écran
         </button>
     </div>
 </div>

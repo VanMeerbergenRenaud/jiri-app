@@ -16,8 +16,8 @@
         <div class="item__members">
             Participants<br>
             <p>
-                @isset($event->contacts)
-                    <span>{{ $event->contacts->count() }} enregistrés</span>
+                @isset($event->contacts_count)
+                    <span>{{ $event->contacts_count }} enregistrés</span>
                 @else
                     <span>0 enregistré</span>
                 @endisset
@@ -30,7 +30,90 @@
             </a>
 
             @if($event->isAvailable())
-                <a href="{{ route('events.show', ['event' => $event]) }}" wire:navigate class="link__see">Voir</a>
+                <x-dialog>
+                    <x-dialog.open>
+                        <button type="button" class="link__available">Démarrer</button>
+                    </x-dialog.open>
+
+                    <x-dialog.panel>
+                        <form class="form" wire:submit.prevent="startEvent">
+                            <div class="form__content">
+                                <h2 class="title">Commencer l'épreuve&nbsp;:&nbsp;{{ $event->name }}</h2>
+                                <ul class="event__actions__list">
+                                    <li class="event__actions__list__item">
+                                        <h3 class="event__actions__list__item__title">
+                                            Informations importantes
+                                        </h3>
+                                        <p class="event__actions__list__item__text">
+                                            Lorsque vous appuierez sur le bouton "Commencer", l'épreuve sera lancée et les participants pourront commencer à voter.
+                                            Chaque évaluateur recevra un email avec un lien unique pour accéder à la plateforme de vote et un timer se lancera automatiquement
+                                            pour voir la durée de l'épreuve. Assurez-vous que tout est prêt avant de lancer l'épreuve <span class="bold">{{ $event->name }}</span>.
+                                        </p>
+                                    </li>
+                                    <li class="event__actions__list__item">
+                                        <span class="event__actions__list__item__subtitle">
+                                            Récapitulatif des informations de l'épreuve
+                                        </span>
+                                        <p class="event__actions__list__item__info">
+                                            <span>Date de début&nbsp;:</span>
+                                            {{ Carbon\Carbon::parse($event->starting_at)->format('d/m/Y à H\hi') }}
+                                        </p>
+
+                                        <p class="event__actions__list__item__info">
+                                            <span>Durée prévue&nbsp;:</span>
+                                            {{ Carbon\Carbon::parse($event->duration)->format('H\hi') }}
+                                        </p>
+
+                                        <p class="event__actions__list__item__info">
+                                            <span>Participants&nbsp;:</span>
+                                            {{ $event->contacts_count }}
+                                        </p>
+
+                                        <p class="event__actions__list__item__info">
+                                            <span>Projets&nbsp;:</span>
+                                            {{ $event->projects_count }}
+                                        </p>
+                                    </li>
+                                </ul>
+                                @if($event->contacts()->whereNull('email')->count() > 0)
+                                    <div class="event__actions__list__evaluators">
+                                        <p class="event__actions__list__evaluators__text">
+                                            <x-svg.warning/>
+                                            Attention, les évaluateurs suivants n'ont pas d'email enregistré. Ils ne
+                                            recevront pas de lien pour accéder à leur tableau de bord de l'épreuve.
+                                        </p>
+                                        <p class="event__actions__list__evaluators__list">
+                                            <span>Évaluateurs sans email&nbsp;:</span>
+                                            @foreach($event->contacts as $contact)
+                                                @if($contact->email === null)
+                                                    {{ ucfirst($contact->name) }},
+                                                @endif
+                                            @endforeach
+                                        </p>
+                                    </div>
+                                @endif
+                            </div>
+
+                            <x-dialog.footer>
+                                <x-dialog.close>
+                                    <button type="button" class="cancel">Annuler</button>
+                                </x-dialog.close>
+
+                                <button type="submit"
+                                        class="save"
+                                        wire:submit="startEvent">
+                                    Commencer
+                                </button>
+                            </x-dialog.footer>
+                        </form>
+                    </x-dialog.panel>
+                </x-dialog>
+            @elseif($event->isCurrent())
+                <a href="{{ route('events.show', ['event' => $event]) }}" wire:navigate class="link__current">Voir</a>
+            @elseif($event->isPaused())
+                <a href="{{ route('events.show', ['event' => $event]) }}" wire:navigate class="link__pause">Continuer</a>
+            @elseif($event->isFinished())
+                <a href="{{ route('events.show', ['event' => $event]) }}" wire:navigate class="link__finish">Récapitulatif</a>
             @else
                 <button type="button" class="link__unavailable">Non disponible</button>
             @endif
@@ -59,44 +142,33 @@
                                 <div class="form__content">
                                     <h2 class="title">Modifier l'épreuve</h2>
 
-                                    <label>
-                                        Nom
-                                        <input
-                                            type="text"
-                                            name="name"
-                                            wire:model="form.name"
-                                            placeholder="Nom de l'épreuve"
-                                            autofocus
-                                            min="1"
-                                        >
-                                        @error('form.name')<div class="error">{{ $message }}</div>@enderror
-                                    </label>
+                                    <x-form.field
+                                        name="name"
+                                        label="Nom de l'épreuve"
+                                        type="text"
+                                        model="form.name"
+                                        placeholder="Ex : Jury juin {{ now()->year }}"
+                                    />
 
-                                    <label>
-                                        Date de début
-                                        <input
-                                            type="datetime-local"
-                                            name="starting_at"
-                                            wire:model="form.starting_at"
-                                            min="2020-01-01T00:00"
-                                            max="2038-01-01T00:00"
-                                            placeholder="JJ/MM/AAAA HH:MM"
-                                        />
-                                        @error('form.starting_at')<div class="error">{{ $message }}</div>@enderror
-                                    </label>
+                                    <x-form.field
+                                        label="Date de début"
+                                        name="starting_at"
+                                        type="datetime-local"
+                                        model="form.starting_at"
+                                        min="2020-01-01T00:00"
+                                        max="2038-01-01T00:00"
+                                        placeholder="{{ now()->format('Y-m-d\TH:i') }}"
+                                    />
 
-                                    <label>
-                                        Durée
-                                        <input
-                                            type="time"
-                                            name="duration"
-                                            wire:model="form.duration"
-                                            min="00:01:00"
-                                            max="23:59:59"
-                                            placeholder="HH:MM:SS"
-                                        />
-                                        @error('form.duration')<div class="error">{{ $message }}</div>@enderror
-                                    </label>
+                                    <x-form.field
+                                        label="Durée de l'épreuve"
+                                        name="duration"
+                                        type="time"
+                                        model="form.duration"
+                                        min="00:01:00"
+                                        max="23:59:00"
+                                        placeholder="00:00:00"
+                                    />
                                 </div>
 
                                 <x-dialog.footer>

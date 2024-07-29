@@ -3,10 +3,15 @@
 namespace Database\Seeders;
 
 use App\Models\Contact;
+use App\Models\EvaluatorEvaluation;
+use App\Models\EvaluatorEvaluationStatus;
+use App\Models\EvaluatorGlobalComment;
 use App\Models\Event;
 use App\Models\EventContact;
-use App\Models\eventProject;
+use App\Models\EventGlobalComment;
 use App\Models\Project;
+use App\Models\ProjectPonderation;
+use App\Models\Task;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -17,13 +22,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $dominique = User::factory()
-            ->create([
-                'name' => 'Renaud Van Meerbergen',
-                'email' => 'renaud.vanmeerbergen@gmail.com',
-                'password' => bcrypt('password'),
-            ]);
-
         $renaud = User::factory()
             ->create([
                 'name' => 'Renaud Vmb',
@@ -38,10 +36,28 @@ class DatabaseSeeder extends Seeder
                 'password' => bcrypt('password'),
             ]);
 
-        $users = collect([$dominique, $renaud]);
+        $users = collect([$renaud]);
 
         foreach ($users as $user) {
             Event::factory()->count(32)->create([
+                'user_id' => $user->id,
+                'started_at' => null,
+                'paused_at' => null,
+                'finished_at' => null,
+            ]);
+
+            Event::factory()->count(3)->create([
+                'user_id' => $user->id,
+                'paused_at' => null,
+                'finished_at' => null,
+            ]);
+
+            Event::factory()->count(2)->create([
+                'user_id' => $user->id,
+                'finished_at' => null,
+            ]);
+
+            Event::factory()->count(1)->create([
                 'user_id' => $user->id,
             ]);
 
@@ -64,11 +80,37 @@ class DatabaseSeeder extends Seeder
                         'event_id' => $event->id,
                         'contact_id' => $contact->id,
                     ]);
-                }
-            }
 
-            // eventProjects for each event
-            foreach ($events as $event) {
+                    EventGlobalComment::factory()->create([
+                        'event_id' => $event->id,
+                        'contact_id' => $contact->id,
+                    ]);
+
+                    EvaluatorGlobalComment::factory()->create([
+                        'event_id' => $event->id,
+                        'contact_id' => $contact->id,
+                        'event_contact_id' => $user->contacts->random()->id,
+                    ]);
+
+                    $projects = $user->projects->random(5);
+
+                    foreach ($projects as $project) {
+                        EvaluatorEvaluation::factory()->create([
+                            'event_id' => $event->id,
+                            'project_id' => $project->id,
+                            'contact_id' => $contact->id,
+                            'event_contact_id' => $user->contacts->random()->id,
+                        ]);
+
+                        EvaluatorEvaluationStatus::factory()->create([
+                            'event_id' => $event->id,
+                            'contact_id' => $contact->id,
+                            'event_contact_id' => $user->contacts->random()->id,
+                        ]);
+                    }
+                }
+
+                /* Projects */
                 $projects = $user->projects->random(5);
 
                 $totalPonderation1 = 0;
@@ -109,12 +151,23 @@ class DatabaseSeeder extends Seeder
                 }
 
                 foreach ($projects as $index => $project) {
-                    EventProject::factory()->create([
+                    ProjectPonderation::factory()->create([
                         'event_id' => $event->id,
                         'project_id' => $project->id,
                         'ponderation1' => $ponderations1[$index],
                         'ponderation2' => $ponderations2[$index],
                     ]);
+                }
+
+                Task::factory()->count(4)->create();
+
+                // Create the project_task pivot table
+                foreach ($projects as $project) {
+                    $tasks = Task::all()->random(2);
+
+                    foreach ($tasks as $task) {
+                        $project->tasks()->attach($task->id);
+                    }
                 }
             }
         }

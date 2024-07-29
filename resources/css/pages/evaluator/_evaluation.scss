@@ -1,6 +1,7 @@
 /* Evaluation mode for the project of a student */
 
 .mainEvaluationStart, .mainEvaluationEdit {
+
     .evaluation-nav {
         position: relative;
         margin: 1.5rem auto;
@@ -21,7 +22,7 @@
         }
     }
 
-    .evaluation {
+    .evaluationStart, .evaluationEdit {
         position: relative;
         margin: 3rem auto;
         width: fit-content;
@@ -53,7 +54,7 @@
 }
 
 .mainEvaluationStart {
-    .evaluation {
+    .evaluationStart {
         &__text {
             margin: 2rem auto;
             text-align: center;
@@ -91,11 +92,12 @@
         margin: 2.5rem 1.5rem;
         width: fit-content;
 
-        .evaluation {
+        .evaluationEdit {
             margin: 0 auto;
 
-            // For the edit page
-            &__listEdit {
+            &__header {}
+
+            &__list {
                 display: grid;
                 gap: 2rem;
                 padding: 1rem 1.5rem;
@@ -116,6 +118,7 @@
                     align-items: center;
                     font-size: 1rem;
                     gap: 0 4rem;
+                    max-width: 600px;
 
                     .label {
                         margin-bottom: 1rem;
@@ -156,18 +159,71 @@
                             align-items: center;
                             font-size: 1rem;
 
+                            input {
+                                text-align: center;
+                                padding: 0.75rem;
+                                margin-right: 0.5rem;
+                                min-width: 1rem;
+                                max-width: 2.5rem;
+                                border-radius: 1rem;
+                            }
+
                             span {
                                 font-weight: 500;
                             }
                         }
                     }
+
+                    input {
+                        padding: 0.75rem 1.5rem;
+                        font-size: 1rem;
+                        font-weight: 400;
+                        border-radius: 1.5rem;
+                        background-color: #F0F1F7;
+                        width: 5.75rem;
+                    }
+                }
+
+                .item__tasks {
+                    align-items: center;
+
+                    p {
+                       text-align: center;
+                    }
+                }
+
+                .item .form__field {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 1rem;
                 }
 
                 .eventComment {
-                    align-items: flex-start;
+                    align-items: center;
+
+                    .form__field {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        gap: 0;
+
+                        .error-message {
+                            grid-column: 1/3;
+
+                            &__item {
+                                position: relative;
+                                right: 1rem;
+                                width: 100%;
+                                display: block;
+                                text-align: right;
+                            }
+                        }
+                    }
 
                     textarea {
-                        width: calc(100% - 3rem);
+                        margin-top: 1rem;
+                        min-width: 225px;
                         padding: 1rem 1.5rem;
                         font-size: 1rem;
                         font-weight: 400;
@@ -196,44 +252,184 @@
 }
 
 .mainEvaluationSummary {
+
+    @import "../../others/tables";
+
     &__header {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: space-between;
-        gap: 1rem;
+        gap: 0.5rem;
 
         .evaluation-nav {
+            position: relative;
+            margin: 1.5rem auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem 0;
+            max-width: 600px;
+        }
+
+        .evaluation-infos {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 0 5rem;
+            gap: 1rem;
+
+            select, span {
+                font-size: 0.875rem;
+                font-weight: 400;
+                min-width: 250px;
+                width: fit-content;
+                border-radius: 1.5rem;
+                background-color: #F0F1F7;
+            }
+
+            &__status {
+                padding: 0.75rem 2.5rem 0.75rem 1.25rem;
+                cursor: pointer;
+            }
+
+            &__timer {
+                padding: 0.75rem 1.5rem;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 0.5rem;
+                border: 1px solid #e4e8f0;
+
+                svg {
+                    width: 1rem;
+                    height: 1rem;
+                }
+            }
         }
     }
 
-    &__summary {
+    .evaluationSummary {
+        margin: 2rem auto;
+        width: fit-content;
+        max-width: 80vw;
+        overflow-x: scroll;
 
+        &__header {
+            position: sticky;
+            top: 0;
+            left: 0;
+            z-index: 2;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1rem 1.5rem;
+            font-weight: 500;
+            background-color: $gray-300;
+            border-radius: 0.75rem 0.75rem 0 0;
+            border: $border;
+            border-bottom: none;
+
+            img {
+                width: 2rem;
+                height: 2rem;
+                border-radius: 2rem;
+            }
+        }
+
+
+        &__table {
+            max-height: none;
+            border-radius: 0 0 0.75rem 0.75rem;
+
+            thead {
+                th {
+                    text-align: left;
+                    padding: 1rem;
+                    font-size: 0.875rem;
+                    font-weight: 500;
+                    min-width: 265px;
+
+                    &:first-of-type {
+                        text-transform: uppercase;
+                    }
+                }
+            }
+
+            tbody {
+                tr {
+                    th {
+                        padding: 1rem;
+                        font-size: 0.875rem;
+                        font-weight: 500;
+                        text-align: left;
+                        text-transform: initial;
+                        z-index: 3;
+                    }
+
+                    td {
+                        padding: 1rem;
+                        font-size: 0.94rem;
+                        font-weight: 400;
+
+                        a {
+                            color: $blue-dark;
+                            font-size: 0.875rem;
+                            font-weight: 500;
+                            text-decoration: underline;
+                            text-transform: lowercase;
+                        }
+
+                        p, span {
+                            font-size: 0.94rem;
+                            font-weight: 400;
+                            text-transform: initial;
+                            max-height: 215px;
+                            overflow-y: scroll;
+                        }
+                    }
+
+                    .comment {
+                        position: relative;
+
+                        p {
+                            margin-bottom: 1.25rem;
+                            padding: 0 0.5rem 0.5rem;
+                        }
+
+                        button {
+                            width: 100%;
+                            justify-content: center;
+                        }
+
+                        a {
+                            position: absolute;
+                            bottom: 1rem;
+                            margin: 0 auto;
+                            padding: 0.85rem 0;
+                            width: calc(100% - 2rem);
+                            display: block;
+                            text-align: center;
+                            font-size: 0.875rem;
+                            text-transform: initial;
+                            color: $blue-dark;
+                            background-color: $gray-300;
+                            border-radius: 2rem;
+                            text-decoration: none;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
 @media screen and (min-width: 768px) {
-    .mainEvaluationSummary {
-        &__header {
-            flex-direction: row;
-
-            .evaluation-nav {
-                flex-direction: row;
-            }
-        }
-
-        &__summary {
-
-        }
-    }
-
     .mainEvaluationStart, .mainEvaluationEdit {
         .evaluation-nav {
-            margin-top: 5rem;
+            margin-top: 4rem;
 
             .inline-block {
                 margin: 0;
@@ -244,8 +440,8 @@
     }
 
     .mainEvaluationStart {
-        .evaluation {
-            margin: 4rem auto;
+        .evaluationStart {
+            margin: 3.5rem auto;
 
             &__header {
                 padding: 1.25rem 5rem;
@@ -254,15 +450,15 @@
     }
 
     .mainEvaluationEdit {
-
         .evaluationForm {
-            margin: 4rem auto;
+            margin: 3rem auto;
 
-            .evaluation {
+            .evaluationEdit {
                 margin: 0 auto;
 
-                &__listEdit {
+                &__list {
                     padding: 2rem 2.5rem;
+                    gap: 1.5rem 0;
 
                     .label {
                         margin-bottom: 0;
@@ -285,11 +481,38 @@
                         }
                     }
 
-                    .eventComment {
-                        align-items: flex-start;
+                    .item .form__field {
+                        display: grid;
+                        align-items: center;
+                        grid-template-columns: 9rem 1fr;
+                        gap: 0 4rem;
+                    }
 
-                        textarea {
-                            width: calc(100% - 2rem);
+                    .item__tasks {
+                        align-items: start;
+
+                        p {
+                            text-align: left;
+                        }
+                    }
+
+                    .eventComment {
+                        .form__field {
+                            display: grid;
+                            align-items: start;
+                            grid-template-columns: 9rem 1fr;
+                            gap: 0 4rem;
+
+                            textarea {
+                                margin-top: 0;
+                                min-width: 300px;
+                                padding: 1rem 1.5rem;
+                                font-size: 1rem;
+                                font-weight: 400;
+                                border-radius: 1rem;
+                                background-color: #F0F1F7;
+                                resize: none;
+                            }
                         }
                     }
                 }
@@ -302,7 +525,81 @@
             }
         }
     }
-    .mainEvaluationSummary {
+}
 
+@media screen and (min-width: 1024px) {
+    .mainEvaluationSummary {
+        margin-bottom: 5rem;
+
+        &__header {
+            padding: 1rem 1.5rem;
+            flex-direction: row;
+
+            .evaluation-nav {
+                margin: 0;
+                flex-direction: row;
+
+                .inline-block {
+                    margin-right: 2rem;
+                }
+            }
+
+            .evaluation-infos {
+                margin: 0;
+                flex-direction: row;
+
+                span {
+                    min-width: 265px;
+                }
+            }
+        }
+
+        .evaluationSummary {
+            max-width: 95vw;
+
+            &__header {
+                border-radius: 1.5rem 1.5rem 0 0;
+            }
+
+            &__table {
+                border-radius: 0 0 1.5rem 1.5rem;
+
+                thead {
+                    th:first-of-type {
+                        position: sticky;
+                        left: 0;
+                    }
+                }
+
+                tbody {
+                    tr {
+                        th {
+                            position: sticky;
+                            left: 0;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
+
+@media screen and (min-width: 1440px) {
+    .mainEvaluationSummary {
+        &__header {
+            margin: 0.5rem auto;
+            padding: 1.5rem 3rem;
+
+            .evaluation-nav {
+                .inline-block {
+                    margin-right: 4rem;
+                }
+            }
+        }
+
+        .evaluationSummary {
+            margin: 1rem auto;
+        }
+    }
+}
+

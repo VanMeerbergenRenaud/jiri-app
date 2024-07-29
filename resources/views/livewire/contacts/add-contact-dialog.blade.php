@@ -15,7 +15,6 @@
                         type="text"
                         model="form.name"
                         placeholder="John"
-                        :messages="$errors->get('form.name')"
                         autofocus
                     />
 
@@ -25,7 +24,6 @@
                         type="text"
                         model="form.firstname"
                         placeholder="Doe"
-                        :messages="$errors->get('form.firstname')"
                     />
 
                     <x-form.field
@@ -34,7 +32,6 @@
                         type="email"
                         model="form.email"
                         placeholder="john.doe@gmail.com"
-                        :messages="$errors->get('form.email')"
                     />
 
                     <x-form.field
@@ -43,8 +40,8 @@
                         type="file"
                         model="form.avatar"
                         placeholder="JPG, JPEG, PNG ou SVG (MAX 1024 ko)"
-                        :messages="$errors->get('form.avatar')"
                     />
+                    <span class="avatar-infos">Format : JPG, JPEG ou PNG (MAX 1024 ko)</span>
 
                     @if($form->avatar)
                         <img src="{{ $form->avatar->temporaryUrl() }}" alt="Image du contact" class="temporary_url">
@@ -68,7 +65,7 @@
                 icon="add"
                 title="Contact ajouté avec succès !"
                 message="Vous avez ajouté un nouveau contact."
-                method="$set('saved', false)"
+                method="$set('added', false)"
             />
         @endif
     </div>

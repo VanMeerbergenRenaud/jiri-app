@@ -10,27 +10,17 @@
         {{-- Title --}}
         <title>{{ $title ?? 'Dashboard évaluateur' }}</title>
 
+        <!-- Alpine -->
+        <script defer src="https://unpkg.com/@alpinejs/ui@3.13.2-beta.0/dist/cdn.min.js"></script>
+
         @livewireStyles
         @vite(['resources/css/app.scss', 'resources/js/app.js'])
     </head>
     <body>
-        <header class="evaluator__header">
-            <!-- Logo -->
-            {{-- TODO : change the route to 'evaluator-events-dashboard' --}}
-            <a href="{{ url()->current() }}" class="logo__link" title="Vers la page de toutes mes épreuves">
-                <x-logo />
-                <span>Jiri.app</span>
-            </a>
+        <div wire:offline class="offline">
+            Vous êtes actuellement hors ligne veuillez vous reconnecter à un réseau pour continuer à utiliser l'application.
+        </div>
 
-            <!-- Name of the event -->
-            <h1 class="evaluator__header__title">{{ $title ?? 'Dashboard évaluateur' }}</h1>
-
-            <!-- Avatar of the evaluator -->
-            {{-- TODO : add a route so the evaluator can change his profile --}}
-            <img src="{{ asset('img/placeholder.png') }}" alt="photo de profil du contact" class="evaluator__header__img">
-        </header>
-
-        <!-- Page Content -->
         {{ $slot }}
 
         @livewireScriptConfig

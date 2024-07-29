@@ -6,19 +6,19 @@
         @csrf
 
         <!-- Name -->
-        <x-form.field
+        <x-form.breeze-field
             label="Nom"
             name="name"
             type="text"
             placeholder="John Doe"
             autocomplete="name"
             required
-            :messages="$errors->get('name')"
             autofocus
+            :messages="$errors->get('name')"
         />
 
         <!-- Email address -->
-        <x-form.field
+        <x-form.breeze-field
             label="Adresse mail"
             name="email"
             type="email"
@@ -29,7 +29,7 @@
         />
 
         <!-- Password -->
-        <x-form.field-password
+        <x-form.breeze-field-password
             label="Mot de passe"
             name="password"
             placeholder="Min. 8 caractères"
@@ -39,7 +39,7 @@
         />
 
         <!-- Confirm password -->
-        <x-form.field-password
+        <x-form.breeze-field-password
             label="Confirmation du mot de passe"
             name="password_confirmation"
             placeholder="Confirmer pour être sûre"
@@ -53,9 +53,13 @@
                 {{ __('Déjà enregistré ?') }}
             </a>
 
-            <button type="submit">
-                {{ __('S‘enregistrer') }}
-            </button>
+            <div class="form__footer__login">
+                <x-auth.github-login />
+
+                <button type="submit">
+                    {{ __('S‘enregistrer') }}
+                </button>
+            </div>
         </div>
     </form>
 </x-guest-layout>

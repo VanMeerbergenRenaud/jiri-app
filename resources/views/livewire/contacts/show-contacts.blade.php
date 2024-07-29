@@ -47,11 +47,11 @@
     </div>
 
     <div>
-        @if($saved)
+        @if($deleted)
             <x-notifications
                 icon="delete"
                 title="Contact supprimé avec succès !"
-                method="$set('saved', false)"
+                method="$set('deleted', false)"
             />
         @endif
     </div>
