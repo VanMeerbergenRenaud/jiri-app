@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\EventContact;
 use Closure;
 use Exception;
 
@@ -26,7 +25,7 @@ class EvaluatorMiddelware
                 ->where('token', $request->route('token'))
                 ->first();
 
-            if (!$eventContact) {
+            if (! $eventContact) {
                 throw new Exception('You are not an evaluator for this event');
             }
 

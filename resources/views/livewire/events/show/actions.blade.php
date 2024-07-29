@@ -40,7 +40,7 @@
             <x-dialog.panel>
                 <div class="form__content">
                     <h2 class="title">Modification du status</h2>
-                    <p>L'épreuve à été mise en pause. Voulez-vous la reprendre ou plutôt la terminée définitevement&nbsp;?</p>
+                    <p>L'épreuve à été mise en pause. Voulez-vous la continuer ou plutôt la terminer définitevement&nbsp;?</p>
                 </div>
 
                 <x-dialog.footer>

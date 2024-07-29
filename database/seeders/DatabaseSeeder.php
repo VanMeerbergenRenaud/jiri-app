@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Contact;
 use App\Models\EvaluatorEvaluation;
+use App\Models\EvaluatorEvaluationStatus;
 use App\Models\EvaluatorGlobalComment;
 use App\Models\Event;
 use App\Models\EventContact;
@@ -97,6 +98,12 @@ class DatabaseSeeder extends Seeder
                         EvaluatorEvaluation::factory()->create([
                             'event_id' => $event->id,
                             'project_id' => $project->id,
+                            'contact_id' => $contact->id,
+                            'event_contact_id' => $user->contacts->random()->id,
+                        ]);
+
+                        EvaluatorEvaluationStatus::factory()->create([
+                            'event_id' => $event->id,
                             'contact_id' => $contact->id,
                             'event_contact_id' => $user->contacts->random()->id,
                         ]);

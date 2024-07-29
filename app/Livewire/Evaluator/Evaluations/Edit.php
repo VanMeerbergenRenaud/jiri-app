@@ -79,7 +79,6 @@ class Edit extends Component
             'comment' => $this->comment,
             'status' => $this->status ?? 'not evaluated',
             'timer' => $this->timer,
-            'public' => false,
             'updated_at' => now(),
             'created_at' => now(),
         ]);

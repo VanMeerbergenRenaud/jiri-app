@@ -90,4 +90,10 @@ class User extends Authenticatable
     {
         return $this->hasManyThrough(EvaluatorGlobalComment::class, Event::class);
     }
+
+    // Status of an evaluation
+    public function evaluatorEvaluationStatuses(): HasManyThrough
+    {
+        return $this->hasManyThrough(EvaluatorEvaluationStatus::class, Event::class);
+    }
 }

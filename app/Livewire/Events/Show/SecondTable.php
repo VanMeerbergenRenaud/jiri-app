@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Livewire\Events\Show;
 
 use Livewire\Component;
@@ -6,11 +7,17 @@ use Livewire\Component;
 class SecondTable extends Component
 {
     public $event;
+
     public $contacts;
+
     public $students;
+
     public $evaluators;
+
     public $projects;
+
     public $evaluations;
+
     public $ponderations;
 
     public function mount($event, $contacts, $students, $evaluators, $projects)

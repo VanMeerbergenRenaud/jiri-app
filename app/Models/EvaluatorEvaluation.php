@@ -17,7 +17,6 @@ class EvaluatorEvaluation extends Model
         'comment',
         'status',
         'timer',
-        'public',
     ];
 
     // The evaluation belongs to an event

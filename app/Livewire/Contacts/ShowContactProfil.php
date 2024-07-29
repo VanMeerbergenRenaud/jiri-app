@@ -52,23 +52,23 @@ class ShowContactProfil extends Component
 
         // Preload the necessary relationships in a single query
         $user = auth()->user()->load([
-            'eventContacts' => function($query) use ($event) {
-                $query->where('event_id', $event->id)->with(['contact' => function($query) {
+            'eventContacts' => function ($query) use ($event) {
+                $query->where('event_id', $event->id)->with(['contact' => function ($query) {
                     $query->where('id', '!=', $this->contact->id);
                 }]);
             },
-            'projectPonderations' => function($query) use ($event) {
+            'projectPonderations' => function ($query) use ($event) {
                 $query->where('event_id', $event->id)->with('project');
             },
-            'evaluatorsEvaluations' => function($query) use ($event) {
+            'evaluatorsEvaluations' => function ($query) use ($event) {
                 $query->where('event_id', $event->id)->where('status', 'evaluated');
             },
-            'eventGlobalComments' => function($query) use ($event, $contact) {
+            'eventGlobalComments' => function ($query) use ($event, $contact) {
                 $query->where('event_id', $event->id)->where('contact_id', $contact->id);
             },
-            'evaluatorGlobalComments' => function($query) use ($event) {
+            'evaluatorGlobalComments' => function ($query) use ($event) {
                 $query->where('event_id', $event->id);
-            }
+            },
         ]);
 
         // Set contact type

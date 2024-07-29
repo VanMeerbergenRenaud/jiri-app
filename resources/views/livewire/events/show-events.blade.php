@@ -1,5 +1,5 @@
 <div>
-    @if($events->count() < 0)
+    @if($events->isEmpty())
         <div class="empty-event">
             <p>Aucune épreuve n'a encore été créée jusqu'à présent.</p>
         </div>
@@ -11,7 +11,6 @@
 
         <div wire:loading.class.delay="opacity-50" class="events__list">
 
-            {{-- Affichage des épreuves disponibles --}}
             @if($availableEvents->isNotEmpty())
                 <ul class="list list-available">
                     Épreuves disponibles
@@ -104,7 +103,6 @@
                     <p>Aucune épreuve ne correspond à votre recherche.</p>
                 </div>
             @endif
-
         </div>
     @endif
 

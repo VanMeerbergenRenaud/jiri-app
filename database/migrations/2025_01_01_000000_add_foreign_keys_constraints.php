@@ -57,6 +57,13 @@ return new class extends Migration
             $table->foreignId('event_id')->constrained()->onDelete('cascade');
             $table->foreignId('contact_id')->constrained()->onDelete('cascade');
         });
+
+        // evaluator evaluation status
+        Schema::table('evaluator_evaluation_statuses', function (Blueprint $table) {
+            $table->foreignId('event_id')->constrained()->onDelete('cascade');
+            $table->foreignId('contact_id')->constrained()->onDelete('cascade');
+            $table->foreignId('event_contact_id');
+        });
     }
 
     /**
@@ -107,6 +114,13 @@ return new class extends Migration
         Schema::table('event_global_comment', function (Blueprint $table) {
             $table->dropForeign(['event_id']);
             $table->dropForeign(['contact_id']);
+        });
+
+        // evaluator evaluation status
+        Schema::table('evaluator_evaluation_statuses', function (Blueprint $table) {
+            $table->dropForeign(['event_id']);
+            $table->dropForeign(['contact_id']);
+            $table->dropForeign(['event_contact_id']);
         });
     }
 };

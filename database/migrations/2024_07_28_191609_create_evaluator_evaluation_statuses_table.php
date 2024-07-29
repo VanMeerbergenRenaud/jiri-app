@@ -11,16 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('evaluator_evaluation', function (Blueprint $table) {
+        Schema::create('evaluator_evaluation_statuses', function (Blueprint $table) {
             $table->id();
-            // score of the evaluation
-            $table->decimal('score', 5, 2)->nullable();
-            // comment of the evaluation
-            $table->text('comment')->nullable();
-            // status of the evaluation
             $table->enum('status', ['not evaluated', 'pending', 'evaluated'])->default('not evaluated');
-            // timer to see how long it took to evaluate
-            $table->time('timer')->nullable();
+            $table->boolean('public')->default(false);
             $table->timestamps();
         });
     }
@@ -30,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('evaluator_evaluation');
+        Schema::dropIfExists('evaluator_evaluation_statuses');
     }
 };

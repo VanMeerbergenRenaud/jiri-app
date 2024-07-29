@@ -91,6 +91,12 @@ class Event extends Model
         return $this->hasMany(EvaluatorEvaluation::class);
     }
 
+    // An event can have one or more evaluation statuses from the evaluators
+    public function evaluatorsEvaluationsStatuses(): HasMany
+    {
+        return $this->hasMany(EvaluatorEvaluationStatus::class);
+    }
+
     // An event can have one or more global comments wrote by the user for a student
     public function eventGlobalComments(): HasMany
     {

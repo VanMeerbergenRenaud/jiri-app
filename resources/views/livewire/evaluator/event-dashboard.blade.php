@@ -47,7 +47,7 @@
                     $averageScore = $countScores > 0 ? ($sumScores / $countScores) : 0;
 
                     // Vérifier si toutes les évaluations sont publiées
-                    $allPublic = $studentEvaluations->every(fn($evaluation) => $evaluation->public === 1);
+                    $allPublic = 0;
                 @endphp
                 <li x-data="{ open: false, isSelected: false }">
                     <div class="students__list__item" :class="{ 'isSelected': isSelected }" @click="open = !open; isSelected = !isSelected">
@@ -158,7 +158,7 @@
                     $averageScore = $countScores > 0 ? ($sumScores / $countScores) : 0;
 
                     // Vérifier si toutes les évaluations sont publiées
-                    $allPublic = $studentEvaluations->every(fn($evaluation) => $evaluation->public === 1);
+                    $allPublic = 0;
                 @endphp
 
                 <tr>
