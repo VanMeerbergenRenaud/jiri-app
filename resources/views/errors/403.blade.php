@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-evaluator-layout>
     <main class="p-error">
         <div class="p-error__header">
             <h1 class="p-error__code">
@@ -15,4 +15,4 @@
             </a>
         </div>
     </main>
-</x-app-layout>
+</x-evaluator-layout>
