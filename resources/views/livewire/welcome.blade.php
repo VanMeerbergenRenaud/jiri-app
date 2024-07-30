@@ -1,6 +1,5 @@
 <div>
-    @section('content')
-        <body class="welcome">
+    <body class="welcome">
         <main class="welcome__main">
             <div class="welcome__container">
                 <div class="welcome__container__intro">
@@ -18,7 +17,7 @@
                 </div>
             </div>
         </main>
+
         <x-footer class="welcome__footer" />
-        </body>
-    @endsection
+    </body>
 </div>

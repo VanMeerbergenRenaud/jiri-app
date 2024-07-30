@@ -13,6 +13,6 @@ class Welcome extends Component
         $avatar = $user->github_avatar ?? asset('img/default-avatar.png');
 
         return view('livewire.welcome', compact('user', 'avatar'))
-            ->layout('layouts.home', ['title' => 'Welcome']);
+            ->layout('layouts.home');
     }
 }
