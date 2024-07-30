@@ -34,7 +34,7 @@
                             <x-dialog.panel>
                                 <form class="form" wire:submit.prevent="addContact(selectedContactId, selectedRole)">
                                     <div class="form__content">
-                                        <h2 class="title">Quel type de contact souhaitez-vous ajouter&nbsp;?</h2>
+                                        <h2 role="heading" aria-level="2" class="title">Quel type de contact souhaitez-vous ajouter&nbsp;?</h2>
 
                                         <label for="role">
                                             Veuillez choisir un type ci-dessous pour <strong class="bold">{{ $contact->name }}&nbsp;:</strong>

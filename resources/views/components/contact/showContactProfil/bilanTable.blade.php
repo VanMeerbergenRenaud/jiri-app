@@ -5,7 +5,7 @@
         <thead>
         <tr>
             <th class="bilan__head" colspan="100%">
-                <h3>Bilan de l’étudiant</h3>
+                <h3 role="heading" aria-level="3">Bilan de l’étudiant</h3>
 
                 <x-dialog>
                     <x-dialog.open>
@@ -16,7 +16,7 @@
 
                     <x-dialog.panel>
                         <div class="form__content">
-                            <h2 class="title">Editer les informations</h2>
+                            <h2 role="heading" aria-level="2" class="title">Editer les informations</h2>
                             <p>
                                 Editer les cotes ainsi que les pondérations des projets de l’étudiant.
                             </p>
@@ -72,7 +72,11 @@
         <tbody>
         <!-- Ligne de titre -->
         <tr class="bilan__row">
-            <th class="bilan__row__title">Projets</th>
+            <th class="bilan__row__title">
+                <h4 role="heading" aria-level="4">
+                    Projets
+                </h4>
+            </th>
             @foreach ($projects as $project)
                 <td>
                     <span class="capitalize">{{ $project->project->name }}</span>
@@ -83,7 +87,9 @@
         </tr>
         <!-- Ligne de moyenne et 1ère pondération -->
         <tr class="bilan__row">
-            <th class="bilan__row__title">Moyenne des cotes</th>
+            <th class="bilan__row__title">
+                <h4 role="heading" aria-level="4">Moyenne des cotes</h4>
+            </th>
             <!-- Moyenne des cotes par projet -->
             @foreach ($projects as $project)
                 <td>
@@ -101,7 +107,9 @@
         </tr>
         <!-- Coéfficient de la cote globale pour chaque projet -->
         <tr class="bilan__row">
-            <th rowspan="2" class="bilan__row__title b-b">Coéfficient de la cote globale en %</th>
+            <th rowspan="2" class="bilan__row__title b-b">
+                <h4 role="heading" aria-level="4">Coéfficient de la cote globale en %</h4>
+            </th>
 
             @foreach ($projects as $project)
                 <td>

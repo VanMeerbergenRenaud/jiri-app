@@ -168,7 +168,11 @@
                                         'token' => $token,
                                         'student' => $student,
                                         'project' => $project,
-                                    ]) }}">Modifier</a>
+                                    ]) }}"
+                                   title="Modifier le commentaire"
+                                >
+                                    Modifier
+                                </a>
                             </td>
                         @endforeach
                         <td class="comment">
@@ -185,7 +189,7 @@
 
                                     <x-dialog.panel>
                                         <div class="form__content">
-                                            <h2 class="title">Commentaire global</h2>
+                                            <h2 role="heading" aria-level="2" class="title">Commentaire global</h2>
                                             <p class="text">
                                                 Veuillez ajouter votre commentaire global pour <span class="bold">{{ $student->name }}</span>.
                                             </p>

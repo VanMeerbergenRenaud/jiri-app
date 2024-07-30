@@ -15,8 +15,9 @@
     </head>
     <body>
         <main class="guest">
+
+            <!-- Logo -->
             <div class="logo">
-                <!-- Logo -->
                 <a href="/" title="Retour à l'accueil" class="logo__link">
                     <x-logo />
                     <span>Jiri.app</span>

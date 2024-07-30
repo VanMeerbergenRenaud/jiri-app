@@ -2,7 +2,7 @@
     @csrf
 
     <div class="sectionHeader">
-        <h3>Commentaire global</h3>
+        <h3 role="heading" aria-level="3">Commentaire global</h3>
 
         <x-dialog wire:model="showCommentDialog">
             <x-dialog.open>
@@ -13,7 +13,7 @@
 
             <x-dialog.panel>
                 <div class="form__content">
-                    <h2 class="title">Commentaire global</h2>
+                    <h2 role="heading" aria-level="2" class="title">Commentaire global</h2>
                     <p class="text">
                         Veuillez ajouter un commentaire global pour l’étudiant.
                     </p>

@@ -1,5 +1,5 @@
 <section class="profile-admin__section">
-    <h2 class="profile-admin__section__title">
+    <h2 role="heading" aria-level="2" class="profile-admin__section__title">
         {{ __('Sauvegarder le mot de passe') }}
     </h2>
 

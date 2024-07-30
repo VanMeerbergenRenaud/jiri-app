@@ -43,6 +43,8 @@ class ShowContactProfil extends Component
 
     public $evaluatorGlobalCote;
 
+    public $tasks;
+
     public function mount($event, $contact)
     {
         $this->event = $event;
@@ -58,7 +60,7 @@ class ShowContactProfil extends Component
                 }]);
             },
             'projectPonderations' => function ($query) use ($event) {
-                $query->where('event_id', $event->id)->with('project');
+                $query->where('event_id', $event->id)->with('project', 'project.tasks');
             },
             'evaluatorsEvaluations' => function ($query) use ($event) {
                 $query->where('event_id', $event->id)->where('status', 'evaluated');
@@ -145,7 +147,6 @@ class ShowContactProfil extends Component
         $this->commentSaved = true;
     }
 
-    #[NoReturn]
     public function editContactRole()
     {
         dd('need to change the role of the contact');

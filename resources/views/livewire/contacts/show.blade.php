@@ -5,7 +5,7 @@
 
     <main class="mainProfil mainProfilShowContact max-width">
         <div class="mainProfil__intro">
-            <h2>Profil du contact</h2>
+            <h2 role="heading" aria-level="2">Profil du contact</h2>
             <p>
                 Listes des épreuves dans lesquelles
                 <span class="font-semibold">{{ $contact->name }}</span>
@@ -36,7 +36,7 @@
                     <li>
                         <p>
                             <span>Épreuve&nbsp;:</span>
-                            <a href="{{ route('events.show', $eventContacts->event) }}">
+                            <a href="{{ route('events.show', $eventContacts->event) }}" title="Vers la page de l'épreuve">
                                 {{ $eventContacts->event->name }}
                             </a>
                         </p>
@@ -56,7 +56,7 @@
 
                         <p>
                             <span>Profil et résultats&nbsp;:</span>
-                            <a href="{{ route('events.contact-profil', ['event' => $eventContacts->event, 'contact' => $contact]) }}">
+                            <a href="{{ route('events.contact-profil', ['event' => $eventContacts->event, 'contact' => $contact]) }}" title="Vers la page du profil de l'épreuve">
                                 Voir
                             </a>
                         </p>

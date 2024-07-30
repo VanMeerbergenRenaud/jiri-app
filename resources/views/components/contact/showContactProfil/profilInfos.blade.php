@@ -12,6 +12,7 @@
 </div>
 
 <div class="mainProfil__content__profil__form">
+    <h3 role="heading" aria-level="3" class="sr-only">Informations du contact</h3>
     <label for="Photo">Photo</label>
     <div class="mainProfil__content__profil__form__photo">
         <div>
@@ -27,19 +28,19 @@
     </div>
     {{-- Nom, prénom, adresse mail, site de référence et compte Github --}}
     <div class="mainProfil__content__profil__form__infos">
-        <h3 class="title">Nom</h3>
+        <h4 role="heading" aria-level="4" class="title">Nom</h4>
         <p class="text">{{ $contact->name }}</p>
 
-        <h3 class="title">Prénom</h3>
+        <h4 role="heading" aria-level="4" class="title">Prénom</h4>
         <p class="text">{{ $contact->firstname }}</p>
 
-        <h3 class="title">Adresse mail</h3>
+        <h4 role="heading" aria-level="4" class="title">Adresse mail</h4>
         <p class="text">{{ $contact->email ?? 'Non renseigné' }}</p>
 
-        <h3 class="title">Site de référence</h3>
+        <h4 role="heading" aria-level="4" class="title">Site de référence</h4>
         <p class="text">{{ $contact->site ?? 'Non renseigné' }}</p>
 
-        <h3 class="title">Compte GitHub</h3>
+        <h4 role="heading" aria-level="4" class="title">Compte GitHub</h4>
         <p class="text">{{ $contact->github ?? 'Non renseigné' }}</p>
     </div>
 </div>

@@ -1,5 +1,5 @@
 <div class="jiriesComment">
-    <h3 class="title">Commentaires des membres du jury</h3>
+    <h3 role="heading" aria-level="3" class="title">Commentaires des membres du jury</h3>
     <ul class="jiriesComment__list">
         @foreach ($evaluators as $evaluator)
             <li x-data="{ open: false, isSelected: false }" class="jiriesComment__list__item">
@@ -27,9 +27,9 @@
                         @endphp
                         <li class="jiriesComment__list__item__commentList__item">
                             <div>
-                                <h4 class="font-semibold capitalize">
-                                    {{ $project->project->name ?? 'Projet inconnu' }}
-                                </h4>
+                                <p class="jiriesComment__list__item__commentList__item__title">
+                                    {{ ucfirst($project->project->name) ?? 'Projet inconnu' }}
+                                </p>
                                 <span>
                                     @if($evaluationsOfEvaluator->isEmpty())
                                         ? / 20
@@ -40,7 +40,7 @@
                                     @endif
                                 </span>
                             </div>
-                            <p>
+                            <p class="jiriesComment__list__item__commentList__item__text">
                                 @if($evaluationsOfEvaluator->isEmpty())
                                     Aucun commentaire n’a encore été enregistré jusqu’à présent pour ce projet.
                                 @else
@@ -63,14 +63,14 @@
                                 : null;
                         @endphp
                         <div>
-                            <h3 class="font-semibold capitalize">
+                            <p role="heading" aria-level="4" class="jiriesComment__list__item__commentList__item__title">
                                 Commentaire global
-                            </h3>
+                            </p>
                             <span>
                                 {{ number_format($globalCote, 2) ?? '?' }} / 20
                             </span>
                         </div>
-                        <p>
+                        <p class="jiriesComment__list__item__commentList__item__text">
                             {{ $this->getGlobalCommentForStudent($evaluator->contact->id) ?? 'Aucun commentaire global enregistré.' }}
                         </p>
                     </li>

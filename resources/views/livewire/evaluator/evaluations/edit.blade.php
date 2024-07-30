@@ -13,19 +13,19 @@
             <section class="evaluationEdit">
                 <h2 role="heading" aria-level="2" class="sr-only">Informations sur le projet</h2>
                 <div class="evaluationEdit__header">
-                    <img src="{{ $student->avatar ?? asset('img/placeholder.png') }}" alt="{{ $student->name }}">
+                    <img src="{{ $student->avatar ?? asset('img/placeholder.png') }}" alt="photo de profil de{{ $student->name }}">
                     <p>{{ $student->name }} {{ $student->firstname }}</p>
                 </div>
                 <ul class="evaluationEdit__list">
                     <li class="evaluationEdit__list__item">
                         <span class="label">Url du projet</span>
-                        <a href="{{ $project->url_readme ?? '#' }}" target="_blank" class="link">
+                        <a href="{{ $project->url_readme ?? '#' }}" target="_blank" class="link" title="Vers la page de description du projet">
                             {{ $project->url_readme ?? 'non renseigné' }}
                         </a>
                     </li>
                     <li class="evaluationEdit__list__item">
                         <span class="label">Repository Github</span>
-                        <a href="{{ $project->student->github ?? '#' }}" target="_blank" class="link">
+                        <a href="{{ $project->student->github ?? '#' }}" target="_blank" class="link" title="Vers le repository Github">
                             {{ $project->student->github ?? 'non renseigné' }}
                         </a>
                     </li>

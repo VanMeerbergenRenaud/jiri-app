@@ -19,9 +19,7 @@
                     Bienvenue sur votre tableau de bord.<br>
                     Vous pouvez voir ici un aperçu de vos dernières statistiques.
                 </p>
-                <a href="{{ route('profile.edit') }}"
-                   title="Vers votre profil"
-                   class="button--blue mainDashboard__header__content__link">
+                <a href="{{ route('profile.edit') }}" title="Vers la page de profil" class="button--blue mainDashboard__header__content__link">
                     Voir mon profil
                 </a>
             </div>
@@ -33,14 +31,10 @@
                 Vous pouvez consulter notre tutoriel pour vous aider à démarrer sur de bonnes bases et plus rapidement
                 que jamais.
             </p>
-            <a href="/home"
-               title="Voir le tutoriel"
-               class="button--blue mainDashboard__tutorial__link">
+            <a href="/" title="Voir le tutoriel" class="button--blue mainDashboard__tutorial__link">
                 Voir le tutoriel
             </a>
-            <img src="{{ asset('img/homepage/card_2.png') }}"
-                 alt="Illustration d'un tutoriel"
-                 class="mainDashboard__tutorial__img">
+            <img src="{{ asset('img/homepage/card_2.png') }}" alt="Illustration d'un tutoriel" class="mainDashboard__tutorial__img">
         </section>
 
         <section class="mainDashboard__stats">
@@ -80,7 +74,6 @@
                             </span>
                             </li>
                         @empty
-                            {{--TODO : mainDashboard item__empty--}}
                             <li class="mainDashboard__stats__available__list__item__empty">
                                 Aucune épreuve à commencer
                             </li>

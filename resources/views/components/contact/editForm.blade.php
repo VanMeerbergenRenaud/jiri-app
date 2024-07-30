@@ -1,6 +1,6 @@
 <form wire:submit="saveContact" class="form">
     <div class="form__content">
-        <h2 class="title">Modifier le contact</h2>
+        <h2 role="heading" aria-level="2" class="title">Modifier le contact</h2>
 
         <x-form.field
             label="Nom"

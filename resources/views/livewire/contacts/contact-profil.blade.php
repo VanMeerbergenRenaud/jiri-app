@@ -1,12 +1,11 @@
 <div>
     @section('title')
-        <h1 role="heading" aria-level="1" class="sr-only">Profil d'un contact</h1>
+        <h1 role="heading" aria-level="1" class="sr-only">Informations du profil de {{ $contact->name }}</h1>
     @endsection
 
     <main class="mainProfil max-width">
         <div class="mainProfil__intro">
-            <h2>Profil du contact
-            </h2>
+            <h2 role="heading" aria-level="2">Profil du contact</h2>
             <p>
                 Découvrez toutes les informations de
                 <span class="font-semibold">{{ $contact->name }}</span>
@@ -15,7 +14,7 @@
         </div>
 
         <div class="mainProfil__nav">
-            <a href="{{ url()->previous() }}" class="button--gray">
+            <a href="{{ url()->previous() }}" class="button--gray" title="Retour à la page précédente">
                 @include('components.svg.arrow-left')
                 Retour
             </a>

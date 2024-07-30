@@ -13,8 +13,8 @@
         @livewireStyles
         @vite(['resources/css/app.scss', 'resources/js/app.js'])
     </head>
-        <!-- Body -->
-        @yield('content')
+
+        {{ $slot }}
 
         @livewireScriptConfig
         @yield('scripts')

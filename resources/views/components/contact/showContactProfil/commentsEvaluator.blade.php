@@ -1,5 +1,6 @@
 <div class="jiriesComment">
     <div class="jiriesComment__head">
+        <h3 role="heading" aria-level="3" class="sr-only">Commentaires de l'évaluateur</h3>
         <img src="{{ $contact->avatar ?? asset('img/placeholder.png') }}" alt="Photo du contact">
         <span>
             {{ $contact->name }} {{ $contact->firstname }}
@@ -32,9 +33,9 @@
                             @endphp
                             <li class="jiriesComment__list__item__commentList__item">
                                 <div>
-                                    <h3 class="font-semibold capitalize">
-                                        {{ $project->project->name ?? 'Projet inconnu' }}
-                                    </h3>
+                                    <p class="jiriesComment__list__item__commentList__item__title">
+                                        {{ ucfirst($project->project->name) ?? 'Projet inconnu' }}
+                                    </p>
                                     <span>
                                         @if($evaluationForStudent->isEmpty())
                                             ? / 20
@@ -45,7 +46,7 @@
                                         @endif
                                     </span>
                                 </div>
-                                <p>
+                                <p class="jiriesComment__list__item__commentList__item__text">
                                     @if($evaluationForStudent->isEmpty())
                                         Aucun commentaire n’a encore été enregistré jusqu’à présent pour
                                         ce projet.
@@ -69,14 +70,14 @@
                                         ? $totalScore / $scoredProjects->count()
                                         : null;
                                 @endphp
-                                <h3 class="font-semibold capitalize">
+                                <p class="jiriesComment__list__item__commentList__item__title">
                                     Commentaire global
-                                </h3>
+                                </p>
                                 <span>
                                     {{ number_format($globalCote, 2) ?? '?' }} / 20
                                 </span>
                             </div>
-                            <p>
+                            <p class="jiriesComment__list__item__commentList__item__text">
                                 {{ $this->getGlobalCommentForEvaluator($student->contact->id) ?? 'Aucun commentaire global enregistré.' }}
                             </p>
                         </li>

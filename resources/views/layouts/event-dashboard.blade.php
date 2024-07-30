@@ -25,6 +25,8 @@
             Vous êtes actuellement hors ligne veuillez vous reconnecter à un réseau pour continuer à utiliser l'application.
         </div>
 
+        @yield('title')
+
         <!-- Navigation -->
         <livewire:events.event.navbar />
 

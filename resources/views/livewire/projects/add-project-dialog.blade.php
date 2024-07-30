@@ -9,7 +9,7 @@
                 @csrf
 
                 <div class="form__content">
-                    <h2 class="title">Créer un nouveau projet</h2>
+                    <h2 role="heading" aria-level="2" class="title">Créer un nouveau projet</h2>
 
                     {{-- Name, description, tasks --}}
                     <x-form.field

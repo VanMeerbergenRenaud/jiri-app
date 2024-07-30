@@ -1,16 +1,16 @@
 <x-evaluator-layout>
     <main class="p-error">
         <div class="p-error__header">
-            <h1 class="p-error__code">
+            <h1 role="heading" aria-level="1" class="p-error__code">
                 <span class="sr-only">Page d'erreur</span>
                 403
             </h1>
-            <h2 class="p-error__title">Page interdite…</h2>
+            <h2 role="heading" aria-level="2" class="p-error__title">Page interdite…</h2>
             <p class="p-error__description">
                 Vous essayez d'accéder une page à laquelle vous n'avez pas le droit d'accéder&nbsp;!<br>
                 Bien essayer, petit chenapan&nbsp;!
             </p>
-            <a href="{{ url()->previous() }}" class="p-error__button">
+            <a href="{{ url()->previous() }}" class="p-error__button" title="Retourner à la page précédente">
                 {{ __('Retourner à la page précédente') }}
             </a>
         </div>

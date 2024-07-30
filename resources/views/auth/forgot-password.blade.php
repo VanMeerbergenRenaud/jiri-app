@@ -2,6 +2,10 @@
     <!-- Session Status -->
     <x-auth.session-status :status="session('status')" />
 
+    <h1 role="heading" aria-level="1" class="sr-only">
+        {{ __('Mot de passe oublié') }}
+    </h1>
+
     <form method="POST" action="{{ route('password.email') }}" class="form">
         @csrf
 

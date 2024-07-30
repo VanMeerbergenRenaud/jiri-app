@@ -71,14 +71,15 @@ class EventRow extends Component
         if ($contacts->isEmpty()) {
             session()->flash('errorParticipants', 'Attention, il n\'y a aucun participant enregistré à cet événement, veuillez en ajouter avant de démarrer l\'épreuve.');
 
-            return false;
+            // Return and reload the page
+            return redirect()->back();
         }
 
         // If there are no evaluators, show an error message
         if ($evaluators->isEmpty()) {
             session()->flash('errorNoEvaluator', 'Attention, il n\'y a aucun évaluateur enregistré à cet événement, veuillez en ajouter avant de démarrer l\'épreuve.');
 
-            return false;
+            return redirect()->back();
         }
 
         // If there are evaluators without an email, show an error message
@@ -94,14 +95,14 @@ class EventRow extends Component
             $names = implode(', ', $evaluatorNamesWithoutEmail);
             session()->flash('errorEvaluatorEmail', 'Attention, les évaluateurs suivants n\'ont pas d\'email enregistré. Ils ne recevront pas de lien pour accéder à leur tableau de bord de l\'épreuve. Veuillez ajouter un email à : '.ucfirst($names).'.');
 
-            return false;
+            return redirect()->back();
         }
 
         // If there are no projects
         if ($projects->isEmpty()) {
             session()->flash('errorNoProject', 'Attention, il n\'y a aucun projet enregistré à cet événement, veuillez en ajouter avant de démarrer l\'épreuve.');
 
-            return false;
+            return redirect()->back();
         }
 
         // After error validation, we can start the event in two steps:

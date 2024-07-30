@@ -1,6 +1,6 @@
 <div>
     @section('title')
-        <h1 role="heading" aria-level="1" class="sr-only">Projets de l'administrateur</h1>
+        <h1 role="heading" aria-level="1" class="sr-only">Listes des projets de {{ auth()->user()->name }}</h1>
     @endsection
 
     <header class="header">

@@ -1,6 +1,6 @@
 <div>
     <nav x-data="{ open: false }" class="nav">
-        <h2 aria-level="2" role="heading" class="sr-only">
+        <h2 role="heading" aria-level="2" class="sr-only">
             Menu de navigation principal
         </h2>
 
@@ -16,23 +16,17 @@
                 <!-- Desktop navigation links -->
                 <ul role="menu" class="navigation-links" tabindex="0">
                     <li class="navigation-links__item">
-                        <a href="{{ route('events.event.dashboard.evaluators', $event) }}"
-                           class="navigation-links__item__link {{ Route::currentRouteNamed('events.event.dashboard.evaluators') ? 'active' : '' }}"
-                           title="Vers la page des évaluateurs de l‘épreuve" wire:navigate>
+                        <a href="{{ route('events.event.dashboard.evaluators', $event) }}" class="navigation-links__item__link {{ Route::currentRouteNamed('events.event.dashboard.evaluators') ? 'active' : '' }}" title="Vers la page des évaluateurs de l‘épreuve" wire:navigate>
                             Évaluateurs
                         </a>
                     </li>
                     <li class="navigation-links__item">
-                        <a href="{{ route('events.event.dashboard.students', $event) }}"
-                           class="navigation-links__item__link {{ Route::currentRouteNamed('events.event.dashboard.students') ? 'active' : '' }}"
-                           title="Vers la page des évalués de l'épreuve" wire:navigate>
+                        <a href="{{ route('events.event.dashboard.students', $event) }}" class="navigation-links__item__link {{ Route::currentRouteNamed('events.event.dashboard.students') ? 'active' : '' }}" title="Vers la page des évalués de l'épreuve" wire:navigate>
                             Étudiants
                         </a>
                     </li>
                     <li class="navigation-links__item">
-                        <a href="{{ route('events.event.dashboard.projects', $event) }}"
-                           class="navigation-links__item__link {{ Route::currentRouteNamed('events.event.dashboard.projects') ? 'active' : '' }}"
-                           title="Vers la page des projets de l'épreuve" wire:navigate>
+                        <a href="{{ route('events.event.dashboard.projects', $event) }}" class="navigation-links__item__link {{ Route::currentRouteNamed('events.event.dashboard.projects') ? 'active' : '' }}" title="Vers la page des projets de l'épreuve" wire:navigate>
                             Projets
                         </a>
                     </li>

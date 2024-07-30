@@ -20,7 +20,7 @@ class Navbar extends Component
 
     public function quitEvent()
     {
-        // Todo stop the timer and add a finished time to the event
+        // Stop the timer and add a finished time to the event
         /*$this->eventInProgress->update([
             'finished_at' => now(),
         ]);*/

@@ -1,6 +1,6 @@
 <div>
     <li class="item">
-        <h3 class="item__name">{{ $event->name }}</h3>
+        <h3 role="heading" aria-level="3" class="item__name">{{ $event->name }}</h3>
         <div class="item__date">
             Date de l’épreuve<br>
             <time datetime="{{$event->starting_at}}">
@@ -21,7 +21,7 @@
         </div>
         {{-- Liens : Édition, Voir, Non disponible, Éditer, Supprimer --}}
         <div class="event__actions">
-            <a href="{{ route('events.edit', ['event' => $event]) }}" wire:navigate class="link__edition">
+            <a href="{{ route('events.edit', ['event' => $event]) }}" wire:navigate class="link__edition" title="Vers la page d'édition de l'épreuve">
                 Configurer l'épreuve
             </a>
 
@@ -34,10 +34,10 @@
                     <x-dialog.panel>
                         <form class="form" wire:submit.prevent="startEvent">
                             <div class="form__content">
-                                <h2 class="title">Commencer l'épreuve&nbsp;:&nbsp;{{ $event->name }}</h2>
+                                <h2 role="heading" aria-level="2" class="title">Commencer l'épreuve&nbsp;:&nbsp;{{ $event->name }}</h2>
                                 <ul class="event__actions__list">
                                     <li class="event__actions__list__item">
-                                        <h3 class="event__actions__list__item__title">
+                                        <h3 role="heading" aria-level="3" class="event__actions__list__item__title">
                                             Informations importantes
                                         </h3>
                                         <p class="event__actions__list__item__text">
@@ -124,11 +124,11 @@
                     </x-dialog.panel>
                 </x-dialog>
             @elseif($event->isCurrent())
-                <a href="{{ route('events.show', ['event' => $event]) }}" wire:navigate class="link__current">Voir</a>
+                <a href="{{ route('events.show', ['event' => $event]) }}" wire:navigate class="link__current" title="Vers le tableau de bord de l'épreuve">Voir</a>
             @elseif($event->isPaused())
-                <a href="{{ route('events.show', ['event' => $event]) }}" wire:navigate class="link__pause">Continuer</a>
+                <a href="{{ route('events.show', ['event' => $event]) }}" wire:navigate class="link__pause" title="Vers le tableau de bord de l'épreuve">Continuer</a>
             @elseif($event->isFinished())
-                <a href="{{ route('events.show', ['event' => $event]) }}" wire:navigate class="link__finish">Récapitulatif</a>
+                <a href="{{ route('events.show', ['event' => $event]) }}" wire:navigate class="link__finish" title="Vers le tableau de bord de l'épreuve">Terminée</a>
             @else
                 <button type="button" class="link__unavailable">Non disponible</button>
             @endif
@@ -155,7 +155,7 @@
                         <x-dialog.panel>
                             <form wire:submit="save" class="form">
                                 <div class="form__content">
-                                    <h2 class="title">Modifier l'épreuve</h2>
+                                    <h2 role="heading" aria-level="2" class="title">Modifier l'épreuve</h2>
 
                                     <x-form.field
                                         name="name"
@@ -217,7 +217,7 @@
                                     <div class="advertising">
                                         <x-svg.advertising/>
                                         <div class="advertising__content">
-                                            <h3 class="title">Supprimer l'épreuve</h3>
+                                            <h3 role="heading" aria-level="3" class="title">Supprimer l'épreuve</h3>
                                             <p class="description">
                                                 Êtes-vous sûre de vouloir supprimer l'épreuve
                                                 <span class="font-semibold"> {{ $event->name }} </span>&nbsp;? Toutes les données seront supprimées. Cette action est irréversible.

@@ -17,13 +17,14 @@ class EvaluatorMiddelware
         try {
             $eventId = $request->route('event');
             $contactId = $request->route('contact');
+            $token = $request->route('token');
 
             // Check if the contact is an evaluator
             $eventContact = auth()->user()->eventContacts()
                 ->where('event_id', $eventId)
                 ->where('contact_id', $contactId)
                 ->where('role', 'evaluator')
-                ->where('token', $request->route('token'))
+                ->where('token', $token)
                 ->first();
 
             if (! $eventContact) {

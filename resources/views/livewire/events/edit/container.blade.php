@@ -37,7 +37,7 @@
         <div class="form__container">
             {{-- Label & select to edit a user in the database --}}
             <div class="form__component">
-                <h3 class="title">Ajouter des contacts</h3>
+                <h3 role="heading" aria-level="3" class="title">Ajouter des contacts</h3>
                 <p>Vous pourrez en ajouter encore par la suite sans problème.</p>
 
                 {{-- Dropdown --}}
@@ -94,7 +94,7 @@
 
             {{-- Label & select to edit a project in the database --}}
             <div class="form__component">
-                <h3 class="title">Ajouter des projets</h3>
+                <h3 role="heading" aria-level="3" class="title">Ajouter des projets</h3>
                 <p>Vous pourrez en ajouter encore par la suite sans problème.</p>
 
                 {{-- Dropdown --}}
@@ -144,14 +144,12 @@
             </div>
 
             {{-- Pondération --}}
-            
-                <livewire:events.edit.ponderation :event="$event" />
-            
+            <livewire:events.edit.ponderation :event="$event" />
         </div>
 
         {{-- Submit buttons --}}
         <div class="form__submit">
-            <a href="{{ route('events.index') }}" class="save">Annuler</a>
+            <a href="{{ route('events.index') }}" class="save" title="Retourner à la liste des épreuves">Annuler</a>
             <button class="cancel" type="submit">Sauvegarder</button>
         </div>
     </form>

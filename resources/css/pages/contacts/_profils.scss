@@ -233,6 +233,7 @@
                             }
 
                             .title {
+                                display: block;
                                 margin-bottom: 0.5rem;
                                 font-weight: 500;
                             }
@@ -337,7 +338,7 @@
                             overflow-x: scroll;
 
                             &__item {
-                                min-width: 265px;
+                                min-width: max-content;
 
                                 div {
                                     padding: 1.25rem;
@@ -346,14 +347,16 @@
                                     justify-content: space-between;
                                     border-bottom: $border;
                                     font-size: 0.925rem;
-
-                                    h4 {
-                                        font-weight: 500;
-                                    }
                                 }
 
-                                p {
-                                    padding: 1.25rem 1.75rem 1.5rem 1.25rem;
+                                &__title {
+                                    padding-right: 1rem;
+                                    font-weight: 500;
+                                }
+
+                                &__text {
+                                    padding: 1.25rem 1.5rem 1.5rem 1.25rem;
+                                    max-width: 250px;
                                 }
                             }
 

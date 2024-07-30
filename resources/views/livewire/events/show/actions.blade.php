@@ -39,7 +39,7 @@
         <x-dialog wire:model="eventOnPause">
             <x-dialog.panel>
                 <div class="form__content">
-                    <h2 aria-level="2" role="heading" class="title">Modification du status</h2>
+                    <h2 role="heading" aria-level="2" class="title">Modification du status</h2>
                     <p>L'épreuve à été mise en pause. Voulez-vous la continuer ou plutôt la terminer définitevement&nbsp;?</p>
                 </div>
 
@@ -55,7 +55,7 @@
         <x-dialog wire:model="eventNotStarted">
             <x-dialog.panel>
                 <div class="form__content">
-                    <h2 aria-level="2" role="heading" class="title">Épreuve non démarrée</h2>
+                    <h2 role="heading" aria-level="2" class="title">Épreuve non démarrée</h2>
                     <p>
                         L'épreuve <span class="font-semibold">{{ $event->name }}</span> n'a pas encore commencé.
                     </p>

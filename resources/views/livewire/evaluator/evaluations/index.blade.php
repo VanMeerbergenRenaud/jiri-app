@@ -28,7 +28,9 @@
                                 'project' => $project
                             ]) }}"
                            wire:navigate
-                           class="evaluationStart__list__item__link button--gray">
+                           class="evaluationStart__list__item__link button--gray"
+                           title="Vers la page d'évaluation du projet"
+                        >
                             {{ $project->name }}
                         </a>
                     </li>

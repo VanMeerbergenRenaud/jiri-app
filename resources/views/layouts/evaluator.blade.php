@@ -21,6 +21,8 @@
             Vous êtes actuellement hors ligne veuillez vous reconnecter à un réseau pour continuer à utiliser l'application.
         </div>
 
+        @yield('title')
+
         {{ $slot }}
 
         @livewireScriptConfig
