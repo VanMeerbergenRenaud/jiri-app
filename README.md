@@ -68,16 +68,17 @@ Jiri est développé en utilisant les technologies modernes du développement we
 
 L'application utilise les tables suivantes pour stocker les données :
 
-- `events` : Liste les événements de jury.
-- `users` : Contient les données des utilisateurs, y compris les professeurs et les jurés.
-- `students` : Stocke les informations sur les étudiants.
-- `evaluators` : Stocke les informations sur les évaluateurs.
-- `attendances` : Utilisé pour les relations polymorphes entre les utilisateurs et les étudiants.
-- `projects` : Liste tous les projets à évaluer.
-- `implementations` : Enregistre les réalisations de projets des étudiants.
-- `scores` : Stocke les scores et les commentaires des jurés.
-- `performances` : Enregistre les notes finales des étudiants.
-- `impressions` : Contient les impressions globales des étudiants.
+- `users` : Contient les données des utilisateurs/admins qui se connectent à l'application.
+- `events` : Liste les épreuves auxquelles les étudiants et les membres du jury participent.
+- `contacts` : Stocke toutes les informations de contact dans l'application.
+- `event_contact` : Stocke les rôles des contacts pour chaque événement.
+- `projects` : Stocke toutes les informations sur les projets à réaliser.
+- `tasks` : Stocke les tâches à réaliser pour chaque projet.
+- `project_task` : Table pivot pour les projets et les tâches.
+- `evaluator_evaluation` : Stocke les notes et les commentaires des membres du jury pour chaque projet de chaque étudiant.
+- `evaluator_evaluation_statuses` : Stocke les statuts des évaluations des membres du jury.
+- `event_global_comment` : Stocke les commentaires globaux de l'utilisateur/admin pour chaque étudiant.
+- `evaluator_global_comment` : Stocke les commentaires globaux des membres du jury pour chaque étudiant.
 
 ## Contribution & contact 🤝
 
@@ -119,8 +120,7 @@ php artisan key:generate
 ```
 Exécutez les migrations et les seeders :
 ```
-php artisan migrate
-php artisan db:seed
+php artisan migrate:fresh --seed
 ```
 Enfin, lancez le serveur en local :
 ```
