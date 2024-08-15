@@ -3,6 +3,7 @@
         <tr>
             <th class="user-infos" colspan="100%">
                 <div>
+                    <h3 role="heading" aria-level="3" class="sr-only">Informations sur les projets</h3>
                     <img src="{{ $contact->avatar ?? asset('img/placeholder.png') }}"
                          alt="Photo du contact">
                     <span>
@@ -23,7 +24,7 @@
         <tr class="project-info">
             @foreach ($projects as $project)
                 <td>
-                    <h4 class="title">Projet présenté</h4>
+                    <span class="title">Projet présenté</span>
                     <p>
                         {{ $project->project->status ?? 'Non présenté' }}
                     </p>
@@ -33,12 +34,12 @@
         <tr class="project-info">
             @foreach ($projects as $project)
                 <td>
-                    <h4 class="title">Réalisation(s)</h4>
+                    <span class="title">Réalisation(s)</span>
                     <ul>
                         <li>
-                            {{--@foreach ($project->project->tasks as $task)
+                            @foreach ($project->project->tasks as $task)
                                 {{ $task->name ?? 'Non renseigné' }} |
-                            @endforeach--}}
+                            @endforeach
                         </li>
                     </ul>
                 </td>
@@ -47,7 +48,7 @@
         <tr class="project-info">
             @foreach ($projects as $project)
                 <td>
-                    <h4 class="title">Maquette de design</h4>
+                    <span class="title">Maquette de design</span>
                     <a href="{{ $project->design ?? "#" }}" target="_blank" class="link" title="Vers la maquette de design">
                         {{ $project->design ?? "https://adobe.xd/renaud.vmb" }}
                     </a>
@@ -57,7 +58,7 @@
         <tr class="project-info">
             @foreach ($projects as $project)
                 <td>
-                    <h4 class="title">Url du site</h4>
+                    <span class="title">Url du site</span>
                     <a href="{{ $project->project->url_readme ?? "#" }}" target="_blank" class="link" title="Vers le site du projet">
                         {{ $project->project->url_readme ?? "Non renseigné" }}
                     </a>
@@ -67,7 +68,7 @@
         <tr class="project-info">
             @foreach ($projects as $project)
                 <td>
-                    <h4 class="title">Repository GitHub</h4>
+                    <span class="title">Repository GitHub</span>
                     <a href="{{ $project->github ?? "#" }}" target="_blank" class="link" title="Vers le repository GitHub">
                         {{ $project->github ?? "https://github.com/VanMeerbergenRenaud/jiri-app" }}
                     </a>

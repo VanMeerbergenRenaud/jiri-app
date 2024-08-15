@@ -3,7 +3,7 @@
         <thead>
         <tr class="row-1">
             <th scope="row" colspan="100%">
-                Tableau récapitulatif des passages
+                <h3 role="heading" aria-level="3" class="row-1__title">Tableau récapitulatif des passages</h3>
             </th>
         </tr>
         <tr class="row-2">

@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <h1 class="title">
+    <h1 role="heading" aria-level="1" class="title">
         {{ __("Veuillez vous connecter à votre compte rapidement juste ici 👇🏻.") }}
     </h1>
 
@@ -32,20 +32,20 @@
         />
 
         <!-- Remember Me -->
-        <div class="form__field form__remember-me">
+        {{--<div class="form__field form__remember-me">
             <input id="remember_me" type="checkbox" name="password"/>
             <label for="remember_me">{{  __('Se rappeler de moi') }}</label>
-        </div>
+        </div>--}}
 
         <div class="form__footer form__footer__4">
             @if (Route::has('register'))
-                <a href="{{ route('register') }}">
+                <a href="{{ route('register') }}" title="Vers la page d'inscription">
                     {{ __("Pas encore enregistré") }}&nbsp;?
                 </a>
             @endif
 
             @if (Route::has('password.request'))
-                <a href="{{ route('password.request') }}">
+                <a href="{{ route('password.request') }}" title="Vers la page de réinitialisation du mot de passe">
                     {{ __("Mot de passe oublié") }}&nbsp;?
                 </a>
             @endif

@@ -1,6 +1,6 @@
 <tr>
     <td class="name">
-        <a href="{{ route('contacts.show', $contact) }}">
+        <a href="{{ route('contacts.show', $contact) }}" title="Voir le profil de {{ $contact->name }}">
             @if($contact->avatar)
                 <img src="{{ asset($contact->avatar) . '?' . $contact->updated_at->format("U") }}" alt="photo de profil du contact">
             @else
@@ -64,7 +64,7 @@
                                 <div class="advertising">
                                     <x-svg.advertising/>
                                     <div class="advertising__content">
-                                        <h3 class="title">Supprimer le contact</h3>
+                                        <h3 role="heading" aria-level="3" class="title">Supprimer le contact</h3>
                                         <p class="description">
                                             Êtes-vous sûre de vouloir supprimer le contact
                                             <span class="font-semibold"> {{ $contact->name }} {{ $contact->firstname }}</span>&nbsp;? Toutes les données seront supprimées. Cette action est irréversible.
@@ -98,5 +98,13 @@
                 </x-dialog>
             </x-menu.items>
         </x-menu>
+
+        @if($saved)
+            <x-notifications
+                icon="success"
+                title="Contact modifié avec succès"
+                method="$set('saved', false)"
+            />
+        @endif
     </td>
 </tr>

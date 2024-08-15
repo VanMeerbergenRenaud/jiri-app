@@ -13,7 +13,7 @@
 
                 @unless($upload)
                 <div class="form__content">
-                    <h2 class="title">Ajoutez votre fichier excel</h2>
+                    <h2 role="heading" aria-level="2" class="title">Ajoutez votre fichier excel</h2>
 
                     <label for="upload" class="upload">
                         Charger votre fichier
@@ -27,7 +27,7 @@
                 @else
                     {{-- Configuration about the columns for name, firstname, email --}}
                     <div class="form__content">
-                        <h2 class="title">Configurez l'ajout de vos données</h2>
+                        <h2 role="heading" aria-level="2" class="title">Configurez l'ajout de vos données</h2>
 
                         <p class="p-2">
                             Veuillez sélectionner la colonne correspondante à celle de votre fichier importé.

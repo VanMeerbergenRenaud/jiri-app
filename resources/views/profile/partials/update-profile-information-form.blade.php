@@ -1,6 +1,6 @@
 @php use Illuminate\Contracts\Auth\MustVerifyEmail; @endphp
 <section class="profile-admin__section">
-    <h2 class="profile-admin__section__title">
+    <h2 role="heading" aria-level="2" class="profile-admin__section__title">
         {{ __('Information du profil') }}
     </h2>
 

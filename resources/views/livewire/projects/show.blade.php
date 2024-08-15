@@ -1,11 +1,11 @@
 <div>
     @section('title')
-        <h1 role="heading" aria-level="1" class="sr-only">Projets de l'administrateur</h1>
+        <h1 role="heading" aria-level="1" class="sr-only">Information du projet {{ $project->name }}</h1>
     @endsection
 
     <main class="mainProfil mainProfilShowContact max-width">
         <div class="mainProfil__intro">
-            <h2>Information du projet</h2>
+            <h2 role="heading" aria-level="2">Information du projet</h2>
             <p>
                 Listes des évènements dans lesquelles le projet
                 <span class="font-semibold">{{ ucfirst($project->name) }}</span>
@@ -14,7 +14,7 @@
         </div>
 
         <div class="mainProfil__nav">
-            <a href="{{ url()->previous() }}" class="button--gray">
+            <a href="{{ url()->previous() }}" class="button--gray" title="Retour à la page précédente">
                 @include('components.svg.arrow-left')
                 Retour
             </a>
@@ -36,7 +36,7 @@
                     <li class="contact__eventContacts__list__item">
                         <p>
                             <span>Épreuve&nbsp;:</span>
-                            <a href="{{ route('events.show', $event) }}">
+                            <a href="{{ route('events.show', $event) }}" title="Vers la page de l'épreuve">
                                 {{ $event->name }}
                             </a>
                         </p>

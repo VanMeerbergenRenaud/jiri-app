@@ -16,6 +16,8 @@ class ContactRow extends Component
 
     public $showEditDialog = false;
 
+    public $saved = false;
+
     public function mount()
     {
         $this->form->setContact($this->contact);
@@ -26,6 +28,7 @@ class ContactRow extends Component
         $this->form->update();
         $this->contact->refresh();
         $this->reset('showEditDialog');
+        $this->saved = true;
     }
 
     public function render()

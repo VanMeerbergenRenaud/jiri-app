@@ -19,7 +19,7 @@
 
                         <x-dialog.panel>
                             <div class="form__content">
-                                <h2 class="title">Suppression du projet de l'épreuve</h2>
+                                <h2 role="heading" aria-level="2" class="title">Suppression du projet de l'épreuve</h2>
                                 <p>Êtes-vous sûr de vouloir supprimer le projet <span class="bold">{{ ucfirst($project->project->name) }}</span> de l'épreuve ?</p>
                             </div>
 

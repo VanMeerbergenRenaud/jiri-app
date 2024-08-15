@@ -1,5 +1,5 @@
 <div>
-    <h2 class="title">Tableau de résumé des cotes</h2>
+    <h3 role="heading" aria-level="3" class="title">Tableau de résumé des cotes</h3>
     <table class="second-table">
         <thead>
         {{-- First line for evaluators --}}
@@ -34,9 +34,8 @@
             <tr class="row-3">
                 {{-- Students --}}
                 <th scope="row" class="students sticky">
-                    <a href="{{ route('events.contact-profil', ['event' => $event, 'contact' => $student->contact]) }}">
-                        <img src="{{ $student->contact->avatar ?? asset('img/placeholder.png') }}"
-                             alt="photo d'un étudiant">
+                    <a href="{{ route('events.contact-profil', ['event' => $event, 'contact' => $student->contact]) }}" title="Vers le profil de l'étudiant">
+                        <img src="{{ $student->contact->avatar ?? asset('img/placeholder.png') }}" alt="photo de {{ $student->contact->name ?? "l'étudiant" }}">
                         {{ $student->contact->name ?? 'Étudiant' }}
                     </a>
                 </th>

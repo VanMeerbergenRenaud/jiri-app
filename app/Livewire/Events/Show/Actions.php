@@ -17,6 +17,8 @@ class Actions extends Component
 
     public $eventOnPause = true;
 
+    public $eventNotStarted = true;
+
     public function mount($event)
     {
         $this->event = $event;
@@ -39,6 +41,11 @@ class Actions extends Component
         $this->hours = str_pad($diff->h, 2, '0', STR_PAD_LEFT);
         $this->minutes = str_pad($diff->i, 2, '0', STR_PAD_LEFT);
         $this->seconds = str_pad($diff->s, 2, '0', STR_PAD_LEFT);
+    }
+
+    public function startEvent()
+    {
+        return redirect()->route('events.index');
     }
 
     public function pauseEvent()
@@ -64,30 +71,6 @@ class Actions extends Component
         ]);
 
         return redirect()->route('events.index');
-    }
-
-    public function updateStatus($status)
-    {
-        switch ($status) {
-            case 'started':
-                $this->event->update([
-                    'started_at' => now(),
-                    'paused_at' => null,
-                    'finished_at' => null,
-                ]);
-                break;
-            case 'paused':
-                $this->event->update([
-                    'paused_at' => now(),
-                    'finished_at' => null,
-                ]);
-                break;
-            case 'finished':
-                $this->event->update([
-                    'finished_at' => now(),
-                ]);
-                break;
-        }
     }
 
     public function render()

@@ -1,7 +1,7 @@
 <div class="form__ponderation">
     <div class="contact__ponderation">
         <h3 role="heading" aria-level="3" class="contact__ponderation__title">
-            Pondération
+            Ajouter une pondération
         </h3>
         <p class="contact__ponderation__text">
             La pondération est un pourcentage qui représente l'importance relative de chaque projet dans un évènement. Vous pouvez ajouter un ou plusieurs projets pour l'évènement, mais il est important de répartir équitablement le pourcentage de pondération entre eux.

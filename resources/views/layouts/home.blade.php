@@ -7,14 +7,16 @@
 
         {{-- Favicon --}}
         <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+
         {{-- Title --}}
         <title>{{ $title ?? 'Jiri App - Accueil' }}</title>
 
         @livewireStyles
         @vite(['resources/css/app.scss', 'resources/js/app.js'])
     </head>
-        <!-- Body -->
-        @yield('content')
+
+        {{ $slot }}
 
         @livewireScriptConfig
         @yield('scripts')

@@ -1,7 +1,8 @@
 <x-guest-layout>
-    <h1 class="title">
+    <h1 role="heading" aria-level="1" class="title">
         {{ __("Veuillez vous enregistrer et créer votre nouveau compte ci-dessous 👇🏻.") }}
     </h1>
+
     <form method="POST" action="{{ route('register') }}" class="form">
         @csrf
 
@@ -49,7 +50,7 @@
         />
 
         <div class="form__footer">
-            <a href="{{ route('login') }}">
+            <a href="{{ route('login') }}" title="Vers la page de connexion">
                 {{ __('Déjà enregistré ?') }}
             </a>
 

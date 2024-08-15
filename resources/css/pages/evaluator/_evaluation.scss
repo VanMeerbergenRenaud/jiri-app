@@ -73,12 +73,15 @@
                 width: 225px;
 
                 &__link {
+                    cursor: pointer;
                     justify-content: center;
                     font-weight: 400;
+                    border: $transparent;
                     transition: font-weight 0.2s;
 
                     &:hover {
                         font-weight: 500;
+                        border: 1px solid $gray-500;
                     }
                 }
             }

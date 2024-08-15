@@ -1,21 +1,12 @@
 <div>
-    {{--
-        1. Bouton pour quitter l'épreuve sans la mettre en pause et retourner au dashboard des épreuves
-        2. Boutons mettre en pause ou terminer l'évènement
-        3. Tableau des personnes vues (voir en plein écran)
-        4. Récapitulatif général des points (voir en plein écran)
-        5. Bouton pour pouvoir quitter l'épreuve et afficher ensuite l'épreuve en cours dans le dashboard
-        6. Terminer les 3 autres interfaces dans Adobe XD
-    --}}
-
     @section('title')
-        <h1 role="heading" aria-level="1" class="sr-only">Évènement {{  $event->name }}</h1>
+        <h1 role="heading" aria-level="1" class="sr-only">Information de l'évènement {{  $event->name }}</h1>
     @endsection
 
     <header class="header">
         <x-banner
-            :title="'Épreuve en cours'"
-            :message="'Votre épreuve ' . $event->name . '  vient de commencer.'"
+            :title="'Épreuve : ' . $event->name"
+            :message="'Votre épreuve est en cours d\'acheminement.'"
         />
     </header>
 

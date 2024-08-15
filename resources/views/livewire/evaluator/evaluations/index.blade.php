@@ -21,13 +21,16 @@
 
                     <li class="evaluationStart__list__item">
                         <a href="{{ route('events.evaluator-evaluation-edit' , [
-                            'event' => $event,
-                            'contact' => $evaluator,
-                            'token' => $token,
-                            'student' => $student,
-                            'project' => $project
-                        ]) }}" wire:navigate
-                           class="evaluationStart__list__item__link button--gray">
+                                'event' => $event,
+                                'contact' => $evaluator,
+                                'token' => $token,
+                                'student' => $student,
+                                'project' => $project
+                            ]) }}"
+                           wire:navigate
+                           class="evaluationStart__list__item__link button--gray"
+                           title="Vers la page d'évaluation du projet"
+                        >
                             {{ $project->name }}
                         </a>
                     </li>

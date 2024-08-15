@@ -1,6 +1,6 @@
 <div>
     <li class="item">
-        <h3 class="item__name">{{ $event->name }}</h3>
+        <h3 role="heading" aria-level="3" class="item__name">{{ $event->name }}</h3>
         <div class="item__date">
             Date de l’épreuve<br>
             <time datetime="{{$event->starting_at}}">
@@ -16,16 +16,12 @@
         <div class="item__members">
             Participants<br>
             <p>
-                @isset($event->contacts_count)
-                    <span>{{ $event->contacts_count }} enregistrés</span>
-                @else
-                    <span>0 enregistré</span>
-                @endisset
+                <span>{{ $event->contacts_count ?? '0' }} enregistré{{ $event->contacts_count < 2 ? '' : 's' }}</span>
             </p>
         </div>
         {{-- Liens : Édition, Voir, Non disponible, Éditer, Supprimer --}}
         <div class="event__actions">
-            <a href="{{ route('events.edit', ['event' => $event]) }}" wire:navigate class="link__edition">
+            <a href="{{ route('events.edit', ['event' => $event]) }}" wire:navigate class="link__edition" title="Vers la page d'édition de l'épreuve">
                 Configurer l'épreuve
             </a>
 
@@ -38,10 +34,10 @@
                     <x-dialog.panel>
                         <form class="form" wire:submit.prevent="startEvent">
                             <div class="form__content">
-                                <h2 class="title">Commencer l'épreuve&nbsp;:&nbsp;{{ $event->name }}</h2>
+                                <h2 role="heading" aria-level="2" class="title">Commencer l'épreuve&nbsp;:&nbsp;{{ $event->name }}</h2>
                                 <ul class="event__actions__list">
                                     <li class="event__actions__list__item">
-                                        <h3 class="event__actions__list__item__title">
+                                        <h3 role="heading" aria-level="3" class="event__actions__list__item__title">
                                             Informations importantes
                                         </h3>
                                         <p class="event__actions__list__item__text">
@@ -66,29 +62,48 @@
 
                                         <p class="event__actions__list__item__info">
                                             <span>Participants&nbsp;:</span>
-                                            {{ $event->contacts_count }}
+                                            {{ $event->contacts_count ?? '0' }}
                                         </p>
 
                                         <p class="event__actions__list__item__info">
                                             <span>Projets&nbsp;:</span>
-                                            {{ $event->projects_count }}
+                                            {{ $event->projects_count ?? '0' }}
                                         </p>
                                     </li>
                                 </ul>
-                                @if($event->contacts()->whereNull('email')->count() > 0)
-                                    <div class="event__actions__list__evaluators">
-                                        <p class="event__actions__list__evaluators__text">
+                                {{-- if there are no participants --}}
+                                @if(session()->has('errorParticipants'))
+                                    <div class="event__actions__list__error">
+                                        <p class="event__actions__list__error__text">
                                             <x-svg.warning/>
-                                            Attention, les évaluateurs suivants n'ont pas d'email enregistré. Ils ne
-                                            recevront pas de lien pour accéder à leur tableau de bord de l'épreuve.
+                                            {{ session('errorParticipants') }}
                                         </p>
-                                        <p class="event__actions__list__evaluators__list">
-                                            <span>Évaluateurs sans email&nbsp;:</span>
-                                            @foreach($event->contacts as $contact)
-                                                @if($contact->email === null)
-                                                    {{ ucfirst($contact->name) }},
-                                                @endif
-                                            @endforeach
+                                    </div>
+                                @endif
+                                {{-- if there are evaluators without email --}}
+                                @if(session()->has('errorNoEvaluator'))
+                                    <div class="event__actions__list__error">
+                                        <p class="event__actions__list__error__text">
+                                            <x-svg.warning/>
+                                            {{ session('errorNoEvaluator') }}
+                                        </p>
+                                    </div>
+                                @endif
+                                {{-- if there are evaluators without email --}}
+                                @if(session()->has('errorEvaluatorEmail'))
+                                    <div class="event__actions__list__error">
+                                        <p class="event__actions__list__error__text">
+                                            <x-svg.warning/>
+                                            {{ session('errorEvaluatorEmail') }}
+                                        </p>
+                                    </div>
+                                @endif
+                                {{-- if there are no projects --}}
+                                @if(session()->has('errorNoProject'))
+                                    <div class="event__actions__list__error">
+                                        <p class="event__actions__list__error__text">
+                                            <x-svg.warning/>
+                                            {{ session('errorNoProject') }}
                                         </p>
                                     </div>
                                 @endif
@@ -109,11 +124,11 @@
                     </x-dialog.panel>
                 </x-dialog>
             @elseif($event->isCurrent())
-                <a href="{{ route('events.show', ['event' => $event]) }}" wire:navigate class="link__current">Voir</a>
+                <a href="{{ route('events.show', ['event' => $event]) }}" wire:navigate class="link__current" title="Vers le tableau de bord de l'épreuve">Voir</a>
             @elseif($event->isPaused())
-                <a href="{{ route('events.show', ['event' => $event]) }}" wire:navigate class="link__pause">Continuer</a>
+                <a href="{{ route('events.show', ['event' => $event]) }}" wire:navigate class="link__pause" title="Vers le tableau de bord de l'épreuve">Continuer</a>
             @elseif($event->isFinished())
-                <a href="{{ route('events.show', ['event' => $event]) }}" wire:navigate class="link__finish">Récapitulatif</a>
+                <a href="{{ route('events.show', ['event' => $event]) }}" wire:navigate class="link__finish" title="Vers le tableau de bord de l'épreuve">Terminée</a>
             @else
                 <button type="button" class="link__unavailable">Non disponible</button>
             @endif
@@ -140,7 +155,7 @@
                         <x-dialog.panel>
                             <form wire:submit="save" class="form">
                                 <div class="form__content">
-                                    <h2 class="title">Modifier l'épreuve</h2>
+                                    <h2 role="heading" aria-level="2" class="title">Modifier l'épreuve</h2>
 
                                     <x-form.field
                                         name="name"
@@ -202,7 +217,7 @@
                                     <div class="advertising">
                                         <x-svg.advertising/>
                                         <div class="advertising__content">
-                                            <h3 class="title">Supprimer l'épreuve</h3>
+                                            <h3 role="heading" aria-level="3" class="title">Supprimer l'épreuve</h3>
                                             <p class="description">
                                                 Êtes-vous sûre de vouloir supprimer l'épreuve
                                                 <span class="font-semibold"> {{ $event->name }} </span>&nbsp;? Toutes les données seront supprimées. Cette action est irréversible.
@@ -238,4 +253,12 @@
             </x-menu>
         </div>
     </li>
+
+    @if($saved)
+        <x-notifications
+            icon="success"
+            title="Épreuve modifiée avec succès"
+            method="$set('saved', false)"
+        />
+    @endif
 </div>

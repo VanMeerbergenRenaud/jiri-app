@@ -16,7 +16,9 @@
                 <a href="{{ route('events.evaluator-dashboard', [
                                 'contact' => $evaluator,
                     ]) }}"
-                   class="breadcrumb__list__item__link">
+                   class="breadcrumb__list__item__link"
+                   title="Vers le tableau de bord des épreuves de l'évaluateur"
+                >
                     Mes épreuves
                 </a>
                 <x-svg.nav-arrow-right/>
@@ -27,7 +29,9 @@
                             'event' => $event,
                             'token' => $token
                     ]) }}"
-                   class="breadcrumb__list__item__link">
+                   class="breadcrumb__list__item__link"
+                   title="Vers le tableau de bord d'évaluation de l'épreuve"
+                >
                     Tableau de bord
                 </a>
                 <x-svg.nav-arrow-right/>

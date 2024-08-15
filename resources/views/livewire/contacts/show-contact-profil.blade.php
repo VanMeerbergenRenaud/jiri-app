@@ -53,7 +53,7 @@
             {{-- Action --}}
             <form class="mainProfil__action" wire:submit.prevent="editContactRole">
                 @csrf
-                <h4 class="title">Action</h4>
+                <h3 role="heading" aria-level="3" class="title">Action</h3>
                 <button type="button" wire:click="editContactRole" class="button--gray">Changer le statut du profil</button>
             </form>
         </div>

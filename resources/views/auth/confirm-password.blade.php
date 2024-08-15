@@ -1,4 +1,8 @@
 <x-guest-layout>
+    <h1 role="heading" aria-level="1" class="sr-only">
+        {{ __('Confirmer votre mot de passe') }}
+    </h1>
+
     <form method="POST" action="{{ route('password.confirm') }}" class="form">
         @csrf
 

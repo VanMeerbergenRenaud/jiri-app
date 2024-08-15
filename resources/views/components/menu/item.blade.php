@@ -1,3 +1,3 @@
-<button type="button" x-menu:item>
+<button type="button" x-menu:item {{ $attributes }}>
     {{ $slot }}
 </button>

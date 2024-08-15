@@ -62,22 +62,18 @@ class Show extends Component
             'globalComment' => 'required|string|max:255',
         ]);
 
-        auth()->user()->evaluatorGlobalComments()->updateOrCreate([
-            'event_id' => $this->event->id,
-            'contact_id' => $this->evaluator->id,
-            'event_contact_id' => $this->student->id,
-        ], [
-            'globalComment' => $this->globalComment,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        auth()->user()->evaluatorGlobalComments()
+            ->updateOrCreate([
+                'event_id' => $this->event->id,
+                'contact_id' => $this->evaluator->id,
+                'event_contact_id' => $this->student->id,
+            ], [
+                'globalComment' => $this->globalComment,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
 
         $this->show = false;
-    }
-
-    public function updateGlobalCote()
-    {
-        // the global cote is automatically calculated in the view
     }
 
     public function render()

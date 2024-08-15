@@ -108,21 +108,17 @@
                 }
             }
 
-            &__link {
-                margin: 1rem 0 0.75rem;
-                display: block;
-                padding: 0.65rem 1rem;
-                width: 100%;
-                text-align: center;
-                font-weight: 500;
-                color: white;
-                border-radius: 0.75rem;
-                background-color: $blue;
+            .mobile-actions {
+                display: flex;
+                justify-content: end;
 
-                &:hover {
-                    background-color: $blue-dark;
-                    transition: .3s ease-in-out;
+                .button--white {
+                    background-color: $gray-bg;
                 }
+            }
+
+            &__link {
+                background-color: inherit;
             }
         }
     }
@@ -262,6 +258,10 @@
             th.actions {
                 padding-right: 1.35rem;
             }
+
+            td.actions {
+                margin: 1rem 1.25rem 0.75rem 2.75rem;
+            }
         }
     }
 
@@ -290,7 +290,7 @@
             &__thead {
                 tr {
                     display: grid;
-                    grid-template-columns: 2fr 125px 165px 100px 135px 125px auto;
+                    grid-template-columns: 2fr 125px 165px 105px 135px 135px auto;
                     gap: 0 1.4rem;
                     padding: 0 1.75rem;
                 }
@@ -299,7 +299,8 @@
             &__tbody {
                 tr {
                     display: grid;
-                    grid-template-columns: 2fr 125px 165px 100px 135px 125px auto;
+                    grid-template-columns: 2fr 130px 170px 100px 155px 115px auto;
+                    // 2fr 130px 160px 90px 120px 110px auto
                     gap: 0 1.25rem;
                     padding: 0 1.75rem;
                 }

@@ -1,6 +1,5 @@
 <div>
-    @section('content')
-        <body class="homepage">
+    <body class="homepage">
         <header class="homepage__header" role="banner">
             <h1 role="heading" aria-level="1" class="sr-only">Jiri app</h1>
 
@@ -27,20 +26,17 @@
                         tabindex="0"
                     >
                         <li itemscope itemtype="http://schema.org/SiteNavigationElement">
-                            <a href="#features" @click="dropdownOpen = false" tabindex="0"
-                               title="Vers la section des fonctionnalités" itemprop="url">
+                            <a href="#features" @click="dropdownOpen = false" tabindex="0" title="Vers la section des fonctionnalités" itemprop="url">
                                 <span itemprop="name">Fonctionnalités</span>
                             </a>
                         </li>
                         <li itemscope itemtype="http://schema.org/SiteNavigationElement">
-                            <a href="#benefits" @click="dropdownOpen = false" tabindex="0"
-                               title="Vers la section des avantages" itemprop="url">
+                            <a href="#benefits" @click="dropdownOpen = false" tabindex="0" title="Vers la section des avantages" itemprop="url">
                                 <span itemprop="name">Avantages</span>
                             </a>
                         </li>
                         <li itemscope itemtype="http://schema.org/SiteNavigationElement">
-                            <a href="#pricing" @click="dropdownOpen = false" tabindex="0" title="Vers la section des prix"
-                               itemprop="url">
+                            <a href="#pricing" @click="dropdownOpen = false" tabindex="0" title="Vers la section des prix" itemprop="url">
                                 <span itemprop="name">Prix</span>
                             </a>
                         </li>
@@ -50,8 +46,7 @@
                 <div class="homepage__header__nav__links">
                     @guest
                         @if (Route::has('login'))
-                            <a href="{{ route('login') }}" title="Vers la page de connexion"
-                               class="link--blue">Connexion</a>
+                            <a href="{{ route('login') }}" title="Vers la page de connexion" class="link--blue">Connexion</a>
                         @endif
                         @if (Route::has('register'))
                             <a href="{{ route('register') }}" title="Vers la page d'inscription" class="link--blue">Inscription</a>
@@ -63,7 +58,7 @@
 
         <main class="homepage__main" role="main">
             @auth
-                <a class="" href="{{ route('dashboard') }}">Vous êtes déjà connecté, retourner au dashboard&nbsp;!</a>
+                <a href="{{ route('dashboard') }}" title="Vers le tableau de bord">Vous êtes déjà connecté, retourner au dashboard&nbsp;!</a>
             @endauth
 
             <!-- Introduction -->
@@ -74,13 +69,12 @@
                 <p class="homepage__main__intro__text">
                     Simplifiez-vous la vie, gagner du temps sur la cotation des projets présentés par vos étudiants.
                 </p>
-                <a href="{{ route('register') }}" title="Vers la page d'inscription"
-                   class="link--blue homepage__main__intro__link">
+                <a href="{{ route('register') }}" title="Vers la page d'inscription" class="link--blue homepage__main__intro__link">
                     Essayer la version gratuite
                 </a>
 
                 <div class="homepage__main__intro__img">
-                    <img src="{{ asset('img/homepage/homepage.jpg') }}" alt="image" width="508" height="878">
+                    <img src="{{ asset('img/homepage/homepage.jpg') }}" alt="image d'un tableau de bord" width="508" height="878">
                 </div>
             </section>
 
@@ -177,13 +171,11 @@
                             <p class="text">
                                 {{ $example['text'] }}
                             </p>
-                            <a href="{{ route('register') }}" title="Vers la page d'inscription"
-                               class="homepage__main__examples__section__container__link">
+                            <a href="{{ route('register') }}" title="Vers la page d'inscription" class="homepage__main__examples__section__container__link">
                                 En savoir plus
                             </a>
                         </div>
-                        <img src="{{ $example['image'] }}"
-                             alt="présentation d'un tableau complet dans l'application">
+                        <img src="{{ $example['image'] }}" alt="présentation d'un tableau complet dans l'application">
                     </section>
                 @endforeach
             </article>
@@ -212,8 +204,7 @@
 
                     <!-- Example of benefit -->
                     <div class="homepage__main__benefits__container__img reveal">
-                        <img src="{{  asset("img/homepage/stats.png") }}"
-                             alt="image de l'appli">
+                        <img src="{{  asset("img/homepage/stats.png") }}" alt="image de l'application">
                         <a href="{{ route('register') }}" title="Vers la page d'inscription" class="link--blue">
                             Commencer
                         </a>
@@ -253,7 +244,7 @@
                 </h2>
                 <div class="homepage__main__pricing__card reveal">
                     <div class="content">
-                        <h3 class="content__title small-title" role="heading" aria-level="3">
+                        <h3 role="heading" aria-level="3" class="content__title small-title">
                             Adhésion à vie
                         </h3>
                         <p class="content__text">
@@ -291,14 +282,14 @@
                         </ul>
                     </div>
                     <div class="price">
-                        <h3 class="price__title" role="heading" aria-level="3">
+                        <h3 role="heading" aria-level="3" class="price__title">
                             Un essai gratuit à vie
                         </h3>
                         <p class="price__text">
                             <strong>€0.00</strong>
                             <span>euro</span>
                         </p>
-                        <a href="{{ route('register') }}" class="link--blue price__link">Avoir accès</a>
+                        <a href="{{ route('register') }}" class="link--blue price__link" title="Vers la page d'inscription">Avoir accès</a>
                         <small class="price__disclaimer">
                             Factures et reçus disponibles pour un remboursement facile par l'entreprise en cas d'erreur.
                         </small>
@@ -343,8 +334,7 @@
         <x-footer class="homepage__footer">
             2024 Renaud Vmb. Tous droits réservés.
         </x-footer>
-        </body>
-    @endsection
+    </body>
 
     @section('scripts')
         <script>

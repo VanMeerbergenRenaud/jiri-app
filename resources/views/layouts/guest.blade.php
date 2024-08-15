@@ -7,6 +7,8 @@
 
         {{-- Favicon --}}
         <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+
         {{-- Title --}}
         <title>{{ $title ?? 'Bienvenue sur Jiri App' }}</title>
 
@@ -15,8 +17,9 @@
     </head>
     <body>
         <main class="guest">
+
+            <!-- Logo -->
             <div class="logo">
-                <!-- Logo -->
                 <a href="/" title="Retour à l'accueil" class="logo__link">
                     <x-logo />
                     <span>Jiri.app</span>

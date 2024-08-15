@@ -17,16 +17,27 @@ class EvaluatorMiddelware
         try {
             $eventId = $request->route('event');
             $contactId = $request->route('contact');
+            $token = $request->route('token');
 
+            // Check if the contact is an evaluator
             $eventContact = auth()->user()->eventContacts()
                 ->where('event_id', $eventId)
                 ->where('contact_id', $contactId)
                 ->where('role', 'evaluator')
-                ->where('token', $request->route('token'))
+                ->where('token', $token)
                 ->first();
 
             if (! $eventContact) {
-                throw new Exception('You are not an evaluator for this event');
+                throw new Exception('Vous n\'êtes pas autorisé à accéder à cette page car vous n\'êtes pas un évaluateur.');
+            }
+
+            // If the event is finished, the evaluator can't access the page
+            $eventFinished = auth()->user()->events()
+                ->findOrFail($eventId)
+                ->finished_at;
+
+            if ($eventFinished !== null) {
+                throw new Exception('L\'épreuve est terminée. Vous ne pouvez plus accéder à cette page.');
             }
 
             return $next($request);

@@ -7,7 +7,7 @@
         <x-dialog.panel>
             <form wire:submit="add" class="form" wire:loading.class.delay="opacity-50">
                 <div class="form__content">
-                    <h2 class="title">Créer une nouvelle épreuve</h2>
+                    <h2 role="heading" aria-level="2" class="title">Créer une nouvelle épreuve</h2>
 
                     <x-form.field
                         name="name"

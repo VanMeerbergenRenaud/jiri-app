@@ -13,19 +13,19 @@
             <section class="evaluationEdit">
                 <h2 role="heading" aria-level="2" class="sr-only">Informations sur le projet</h2>
                 <div class="evaluationEdit__header">
-                    <img src="{{ $student->avatar ?? asset('img/placeholder.png') }}" alt="{{ $student->name }}">
+                    <img src="{{ $student->avatar ?? asset('img/placeholder.png') }}" alt="photo de profil de{{ $student->name }}">
                     <p>{{ $student->name }} {{ $student->firstname }}</p>
                 </div>
                 <ul class="evaluationEdit__list">
                     <li class="evaluationEdit__list__item">
                         <span class="label">Url du projet</span>
-                        <a href="{{ $project->url_readme ?? '#' }}" target="_blank" class="link">
+                        <a href="{{ $project->url_readme ?? '#' }}" target="_blank" class="link" title="Vers la page de description du projet">
                             {{ $project->url_readme ?? 'non renseigné' }}
                         </a>
                     </li>
                     <li class="evaluationEdit__list__item">
                         <span class="label">Repository Github</span>
-                        <a href="{{ $project->student->github ?? '#' }}" target="_blank" class="link">
+                        <a href="{{ $project->student->github ?? '#' }}" target="_blank" class="link" title="Vers le repository Github">
                             {{ $project->student->github ?? 'non renseigné' }}
                         </a>
                     </li>
@@ -38,26 +38,32 @@
                         </p>
                     </li>
                     <hr>
-                    {{--timer--}}
-                    {{-- TODO : déclencher le timer lorsque l'utilisateur est sur la page --}}
+
                     <li class="evaluationEdit__list__item item">
-                        <x-form.field
-                            label="Temps passé"
-                            name="timer"
-                            type="time"
-                            model="timer"
-                            value="{{ $timer ?? '00:00:00' }}"
-                            placeholder="00:00:00"
-                        />
+                        <div class="form__field">
+                            <span>Temps passé</span>
+                            @if($status === 'evaluated' && $score !== null && $comment !== null)
+                                <span>
+                                    {{ $timer ?? 'Terminé' }}
+                                </span>
+                            @else
+                                <span wire:poll.1s="updateTimer">
+                                    {{ $hours ?? '00' }}:{{ $minutes ?? '00' }}:{{ $seconds ?? '00' }}
+                                </span>
+                            @endif
+                        </div>
                     </li>
+
                     <li class="evaluationEdit__list__item">
                         <label for="eventStatus" class="label">Status</label>
                         <select name="eventStatus" id="eventStatus" wire:model.blur="status">
-                            <option disabled selected value="">Choisir un status</option>
+                            <option disabled selected>Choisir un status</option>
                             <option value="evaluated">Vu</option>
+                            <option value="pending">En cours</option>
                             <option value="not evaluated">Non vu</option>
                         </select>
                     </li>
+
                     <li class="evaluationEdit__list__item">
                         <label for="eventReview" class="label">Cote du projet</label>
                         <div class="eventReview">
@@ -85,6 +91,7 @@
                             </ul>
                         @enderror
                     </li>
+
                     <li class="evaluationEdit__list__item eventComment">
                         <x-form.textarea
                             label="Commentaire"

@@ -1,4 +1,8 @@
 <x-guest-layout>
+    <h1 role="heading" aria-level="1" class="sr-only">
+        {{ __('Réinitialisation du mot de passe') }}
+    </h1>
+
     <form method="POST" action="{{ route('password.store') }}" class="form">
         @csrf
 

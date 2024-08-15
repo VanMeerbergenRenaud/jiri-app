@@ -9,6 +9,7 @@
         align-items: center;
         justify-content: center;
         text-align: center;
+        margin-top: 3rem;
     }
 
     &__container {
@@ -62,6 +63,10 @@
 
             &__link {
                 padding: 0.8125rem 3rem;
+
+                &:hover {
+                    border: $border;
+                }
             }
         }
     }

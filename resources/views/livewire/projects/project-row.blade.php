@@ -7,7 +7,7 @@
     <td class="capitalize">{{ str($project->description)->limit(50) }}</td>
     <td class="tasks">
         {{--{{ implode(' | ', json_decode($project->tasks)) }}--}}
-        <a href="{{ $project->url_readme }}" class="" title="Voir le Read.me" target="_blank">
+        <a href="{{ $project->url_readme }}" class="" title="Vers la page de description du projet" target="_blank">
             {{ $project->url_readme }}
         </a>
     </td>
@@ -19,7 +19,7 @@
 
             <x-menu.items>
                 {{-- Item to show a project --}}
-                <a class="link" href="{{ route('projects.show', $project) }}">
+                <a class="link" href="{{ route('projects.show', $project) }}" title="Voir le projet">
                     <x-svg.show/>
 
                     Voir
@@ -43,7 +43,7 @@
                         <form wire:submit="save" class="form">
                             @csrf
                             <div class="form__content">
-                                <h2 class="title">Modifier le project</h2>
+                                <h2 role="heading" aria-level="2" class="title">Modifier le project</h2>
 
                                 {{-- Nom, description, tâches selection --}}
                                 <x-form.field
@@ -106,7 +106,7 @@
                                 <div class="advertising">
                                     <x-svg.advertising/>
                                     <div class="advertising__content">
-                                        <h3 class="title">Supprimer le projet</h3>
+                                        <h3 role="heading" aria-level="3" class="title">Supprimer le projet</h3>
                                         <p class="description">
                                             Êtes-vous sûre de vouloir supprimer le projet
                                             <span class="font-semibold"> {{ $project->name }}</span>&nbsp;? Toutes les données seront supprimées. Cette action est irréversible.
@@ -140,5 +140,13 @@
                 </x-dialog>
             </x-menu.items>
         </x-menu>
+
+        @if($saved)
+            <x-notifications
+                icon="success"
+                title="Projet modifié avec succès"
+                method="$set('saved', false)"
+            />
+        @endif
     </td>
 </tr>

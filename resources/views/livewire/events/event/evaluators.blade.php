@@ -1,6 +1,6 @@
 <div>
     @section('title')
-        <h1 role="heading" aria-level="1" class="sr-only">Évènement {{  $event->name ?? 'ok' }}</h1>
+        <h1 role="heading" aria-level="1" class="sr-only">Évaluateurs de l'évènement {{  $event->name ?? '' }}</h1>
     @endsection
 
     <header class="header">

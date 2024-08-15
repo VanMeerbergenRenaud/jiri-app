@@ -10,6 +10,7 @@
 
         <!-- Favicon -->
         <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
 
         <!-- Title -->
         <title>{{ __('Jiri app') }}</title>
@@ -24,6 +25,8 @@
         <div wire:offline class="offline">
             Vous êtes actuellement hors ligne veuillez vous reconnecter à un réseau pour continuer à utiliser l'application.
         </div>
+
+        @yield('title')
 
         <!-- Navigation -->
         <livewire:events.event.navbar />
